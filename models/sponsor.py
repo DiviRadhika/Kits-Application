@@ -7,9 +7,10 @@ from sqlalchemy.dialects.postgresql import UUID
 class SponsorModel(db.Model):
     __tablename__ = "sponsor"
     # extend_existing=True
-    sponser_code = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    sponser_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    sponser_code = db.Column(db.String)
     sponser_name = db.Column(db.String)
-    legal_sponser_name= db.Column(db.String)
+    legal_sponser_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
     address_3 = db.Column(db.String)
@@ -28,7 +29,10 @@ class SponsorModel(db.Model):
     changed_by = db.Column(db.String)
     changed_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
 
-
     @classmethod
     def find_all(cls):
         return cls.query.all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()

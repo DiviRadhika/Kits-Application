@@ -1,4 +1,4 @@
-from flask_restx import Namespace,fields, Resource
+from flask_restx import Namespace, fields, Resource
 from schemas.sponsor import SponsorSchema
 from models.sponsor import SponsorModel
 from flask import request
@@ -21,24 +21,23 @@ sponsor = sponsor_ns.model(
         "address_3": fields.String(required=True),
         "address_4": fields.String(required=True),
         "city": fields.String(required=True),
-        "district" : fields.String(required=True),
+        "district": fields.String(required=True),
         "region": fields.String(required=True),
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
         "email": fields.String(required=True),
-        "website" : fields.String(required=True)
-    }
+        "website": fields.String(required=True),
+    },
 )
+
 
 class SponsersList(Resource):
     @sponsors_ns.doc("Get all the sponsers")
     def get(self):
-        return(
-            sponsors_list_schema.dump(SponsorModel.find_all()),
-            200
-        )
+        return (sponsors_list_schema.dump(SponsorModel.find_all()), 200)
+
 
 class Sponser(Resource):
     @sponsor_ns.expect(sponsor)
@@ -53,7 +52,7 @@ class Sponser(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "created sponser data successfully"}, 201
 
-    @sponsor_ns.doc("Update a sponser")
+    '''@sponsor_ns.doc("Update a sponser")
     @sponsor_ns.expect(sponsor)
     def put(self):
-        return {"data": [], "message": "updated"}, 200
+        return {"data": [], "message": "updated"}, 200'''

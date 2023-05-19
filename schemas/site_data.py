@@ -6,5 +6,5 @@ class SiteDataSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = SiteDataModel
         load_instance = True
-    
+
         include_fk = True

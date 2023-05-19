@@ -7,7 +7,8 @@ from sqlalchemy.dialects.postgresql import UUID
 class LabtestModel(db.Model):
     __tablename__ = "labtest"
     # extend_existing=True
-    lab_code = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    lab_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    lab_code = db.Column(db.String)
     lab_test = db.Column(db.String)
     material = db.Column(db.String)
     size = db.Column(db.String)
@@ -16,3 +17,12 @@ class LabtestModel(db.Model):
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)
     changed_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
+
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
