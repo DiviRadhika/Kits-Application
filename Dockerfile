@@ -18,7 +18,7 @@ RUN apt-get -y install tk-dev
 
 # copy over our requirements.txt file
 # COPY requirements_for_docker.txt /tmp/
-COPY requirements_for_flask.txt /tmp/
+COPY requirements.txt /tmp/
 # COPY latest_packages_2.txt /tmp/
 
 # upgrade pip and install required python packages
@@ -26,7 +26,7 @@ RUN pip install -U pip
 RUN pip install psycopg2-binary
 
 # RUN pip install -r /tmp/requirements_for_docker.txt
-RUN pip install -r /tmp/requirements_for_flask.txt
+RUN pip install -r /tmp/requirements.txt
 # RUN pip install -r /tmp/latest_packages_2.txt
 
 # RUN pip install flask-jwt-extended
