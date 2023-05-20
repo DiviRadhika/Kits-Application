@@ -57,11 +57,11 @@ def create_tables():
 
 @app.after_request
 def after_request(response):
-    header = response.headers
-    header["Access-Control-Allow-Origin"] = "*"
-    #response.headers.add('Access-Control-Allow-Origin', '*')
-    header('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    header('Access-Control-Allow-Methods', 'POST')
+    #header = response.headers
+    #header["Access-Control-Allow-Origin"] = "*"
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'POST')
     return response
 
 
