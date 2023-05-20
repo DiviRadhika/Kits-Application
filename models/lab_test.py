@@ -18,7 +18,6 @@ class LabtestModel(db.Model):
     changed_by = db.Column(db.String)
     changed_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
 
-
     @classmethod
     def find_all(cls):
         return cls.query.all()

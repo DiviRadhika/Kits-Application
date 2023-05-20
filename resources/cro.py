@@ -43,7 +43,8 @@ class Cro(Resource):
     @cro_ns.doc("Create a cro")
     def post(self):
         def post(self):
-            cro_json = request.get_json(cro_json)
+            request.get_json(cro_json)
+
         try:
             cro_data = cro_schema.load()
             cro_data.save_to_db()
@@ -51,8 +52,8 @@ class Cro(Resource):
             print(e)
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
-    
-    @cro_ns.doc("Update a cro")
+
+    """@cro_ns.doc("Update a cro")
     @cro_ns.expect(cro)
     def put(self):
-        return {"data": [], "message": "updated"}, 200
+        return {"data": [], "message": "updated"}, 200"""

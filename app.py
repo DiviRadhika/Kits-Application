@@ -54,18 +54,20 @@ def create_tables():
     ma.init_app(app)
     db.create_all()
 
-@app.after_request 
+
+@app.after_request
 def after_request(response):
     header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
+    header["Access-Control-Allow-Origin"] = "*"
     return response
+
 
 sponsor_ns.add_resource(Sponser, "")
 sponsors_ns.add_resource(SponsersList, "")
-#cro_ns.add_resource(Cro, "")
-#cros_ns.add_resource(CrosList, "")
-#site_data_ns.add_resource(Sitedata, "")
-#sites_data_ns.add_resource(SitedatasList, "")
+cro_ns.add_resource(Cro, "")
+cros_ns.add_resource(CrosList, "")
+site_data_ns.add_resource(Sitedata, "")
+sites_data_ns.add_resource(SitedatasList, "")
 lab_test_ns.add_resource(Labtest, "")
 lab_tests_ns.add_resource(LabtestssList, "")
 

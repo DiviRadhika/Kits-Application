@@ -53,7 +53,7 @@ class Sitedata(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    @site_data_ns.doc("Update a site_data")
+    """@site_data_ns.doc("Update a site_data")
     @site_data_ns.expect(site_data)
     def put(self):
-        return {"data": [], "message": "updated"}, 200
+        return {"data": [], "message": "updated"}, 200"""
