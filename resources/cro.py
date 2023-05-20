@@ -42,11 +42,9 @@ class Cro(Resource):
     @cro_ns.expect(cro)
     @cro_ns.doc("Create a cro")
     def post(self):
-        def post(self):
-            request.get_json(cro_json)
-
+        cro_json = request.get_json()
         try:
-            cro_data = cro_schema.load()
+            cro_data = cro_schema.load(cro_json)
             cro_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
