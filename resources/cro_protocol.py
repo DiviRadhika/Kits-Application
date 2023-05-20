@@ -2,49 +2,55 @@ from flask_restx import Namespace, fields, Resource
 from schemas.cro_protocol import CroProtocolSchema
 from flask import request
 from sqlalchemy import exc
+from models.cro_protocol import CroProtocolModel
+
 
 cro_protocol_ns = Namespace("cro_protocol", description="cro protocol related operations")
-cros_protocols_ns = Namespace("cros_protocols", description="cros protocols related operations")
+cro_protocols_ns = Namespace("cro_protocols", description="cro protocols related operations")
 
 cro_protocol_schema = CroProtocolSchema()
-cros_list_protocols_schema = CroProtocolSchema(many=True)
+cro_list_protocols_schema = CroProtocolSchema(many=True)
 
-cro_protocol = cros_protocols_ns.model(
+data_fields = cro_protocol_ns.model(
+    "visit_kit_details",
+    {
+        "no_of_visits": fields.String(required=True),
+        "kit_type": fields.String(required=True),
+        "lab_id": fields.String(required=True)
+    }
+)
+
+cro_protocol = cro_protocols_ns.model(
     "cro_protocol",
     {
-        "protocolId": fields.String(required=True),
+        "protocol_id": fields.String(required=True),
         "request_id": fields.String(required=True),
-        "croid": fields.String(required=True),
+        "cro_id": fields.String(required=True),
         "no_of_sites": fields.Integer(required=True),
         "total_patients": fields.Integer(required=True),
         "site_ids": fields.List(fields.String(), required=True),
         "screening_kit_count": fields.Integer(required=True),
         "screening_kit_lab_tests": fields.String(required=True),
         "visit_kit_count": fields.Integer(required=True),
-        "visit_kit_details": fields.DictItem(attribute="visit_kit_details", required=True),
-        "created_by": fields.String(required=True),
-        "created_on": fields.String(required=True),
-        "changed_by": fields.String(required=True),
-        "changed_on": fields.String(required=True),
+        "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
 )
 
 
 class CrosProtocolsList(Resource):
-    @cros_protocols_ns.doc("Get all the cros protocols")
+    @cro_protocols_ns.doc("Get all the cros protocols")
     def get(self):
-        return {"data": [], "message": "success"}, 200
+        return (CroProtocolSchema.dump(CroProtocolModel.find_all()), 200)
 
 
 class CroProtocol(Resource):
-    @cro_protocol_ns.expect(cro)
-    @cro_protocol_ns.doc("Create a cro protocol")
+    @cro_protocol_ns.expect(cro_protocol)
+    @cro_protocol_ns.doc("Create a cro_protocol")
     def post(self):
-        def post(self):
-            cro_protocol_json = request.get_json("cro_protocol_json")
+        cro_protocal_json = request.get_json()
         try:
-            cro_protocol_data = cro_protocol_schema.load()
-            cro_protocol_data.save_to_db()
+            cro_protocal_data = CroProtocolSchema.load(cro_protocal_json)
+            cro_protocal_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to save data"}, 500

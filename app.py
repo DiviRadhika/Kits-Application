@@ -14,6 +14,8 @@ from resources.sponsor import Sponser, SponsersList, sponsor_ns, sponsors_ns
 from resources.cro import CrosList, Cro, cro_ns, cros_ns
 from resources.site_data import SitedatasList, Sitedata, site_data_ns, sites_data_ns
 from resources.lab_test import LabtestssList, Labtest, lab_test_ns, lab_tests_ns
+from resources.cro_protocol import CrosProtocolsList,CroProtocol,cro_protocol_ns,cro_protocols_ns
+
 
 
 app = Flask(__name__)
@@ -45,6 +47,9 @@ api.add_namespace(site_data_ns)
 api.add_namespace(sites_data_ns)
 api.add_namespace(lab_test_ns)
 api.add_namespace(lab_tests_ns)
+api.add_namespace(cro_protocol_ns)
+api.add_namespace(cro_protocols_ns)
+
 
 
 # cors = flask_cors.CORS()
@@ -73,6 +78,9 @@ site_data_ns.add_resource(Sitedata, "")
 sites_data_ns.add_resource(SitedatasList, "")
 lab_test_ns.add_resource(Labtest, "")
 lab_tests_ns.add_resource(LabtestssList, "")
+cro_protocol_ns.add_resource(CroProtocol, "")
+cro_protocols_ns.add_resource(CrosProtocolsList,"")
+
 
 
 if __name__ == "__main__":

@@ -8,14 +8,15 @@ from sqlalchemy.dialects.postgresql import JSONB
 class CroProtocolModel(db.Model):
     __tablename__ = "cro_protocol"
     # extend_existing=True
-    protocolId = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
-    request_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, db.ForeignKey('sponsor.sponser_id'))
-    croid =  db.Column(UUID(as_uuid=True), default=uuid.uuid4, db.ForeignKey('cro.cro_id'))
+    id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    protocol_id = db.Column(db.String)
+    sponser_id = db.Column(UUID(as_uuid=True), db.ForeignKey('sponsor.sponser_id'))
+    cro_id =  db.Column(UUID(as_uuid=True), db.ForeignKey('cro.cro_id'))
     no_of_sites = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
-    site_ids = db.Column(db.Array(db.String))
+    site_ids = db.Column(db.ARRAY(db.String))
     screening_kit_count  = db.Column(db.Integer)
-    screening_kit_lab_tests = db.Column(db.Array(UUID(as_uuid=True)))
+    screening_kit_lab_tests = db.Column(db.ARRAY(UUID(as_uuid=True)))
     visit_kit_count = db.Column(db.Integer)
     visit_kit_details = db.Column(JSONB)
     created_by = db.Column(db.String)
