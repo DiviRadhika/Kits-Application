@@ -14,6 +14,7 @@ sponsors_list_schema = SponsorSchema(many=True)
 sponsor = sponsor_ns.model(
     "sponsor",
     {
+        "sponser_code": fields.String(required=True),
         "sponsor_name": fields.String(required=True),
         "legal_sponsor_name": fields.String(required=True),
         "address_1": fields.String(required=True),
