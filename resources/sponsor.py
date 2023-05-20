@@ -14,7 +14,7 @@ sponsors_list_schema = SponsorSchema(many=True)
 sponsor = sponsor_ns.model(
     "sponsor",
     {
-        "sponser_code": fields.String(required=True),
+        "sponsor_code": fields.String(required=True),
         "sponsor_name": fields.String(required=True),
         "legal_sponsor_name": fields.String(required=True),
         "address_1": fields.String(required=True),
@@ -50,10 +50,10 @@ class Sponser(Resource):
             sponser_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "created sponser data successfully"}, 201
 
-    '''@sponsor_ns.doc("Update a sponser")
+    """@sponsor_ns.doc("Update a sponser")
     @sponsor_ns.expect(sponsor)
     def put(self):
-        return {"data": [], "message": "updated"}, 200'''
+        return {"data": [], "message": "updated"}, 200"""

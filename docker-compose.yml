@@ -30,4 +30,3 @@ services:
         # default:
         #name: nginxproxymanager
         #external: true
-

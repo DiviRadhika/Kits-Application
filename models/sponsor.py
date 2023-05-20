@@ -7,10 +7,10 @@ from sqlalchemy.dialects.postgresql import UUID
 class SponsorModel(db.Model):
     __tablename__ = "sponsor"
     # extend_existing=True
-    sponser_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
-    sponser_code = db.Column(db.String)
-    sponser_name = db.Column(db.String)
-    legal_sponser_name = db.Column(db.String)
+    sponsor_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
+    sponsor_code = db.Column(db.String)
+    sponsor_name = db.Column(db.String)
+    legal_sponsor_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
     address_3 = db.Column(db.String)

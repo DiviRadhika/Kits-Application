@@ -34,14 +34,14 @@ class Labtest(Resource):
     def post(self):
         lab_test_json = request.get_json()
         try:
-            lab_test_data = LabtestSchema.load(lab_test_json)
+            lab_test_data = lab_test_schema.load(lab_test_json)
             lab_test_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    '''@lab_test_ns.doc("Update a lab_test")
+    """@lab_test_ns.doc("Update a lab_test")
     @lab_test_ns.expect(lab_test)
     def put(self):
-        return {"data": [], "message": "updated"}, 200'''
+        return {"data": [], "message": "updated"}, 200"""
