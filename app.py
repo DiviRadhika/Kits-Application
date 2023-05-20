@@ -26,7 +26,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/postgres".fo
     os.environ.get("DB_USERNAME"),
     os.environ.get("DB_PASSWORD"),
     os.environ.get("DB_IP"),
- )
+)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -54,6 +54,11 @@ def create_tables():
     ma.init_app(app)
     db.create_all()
 
+@app.after_request 
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    return response
 
 sponsor_ns.add_resource(Sponser, "")
 sponsors_ns.add_resource(SponsersList, "")
