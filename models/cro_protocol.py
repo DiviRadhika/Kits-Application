@@ -10,7 +10,7 @@ class CroProtocolModel(db.Model):
     # extend_existing=True
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     protocol_id = db.Column(db.String)
-    sponser_id = db.Column(UUID(as_uuid=True), db.ForeignKey('sponsor.sponser_id'))
+    sponser_id = db.Column(UUID(as_uuid=True), db.ForeignKey('sponsor.sponsor_id'))
     cro_id =  db.Column(UUID(as_uuid=True), db.ForeignKey('cro.cro_id'))
     no_of_sites = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
