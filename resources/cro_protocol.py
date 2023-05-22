@@ -49,7 +49,7 @@ class CroProtocol(Resource):
     def post(self):
         cro_protocal_json = request.get_json()
         try:
-            cro_protocal_data = CroProtocolSchema.load(cro_protocal_json)
+            cro_protocal_data = cro_protocol_schema.load(cro_protocal_json)
             cro_protocal_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
