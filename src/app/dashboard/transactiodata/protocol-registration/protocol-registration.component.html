@@ -1,0 +1,275 @@
+<h4><i class="fas fa-file-signature mr-2"></i>protocol Registration</h4>
+<br>
+<div class="card ml-2 mr-2 bg-white">
+    <div class="container">
+
+        <div class="card-body">
+            <form [formGroup]="ProtocolForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="protocol id" placeholder="Enter Protocol ID"
+                                formControlName="protocol_id">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <!-- <input type="" class="form-control" id="sponosor id/name"
+                                placeholder="Enter Sponsor ID/Name" formControlName="sponsor_id"> -->
+                            <!-- <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Select Sponsor ID / Name
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" >Option 1</a>
+                                      <a class="dropdown-item" href="#">Option 2</a>
+                                      <a class="dropdown-item" href="#">Option 3</a>
+                                    </div>
+                                  </div> -->
+                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                                <option value="Select an option">Select an option</option>
+                                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                            </select>
+
+
+
+                        </div>
+                    </div>
+
+                   
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control" id="cro id" placeholder="Enter CRO ID/Name"
+                                formControlName="cro_id"> -->
+                        <div class="dropdown">
+                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                                <option value="Select an option">Select an option</option>
+                                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="card-body">
+
+            <hr>
+            <form [formGroup]="ProtocolForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="protocol id" placeholder="Enter No.of Sites"
+                                formControlName="no_of_sites">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> <input type="text" class="form-control" id="sponosor id/name"
+                                placeholder="Total No.of Patients" formControlName="total_patients">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+        <div class="card-body">
+            <h6 style="color: rgb(250, 49, 49); margin-left: 20px;">Site Details</h6>
+            <hr>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>SiteId/Name</th>
+                            <th>Patient Count</th>
+                            <th>No.of Visits</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data 1</td>
+                            <td>Data 2</td>
+                            <td>Data 3</td>
+                        </tr>
+                        <tr>
+                            <td>Data 4</td>
+                            <td>Data 5</td>
+                            <td>Data 6</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h6 style="color: rgb(250, 49, 49); margin-left: 20px;">Kit Details</h6>
+            <div class="col">
+
+                <div class="form-check">
+                    <label class="form-check-label" style="margin-left: 30px;" for="radio2">Kit Type:</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioGroup" id="radio3" [(ngModel)]="KitType"
+                        value="screening">
+                    <label style="color: blue;" class="form-check-label" for="radio3">Screening</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioGroup" id="radio3" [(ngModel)]="KitType"
+                        value="visit">
+                    <label style="color: blue;" class="form-check-label" for="radio3">Visit</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body" *ngIf="KitType=='screening'">
+        <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Screening Kit Details</h6>
+        <div class="row">
+            <form action="" [formGroup]="ProtocolForm">
+                <div class="col">
+                    <div class="form-group">
+                        <div>
+                            <input style="width:180px;margin-left:10px" type="number" class="form-control flex-grow-1"
+                                id="inputField" placeholder="Enter Kit Count" formControlName="screening_kit_count">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lab Test</th>
+                        <th>Materail</th>
+                        <th>Size</th>
+                        <th>Frozen at Site</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="card-body" *ngIf="KitType=='visit'">
+        <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Visit Kit Details</h6>
+        <div class="row">
+            <form action="" [formGroup]="ProtocolForm">
+                <div class="col-md-3">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" id="Sponsor Code" placeholder="Enter Kit Count"
+                            formControlName="visit_kit_count">
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group"> <input type="text" class="form-control" id="Site Name"
+                            placeholder="Enter Kit Type / Varients" formControlName="visit_kit_details">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.of Visit</th>
+                        <th>Kit Type</th>
+                        <th>Lab Test</th>
+                        <th>Material</th>
+                        <th>Size</th>
+                        <th>Frozen at Site</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+
+        <div class="card-body">
+            <h6 style="color: rgb(250, 49, 49);"></h6>
+
+            <form>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="Sponsor Code" placeholder="Created By">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> <input type="text" class="form-control" id="Site Name"
+                                placeholder="Created On">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="field3" placeholder="Changed By">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="field3" placeholder="Changed On">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                <button (click)="submit()" class="btn btn-primary">Submit</button>
+
+            </div>
+        </div>
+
+    </div>

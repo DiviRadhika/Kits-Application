@@ -1,0 +1,113 @@
+<div class="sidebar">
+  <ul class="nav flex-column">
+    <img src="assets/images/roboxa-logo-lite.png" alt="ROBOXA" width="149px" class="logo">
+    <hr style="color: rgb(230, 227, 227);">
+    <h4>KITS</h4>
+    <li class="nav-item">
+      <h5 class="nav-link" data-toggle="collapse" href="#masterdata" role="button" aria-expanded="false"
+        aria-controls="masterdata"><i class="fa fa-database mr-2" aria-hidden="true"></i>Master Data <i
+          class="fa fa-caret-down" aria-hidden="true"></i></h5>
+      <div class="collapse" id="masterdata">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="sponsor"><i
+                class="fas fa-hand-holding-heart sponsor-icon mr-2"></i>Sponsor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="site"> <i class="fa fa-light fa-hospital mr-2"></i>Site</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="cro"><i class="fab fa-codiepie cro-icon mr-sm-2"></i>
+              CRO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="lab-tests"><i class="fas fa-vial mr-sm-2"></i>
+              Lab Tests</a>
+          </li>
+
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <h5 class="nav-link" data-toggle="collapse" href="#site" role="button" aria-expanded="false" aria-controls="site">
+        <i class="fa fa-light fa-hospital mr-2"></i>
+        Site
+      </h5>
+      <div class="collapse" id="site">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="sample-collection"><i class="fas fa-vials mr-2"></i>Sample Collection</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <h5 class="nav-link" data-toggle="collapse" href="#transactonaldata" role="button" aria-expanded="false"
+        aria-controls="transactonal data"><i class="fas fa-exchange-alt mr-sm-2"></i>
+        Transactonal Data
+      </h5>
+      <div class="collapse" id="transactonaldata">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="protocol-registration"><i class="fas fa-file-signature mr-2"></i>
+              Protocol-registration</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <h5 class="nav-link" data-toggle="collapse" href="#centrallab" role="button" aria-expanded="false"
+        aria-controls="centrallab"><i class="fas fa-flask central-lab-icon mr-2"></i>
+        Central Lab
+      </h5>
+      <div class="collapse" id="centrallab">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="kit-preparation"><i class="fas fa-toolbox kit-preparation-icon mr-2"></i>Kit
+              Preparation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="kit-verification"><i class="fas fa-check-circle mr-2"></i>Kit
+              Verification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="sample-acknowledgment"><i class="fas fa-receipt mr-2"></i>
+              Sample Acknowledgment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="upload-results"><i class="fas fa-cloud-upload-alt mr-2"></i>
+              Upload Results</a>
+          </li>
+
+        </ul>
+      </div>
+    </li>
+
+  </ul>
+
+  <div class="col-md-2 mt-5 button ">
+    <button (click)="toggleLogout()" class="btn btn-outline-light "><i class="fa fa-user mr-2"
+        aria-hidden="true"></i>CRO ADMIN</button>
+    <button *ngIf="showLogout" class="btn btn-danger mt-3">Logout</button>
+  </div>
+
+</div>
+<div class="content">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+
+      </div>
+
+    </nav>
+  </header>
+  <router-outlet></router-outlet>
+  <div class="main">
+    <p>2023 © Roboxa</p>
+  </div>
+</div>

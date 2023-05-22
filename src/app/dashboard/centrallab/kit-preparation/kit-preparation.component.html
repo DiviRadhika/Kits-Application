@@ -1,0 +1,233 @@
+<h4> <i class="fa fa-light fa-hospital mr-2"></i>CL_Kit Preparation</h4>
+<div class="card ml-2 mr-2 bg-white">
+    <div class="container">
+
+        <div class="card-body">
+            <h6 style="color: rgb(250, 49, 49);">Protocol Details</h6>
+            <hr>
+            <form>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="Protocol ID"placeholder="Enter Protocol ID " formControlName="site_data_code">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group"> <input type="text" class="form-control" id="Site Name" placeholder="Enter Protocol ID" formControlName="site_data_name">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card-body">
+        <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Screening Kit Details</h6>
+        <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <div>
+                  <input style="width:180px;margin-left:10px" type="number" class="form-control flex-grow-1" id="inputField" placeholder="Enter Kit Count" formControlName="screening_kit_count">
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Lab Test</th>
+                        <th>Materail</th>
+                        <th>Size</th>
+                        <th>Frozen at Site</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CKit ID</th>
+                    <th>Kit ID</th>
+                    <th>Preparation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Manual ID</td>
+                    <td>Auto ID</td>
+                    <td>
+                        <input type="radio" name="ok" id="" value="IN Site audit">
+                        <label style="margin-right: 20px;">In progress</label>
+                        <input type="radio" name="ok" id="" value="Evaluation by Documentation">
+                        <label style="margin-right: 30px;">Complete</label>
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td>Manual ID</td>
+                    <td>Auto ID</td>
+                    <td>
+                        <input type="radio" name="k" id="" value="IN Site audit">
+                        <label style="margin-right: 20px;">In progress</label>
+                        <input type="radio" name="k" id="" value="Evaluation by Documentation">
+                        <label style="margin-right: 30px;">Complete</label>
+                    </td>
+                   
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="card-body">
+        <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Visit Kit Details</h6>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="Sponsor Code"placeholder="Enter Kit Count" formControlName="visit_kit_count">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group"> <input type="text" class="form-control" id="Site Name" placeholder="Enter Kit Type / Varients" formControlName="visit_kit_details">
+                </div>
+            </div>
+            </div>
+         
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No.of Visit</th>
+                        <th>Kit Type</th>
+                        <th>Lab Test</th>
+                        <th>Material</th>
+                        <th>Size</th>
+                        <th>Frozen at Site</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                        <td>
+                            <input type="radio" name="k" id="" value="IN Site audit">
+                            <label style="margin-right: 20px;">Yes</label>
+                            <input type="radio" name="k" id="" value="Evaluation by Documentation">
+                            <label style="margin-right: 30px;">No</label>
+                        </td>
+                        <td>image</td>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                        <td>
+                            <input type="radio" name="ok" id="" value="IN Site audit">
+                            <label style="margin-right: 20px;">Yes</label>
+                            <input type="radio" name="ok" id="" value="Evaluation by Documentation">
+                            <label style="margin-right: 30px;">No</label>
+                        </td>
+                        <td>image</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>CKit ID</th>
+                        <th>Kit ID</th>
+                        <th>Preparation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Manual ID</td>
+                        <td>Auto ID</td>
+                        <td>
+                            <input type="radio" name="ok" id="" value="IN Site audit">
+                            <label style="margin-right: 20px;">In progress</label>
+                            <input type="radio" name="ok" id="" value="Evaluation by Documentation">
+                            <label style="margin-right: 30px;">Complete</label>
+                        </td>
+                       
+                    </tr>
+                    <tr>
+                        <td>Manual ID</td>
+                        <td>Auto ID</td>
+                        <td>
+                            <input type="radio" name="k" id="" value="IN Site audit">
+                            <label style="margin-right: 20px;">In progress</label>
+                            <input type="radio" name="k" id="" value="Evaluation by Documentation">
+                            <label style="margin-right: 30px;">Complete</label>
+                        </td>
+                       
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="container">
+
+            <div class="card-body">
+                <h6 style="color: rgb(250, 49, 49);"></h6>
+                <hr>
+                <form>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Sponsor Code"placeholder="Created By">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group"> <input type="text" class="form-control" id="Site Name" placeholder="Created On">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="field3" placeholder="Changed By" >
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="field3" placeholder="Changed On" >
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    
+        </div>
+</div>
