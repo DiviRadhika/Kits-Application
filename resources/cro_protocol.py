@@ -20,6 +20,15 @@ data_fields = cro_protocol_ns.model(
     }
 )
 
+
+lab_test_data_fields = cro_protocol_ns.model(
+    "lab_test_kit_details",
+    {
+        "lab_test_id": fields.String(required=True),
+        "frozen_status": fields.Boolean(required=True),
+    }
+)
+
 cro_protocol = cro_protocols_ns.model(
     "cro_protocol",
     {
@@ -30,7 +39,7 @@ cro_protocol = cro_protocols_ns.model(
         "total_patients": fields.Integer(required=True),
         "site_ids": fields.List(fields.String(), required=True),
         "screening_kit_count": fields.Integer(required=True),
-        "screening_kit_lab_tests": fields.List(fields.String(), required=True),
+        "screening_kit_lab_test_details": fields.List(fields.Nested(lab_test_data_fields)),
         "visit_kit_count": fields.Integer(required=True),
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
