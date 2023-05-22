@@ -56,7 +56,7 @@ class CroProtocol(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
     
-    '''@cro_protocol_ns.doc("Update a cro protocol")
+    @cro_protocol_ns.doc("Update a cro protocol")
     @cro_protocol_ns.expect(cro_protocol)
     def put(self):
-        return {"data": [], "message": "updated"}, 200'''
+        return {"data": [], "message": "updated"}, 200
