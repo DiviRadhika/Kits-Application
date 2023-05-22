@@ -48,7 +48,9 @@ class CroProtocol(Resource):
     @cro_protocol_ns.doc("Create a cro_protocol")
     def post(self):
         cro_protocal_json = request.get_json()
+        cro_protocal_json['screening_kit_lab_tests'] = list(cro_protocal_json['screening_kit_lab_tests'].split(','))
         try:
+            print(cro_protocal_json)
             cro_protocal_data = cro_protocol_schema.load(cro_protocal_json)
             cro_protocal_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
