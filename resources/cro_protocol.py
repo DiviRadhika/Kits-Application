@@ -30,7 +30,7 @@ cro_protocol = cro_protocols_ns.model(
         "total_patients": fields.Integer(required=True),
         "site_ids": fields.List(fields.String(), required=True),
         "screening_kit_count": fields.Integer(required=True),
-        "screening_kit_lab_tests": fields.String(required=True),
+        "screening_kit_lab_tests": fields.List(fields.String(), required=True),
         "visit_kit_count": fields.Integer(required=True),
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
@@ -40,7 +40,7 @@ cro_protocol = cro_protocols_ns.model(
 class CrosProtocolsList(Resource):
     @cro_protocols_ns.doc("Get all the cros protocols")
     def get(self):
-        return (CroProtocolSchema.dump(CroProtocolModel.find_all()), 200)
+        return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
 
 
 class CroProtocol(Resource):
