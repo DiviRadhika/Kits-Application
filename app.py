@@ -28,6 +28,7 @@ from resources.users import (
     CreateDefaultUser,
 )
 from models.users import UserModel
+from resources.clab_kit_preparation import clab_kit_preparation_ns, clab_kit_preparations_ns, ClabKitPreparation, ClabKitPreparationList
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -130,6 +131,8 @@ api.add_namespace(lab_tests_ns)
 api.add_namespace(cro_protocol_ns)
 api.add_namespace(cro_protocols_ns)
 api.add_namespace(login_ns)
+api.add_namespace(clab_kit_preparations_ns)
+api.add_namespace(clab_kit_preparation_ns)
 
 
 # cors = flask_cors.CORS()
@@ -161,6 +164,8 @@ lab_test_ns.add_resource(Labtest, "")
 lab_tests_ns.add_resource(LabtestssList, "")
 cro_protocol_ns.add_resource(CroProtocol, "")
 cro_protocols_ns.add_resource(CrosProtocolsList, "")
+clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")
+clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
