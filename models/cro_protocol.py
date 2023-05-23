@@ -10,14 +10,14 @@ class CroProtocolModel(db.Model):
     __tablename__ = "cro_protocol"
     # extend_existing=True
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
-    protocol_id = db.Column(db.String)
+    protocol_id = db.Column(db.String, unique=True)
     sponsor_id = db.Column(UUID(as_uuid=True), db.ForeignKey('sponsor.sponsor_id'))
     cro_id =  db.Column(UUID(as_uuid=True), db.ForeignKey('cro.cro_id'))
     no_of_sites = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
     site_ids = db.Column(ARRAY(db.String))
     screening_kit_count  = db.Column(db.Integer)
-    screening_kit_lab_test_details = db.Column(ARRAY(UUID(as_uuid=True)))
+    screening_kit_lab_test_details = db.Column(JSONB)
     visit_kit_count = db.Column(db.Integer)
     visit_kit_details = db.Column(JSONB)
     created_by = db.Column(db.String)
