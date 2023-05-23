@@ -2,6 +2,7 @@ from flask_restx import Namespace, fields, Resource
 from schemas.site_data import SiteDataSchema
 from flask import request
 from sqlalchemy import exc
+from models.site_data import SiteDataModel
 
 
 site_data_ns = Namespace("site_data", description="site_data related operations")
@@ -37,7 +38,7 @@ site_data = sites_data_ns.model(
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
     def get(self):
-        return {"data": [], "message": "success"}, 200
+        return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
 class Sitedata(Resource):

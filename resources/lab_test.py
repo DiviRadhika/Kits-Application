@@ -25,7 +25,7 @@ lab_test = lab_tests_ns.model(
 class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
     def get(self):
-        return {"data": [], "message": "success"}, 200
+        return (lab_tests_schema.dump(LabtestModel.find_all()), 200)
 
 
 class Labtest(Resource):

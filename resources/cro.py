@@ -2,6 +2,7 @@ from flask_restx import Namespace, fields, Resource
 from schemas.cro import CroSchema
 from flask import request
 from sqlalchemy import exc
+from models.cro import CroModel
 
 cro_ns = Namespace("cro", description="cro related operations")
 cros_ns = Namespace("cros", description="cros related operations")
@@ -35,7 +36,7 @@ cro = cros_ns.model(
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
     def get(self):
-        return {"data": [], "message": "success"}, 200
+        return (cros_list_schema.dump(CroModel.find_all()), 200)
 
 
 class Cro(Resource):
