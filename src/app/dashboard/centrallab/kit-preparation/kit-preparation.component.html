@@ -5,19 +5,18 @@
         <div class="card-body">
             <h6 style="color: rgb(250, 49, 49);">Protocol Details</h6>
             <hr>
-            <form>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="Protocol ID"placeholder="Enter Protocol ID " formControlName="site_data_code">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group"> <input type="text" class="form-control" id="Site Name" placeholder="Enter Protocol ID" formControlName="site_data_name">
-                        </div>
-                    </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Choose Protocol Id</label>
+                    <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                        <option value="Select an option">Select an option</option>
+                        <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                    </select>
+
+
+
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -35,7 +34,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Lab Test</th>
+                        <th>Lab Test
+                            <!-- <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                                <option value="Select an option">Select an option</option>
+                                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                            </select> -->
+                        </th>
                         <th>Materail</th>
                         <th>Size</th>
                         <th>Frozen at Site</th>

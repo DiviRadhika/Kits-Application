@@ -14,22 +14,11 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <!-- <input type="" class="form-control" id="sponosor id/name"
-                                placeholder="Enter Sponsor ID/Name" formControlName="sponsor_id"> -->
-                            <!-- <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Select Sponsor ID / Name
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" >Option 1</a>
-                                      <a class="dropdown-item" href="#">Option 2</a>
-                                      <a class="dropdown-item" href="#">Option 3</a>
-                                    </div>
-                                  </div> -->
-                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                           <label for=""> Choose sponsor id / Name</label>
+                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">ch
                                 <option value="Select an option">Select an option</option>
-                                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
-                            </select>
+                                <option *ngFor="let option of options" [value]="option">{{ options }}</option>
+                            </select> 
 
 
 
@@ -40,10 +29,10 @@
                 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <!-- <input type="text" class="form-control" id="cro id" placeholder="Enter CRO ID/Name"
-                                formControlName="cro_id"> -->
+                        
                         <div class="dropdown">
                             <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                                
                                 <option value="Select an option">Select an option</option>
                                 <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                             </select>
