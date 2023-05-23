@@ -17,7 +17,7 @@ class CroProtocolModel(db.Model):
     total_patients = db.Column(db.Integer)
     site_ids = db.Column(ARRAY(db.String))
     screening_kit_count  = db.Column(db.Integer)
-    screening_kit_lab_test_details = db.Column(ARRAY(UUID(as_uuid=True)))
+    screening_kit_lab_test_details = db.Column(JSONB)
     visit_kit_count = db.Column(db.Integer)
     visit_kit_details = db.Column(JSONB)
     created_by = db.Column(db.String)

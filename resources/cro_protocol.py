@@ -62,7 +62,7 @@ class CroProtocol(Resource):
             cro_protocal_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
     
     """@cro_protocol_ns.doc("Update a cro protocol")
