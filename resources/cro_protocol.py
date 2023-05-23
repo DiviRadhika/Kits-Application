@@ -48,6 +48,7 @@ cro_protocol = cro_protocols_ns.model(
         ),
         "visit_kit_count": fields.Integer(required=True),
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
+        #"frozen_status": fields.List(fields.Nested(data_fields))
     },
 )
 
