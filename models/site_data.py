@@ -25,6 +25,7 @@ class SiteDataModel(db.Model):
     mobile_telephone = db.Column(db.String)
     email = db.Column(db.String)
     website = db.Column(db.String)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)

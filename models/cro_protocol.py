@@ -20,11 +20,11 @@ class CroProtocolModel(db.Model):
     screening_kit_lab_test_details = db.Column(JSONB)
     visit_kit_count = db.Column(db.Integer)
     visit_kit_details = db.Column(JSONB)
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)
     changed_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
-
 
     @classmethod
     def find_all(cls):
@@ -33,4 +33,3 @@ class CroProtocolModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
-
