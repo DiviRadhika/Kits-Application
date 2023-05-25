@@ -6,21 +6,21 @@
         <div class="card-body">
             <h3 style="color: rgb(250, 49, 49);">Lab Tests Form</h3>
             <hr>
-            <form >
+            <form  [formGroup]="testForm">
                 
                     <div class="col-md-10">
                         <div class="form-group">
                             
-                            <input type="text" class="form-control" id="lab test"placeholder="Enter Lab Test">
+                            <input type="text" class="form-control" id="lab test"placeholder="Enter Lab Test" formControlName="lab_test">
                         </div>
                     </div>
                     <div class="col-md-10">
-                        <div class="form-group"> <input type="text" class="form-control" id="material" placeholder="Enter Material Name">
+                        <div class="form-group"> <input type="text" class="form-control" id="material" placeholder="Enter Material Name" formControlName="material">
                         </div>
                     </div>
                     <div class="col-md-10">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="Size" placeholder=" Enter Size">
+                            <input type="text" class="form-control" id="Size" placeholder=" Enter Size" formControlName="size">
                         </div>
                     </div>
                     <div class="col-md-10 mt-auto d-flex justify-content-end">
