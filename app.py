@@ -30,7 +30,12 @@ from resources.users import (
     UserRegister,
 )
 from models.users import UserModel
-from resources.clab_kit_preparation import clab_kit_preparation_ns, clab_kit_preparations_ns, ClabKitPreparation, ClabKitPreparationList
+from resources.clab_kit_preparation import (
+    clab_kit_preparation_ns,
+    clab_kit_preparations_ns,
+    ClabKitPreparation,
+    ClabKitPreparationList,
+)
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -172,7 +177,7 @@ clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
-user_ns.add_resource(UserRegister,"/register")
+user_ns.add_resource(UserRegister, "/register")
 
 
 if __name__ == "__main__":

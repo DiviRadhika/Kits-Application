@@ -21,7 +21,6 @@ login_ns = Namespace("login", description="login related operations")
 user_ns = Namespace("user", description="user related operations")
 
 
-
 access = login_ns.model(
     "Access",
     {
@@ -39,8 +38,8 @@ creation = login_ns.model(
         "last_name": fields.String(title="Lastname", required=True),
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
-        "role": fields.String(title="Role", required=True)
-    }
+        "role": fields.String(title="Role", required=True),
+    },
 )
 
 user_schema = UserSchema()
@@ -54,7 +53,7 @@ def CreateDefaultUser():
         "email": "jafarp@pathbreakertech.com",
         "status": True,
         "password": "Kits@123",
-        "role": "admin"
+        "role": "admin",
     }
     users_data = UserModel.find_by_email("jafarp@pathbreakertech.com")
     if users_data:
@@ -73,6 +72,7 @@ def CreateDefaultUser():
         )
         return {"message": "Failed to save default user data into DB"}, 400
     print("user table set with default values")
+
 
 class SendOTP(Resource):
     @login_ns.expect(access)
@@ -104,12 +104,9 @@ class SendOTP(Resource):
             return {"message": "User not registered yet, please contact admin"}, 500
 
         if not user:
-            return {
-                "message": "invalid username/email"
-            }, 400
+            return {"message": "invalid username/email"}, 400
 
-        
-        if (os.environ.get("ENVIRONMENT") in ["dev", "uat"]):
+        if os.environ.get("ENVIRONMENT") in ["dev", "uat"]:
             otp = 123456
         else:
             otp = generate_otp()
@@ -145,6 +142,7 @@ class SendOTP(Resource):
 
         return {"message": "OTP sent successfully."}, 201
 
+
 class UserRegister(Resource):
     @user_ns.doc("Get all the sponsers")
     def get(self):
@@ -157,10 +155,11 @@ class UserRegister(Resource):
         try:
             user_data = user_schema.load(user_json)
             user_data.save_to_db()
-        except(Exception, exc.SQLAlchemyError) as e:
+        except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
             return {"message": "user creation failed"}, 400
         return {"message": "user registration success"}, 201
+
 
 class UserLogin(Resource):
     @login_ns.expect(access)
@@ -208,7 +207,7 @@ class UserLogin(Resource):
 
         if str(user.user_otp) != otp:
             return {"message": "invalid OTP"}, 400
-        
+
         if str(user.password) != password:
             return {"message": "invalid password"}, 400
 
@@ -268,4 +267,3 @@ class TokenRefresh(Resource):
             identity=current_user, fresh=True, additional_claims=additional_claims
         )
         return {"new_access_token": new_token}, 200
-

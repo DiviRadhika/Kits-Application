@@ -21,7 +21,7 @@ data_fields = cro_protocol_ns.model(
         "no_of_visits": fields.String(required=True),
         "kit_type": fields.String(required=True),
         "lab_id": fields.String(required=True),
-        "frozen_status": fields.String(required=True)
+        "frozen_status": fields.String(required=True),
     },
 )
 
@@ -30,7 +30,7 @@ lab_test_data_fields = cro_protocol_ns.model(
     "lab_test_kit_details",
     {
         "lab_test_id": fields.String(required=True),
-        "frozen_status": fields.Boolean(required=True)
+        "frozen_status": fields.Boolean(required=True),
     },
 )
 
@@ -48,7 +48,7 @@ cro_protocol = cro_protocols_ns.model(
             fields.Nested(lab_test_data_fields)
         ),
         "visit_kit_count": fields.Integer(required=True),
-        "visit_kit_details": fields.List(fields.Nested(data_fields))
+        "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
 )
 

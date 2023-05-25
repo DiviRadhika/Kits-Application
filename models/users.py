@@ -21,7 +21,6 @@ class UserModel(db.Model):
     refresh_token = db.Column(db.String)
     role = db.Column(db.String)
 
-
     @classmethod
     def find_all(cls):
         return cls.query.all()
@@ -29,7 +28,6 @@ class UserModel(db.Model):
     @classmethod
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
-    
 
     def save_to_db(self):  # -> None:
         db.session.add(self)
