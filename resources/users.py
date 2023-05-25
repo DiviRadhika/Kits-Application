@@ -16,7 +16,9 @@ from datetime import datetime
 from config import logger
 from schemas.users import UserSchema
 
+
 login_ns = Namespace("login", description="login related operations")
+user_ns = Namespace("user", description="user related operations")
 
 
 
@@ -30,6 +32,17 @@ access = login_ns.model(
     },
 )
 
+creation = login_ns.model(
+    "Create",
+    {
+        "first_name": fields.String(title="Firstname", required=True),
+        "last_name": fields.String(title="Lastname", required=True),
+        "email": fields.String(title="Email", required=True),
+        "password": fields.String(title="Password", required=True),
+        "role": fields.String(title="Role", required=True)
+    }
+)
+
 user_schema = UserSchema()
 
 
@@ -39,7 +52,8 @@ def CreateDefaultUser():
         "last_name": "admin",
         "email": "jafarp@pathbreakertech.com",
         "status": True,
-        "password": "Kits@123"
+        "password": "Kits@123",
+        "role": "admin"
     }
     users_data = UserModel.find_by_email("jafarp@pathbreakertech.com")
     if users_data:
@@ -130,6 +144,18 @@ class SendOTP(Resource):
 
         return {"message": "OTP sent successfully."}, 201
 
+class UserRegister(Resource):
+    @user_ns.expect(creation)
+    @user_ns.doc("User")
+    def post(self):
+        user_json = request.json
+        try:
+            user_data = user_schema.load(user_json)
+            user_data.save_to_db()
+        except(Exception, exc.SQLAlchemyError) as e:
+            print(str(e))
+            return {"message": "user creation failed"}, 400
+        return {"message": "user registration success"}, 201
 
 class UserLogin(Resource):
     @login_ns.expect(access)

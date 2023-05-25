@@ -22,10 +22,13 @@ data_fields = clab_kit_preparation_ns.model(
 
 
 lab_test_data_fields = clab_kit_preparation_ns.model(
-    "lab_test_kit_details",
+    "screening_kit_details",
     {
         "lab_test_id": fields.String(required=True),
-        "frozen_status": fields.Boolean(required=True),
+        "kid_id": fields.String(required=True),
+        "preparation": fields.String(required=True),
+        "status": fields.String(default="not Verified"),
+        "assigned_to_site": fields.String()
     }
 )
 

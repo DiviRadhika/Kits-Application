@@ -16,9 +16,10 @@ class UserModel(db.Model):
     user_otp = db.Column(db.Integer)
     otp_sent_time = db.Column(db.DateTime(timezone=False))
     is_logged_in = db.Column(db.Boolean)
-    status = db.Column(db.Boolean)
+    status = db.Column(db.Boolean, default=True)
     access_token = db.Column(db.String)
     refresh_token = db.Column(db.String)
+    role = db.Column(db.String)
 
 
 
