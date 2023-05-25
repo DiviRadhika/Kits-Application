@@ -8,8 +8,12 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="protocol id" placeholder="Enter Protocol ID"
-                                formControlName="protocol_id">
+                           
+                                <label for=""> Choose Protocol ID</label>
+                                <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">ch
+                                    <option  value="Select an option">Select an option</option>
+                                    <option *ngFor="let option of options" [value]="option">{{ options }}</option>
+                                </select> 
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -25,7 +29,7 @@
                         </div>
                     </div>
 
-                   
+                    
                 
                 <div class="col-md-3">
                     <div class="form-group">
@@ -230,7 +234,7 @@
 
         <div class="card-body">
             <h6 style="color: rgb(250, 49, 49);"></h6>
-
+<!-- 
             <form>
                 <div class="row">
                     <div class="col-md-3">
@@ -254,7 +258,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> -->
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                 <button (click)="submit()" class="btn btn-primary">Submit</button>
 

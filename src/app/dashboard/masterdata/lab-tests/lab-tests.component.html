@@ -1,10 +1,10 @@
 <h4>Tests Data</h4>
 <div class="col-12 mt-auto d-flex justify-content-end mt-8 mb-2 ">
-    <button class="btn btn-primary" (click)="create()">Create</button>
-   
+<button class="btn btn-primary" (click)="create()"><i class="fa-solid fa-plus"  aria-hidden="true"></i>&nbsp;Create</button>
+
 </div>
 <div class="card">
-    <table class="table">
+    <!-- <table class="table">
         <thead class="card-body">
             <tr>
                 <th scope="col">Lab Test</th>
@@ -117,5 +117,42 @@
                 <td><button><i class="fa fa-paperclip" aria-hidden="true"></i>Attach</button></td>
             </tr>
         </tbody>
+    </table> -->
+
+    <table mat-table #table [dataSource]="labTableValues" class="lesson-table mat-elevation-z8">
+      
+        <ng-container matColumnDef="lab_test">
+
+            <th mat-header-cell *matHeaderCellDef class="h6" style="width:90px"> <b>Lab Test</b> </th>
+
+
+            <td mat-cell *matCellDef="let element"> {{element.lab_test}} </td>
+
+
+        
+        </ng-container>
+        <ng-container matColumnDef="material">
+            <th mat-header-cell *matHeaderCellDef class="h6" style="width:90px"> <b>Material</b> </th>
+            <td mat-cell *matCellDef="let element"> {{element.material}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="size">
+            <th mat-header-cell *matHeaderCellDef class="h6" style="width:90px"><b>Size</b> </th>
+            <td mat-cell *matCellDef="let element"> {{element.size }} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef class="h6" style="width:90px"><b>Image</b> </th>
+            <td mat-cell *matCellDef="let element">
+          
+            <img style="width:50px" src="{{'data:image/jpg;base64,' + element.image}}" />
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+   
+    
+   
 </div>

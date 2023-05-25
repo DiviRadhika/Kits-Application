@@ -6,27 +6,29 @@
         <div class="card-body">
             <h3 style="color: rgb(250, 49, 49);">Lab Tests Form</h3>
             <hr>
-            <form >
+            <form [formGroup]="labForm">
                 
                     <div class="col-md-10">
                         <div class="form-group">
                             
-                            <input type="text" class="form-control" id="lab test"placeholder="Enter Lab Test">
+                            <input type="text" class="form-control" formControlName="lab_test"  id="lab test"placeholder="Enter Lab Test">
                         </div>
                     </div>
                     <div class="col-md-10">
-                        <div class="form-group"> <input type="text" class="form-control" id="material" placeholder="Enter Material Name">
+                        <div class="form-group"> <input type="text" formControlName="material"  class="form-control" id="material" placeholder="Enter Material Name">
                         </div>
                     </div>
                     <div class="col-md-10">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="Size" placeholder=" Enter Size">
+                            <input type="text" class="form-control" id="Size" formControlName="size"  placeholder=" Enter Size">
                         </div>
                     </div>
-                    <div class="col-md-10 mt-auto d-flex justify-content-end">
-                        
-                        <button class="btn btn-success"><i class="fa fa-paperclip" aria-hidden="true"></i>Attach</button>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input type="file" accept=".jpg,.png" class="form-control" formControlName="image" (change)="uploadFile($event)" id="Size" placeholder=" Enter Size">
+                        </div>
                     </div>
+                  
                 
             </form>
         </div>

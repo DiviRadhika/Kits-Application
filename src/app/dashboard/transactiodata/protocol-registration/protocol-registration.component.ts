@@ -18,6 +18,9 @@ export class ProtocolRegistrationComponent {
     private _activatedRoute: ActivatedRoute,
     private _protocolService: ProtocolService
   ) {
+    _protocolService.getProtocols().subscribe((data: any) => {
+     console.log(data)
+    });
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
         this.isEdit = true;
@@ -27,6 +30,8 @@ export class ProtocolRegistrationComponent {
         });
       }
     });
+
+    
   }
   public ProtocolForm: FormGroup = new FormGroup({
 
