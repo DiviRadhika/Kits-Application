@@ -1,13 +1,13 @@
 <h4><i class="fab fa-codiepie cro-icon mr-sm-2"></i>CRO Data</h4>
 <br>
-<form>
+<form [formGroup]="CroForm">
 <div class="card ml-2 mr-2 bg-white">
     <div class="container">
         
         <div class="card-body">
             <h6 style="color: rgb(250, 39, 39);">CRO Form</h6>
             <hr>
-            <form >
+            <form [formGroup]="CroForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -35,7 +35,7 @@
         <div class="card-body">
             <h6 style="color: rgb(250, 39, 39);">Address</h6>
             <hr>
-            <form >
+            <form [formGroup]="CroForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -99,7 +99,7 @@
         <div class="card-body">
             <h6 style="color: rgb(250, 39, 39);">Communication</h6>
             <hr>
-            <form >
+            <form [formGroup]="CroForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group"> 
