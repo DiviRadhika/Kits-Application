@@ -44,6 +44,7 @@ creation = login_ns.model(
 )
 
 user_schema = UserSchema()
+user_list_schema = UserSchema(many=True)
 
 
 def CreateDefaultUser():
@@ -145,6 +146,10 @@ class SendOTP(Resource):
         return {"message": "OTP sent successfully."}, 201
 
 class UserRegister(Resource):
+    @user_ns.doc("Get all the sponsers")
+    def get(self):
+        return (user_list_schema.dump(UserModel.find_all()), 200)
+
     @user_ns.expect(creation)
     @user_ns.doc("User")
     def post(self):

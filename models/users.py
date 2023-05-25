@@ -22,6 +22,9 @@ class UserModel(db.Model):
     role = db.Column(db.String)
 
 
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     @classmethod
     def find_by_email(cls, email):
