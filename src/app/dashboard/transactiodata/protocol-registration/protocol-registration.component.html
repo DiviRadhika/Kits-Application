@@ -4,37 +4,45 @@
     <div class="container">
 
         <div class="card-body">
-            <form [formGroup]="protocolForm">
+            <form [formGroup]="ProtocolForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="protocol id" placeholder="Enter Protocol ID"
-                                formControlName="protocol_id">
+                           
+                                <label for=""> Choose Protocol ID</label>
+                                <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">ch
+                                    <option  value="Select an option">Select an option</option>
+                                    <option *ngFor="let option of options" [value]="option">{{ options }}</option>
+                                </select> 
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <!-- <label for="">Choose sponsor id / Name</label> -->
+                           <label for=""> Choose sponsor id / Name</label>
+                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">ch
+                                <option value="Select an option">Select an option</option>
+                                <option *ngFor="let option of options" [value]="option">{{ options }}</option>
+                            </select> 
 
-                            <select  class="form-control" placeholder="Select an option" formControlName="sponsor_id">
-                                <option value="Select an option" *ngFor="let sponsor of sponsors" formControlName="sponsor_code">
-                                    {{sponsor.sponsor_code}}<i class="fa fa-caret-down" aria-hidden="true"></i></option>
-                                <option *ngFor="let sponsor of sponsors" formControlName="sponsor_name">{{sponsor.sponsor_name}}</option>
+
+
+                        </div>
+                    </div>
+
+                    
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        
+                        <div class="dropdown">
+                            <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
+                                
+                                <option value="Select an option">Select an option</option>
+                                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <div class="dropdown">
-                                <select class="form-control"
-                                    placeholder="Select an option" formControlName="cro_id">
-                                    <option value="Select an option" *ngFor="let cro of cros">{{cro.cro_code}}<i
-                                            class="fa fa-caret-down" aria-hidden="true"></i></option>
-                                    <option *ngFor="let cro of cros">{{cro.cro_name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                </div>
                 </div>
             </form>
         </div>
@@ -45,7 +53,7 @@
         <div class="card-body">
 
             <hr>
-            <form [formGroup]="protocolForm">
+            <form [formGroup]="ProtocolForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -70,76 +78,26 @@
         <div class="card-body">
             <h6 style="color: rgb(250, 49, 49); margin-left: 20px;">Site Details</h6>
             <hr>
-            <div class="table-responsive" id="myTable">
-                <button class="btn btn-primary d-flex-end mr-end ml-2 mt-2"><i class="fa fa-plus"
-                        aria-hidden="true"></i> Add Row</button>
-                <button type="button" class="btn btn-danger ml-3 mt-2">Delete</button>
-                <table class="table table-bordered">
+            <div class="table-responsive">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>SiteId/Name</th>
                             <th>Patient Count</th>
                             <th>No.of Visits</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let site of sites">
-                            <td>
-                                <select [(ngModel)]="selectedOption" class="form-control" placeholder="Select an option">
-                                    <option value="Select an option" *ngFor="let site of sites">{{site.site_data_code}}<i class="fa fa-caret-down" aria-hidden="true"></i></option>
-                                    <option *ngFor="let site of sites">{{site.site_data_name}}</option>
-                                  </select>
-                            </td>
-                            <td><input type="number" class="form-control" id="protocol id" placeholder="Enter No.of Patients"
-                                formControlName="no_of_sites"></td>
-                            <td><input type="number" class="form-control" id="protocol id" placeholder="Enter No.of visits"></td>
-                        
-            
-                            
+                        <tr>
+                            <td>Data 1</td>
+                            <td>Data 2</td>
+                            <td>Data 3</td>
                         </tr>
-                        <!-- <tr *ngFor="let row of existingRows; let rowIndex = index">
-                            <td>
-                                <select [(ngModel)]="row.siteId" class="form-control" placeholder="Select an option" formControlName="site_ids">
-                                     Options for siteId -->
-                                    <!-- <option value="Select an option" *ngFor="let site of sites" formControlName="site_data_code">
-                                        {{site.site_data_code}}<i class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </option>
-                                    <option *ngFor="let site of sites" formControlName="site_data_name">{{site.site_data_name}}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.patientCount"
-                                    placeholder="Enter No.of Patients" formControlName="total_patients">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.numberOfVisits"
-                                    placeholder="Enter No.of visits">
-                            </td>
-                        </tr>  -->
-
-                        <!-- Render added rows -->
-                        <tr *ngFor="let row of existingRows;">
-                            <td>
-                                <select [(ngModel)]="row.siteId" class="form-control" placeholder="Select an option" formControlName="site_ids">
-                                    Options for siteId 
-                                    <option value="Select an option" *ngFor="let site of sites" formControlName="site_data_code">
-                                       {{site.site_data_code}}<i class="fa fa-caret-down" aria-hidden="true"></i>
-                                   </option>
-                                   <option *ngFor="let site of sites" formControlName="site_data_name" formControlName="site_data_name">{{site.site_data_name}}</option>
-                               </select>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.patientCount"
-                                    placeholder="Enter No.of Patients">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" [(ngModel)]="row.numberOfVisits"
-                                    placeholder="Enter No.of visits">
-                            </td>
+                        <tr>
+                            <td>Data 4</td>
+                            <td>Data 5</td>
+                            <td>Data 6</td>
                         </tr>
-
-
 
                     </tbody>
                 </table>
@@ -175,7 +133,7 @@
     <div class="card-body" *ngIf="KitType=='screening'">
         <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Screening Kit Details</h6>
         <div class="row">
-            <form action="" [formGroup]="protocolForm">
+            <form action="" [formGroup]="ProtocolForm">
                 <div class="col">
                     <div class="form-group">
                         <div>
@@ -187,61 +145,31 @@
             </form>
         </div>
         <div class="table-responsive">
-            <button class="btn btn-primary d-flex-end mr-end"><i class="fa fa-plus"
-                    aria-hidden="true"></i> ADD</button>
-            <table class="table" id="myTable">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Lab Test</th>
-                        <th>Material</th>
-                        <th>labtest.Size</th>
+                        <th>Materail</th>
+                        <th>Size</th>
                         <th>Frozen at Site</th>
                         <th>Image</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr  *ngFor="let row of existingRows; let rowIndex = index;let labtest of labtests;">
-                        <td>
-                            <select  class="form-control" placeholder="Select an option">
-                                
-                                <option value="Select an option" *ngFor="let labtest of labtests">{{labtest.lab_test}}<i class="fa fa-caret-down" aria-hidden="true"></i></option>
-                               
-                              </select>
-                        </td>
-                        <td>{{labtest.material}}</td>
-                        <td>{{labtest.size}}</td>
-                        <td>
-                            <input type="radio" name="ok" id="" value="IN Site audit">
-                            <label style="margin-right: 20px;">Yes</label>
-                            <input type="radio" name="ok" id="" value="Evaluation by Documentation">
-                            <label style="margin-right: 30px;">No</label>
-                        </td>
-                        <td>{{labtest.image}}</td>
-                        
-                    </tr> -->
-                    <tr *ngFor="let row of existingRows; let rowIndex = index;">
-                        <td>
-                            <select [(ngModel)]="row.siteId" class="form-control" placeholder="Select an option"
-                                (change)="updateDetails(row)">
-                                <!-- Options for siteId -->
-                                <option value="Select an option" *ngFor="let labtest of labtests">{{labtest.lab_test}}<i
-                                        class="fa fa-caret-down" aria-hidden="true"></i></option>
-                            </select>
-                        </td>
-                        <td>{{row.details?.material}}</td>
-                        <td>{{row.details?.size}}</td>
-                        <td>
-                            <input type="radio" name="ok" id="" value="IN Site audit">
-                            <label style="margin-right: 20px;">Yes</label>
-                            <input type="radio" name="ok" id="" value="Evaluation by Documentation">
-                            <label style="margin-right: 30px;">No</label>
-                        </td>
-                        <td>{{row.details?.image}}</td>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
                     </tr>
-
-
-
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
 
                 </tbody>
             </table>
@@ -251,7 +179,7 @@
     <div class="card-body" *ngIf="KitType=='visit'">
         <h6 style="color: rgb(250, 49, 49); margin-left: 10px;">Visit Kit Details</h6>
         <div class="row">
-            <form action="" [formGroup]="protocolForm">
+            <form action="" [formGroup]="ProtocolForm">
                 <div class="col-md-3">
                     <div class="form-group">
 
@@ -269,10 +197,7 @@
         </div>
 
         <div class="table-responsive">
-            <br>
-            <button class="btn btn-primary d-flex-end mr-end"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Add Row</button>
-            <table class="table" id="myTable">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>No.of Visit</th>
@@ -285,22 +210,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let labtest of labtests">
-                        <td><input type="number"></td>
-                        <td><input type="number"></td>
-                        <td>{{labtest.lab_test}}</td>
-                        <td>{{labtest.material}}</td>
-                        <td>{{labtest.size}}</td>
-                        <td>
-                            <input type="radio" name="ok" id="" value="IN Site audit">
-                            <label style="margin-right: 20px;">Yes</label>
-                            <input type="radio" name="ok" id="" value="Evaluation by Documentation">
-                            <label style="margin-right: 30px;">No</label>
-                        </td>
-                        <td>{{labtest.image}}</td>
-
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
                     </tr>
-
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                        <td>Data 3</td>
+                        <td>Data 4</td>
+                        <td>Data 5</td>
+                    </tr>
 
                 </tbody>
             </table>
@@ -311,7 +234,7 @@
 
         <div class="card-body">
             <h6 style="color: rgb(250, 49, 49);"></h6>
-
+<!-- 
             <form>
                 <div class="row">
                     <div class="col-md-3">
@@ -335,7 +258,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> -->
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                 <button (click)="submit()" class="btn btn-primary">Submit</button>
 

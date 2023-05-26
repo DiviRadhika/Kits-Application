@@ -20,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LabDetailsComponent } from './masterdata/lab-tests/lab-details/lab-details.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -44,7 +46,11 @@ import { LabDetailsComponent } from './masterdata/lab-tests/lab-details/lab-deta
     ModalModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,MatCardModule,
+    MatListModule,
+    
+    
   ]
 })
 export class DashboardModule { }

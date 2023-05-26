@@ -11,6 +11,15 @@
   flex-direction: column; /* Align items vertically */
 
 }
+/* You can add global styles to this file, and also import other style files */
+
+/* html, body { height: 100%; } */
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+/* body{
+    margin: 0px;
+    padding: 0px;
+} */
+
 h4{
   top: 2;
   margin-top: 10px;
@@ -70,6 +79,14 @@ main{
   width:150px;
   font-size:12px
 }
+
+
+
+
+
+
+
+
 
 
 
