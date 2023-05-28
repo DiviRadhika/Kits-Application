@@ -3,6 +3,12 @@ from schemas.cro import CroSchema
 from flask import request
 from sqlalchemy import exc
 from models.cro import CroModel
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 
 cro_ns = Namespace("cro", description="cro related operations")
 cros_ns = Namespace("cros", description="cros related operations")
@@ -35,14 +41,32 @@ cro = cros_ns.model(
 
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (cros_list_schema.dump(CroModel.find_all()), 200)
 
 
 class Cro(Resource):
     @cro_ns.expect(cro)
     @cro_ns.doc("Create a cro")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         cro_json = request.get_json()
         try:
             cro_data = cro_schema.load(cro_json)
