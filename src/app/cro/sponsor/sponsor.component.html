@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="number" class="form-control" id="Zip Code"
+                                            <input type="text" class="form-control" id="Zip Code"
                                                 placeholder="Enter Zip Code" formControlName="zip_code"
                                                 [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                                             <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">

@@ -59,6 +59,7 @@ export class AddSiteComponent implements OnInit {
       this._cro.updateSiteDetails(this.siteForm.value,this.id).subscribe(
         (data:any)=>{
           alert('updated successfully');
+          this.router.navigate(['/home/cro/addSite'])
         },
         (err:any)=>{
           alert("server errorr")

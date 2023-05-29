@@ -63,10 +63,10 @@
                   <div class="col-md-3">
                     <div class="form-group">
                   <label >Role</label>
-                  <select formControlName="role" class="form-control" placeholder="Select an option">
-                      <option value="Select an option">Select an option</option>
-                      <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                  <select formControlName="role" class="form-select" aria-label="Default select example">
+                    <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                   </select>
+                
                   </div>
                   </div>
                 </div>

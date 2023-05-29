@@ -102,8 +102,8 @@
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <a class="dropdown-item text-danger" href="login.html"><i
+                            <!-- item--> 
+                            <a  routerLink="/Login"  class="dropdown-item text-danger" href="login.html"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout">Logout</span></a>
                         </div>
@@ -124,7 +124,7 @@
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title" key="t-menu">Menu</li>
                         <li *ngIf="adminRole">
-                            <a href="#" class="waves-effect">
+                            <a  class="waves-effect">
                                 <i class="bx bxs-user-check"></i>
                                 <span key="t-chat">Application Admin</span>
                             </a>
@@ -141,18 +141,7 @@
                             </ul>
                         <li>
 
-                        <li *ngIf="sponsorRole">
-                            <a href="#" class="waves-effect">
-                                <i class="bx bxs-user-check"></i>
-                                <span key="t-chat">Sponsor</span>
-                            </a>
-                            <ul>
-                                <li><a routerLink="/home/Sponsor/protocol" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Protocol</span>
-                                    </a> </li>
-                            </ul>
-                        <li>
+
                         <li *ngIf="croRole">
                             <a class="waves-effect">
                                 <i class="bx bxs-user-check"></i>
@@ -179,11 +168,23 @@
                                         <span key="t-chat">Protocol Registration</span>
                                     </a> </li>
                             </ul>
+                        </li>
+                        <li *ngIf="sponsorRole">
+                            <a  class="waves-effect">
+                                <i class="bx bxs-user-check"></i>
+                                <span key="t-chat">Sponsor</span>
+                            </a>
+                            <ul>
+                                <li><a routerLink="/home/Sponsor/protocol" class="waves-effect">
+                                        <i class="bx bxs-user-check"></i>
+                                        <span key="t-chat">Protocol</span>
+                                    </a> </li>
+                            </ul>
                         <li>
                         <li *ngIf="centralLab">
                             <a class="waves-effect">
                                 <i class="bx bxs-analyse"></i>
-                                <span key="t-chat">Cenral Lab</span>
+                                <span key="t-chat">Central Lab</span>
                             </a>
                             <ul>
                                 <li><a routerLink="/home/cro/csponsor" class="waves-effect">

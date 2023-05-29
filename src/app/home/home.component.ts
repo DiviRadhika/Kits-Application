@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
       this.sponsorRole = false;
       this.croRole = false;
       this.centralLab = true;
-      this.siteRole = true;
+      this.siteRole = false;
     }
     else if(this.role === 'Site'){
       this.adminRole = false;

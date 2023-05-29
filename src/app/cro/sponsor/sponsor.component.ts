@@ -123,6 +123,7 @@ ngOnInit(): void {
      else {
        this._cro.CreateSponsorDetails(obj).subscribe(
          (data: any) => {
+          alert('Sponsor Created Successfully')
           this.route.navigate(['/home/cro/sponsorGrid'])
          },
          (err: any) => {
