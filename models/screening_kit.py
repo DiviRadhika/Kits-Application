@@ -5,16 +5,14 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import ARRAY
 
 
-class ClabKitPreparationModel(db.Model):
-    __tablename__ = "clab_kit_preparation"
+class ScreeningKitDetailsModel(db.Model):
+    __tablename__ = "screening_kit_details"
     # extend_existing=True
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     protocol_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro_protocol.id"))
-    central_lab_id = db.Column(db.String)
-    kit_id = db.Column(db.String)
-    preparation_status = db.Column(db.String)
-    status = db.Column(db.String)
-    assigned_site_id = db.Column(db.String)
+    screening_kit_count = db.Column(db.Integer)
+    lab_test_id = db.Column(UUID(as_uuid=True), db.ForeignKey("lab_test.lab_id"))
+    lab_frozen_status = db.Column(db.Boolean)
 
     @classmethod
     def find_all(cls):

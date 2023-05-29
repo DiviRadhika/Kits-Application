@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID
 
 
 class LabtestModel(db.Model):
-    __tablename__ = "labtest"
+    __tablename__ = "lab_test"
     # extend_existing=True
     lab_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     lab_code = db.Column(db.String)

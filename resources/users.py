@@ -150,9 +150,30 @@ class UserRegister(Resource):
 
     @user_ns.expect(creation)
     @user_ns.doc("User")
+    def put(self):
+        user_json = request.json
+        try:
+            user_data = UserModel.find_by_email(user_json["email"])
+            if user_data:
+                for key, value in user_json.items():
+                    if hasattr(user_data, key) and value is not None:
+                        setattr(user_data, key, value)
+                user_data.save_to_db()
+            else:
+                return {"message": "user not found"}, 400
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(str(e))
+            return {"message": "user updation failed"}, 400
+        return {"message": "user updation success"}, 201
+
+    @user_ns.expect(creation)
+    @user_ns.doc("User")
     def post(self):
         user_json = request.json
         try:
+            user_data = UserModel.find_by_email(user_json["email"])
+            if user_data:
+                return {"message": "user already exists"}, 400
             user_data = user_schema.load(user_json)
             user_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:

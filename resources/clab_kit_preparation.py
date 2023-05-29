@@ -15,6 +15,7 @@ clab_kit_preparations_ns = Namespace(
 clab_kit_preparation_schema = ClabKitPreparationSchema()
 clab_kit_list_preparation_schema = ClabKitPreparationSchema(many=True)
 
+
 data_fields = clab_kit_preparation_ns.model(
     "visit_kit_details",
     {
@@ -48,7 +49,6 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
         "preparation": fields.String(required=True),
         "status": fields.String(required=True),
-        # "frozen_status": fields.List(fields.Nested(data_fields))
     },
 )
 
