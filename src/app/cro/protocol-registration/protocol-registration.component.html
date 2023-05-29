@@ -1,1 +1,492 @@
-<p>protocol-registration works!</p>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-icon-dark.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/roboxa-logo.png" alt="" height="17">
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-icon-lite.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/roboxa-logo-lite.png" alt="" height="35">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+
+                    <!-- App Search-->
+                    <form class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="bx bx-search-alt"></span>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div class="d-flex">
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                            aria-labelledby="page-header-search-dropdown">
+
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..."
+                                            aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="dropdown d-none d-lg-inline-block ms-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect"
+                            data-bs-toggle="fullscreen">
+                            <i class="bx bx-fullscreen"></i>
+                        </button>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="assets/images/profile_img.jpg"
+                                alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">CRO Admin</span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item text-danger" href="login.html"><i
+                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                    key="t-logout">Logout</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title" key="t-menu">Menu</li>
+						<li>
+                                <a href="" class="has-arrow waves-effect">
+                                    <i class="bx bx-home-circle"></i>
+                                    <span key="t-dashboards">Transactional Data</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="protocol_registration.html" key="t-default">Protocol Registration</a></li>
+                                    <li><a href="lab_kit_preparation.html" key="t-default">Lab Kit Preparation</a></li>
+                                    <li><a href="lab_kit_verification.html" key="t-default">Lab Kit Verification</a></li>
+                                </ul>
+                            </li>
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+
+
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-dashboard"></i> Protocol Registration</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="">Transactonal Data</a></li>
+                                        <li class="breadcrumb-item active">Protocol Registration</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                            <div class="card">
+                                <div class="card-body">
+								    <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
+                                    <input type="text" class="form-control" id="" placeholder="Enter Protocol ID">
+                                </div>
+                            </div>
+							<div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
+                                    <select class="form-select">
+                                        <option>Select</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+
+                                    </select>
+                                </div>
+                            </div>
+							<div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">CRO ID / Name</label>
+                                    <select class="form-select">
+                                        <option>Select</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+							
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">No.of Sites</label>
+                                    <input type="text" class="form-control" id="" placeholder=" ">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="formrow-firstname-input" class="form-label">Total No.of Patients</label>
+                                    <input type="text" class="form-control" id="" placeholder=" ">
+                                </div>
+                            </div>
+							
+							
+                                </div>
+                            
+							
+							<hr class="mt-4 mb-4">
+							
+							
+								    <div class="row">
+							<div class="col-md-10 mb-3"><h4 class="r-blue-text">Site Details</h4></div>	
+							<div class="col-md-2 mb-3" align="right">
+							<div class="mb-2 text-right" width="100%">
+                                        <button type="button"
+                                            class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
+                                            data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                                                class="bx bx-plus label-icon"></i> Add Row</button>
+                                    </div>
+							</div>	
+							 
+                            	 <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+        
+                                                <thead Style="background:#EEE">
+                                                    <tr>
+                                                        <th>Site ID / Name</th>
+                                                        <th>Patient Count</th>
+                                                        <th>No. of Visits</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row"><select class="form-select">
+                                        <option>Select Site</option>
+                                        <option selected>Site 1 </option>
+                                        <option>Site 2</option>
+                                        <option>Site 3</option>
+                                        <option>Site 4</option>
+                                    </select></th>
+                                                        <td><input type="text" class="form-control" value=""></td>
+                                                        <td><input type="text" class="form-control" value=""></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><select class="form-select">
+                                        <option>Select Site</option>
+                                        <option>Site 1 </option>
+                                        <option selected>Site 2</option>
+                                        <option>Site 3</option>
+                                        <option>Site 4</option>
+                                    </select></th>
+                                                        <td><input type="text" class="form-control" value=""></td>
+                                                        <td><input type="text" class="form-control" value=""></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+							
+                                </div>
+                           
+						   <hr class="mt-4 mb-4">
+							
+							
+								    <div class="row">
+							<div class="col-md-12 mb-3"><h4 class="r-blue-text">Kit Details</h4></div>	
+							 <div class="col-md-12 mb-3">
+                               <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#screening" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                    <span class="d-none d-sm-block">Screening</span>    
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#visit" role="tab">
+                                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                                    <span class="d-none d-sm-block">Visit</span>    
+                                                </a>
+                                            </li>
+                                        </ul>
+        
+                                        <!-- Tab panes -->
+                                        <div class="tab-content pt-3 text-muted">
+                                            <div class="tab-pane active" id="screening" role="tabpanel">
+											<div class="row">
+											<div class="col-md-12 mt-2 mb-3"><h5>Screening Kit Details</h5></div>
+											<div class="col-md-3 mb-3">
+											<input type="text" class="form-control" placeholder="Enter Kit Count">
+											</div> 
+								<div class="col-md-9 mb-3" align="right">
+							<div class="mb-2 text-right" width="100%">
+                                        <button type="button"
+                                            class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
+                                            data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                                                class="bx bx-plus label-icon"></i> Add Row</button>
+                                    </div>
+							</div>
+</div>
+							
+                            	 <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+        
+                                                <thead Style="background:#EEE">
+                                                    <tr>
+                                                        <th>Lab Test</th>
+                                                        <th>Material</th>
+                                                        <th>Size</th>
+                                                        <th>Frozen at Site</th>
+                                                        <th>Image</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row"><select class="form-select">
+                                        <option>Select Test</option>
+                                        <option selected>Chemistry </option>
+                                        <option>BHCG</option>
+                                        <option>Lipid Panel</option>
+                                        <option>eGFR</option>
+
+                                    </select></th>
+                                                        <td>Gel Separator Tube SST</td>
+                                                        <td>1 X 5 mL SST</td>
+                                                        <td><input class="form-check-input" type="checkbox" value="checked" id="debugInfo"></td>
+                                                        <td><i class="bx bx-image-alt font-size-24"></i></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">
+														<select class="form-select">
+                                        <option>Select Test</option>
+                                        <option>Chemistry </option>
+                                        <option selected>BHCG</option>
+                                        <option>Lipid Panel</option>
+                                        <option>eGFR</option>
+                                    </select></th>
+                                                        <td>Gel Separator Tube SST</td>
+                                                        <td>1 X 5 mL SST</td>
+                                                        <td><input class="form-check-input" type="checkbox" value="checked" id="debugInfo"></td>
+                                                        <td><i class="bx bx-image-alt font-size-24"></i></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+                                            </div>
+                                            
+											
+											<div class="tab-pane" id="visit" role="tabpanel">
+											<div class="row">
+											<div class="col-md-12 mt-2 mb-3"><h5>Visit Kit Details</h5></div>
+                                               
+                                                <div class="col-md-3 mb-3">
+											
+											   <input type="text" class="form-control" placeholder="Enter Kit Count">
+											</div>   
+											<div class="col-md-3 mb-3">
+											   <input type="text" class="form-control" placeholder="Enter Kit Type / Varients">
+											</div> 
+<div class="col-md-6 mb-3" align="right">
+							<div class="mb-2 text-right" width="100%">
+                                        <button type="button"
+                                            class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                            data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                                                class="bx bx-plus label-icon"></i> Add Row</button>
+                                    </div>
+							</div>											
+											
+                            	 <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+        
+                                                <thead Style="background:#EEE">
+                                                    <tr>
+                                                        <th>No of Visit</th>
+                                                        <th>Kit Type</th>
+                                                        <th>Lab Test</th>
+                                                        <th>Material</th>
+                                                        <th>Size</th>
+                                                        <th>Frozen at Site</th>
+                                                        <th>Image</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" value="1"></td>
+                                                        <td><input type="text" class="form-control" value="2"></td>
+											   
+                                                        <th scope="row"><select class="form-select">
+                                        <option>Select Test</option>
+                                        <option selected>Chemistry </option>
+                                        <option>BHCG</option>
+                                        <option>Lipid Panel</option>
+                                        <option>eGFR</option>
+
+                                    </select></th>
+                                                        <td>Gel Separator Tube SST</td>
+                                                        <td>1 X 5 mL SST</td>
+                                                        <td><input class="form-check-input" type="checkbox" value="checked" id="debugInfo"></td>
+                                                        <td><i class="bx bx-image-alt font-size-24"></i></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" value="3"></td>
+                                                        <td><input type="text" class="form-control" value="4"></td>
+                                                        <th scope="row"><select class="form-select">
+                                        <option>Select Test</option>
+                                        <option>Chemistry </option>
+                                        <option selected>BHCG</option>
+                                        <option>Lipid Panel</option>
+                                        <option>eGFR</option>
+
+                                    </select></th>
+                                                        <td>Gel Separator Tube SST</td>
+                                                        <td>1 X 5 mL SST</td>
+                                                        <td><input class="form-check-input" type="checkbox" value="checked" id="debugInfo"></td>
+                                                        <td><i class="bx bx-image-alt font-size-24"></i></td>
+                                                        <td>
+											<button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
+                                            </button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+        </div>
+                                            </div>
+                                        </div>
+        </div>
+							
+                                </div>
+                           
+							<div class="col-md-12 mb-3" align="right">
+							<div class="mb-2 text-right" width="100%">
+                                        <button type="button"
+                                            class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right" style="width: 150px; height: 40px;"
+                                            data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                                                class="bx bx-hdd label-icon"></i> Submit</button>
+                                    </div>
+							</div>	
+							</div>
+                       
+
+                        <!-- end col -->
+                    </div> <!-- end row -->
+                
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                             © Roboxa
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
