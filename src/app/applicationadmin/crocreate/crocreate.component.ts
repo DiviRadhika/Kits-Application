@@ -24,11 +24,9 @@ export class CROcreateComponent implements OnInit  {
         admin.getCroDeatils(data.id).subscribe((data: any) => {
           // this.CroForm.patchValue(data);
           this.getData = data  
-          console.log(this.getData )  
-         
-          this.CroForm.controls['cro_code'].setValue('123');   
+        
         });
-        console.log(this.CroForm.controls['cro_code'].setValue('123') )
+     
       }
     });
   }
