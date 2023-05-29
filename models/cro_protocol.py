@@ -15,12 +15,8 @@ class CroProtocolModel(db.Model):
     cro_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro.cro_id"))
     no_of_sites = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
-    site_ids = db.Column(ARRAY(db.String))
-    screening_kit_count = db.Column(db.Integer)
-    screening_kit_lab_test_details = db.Column(JSONB)
-    visit_kit_count = db.Column(db.Integer)
-    visit_kit_details = db.Column(JSONB)
-    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
+    site_data = db.Column(JSONB)
+    # user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)
@@ -33,3 +29,4 @@ class CroProtocolModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+        return self.id
