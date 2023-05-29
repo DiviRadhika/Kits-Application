@@ -12,13 +12,18 @@ import { HomeComponent } from './home/home.component';
 import { UploadResultsComponent } from './central/upload-results/upload-results.component';
 import { CentralLabModule } from './central-lab/central-lab.module';
 import { SiteModule } from './site/site.module';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    UploadResultsComponent
+    UploadResultsComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,8 @@ import { SiteModule } from './site/site.module';
     ApplicationadminModule,
     CROModule,
     SponsorModule,
-    CentralLabModule,SiteModule
+    CentralLabModule,SiteModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

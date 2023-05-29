@@ -23,9 +23,30 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/icons.min.css",
+              "src/assets/css/app.min.css",
+              "src/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css",
+              "src/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css",
+              "src/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
+              "src/assets/css/style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/libs/jquery/jquery.min.js",
+              "src/assets/libs/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/libs/metismenu/metisMenu.min.js",
+              "src/assets/libs/simplebar/simplebar.min.js",
+              "src/assets/libs/node-waves/waves.min.js",
+              "src/assets/libs/datatables.net/js/jquery.dataTables.min.js",
+              "src/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js",
+              "src/assets/libs/apexcharts/apexcharts.min.js",
+              "src/assets/js/pages/dashboard.init.js",
+              "src/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js",
+              "src/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
+              "src/assets/js/pages/datatables.init.js",
+              "src/assets/js/app.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -97,5 +118,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "203248de-e6de-4cfd-a7fd-2febabe60448"
   }
 }
