@@ -80,7 +80,7 @@ class Cro(Resource):
             return (cro_schema.dump(cro_data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to get the data"}, 500
 
     @cro_ns.expect(cro)
     @cro_ns.doc("Create a cro")

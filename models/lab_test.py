@@ -24,7 +24,7 @@ class LabtestModel(db.Model):
         return cls.query.all()
 
     @classmethod
-    def find_by_id(cls, id):
+    def get_by_id(cls, id):
         return cls.query.filter_by(lab_id=id).first()
 
     def save_to_db(self):
