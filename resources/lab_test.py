@@ -21,6 +21,17 @@ lab_test = lab_tests_ns.model(
     },
 )
 
+update_lab_test = lab_tests_ns.model(
+    "lab_test",
+    {
+        "lab_test_id": fields.String(required=True),
+        "lab_test": fields.String(required=True),
+        "material": fields.String(required=True),
+        "size": fields.String(required=True),
+        "image": fields.String(required=True),
+    },
+)
+
 
 class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
@@ -41,7 +52,19 @@ class Labtest(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    """@lab_test_ns.doc("Update a lab_test")
-    @lab_test_ns.expect(lab_test)
+    @lab_test_ns.expect(update_lab_test)
+    @lab_test_ns.doc("Update a lab test")
     def put(self):
-        return {"data": [], "message": "updated"}, 200"""
+        request_json = request.get_json()
+        try:
+            lab_test_data = LabtestModel.get_by_id(request_json["lab_test_id"])
+            if not lab_test_data:
+                return {"message": "lab_test data not found"}, 500
+            for key, value in request_json.items():
+                if hasattr(lab_test_data, key) and value is not None:
+                    setattr(lab_test_data, key, value)
+            lab_test_data.save_to_db()
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to update data {}".format(str(e))}, 500
+        return {"data": [], "message": "updated lab test data successfully"}, 201

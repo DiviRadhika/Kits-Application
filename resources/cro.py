@@ -32,6 +32,29 @@ cro = cros_ns.model(
     },
 )
 
+update_cro = cros_ns.model(
+    "cro",
+    {
+        "cro_id": fields.String(required=True),
+        "cro_code": fields.String(required=True),
+        "cro_name": fields.String(required=True),
+        "legal_cro_name": fields.String(required=True),
+        "address_1": fields.String(required=True),
+        "address_2": fields.String(required=True),
+        "address_3": fields.String(required=True),
+        "address_4": fields.String(required=True),
+        "city": fields.String(required=True),
+        "district": fields.String(required=True),
+        "region": fields.String(required=True),
+        "zip_code": fields.String(required=True),
+        "country": fields.String(required=True),
+        "office_telephone": fields.String(required=True),
+        "extension": fields.String(required=True),
+        "email": fields.String(required=True),
+        "website": fields.String(required=True),
+    },
+)
+
 
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
@@ -52,7 +75,19 @@ class Cro(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    """@cro_ns.doc("Update a cro")
-    @cro_ns.expect(cro)
+    @cro_ns.expect(update_cro)
+    @cro_ns.doc("Update a cro")
     def put(self):
-        return {"data": [], "message": "updated"}, 200"""
+        request_json = request.get_json()
+        try:
+            cro_data = CroModel.get_by_id(request_json["cro_id"])
+            if not cro_data:
+                return {"message": "cro data not found"}, 500
+            for key, value in request_json.items():
+                if hasattr(cro_data, key) and value is not None:
+                    setattr(cro_data, key, value)
+            cro_data.save_to_db()
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to update data {}".format(str(e))}, 500
+        return {"data": [], "message": "updated cro data successfully"}, 201

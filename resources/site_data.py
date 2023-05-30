@@ -34,6 +34,30 @@ site_data = sites_data_ns.model(
     },
 )
 
+update_site_data = sites_data_ns.model(
+    "site_data",
+    {
+        "site_id": fields.String(required=True),
+        "site_data_code": fields.String(required=True),
+        "site_data_name": fields.String(required=True),
+        "legal_site_data_name": fields.String(required=True),
+        "address_1": fields.String(required=True),
+        "address_2": fields.String(required=True),
+        "address_3": fields.String(required=True),
+        "address_4": fields.String(required=True),
+        "city": fields.String(required=True),
+        "district": fields.String(required=True),
+        "region": fields.String(required=True),
+        "zip_code": fields.String(required=True),
+        "country": fields.String(required=True),
+        "office_telephone": fields.String(required=True),
+        "extension": fields.String(required=True),
+        "mobile_telephone": fields.String(required=True),
+        "email": fields.String(required=True),
+        "website": fields.String(required=True),
+    },
+)
+
 
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
@@ -54,7 +78,19 @@ class Sitedata(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    """@site_data_ns.doc("Update a site_data")
-    @site_data_ns.expect(site_data)
+    @site_data_ns.expect(update_site_data)
+    @site_data_ns.doc("Update a site_data")
     def put(self):
-        return {"data": [], "message": "updated"}, 200"""
+        request_json = request.get_json()
+        try:
+            site_data = SiteDataModel.get_by_id(request_json["site_id"])
+            if not site_data:
+                return {"message": "site data not found"}, 500
+            for key, value in request_json.items():
+                if hasattr(site_data, key) and value is not None:
+                    setattr(site_data, key, value)
+            site_data.save_to_db()
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to update data {}".format(str(e))}, 500
+        return {"data": [], "message": "updated site data successfully"}, 201
