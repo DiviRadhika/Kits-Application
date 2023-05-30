@@ -58,6 +58,11 @@ update_site_data = sites_data_ns.model(
     },
 )
 
+get_by_id = sites_data_ns.model(
+    "Sitedata",
+    {"site_id": fields.String(required=True)},
+)
+
 
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
@@ -66,6 +71,19 @@ class SitedatasList(Resource):
 
 
 class Sitedata(Resource):
+    @site_data_ns.expect(get_by_id)
+    @site_data_ns.doc("get by id")
+    def get(self):
+        request_json = request.get_json()
+        try:
+            data = SiteDataModel.get_by_id(request_json["site_id"])
+            if not data:
+                return {"message": "site data not found"}, 400
+            return (site_data_schema.dump(data), 200)
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to get the data"}, 500
+
     @site_data_ns.expect(site_data)
     @site_data_ns.doc("Create a site_data")
     def post(self):

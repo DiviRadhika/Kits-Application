@@ -161,7 +161,7 @@ def after_request(response):
     # header["Access-Control-Allow-Origin"] = "*"
     response.headers.add("Access-Control-Allow-Origin", "*")
     response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "POST")
+    response.headers.add("Access-Control-Allow-Methods", "POST,PUT")
     return response
 
 

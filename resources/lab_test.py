@@ -32,6 +32,11 @@ update_lab_test = lab_tests_ns.model(
     },
 )
 
+get_by_id = lab_test_ns.model(
+    "cro",
+    {"lab_test_id": fields.String(required=True)},
+)
+
 
 class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
@@ -40,6 +45,19 @@ class LabtestssList(Resource):
 
 
 class Labtest(Resource):
+    @lab_test_ns.expect(get_by_id)
+    @lab_test_ns.doc("get by id")
+    def get(self):
+        request_json = request.get_json()
+        try:
+            data = LabtestModel.get_by_id(request_json["lab_test_id"])
+            if not data:
+                return {"message": "lab test data not found"}, 400
+            return (lab_test_schema.dump(data), 200)
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to get the data"}, 500
+
     @lab_test_ns.expect(lab_test)
     @lab_test_ns.doc("Create a lab_test")
     def post(self):

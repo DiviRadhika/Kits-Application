@@ -56,6 +56,11 @@ update_sponsor = sponsor_ns.model(
     },
 )
 
+get_by_id = sponsor_ns.model(
+    "Sponsor",
+    {"sponsor_id": fields.String(required=True)},
+)
+
 
 class SponsersList(Resource):
     @sponsors_ns.doc("Get all the sponsers")
@@ -64,6 +69,19 @@ class SponsersList(Resource):
 
 
 class Sponser(Resource):
+    @sponsor_ns.expect(get_by_id)
+    @sponsor_ns.doc("get by id")
+    def get(self):
+        request_json = request.get_json()
+        try:
+            data = SponsorModel.get_by_id(request_json["sponsor_id"])
+            if not data:
+                return {"message": "sponsor data not found"}, 400
+            return (sponsor_schema.dump(data), 200)
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to get the data"}, 500
+
     @sponsor_ns.expect(sponsor)
     @sponsor_ns.doc("Create a sponser")
     def post(self):

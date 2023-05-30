@@ -55,6 +55,11 @@ update_cro = cros_ns.model(
     },
 )
 
+get_by_id = cros_ns.model(
+    "Cro",
+    {"cro_id": fields.String(required=True)},
+)
+
 
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
@@ -63,6 +68,20 @@ class CrosList(Resource):
 
 
 class Cro(Resource):
+    @cro_ns.expect(get_by_id)
+    @cro_ns.expect(cro)
+    @cro_ns.doc("get by id")
+    def get(self):
+        cro_json = request.get_json()
+        try:
+            cro_data = CroModel.get_by_id(cro_json["cro_id"])
+            if not cro_data:
+                return {"message": "cro data not found"}, 400
+            return (cro_schema.dump(cro_data), 200)
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to save data"}, 500
+
     @cro_ns.expect(cro)
     @cro_ns.doc("Create a cro")
     def post(self):
