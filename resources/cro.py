@@ -34,7 +34,7 @@ cro = cros_ns.model(
 )
 
 update_cro = cros_ns.model(
-    "cro",
+    "Updatecro",
     {
         "cro_id": fields.String(required=True),
         "cro_code": fields.String(required=True),
@@ -55,12 +55,6 @@ update_cro = cros_ns.model(
         "website": fields.String(required=True),
     },
 )
-
-get_by_id = cros_ns.model(
-    "Cro",
-    {"cro_id": fields.String(required=True)},
-)
-
 
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
