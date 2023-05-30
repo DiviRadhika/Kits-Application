@@ -29,6 +29,10 @@ class UserModel(db.Model):
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
 
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(user_id=id).first()
+
     def save_to_db(self):  # -> None:
         db.session.add(self)
         db.session.commit()

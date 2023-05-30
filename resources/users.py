@@ -19,6 +19,7 @@ from schemas.users import UserSchema
 
 login_ns = Namespace("login", description="login related operations")
 user_ns = Namespace("user", description="user related operations")
+users_ns = Namespace("user_actions", description="user actions related operations")
 
 
 access = login_ns.model(
@@ -143,6 +144,16 @@ class SendOTP(Resource):
         return {"message": "OTP sent successfully."}, 201
 
 
+class UserList(Resource):
+    @users_ns.doc("get user by id")
+    def get(self, user_id):
+        user_data = UserModel.find_by_id(id=user_id)
+        if not user_data:
+            return {"message": "user data not found"}, 400
+
+        return (user_schema.dump(user_data), 200)
+
+
 class UserRegister(Resource):
     @user_ns.doc("Get all the sponsers")
     def get(self):
@@ -164,7 +175,7 @@ class UserRegister(Resource):
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
             return {"message": "user updation failed"}, 400
-        return {"message": "user updation success"}, 201
+        return {"message": "user updation success"}, 200
 
     @user_ns.expect(creation)
     @user_ns.doc("User")

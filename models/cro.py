@@ -34,6 +34,10 @@ class CroModel(db.Model):
     def find_all(cls):
         return cls.query.all()
 
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(cro_id=id).first()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

@@ -28,6 +28,8 @@ from resources.users import (
     CreateDefaultUser,
     user_ns,
     UserRegister,
+    UserList,
+    users_ns,
 )
 from models.users import UserModel
 from resources.clab_kit_preparation import (
@@ -141,6 +143,7 @@ api.add_namespace(login_ns)
 api.add_namespace(clab_kit_preparations_ns)
 api.add_namespace(clab_kit_preparation_ns)
 api.add_namespace(user_ns)
+api.add_namespace(users_ns)
 
 
 # cors = flask_cors.CORS()
@@ -178,6 +181,7 @@ login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
+users_ns.add_resource(UserList, "/<string:user_id>")
 
 
 if __name__ == "__main__":
