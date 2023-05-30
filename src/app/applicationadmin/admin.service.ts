@@ -7,24 +7,36 @@ import { Observable } from 'rxjs';
 export class AdminService {
 
   constructor(private _httpClient:HttpClient) { }
+
+  // Services for cro
   getCro():Observable<any>{
     return this._httpClient.get<any>("http://34.100.227.119:5001/api/cros");
   }
-  getCroDeatils(id:any):Observable<any>{
-    return this._httpClient.get("http://34.100.227.119:5001/api/cros"+id);
+  getCrobyId(id:any):Observable<any>{
+    return this._httpClient.get("http://34.100.227.119:5001/api/cro/" + id);
   }
   CreateCroDetails(data:string):Observable<any>{
     return this._httpClient.post("http://34.100.227.119:5001/api/cro",data);
   }
-  updateCroDetaild(data:any,id:any):Observable<any>{
-    return this._httpClient.put("http://34.100.227.119:5001/api/cro/"+id,data);
+  updateCroDetaild(data:[]):Observable<any>{
+    return this._httpClient.put("http://34.100.227.119:5001/api/cro",data);
   }
+
+ // Services for USer
   getUser():Observable<any>{
     return this._httpClient.get("http://34.100.227.119:5001/api/user/register");
+  }
+  getUserbyId(id:any):Observable<any>{
+    return this._httpClient.get("http://34.100.227.119:5001/api/user_actions/" + id);
   }
   createUser(data:any):Observable<any>{
     return this._httpClient.post("http://34.100.227.119:5001/api/user/register", data);
   }
+  updateUser(data:[]):Observable<any>{
+    return this._httpClient.put("http://34.100.227.119:5001/api/user/register", data);
+  }
+
+ // Login Services
   login(data:any):Observable<any>{
     return this._httpClient.post("http://34.100.227.119:5001/api/login", data);
   }

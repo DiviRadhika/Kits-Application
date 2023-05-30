@@ -13,8 +13,10 @@
                         </h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="subjects.html">Lab Test</a></li>
+                                <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
+                                        class="waves-effect">Lab Test</a></li>
                                 <li *ngIf="!isEdit" class="breadcrumb-item active">Add Lab Test</li>
                                 <li *ngIf="isEdit" class="breadcrumb-item active">Edit Lab Test</li>
                             </ol>
@@ -68,16 +70,28 @@
                             </div>
                             <br>
                             <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <!-- <label>Role</label> -->
-                                    <input type="file" accept=".jpg,.png" class="form-control" formControlName="image"
-                                        (change)="uploadFile($event)" id="Size" placeholder=" Enter Size">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="file" accept=".jpg,.png" class="form-control"
+                                            formControlName="image" (change)="uploadFile($event)" id="image"
+                                            placeholder="Select Image">
+
+                                    </div>
+
                                 </div>
-                            </div>
-                            </div>
 
 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span *ngIf="editImage"><img style="width:70px"
+                                                src="{{'data:image/jpg;base64,' + labData.image}}" /></span>
+                                        <span *ngIf="imgDisplay"><img style="width:70px"
+                                                src="{{'data:image/jpg;base64,' + bas2}}" /></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </form>
                     </div>
                     <div class="col-12 mt-auto mb-2 d-flex justify-content-end">

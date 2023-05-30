@@ -6,42 +6,48 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CrosService {
-  constructor(private _httpClient:HttpClient) { }
-  getsponsors():Observable<any>{
+  constructor(private _httpClient: HttpClient) { }
+
+  // Services for Sponsors
+  getsponsors(): Observable<any> {
     return this._httpClient.get<any>("http://34.100.227.119:5001/api/sponsors")
   }
-  CreateSponsorDetails(data:any):Observable<any>{
-    return this._httpClient.post("http://34.100.227.119:5001/api/sponsor",data);
+  CreateSponsorDetails(data: any): Observable<any> {
+    return this._httpClient.post("http://34.100.227.119:5001/api/sponsor", data);
   }
-  getSponsorDetails(id:any):Observable<any>{
-    return this._httpClient.get("http://34.100.227.119:5001/api/sponsors"+id);
+  getSponsorById(id: any): Observable<any> {
+    return this._httpClient.get("http://34.100.227.119:5001/api/sponsor/" + id);
   }
-  updateSponsorDetails(data:any,id:any):Observable<any>{
-    return this._httpClient.put("http://34.100.227.119:5001/api/sponsor/"+id,data);
-  }
-  getSites():Observable<any>{
-    return this._httpClient.get<any>("http://34.100.227.119:5001/api/sites_data");
-  }
-  CreateSiteDetails(data:string):Observable<any>{
-    return this._httpClient.post("http://34.100.227.119:5001/api/site_data",data);
-  }
-  getSiteDetails(id:any):Observable<any>{
-    return this._httpClient.get("http://34.100.227.119:5001/api/site_data"+id);
-  }
-  updateSiteDetails(data:any,id:any):Observable<any>{
-    return this._httpClient.put("http://34.100.227.119:5001/api/site_data/"+id,data);
+  updateSponsorDetails(data:any): Observable<any> {
+    return this._httpClient.put("http://34.100.227.119:5001/api/sponsor", data);
   }
 
-  createTestDetails(data:any):Observable<any>{
-    return this._httpClient.post("http://34.100.227.119:5001/api/lab_test",data);
+  // Services for Sites
+  getSites(): Observable<any> {
+    return this._httpClient.get<any>("http://34.100.227.119:5001/api/sites_data");
   }
-  updateTestDetails(data:any,id:any):Observable<any>{
-    return this._httpClient.put("http://34.100.227.119:5001/api/lab_test/"+id,data);
+  CreateSiteDetails(data: string): Observable<any> {
+    return this._httpClient.post("http://34.100.227.119:5001/api/site_data", data);
   }
-  getTestDetails(id:any):Observable<any>{
-    return this._httpClient.get("http://34.100.227.119:5001/api/lab_tests"+id);
+  getSiteById(id: any): Observable<any> {
+    return this._httpClient.get("http://34.100.227.119:5001/api/site_data/" + id);
   }
-  getLabTests():Observable<any>{
+  updateSiteDetails(data: []): Observable<any> {
+    return this._httpClient.put("http://34.100.227.119:5001/api/site_data" ,data);
+  }
+
+
+  // Services for Lab Test
+  createTestDetails(data: any): Observable<any> {
+    return this._httpClient.post("http://34.100.227.119:5001/api/lab_test", data);
+  }
+  updateTestDetails(data:any): Observable<any> {
+    return this._httpClient.put("http://34.100.227.119:5001/api/lab_test", data);
+  }
+  getTestDetailsById(id: any): Observable<any> {
+    return this._httpClient.get("http://34.100.227.119:5001/api/lab_test/" + id);
+  }
+  getLabTests(): Observable<any> {
     return this._httpClient.get<any>("http://34.100.227.119:5001/api/lab_tests");
   }
 }

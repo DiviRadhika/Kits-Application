@@ -15,6 +15,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationadminModule } from './applicationadmin/applicationadmin.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './token-interceptor.service';
+
 
 
 
@@ -38,6 +41,7 @@ import { ApplicationadminModule } from './applicationadmin/applicationadmin.modu
     ApplicationadminModule,
     FormsModule
   ],
+  // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
   providers: [],
   bootstrap: [AppComponent]
 })

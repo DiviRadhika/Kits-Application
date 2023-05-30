@@ -21,8 +21,8 @@ export class AddSiteComponent implements OnInit {
       if (data.id) {    
         this.isEdit = true;
         this.id = data.id;
-        _cro.getSiteDetails(data.id).subscribe((data: any) => {
-          // this.siteForm.patchValue(data);
+        _cro.getSiteById(data.id).subscribe((data: any) => {
+          this.siteForm.patchValue(data);
           this.getData = data  
         
         });
@@ -32,9 +32,9 @@ export class AddSiteComponent implements OnInit {
   }
  
   public siteForm: FormGroup = new FormGroup({
-    site_code: new FormControl(),
-    site_name: new FormControl(),
-    legal_site_name: new FormControl(),
+    site_data_code: new FormControl(),
+    site_data_name: new FormControl(),
+    legal_site_data_name: new FormControl(),
     address_1: new FormControl(),
     address_2: new FormControl(),
     address_3: new FormControl(),
@@ -55,11 +55,30 @@ export class AddSiteComponent implements OnInit {
     
   }
   submit(){
+    const obj:any ={
+      "site_data_code": this.siteForm.controls['site_data_code'].value,
+      "site_data_name": this.siteForm.controls['site_data_name'].value,
+      "legal_site_data_name": this.siteForm.controls['legal_site_data_name'].value,
+      "address_1": this.siteForm.controls['address_1'].value,
+      "address_2": this.siteForm.controls['address_2'].value,
+      "address_3": this.siteForm.controls['address_3'].value,
+      "address_4": this.siteForm.controls['address_4'].value,
+      "city": this.siteForm.controls['city'].value,
+      "district": this.siteForm.controls['district'].value,
+      "region": this.siteForm.controls['region'].value,
+      "zip_code": this.siteForm.controls['zip_code'].value,
+      "country": this.siteForm.controls['country'].value,
+      "office_telephone": this.siteForm.controls['office_telephone'].value,
+      "extension": this.siteForm.controls['extension'].value,
+      "email": this.siteForm.controls['email'].value,
+      "website": this.siteForm.controls['website'].value
+    }
     if(this.isEdit){
-      this._cro.updateSiteDetails(this.siteForm.value,this.id).subscribe(
+      obj.site_id = this.id
+      this._cro.updateSiteDetails(obj).subscribe(
         (data:any)=>{
-          alert('updated successfully');
-          this.router.navigate(['/home/cro/addSite'])
+          alert('Site Deatails updated successfully');
+          this.router.navigate(['/home/cro/siteGrid'])
         },
         (err:any)=>{
           alert("server errorr")
@@ -67,25 +86,6 @@ export class AddSiteComponent implements OnInit {
       );
     }
     else{
-      const obj:any ={
-        "site_data_code": this.siteForm.controls['site_code'].value,
-        "site_data_name": this.siteForm.controls['site_name'].value,
-        "legal_site_data_name": this.siteForm.controls['legal_site_name'].value,
-        "address_1": this.siteForm.controls['address_1'].value,
-        "address_2": this.siteForm.controls['address_2'].value,
-        "address_3": this.siteForm.controls['address_3'].value,
-        "address_4": this.siteForm.controls['address_4'].value,
-        "city": this.siteForm.controls['city'].value,
-        "district": this.siteForm.controls['district'].value,
-        "region": this.siteForm.controls['region'].value,
-        "zip_code": this.siteForm.controls['zip_code'].value,
-        "country": this.siteForm.controls['country'].value,
-        "office_telephone": this.siteForm.controls['office_telephone'].value,
-        "extension": this.siteForm.controls['extension'].value,
-        "email": this.siteForm.controls['email'].value,
-        "website": this.siteForm.controls['website'].value
-      }
-      console.log(obj)
       this._cro.CreateSiteDetails(obj).subscribe(
         (data:any)=>{
           alert("Site Deatails Created Successfully");

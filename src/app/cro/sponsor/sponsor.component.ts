@@ -26,7 +26,7 @@ export class SponsorComponent implements OnInit {
       if (data.id) {
         this.isEdit = true;
         this.id = data.id;
-        _cro.getSponsorDetails(data.id).subscribe((data: any) => {
+        _cro.getSponsorById(data.id).subscribe((data: any) => {
           this.sponsorForm.patchValue(data);
         });
       }
@@ -90,7 +90,7 @@ ngOnInit(): void {
   });
 
   submit() {
-    const obj= {
+    const obj:any= {
        "sponsor_code": this.sponsorForm.controls['sponsor_code'].value,
        "sponsor_name": this.sponsorForm.controls['sponsor_name'].value,
        "legal_sponsor_name":this.sponsorForm.controls['legal_sponsor_name'].value,
@@ -108,10 +108,10 @@ ngOnInit(): void {
        "email": this.sponsorForm.controls['email'].value,
        "website": "string"
      }
-     console.log(obj);
      
      if (this.isEdit) {
-       this._cro.updateSponsorDetails(this.sponsorForm.value, this.id).subscribe(
+      obj.sponsor_id = this.id
+       this._cro.updateSponsorDetails(obj).subscribe(
          (data: any) => {
  
          },

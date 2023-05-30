@@ -17,7 +17,7 @@ export class LabTestComponent implements OnInit {
   }
 
   edit(id:any){
-
+    this.route.navigate(['/home/cro/updateLabTest',id])
   }
   labCreate(){
     this.route.navigate(['/home/cro/createLabTest'])

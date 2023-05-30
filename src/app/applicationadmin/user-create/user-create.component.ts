@@ -18,6 +18,7 @@ export class UserCreateComponent implements OnInit {
     role: new FormControl(),
 
   });
+  
   options: string[] = ['Sponsor', 'CRO', 'Central Lab', 'Site'];
   id: any;
   getUserData: any;
@@ -26,10 +27,21 @@ export class UserCreateComponent implements OnInit {
       if (data.id) {    
         this.isEdit = true;
         this.id = data.id;
-        admin.getCroDeatils(data.id).subscribe((data: any) => {
+        admin.getUserbyId(data.id).subscribe((data: any) => {
           // this.userForm.patchValue(data);
-          this.getUserData = data  
-        });    
+          this.getUserData = data 
+          this.userForm.patchValue(this.getUserData)
+          // this.userForm.controls['first_name'].setValue(this.getUserData.first_name);
+          // this.userForm.controls['last_name'].setValue(this.getUserData.last_name)
+          // this.userForm.controls['password'].setValue(this.getUserData.password)
+          // this.userForm.controls['email'].setValue(this.getUserData.email)
+          // this.userForm.controls['role'].setValue(this.getUserData.role)
+       
+        });  
+
+      }
+      else{
+        this.isEdit = false;
       }
     });
    }
@@ -37,10 +49,19 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {
   }
   submit(){
+    const obj:any ={
+       
+      "first_name": this.userForm.controls['first_name'].value,
+      "last_name": this.userForm.controls['last_name'].value,
+      "email": this.userForm.controls['email'].value,
+      "password": this.userForm.controls['password'].value,
+      "role": this.userForm.controls['role'].value,
+    }
     if(this.isEdit){
-      this.admin.updateCroDetaild(this.userForm.value,this.id).subscribe(
+      this.admin.updateUser(obj).subscribe(
         (data:any)=>{
-          alert('updated successfully');
+          alert('User updated successfully');
+          this.route.navigate(['/home/admin/userGrid'])
         },
         (err:any)=>{
           alert("server errorr")
@@ -48,13 +69,7 @@ export class UserCreateComponent implements OnInit {
       );
     }
     else{
-      const obj:any ={
-        "first_name": this.userForm.controls['first_name'].value,
-        "last_name": this.userForm.controls['last_name'].value,
-        "email": this.userForm.controls['email'].value,
-        "password": this.userForm.controls['password'].value,
-        "role": this.userForm.controls['role'].value,
-      }
+     
       console.log(obj)
       this.admin.createUser(obj).subscribe(
         (data:any)=>{
