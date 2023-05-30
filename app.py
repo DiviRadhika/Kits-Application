@@ -10,10 +10,28 @@ from db import db
 import flask_excel as excel
 
 
-from resources.sponsor import Sponser, SponsersList, sponsor_ns, sponsors_ns
+from resources.sponsor import (
+    Sponser,
+    SponsersList,
+    sponsor_ns,
+    sponsors_ns,
+    SponserActionsById,
+)
 from resources.cro import CrosList, Cro, cro_ns, cros_ns, CroActionsById
-from resources.site_data import SitedatasList, Sitedata, site_data_ns, sites_data_ns
-from resources.lab_test import LabtestssList, Labtest, lab_test_ns, lab_tests_ns
+from resources.site_data import (
+    SitedatasList,
+    Sitedata,
+    site_data_ns,
+    sites_data_ns,
+    SiteActionsById,
+)
+from resources.lab_test import (
+    LabtestssList,
+    Labtest,
+    lab_test_ns,
+    lab_tests_ns,
+    LabActionsById,
+)
 from resources.cro_protocol import (
     CroProtocol,
     CrosProtocolsList,
@@ -166,13 +184,16 @@ def after_request(response):
 
 
 sponsor_ns.add_resource(Sponser, "")
+sponsor_ns.add_resource(SponserActionsById, "/<string:sponsor_id>")
 sponsors_ns.add_resource(SponsersList, "")
 cro_ns.add_resource(Cro, "")
 cros_ns.add_resource(CrosList, "")
 site_data_ns.add_resource(Sitedata, "")
+site_data_ns.add_resource(SiteActionsById, "/<string:site_id>")
 sites_data_ns.add_resource(SitedatasList, "")
 lab_test_ns.add_resource(Labtest, "")
 lab_tests_ns.add_resource(LabtestssList, "")
+lab_test_ns.add_resource(LabActionsById, "/<string:lab_test_id>")
 cro_protocol_ns.add_resource(CroProtocol, "")
 cro_protocols_ns.add_resource(CrosProtocolsList, "")
 clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")

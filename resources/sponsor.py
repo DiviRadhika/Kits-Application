@@ -68,13 +68,11 @@ class SponsersList(Resource):
         return (sponsors_list_schema.dump(SponsorModel.find_all()), 200)
 
 
-class Sponser(Resource):
-    @sponsor_ns.expect(get_by_id)
+class SponserActionsById(Resource):
     @sponsor_ns.doc("get by id")
-    def get(self):
-        request_json = request.get_json()
+    def get(self, sponsor_id):
         try:
-            data = SponsorModel.get_by_id(request_json["sponsor_id"])
+            data = SponsorModel.get_by_id(sponsor_id)
             if not data:
                 return {"message": "sponsor data not found"}, 400
             return (sponsor_schema.dump(data), 200)
@@ -82,6 +80,8 @@ class Sponser(Resource):
             print(e)
             return {"error": "failed to get the data"}, 500
 
+
+class Sponser(Resource):
     @sponsor_ns.expect(sponsor)
     @sponsor_ns.doc("Create a sponser")
     def post(self):

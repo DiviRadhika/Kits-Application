@@ -44,13 +44,11 @@ class LabtestssList(Resource):
         return (lab_tests_schema.dump(LabtestModel.find_all()), 200)
 
 
-class Labtest(Resource):
-    @lab_test_ns.expect(get_by_id)
+class LabActionsById(Resource):
     @lab_test_ns.doc("get by id")
-    def get(self):
-        request_json = request.get_json()
+    def get(self, lab_test_id):
         try:
-            data = LabtestModel.get_by_id(request_json["lab_test_id"])
+            data = LabtestModel.get_by_id(lab_test_id)
             if not data:
                 return {"message": "lab test data not found"}, 400
             return (lab_test_schema.dump(data), 200)
@@ -58,6 +56,8 @@ class Labtest(Resource):
             print(e)
             return {"error": "failed to get the data"}, 500
 
+
+class Labtest(Resource):
     @lab_test_ns.expect(lab_test)
     @lab_test_ns.doc("Create a lab_test")
     def post(self):

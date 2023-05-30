@@ -70,13 +70,11 @@ class SitedatasList(Resource):
         return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
-class Sitedata(Resource):
-    @site_data_ns.expect(get_by_id)
+class SiteActionsById(Resource):
     @site_data_ns.doc("get by id")
-    def get(self):
-        request_json = request.get_json()
+    def get(self, site_id):
         try:
-            data = SiteDataModel.get_by_id(request_json["site_id"])
+            data = SiteDataModel.get_by_id(site_id)
             if not data:
                 return {"message": "site data not found"}, 400
             return (site_data_schema.dump(data), 200)
@@ -84,6 +82,8 @@ class Sitedata(Resource):
             print(e)
             return {"error": "failed to get the data"}, 500
 
+
+class Sitedata(Resource):
     @site_data_ns.expect(site_data)
     @site_data_ns.doc("Create a site_data")
     def post(self):
