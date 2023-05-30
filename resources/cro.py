@@ -7,6 +7,7 @@ from models.cro import CroModel
 cro_ns = Namespace("cro", description="cro related operations")
 cros_ns = Namespace("cros", description="cros related operations")
 
+
 cro_schema = CroSchema()
 cros_list_schema = CroSchema(many=True)
 
@@ -67,14 +68,11 @@ class CrosList(Resource):
         return (cros_list_schema.dump(CroModel.find_all()), 200)
 
 
-class Cro(Resource):
-    @cro_ns.expect(get_by_id)
-    @cro_ns.expect(cro)
+class CroActionsById(Resource):
     @cro_ns.doc("get by id")
-    def get(self):
-        cro_json = request.get_json()
+    def get(self, cro_id):
         try:
-            cro_data = CroModel.get_by_id(cro_json["cro_id"])
+            cro_data = CroModel.get_by_id(cro_id)
             if not cro_data:
                 return {"message": "cro data not found"}, 400
             return (cro_schema.dump(cro_data), 200)
@@ -82,6 +80,8 @@ class Cro(Resource):
             print(e)
             return {"error": "failed to get the data"}, 500
 
+
+class Cro(Resource):
     @cro_ns.expect(cro)
     @cro_ns.doc("Create a cro")
     def post(self):

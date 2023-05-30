@@ -11,7 +11,7 @@ import flask_excel as excel
 
 
 from resources.sponsor import Sponser, SponsersList, sponsor_ns, sponsors_ns
-from resources.cro import CrosList, Cro, cro_ns, cros_ns
+from resources.cro import CrosList, Cro, cro_ns, cros_ns, CroActionsById
 from resources.site_data import SitedatasList, Sitedata, site_data_ns, sites_data_ns
 from resources.lab_test import LabtestssList, Labtest, lab_test_ns, lab_tests_ns
 from resources.cro_protocol import (
@@ -182,6 +182,7 @@ login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
 users_ns.add_resource(UserList, "/<string:user_id>")
+cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
 
 
 if __name__ == "__main__":
