@@ -34,7 +34,7 @@ sponsor = sponsor_ns.model(
 )
 
 update_sponsor = sponsor_ns.model(
-    "sponsor",
+    "update_sponsor",
     {
         "sponsor_id": fields.String(required=True),
         "sponsor_code": fields.String(required=True),
@@ -54,11 +54,6 @@ update_sponsor = sponsor_ns.model(
         "email": fields.String(required=True),
         "website": fields.String(required=True),
     },
-)
-
-get_by_id = sponsor_ns.model(
-    "Sponsor",
-    {"sponsor_id": fields.String(required=True)},
 )
 
 

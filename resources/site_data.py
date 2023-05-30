@@ -35,7 +35,7 @@ site_data = sites_data_ns.model(
 )
 
 update_site_data = sites_data_ns.model(
-    "site_data",
+    "update_site_data",
     {
         "site_id": fields.String(required=True),
         "site_data_code": fields.String(required=True),
@@ -56,11 +56,6 @@ update_site_data = sites_data_ns.model(
         "email": fields.String(required=True),
         "website": fields.String(required=True),
     },
-)
-
-get_by_id = sites_data_ns.model(
-    "Sitedata",
-    {"site_id": fields.String(required=True)},
 )
 
 

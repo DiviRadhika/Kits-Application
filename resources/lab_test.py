@@ -22,7 +22,7 @@ lab_test = lab_tests_ns.model(
 )
 
 update_lab_test = lab_tests_ns.model(
-    "lab_test",
+    "update_lab_test",
     {
         "lab_test_id": fields.String(required=True),
         "lab_test": fields.String(required=True),
@@ -30,11 +30,6 @@ update_lab_test = lab_tests_ns.model(
         "size": fields.String(required=True),
         "image": fields.String(required=True),
     },
-)
-
-get_by_id = lab_test_ns.model(
-    "cro",
-    {"lab_test_id": fields.String(required=True)},
 )
 
 

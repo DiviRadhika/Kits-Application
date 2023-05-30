@@ -56,6 +56,7 @@ update_cro = cros_ns.model(
     },
 )
 
+
 class CrosList(Resource):
     @cros_ns.doc("Get all the cros")
     def get(self):
