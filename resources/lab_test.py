@@ -56,7 +56,16 @@ class LabtestssList(Resource):
 
 class LabActionsById(Resource):
     @lab_test_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, lab_test_id):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             data = LabtestModel.get_by_id(lab_test_id)
             if not data:
@@ -91,7 +100,16 @@ class Labtest(Resource):
 
     @lab_test_ns.expect(update_lab_test)
     @lab_test_ns.doc("Update a lab test")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         try:
             lab_test_data = LabtestModel.get_by_id(request_json["lab_test_id"])

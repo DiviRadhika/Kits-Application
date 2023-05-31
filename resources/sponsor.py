@@ -80,7 +80,16 @@ class SponsersList(Resource):
 
 class SponserActionsById(Resource):
     @sponsor_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, sponsor_id):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             data = SponsorModel.get_by_id(sponsor_id)
             if not data:
@@ -115,7 +124,16 @@ class Sponser(Resource):
 
     @sponsor_ns.expect(update_sponsor)
     @sponsor_ns.doc("Update a sponser")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         sponsor_json = request.get_json()
         try:
             # import pdb; pdb.set_trace()

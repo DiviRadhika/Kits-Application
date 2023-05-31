@@ -80,7 +80,16 @@ class CrosList(Resource):
 
 class CroActionsById(Resource):
     @cro_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, cro_id):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             cro_data = CroModel.get_by_id(cro_id)
             if not cro_data:
@@ -115,7 +124,16 @@ class Cro(Resource):
 
     @cro_ns.expect(update_cro)
     @cro_ns.doc("Update a cro")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         try:
             cro_data = CroModel.get_by_id(request_json["cro_id"])

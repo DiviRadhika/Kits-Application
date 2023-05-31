@@ -82,7 +82,16 @@ class SitedatasList(Resource):
 
 class SiteActionsById(Resource):
     @site_data_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, site_id):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             data = SiteDataModel.get_by_id(site_id)
             if not data:
@@ -117,7 +126,16 @@ class Sitedata(Resource):
 
     @site_data_ns.expect(update_site_data)
     @site_data_ns.doc("Update a site_data")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         try:
             site_data = SiteDataModel.get_by_id(request_json["site_id"])
