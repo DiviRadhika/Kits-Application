@@ -257,12 +257,12 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <input type="number" class="form-control" id="mobile_no"
-                                                placeholder="Enter mobile_no Number" formControlName="mobile_no"
-                                                [class.is-invalid]="shouldShowRequired('mobile_no') && sponsorForm.get('mobile_no')?.touched">
-                                            <div *ngIf="shouldShowRequired('mobile_no')" class="invalid-feedback">
+                                                placeholder="Enter mobile_no Number" formControlName="mobile_telephone"
+                                                [class.is-invalid]="shouldShowRequired('mobile_telephone') && sponsorForm.get('mobile_telephone')?.touched">
+                                            <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
                                                 mobile_no' is required.
                                             </div>
-                                            <div *ngIf="shouldShowPatternError('mobile_no')" class="invalid-feedback">
+                                            <div *ngIf="shouldShowPatternError('mobile_telephone')" class="invalid-feedback">
                                                 Invalid mobile_no
                                                 number format
                                             </div>

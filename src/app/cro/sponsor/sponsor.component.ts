@@ -28,6 +28,10 @@ export class SponsorComponent implements OnInit {
         this.id = data.id;
         _cro.getSponsorById(data.id).subscribe((data: any) => {
           this.sponsorForm.patchValue(data);
+          this.sponsorForm.controls['sponsor_code'].disable()
+          this.sponsorForm.controls['sponsor_name'].disable()
+          this.sponsorForm.controls['legal_sponsor_name'].disable()
+          this.sponsorForm.controls['email'].disable()
         });
       }
     });
@@ -83,7 +87,7 @@ ngOnInit(): void {
       ) // Regular expression pattern for URL validation
     ]),
 
-    mobile_no: new FormControl('', [
+    mobile_telephone: new FormControl('', [
       Validators.required,
       Validators.pattern('[0-9]{10}')
     ]),
@@ -104,6 +108,7 @@ ngOnInit(): void {
        "zip_code": this.sponsorForm.controls['zip_code'].value,
        "country": this.sponsorForm.controls['country'].value,
        "office_telephone": this.sponsorForm.controls['office_telephone'].value,
+       "mobile_telephone": this.sponsorForm.controls['mobile_telephone'].value,    
        "extension": this.sponsorForm.controls['extension'].value,
        "email": this.sponsorForm.controls['email'].value,
        "website": "string"
@@ -111,8 +116,10 @@ ngOnInit(): void {
      
      if (this.isEdit) {
       obj.sponsor_id = this.id
+      console.log(obj)
        this._cro.updateSponsorDetails(obj).subscribe(
          (data: any) => {
+          this.route.navigate(['/home/cro/sponsorGrid'])
  
          },
          (err: any) => {

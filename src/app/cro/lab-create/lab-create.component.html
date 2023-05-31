@@ -60,31 +60,24 @@
                                             placeholder=" Enter Size">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <!-- <label>Email</label> -->
-                                        <input type="text" class="form-control" id="email" placeholder="Enter Email"
-                                            formControlName="email">
-                                    </div>
-                                </div>
+                               
+                            
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div *ngIf="fieldDisplay" class="col-md-3">
                                     <div class="form-group">
-                                        <input type="file" accept=".jpg,.png" class="form-control"
-                                            formControlName="image" (change)="uploadFile($event)" id="image"
+                                        <input  type="file" accept=".jpg,.png" class="form-control"
+                                            formControlName="image" (change)="uploadFile($event, false)" id="image"
                                             placeholder="Select Image">
-
                                     </div>
 
                                 </div>
-
-
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <span *ngIf="editImage"><img style="width:70px"
-                                                src="{{'data:image/jpg;base64,' + labData.image}}" /></span>
+                                        <span  (click)="enable()" *ngIf="editImage"><img style="width:70px"
+                                                src="{{'data:image/jpg;base64,' + labData.image}}" />
+                                                &nbsp;&nbsp;&nbsp;<a style="color:blue">Click here To Upload New image</a></span>
                                         <span *ngIf="imgDisplay"><img style="width:70px"
                                                 src="{{'data:image/jpg;base64,' + bas2}}" /></span>
                                     </div>

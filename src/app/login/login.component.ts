@@ -10,55 +10,59 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  enableFields: boolean = false;
 
-  constructor(private admin:AdminService, private route: Router) { }
-public loginForm : FormGroup = new FormGroup({
-  username: new FormControl(),
-  password: new FormControl()
-})
+  constructor(private admin: AdminService, private route: Router) { }
+  public loginForm: FormGroup = new FormGroup({
+    username: new FormControl(),
+    password: new FormControl(),
+    otp: new FormControl(),
+  })
 
-ngOnInit(): void {
-  
-}
-login(){
-  const obj = {
-    username: this.loginForm.controls['username'].value,
-    password: this.loginForm.controls['password'].value,
-    clear_session: true,
-    otp: "123456"
+  ngOnInit(): void {
+
   }
-  this.admin.login(obj).subscribe(
-    (data:any)=>{
-      this.route.navigate(['/home'])
-      console.log(data)
-      sessionStorage.setItem('role', data.role)
-      sessionStorage.setItem('access_token', data.access_token)
-    },
-    (err:any)=>{
-      alert("err")
+  login() {
+    const obj = {
+      username: this.loginForm.controls['username'].value,
+      password: this.loginForm.controls['password'].value,
+      clear_session: true,
+      otp: "123456"
     }
-  )
-}
-otp(){
-  const obj = {
-    username: this.loginForm.controls['username'].value,
-    password: '',
-    clear_session: '',
-    otp: ''
+    this.admin.login(obj).subscribe(
+      (data: any) => {
+        this.route.navigate(['/home'])
+        console.log(data)
+        sessionStorage.setItem('role', data.role)
+        sessionStorage.setItem('access_token', data.access_token)
+      },
+      (err: any) => {
+        alert("err")
+      }
+    )
   }
-  this.admin.otp(obj).subscribe(
-    (data:any)=>{
-      // this.route.navigate(['/home'])
-    },
-    (err:any)=>{
-      alert("err")
+  otp() {
+    this.enableFields = true
+    const obj = {
+      username: this.loginForm.controls['username'].value,
+      password: '',
+      clear_session: '',
+      otp: ''
     }
-  )
-}
-  
+    this.admin.otp(obj).subscribe(
+      (data: any) => {
+
+        // this.route.navigate(['/home'])
+      },
+      (err: any) => {
+        alert("err")
+      }
+    )
+  }
+
 }
 
 
-  
- 
+
+
 

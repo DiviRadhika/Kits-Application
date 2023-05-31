@@ -23,6 +23,10 @@ export class CROcreateComponent implements OnInit {
         admin.getCrobyId(data.id).subscribe((data: any) => {
           this.getcroData = data
           this.CroForm.patchValue(data)
+          this.CroForm.controls['cro_code'].disable()
+          this.CroForm.controls['cro_name'].disable()
+          this.CroForm.controls['legal_cro_name'].disable()
+          this.CroForm.controls['email'].disable()
         
         });
 
@@ -68,6 +72,7 @@ export class CROcreateComponent implements OnInit {
       "zip_code": this.CroForm.controls['zip_code'].value,
       "country": this.CroForm.controls['country'].value,
       "office_telephone": this.CroForm.controls['office_telephone'].value,
+      "mobile_telephone": this.CroForm.controls['mobile_telephone'].value,
       "extension": this.CroForm.controls['extension'].value,
       "email": this.CroForm.controls['email'].value,
       "website": this.CroForm.controls['website'].value

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './lab-create.component.html',
   styleUrls: ['./lab-create.component.css']
 })
-export class LabCreateComponent implements OnInit {
+export class LabCreateComponent  {
   public isEdit: boolean = false;
   public id: any = '';
   files1: any;
@@ -18,7 +18,8 @@ export class LabCreateComponent implements OnInit {
   labData: any;
   imgDisplay: boolean = false
   editImage: boolean = false
-
+  imageChanged: boolean = true;
+  fieldDisplay: boolean = false
 
   constructor(
     private _cro: CrosService,
@@ -29,10 +30,13 @@ export class LabCreateComponent implements OnInit {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
         this.isEdit = true;
+        this.imageChanged = true
         this.id = data.id;
         _cro.getTestDetailsById(data.id).subscribe((data: any) => {
           this.labData = data
-          this.labForm.patchValue(data);
+         this.labForm.controls['lab_test'].setValue(this.labData.lab_test)
+         this.labForm.controls['size'].setValue(this.labData.size)
+         this.labForm.controls['lab_test'].disable()
           this.editImage= true;
         });
         console.log(this.id)
@@ -43,18 +47,10 @@ export class LabCreateComponent implements OnInit {
     lab_test: new FormControl(),
     material: new FormControl(),
     size: new FormControl(),
-    email:new FormControl(),
     image: new FormControl(),
   });
-  ngOnInit() {
-    this.labForm = this._formbuilder.group({
-      lab_test: [''],
-      material: [''],
-      size: [''],
-      image: [''],
-    })
-  }
-  uploadFile(evt: any) {
+  
+  uploadFile(evt: any, value:boolean) {
 
     this.files1 = evt.target.files;
     const file = this.files1[0];
@@ -66,10 +62,12 @@ export class LabCreateComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = this._handleReaderLoaded1.bind(this);
       reader.readAsBinaryString(file);
+      this.imageChanged = value
     }
   }
 
   _handleReaderLoaded1(readerEvt: any) {
+    
     const binaryString = readerEvt.target.result;
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
@@ -77,9 +75,14 @@ export class LabCreateComponent implements OnInit {
     this.imgDisplay = true;
     this.editImage = false
   }
-
+  enable(){
+    this.editImage = false
+    this.fieldDisplay = true
+    // this.enable= false
+  }
   submit() {
-    const data =
+    console.log(this.imageChanged)
+    const data:any =
     {
       "lab_test": this.labForm.get('lab_test')?.value,
       "material": this.labForm.get('material')?.value,
@@ -88,9 +91,18 @@ export class LabCreateComponent implements OnInit {
     }
     console.log(data)
     if (this.isEdit) {
+      if(this.imageChanged == true){
+        data.image = this.labData.email
+      }
+      else{
+        
+      }
+      data.lab_test_id = this.id
+      
       this._cro.updateTestDetails(data).subscribe(
         (data: any) => {
-          alert('updated successfully');
+          alert('Test results updated successfully');
+          this.route.navigate(['/home/cro/labTestGrid'])
         },
         (err: any) => {
           alert('internal server error')

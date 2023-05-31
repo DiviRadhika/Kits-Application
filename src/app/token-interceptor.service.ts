@@ -62,7 +62,7 @@ export class TokenInterceptorService {
     }
     else {
      
-
+console.log(sessionStorage.getItem('access_token'))
 
       this.tokenizedReq = req.clone({
 

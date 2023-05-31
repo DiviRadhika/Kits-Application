@@ -103,7 +103,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item--> 
-                            <a  routerLink="/Login"  class="dropdown-item text-danger" href="login.html"><i
+                            <a  routerLink="/Login" (click)="clear()" class="dropdown-item text-danger" href="login.html"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout">Logout</span></a>
                         </div>
@@ -130,7 +130,7 @@
                             </a>
                             <ul>
                                 <li><a routerLink="/home/admin/croGrid" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                         <span key="t-chat">CRO Create</span>
                                     </a> </li>
                                 <li><a routerLink="/home/admin/userGrid" class="waves-effect">

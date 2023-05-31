@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 
@@ -11,7 +11,7 @@ import { AdminService } from '../admin.service';
 export class UserCreateComponent implements OnInit {
   public isEdit: boolean = false;
   public userForm: FormGroup = new FormGroup({
-    first_name: new FormControl(),
+    first_name: new FormControl("", [Validators.required, Validators.maxLength(20)]),
     last_name: new FormControl(),
     password: new FormControl(),
     email: new FormControl(),
@@ -48,6 +48,7 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   submit(){
     const obj:any ={
        

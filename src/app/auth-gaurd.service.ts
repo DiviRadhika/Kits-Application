@@ -21,8 +21,6 @@ export class AuthGuard implements CanActivate {
 
   }
 
-
-
 canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
   if (sessionStorage.getItem('role') != null) {
     return true;

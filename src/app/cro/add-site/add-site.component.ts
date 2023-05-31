@@ -24,7 +24,10 @@ export class AddSiteComponent implements OnInit {
         _cro.getSiteById(data.id).subscribe((data: any) => {
           this.siteForm.patchValue(data);
           this.getData = data  
-        
+          this.siteForm.controls['site_data_code'].disable();
+          this.siteForm.controls['site_data_name'].disable();
+          this.siteForm.controls['legal_site_data_name'].disable();
+          this.siteForm.controls['email'].disable();
         });
      
       }
@@ -69,6 +72,7 @@ export class AddSiteComponent implements OnInit {
       "zip_code": this.siteForm.controls['zip_code'].value,
       "country": this.siteForm.controls['country'].value,
       "office_telephone": this.siteForm.controls['office_telephone'].value,
+      "mobile_telephone": this.siteForm.controls['mobile_telephone'].value,
       "extension": this.siteForm.controls['extension'].value,
       "email": this.siteForm.controls['email'].value,
       "website": this.siteForm.controls['website'].value

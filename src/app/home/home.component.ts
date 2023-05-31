@@ -68,6 +68,9 @@ export class HomeComponent implements OnInit {
   toggleLogout(){
     this.showLogout=!this.showLogout
   }
+  clear(){
+    sessionStorage.clear()
+  }
 }
 
   
