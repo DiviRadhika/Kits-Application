@@ -94,7 +94,8 @@ class Sponser(Resource):
     def put(self):
         sponsor_json = request.get_json()
         try:
-            sponsor_data = SponsorModel.get_by_id(sponsor_json["sponser_id"])
+            # import pdb; pdb.set_trace()
+            sponsor_data = SponsorModel.get_by_id(sponsor_json["sponsor_id"])
             if not sponsor_data:
                 return {"message": "sponsor data not found"}, 500
             for key, value in sponsor_json.items():
