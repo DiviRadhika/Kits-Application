@@ -3,6 +3,12 @@ from schemas.sponsor import SponsorSchema
 from models.sponsor import SponsorModel
 from flask import request
 from sqlalchemy import exc
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 
 
 sponsor_ns = Namespace("sponsor", description="Sponsor related operations")
@@ -59,7 +65,16 @@ update_sponsor = sponsor_ns.model(
 
 class SponsersList(Resource):
     @sponsors_ns.doc("Get all the sponsers")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (sponsors_list_schema.dump(SponsorModel.find_all()), 200)
 
 
@@ -79,7 +94,16 @@ class SponserActionsById(Resource):
 class Sponser(Resource):
     @sponsor_ns.expect(sponsor)
     @sponsor_ns.doc("Create a sponser")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         sponsor_json = request.get_json()
         try:
             sponser_data = sponsor_schema.load(sponsor_json)

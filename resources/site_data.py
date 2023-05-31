@@ -3,6 +3,12 @@ from schemas.site_data import SiteDataSchema
 from flask import request
 from sqlalchemy import exc
 from models.site_data import SiteDataModel
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 
 
 site_data_ns = Namespace("site_data", description="site_data related operations")
@@ -61,7 +67,16 @@ update_site_data = sites_data_ns.model(
 
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
@@ -81,7 +96,16 @@ class SiteActionsById(Resource):
 class Sitedata(Resource):
     @site_data_ns.expect(site_data)
     @site_data_ns.doc("Create a site_data")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         site_data_json = request.get_json()
         try:
             site_data_data = site_data_schema.load(site_data_json)

@@ -3,6 +3,12 @@ from schemas.cro_protocol import CroProtocolSchema
 from flask import request
 from sqlalchemy import exc
 from models.cro_protocol import CroProtocolModel
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 from schemas.screening_kit import ScreeningKitDetailsSchema
 from schemas.visit_kit import VisitKitDetailsSchema
 
@@ -68,14 +74,32 @@ cro_protocol = cro_protocols_ns.model(
 
 class CrosProtocolsList(Resource):
     @cro_protocols_ns.doc("Get all the cros protocols")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
 
 
 class CroProtocol(Resource):
     @cro_protocol_ns.expect(cro_protocol)
     @cro_protocol_ns.doc("Create a cro_protocol")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         cro_protocol_json = {
             "protocol_id": request_json["protocol_id"],

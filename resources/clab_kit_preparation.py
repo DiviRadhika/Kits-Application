@@ -3,6 +3,12 @@ from schemas.clab_kit_preparation import ClabKitPreparationSchema
 from flask import request
 from sqlalchemy import exc
 from models.clab_kit_preparation import ClabKitPreparationModel
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 
 
 clab_kit_preparation_ns = Namespace(
@@ -55,7 +61,16 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
 
 class ClabKitPreparationList(Resource):
     @clab_kit_preparations_ns.doc("Get all the CLab Kit Preparations")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (
             clab_kit_list_preparation_schema.dump(ClabKitPreparationModel.find_all()),
             200,
@@ -65,7 +80,16 @@ class ClabKitPreparationList(Resource):
 class ClabKitPreparation(Resource):
     @clab_kit_preparation_ns.expect(clab_kit_preparation)
     @clab_kit_preparation_ns.doc("Create a CLab Kit Preparation")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user_data = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         clab_kit_prep_json = request.get_json()
         try:
             clab_kit_prep_data = clab_kit_preparation_schema.load(clab_kit_prep_json)
