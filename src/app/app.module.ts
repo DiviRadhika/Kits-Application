@@ -11,15 +11,15 @@ import { HomeComponent } from './home/home.component';
 import { UploadResultsComponent } from './central/upload-results/upload-results.component';
 import { CentralLabModule } from './central-lab/central-lab.module';
 import { SiteModule } from './site/site.module';
-import { ProtocolRegistrationComponent } from './protocol-registration/protocol-registration.component';
-
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationadminModule } from './applicationadmin/applicationadmin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
+//import {ProtocolRegistrationComponent} from './cro/protocol-registration/protocol-registration.component';
 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
     LoginComponent,
     HomeComponent,
     UploadResultsComponent,
-    ProtocolRegistrationComponent
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,10 +39,12 @@ import { TokenInterceptorService } from './token-interceptor.service';
     CentralLabModule,SiteModule,
     ReactiveFormsModule,
     ApplicationadminModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    
   ],
   
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }
