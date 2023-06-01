@@ -40,7 +40,10 @@
                                     <div class="form-group">
                                         <!-- <label>User First Name</label> -->
                                         <input type="text" class="form-control" formControlName="lab_test" id="lab test"
-                                            placeholder="Enter Lab Test">
+                                            placeholder="Enter Lab Test"   [class.is-invalid]="shouldShowRequired('lab_test') && labForm.get('lab_test')?.touched">
+                                            <div *ngIf="shouldShowRequired('lab_test')" class="invalid-feedback">
+                                                Lab Test is required.
+                                            </div>
                                     </div>
                                 </div>
 
@@ -49,7 +52,10 @@
 
                                         <!-- <label>Password</label> -->
                                         <input type="text" class="form-control" id="material" formControlName="material"
-                                            placeholder=" Enter Material">
+                                            placeholder=" Enter Material"  [class.is-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
+                                            <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">
+                                                Material is required.
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -57,7 +63,10 @@
 
                                         <!-- <label>Password</label> -->
                                         <input type="text" class="form-control" id="Size" formControlName="size"
-                                            placeholder=" Enter Size">
+                                            placeholder=" Enter Size"  [class.is-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched">
+                                            <div *ngIf="shouldShowRequired('size')" class="invalid-feedback">
+                                                Size is required.
+                                            </div>
                                     </div>
                                 </div>
                                

@@ -58,20 +58,20 @@ ngOnInit(): void {
   }
 
   public sponsorForm: FormGroup = new FormGroup({
-    sponsor_code: new FormControl("", [Validators.required, Validators.maxLength(15), Validators.minLength(5)]),
-    sponsor_name: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    legal_sponsor_name: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    address_1: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    address_2: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    address_3: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    address_4: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    city: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    district: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    region: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
+    sponsor_code: new FormControl("", [Validators.required]),
+    sponsor_name: new FormControl("", [Validators.required]),
+    legal_sponsor_name: new FormControl("", [Validators.required]),
+    address_1: new FormControl("", [Validators.required]),
+    address_2: new FormControl("", [Validators.required]),
+    address_3: new FormControl(""),
+    address_4: new FormControl(""),
+    city: new FormControl("", [Validators.required]),
+    district: new FormControl("", [Validators.required]),
+    region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
-    country: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    office_telephone: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
-    extension: new FormControl("", [Validators.required, Validators.maxLength(14), Validators.minLength(6)]),
+    country: new FormControl("", [Validators.required]),
+     office_telephone: new FormControl(""),
+   extension: new FormControl(""),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
@@ -82,6 +82,7 @@ ngOnInit(): void {
     website: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
+
       Validators.pattern(
         /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
       ) // Regular expression pattern for URL validation
@@ -94,6 +95,16 @@ ngOnInit(): void {
   });
 
   submit() {
+ 
+    if (this.sponsorForm.invalid) {
+      // Mark all form controls as touched to trigger validation
+      Object.keys(this.sponsorForm.controls).forEach(key => {
+        this.sponsorForm.get(key)?.markAsTouched();
+      });
+      alert('Please Fill All Mandatory Fields')
+    }
+ 
+ else {
     const obj:any= {
        "sponsor_code": this.sponsorForm.controls['sponsor_code'].value,
        "sponsor_name": this.sponsorForm.controls['sponsor_name'].value,
@@ -138,6 +149,7 @@ ngOnInit(): void {
          }
        )
      }
+    }
  
    }
 

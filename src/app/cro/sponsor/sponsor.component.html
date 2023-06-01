@@ -161,7 +161,7 @@
                                                 placeholder="Enter District" formControlName="district"
                                                 [class.is-invalid]="shouldShowRequired('district') && sponsorForm.get('district')?.touched">
                                             <div *ngIf="shouldShowRequired('district')" class="invalid-feedback">
-                                                district is required.
+                                                District is required.
                                             </div>
                                             <div *ngIf="shouldShowLengthError('district')" class="invalid-feedback">
                                                 district between 5 and 15 characters.
@@ -177,7 +177,7 @@
                                                 placeholder="Enter Region" formControlName="region"
                                                 [class.is-invalid]="shouldShowRequired('region') && sponsorForm.get('region')?.touched">
                                             <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
-                                                region is required.
+                                                Region is required.
                                             </div>
                                             <div *ngIf="shouldShowLengthError('region')" class="invalid-feedback">
                                                 region between 5 and 15 characters.
@@ -206,7 +206,7 @@
                                                 placeholder="Enter Country" formControlName="country"
                                                 [class.is-invalid]="shouldShowRequired('country') && sponsorForm.get('country')?.touched">
                                             <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
-                                                country is required.
+                                                Country is required.     
                                             </div>
                                             <div *ngIf="shouldShowLengthError('country')" class="invalid-feedback">
                                                 country between 5 and 15 characters.
@@ -233,11 +233,11 @@
                                                 [class.is-invalid]="shouldShowRequired('office_telephone') && sponsorForm.get('office_telephone')?.touched">
                                             <div *ngIf="shouldShowRequired('office_telephone')"
                                                 class="invalid-feedback">
-                                                OfficeTelephone is required.
+                                                Office Telephone is required.
                                             </div>
                                             <div *ngIf="shouldShowLengthError('office_telephone')"
                                                 class="invalid-feedback">
-                                                OfficeTelephone between 5 and 15 characters.
+                                                Office Telephone between 5 and 15 characters.
                                             </div>
                                         </div>
                                     </div>
@@ -245,13 +245,8 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="Extension:"
                                                 placeholder="Enter Extension:" formControlName="extension"
-                                                [class.is-invalid]="shouldShowRequired('extension') && sponsorForm.get('extension')?.touched">
-                                            <div *ngIf="shouldShowRequired('extension')" class="invalid-feedback">
-                                                extension is required.
-                                            </div>
-                                            <div *ngIf="shouldShowLengthError('extension')" class="invalid-feedback">
-                                                extension between 5 and 15 characters.
-                                            </div>
+                                               >
+                                         
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -260,7 +255,7 @@
                                                 placeholder="Enter mobile_no Number" formControlName="mobile_telephone"
                                                 [class.is-invalid]="shouldShowRequired('mobile_telephone') && sponsorForm.get('mobile_telephone')?.touched">
                                             <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
-                                                mobile_no' is required.
+                                               Mobile Number is Required.
                                             </div>
                                             <div *ngIf="shouldShowPatternError('mobile_telephone')" class="invalid-feedback">
                                                 Invalid mobile_no
@@ -277,11 +272,13 @@
                                             <input type="text" class="form-control" id="Address 1"
                                                 placeholder="Enter Email" formControlName="email"
                                                 [class.is-invalid]="shouldShowRequired('email') && sponsorForm.get('email')?.touched">
-                                            <div *ngIf="sponsorForm.get('email')?.hasError('invalidDomain')"
-                                                class="invalid-feedback">
+                                                <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
+                                                  Email is required.
+                                                </div>
+                                               
+                                              <div *ngIf="sponsorForm.get('email')?.hasError('invalidDomain')" class="invalid-feedback">
                                                 Invalid email domain.
-                                            </div>
-
+                                              </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -290,7 +287,7 @@
                                                 placeholder="Enter Website" formControlName="website"
                                                 [class.is-invalid]="shouldShowRequired('website') && sponsorForm.get('website')?.touched">
                                             <div *ngIf="shouldShowRequired('website')" class="invalid-feedback">
-                                                website is required.
+                                                Website is required.
                                             </div>
                                             <div *ngIf="shouldShowLengthError('website')" class="invalid-feedback">
                                                 website must have at least 3 characters.

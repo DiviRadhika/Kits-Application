@@ -13,8 +13,8 @@
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a></li>
                 <li class="breadcrumb-item"><a routerLink="/home/admin/croGrid" class="waves-effect">CRO</a></li>
-                <li  *ngIf="!isEdit" class="breadcrumb-item active">Add CRO</li>
-                <li  *ngIf="isEdit" class="breadcrumb-item active">Edit CRO</li>
+                <li *ngIf="!isEdit" class="breadcrumb-item active">Add CRO</li>
+                <li *ngIf="isEdit" class="breadcrumb-item active">Edit CRO</li>
               </ol>
             </div>
           </div>
@@ -29,103 +29,160 @@
             <div class="card-body">
               <h6 style="color: rgb(250, 39, 39);">CRO Form</h6>
               <hr>
-              <form [formGroup]="CroForm">
+              <form [formGroup]="CroForm" (ngSubmit)="submit()">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label >Enter CRO Code</label>
-                      <input type="text"  class="form-control" id="CRO Code" placeholder="Enter CRO Code"
-                        formControlName="cro_code">
+                      <input type="text" class="form-control" id="CROCode" placeholder="Enter CRO Code"
+                        formControlName="cro_code"
+                        [class.is-invalid]="shouldShowRequired('cro_code') && CroForm.get('cro_code')?.touched">
+
+                      <div *ngIf="shouldShowRequired('cro_code')" class="invalid-feedback">
+                        CRO Code is required.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('cro_code')" class="invalid-feedback">
+                        CRO Code should contain between 5 and 15 characters.
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label >Enter CRO Name</label> <input type="text" class="form-control" id="CRO Name"
-                        placeholder="Enter CRO Name" formControlName="cro_name">
+                      <input type="text" class="form-control" id="CROName" placeholder="Enter CRO Name"
+                        formControlName="cro_name"
+                        [class.is-invalid]="shouldShowRequired('cro_name') && CroForm.get('cro_name')?.touched">
+                      <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
+                        CRO Name is required.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('cro_name')" class="invalid-feedback">
+                        CRO Name should contain between 5 and 15 characters.
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <label >Enter Legal CRO Name</label>
-                      <input type="text" class="form-control" id="field3" placeholder="Enter legal CRO Name"
-                        formControlName="legal_cro_name">
+                      <input type="text" class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
+                        formControlName="legal_cro_name"
+                        [class.is-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
+                      <div *ngIf="shouldShowRequired('legal_cro_name')" class="invalid-feedback">
+                        Legal CRO Name is required.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('legal_cro_name')" class="invalid-feedback">
+                        Legal CRO Name should contain between 5 and 15 characters.
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </form>
             </div>
 
           </div>
           <br>
           <div class="container">
-
-
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">Address</h6>
+              <h6 style="color: rgb(250, 49, 49);">Address</h6>
               <hr>
               <form [formGroup]="CroForm">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
-                        formControlName="address_1">
+                        formControlName="address_1"
+                        [class.is-invalid]="shouldShowRequired('address_1') && CroForm.get('address_1')?.touched">
+                      <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
+                        Adress is required.
+                      </div>
+
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Address" placeholder="Enter Address 2"
-                        formControlName="address_2">
+                        formControlName="address_2"
+                        [class.is-invalid]="shouldShowRequired('address_2') && CroForm.get('address_2')?.touched">
+                      <div *ngIf="shouldShowRequired('address_2')" class="invalid-feedback">
+                        Adress is required.
+                      </div>
+
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Address3" placeholder="Enter Address 3"
-                        formControlName="address_3">
+                        formControlName="address_3"
+                        [class.is-invalid]="shouldShowRequired('address_3') && CroForm.get('address_3')?.touched">
+                      <div *ngIf="shouldShowRequired('address_3')" class="invalid-feedback">
+                        Adress is required.
+                      </div>
                     </div>
                   </div>
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 3"
+                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 4 (optional)"
                         formControlName="address_4">
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type=" text" class="form-control" id="City" placeholder="Enter City"
-                        formControlName="city">
+                      <input type=" text" class="form-control" id="City" placeholder="Enter City" formControlName="city"
+                        [class.is-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
+                      <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
+                        City is required.
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="District" placeholder="Enter District"
-                        formControlName="district">
+                        formControlName="district"
+                        [class.is-invalid]="shouldShowRequired('district') && CroForm.get('district')?.touched">
+                      <div *ngIf="shouldShowRequired('district')" class="invalid-feedback">
+                        District is required.
+                      </div>
                     </div>
                   </div>
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Region" placeholder="Enter Region"
-                        formControlName="region">
+                        formControlName="region"
+                        [class.is-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
+                      <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
+                        Region is required.
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code">
+                        formControlName="zip_code"
+                        [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
+                      <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
+                        Zipcode is required and enter valid Zipcode.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('zip_code')" class="invalid-feedback">
+                        Zipcode Must be 6characters.
+                      </div>
                     </div>
                   </div>
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Country" placeholder="Enter Country"
-                        formControlName="country">
+                        formControlName="country"
+                        [class.is-invalid]="shouldShowRequired('country') && CroForm.get('country')?.touched">
+                      <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
+                        Country is required.     
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -136,55 +193,86 @@
           </div>
           <br>
           <div class="container">
-
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">Communication</h6>
+              <h6 style="color: rgb(250, 49, 49);">Communication</h6>
               <hr>
               <form [formGroup]="CroForm">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
                       <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Office Telephone"
-                        formControlName="office_telephone">
+                        formControlName="office_telephone"
+                        [class.is-invalid]="shouldShowRequired('office_telephone') && CroForm.get('office_telephone')?.touched">
+                      <div *ngIf="shouldShowRequired('office_telephone')" class="invalid-feedback">
+                        Office Telephone is required.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('office_telephone')" class="invalid-feedback">
+                        Office Telephone between 5 and 15 characters.
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="Extension:" placeholder="Enter Extension:"
+                      <input type="text" class="form-control" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
+                       
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="Mobile No" placeholder="Enter Mobile No"
-                        formControlName="mobile_telephone">
+                      <input type="number" class="form-control" id="mobile_no" placeholder="Enter mobile_no Number"
+                        formControlName="mobile_telephone"
+                        [class.is-invalid]="shouldShowRequired('mobile_telephone') && CroForm.get('mobile_telephone')?.touched">
+                      <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
+                       Mobile Number is Required.
+                      </div>
+                      <div *ngIf="shouldShowPatternError('mobile_telephone')" class="invalid-feedback">
+                        Invalid Mobile Number
+                      </div>
+
                     </div>
                   </div>
-
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="Address 1" placeholder="Enter Email "
-                        formControlName="email">
+                      <input type="text" class="form-control" id="Address 1" placeholder="Enter Email"
+                        formControlName="email"
+                        [class.is-invalid]="shouldShowRequired('email') && CroForm.get('email')?.touched">
+                        <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
+                          Email is required.
+                        </div>
+                       
+                      <div *ngIf="CroForm.get('email')?.hasError('invalidDomain')" class="invalid-feedback">
+                        Invalid email domain.
+                      </div>
+
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="Address" placeholder="Enter Website "
-                        formControlName="website">
+                      <input type="text" class="form-control" id="Address" placeholder="Enter Website"
+                        formControlName="website"
+                        [class.is-invalid]="shouldShowRequired('website') && CroForm.get('website')?.touched">
+                      <div *ngIf="shouldShowRequired('website')" class="invalid-feedback">
+                        Website is required.
+                      </div>
+                      <div *ngIf="shouldShowLengthError('website')" class="invalid-feedback">
+                        website must have at least 3 characters.
+                      </div>
+                      <div *ngIf="shouldShowUrlError('website')" class="invalid-feedback">
+                        Please enter a valid URL.
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </form>
             </div>
-          
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
               <button (click)="submit()" class="btn btn-primary">Submit</button>
-
             </div>
-
           </div>
         </div>
       </form>

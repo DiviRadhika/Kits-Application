@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 
@@ -11,12 +11,16 @@ import { AdminService } from '../admin.service';
 export class UserCreateComponent implements OnInit {
   public isEdit: boolean = false;
   public userForm: FormGroup = new FormGroup({
-    first_name: new FormControl("", [Validators.required, Validators.maxLength(20)]),
+    first_name: new FormControl("", [Validators.required]),
     last_name: new FormControl(),
-    password: new FormControl(),
-    email: new FormControl(),
-    role: new FormControl(),
-
+    password:new FormControl(''),
+    role: new FormControl("", [Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      this.emailDomainValidator.bind(this)
+    ]),
+  
   });
   
   options: string[] = ['Sponsor', 'CRO', 'Central Lab', 'Site'];
@@ -31,11 +35,9 @@ export class UserCreateComponent implements OnInit {
           // this.userForm.patchValue(data);
           this.getUserData = data 
           this.userForm.patchValue(this.getUserData)
-          // this.userForm.controls['first_name'].setValue(this.getUserData.first_name);
-          // this.userForm.controls['last_name'].setValue(this.getUserData.last_name)
-          // this.userForm.controls['password'].setValue(this.getUserData.password)
-          // this.userForm.controls['email'].setValue(this.getUserData.email)
-          // this.userForm.controls['role'].setValue(this.getUserData.role)
+        
+          this.userForm.controls['email'].disable()
+
        
         });  
 
@@ -48,8 +50,29 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+  shouldShowRequired(controlName: string): boolean {
+    const control = this.userForm.get(controlName);
+    return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
+
+  emailDomainValidator(control: FormControl): ValidationErrors | null {
+    const email = control.value;
+    if (email && email.indexOf('@') !== -1) {
+      const [_, domain] = email.split('@');
+      if (!['gmail.com'].includes(domain)) {
+        return { invalidDomain: true };
+      }
+    }
+    return null; // Return null for valid email format
+  }
   submit(){
+    if (this.userForm.invalid) {
+      // Mark all form controls as touched to trigger validation
+      Object.keys(this.userForm.controls).forEach(key => {
+        this.userForm.get(key)?.markAsTouched();
+      });
+    }
+  else {
     const obj:any ={
        
       "first_name": this.userForm.controls['first_name'].value,
@@ -83,4 +106,5 @@ export class UserCreateComponent implements OnInit {
       )
     }
   }
+}
 }

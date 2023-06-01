@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class UserGridComponent implements OnInit {
  public getUserData: any;
   userDetails:any[]= [];
-
+  searchText = ''
   constructor(private admin:AdminService, private route: Router) { 
     this.getUser()
     
@@ -19,6 +19,13 @@ export class UserGridComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  applyFilter(filterValue: any) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.userDetails.filter = filterValue;
+}
+ 
+  
   addUser(){
     this.route.navigate(['/home/admin/userCreate'])
   }

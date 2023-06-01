@@ -43,8 +43,10 @@
                           </select> entries</label></div>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                            class="form-control form-control-sm" placeholder="" aria-controls="datatable"></label></div>
+                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                        <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search "
+            (input)="applyFilter($event)" />
+                       </label></div>
                     </div>
                   </div>
                   <div class="row">

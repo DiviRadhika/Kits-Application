@@ -9,10 +9,18 @@ import { AdminService } from '../admin.service';
 })
 export class CroGridComponent implements OnInit {
   croDetails: any[] = []
-
+  searchText :any 
   constructor(private route:Router,
     private admin:AdminService) { }
 
+  //   applyFilter() {
+  //     this.searchText = this.searchText.trim(); // Remove whitespace
+  //     this.searchText.filter((data:any)=>
+  //     JSON.stringify(data).toLowerCase().indexOf(this.searchText.toLowerCase))!=-1))''
+
+  //     // })) // Datasource defaults to lowercase matches
+  //     // this.croDetails.filter = filterValue;
+  // }
   ngOnInit(): void {
     this.getCRoDetails();
   }
