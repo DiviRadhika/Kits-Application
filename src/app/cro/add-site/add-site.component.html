@@ -1,0 +1,191 @@
+<div class="main-content">
+
+    <div class="page-content">
+      <div class="container-fluid">
+  
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Site</h4>
+              <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Site</h4>
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a routerLink="/home/cro/siteGrid" class="waves-effect">Site</a></li>
+                  <li  *ngIf="!isEdit" class="breadcrumb-item active">Add Site</li>
+                  <li  *ngIf="isEdit" class="breadcrumb-item active">Edit Site</li>
+                </ol>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <!-- <h4><i class="fab fa-codiepie cro-icon mr-sm-2"></i>CRO Data</h4>/ -->
+        <br>
+        <form [formGroup]="siteForm">
+          <div class="card ml-2 mr-2 bg-white">
+            <div class="container">
+  
+              <div class="card-body">
+                <h6 style="color: rgb(250, 39, 39);">Site Form</h6>
+                <hr>
+                <form [formGroup]="siteForm">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Site Code" placeholder="Enter Site Code"
+                          formControlName="site_data_code">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group"> <input type="text" class="form-control" id="Site Name"
+                          placeholder="Enter Site Name" formControlName="site_data_name">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="field3" placeholder="Enter legal Site Name"
+                          formControlName="legal_site_data_name">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+  
+            </div>
+            <br>
+            <div class="container">
+  
+  
+              <div class="card-body">
+                <h6 style="color: rgb(250, 39, 39);">Address</h6>
+                <hr>
+                <form [formGroup]="siteForm">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
+                          formControlName="address_1">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address" placeholder="Enter Address 2"
+                          formControlName="address_2">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address3" placeholder="Enter Address 3"
+                          formControlName="address_3">
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address" placeholder="Enter Address 4"
+                          formControlName="address_4">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type=" text" class="form-control" id="City" placeholder="Enter City"
+                          formControlName="city">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="District" placeholder="Enter District"
+                          formControlName="district">
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Region" placeholder="Enter Region"
+                          formControlName="region">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Zip Code" placeholder="Enter Zip Code"
+                          formControlName="zip_code">
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Country" placeholder="Enter Country"
+                          formControlName="country">
+                      </div>
+                    </div>
+                  </div>
+  
+                </form>
+              </div>
+  
+            </div>
+            <br>
+            <div class="container">
+  
+              <div class="card-body">
+                <h6 style="color: rgb(250, 39, 39);">Communication</h6>
+                <hr>
+                <form [formGroup]="siteForm">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Office Telephone"
+                          formControlName="office_telephone">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Extension:" placeholder="Enter Extension:"
+                          formControlName="extension">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Mobile No" placeholder="Enter Mobile No"
+                          formControlName="mobile_telephone">
+                      </div>
+                    </div>
+  
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address 1" placeholder="Enter Email "
+                          formControlName="email">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="Address" placeholder="Enter Website "
+                          formControlName="website">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            
+              <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                <button (click)="submit()" class="btn btn-primary">Submit</button>
+  
+              </div>
+  
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -6,6 +6,7 @@
 	color: #ff414b !important;
 }
 
+
 .r-blue-text {
 	color: #03aced !important;
 }
@@ -56,6 +57,9 @@
 	background-image: url("../images/login_bg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
+
+	max-height: 100%;
+
 }
 
 body[data-sidebar=dark] .mm-active {

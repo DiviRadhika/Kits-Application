@@ -1,0 +1,100 @@
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab Test
+                        </h4>
+                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab Test
+                        </h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
+                                        class="waves-effect">Lab Test</a></li>
+                                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Lab Test</li>
+                                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Lab Test</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <h4><i class="fab fa-codiepie cro-icon mr-sm-2"></i>CRO Data</h4>/ -->
+            <br>
+
+            <div class="card ml-2 mr-2 bg-white">
+                <div class="container">
+
+                    <div class="card-body">
+                        <h6 style="color: rgb(250, 39, 39);">LabTest Form</h6>
+                        <hr>
+                        <form [formGroup]="labForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <!-- <label>User First Name</label> -->
+                                        <input type="text" class="form-control" formControlName="lab_test" id="lab test"
+                                            placeholder="Enter Lab Test">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
+                                        <!-- <label>Password</label> -->
+                                        <input type="text" class="form-control" id="material" formControlName="material"
+                                            placeholder=" Enter Material">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
+                                        <!-- <label>Password</label> -->
+                                        <input type="text" class="form-control" id="Size" formControlName="size"
+                                            placeholder=" Enter Size">
+                                    </div>
+                                </div>
+                               
+                            
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div *ngIf="fieldDisplay" class="col-md-3">
+                                    <div class="form-group">
+                                        <input  type="file" accept=".jpg,.png" class="form-control"
+                                            formControlName="image" (change)="uploadFile($event, false)" id="image"
+                                            placeholder="Select Image">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span  (click)="enable()" *ngIf="editImage"><img style="width:70px"
+                                                src="{{'data:image/jpg;base64,' + labData.image}}" />
+                                                &nbsp;&nbsp;&nbsp;<a style="color:blue">Click here To Upload New image</a></span>
+                                        <span *ngIf="imgDisplay"><img style="width:70px"
+                                                src="{{'data:image/jpg;base64,' + bas2}}" /></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                        <button (click)="submit()" class="btn btn-primary">Submit</button>
+
+                    </div>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+</div>
