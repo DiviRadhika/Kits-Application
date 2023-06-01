@@ -6,30 +6,6 @@
 	color: #ff414b !important;
 }
 
-.r-blue-text {
-	color: #03aced !important;
-}
-
-
-
-.r-darkblue {
-	background: #064ea2 !important;
-	border: #064ea2 !important;
-}
-
-.r-darkblue-border {
-	border: #064ea2 !important;
-}
-
-.r-blue {
-	background: #03aced !important;
-	border: #03aced !important;
-}
-
-.r-blue-border {
-	border: #03aced !important;
-}
-
 
 .r-red-border {
 	border: #ff414b !important;
@@ -53,7 +29,7 @@
 }
 
 .login-bg {
-	/* background-image: url("../images/login_bg.jpg"); */
+	background-image: url("../images/login_bg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -152,18 +128,4 @@ hr {
 
 #sidebar-menu ul li a i {
 	color: #fff !important;
-}
-
-
-.nav-tabs .nav-link{
-	border-radius:0px;
-}
-
-.nav-tabs{
-	font-size:14px;
-}
-
-.nav-tabs .nav-link.active{
-	background:#20456a;
-	color:#FFF;
 }
