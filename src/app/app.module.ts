@@ -12,13 +12,15 @@ import { HomeComponent } from './home/home.component';
 import { UploadResultsComponent } from './central/upload-results/upload-results.component';
 import { CentralLabModule } from './central-lab/central-lab.module';
 import { SiteModule } from './site/site.module';
+import { ProtocolRegistrationComponent } from './protocol-registration/protocol-registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    UploadResultsComponent
+    UploadResultsComponent,
+    ProtocolRegistrationComponent
   ],
   imports: [
     BrowserModule,
