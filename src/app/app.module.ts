@@ -1,10 +1,8 @@
 import { ApplicationModule, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
 import { CROModule } from './cro/cro.module';
 import { SponsorModule } from './sponsor/sponsor.module';
 import { HomeComponent } from './home/home.component';
@@ -20,8 +18,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,7 +27,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HomeComponent,
     UploadResultsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -41,11 +39,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     ApplicationadminModule,
     FormsModule,
-    NgxPaginationModule
-  
+    NgxPaginationModule,
+   HttpClientModule,
+
   ],
   
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }

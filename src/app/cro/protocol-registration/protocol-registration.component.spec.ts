@@ -6,12 +6,10 @@ describe('ProtocolRegistrationComponent', () => {
   let component: ProtocolRegistrationComponent;
   let fixture: ComponentFixture<ProtocolRegistrationComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ProtocolRegistrationComponent ]
-    })
-    .compileComponents();
-
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ProtocolRegistrationComponent]
+    });
     fixture = TestBed.createComponent(ProtocolRegistrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
