@@ -13,8 +13,10 @@
                         </h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a routerLink="/home/cro/sponsorGrid" class="waves-effect">Sponsor</a></li>
+                                <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item"><a routerLink="/home/cro/sponsorGrid"
+                                        class="waves-effect">Sponsor</a></li>
                                 <li *ngIf="!isEdit" class="breadcrumb-item active">Add Sponsor</li>
                                 <li *ngIf="isEdit" class="breadcrumb-item active">Edit Sponsor</li>
                             </ol>
@@ -206,7 +208,7 @@
                                                 placeholder="Enter Country" formControlName="country"
                                                 [class.is-invalid]="shouldShowRequired('country') && sponsorForm.get('country')?.touched">
                                             <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
-                                                Country is required.     
+                                                Country is required.
                                             </div>
                                             <div *ngIf="shouldShowLengthError('country')" class="invalid-feedback">
                                                 country between 5 and 15 characters.
@@ -244,9 +246,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="Extension:"
-                                                placeholder="Enter Extension:" formControlName="extension"
-                                               >
-                                         
+                                                placeholder="Enter Extension:" formControlName="extension">
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -254,10 +255,12 @@
                                             <input type="number" class="form-control" id="mobile_no"
                                                 placeholder="Enter mobile_no Number" formControlName="mobile_telephone"
                                                 [class.is-invalid]="shouldShowRequired('mobile_telephone') && sponsorForm.get('mobile_telephone')?.touched">
-                                            <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
-                                               Mobile Number is Required.
+                                            <div *ngIf="shouldShowRequired('mobile_telephone')"
+                                                class="invalid-feedback">
+                                                Mobile Number is Required.
                                             </div>
-                                            <div *ngIf="shouldShowPatternError('mobile_telephone')" class="invalid-feedback">
+                                            <div *ngIf="shouldShowPatternError('mobile_telephone')"
+                                                class="invalid-feedback">
                                                 Invalid mobile_no
                                                 number format
                                             </div>
@@ -272,13 +275,14 @@
                                             <input type="text" class="form-control" id="Address 1"
                                                 placeholder="Enter Email" formControlName="email"
                                                 [class.is-invalid]="shouldShowRequired('email') && sponsorForm.get('email')?.touched">
-                                                <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
-                                                  Email is required.
-                                                </div>
-                                               
-                                              <div *ngIf="sponsorForm.get('email')?.hasError('invalidDomain')" class="invalid-feedback">
+                                            <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
+                                                Email is required.
+                                            </div>
+
+                                            <div *ngIf="sponsorForm.get('email')?.hasError('invalidDomain')"
+                                                class="invalid-feedback">
                                                 Invalid email domain.
-                                              </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -298,18 +302,17 @@
                                         </div>
                                     </div>
                                 </div>
-                        
+                            </form>
+                        </div>
+
+                        <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                            <button (click)="submit()" class="btn btn-primary">Submit</button>
+
+                        </div>
+
+                    </div>
+                </div>
             </form>
         </div>
-
-        <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-            <button (click)="submit()" class="btn btn-primary">Submit</button>
-
-        </div>
-
     </div>
-</div>
-</form>
-</div>
-</div>
 </div>

@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationadminModule } from './applicationadmin/applicationadmin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -39,7 +40,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
     CentralLabModule,SiteModule,
     ReactiveFormsModule,
     ApplicationadminModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
+  
   ],
   
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],

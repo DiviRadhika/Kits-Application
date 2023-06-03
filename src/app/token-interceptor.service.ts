@@ -16,11 +16,23 @@ export class TokenInterceptorService {
     ) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-   
+
+
+    
+    // req = req.clone({
+    //       withCredentials: true
+    //   });
+  
+    //   return next.handle(req);
+
+
+
+
     this.role = sessionStorage.getItem('role');
     if (this.role === null) {
       sessionStorage.setItem('enablebtn', 'valid');
       const tokenizedReq = req.clone({
+        withCredentials: true
         // setHeaders : {
         // Authorization : 'Bearer '
         // }`
@@ -65,9 +77,11 @@ export class TokenInterceptorService {
 console.log(sessionStorage.getItem('access_token'))
 
       this.tokenizedReq = req.clone({
-
+       
         setHeaders: {
-          Authorization: 'Bearer ' + sessionStorage.getItem('access_token')
+          
+          Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+          // Access-Control-Allow-Origin: '*'
         }
       });
 

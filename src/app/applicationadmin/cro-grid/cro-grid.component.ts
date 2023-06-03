@@ -9,34 +9,55 @@ import { AdminService } from '../admin.service';
 })
 export class CroGridComponent implements OnInit {
   croDetails: any[] = []
-  searchText :any 
-  constructor(private route:Router,
-    private admin:AdminService) { }
+  page = 1;
+  totalCount = 0
+  pageSize = 2;
+  p = 1;
+  searchText: any
+  allcroDetails: any;
+  constructor(private route: Router,
+    private admin: AdminService) { }
 
-  //   applyFilter() {
-  //     this.searchText = this.searchText.trim(); // Remove whitespace
-  //     this.searchText.filter((data:any)=>
-  //     JSON.stringify(data).toLowerCase().indexOf(this.searchText.toLowerCase))!=-1))''
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    if (filterValue === '') {
+      this.croDetails = this.allcroDetails;
+    }
+    else {
+      this.croDetails = this.allcroDetails.filter(
+        (cro: any) =>
+          (cro.cro_code && cro.cro_code.toLowerCase().includes(filterValue)) ||
+          (cro.cro_name && cro.cro_name.toLowerCase().includes(filterValue)) ||
+          (cro.legal_cro_name && cro.legal_cro_name.toLowerCase().includes(filterValue))
+      );
+    }
 
-  //     // })) // Datasource defaults to lowercase matches
-  //     // this.croDetails.filter = filterValue;
-  // }
+  }
+  pageChange(event: number) {
+    this.page = event;
+    this.getCRoDetails()
+  }
+
+
   ngOnInit(): void {
     this.getCRoDetails();
   }
-  croCreate(){
+  croCreate() {
     this.route.navigate(['/home/admin/croCreate'])
   }
-  edit(id:string){
-    this.route.navigate(['/home/admin/croUpdate',id])
+  edit(id: string) {
+    this.route.navigate(['/home/admin/croUpdate', id])
   }
-  getCRoDetails(){
+  getCRoDetails() {
     this.admin.getCro().subscribe(
-      (data:any)=>{
-      this.croDetails = data
-       console.log(data)
+      (data: any) => {
+        this.croDetails = data
+        this.allcroDetails = data
+        console.log(data)
+        this.totalCount = this.croDetails.length
       },
-      (err:any)=>{
+      (err: any) => {
         alert("err")
       }
     )

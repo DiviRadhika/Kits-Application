@@ -35,17 +35,11 @@
                 <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                   <div class="row">
                     <div class="col-sm-12 col-md-6">
-                      <div class="dataTables_length" id="datatable_length"><label>Show <select name="datatable_length"
-                            aria-controls="datatable" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select> entries</label></div>
-                    </div>
+                    
                     <div class="col-sm-12 col-md-6">
                       <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                            class="form-control form-control-sm" placeholder="" aria-controls="datatable"></label></div>
+                            class="form-control form-control-sm"[(ngModel)]="searchText"
+                            placeholder="Search " (keyup)="applyFilter(searchText)" /></label></div>
                     </div>
                   </div>
                   <div class="row">
@@ -70,8 +64,10 @@
   
   
                         <tbody>
-                          <tr class="odd" *ngFor ="let siteData of siteDetails">
-  
+                          
+                            <tr class="odd"
+                            *ngFor="let siteData of siteDetails  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+
                             <td class="sorting_1 dtr-control">{{siteData.site_data_code}}</td>
                            
                             <td>{{siteData.site_data_name}}</td>
@@ -86,26 +82,12 @@
                        
                         </tbody>
                       </table>
+                      <pagination-controls id="sitePagination" (pageChange)="pageChange($event)"
+                      *ngIf="siteDetails && siteDetails.length"></pagination-controls>
+                  </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                      <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 4 of
-                        4 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                      <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
-                        <ul class="pagination">
-                          <li class="paginate_button page-item previous disabled" id="datatable_previous"><a href="#"
-                              aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                          <li class="paginate_button page-item active"><a href="#" aria-controls="datatable"
-                              data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                          <li class="paginate_button page-item next disabled" id="datatable_next"><a href="#"
-                              aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                 
                 </div>
   
   

@@ -6,8 +6,8 @@ import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './auth-gaurd.service';
 
 const routes: Routes = [
-{path:'',redirectTo:'Login', pathMatch:'full'},
-{path:'Login',  component: LoginComponent},
+{path:'',redirectTo:'login', pathMatch:'full'},
+{path:'login',  component: LoginComponent},
 {path:'header',  component:HeaderComponent},
 {path: 'home', component:HomeComponent,
 children: [

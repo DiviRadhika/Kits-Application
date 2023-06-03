@@ -30,7 +30,7 @@ canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
   //   return true;
   // }
   else {
-    this.router.navigateByUrl('/Login');
+    this.router.navigateByUrl('/login');
     // alert('auhcalled')
     // sessionStorage.setItem('hideButtons', 'false');
     return false;
