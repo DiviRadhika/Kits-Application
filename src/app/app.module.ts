@@ -1,10 +1,8 @@
 import { ApplicationModule, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
 import { CROModule } from './cro/cro.module';
 import { SponsorModule } from './sponsor/sponsor.module';
 import { HomeComponent } from './home/home.component';
@@ -17,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationadminModule } from './applicationadmin/applicationadmin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
-//import {ProtocolRegistrationComponent} from './cro/protocol-registration/protocol-registration.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -40,8 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     ApplicationadminModule,
     FormsModule,
-    HttpClientModule,
-    
+    NgxPaginationModule,
+   HttpClientModule,
+
   ],
   
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],

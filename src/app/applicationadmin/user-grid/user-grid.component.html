@@ -1,59 +1,53 @@
 <div class="main-content">
 
-    <div class="page-content">
-      <div class="container-fluid">
-  
-        <!-- start page title -->
-        <div class="row">
-          <div class="col-12">
-            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> Users</h4>
-  
-              <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="subjects.html">Users</a></li>
-                </ol>
-              </div>
-  
+  <div class="page-content">
+    <div class="container-fluid">
+
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> Users</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="subjects.html">Users</a></li>
+              </ol>
             </div>
+
           </div>
         </div>
-        <!-- end page title -->
-  
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="pull-Right mb-2 text-right" width="100%">
-                  <button type="button" (click)="addUser()" class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
-                    data-bs-toggle="modal"   data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
-                    Add User</button>
-                </div>
-                <hr width="100%" class="mb-4">
-                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                  <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                      <div class="dataTables_length" id="datatable_length"><label>Show <select name="datatable_length"
-                            aria-controls="datatable" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select> entries</label></div>
-                    </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="pull-Right mb-2 text-right" width="100%">
+                <button type="button" (click)="addUser()"
+                  class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right" data-bs-toggle="modal"
+                  data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
+                  Add User</button>
+              </div>
+              <hr width="100%" class="mb-4">
+              <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+
                     <div class="col-sm-12 col-md-6">
                       <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                        <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search "
-            (input)="applyFilter($event)" />
-                       </label></div>
+                          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                            placeholder="Search " (keyup)="applyFilter(searchText)" />
+                        </label></div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
                       <table id="datatable"
-                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid"
-                        aria-describedby="datatable_info" style="width: 1182px;">
+                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                        role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                         <thead>
                           <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
@@ -63,83 +57,57 @@
                               style="width: 364.2px;" aria-label="Email: activate to sort column ascending">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 230.2px;" aria-label="Role: activate to sort column ascending">Role</th>
-                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                              colspan="1" style="width: 150.2px;"
+                              aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
                         </thead>
-  
-  
+
+
                         <tbody>
-  
-  
-  
-  
-  
-                          <tr class="odd" *ngFor ="let user of userDetails">
+                          <tr class="odd"
+                            *ngFor="let user of userDetails  | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+
+                            <!-- <th>{{(page-1) * pageSize + i+1}}</th> -->
+
                             <td class="sorting_1 dtr-control">{{user.first_name}}&nbsp;{{user.last_name}}</td>
                             <td>{{user.email}}</td>
                             <td>{{user.role}}</td>
-                           
                             <td>
-                              <button type="button" (click)="edit(user.user_id)" class="btn btn-success waves-effect edit-btn waves-light">
+                              <button type="button" (click)="edit(user.user_id)"
+                                class="btn btn-success waves-effect edit-btn waves-light">
                                 <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                                 Edit
                               </button>
                             </td>
                           </tr>
-                         
                         </tbody>
                       </table>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                      <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 4 of
-                        4 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                      <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
-                        <ul class="pagination">
-                          <li class="paginate_button page-item previous disabled" id="datatable_previous"><a href="#"
-                              aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                          <li class="paginate_button page-item active"><a href="#" aria-controls="datatable"
-                              data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                          <li class="paginate_button page-item next disabled" id="datatable_next"><a href="#"
-                              aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
-                        </ul>
-                      </div>
+                      <pagination-controls id="userPagination" (pageChange)="pageChange($event)"
+                        *ngIf="userDetails && userDetails.length"></pagination-controls>
                     </div>
                   </div>
                 </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
               </div>
             </div>
           </div>
-  
-          <!-- end col -->
-        </div> <!-- end row -->
-      </div>
-      <!-- container-fluid -->
+        </div>
+
+        <!-- end col -->
+      </div> <!-- end row -->
     </div>
-    <!-- End Page-content -->
-  
-  
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-6">
-            <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
-          </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
         </div>
       </div>
-    </footer>
-  </div>
-  
+    </div>
+  </footer>
+</div>

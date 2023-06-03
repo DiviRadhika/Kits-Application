@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { endPointsUser } from '../api';
 
 @Injectable({
   providedIn: 'root'
@@ -10,45 +11,49 @@ export class CrosService {
 
   // Services for Sponsors
   getsponsors(): Observable<any> {
-    return this._httpClient.get<any>("http://34.100.227.119:5001/api/sponsors")
-  }
-  CreateSponsorDetails(data: any): Observable<any> {
-    return this._httpClient.post("http://34.100.227.119:5001/api/sponsor", data);
+    return this._httpClient.get(endPointsUser.getSponsors)
   }
   getSponsorById(id: any): Observable<any> {
-    return this._httpClient.get("http://34.100.227.119:5001/api/sponsor/" + id);
+    return this._httpClient.get(endPointsUser.getSponsorsById)
   }
-  updateSponsorDetails(data:any): Observable<any> {
-    return this._httpClient.put("http://34.100.227.119:5001/api/sponsor", data);
+  CreateSponsorDetails(data: any): Observable<any> {
+    return this._httpClient.post(endPointsUser.getSponsorsAddUpdate, data)
+  }
+
+  updateSponsorDetails(data: any): Observable<any> {
+    return this._httpClient.put(endPointsUser.getSponsorsAddUpdate, data)
   }
 
   // Services for Sites
   getSites(): Observable<any> {
-    return this._httpClient.get<any>("http://34.100.227.119:5001/api/sites_data");
-  }
-  CreateSiteDetails(data: string): Observable<any> {
-    return this._httpClient.post("http://34.100.227.119:5001/api/site_data", data);
+    return this._httpClient.get(endPointsUser.getSites)
   }
   getSiteById(id: any): Observable<any> {
-    return this._httpClient.get("http://34.100.227.119:5001/api/site_data/" + id);
+    return this._httpClient.get(endPointsUser.getSiteById)
   }
-  updateSiteDetails(data: []): Observable<any> {
-    return this._httpClient.put("http://34.100.227.119:5001/api/site_data" ,data);
+  CreateSiteDetails(data: string): Observable<any> {
+    return this._httpClient.post(endPointsUser.getSiteAddUpdate, data)
   }
 
+  updateSiteDetails(data: []): Observable<any> {
+    return this._httpClient.put(endPointsUser.getSiteAddUpdate, data)
+  }
 
   // Services for Lab Test
-  createTestDetails(data: any): Observable<any> {
-    return this._httpClient.post("http://34.100.227.119:5001/api/lab_test", data);
-  }
-  updateTestDetails(data:any): Observable<any> {
-    return this._httpClient.put("http://34.100.227.119:5001/api/lab_test", data);
+  getLabTests(): Observable<any> {
+    return this._httpClient.get(endPointsUser.getLabTest)
   }
   getTestDetailsById(id: any): Observable<any> {
-    return this._httpClient.get("http://34.100.227.119:5001/api/lab_test/" + id);
+    return this._httpClient.get(endPointsUser.getLabTestById)
   }
-  getLabTests(): Observable<any> {
-    return this._httpClient.get<any>("http://34.100.227.119:5001/api/lab_tests");
+  createTestDetails(data: any): Observable<any> {
+
+    return this._httpClient.post(endPointsUser.getLabTestAddUpdate, data)
   }
+  updateTestDetails(data: any): Observable<any> {
+    return this._httpClient.put(endPointsUser.getLabTestAddUpdate, data)
+  }
+  
+  
 }
 

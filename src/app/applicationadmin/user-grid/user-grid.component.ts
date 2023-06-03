@@ -9,33 +9,54 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-grid.component.css']
 })
 export class UserGridComponent implements OnInit {
- public getUserData: any;
-  userDetails:any[]= [];
+  public getUserData: any;
+  userDetails: any[] = [];
   searchText = ''
-  constructor(private admin:AdminService, private route: Router) { 
+  allUserData: any;
+  page = 1;
+  totalCount = 0
+  pageSize = 2;
+  p = 1;
+  constructor(private admin: AdminService, private route: Router) {
     this.getUser()
-    
+
   }
 
   ngOnInit(): void {
   }
-  applyFilter(filterValue: any) {
+
+  applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.userDetails.filter = filterValue;
-}
- 
-  
-  addUser(){
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    if (filterValue === '') {
+      this.userDetails = this.allUserData;
+    }
+    else {
+      this.userDetails = this.allUserData.filter(
+        (user: any) =>
+          (user.first_name && user.first_name.toLowerCase().includes(filterValue)) ||
+          (user.last_name && user.last_name.toLowerCase().includes(filterValue)) ||
+          (user.email && user.role.toLowerCase().includes(filterValue))
+      );
+    }
+
+  }
+  pageChange(event: number) {
+   this.page = event;
+    this.getUser()
+  }
+  addUser() {
     this.route.navigate(['/home/admin/userCreate'])
   }
-  edit(id:string){
-    this.route.navigate(['/home/admin/userUpdate',id])
+  edit(id: string) {
+    this.route.navigate(['/home/admin/userUpdate', id])
   }
-  getUser(){
-    this.getUserData =  this.admin.getUser().subscribe((data:any)=>{
+  getUser() {
+    this.getUserData = this.admin.getUser().subscribe((data: any) => {
       console.log(data)
       this.userDetails = data
+      this.allUserData = data
+      this.totalCount = this.userDetails.length
     })
 
   }

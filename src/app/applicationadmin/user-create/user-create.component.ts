@@ -50,6 +50,7 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   shouldShowRequired(controlName: string): boolean {
     const control = this.userForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
