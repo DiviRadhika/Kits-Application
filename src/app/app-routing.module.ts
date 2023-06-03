@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './auth-gaurd.service';
+import { ProtocolRegistrationComponent } from './cro/protocol-registration/protocol-registration.component';
 
 const routes: Routes = [
 {path:'',redirectTo:'Login', pathMatch:'full'},
@@ -31,6 +32,7 @@ children: [
   path: 'site',
   loadChildren: ()=>import('./site/site.module').then(m=>m.SiteModule)
 },
+
 
 ]
 , canActivate: [AuthGuard]

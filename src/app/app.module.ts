@@ -17,10 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationadminModule } from './applicationadmin/applicationadmin.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
+//import {ProtocolRegistrationComponent} from './cro/protocol-registration/protocol-registration.component';
 
-
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     HomeComponent,
     UploadResultsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,10 +39,12 @@ import { TokenInterceptorService } from './token-interceptor.service';
     CentralLabModule,SiteModule,
     ReactiveFormsModule,
     ApplicationadminModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    
   ],
   
   providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }
