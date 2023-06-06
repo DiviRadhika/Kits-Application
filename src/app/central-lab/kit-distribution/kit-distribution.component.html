@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Kit Distribution
+                                <i class="bx bxs-dashboard"></i> Kit distribution
                             </h4>
 
                             <div class="page-title-right">
@@ -62,13 +62,15 @@
                                             <span class="d-none d-sm-block">Screening</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" (click)="showv()" data-bs-toggle="tab" href="#visit"
-                                            role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Visit</span>
-                                        </a>
-                                    </li>
+                                 
+ <li *ngFor="let item of listItems let j = index" 
+ class="nav-item">
+   <a  class="nav-link" data-bs-toggle="tab" (click)="showv()" href="#visit" role="tab">
+     <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+     <span  class="d-none d-sm-block">Visit {{j+1}}</span>
+   </a>
+  
+ </li>
                                 </ul>
 
                                 <div class="tab-content pt-3 text-muted">
@@ -222,7 +224,7 @@
                                                             <button type="button"
                                                             class="btn btn-primary  r-darkblue pull-Right"
                                                            >
-                                                             Print
+                                                           Print SiteId
                                                         </button>
                                                         </td>
                                                      
@@ -386,7 +388,7 @@
                                                         <button type="button"
                                                         class="btn btn-primary  r-darkblue pull-Right"
                                                        >
-                                                         Print
+                                                         Print SiteId
                                                     </button>
                                                     </td>
 

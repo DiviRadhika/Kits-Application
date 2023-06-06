@@ -62,13 +62,15 @@
                                             <span class="d-none d-sm-block">Screening</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" (click)="showv()" data-bs-toggle="tab" href="#visit"
-                                            role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Visit</span>
-                                        </a>
-                                    </li>
+                                   
+ <li *ngFor="let item of listItems let j = index" 
+ class="nav-item">
+   <a  class="nav-link" data-bs-toggle="tab" (click)="showv()" href="#visit" role="tab">
+     <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+     <span  class="d-none d-sm-block">Visit {{j+1}}</span>
+   </a>
+  
+ </li>
                                 </ul>
 
                                 <div class="tab-content pt-3 text-muted">
@@ -170,8 +172,9 @@
                                                         <th>CKitId</th>
                                                         <th>KitId</th>
                                                         <th>Prepration</th>
-                                                        <th>Status</th>
                                                         <th>Label Id</th>
+                                                        <th>Status</th>
+                                                       
                                                     </tr>
                                                 </thead>
 
@@ -199,6 +202,11 @@
 
                                                         </td>
                                                         <td>
+                                                            <input type="text" placeholder="Label Id"
+                                                                formControlName="labelId" class="form-control" value="" />
+    
+                                                        </td>
+                                                        <td>
                                                             <select formControlName="status" class="form-select form-control">
                                                                 <option *ngFor="let data of statusData">
                                                                     {{ data }}
@@ -207,11 +215,7 @@
                                                            
     
                                                         </td>
-                                                        <td>
-                                                            <input type="text" placeholder="Label Id"
-                                                                formControlName="labelId" class="form-control" value="" />
-    
-                                                        </td>
+                                            
                                                     </tr>
 
 
@@ -319,8 +323,9 @@
                                                     <th>CKitId</th>
                                                     <th>KitId</th>
                                                     <th>Prepration</th>
-                                                    <th>Status</th>
                                                     <th>Label Id</th>
+                                                    <th>Status</th>
+                                                   
 
 
                                                 </tr>
@@ -349,6 +354,11 @@
 
                                                     </td>
                                                     <td>
+                                                        <input type="text" placeholder="Label Id"
+                                                            formControlName="labelId" class="form-control" value="" />
+
+                                                    </td>
+                                                    <td>
                                                         <select formControlName="status" class="form-select form-control">
                                                             <option *ngFor="let data of statusData">
                                                                 {{ data }}
@@ -357,11 +367,7 @@
                                                        
 
                                                     </td>
-                                                    <td>
-                                                        <input type="text" placeholder="Label Id"
-                                                            formControlName="labelId" class="form-control" value="" />
-
-                                                    </td>
+                                   
 
 
                                                 </tr>
