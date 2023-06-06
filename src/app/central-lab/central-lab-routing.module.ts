@@ -11,7 +11,6 @@ const routes: Routes = [
   {path:'kitPrepration', component:KitPreprationComponent},
   {path:'kitVerification', component:KitVerificationComponent},
   {path:'kitDistribution', component:KitDistributionComponent},
-  {path:'sampleCollection', component:SampleCollectionComponent},
   {path:'sampleAcknowledgement', component:SampleAcknowledgementComponent},
   {path:'upload', component:UploadResultsComponent},
 ];

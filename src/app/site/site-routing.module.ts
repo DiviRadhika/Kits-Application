@@ -4,6 +4,7 @@ import { SampleCollectionComponent } from './sample-collection/sample-collection
 
 const routes: Routes = [
   {path:'sampleCollection', component:SampleCollectionComponent},
+
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ export class KitDistributionComponent implements OnInit {
   labelid: string='';
   kitId = 3;
   screenid = 4;
+  listItems: string[]=[];
   constructor(private protocolService: ProtocolService,private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
@@ -68,12 +69,20 @@ export class KitDistributionComponent implements OnInit {
       this.addScreenKit()
 
     }
+   
     //console.log(this.ScreenKitForm);
     this.VisitKitForm = this.formBuilder.group({
-
-      visitKitList: this.formBuilder.array([this.addVisitKitData()])
+      visitKitList: this.formBuilder.array([])
+      // visitKitList: this.formBuilder.array([this.addVisitKitData()])
 
     })
+    this.listItems = []; 
+    for (let i = 0; i <= this.kitId-1; i++)
+     { this.listItems.push(`Item ${i}`); 
+     this.addVisitKit()
+
+  
+    } 
 
   }
 
@@ -123,10 +132,7 @@ export class KitDistributionComponent implements OnInit {
     // this.addVisitKit()
     this.screening = false;
     this.visit = true
-    for(let i=0; i<this.kitId-1;i++){
-      this.addVisitKit()
-
-    }
+   
   }
   addVisitKitData() {
     return this.formBuilder.group({
