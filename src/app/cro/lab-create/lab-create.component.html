@@ -7,18 +7,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab Test
+                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Material
                         </h4>
-                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab Test
+                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Material
                         </h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
-                                        class="waves-effect">Lab Test</a></li>
-                                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Lab Test</li>
-                                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Lab Test</li>
+                                        class="waves-effect">Material</a></li>
+                                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Material</li>
+                                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Material</li>
                             </ol>
                         </div>
 
@@ -32,20 +32,11 @@
                 <div class="container">
 
                     <div class="card-body">
-                        <h6 style="color: rgb(250, 39, 39);">LabTest Form</h6>
+                        <h6 style="color: rgb(250, 39, 39);">Material Form</h6>
                         <hr>
                         <form [formGroup]="labForm">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <!-- <label>User First Name</label> -->
-                                        <input type="text" class="form-control" formControlName="lab_test" id="lab test"
-                                            placeholder="Enter Lab Test"   [class.is-invalid]="shouldShowRequired('lab_test') && labForm.get('lab_test')?.touched">
-                                            <div *ngIf="shouldShowRequired('lab_test')" class="invalid-feedback">
-                                                Lab Test is required.
-                                            </div>
-                                    </div>
-                                </div>
+                              
 
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -69,11 +60,6 @@
                                             </div>
                                     </div>
                                 </div>
-                               
-                            
-                            </div>
-                            <br>
-                            <div class="row">
                                 <div *ngIf="fieldDisplay" class="col-md-3">
                                     <div class="form-group">
                                         <input  type="file" accept=".jpg,.png" class="form-control"

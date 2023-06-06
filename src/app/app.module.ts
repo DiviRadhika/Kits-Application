@@ -35,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     CROModule,
     SponsorModule,
-    CentralLabModule,SiteModule,
+    // CentralLabModule,
+    // SiteModule,
     ReactiveFormsModule,
     ApplicationadminModule,
     FormsModule,
@@ -43,8 +44,8 @@ import { HttpClientModule } from '@angular/common/http';
    HttpClientModule,
 
   ],
-  
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
+  // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
+  providers: [],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }

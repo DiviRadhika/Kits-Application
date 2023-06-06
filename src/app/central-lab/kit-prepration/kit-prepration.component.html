@@ -1,1 +1,438 @@
-<p>kit-prepration works!</p>
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">
+                                <i class="bx bxs-dashboard"></i> Kit Prepration
+                            </h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="">Central Lab</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Kit Prepration</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    
+                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
+                                    <select formControlName="prepration"
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of protocols">
+                                        {{ data.protocol_id }}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <hr class="mt-4 mb-4" />
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <h4 class="r-blue-text">Kit Details</h4>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" (click)="showsc()" data-bs-toggle="tab"
+                                            href="#screening" role="tab">
+                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                            <span class="d-none d-sm-block">Screening</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" (click)="showv()" data-bs-toggle="tab" href="#visit"
+                                            role="tab">
+                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                            <span class="d-none d-sm-block">Visit</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content pt-3 text-muted">
+                                    <div class="tab-pane active" *ngIf="screening" id="screening" role="tabpanel">
+                                        <h5 class="mb-sm-0 font-size-18">
+                                            Kit Count : {{screenid}}
+                                           </h5>
+                                           
+                                           <br><div class="row">
+                                            <div class="col-md-4 mb-3">
+                                        <div class="table-responsive">
+
+                                            <table class="table table-striped mb-0">
+                                                <thead Style="background:#EEE">
+                                                    <tr>
+                                                        <th>Lab Test</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr *ngFor="
+                                    let item of labTestsList
+                                      
+                                    let i = index
+                                  ">
+                                                        <th scope="row">
+                                                            <input type="text" class="form-control"
+                                                                value={{item.lab_test}} />
+                                                          
+                                                        </th>
+                                                       
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                      
+                                        <div class="col-md-8 mb-3">
+                                            <div class="table-responsive">
+    
+                                                <table class="table table-striped mb-0">
+                                                    <thead Style="background:#EEE">
+                                                        <tr>
+                                                            
+                                                            <th>material</th>
+                                                            <th>Size</th>
+                                                            <th>Frozen at Site</th>
+                                                            <th>Image</th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+    
+                                                    <tbody>
+    
+                                                        <tr *ngFor="
+                                        let item of labTestsList
+                                          
+                                        let i = index
+                                      ">
+                                                        
+                                                            <td>
+                                                                <input type="text" class="form-control"
+                                                                    value={{item.material}} />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control"
+                                                                    value={{item.size}} />
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="checked" id="debugInfo" />
+                                                            </td>
+                                                            <td>
+                                                                <img style="width:50px"
+                                                                    src="{{'data:image/jpg;base64,' + item.image}}" />
+                                                            </td>
+                                                           
+                                                        </tr>
+    
+    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                       </div>
+
+                                       </div>
+                                       
+                                        <br>
+                                        <div class="row">
+
+                                            <div class="col-md-12 mb-3" align="right">
+                                                <div class="mb-2 text-right" width="100%">
+                                                    <button type="button"
+                                                        class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
+                                                        (click)="onScreenKitAdd()">
+                                                        <i class="bx bx-plus label-icon"></i> Add Kit
+                                                    </button>
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                        
+                                    <div class="table-responsive" [formGroup]="ScreenKitForm">
+                                        <table class="table table-striped mb-0" formArrayName="screenKitList">
+                                            <thead Style="background:#EEE">
+                                                <tr>
+                                                    <th>CKitId</th>
+                                                    <th>KitId</th>
+                                                    <th>Prepration</th>
+                                                    <th>Label Id</th>
+                                                    <th>Print</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr [formGroupName]="i" *ngFor="
+                                let item of ScreenKitForm.get('screenKitList')
+                                  .controls;
+                                let i = index
+                              ">
+
+                                                    <td width="25%">
+                                                        <input type="text" placeholder="ckitId" formControlName="ckitId"
+                                                            class="form-control" value="" />
+                                                    </td >
+                                                    <td width="25%">
+                                                        <input type="text" placeholder="kitId" formControlName="kitId"
+                                                            class="form-control" value="" />
+                                                    </td>
+                                                    <td width="25%">
+                                                        <select formControlName="prepration"
+                                                            class="form-select form-control">
+                                                            <option *ngFor="let data of preprationData">
+                                                                {{ data }}
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                    <td width="35%">
+                                                        <button type="button" (click)="generateId()"
+                                                        class="btn btn-primary  r-darkblue pull-Right"
+                                                       >
+                                                         Generate
+                                                    </button>
+                                                   &nbsp;&nbsp;{{labelid}}
+                                                    </td>
+                                                    <td width="20%">
+                                                        <button type="button"
+                                                        class="btn btn-primary  r-darkblue pull-Right"
+                                                       >
+                                                         Print
+                                                    </button>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="tab-pane active" *ngIf="visit" id="visit" role="tabpanel">
+                                    <h5 class="mb-sm-0 font-size-18">
+                                        Kit Count : {{kitId}}
+                                       </h5>
+                                       <br>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                    <div class="table-responsive">
+
+                                        <table class="table table-striped mb-0">
+                                            <thead Style="background:#EEE">
+                                                <tr>
+                                                    <th>Lab Test</th>
+                                                    
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr *ngFor="
+                                let item of labTestsList
+                                  
+                                let i = index
+                              ">
+                                                    <th scope="row">
+                                                        <input type="text" class="form-control"
+                                                            value={{item.lab_test}} />
+                                                      
+                                                    </th>
+                                                   
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-8 mb-3">
+                                        <div class="table-responsive">
+
+                                            <table class="table table-striped mb-0">
+                                                <thead Style="background:#EEE">
+                                                    <tr>
+                                                        
+                                                        <th>material</th>
+                                                        <th>Size</th>
+                                                        <th>Frozen at Site</th>
+                                                        <th>Image</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr *ngFor="
+                                    let item of labTestsList
+                                      
+                                    let i = index
+                                  ">
+                                                    
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                value={{item.material}} />
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                value={{item.size}} />
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="checked" id="debugInfo" />
+                                                        </td>
+                                                        <td>
+                                                            <img style="width:50px"
+                                                                src="{{'data:image/jpg;base64,' + item.image}}" />
+                                                        </td>
+                                                       
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                   </div>
+
+                                   </div>
+                                   
+                                    <br>
+                                    <br>
+                                    <div class="row">
+
+                                        <div class="col-md-12 mb-3" align="right">
+                                            <div class="mb-2 text-right" width="100%">
+                                                <button type="button"
+                                                    class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
+                                                    (click)="onVisitKitAdd()">
+                                                    <i class="bx bx-plus label-icon"></i> Add Kit
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                   
+                                    <div class="table-responsive" [formGroup]="VisitKitForm">
+                                        <table class="table table-striped mb-0" formArrayName="visitKitList">
+                                            <thead Style="background:#EEE">
+                                                <tr>
+                                                    <th>CKitId</th>
+                                                    <th>KitId</th>
+                                                    <th>Prepration</th>
+                                                    <th>Label Id</th>
+                                                    <th>Print</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr [formGroupName]="i" *ngFor="
+                                let item of VisitKitForm.get('visitKitList')
+                                  .controls;
+                                let i = index
+                              ">
+
+                                                    <td width="25%">
+                                                        <input type="text" placeholder="ckitId" formControlName="ckitId"
+                                                            class="form-control" value="" />
+                                                    </td >
+                                                    <td width="25%">
+                                                        <input type="text" placeholder="kitId" formControlName="kitId"
+                                                            class="form-control" value="" />
+                                                    </td>
+                                                    <td width="25%">
+                                                        <select formControlName="prepration"
+                                                            class="form-select form-control">
+                                                            <option *ngFor="let data of preprationData">
+                                                                {{ data }}
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                    <td width="35%">
+                                                        <button type="button" (click)="generateId()"
+                                                        class="btn btn-primary  r-darkblue pull-Right"
+                                                       >
+                                                         Generate
+                                                    </button>
+                                                   &nbsp;&nbsp;{{labelid}}
+                                                    </td>
+                                                    <td width="20%">
+                                                        <button type="button"
+                                                        class="btn btn-primary  r-darkblue pull-Right"
+                                                       >
+                                                         Print
+                                                    </button>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3" align="right">
+                            <div class="mb-2 text-right" width="100%">
+                                <button type="button"
+                                    class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                    style="width: 150px; height: 40px" (click)="SubmitData()">
+                                    <i class="bx bx-hdd label-icon"></i> Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">© Roboxa</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+</div>
+
+<!-- END layout-wrapper -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>

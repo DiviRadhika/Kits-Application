@@ -5,15 +5,21 @@ import { LSponsers } from './lsponsers';
 import { LabTests } from './lab-tests';
 import { CROS } from './cros';
 import { Protocol } from './protocol';
-
+import { CrosService } from '../cros.service';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 @Component({
   selector: 'app-protocol-registration',
   templateUrl: './protocol-registration.component.html',
   styleUrls: ['./protocol-registration.component.css']
 })
 export class ProtocolRegistrationComponent {
+  labMatTestsList: Array<any> = [];
+  screening: boolean = true;
+  visit: boolean = false;
+  valueVisit: any= 0;
+  listItems: string[]=[];
 
-  constructor(private protocolService: ProtocolService, private formBuilder: FormBuilder) { };
+  constructor(private protocolService: ProtocolService, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
   sponsers: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -24,6 +30,8 @@ export class ProtocolRegistrationComponent {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
+  sizeValues =['1.5ml', '1lt', '1/2lt']
+
 
 
   /* nmModel Variables */
@@ -32,32 +40,36 @@ export class ProtocolRegistrationComponent {
   selected_cro_id: any;
   selected_sites_num: any;
   selected_patients_num: any;
+  total_visits: any;
   selected_site_id: any;
   selected_patient_name: any;
   selected_patient_visits: any;
   selected_skit_count: any;
   selected_vkit_count: any;
   selected_vkit_variant: any;
-
+  VisitKitMatForm: any;
   sitesForm:any;
   ScreenKitForm:any;
+  ScreenMaterialKitForm: any;
   VisitKitForm:any;
   customerFormGroup:any;
 
   ngOnInit() {
-    this.protocolService.getSponsers().subscribe((sponsers) => {
+    this.croService.getsponsors().subscribe((sponsers) => {
       this.sponsersData(sponsers);
     });
     //console.log('Insite Protol Registration');
-    this.protocolService.getLabTests().subscribe((labTestsList) => {
+  
+    this.croService.getLabTests().subscribe((labTestsList) => {
       this.labTestsData(labTestsList);
+      this.labMatData(labTestsList)
     });
 
-    this.protocolService.getCros().subscribe((crosList) => {
+    this.adminService.getCro().subscribe((crosList) => {
       this.crosData(crosList);
     });
     //console.log('Insite Protol Registration');
-    this.protocolService.getSites().subscribe((sites) => {
+    this.croService.getSites().subscribe((sites) => {
       this.sitesData(sites);
     });
 
@@ -78,10 +90,21 @@ export class ProtocolRegistrationComponent {
       labTestsList: this.formBuilder.array([this.addScreenKitData()])
 
     })
+
+    this.ScreenMaterialKitForm=this.formBuilder.group({
+
+      materialList: this.formBuilder.array([this.addScreenmKitData()])
+
+    })
     //console.log(this.ScreenKitForm);
     this.VisitKitForm = this.formBuilder.group({
 
       labTestsList: this.formBuilder.array([this.addVisitKitData()])
+
+    })
+    this.VisitKitMatForm = this.formBuilder.group({
+
+      materialList: this.formBuilder.array([this.addVisitKitMatData()])
 
     })
 
@@ -90,9 +113,76 @@ export class ProtocolRegistrationComponent {
   get customerAddressDTOList() {
     return <FormArray>this.customerFormGroup.controls['sitesList'];
   }
+  onScreenKitAdd() {
 
+    //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
+    const control1 = this.ScreenKitForm.get('labTestsList') as FormArray;
+    control1.push(this.addScreenKitData());
+    console.log(this.ScreenKitForm.get('labTestsList').controls);
+  }
+  removeSite(j: number) { 
+    this.sitesForm.get('sites').removeAt(j);
+  }
+  removeScreenKit(j: number) { 
+    this.ScreenKitForm.get('labTestsList').removeAt(j);
+  }
+  removeMatScreenKit(j: number) { 
+    this.ScreenMaterialKitForm.get('materialList').removeAt(j);
+  }
+  removeVisitKit(j: number) { 
+    this.VisitKitForm.get('labTestsList').removeAt(j);
+  }
+  removeVisitMatKit(j: number) { 
+    this.VisitKitMatForm.get('materialList').removeAt(j);
+  }
+  showsc(){
+    this.screening = true;
+    this.visit = false
+  }
+  showv(){
+    // this.addVisitKit()
+    this.screening = false;
+    this.visit = true
+  }
+  visits(value: any){
+  this.valueVisit= value
+  this.listItems = []; 
+  for (let i = 1; i <= value; i++)
+   { this.listItems.push(`Item ${i}`); 
+  //  this.addVisitKit()
+
+  } } 
+  
+  onMaterialKitAdd() {
+
+    //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
+    const control1 = this.ScreenMaterialKitForm.get('materialList') as FormArray;
+    control1.push(this.addScreenmKitData());
+    console.log(this.ScreenMaterialKitForm.get('materialList').controls);
+  }
+  addScreenKitData() {
+    return this.formBuilder.group({
+      lab_test_id: [''],
+      Material: [''],
+      Size: [''],
+      frozen_status: [''],
+      Image: ''
+    })
+  }
+  addScreenmKitData() {
+    return this.formBuilder.group({
+     
+      Material: [''],
+      Size: [''],
+      quantity: [''],
+      frozen_status: [''],
+      Image: ''
+    })
+  }
   addSite() {
+    // for(let i=0; i<=this.valueVisit; i++){
     this.sitesForm.get('sites').push(this.addData());
+    // }
   }
 
   addScreenKit() {
@@ -103,6 +193,9 @@ export class ProtocolRegistrationComponent {
   addVisitKit() {
     this.VisitKitForm.get('labTestsList').push(this.addVisitKitData());
     
+  }
+  addVisitMatKit(){
+    this.VisitKitMatForm.get('materialList').push(this.addVisitKitMatData());
   }
 
 
@@ -123,28 +216,13 @@ export class ProtocolRegistrationComponent {
     return this.formBuilder.group({
       site_id: [''],
       patient_count: [''],
-      no_of_visits: ['']
+      // no_of_visits: ['']
     })
   }
 
-  onScreenKitAdd() {
+ 
 
-    //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
-    const control1 = this.ScreenKitForm.get('labTestsList') as FormArray;
-    control1.push(this.addScreenKitData());
-    console.log(this.ScreenKitForm.get('labTestsList').controls);
-  }
-
-  addScreenKitData() {
-    return this.formBuilder.group({
-      lab_test_id: [''],
-      Material: [''],
-      Size: [''],
-      frozen_status: [''],
-      Image: ''
-    })
-  }
-
+ 
   onVisitKitAdd() {
 
     //this.VisitKitForm.get('labTestsList').controls.push(this.addVisitKitData());
@@ -155,16 +233,57 @@ export class ProtocolRegistrationComponent {
 
   addVisitKitData() {
     return this.formBuilder.group({
-      no_of_visits: [''],
-      kit_type: [''],
+      // no_of_visits: [''],
+      // kit_type: [''],
       lab_id: [''],
+      // Material: [''],
+      // Size: [''],
+      frozen_status: [''],
+      // Image: ['']
+    })
+  }
+  onVisitKitMatChange(evt: any,index: any){
+   
+    let selected_lab_id = evt.target.value;
+    let selected_material ;
+    let selected_size;
+    let selected_image_string;
+   
+   // this.labTestsList.filter(lab => {
+   //   lab.lab_id == selected_lab_id
+   // })
+   for(var item of this.labTestsList){
+     
+     if (item['lab_id'] == evt.target.value) 
+     {
+       selected_material = item['material'];
+       selected_size = item['size'];
+       selected_image_string = item['image'];
+       
+      //  this.VisitKitForm.controls.labTestsList.controls[index].controls['Material'].setValue(selected_material);
+      //  this.VisitKitForm.controls.labTestsList.controls[index].controls['Size'].setValue(selected_size);
+       const img = new Image();
+       img.src = 'data:image/jpeg;base64,' + selected_image_string;
+       console.log(img.src);
+      // this.image_url = img.src;
+       this.VisitKitMatForm.controls.materialList.controls[index].controls['Image'].setValue(img.src);          
+         break;
+         
+     }
+   } 
+
+  }
+  addVisitKitMatData(){
+    return this.formBuilder.group({
+      // no_of_visits: [''],
+      // kit_type: [''],
       Material: [''],
       Size: [''],
+      quantity:[''],
       frozen_status: [''],
       Image: ['']
     })
   }
-
   sponsersData(sponsers:any) {
     sponsers.forEach((sponser: any) => {
       this.sponsers.push(sponser);
@@ -179,6 +298,14 @@ export class ProtocolRegistrationComponent {
     });
     console.log(this.labTestsList);
   }
+
+  labMatData(labMatList:any) {
+    labMatList.forEach((labTests:any) => {
+      this.labMatTestsList.push(labTests);
+    });
+    console.log(this.labTestsList);
+  }
+  
 
   crosData(crosList:any) {
     crosList.forEach((cros:any) => {
@@ -221,7 +348,7 @@ export class ProtocolRegistrationComponent {
       screening_kit_count: Number(this.selected_skit_count),
       screening_kit_lab_test_details: this.ScreenKitForm.value.labTestsList,
       visit_kit_count: Number(this.selected_vkit_count),
-      visit_kit_type: this.selected_vkit_variant,
+    
       visit_kit_details: this.VisitKitForm.value.labTestsList
     }
 
@@ -266,7 +393,37 @@ export class ProtocolRegistrationComponent {
     }
 
     
+
+    
   }
+  onScreenKitMatChange(evt: any,index: any){
+    
+    
+    let selected_lab_id = evt.target.value;
+    let selected_material ;
+    let selected_size;
+    let selected_image_string;
+   
+   // this.labTestsList.filter(lab => {
+   //   lab.lab_id == selected_lab_id
+   // })
+   for(var item of this.labMatTestsList){
+     
+     if (item['lab_id'] == evt.target.value) 
+     {
+    
+       selected_image_string = item['image'];
+      
+       const img = new Image();
+       img.src = 'data:image/jpeg;base64,' + selected_image_string;
+       console.log(img.src);
+      // this.image_url = img.src;
+       this.ScreenMaterialKitForm.controls.materialList.controls[index].controls['Image'].setValue(img.src);          
+         break;
+         
+     }
+   }    
+ }
 
   //image_url:any;
   onVisitKitChange(evt: any,index: any){

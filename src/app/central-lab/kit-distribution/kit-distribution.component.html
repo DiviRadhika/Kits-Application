@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Kit Verification
+                                <i class="bx bxs-dashboard"></i> Kit Distribution
                             </h4>
 
                             <div class="page-title-right">
@@ -20,7 +20,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="">Central Lab</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Kit Verification</li>
+                                    <li class="breadcrumb-item active">Kit Distribution</li>
                                 </ol>
                             </div>
                         </div>
@@ -170,8 +170,11 @@
                                                         <th>CKitId</th>
                                                         <th>KitId</th>
                                                         <th>Prepration</th>
-                                                        <th>Status</th>
                                                         <th>Label Id</th>
+                                                        <th>Status</th>
+                                                        <th>Site ID</th>
+                                                        <th>Print</th>
+                                                       
                                                     </tr>
                                                 </thead>
 
@@ -199,19 +202,30 @@
 
                                                         </td>
                                                         <td>
-                                                            <select formControlName="status" class="form-select form-control">
-                                                                <option *ngFor="let data of statusData">
-                                                                    {{ data }}
-                                                                </option>
-                                                            </select>
-                                                           
-    
-                                                        </td>
-                                                        <td>
                                                             <input type="text" placeholder="Label Id"
                                                                 formControlName="labelId" class="form-control" value="" />
     
                                                         </td>
+                                                        <td>
+                                                            <input type="text" placeholder="status"
+                                                                formControlName="status" class="form-control"
+                                                                value="" />
+                            
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" placeholder="site Id"
+                                                                formControlName="siteId" class="form-control"
+                                                                value="" />
+                            
+                                                        </td>
+                                                        <td >
+                                                            <button type="button"
+                                                            class="btn btn-primary  r-darkblue pull-Right"
+                                                           >
+                                                             Print
+                                                        </button>
+                                                        </td>
+                                                     
                                                     </tr>
 
 
@@ -319,8 +333,10 @@
                                                     <th>CKitId</th>
                                                     <th>KitId</th>
                                                     <th>Prepration</th>
-                                                    <th>Status</th>
                                                     <th>Label Id</th>
+                                                        <th>Status</th>
+                                                        <th>Site ID</th>
+                                                        <th>Print</th>
 
 
                                                 </tr>
@@ -349,20 +365,30 @@
 
                                                     </td>
                                                     <td>
-                                                        <select formControlName="status" class="form-select form-control">
-                                                            <option *ngFor="let data of statusData">
-                                                                {{ data }}
-                                                            </option>
-                                                        </select>
-                                                       
-
-                                                    </td>
-                                                    <td>
                                                         <input type="text" placeholder="Label Id"
                                                             formControlName="labelId" class="form-control" value="" />
 
                                                     </td>
-
+                                                    <td>
+                                                        <input type="text" placeholder="status"
+                                                            formControlName="status" class="form-control"
+                                                            value="" />
+                        
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" placeholder="site Id"
+                                                            formControlName="siteId" class="form-control"
+                                                            value="" />
+                        
+                                                    </td>
+                                                 
+                                                    <td >
+                                                        <button type="button"
+                                                        class="btn btn-primary  r-darkblue pull-Right"
+                                                       >
+                                                         Print
+                                                    </button>
+                                                    </td>
 
                                                 </tr>
 

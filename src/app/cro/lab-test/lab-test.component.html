@@ -21,96 +21,244 @@
         </div>
       </div>
       <!-- end page title -->
-
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <div class="pull-Right mb-2 text-right" width="100%">
-                <button type="button" (click)="labCreate()"
-                  class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right" data-bs-toggle="modal"
-                  data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
-                  Add Lab Test</button>
-              </div>
-              <hr width="100%" class="mb-4">
-              <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-bs-toggle="tab" (click)="showLab()" role="tab">
+            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+            <span class="d-none d-sm-block">Lab Test</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" (click)="showMat()" role="tab">
+            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+            <span class="d-none d-sm-block">Material</span>
+          </a>
+        </li>
+      </ul>
+      <div *ngIf="material">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-12 col-md-6">
-
-                  <div class="col-sm-12 col-md-6">
-                    <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                          class="form-control form-control-sm" [(ngModel)]="searchText"
-                          placeholder="Search " (keyup)="applyFilter(searchText)" /></label></div>
+                  <div class="col-md-9"></div>
+                  <div class="col-md-2">
+                    <div class="pull-Right mb-2 text-right" width="100%">
+                      <button type="button" (click)="materialCreate()"
+                        class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+                        data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                          class="bx bx-plus label-icon"></i>
+                        Add Material</button>
+                    </div>
                   </div>
                 </div>
+
+                <hr width="100%" class="mb-4">
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6">
+
+                      <div class="col-sm-12 col-md-6">
+                        <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                              class="form-control form-control-sm" [(ngModel)]="searchText" placeholder="Search "
+                              (keyup)="applyFilter(searchText)" /></label></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table id="datatable"
+                          class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                          role="grid" aria-describedby="datatable_info" style="width: 1182px;">
+                          <thead>
+                            <tr role="row">
+
+                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending">
+                                Material
+                              </th>
+                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 282.2px;" aria-label="Size: activate to sort column ascending">
+                                Size</th>
+                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 282.2px;" aria-label="Image: activate to sort column ascending">
+                                Image</th>
+                              <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                colspan="1" style="width: 150.2px;"
+                                aria-label="Actions: activate to sort column ascending">Actions</th>
+                            </tr>
+                          </thead>
+
+
+                          <tbody>
+                            <tr class="odd"
+                              *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                              <!-- <td class="sorting_1 dtr-control">{{labData.lab_test}}</td> -->
+                              <td>{{labData.material}}</td>
+                              <td>{{labData.size}}</td>
+                              <td>
+                                <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
+                              </td>
+                              <td>
+                                <button type="button" (click)="edit(labData.lab_id)"
+                                  class="btn btn-success waves-effect edit-btn waves-light">
+                                  <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                                  Edit
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
+                      *ngIf="LabDetails && LabDetails.length"></pagination-controls>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- end col -->
+          </div> <!-- end row -->
+        </div>
+      </div>
+      <div *ngIf="lab">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-12">
-                    <table id="datatable"
-                      class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid"
-                      aria-describedby="datatable_info" style="width: 1182px;">
-                      <thead>
-                        <tr role="row">
-                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 243.2px;" aria-sort="ascending"
-                            aria-label="Lab Test: activate to sort column descending">Lab Test</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 335.2px;" aria-label="Material: activate to sort column ascending">Material
-                          </th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 282.2px;" aria-label="Size: activate to sort column ascending">
-                            Size</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 282.2px;" aria-label="Image: activate to sort column ascending">
-                            Image</th>
-                          <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
-                        </tr>
-                      </thead>
+                  <div class="col-md-9"></div>
+                  <div class="col-md-2" *ngIf="disableAdd">
+                    <div class="pull-Right mb-2 text-right" width="100%">
+                      <button type="button" (click)="labCreate()"
+                        class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+                        data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                          class="bx bx-plus label-icon"></i>
+                        Add Lab Test</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="card ml-2 mr-2 bg-white">
+                  <div class="container">
+
+                    <div class="card-body" *ngIf="labFormval">
+                      <h6 style="color: rgb(250, 39, 39);">LabTest Form</h6>
+                      <hr>
+                      <form [formGroup]="labForm">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <!-- <label>User First Name</label> -->
+                              <input type="text" class="form-control" formControlName="lab_test" id="lab test"
+                                placeholder="Enter Lab Test">
+                              <!-- [class.is-invalid]="shouldShowRequired('lab_test') && labForm.get('lab_test')?.touched">
+                              <div *ngIf="shouldShowRequired('lab_test')" class="invalid-feedback">
+                                Lab Test is required.
+                              </div> -->
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <button (click)="submit()" class="btn btn-primary">Submit</button>
+
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
+                    <hr width="100%" class="mb-4">
+                    <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                      <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                        </div>
+
+                        <div class="col-sm-4 col-md-5">
+                          <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                class="form-control form-control-sm" [(ngModel)]="searchText" placeholder="Search "
+                                (keyup)="applyFilter(searchText)" /></label></div>
+                        </div>
+                      </div>
+                    
+                    <div class="row">
+                      <!-- <div class="col-sm-3"></div> -->
+                      <div class="col-sm-12">
+                        <table id="datatable"
+                          class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                          role="grid" aria-describedby="datatable_info" style="width: 1182px;">
+                          <thead>
+                            <tr role="row">
+                              <th width="30%">S.No</th>
+                              <th width="65%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 243.2px;" aria-sort="ascending"
+                                aria-label="Lab Test: activate to sort column descending">Lab Test</th>
+                             <th  width="10%" >Delete</th>
+                              <!-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                  style="width: 335.2px;" aria-label="Material: activate to sort column ascending">Material
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                  style="width: 282.2px;" aria-label="Size: activate to sort column ascending">
+                                  Size</th>
+                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                  style="width: 282.2px;" aria-label="Image: activate to sort column ascending">
+                                  Image</th>
+                                <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                  style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th> -->
+                            </tr>
+
+                          </thead>
 
 
-                      <tbody>
-                        <tr class="odd"
-                          *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
-                          <td class="sorting_1 dtr-control">{{labData.lab_test}}</td>
-                          <td>{{labData.material}}</td>
+                          <tbody>
+
+                            <tr class="odd"
+                              *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                             <td>
+                              {{i+1}}
+                             </td> <td class="sorting_1 dtr-control">{{labData.lab_test}}</td>
+                             <td>
+                              <button type="button" 
+                                class="btn btn-danger ml-3 mt-2">Delete</button>
+                              <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
+                            </td>
+                              <!-- <td>{{labData.material}}</td>
                           <td>{{labData.size}}</td>
                           <td>
                             <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
-                          </td>
-                          <td>
-                            <button type="button" (click)="edit(labData.lab_id)"
-                              class="btn btn-success waves-effect edit-btn waves-light">
-                              <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                              Edit
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          </td> -->
+                              <!-- <td>
+                                <button type="button" (click)="edit(labData.lab_id)"
+                                  class="btn btn-success waves-effect edit-btn waves-light">
+                                  <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                                  Edit
+                                </button>
+                              </td> -->
+                            </tr>
+                          </tbody>
+                        </table>
+                        <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
+                          *ngIf="LabDetails && LabDetails.length"></pagination-controls>
+                      </div>
+                    </div>
+
+
                   </div>
                 </div>
-                <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
-                  *ngIf="LabDetails && LabDetails.length"></pagination-controls>
+              </div>
+
+              <!-- end col -->
+            </div> <!-- end row -->
+          </div>
+          <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+      </div>
+
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- end col -->
-      </div> <!-- end row -->
-    </div>
-    <!-- container-fluid -->
-  </div>
-  <!-- End Page-content -->
-
-
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
-        </div>
+        </footer>
       </div>
-    </div>
-  </footer>
-</div>

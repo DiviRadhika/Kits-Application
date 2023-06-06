@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrosService } from '../cros.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-lab-test',
@@ -12,20 +13,39 @@ export class LabTestComponent implements OnInit {
   allLabDetails: any;
   page = 1;
   totalCount = 0
-  pageSize = 2;
+  pageSize = 10;
   p = 1;
   searchText = '';
+  lab: boolean = true;
+  material: boolean = false;
+  public labForm: FormGroup = new FormGroup({
+    lab_test: new FormControl("", [Validators.required]),
+  })
+  labFormval: boolean = false;
+  disableAdd: boolean  = true
   constructor(private route: Router, private _cro:CrosService) { }
 
   ngOnInit(): void {
   this.labDetailsData();
   }
-
+  showLab(){
+    this.lab = true
+    this.material= false
+  }
+  showMat(){
+    this.lab = false
+    this.material= true
+  }
   edit(id:any){
     this.route.navigate(['/home/cro/updateLabTest',id])
   }
-  labCreate(){
+  materialCreate(){
     this.route.navigate(['/home/cro/createLabTest'])
+
+  }
+  labCreate(){
+    this.labFormval = true
+    this.disableAdd = false
 
   }
   labDetailsData(){
@@ -50,6 +70,40 @@ export class LabTestComponent implements OnInit {
           (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
       );
     }
+  }
+  submit() {
+
+    if (this.labForm.invalid) {
+      // Mark all form controls as touched to trigger validation
+      Object.keys(this.labForm.controls).forEach(key => {
+        this.labForm.get(key)?.markAsTouched();
+      });
+      alert('Please Fill All Mandatory Fields')
+    }
+   else {
+
+      const data: any =
+      {
+        "lab_test": this.labForm.get('lab_test')?.value,
+        
+      }
+      console.log(data)
+    
+        this._cro.createTestDetails(data).subscribe(
+          (data: any) => {
+            alert('Test results created successfully');
+            this.route.navigate(['/home/cro/labTestGrid'])
+            this.labFormval = false
+            this.disableAdd = true
+
+          },
+          (err: any) => {
+            alert('internal server err');
+          }
+        );
+      }
+      console.log(this.labForm.value);
+    
   }
   pageChange(event: number) {
     this.page = event;

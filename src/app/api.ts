@@ -1,4 +1,4 @@
-export const api = "http://34.100.227.119:5002/api";
+export const api = "http://34.100.227.119:5001/api";
 
 export const endPointsUser = {
     // Endpoints for UserCreate
@@ -28,12 +28,12 @@ export const endPointsUser = {
     // Endpoints for sponsors
     getLabTest: `${api}/lab_tests`,
     getLabTestById: `${api}/lab_test/`,
-    getLabTestAddUpdate: `${api}/lab_test`
-     
+    getLabTestAddUpdate: `${api}/lab_test`,
 
 
-    
-     
+    // Endpoints for Protocol
+    postProtocol: `${api}/cro_protocol`,
+    croProtocols: `${api}/cro_protocols`,
+
+
 }
-
-

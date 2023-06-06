@@ -5,11 +5,11 @@ import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
 @Component({
-  selector: 'app-kit-verification',
-  templateUrl: './kit-verification.component.html',
-  styleUrls: ['./kit-verification.component.css']
+  selector: 'app-kit-distribution',
+  templateUrl: './kit-distribution.component.html',
+  styleUrls: ['./kit-distribution.component.css']
 })
-export class KitVerificationComponent implements OnInit {
+export class KitDistributionComponent implements OnInit {
   labelid: string='';
   kitId = 3;
   screenid = 4;
@@ -101,8 +101,9 @@ export class KitVerificationComponent implements OnInit {
      ckitId:['c123'],
      kitId: ['5678'],
      prepration:['Completed'],
-     status:[''],
+     status:['Verified'],
      labelId: ['c1lab'],
+     siteId:['']
    
     })
   }
@@ -132,8 +133,9 @@ export class KitVerificationComponent implements OnInit {
       ckitId:['c567'],
      kitId: ['122'],
      prepration:['InProgress'],
-     status:[''],
+     status:['Verified'],
      labelId: ['c2lab'],
+     siteId:['']
    
     })
   }

@@ -6,6 +6,7 @@ import { CROS } from './cros';
 import { Protocol } from './protocol';
 import { Sites } from './sites';
 import { Observable } from 'rxjs';
+import { endPointsUser } from 'src/app/api';
 
 @Injectable(
     { providedIn: 'root', }
@@ -18,23 +19,11 @@ export class ProtocolService {
   protocolList: Protocol[] | undefined ;
   labTestsList: LabTests[] | undefined ;*/
   protocolList: Protocol[] =[];
-    getSponsers(){
-        return  this.http.get("http://34.100.227.119:5001/api/sponsors");
-    }
-
-    getLabTests(){
-        return this.http.get("http://34.100.227.119:5001/api/lab_tests");
-    }
-
-    getCros(){
-        return this.http.get("http://34.100.227.119:5001/api/cros");
-    }
-
-    getSites(){
-        return this.http.get("http://34.100.227.119:5001/api/sites_data");
-    }
 
     postProtocol(data:any):Observable<any>{
-        return this.http.post<Protocol>("http://34.100.227.119:5001/api/cro_protocol",data);
+        return this.http.post(endPointsUser.postProtocol, data)
+    }
+    getProtocol(){
+        return this.http.get(endPointsUser.croProtocols)
     }
  }  
