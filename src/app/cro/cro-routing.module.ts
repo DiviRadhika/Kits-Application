@@ -8,6 +8,7 @@ import { SponsorGridComponent } from './sponsor-grid/sponsor-grid.component';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
 
+
 const routes: Routes = [
  
   {path:'siteGrid', component:SiteComponent},
@@ -23,8 +24,7 @@ const routes: Routes = [
   {path:'csponsorUpdate/:id', component:SponsorComponent},
 
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
-
-
+ 
 
 
 ];

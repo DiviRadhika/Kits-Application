@@ -10,6 +10,7 @@ import { SponsorGridComponent } from './sponsor-grid/sponsor-grid.component';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaterialComponent } from './material/material.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProtocolRegistrationComponent,
     SponsorGridComponent,
     AddSiteComponent,
-    LabCreateComponent
+    LabCreateComponent,
+    MaterialComponent
   ],
   imports: [
     CommonModule,

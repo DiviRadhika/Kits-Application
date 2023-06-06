@@ -34,9 +34,9 @@ export class LabCreateComponent {
         this.id = data.id;
         _cro.getTestDetailsById(data.id).subscribe((data: any) => {
           this.labData = data
-          this.labForm.controls['lab_test'].setValue(this.labData.lab_test)
+          this.labForm.controls['material'].setValue(this.labData.material)
           this.labForm.controls['size'].setValue(this.labData.size)
-          this.labForm.controls['lab_test'].disable()
+          // this.labForm.controls['lab_test'].disable()
           this.editImage = true;
           this.fieldDisplay = false
         });
@@ -45,7 +45,6 @@ export class LabCreateComponent {
     });
   }
   public labForm: FormGroup = new FormGroup({
-    lab_test: new FormControl("", [Validators.required]),
     material: new FormControl("", [Validators.required]),
     size: new FormControl("", [Validators.required]),
     image: new FormControl(''),
@@ -98,7 +97,6 @@ export class LabCreateComponent {
 
       const data: any =
       {
-        "lab_test": this.labForm.get('lab_test')?.value,
         "material": this.labForm.get('material')?.value,
         "size": this.labForm.get('size')?.value,
         "image": this.bas2
@@ -115,7 +113,7 @@ export class LabCreateComponent {
 
         this._cro.updateTestDetails(data).subscribe(
           (data: any) => {
-            alert('Test results updated successfully');
+            alert('Material updated successfully');
             this.route.navigate(['/home/cro/labTestGrid'])
           },
           (err: any) => {
@@ -127,7 +125,7 @@ export class LabCreateComponent {
       else {
         this._cro.createTestDetails(data).subscribe(
           (data: any) => {
-            alert('Test results created successfully');
+            alert('Material created successfully');
             this.route.navigate(['/home/cro/labTestGrid'])
           },
           (err: any) => {

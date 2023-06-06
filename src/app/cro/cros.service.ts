@@ -14,7 +14,7 @@ export class CrosService {
     return this._httpClient.get(endPointsUser.getSponsors)
   }
   getSponsorById(id: any): Observable<any> {
-    return this._httpClient.get(endPointsUser.getSponsorsById)
+    return this._httpClient.get(endPointsUser.getSponsorsById + id)
   }
   CreateSponsorDetails(data: any): Observable<any> {
     return this._httpClient.post(endPointsUser.getSponsorsAddUpdate, data)
@@ -29,7 +29,7 @@ export class CrosService {
     return this._httpClient.get(endPointsUser.getSites)
   }
   getSiteById(id: any): Observable<any> {
-    return this._httpClient.get(endPointsUser.getSiteById)
+    return this._httpClient.get(endPointsUser.getSiteById + id)
   }
   CreateSiteDetails(data: string): Observable<any> {
     return this._httpClient.post(endPointsUser.getSiteAddUpdate, data)
@@ -44,7 +44,7 @@ export class CrosService {
     return this._httpClient.get(endPointsUser.getLabTest)
   }
   getTestDetailsById(id: any): Observable<any> {
-    return this._httpClient.get(endPointsUser.getLabTestById)
+    return this._httpClient.get(endPointsUser.getLabTestById  + id)
   }
   createTestDetails(data: any): Observable<any> {
 
