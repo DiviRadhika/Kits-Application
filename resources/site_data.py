@@ -60,6 +60,8 @@ update_site_data = sites_data_ns.model(
         "extension": fields.String(required=True),
         "mobile_telephone": fields.String(required=True),
         "email": fields.String(required=True),
+        "password": fields.String(required=True),
+        "username": fields.String(required=True),
         "website": fields.String(required=True),
     },
 )

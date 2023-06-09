@@ -233,7 +233,7 @@ class UserRegister(Resource):
             user_data = UserModel.find_by_email(user_json["email"])
             if not user_data:
                 return {"message": "invalid email, user not found"}, 400
-            if user_data.otp != user_json["otp"]:
+            if user_data.user_otp != user_json["otp"]:
                 return {"message": "invalid OTP"}, 400
             if user_data.status == False:
                 return {"message": "user not activated"}, 400
