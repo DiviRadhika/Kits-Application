@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../applicationadmin/admin.service';
 import { Router } from '@angular/router';
+import {  password1 } from 'src/password';
 
 
 @Component({
@@ -12,16 +13,45 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   enableFields: boolean = false;
 
-  constructor(private admin: AdminService, private route: Router) { }
-  public loginForm: FormGroup = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl(),
-    otp: new FormControl(),
-  })
+  constructor(private admin: AdminService, private route: Router, private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
+loginForm!: FormGroup;
+submitted = false;
 
+
+
+ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+        password: ['', Validators.required],
+        otp: [''],
+        npassword: ['', [Validators.required, Validators.minLength(8)]],
+      
+        // npassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+    }, {
+        validators: password1('npassword', 'confirmPassword')
+    });
+}
+reset(){
+  const obj = {
+    email: this.loginForm.controls['username'].value,
+    password: this.loginForm.controls['confirmPassword'].value,
+    otp: "123456"
   }
+  this.admin.reset(obj).subscribe(
+    (data: any) => {
+      this.route.navigate(['/home'])
+      console.log(data)
+      sessionStorage.setItem('role', data.role)
+      sessionStorage.setItem('access_token', data.access_token)
+    },
+    (err: any) => {
+      alert("err")
+    }
+  )
+
+}
   login() {
     const obj = {
       username: this.loginForm.controls['username'].value,

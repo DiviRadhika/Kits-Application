@@ -11,6 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LabTestComponent implements OnInit {
   LabDetails: any[]= [];
   allLabDetails: any;
+  materials: any[]= [];
+  allmaterials: any;
   page = 1;
   totalCount = 0
   pageSize = 10;
@@ -23,10 +25,12 @@ export class LabTestComponent implements OnInit {
   })
   labFormval: boolean = false;
   disableAdd: boolean  = true
+  totalCountmaterial = 0;
   constructor(private route: Router, private _cro:CrosService) { }
 
   ngOnInit(): void {
   this.labDetailsData();
+  this.meterialsData()
   }
   showLab(){
     this.lab = true
@@ -56,6 +60,15 @@ export class LabTestComponent implements OnInit {
       this.totalCount = this.LabDetails.length
     })
   }  
+  meterialsData(){
+    this._cro.meterials().subscribe((data:any)=>{
+       console.log(data)
+       this.materials = data
+       this.allmaterials = data
+       this.totalCountmaterial = this.materials.length
+     })
+   }  
+  
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -84,7 +97,7 @@ export class LabTestComponent implements OnInit {
 
       const data: any =
       {
-        "lab_test": this.labForm.get('lab_test')?.value,
+        "name": this.labForm.get('lab_test')?.value,
         
       }
       console.log(data)
@@ -104,6 +117,13 @@ export class LabTestComponent implements OnInit {
       }
       console.log(this.labForm.value);
     
+  }
+  deletelab(id: any){
+    this._cro.deleteLab(id).subscribe(
+      (data: any) => {
+        console.log(data)
+      });
+
   }
   pageChange(event: number) {
     this.page = event;

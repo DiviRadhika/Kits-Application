@@ -32,9 +32,9 @@ export class LabCreateComponent {
         this.isEdit = true;
         this.imageChanged = true
         this.id = data.id;
-        _cro.getTestDetailsById(data.id).subscribe((data: any) => {
+        _cro.getmeterialById(data.id).subscribe((data: any) => {
           this.labData = data
-          this.labForm.controls['material'].setValue(this.labData.material)
+          this.labForm.controls['material'].setValue(this.labData.name)
           this.labForm.controls['size'].setValue(this.labData.size)
           // this.labForm.controls['lab_test'].disable()
           this.editImage = true;
@@ -97,21 +97,23 @@ export class LabCreateComponent {
 
       const data: any =
       {
-        "material": this.labForm.get('material')?.value,
+        "name": this.labForm.get('material')?.value,
         "size": this.labForm.get('size')?.value,
-        "image": this.bas2
       }
-      console.log(data)
+     
       if (this.isEdit) {
         if (this.imageChanged == true) {
-          data.image = this.labData.email
+          data.image = this.labData.image
         }
         else {
-
+          data.image = this.bas2
         }
-        data.lab_test_id = this.id
-
-        this._cro.updateTestDetails(data).subscribe(
+        // data.material_id = this.id
+     console.log(this.id);
+     console.log(this.labData.image);
+     console.log(data)
+     
+        this._cro.updateMaterialDetails(this.id, data).subscribe(
           (data: any) => {
             alert('Material updated successfully');
             this.route.navigate(['/home/cro/labTestGrid'])
@@ -123,7 +125,7 @@ export class LabCreateComponent {
 
       }
       else {
-        this._cro.createTestDetails(data).subscribe(
+        this._cro.createMaterialDetails(data).subscribe(
           (data: any) => {
             alert('Material created successfully');
             this.route.navigate(['/home/cro/labTestGrid'])

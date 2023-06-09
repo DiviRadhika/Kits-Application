@@ -91,15 +91,15 @@
 
                           <tbody>
                             <tr class="odd"
-                              *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                              *ngFor="let labData of materials  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountmaterial }; let i=index">
                               <!-- <td class="sorting_1 dtr-control">{{labData.lab_test}}</td> -->
-                              <td>{{labData.material}}</td>
+                              <td>{{labData.name}}</td>
                               <td>{{labData.size}}</td>
                               <td>
                                 <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
                               </td>
                               <td>
-                                <button type="button" (click)="edit(labData.lab_id)"
+                                <button type="button" (click)="edit(labData.meterial_id)"
                                   class="btn btn-success waves-effect edit-btn waves-light">
                                   <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                                   Edit
@@ -191,17 +191,7 @@
                                 style="width: 243.2px;" aria-sort="ascending"
                                 aria-label="Lab Test: activate to sort column descending">Lab Test</th>
                              <th  width="20%" >Delete</th>
-                              <!-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                  style="width: 335.2px;" aria-label="Material: activate to sort column ascending">Material
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                  style="width: 282.2px;" aria-label="Size: activate to sort column ascending">
-                                  Size</th>
-                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                  style="width: 282.2px;" aria-label="Image: activate to sort column ascending">
-                                  Image</th>
-                                <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                  style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th> -->
+                             
                             </tr>
 
                           </thead>
@@ -216,24 +206,14 @@
                               
                              </td> -->
                              <td class="sorting_1 dtr-control">{{labData.lab_id}}</td>
-                              <td class="sorting_1 dtr-control">{{labData.lab_test}}</td>
+                              <td class="sorting_1 dtr-control">{{labData.name}}</td>
                              <td>
-                              <button type="button" 
-                                class="btn btn-danger ml-3 mt-2">Delete</button>
-                              <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
+                              <button type="button" (click)="deletelab(labData.lab_id)"
+                                class="btn btn-danger ml-3 mt-2" >Delete</button>
+
                             </td>
-                              <!-- <td>{{labData.material}}</td>
-                          <td>{{labData.size}}</td>
-                          <td>
-                            <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
-                          </td> -->
-                              <!-- <td>
-                                <button type="button" (click)="edit(labData.lab_id)"
-                                  class="btn btn-success waves-effect edit-btn waves-light">
-                                  <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                                  Edit
-                                </button>
-                              </td> -->
+
+          
                             </tr>
                           </tbody>
                         </table>
@@ -247,12 +227,9 @@
                 </div>
               </div>
 
-              <!-- end col -->
-            </div> <!-- end row -->
+            </div>
           </div>
-          <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
       </div>
 
         <footer class="footer">

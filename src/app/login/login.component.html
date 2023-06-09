@@ -82,13 +82,22 @@
         </div> 
         <div class="modal-body">
           <div class="row">
+            
             <div class="col-md-12">
               <div class="mb-3 text-center">
                <label>
-                Enter Password
+                 New Password
                </label>
-                <input type="text" formControlName="password" class="form-control text-center mb-3" id="" placeholder="Passowrd">
-                <!-- <span class="text-danger"> OTP Sent to Registerd Mail ID</span> -->
+                <input type="text" formControlName="npassword" class="form-control text-center mb-3" id="" placeholder="Passowrd" required minlength="6">
+                <div *ngIf="loginForm.get('npassword')?.touched && loginForm.get('npassword')?.hasError('required')" class="text-danger">
+                  Password is required
+                </div>
+                <div *ngIf="loginForm.get('npassword')?.touched && loginForm.get('npassword')?.hasError('minlength')" class="text-danger">
+                  Password should contain a minimum of 8 characters
+                </div>
+                <!-- <div *ngIf="loginForm.get('npassword')?.touched && loginForm.get('npassword')?.hasError('pattern')" class="text-danger">
+                  Password should include at least one lowercase letter, one uppercase letter, one digit, and one special character
+                </div> -->
               </div>
             </div>
             <div class="col-md-12">
@@ -96,14 +105,16 @@
                <label>
                 Confirm Password
                </label>
-                <input type="text" formControlName="password" class="form-control text-center mb-3" id="" placeholder="Passowrd">
-                <!-- <span class="text-danger"> OTP Sent to Registerd Mail ID</span> -->
+                <input type="text" formControlName="confirmPassword" class="form-control text-center mb-3" id="" placeholder="Passowrd">
+                <div *ngIf="loginForm.get('confirmPassword')?.hasError('password1')" class="text-danger">
+                  Password and Confirm Password Should Match
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" data-bs-dismiss="modal"  class="btn btn-primary w-md">Submit</button>
+          <button type="submit" data-bs-dismiss="modal" (click)="reset()" class="btn btn-primary w-md">Submit</button>
         </div>
       </div>
     </div>
