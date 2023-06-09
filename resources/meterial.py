@@ -21,8 +21,8 @@ meterial_test = meterial_ns.model(
     "meterial",
     {
         "name": fields.String(required=True),
-        "size": fields.String(required=True),
         "image": fields.String(required=True),
+        "size": fields.List(fields.String(required=True)),
     },
 )
 
