@@ -53,7 +53,23 @@ export class CrosService {
   updateTestDetails(data: any): Observable<any> {
     return this._httpClient.put(endPointsUser.getLabTestAddUpdate, data)
   }
-  
+  deleteLab(id: any): Observable<any> {
+    return this._httpClient.delete(endPointsUser.getLabTestById  + id)
+  }
+
+  // Services for meterials
+  meterials(): Observable<any> {
+    return this._httpClient.get(endPointsUser.meterials)
+  }
+  createMaterialDetails(data: any): Observable<any> {
+    return this._httpClient.post(endPointsUser.materialAddUpdate, data)
+  }
+  updateMaterialDetails(id:any,data: any): Observable<any> {
+    return this._httpClient.put(endPointsUser.materialAddUpdate + '/' +id, data)
+  }
+  getmeterialById(id: any): Observable<any> {
+    return this._httpClient.get(endPointsUser.getmeterialById +id)
+  }
   
 }
 

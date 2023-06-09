@@ -21,7 +21,7 @@ export class ProtocolRegistrationComponent {
   listTabs: string[]=[];
   tabnum: number = 0;
   matList: any;
-  materialList: FormArray[] = [];
+  // MaterialList: FormArray = new FormArray([])
   constructor(private protocolService: ProtocolService, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
   sponsers: Array<any> = [];
   crosList: Array<any> = [];
@@ -162,12 +162,12 @@ export class ProtocolRegistrationComponent {
   for (let i = 1; i <= value.data; i++)
    { this.listItems.push(`Item ${i}`); 
   
-
+   this.addScreenmKitData()
   } 
   // this.tabs.push('M' + (this.tabs.length + 1));
   // this.tab.push(this.createGroup());
   // this.materialList.push(this.addScreenmKitData())
-  materialList: this.formBuilder.array([this.addScreenmKitData()])
+
 } 
   
   onMaterialKitAdd() {

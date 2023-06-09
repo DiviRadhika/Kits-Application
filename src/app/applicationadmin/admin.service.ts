@@ -50,6 +50,10 @@ headers = new HttpHeaders({
   otp(data: any): Observable<any> {
     return this._httpClient.post(endPointsUser.sendotp, data)
   }
+  reset(data: any): Observable<any> {
+    return this._httpClient.put(endPointsUser.reset, data)
+  }
+
 
   //country
   country(){

@@ -14,22 +14,27 @@ export const endPointsUser = {
     // Endpoints for  Login 
     login: `${api}/login`,
     sendotp: `${api}/login/sendotp`,
+    reset:`${api}/user/register`,
 
     // Endpoints for sponsors
     getSponsors: `${api}/sponsors`,
     getSponsorsById: `${api}/sponsor/`,
     getSponsorsAddUpdate: `${api}/sponsor`,
 
-    // Endpoints for sponsors
+    // Endpoints for Site
     getSites: `${api}/sites_data`,
     getSiteById: `${api}/site_data/`,
     getSiteAddUpdate: `${api}/site_data`,
 
-    // Endpoints for sponsors
+    // Endpoints for Lab Test
     getLabTest: `${api}/lab_tests`,
     getLabTestById: `${api}/lab_test/`,
     getLabTestAddUpdate: `${api}/lab_test`,
 
+   // Endpoints for Material
+   meterials: `${api}/meterials`,
+   materialAddUpdate:  `${api}/meterial`,
+   getmeterialById: `${api}/meterial/`,
 
     // Endpoints for Protocol
     postProtocol: `${api}/cro_protocol`,
