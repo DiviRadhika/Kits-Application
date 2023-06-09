@@ -56,20 +56,25 @@ cro_protocol = cro_protocols_ns.model(
     "cro_protocol",
     {
         "protocol_id": fields.String(required=True),
+        "protocol_name": fields.String(required=True),
         "sponsor_id": fields.String(required=True),
         "cro_id": fields.String(required=True),
-        "no_of_sites": fields.Integer(required=True),
+        "no_of_visits": fields.Integer(required=True),
+        "no_of_screens": fields.Integer(required=True),
         "total_patients": fields.Integer(required=True),
-        "site_data": fields.List(fields.Nested(site_data)),
         "screening_kit_count": fields.Integer(required=True),
         "screening_kit_lab_test_details": fields.List(
             fields.Nested(lab_test_data_fields)
         ),
         "visit_kit_count": fields.Integer(required=True),
-        "visit_kit_type": fields.String(required=True),
+       # "visit_kit_type": fields.String(required=True),
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
 )
+
+'''
+create, get
+'''
 
 
 class CrosProtocolsList(Resource):

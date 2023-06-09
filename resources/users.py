@@ -42,6 +42,7 @@ creation = login_ns.model(
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
         "role": fields.String(title="Role", required=True),
+        "status": fields.Boolean(title="Status", required=True),
     },
 )
 

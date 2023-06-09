@@ -20,10 +20,7 @@ lab_tests_schema = LabtestSchema(many=True)
 lab_test = lab_tests_ns.model(
     "lab_test",
     {
-        "lab_test": fields.String(required=True),
-        "material": fields.String(required=True),
-        "size": fields.String(required=True),
-        "image": fields.String(required=True),
+        "name": fields.String(required=True)
     },
 )
 
@@ -38,57 +35,41 @@ update_lab_test = lab_tests_ns.model(
     },
 )
 
+'''
+lab_test takes only name and delete api
+
+meterial api  ...name, size, image  create, update , get
+
+'''
 
 class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
-    @jwt_required(fresh=True)
+    #@jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (lab_tests_schema.dump(LabtestModel.find_all()), 200)
 
 
 class LabActionsById(Resource):
-    @lab_test_ns.doc("get by id")
-    @jwt_required(fresh=True)
-    def get(self, lab_test_id):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
+    @lab_tests_ns.doc("delete lab test by id")
+    def delete(self, lab_test_id):
         try:
-            data = LabtestModel.get_by_id(lab_test_id)
-            if not data:
-                return {"message": "lab test data not found"}, 400
-            return (lab_test_schema.dump(data), 200)
+            lab_test_data = LabtestModel.get_by_id(lab_test_id)
+            if lab_test_data:
+                lab_test_data.delete_from_db()
+            else:
+                return {"message": "deletion failed, lab_test not found"}, 400
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to get the data"}, 500
+            return {"message": "deletion failed, internal server error"}, 500
+
+        return {"message": "lab test deleted successfully"}, 200
+    
 
 
 class Labtest(Resource):
     @lab_test_ns.expect(lab_test)
     @lab_test_ns.doc("Create a lab_test")
-    @jwt_required(fresh=True)
     def post(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         lab_test_json = request.get_json()
         try:
             lab_test_data = lab_test_schema.load(lab_test_json)
@@ -98,7 +79,7 @@ class Labtest(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    @lab_test_ns.expect(update_lab_test)
+    '''@lab_test_ns.expect(update_lab_test)
     @lab_test_ns.doc("Update a lab test")
     @jwt_required(fresh=True)
     def put(self):
@@ -122,4 +103,4 @@ class Labtest(Resource):
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to update data {}".format(str(e))}, 500
-        return {"data": [], "message": "updated lab test data successfully"}, 201
+        return {"data": [], "message": "updated lab test data successfully"}, 201'''

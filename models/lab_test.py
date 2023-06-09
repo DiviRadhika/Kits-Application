@@ -8,12 +8,12 @@ class LabtestModel(db.Model):
     __tablename__ = "lab_test"
     # extend_existing=True
     lab_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
-    lab_code = db.Column(db.String)
-    lab_test = db.Column(db.String)
+    name = db.Column(db.String)
+    '''lab_test = db.Column(db.String)
     material = db.Column(db.String)
     size = db.Column(db.String)
     image = db.Column(db.String)
-    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
+    user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))'''
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)
@@ -29,4 +29,8 @@ class LabtestModel(db.Model):
 
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
