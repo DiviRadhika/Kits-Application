@@ -186,11 +186,11 @@
                           role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                           <thead>
                             <tr role="row">
-                              <th width="30%">S.No</th>
-                              <th width="65%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              <th width="50%">Lab Test Id</th>
+                              <th width="50%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                 style="width: 243.2px;" aria-sort="ascending"
                                 aria-label="Lab Test: activate to sort column descending">Lab Test</th>
-                             <th  width="10%" >Delete</th>
+                             <th  width="20%" >Delete</th>
                               <!-- <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                   style="width: 335.2px;" aria-label="Material: activate to sort column ascending">Material
                                 </th>
@@ -211,9 +211,12 @@
 
                             <tr class="odd"
                               *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
-                             <td>
+                             <!-- <td>
                               {{i+1}}
-                             </td> <td class="sorting_1 dtr-control">{{labData.lab_test}}</td>
+                              
+                             </td> -->
+                             <td class="sorting_1 dtr-control">{{labData.lab_id}}</td>
+                              <td class="sorting_1 dtr-control">{{labData.lab_test}}</td>
                              <td>
                               <button type="button" 
                                 class="btn btn-danger ml-3 mt-2">Delete</button>

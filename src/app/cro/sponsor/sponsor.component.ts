@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { log } from 'console';
 import { SponsorService } from 'src/app/sponsor/sponsor.service';
 import { CrosService } from '../cros.service';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 
 @Component({
   selector: 'app-sponsor',
@@ -13,6 +14,7 @@ import { CrosService } from '../cros.service';
 export class SponsorComponent implements OnInit {
   public isEdit: boolean = false;
   public id: any = '';
+  myData: { text: any; value: any; }[]= [];
 
 
   
@@ -21,6 +23,7 @@ export class SponsorComponent implements OnInit {
     private route: Router,
     private _cro:CrosService,
     private _activatedRoute: ActivatedRoute,
+    private admin: AdminService
    ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -28,6 +31,11 @@ export class SponsorComponent implements OnInit {
         this.id = data.id;
         _cro.getSponsorById(data.id).subscribe((data: any) => {
           this.sponsorForm.patchValue(data);
+          console.log(data.country)
+console.log(this.sponsorForm.controls['country'].setValue(data.country))
+console.log(this.sponsorForm.controls['country'].setValue(data.country.value))
+          this.sponsorForm.controls['country'].setValue(data.country)
+          this.sponsorForm.controls['country'].setValue(data.country)
           this.sponsorForm.controls['sponsor_code'].disable()
           this.sponsorForm.controls['sponsor_name'].disable()
           this.sponsorForm.controls['legal_sponsor_name'].disable()
@@ -37,7 +45,10 @@ export class SponsorComponent implements OnInit {
     });
   }
 ngOnInit(): void {
-  
+  this.admin.country().subscribe((resp: any) => {
+    this.myData = resp;
+   
+}); 
 }
   shouldShowRequired(controlName: string): boolean {
     const control = this.sponsorForm.get(controlName);
@@ -70,28 +81,11 @@ ngOnInit(): void {
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
     country: new FormControl("", [Validators.required]),
-     office_telephone: new FormControl(""),
-   extension: new FormControl(""),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      this.emailDomainValidator.bind(this)
-    ]),
-
-
-    website: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-
-      Validators.pattern(
-        /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-      ) // Regular expression pattern for URL validation
-    ]),
-
-    mobile_telephone: new FormControl('', [
-      Validators.required,
-      Validators.pattern('[0-9]{10}')
-    ]),
+    office_telephone: new FormControl(""),
+    extension: new FormControl(""),
+    email: new FormControl(''),
+    website:new FormControl(''),
+    mobile_telephone:new FormControl(''),
   });
 
   submit() {
@@ -124,6 +118,7 @@ ngOnInit(): void {
        "email": this.sponsorForm.controls['email'].value,
        "website": "string"
      }
+     console.log(obj)
      
      if (this.isEdit) {
       obj.sponsor_id = this.id

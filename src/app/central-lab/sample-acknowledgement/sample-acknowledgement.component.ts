@@ -11,6 +11,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   labelid: string='';
   kitId = 5;
   screenid = 4;
+
   constructor(private protocolService: ProtocolService, private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
@@ -22,7 +23,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  statusData =['Collected', 'Not Collected']
+  statusData =['Pending', 'Recieved']
 
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -101,7 +102,8 @@ export class SampleAcknowledgementComponent implements OnInit {
       cKitId:['c123'],
       patientId:['p123'],
       collected:['collected'],
-      remarks:['']
+      remarks:[''],
+      acknowldgement:[''],
     })
   }
   addVisitKitData() {
@@ -111,10 +113,34 @@ export class SampleAcknowledgementComponent implements OnInit {
       cKitId:['c123'],
       patientId:['p123'],
       collected:['collected'],
-      remarks:['']
+      remarks:[''],
+      acknowldgement:[''],
    
     })
   }
+  // For getting data of uploadded file and convering into base64
+  uploadFile(evt: any) {
+    this.files1 = evt.target.files;
+    const file = this.files1[0];
+    this.file2 = this.files1[0].name;
+    const fileSize = this.files1[0].size;
+    if (fileSize >= 1084) {
+    }
+    if (this.files1 && file) {
+      const reader = new FileReader();
+      reader.onload = this._handleReaderLoaded1.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded1(readerEvt: any) {
+    const binaryString = readerEvt.target.result;
+    this.base64textString = btoa(binaryString);
+    this.bas2 = 'data:text/html;base64,' + this.base64textString;
+    this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
+    console.log(this.bas2);
+  }
+
 
   showsc(){
     this.screening = true;

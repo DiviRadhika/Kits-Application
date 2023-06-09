@@ -49,7 +49,7 @@
                   </div>
 
                   <div class="mt-4 text-center">
-                    <a href="#" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your
+                    <a href="#" class="text-muted"  data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i class="mdi mdi-lock me-1"></i> Forgot your
                       password?</a>
                   </div>
                 </form>
@@ -69,32 +69,44 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="modal fade transaction-detailModal" tabindex="-1" role="dialog"
+  <!-- <button type="button" *ngIf="!enableFields"  (click)="otp()"  class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+  data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+    class="bx bx-lock label-icon"></i> Send OTP</button> -->
+  <div class="modal fade transaction-detailModal" tabindex="-1" role="dialog"
     aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="transaction-detailModalLabel">Enter OTP & Password</h5>
+          <h5 class="modal-title" id="transaction-detailModalLabel">Reset Password</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> 
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
               <div class="mb-3 text-center">
-
-               
+               <label>
+                Enter Password
+               </label>
                 <input type="text" formControlName="password" class="form-control text-center mb-3" id="" placeholder="Passowrd">
-                <span class="text-danger"> OTP Sent to Registerd Mail ID</span>
+                <!-- <span class="text-danger"> OTP Sent to Registerd Mail ID</span> -->
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="mb-3 text-center">
+               <label>
+                Confirm Password
+               </label>
+                <input type="text" formControlName="password" class="form-control text-center mb-3" id="" placeholder="Passowrd">
+                <!-- <span class="text-danger"> OTP Sent to Registerd Mail ID</span> -->
               </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" data-bs-dismiss="modal" (click)="login()" class="btn btn-primary w-md">Verify</button>
+          <button type="submit" data-bs-dismiss="modal"  class="btn btn-primary w-md">Submit</button>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </form>
 </body>

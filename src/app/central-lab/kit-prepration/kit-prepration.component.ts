@@ -10,7 +10,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration.component.css']
 })
 export class KitPreprationComponent implements OnInit {
-  labelid: string='';
+ 
   kitId = 3;
   screenid = 4;
   constructor(private protocolService: ProtocolService,private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
@@ -24,7 +24,7 @@ export class KitPreprationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData =['InProgress', 'Complete']
+  preprationData =['InProgress', 'Completed']
 
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -168,9 +168,7 @@ export class KitPreprationComponent implements OnInit {
     });
     console.log(this.sites);
   }
-  generateId(){
-    this.labelid = '123445'
-  }
+
   SubmitData() {
     console.log(this.selected_protocol_id);
     // console.log(this.selected_sponsor_id);

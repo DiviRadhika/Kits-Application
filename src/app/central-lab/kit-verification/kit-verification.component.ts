@@ -24,7 +24,7 @@ export class KitVerificationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  statusData =['Verified', 'Not Verified']
+  statusData =['Not Verified','Verified']
 
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -112,7 +112,7 @@ export class KitVerificationComponent implements OnInit {
      kitId: ['5678'],
      prepration:['Completed'],
      status:[''],
-     labelId: ['c1lab'],
+    
    
     })
   }
@@ -140,7 +140,7 @@ export class KitVerificationComponent implements OnInit {
      kitId: ['122'],
      prepration:['InProgress'],
      status:[''],
-     labelId: ['c2lab'],
+   
    
     })
   }

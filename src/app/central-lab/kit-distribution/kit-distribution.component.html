@@ -76,11 +76,12 @@
                                 <div class="tab-content pt-3 text-muted">
                                     <div class="tab-pane active" *ngIf="screening" id="screening" role="tabpanel">
                                         <h5 class="mb-sm-0 font-size-18">
-                                            Kit Count : {{screenid}}
+                                           Total No.of Kits: {{screenid}},&nbsp; Prepared Kits: {{screenid}},&nbsp; 
+                                            Pending Kits: {{screenid}}, &nbsp;Verified Kits: {{screenid}}
                                         </h5>
                                         <br>
                                         <div class="row">
-                                            <div class="col-md-4 mb-3">
+                                            <div class="col-md-12 mb-3">
                                                 <div class="table-responsive">
 
                                                     <table class="table table-striped mb-0">
@@ -111,8 +112,25 @@
                                                     </table>
                                                 </div>
                                             </div>
+                                            <h5 class="mb-sm-0 font-size-18">
+                                                Materials
+                                            </h5>
+                                            <hr />
+                                            <div class="row card-group">
+                                                <div class="col-md-3 mb-3" *ngFor="let item of labTestsList">
+                                                    <div class="card" style="background-color: lightgray;
+                                                    height: 189px;
+                                                    width: 79%">
+                                                        <img style="width:180px"
+                                                            src="{{'data:image/jpg;base64,' + item.image}}" />
+                                                        Material:{{item.material}} <br>
+                                                        size:{{item.size}}
 
-                                            <div class="col-md-8 mb-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-12 mb-3">
                                                 <div class="table-responsive">
 
                                                     <table class="table table-striped mb-0">
@@ -158,7 +176,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                         </div>
 
@@ -169,12 +187,13 @@
                                             <table class="table table-striped mb-0" formArrayName="screenKitList">
                                                 <thead Style="background:#EEE">
                                                     <tr>
-                                                        <th>CKitId</th>
                                                         <th>KitId</th>
+                                                        <th>Lab KitId</th>
+                                                      
                                                         <th>Prepration</th>
                                                         <th>Label Id</th>
                                                         <th>Status</th>
-                                                        <th>Site ID</th>
+                                                        <th width="20%">Site ID</th>
                                                         <th>Print</th>
                                                        
                                                     </tr>
@@ -186,17 +205,17 @@
                                 let item of ScreenKitForm.get('screenKitList')
                                   .controls;
                                 let i = index
-                              ">
+                              ">  <td>
+                                <input type="text" placeholder="kitId"
+                                    formControlName="kitId" class="form-control" value="" />
+                            </td>
 
                                                         <td>
-                                                            <input type="text" placeholder="ckitId"
+                                                            <input type="text" placeholder="Lab kitId"
                                                                 formControlName="ckitId" class="form-control"
                                                                 value="" />
                                                         </td>
-                                                        <td>
-                                                            <input type="text" placeholder="kitId"
-                                                                formControlName="kitId" class="form-control" value="" />
-                                                        </td>
+                                                      
                                                         <td>
                                                             <input type="text" placeholder="prepration"
                                                                 formControlName="prepration" class="form-control"
@@ -215,9 +234,12 @@
                             
                                                         </td>
                                                         <td>
-                                                            <input type="text" placeholder="site Id"
-                                                                formControlName="siteId" class="form-control"
-                                                                value="" />
+                                                            <select class="form-select form-control"  formControlName="siteId">
+                                                                <option *ngFor="let data of sponsers">
+                                                                    {{ data.site_data_name + '/' +data.site_id }}
+                                                                </option>
+                                                            </select>
+                                                          
                             
                                                         </td>
                                                         <td >
@@ -238,11 +260,13 @@
                                 </div>
                                 <div class="tab-pane" *ngIf="visit" id="visit" role="tabpanel">
                                     <h5 class="mb-sm-0 font-size-18">
-                                        Kit Count : {{kitId}}
+                                     
+                                    Total No.of Kits: {{kitId}},&nbsp; Prepared Kits: {{screenid}},
+                                        &nbsp; Pending Kits: {{screenid}}, &nbsp; Verified Kits: {{screenid}}
                                     </h5>
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-12 mb-3">
                                             <div class="table-responsive">
 
                                                 <table class="table table-striped mb-0">
@@ -273,7 +297,25 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-md-8 mb-3">
+                                        <h5 class="mb-sm-0 font-size-18">
+                                            Materials
+                                        </h5>
+                                        <hr />
+                                        <div class="row card-group">
+                                            <div class="col-md-3 mb-3" *ngFor="let item of labTestsList">
+                                                <div class="card" style="background-color: lightgray;
+                                                height: 189px;
+                                                width: 79%">
+                                                    <img style="width:180px"
+                                                        src="{{'data:image/jpg;base64,' + item.image}}" />
+                                                    Material:{{item.material}} <br>
+                                                    size:{{item.size}}
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-12 mb-3">
                                             <div class="table-responsive">
 
                                                 <table class="table table-striped mb-0">
@@ -319,7 +361,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                     </div>
 
@@ -332,12 +374,13 @@
                                         <table class="table table-striped mb-0" formArrayName="visitKitList">
                                             <thead Style="background:#EEE">
                                                 <tr>
-                                                    <th>CKitId</th>
                                                     <th>KitId</th>
+                                                    <th>Lab KitId</th>
+                                                  
                                                     <th>Prepration</th>
                                                     <th>Label Id</th>
                                                         <th>Status</th>
-                                                        <th>Site ID</th>
+                                                        <th width="20%">Site ID</th>
                                                         <th>Print</th>
 
 
@@ -351,15 +394,15 @@
                                   .controls;
                                 let i = index
                               ">
-
+                              <td>
+                                <input type="text" placeholder="kitId" formControlName="kitId"
+                                    class="form-control" value="" />
+                            </td>
                                                     <td>
-                                                        <input type="text" placeholder="ckitId" formControlName="ckitId"
+                                                        <input type="text" placeholder="Lab kitId" formControlName="ckitId"
                                                             class="form-control" value="" />
                                                     </td>
-                                                    <td>
-                                                        <input type="text" placeholder="kitId" formControlName="kitId"
-                                                            class="form-control" value="" />
-                                                    </td>
+                                                 
                                                     <td>
                                                         <input type="text" placeholder="prepration"
                                                             formControlName="prepration" class="form-control"
@@ -377,12 +420,11 @@
                                                             value="" />
                         
                                                     </td>
-                                                    <td>
-                                                        <input type="text" placeholder="site Id"
-                                                            formControlName="siteId" class="form-control"
-                                                            value="" />
-                        
-                                                    </td>
+                                                    <select class="form-select form-control"  formControlName="siteId">
+                                                        <option *ngFor="let data of sponsers">
+                                                            {{ data.site_data_name }}
+                                                        </option>
+                                                    </select>
                                                  
                                                     <td >
                                                         <button type="button"

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { endPointsUser } from '../api';
+import { endPointsUser, country } from '../api';
 @Injectable({
   providedIn: 'root'
 })
@@ -49,5 +49,10 @@ headers = new HttpHeaders({
   }
   otp(data: any): Observable<any> {
     return this._httpClient.post(endPointsUser.sendotp, data)
+  }
+
+  //country
+  country(){
+    return this._httpClient.get(country)
   }
 }
