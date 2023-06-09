@@ -19,9 +19,7 @@ lab_tests_schema = LabtestSchema(many=True)
 
 lab_test = lab_tests_ns.model(
     "lab_test",
-    {
-        "name": fields.String(required=True)
-    },
+    {"name": fields.String(required=True)},
 )
 
 update_lab_test = lab_tests_ns.model(
@@ -35,16 +33,17 @@ update_lab_test = lab_tests_ns.model(
     },
 )
 
-'''
+"""
 lab_test takes only name and delete api
 
 meterial api  ...name, size, image  create, update , get
 
-'''
+"""
+
 
 class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
-    #@jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def get(self):
         return (lab_tests_schema.dump(LabtestModel.find_all()), 200)
 
@@ -63,7 +62,6 @@ class LabActionsById(Resource):
             return {"message": "deletion failed, internal server error"}, 500
 
         return {"message": "lab test deleted successfully"}, 200
-    
 
 
 class Labtest(Resource):
@@ -79,7 +77,7 @@ class Labtest(Resource):
             return {"error": "failed to save data"}, 500
         return {"data": [], "message": "success"}, 201
 
-    '''@lab_test_ns.expect(update_lab_test)
+    """@lab_test_ns.expect(update_lab_test)
     @lab_test_ns.doc("Update a lab test")
     @jwt_required(fresh=True)
     def put(self):
@@ -103,4 +101,4 @@ class Labtest(Resource):
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to update data {}".format(str(e))}, 500
-        return {"data": [], "message": "updated lab test data successfully"}, 201'''
+        return {"data": [], "message": "updated lab test data successfully"}, 201"""

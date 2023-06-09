@@ -67,14 +67,14 @@ cro_protocol = cro_protocols_ns.model(
             fields.Nested(lab_test_data_fields)
         ),
         "visit_kit_count": fields.Integer(required=True),
-       # "visit_kit_type": fields.String(required=True),
+        # "visit_kit_type": fields.String(required=True),
         "visit_kit_details": fields.List(fields.Nested(data_fields)),
     },
 )
 
-'''
+"""
 create, get
-'''
+"""
 
 
 class CrosProtocolsList(Resource):

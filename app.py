@@ -32,6 +32,14 @@ from resources.lab_test import (
     lab_tests_ns,
     LabActionsById,
 )
+
+from resources.meterial import (
+    meterial_ns,
+    meterials_ns,
+    Meterial,
+    MeterialsList,
+    MeterialActionsById,
+)
 from resources.cro_protocol import (
     CroProtocol,
     CrosProtocolsList,
@@ -162,6 +170,8 @@ api.add_namespace(clab_kit_preparations_ns)
 api.add_namespace(clab_kit_preparation_ns)
 api.add_namespace(user_ns)
 api.add_namespace(users_ns)
+api.add_namespace(meterials_ns)
+api.add_namespace(meterial_ns)
 
 
 # cors = flask_cors.CORS()
@@ -204,6 +214,9 @@ login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
 users_ns.add_resource(UserList, "/<string:user_id>")
 cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
+meterial_ns.add_resource(Meterial, "")
+meterials_ns.add_resource(MeterialsList, "")
+meterial_ns.add_resource(MeterialActionsById, "/<string:meterial_id>")
 
 
 if __name__ == "__main__":
