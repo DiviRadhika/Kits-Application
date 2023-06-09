@@ -11,8 +11,8 @@ import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialComponent } from './material/material.component';
-
-
+import {PickListModule} from 'primeng/picklist';
+import {ChipsModule} from 'primeng/chips';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -29,7 +29,9 @@ import { MaterialComponent } from './material/material.component';
     CRORoutingModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    PickListModule,
+    ChipsModule
   ]
 })
 export class CROModule { }

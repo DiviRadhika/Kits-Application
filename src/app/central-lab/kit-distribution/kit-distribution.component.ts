@@ -26,7 +26,7 @@ export class KitDistributionComponent implements OnInit {
   public base64textString: string = '';
   public bas2: string = '';
   statusData =['Verified', 'Not Verified']
-
+  sponsers: Array<any> = [];
   /* nmModel Variables */
   selected_protocol_id: any;
   // selected_sponsor_id: any;
@@ -47,6 +47,10 @@ export class KitDistributionComponent implements OnInit {
   customerFormGroup:any;
 
   ngOnInit() {
+    this.croService.getSites().subscribe((sites) => {
+      this.sponsersData(sites);
+    });
+
     this.protocolService.getProtocol().subscribe((protocols) => {
       this.ProtoData(protocols);
     });
@@ -86,6 +90,12 @@ export class KitDistributionComponent implements OnInit {
 
   }
 
+  sponsersData(sponsers:any) {
+    sponsers.forEach((sponser: any) => {
+      this.sponsers.push(sponser);
+    });
+    console.log(this.sponsers)
+  }
 
   addScreenKit() {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData());

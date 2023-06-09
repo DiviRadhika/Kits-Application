@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ValidationErrors, Form, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-crocreate',
@@ -9,12 +10,13 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./crocreate.component.css']
 })
 export class CROcreateComponent implements OnInit {
+  myData: any;
 
   public isEdit: boolean = false;
   public id: any = '';
   getcroData: any;
   constructor(private admin: AdminService,
-    private _activatedRoute: ActivatedRoute, private router: Router
+    private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -32,6 +34,16 @@ export class CROcreateComponent implements OnInit {
 
       }
     });
+    this.admin.country().subscribe((resp: any) => {
+      console.log(resp)
+      const countries = [];
+      for (let i = 0; i < resp.length; ++i) {
+          const country = resp[i];
+          countries.push({ text: country.text, value: country.value });
+      }
+      this.myData = countries;
+      console.log(countries)
+  });
   }
 
   public CroForm: FormGroup = new FormGroup({
@@ -39,7 +51,7 @@ export class CROcreateComponent implements OnInit {
     cro_name: new FormControl("", [Validators.required]),
     legal_cro_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
-    address_2: new FormControl("", [Validators.required]),
+    address_2: new FormControl(""),
     address_3: new FormControl("",),
     address_4: new FormControl(""),
     city: new FormControl("", [Validators.required]),
@@ -49,25 +61,25 @@ export class CROcreateComponent implements OnInit {
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      this.emailDomainValidator.bind(this)
-    ]),
+    email: new FormControl(''),
+    website:new FormControl(''),
+    mobile_telephone:new FormControl(''),
+      // Validators.required,
+      // Validators.email,
+      // this.emailDomainValidator.bind(this)
 
+    // website: new FormControl('', [
+    //   Validators.required,
+    //   Validators.minLength(3),
+    //   Validators.pattern(
+    //     /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+    //   ) // Regular expression pattern for URL validation
+    // ]),
 
-    website: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern(
-        /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-      ) // Regular expression pattern for URL validation
-    ]),
-
-    mobile_telephone: new FormControl('', [
-      Validators.required,
-      Validators.pattern('[0-9]{10}')
-    ]),
+    // mobile_telephone: new FormControl('', [
+    //   Validators.required,
+    //   Validators.pattern('[0-9]{10}')
+    // ]),
   });
 
   emailDomainValidator(control: FormControl): ValidationErrors | null {
@@ -82,9 +94,11 @@ export class CROcreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+   
 
   }
+
+
   shouldShowRequired(controlName: string): boolean {
     const control = this.CroForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;

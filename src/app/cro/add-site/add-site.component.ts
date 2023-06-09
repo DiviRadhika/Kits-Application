@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrosService } from '../cros.service';
 import { FormBuilder, FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 
 @Component({
   selector: 'app-add-site',
@@ -13,8 +14,9 @@ export class AddSiteComponent  {
   public isEdit: boolean = false;
   public id: any = '';
   getData: any;
+  myData: { text: any; value: any; }[]= [];
   constructor(private _cro: CrosService,
-    private _activatedRoute: ActivatedRoute,
+    private _activatedRoute: ActivatedRoute, private admin:AdminService,
     private fb: FormBuilder, private router:Router
    ) {
     this._activatedRoute.params.subscribe((data: any) => {
@@ -31,6 +33,16 @@ export class AddSiteComponent  {
         }); 
       }
     });
+    this.admin.country().subscribe((resp: any) => {
+      console.log(resp)
+      const countries = [];
+      for (let i = 0; i < resp.length; ++i) {
+          const country = resp[i];
+          countries.push({ text: country.text, value: country.value });
+      }
+      this.myData = countries;
+      console.log(countries)
+  }); 
   }
  
   public siteForm: FormGroup = new FormGroup({
@@ -46,27 +58,15 @@ export class AddSiteComponent  {
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
     country: new FormControl("", [Validators.required]),
-     office_telephone: new FormControl(""),
-   extension: new FormControl(""),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      this.emailDomainValidator.bind(this)
-    ]),
-
-
-    website: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern(
-        /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-      ) // Regular expression pattern for URL validation
-    ]),
-
-    mobile_telephone: new FormControl('', [
-      Validators.required,
-      Validators.pattern('[0-9]{10}')
-    ]),
+    office_telephone: new FormControl(""),
+    extension: new FormControl(""),
+    email: new FormControl(''),
+    website:new FormControl(''),
+    mobile_telephone:new FormControl(''),
+    first_name:new FormControl("", [Validators.required]),
+    password:new FormControl(''),
+    uemail:new FormControl(''),
+ 
   });
 
   emailDomainValidator(control: FormControl): ValidationErrors | null {

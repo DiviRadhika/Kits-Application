@@ -23,7 +23,7 @@ export class SampleCollectionComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  statusData =['Collected', 'Not Collected']
+  statusData =['Pending','Collected']
 
   /* nmModel Variables */
   selected_protocol_id: any;

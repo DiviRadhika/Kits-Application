@@ -1,0 +1,25 @@
+
+
+
+.validation-feedback {
+
+    margin-top: 8px;
+
+  }
+
+
+
+
+  .invalid-feedback,
+
+  .valid-feedback {
+
+    display:inline;
+
+    margin-top: 4px;
+
+    font-size: 14px;
+
+    font-family: 'Times New Roman', Times, serif;
+
+  }

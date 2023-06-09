@@ -36,48 +36,61 @@
                         <hr>
                         <form [formGroup]="labForm">
                             <div class="row">
-                              
+
 
                                 <div class="col-md-3">
                                     <div class="form-group">
 
-                                        <!-- <label>Password</label> -->
+                                        <label>Material</label>
                                         <input type="text" class="form-control" id="material" formControlName="material"
-                                            placeholder=" Enter Material"  [class.is-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
-                                            <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">
-                                                Material is required.
-                                            </div>
+                                            placeholder=" Enter Material"
+                                            [class.is-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
+                                        <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">
+                                            Material is required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
+                                        <label>Size</label><br>
+                                        <p-chips formControlName="size" placeholder="size"
+                                            [class.is-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched"></p-chips>
+                                        <div *ngIf="shouldShowRequired('size')" class="invalid-feedback">
+                                            Size is required.
+                                        </div>
 
-                                        <!-- <label>Password</label> -->
-                                        <input type="text" class="form-control" id="Size" formControlName="size"
-                                            placeholder=" Enter Size"  [class.is-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched">
-                                            <div *ngIf="shouldShowRequired('size')" class="invalid-feedback">
-                                                Size is required.
+                                    </div>
+                                </div>
+                                <div *ngIf="fieldDisplay" class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Upload Image</label><br>
+                                        <button type="submit" class="btn btn-primary  r-darkblue pull-Right"
+                                            (click)="fileInput.click()">Upload Image</button>
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type="file" accept=".jpg,.png" class="form-control"
+                                                    formControlName="image" #fileInput
+                                                    (change)="uploadFile($event, false)" id="image"
+                                                    placeholder="Select Image">
                                             </div>
-                                    </div>
-                                </div>
-                                <div *ngIf="fieldDisplay" class="col-md-3">
-                                    <div class="form-group">
-                                        <input  type="file" accept=".jpg,.png" class="form-control"
-                                            formControlName="image" (change)="uploadFile($event, false)" id="image"
-                                            placeholder="Select Image">
-                                    </div>
+                                        </div>
 
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <span  (click)="enable()" *ngIf="editImage"><img style="width:70px"
+                                        <span (click)="enable()" *ngIf="editImage"><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + labData.image}}" />
-                                                &nbsp;&nbsp;&nbsp;<a style="color:blue">Click here To Upload New image</a></span>
-                                        <span *ngIf="imgDisplay"><img style="width:70px"
+                                            &nbsp;&nbsp;&nbsp;<a style="color:blue">Click here To Upload New
+                                                image</a></span>
+                                        <span *ngIf="imgDisplay"><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + bas2}}" /></span>
                                     </div>
 
                                 </div>
+
+
+
 
                             </div>
                         </form>
