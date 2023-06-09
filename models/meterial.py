@@ -4,7 +4,6 @@ from datetime import datetime
 from sqlalchemy.dialects.postgresql import UUID, ARRAY
 
 
-
 class MeterialModel(db.Model):
     __tablename__ = "meterial"
     # extend_existing=True
@@ -12,7 +11,7 @@ class MeterialModel(db.Model):
     name = db.Column(db.String)
     size = db.Column(ARRAY(db.String))
     image = db.Column(db.String)
-    #user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))'''
+    # user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))'''
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
     changed_by = db.Column(db.String)
@@ -29,4 +28,3 @@ class MeterialModel(db.Model):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
-

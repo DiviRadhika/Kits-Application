@@ -46,6 +46,15 @@ creation = login_ns.model(
     },
 )
 
+update_user = login_ns.model(
+    "Update",
+    {
+        "email": fields.String(title="Email", required=True),
+        "password": fields.String(title="Password", required=True),
+        "otp": fields.String(title="otp", required=True),
+    },
+)
+
 user_schema = UserSchema()
 user_list_schema = UserSchema(many=True)
 
@@ -109,6 +118,9 @@ class SendOTP(Resource):
 
         if not user:
             return {"message": "invalid username/email"}, 400
+
+        if user.status == False:
+            return {"message": "user not activated"}, 400
 
         if os.environ.get("ENVIRONMENT") in ["dev", "uat"]:
             otp = 123456
@@ -212,6 +224,25 @@ class UserRegister(Resource):
             print(str(e))
             return {"message": "user creation failed"}, 400
         return {"message": "user registration success"}, 201
+
+    @user_ns.expect(update_user)
+    @user_ns.doc("User")
+    def put(self):
+        user_json = request.json
+        try:
+            user_data = UserModel.find_by_email(user_json["email"])
+            if not user_data:
+                return {"message": "invalid email, user not found"}, 400
+            if user_data.otp != user_json["otp"]:
+                return {"message": "invalid OTP"}, 400
+            if user_data.status == False:
+                return {"message": "user not activated"}, 400
+            user_data.password = user_json["password"]
+            user_data.save_to_db()
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(str(e))
+            return {"message": "password reset failed"}, 400
+        return {"message": "password updated successfully"}, 200
 
 
 class UserLogin(Resource):

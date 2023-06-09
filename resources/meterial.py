@@ -26,7 +26,7 @@ meterial_test = meterial_ns.model(
     },
 )
 
-'''
+"""
 update_lab_test = lab_tests_ns.model(
     "update_lab_test",
     {
@@ -36,18 +36,19 @@ update_lab_test = lab_tests_ns.model(
         "size": fields.String(required=True),
         "image": fields.String(required=True),
     },
-)'''
+)"""
 
-'''
+"""
 lab_test takes only name and delete api
 
 meterial api  ...name, size, image  create, update , get
 
-'''
+"""
+
 
 class MeterialsList(Resource):
     @meterials_ns.doc("Get all the meterials")
-    #@jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def get(self):
         return (meterials_schema.dump(MeterialModel.find_all()), 200)
 
@@ -58,9 +59,9 @@ class MeterialActionsById(Resource):
         meterial_data = MeterialModel.get_by_id(meterial_id)
         if not meterial_data:
             return {"message": "meterial data not found"}, 400
-        
+
         return (meterial_schema.dump(meterial_data), 200)
-        
+
     @meterial_ns.doc("update meterial data by id")
     @meterial_ns.expect(meterial_test)
     def put(self, meterial_id):
@@ -79,7 +80,6 @@ class MeterialActionsById(Resource):
             return {"message": "updation failed, internal server error"}, 500
 
         return {"message": "meterail data updated successfully"}, 200
-    
 
 
 class Meterial(Resource):
@@ -95,8 +95,8 @@ class Meterial(Resource):
             return {"message": "creation failed, internal server error"}, 500
 
         return {"message": "meterial data created successfully"}, 201
-    
-    '''@lab_test_ns.expect(update_lab_test)
+
+    """@lab_test_ns.expect(update_lab_test)
     @lab_test_ns.doc("Update a lab test")
     @jwt_required(fresh=True)
     def put(self):
@@ -120,4 +120,4 @@ class Meterial(Resource):
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to update data {}".format(str(e))}, 500
-        return {"data": [], "message": "updated lab test data successfully"}, 201'''
+        return {"data": [], "message": "updated lab test data successfully"}, 201"""
