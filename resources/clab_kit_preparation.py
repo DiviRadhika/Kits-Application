@@ -23,7 +23,7 @@ clab_kit_list_preparation_schema = ClabKitPreparationSchema(many=True)
 
 
 data_fields = clab_kit_preparation_ns.model(
-    "visit_kit_details",
+    "visit_kit_details1",
     {
         "no_of_visits": fields.String(required=True),
         "kit_type": fields.String(required=True),
@@ -33,7 +33,7 @@ data_fields = clab_kit_preparation_ns.model(
 
 
 lab_test_data_fields = clab_kit_preparation_ns.model(
-    "screening_kit_details",
+    "screening_kit_details1",
     {
         "lab_test_id": fields.String(required=True),
         "kid_id": fields.String(required=True),

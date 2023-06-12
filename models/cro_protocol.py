@@ -2,8 +2,6 @@ from db import db
 import uuid
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.dialects.postgresql import ARRAY
 
 
 class CroProtocolModel(db.Model):
@@ -11,11 +9,12 @@ class CroProtocolModel(db.Model):
     # extend_existing=True
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     protocol_id = db.Column(db.String, unique=True)
+    protocol_name = db.Column(db.String)
     sponsor_id = db.Column(UUID(as_uuid=True), db.ForeignKey("sponsor.sponsor_id"))
     cro_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro.cro_id"))
     no_of_sites = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
-    site_data = db.Column(JSONB)
+    no_of_screens = db.Column(db.Integer)
     # user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))

@@ -90,7 +90,7 @@ class SitedatasList(Resource):
 
 class SiteActionsById(Resource):
     @site_data_ns.doc("get by id")
-    #@jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def get(self, site_id):
         try:
             data = SiteDataModel.get_by_id(site_id)
@@ -105,26 +105,26 @@ class SiteActionsById(Resource):
 class Sitedata(Resource):
     @site_data_ns.expect(create_site_data)
     @site_data_ns.doc("Create a site_data")
-    #@jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def post(self):
         site_data_json = request.get_json()
         try:
-            user_data= UserModel.find_by_email(site_data_json['email'])
+            user_data = UserModel.find_by_email(site_data_json["email"])
             if user_data:
                 return {"message": "user already registered"}, 500
             new_user_data = {
-                "email": site_data_json['email'],
-                "password": site_data_json['password'],
-                "status": site_data_json['status'],
+                "email": site_data_json["email"],
+                "password": site_data_json["password"],
+                "status": site_data_json["status"],
                 "username": site_data_json["username"],
-                "role": site_data_json['role']
+                "role": site_data_json["role"],
             }
             user_table_data = user_schema.load(new_user_data)
             user_table_data.save_to_db()
-            del(site_data_json['password'])
-            del(site_data_json['status'])
-            del(site_data_json['role'])
-            del(site_data_json['username'])
+            del site_data_json["password"]
+            del site_data_json["status"]
+            del site_data_json["role"]
+            del site_data_json["username"]
             site_data_data = site_data_schema.load(site_data_json)
             site_data_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
@@ -134,7 +134,7 @@ class Sitedata(Resource):
 
     @site_data_ns.expect(update_site_data)
     @site_data_ns.doc("Update a site_data")
-    #@jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def put(self):
         request_json = request.get_json()
         try:

@@ -24,34 +24,34 @@ cro_list_protocols_schema = CroProtocolSchema(many=True)
 screening_kit_details_schema = ScreeningKitDetailsSchema()
 visit_kit_details_schema = VisitKitDetailsSchema()
 
-data_fields = cro_protocol_ns.model(
+
+meterial_details = cro_protocol_ns.model(
+    "meterial_kit_details",
+    {
+        "meterial_id": fields.String(required=True),
+        "size": fields.String(required=True),
+        "frozen_status": fields.String(required=True),
+        "quantity": fields.Integer(required=True),
+    },
+)
+
+screening_kit_details = cro_protocol_ns.model(
+    "screening_kit_details",
+    {
+        "screening_kit_count": fields.Integer(required=True),
+        "lab_test_ids": fields.List(fields.String(required=True)),
+        "meterial_details": fields.List(fields.Nested(meterial_details)),
+    },
+)
+
+visit_kit_details = cro_protocol_ns.model(
     "visit_kit_details",
     {
-        "no_of_visits": fields.String(required=True),
-        "kit_type": fields.String(required=True),
-        "lab_id": fields.String(required=True),
-        "frozen_status": fields.String(required=True),
+        "visit_kit_count": fields.Integer(required=True),
+        "lab_test_ids": fields.List(fields.String(required=True)),
+        "meterial_details": fields.List(fields.Nested(meterial_details)),
     },
 )
-
-
-lab_test_data_fields = cro_protocol_ns.model(
-    "lab_test_kit_details",
-    {
-        "lab_test_id": fields.String(required=True),
-        "frozen_status": fields.Boolean(required=True),
-    },
-)
-
-site_data = cro_protocol_ns.model(
-    "site_data",
-    {
-        "site_id": fields.String(required=True),
-        "patient_count": fields.String(required=True),
-        "no_of_visits": fields.String(required=True),
-    },
-)
-
 cro_protocol = cro_protocols_ns.model(
     "cro_protocol",
     {
@@ -62,19 +62,10 @@ cro_protocol = cro_protocols_ns.model(
         "no_of_visits": fields.Integer(required=True),
         "no_of_screens": fields.Integer(required=True),
         "total_patients": fields.Integer(required=True),
-        "screening_kit_count": fields.Integer(required=True),
-        "screening_kit_lab_test_details": fields.List(
-            fields.Nested(lab_test_data_fields)
-        ),
-        "visit_kit_count": fields.Integer(required=True),
-        # "visit_kit_type": fields.String(required=True),
-        "visit_kit_details": fields.List(fields.Nested(data_fields)),
+        "screening_kit_details": fields.List(fields.Nested(screening_kit_details)),
+        "visit_kit_details": fields.List(fields.Nested(visit_kit_details)),
     },
 )
-
-"""
-create, get
-"""
 
 
 class CrosProtocolsList(Resource):
@@ -95,33 +86,26 @@ class CrosProtocolsList(Resource):
 class CroProtocol(Resource):
     @cro_protocol_ns.expect(cro_protocol)
     @cro_protocol_ns.doc("Create a cro_protocol")
-    @jwt_required(fresh=True)
+    # @jwt_required(fresh=True)
     def post(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         request_json = request.get_json()
         cro_protocol_json = {
             "protocol_id": request_json["protocol_id"],
+            "protocol_name": request_json["protocol_name"],
             "sponsor_id": request_json["sponser_id"],
             "cro_id": request_json["cro_id"],
-            "no_of_sites": request_json["no_of_sites"],
+            "no_of_visits": request_json["no_of_visits"],
             "total_patients": request_json["total_patients"],
-            "site_data": request_json["site_data"],
+            "no_of_screens": request_json["no_of_screens"],
         }
         try:
             cro_protocol_data = cro_protocol_schema.load(cro_protocol_json)
             cro_protocol_id = cro_protocol_data.save_to_db()
-            screening_kit_details = request_json["screening_kit_lab_test_details"]
+            screening_kit_details = request_json["screening_kit_details"]
             for item in screening_kit_details:
                 screening_item_json = {
-                    "lab_test_id": item["lab_test_id"],
-                    "lab_frozen_status": item["frozen_status"],
+                    "lab_test_ids": item["lab_test_ids"],
+                    "meterial_details": item["meterial_details"],
                     "protocol_id": cro_protocol_id,
                     "screening_kit_count": request_json["screening_kit_count"],
                 }
@@ -133,13 +117,10 @@ class CroProtocol(Resource):
             visit_kit_details = request_json["visit_kit_details"]
             for item in visit_kit_details:
                 visit_item_json = {
-                    "visit_kit_type": request_json["visit_kit_type"],
                     "protocol_id": cro_protocol_id,
                     "visit_kit_count": request_json["visit_kit_count"],
-                    "no_of_visits": item["no_of_visits"],
-                    "kit_type": item["kit_type"],
-                    "lab_test_id": item["lab_id"],
-                    "lab_frozen_status": item["frozen_status"],
+                    "lab_test_ids": item["lab_test_ids"],
+                    "meterial_details": item["meterial_details"],
                 }
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)
                 visit_kit_data.save_to_db()
