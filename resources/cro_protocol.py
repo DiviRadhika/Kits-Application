@@ -31,6 +31,7 @@ meterial_details = cro_protocol_ns.model(
         "meterial_id": fields.String(required=True),
         "size": fields.String(required=True),
         "frozen_status": fields.String(required=True),
+        "image": fields.String(required=True),
         "quantity": fields.Integer(required=True),
     },
 )
