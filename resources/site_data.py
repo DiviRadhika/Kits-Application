@@ -21,8 +21,8 @@ site_datas_list_schema = SiteDataSchema(many=True)
 user_schema = UserSchema()
 
 
-site_data = sites_data_ns.model(
-    "site_data",
+create_site_data = sites_data_ns.model(
+    "create_site_data",
     {
         "site_data_code": fields.String(required=True),
         "site_data_name": fields.String(required=True),
@@ -103,7 +103,7 @@ class SiteActionsById(Resource):
 
 
 class Sitedata(Resource):
-    @site_data_ns.expect(site_data)
+    @site_data_ns.expect(create_site_data)
     @site_data_ns.doc("Create a site_data")
     #@jwt_required(fresh=True)
     def post(self):
