@@ -95,7 +95,7 @@ class SiteActionsById(Resource):
         try:
             data = SiteDataModel.get_by_id(site_id)
             if not data:
-                return {"message": "site data not found"}, 400
+                return {"message": "site data not found"}, 500
             return (site_data_schema.dump(data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
@@ -111,7 +111,7 @@ class Sitedata(Resource):
         try:
             user_data= UserModel.find_by_email(site_data_json['email'])
             if user_data:
-                return {"message": "user already registered"}, 400
+                return {"message": "user already registered"}, 500
             new_user_data = {
                 "email": site_data_json['email'],
                 "password": site_data_json['password'],

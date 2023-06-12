@@ -51,7 +51,7 @@ update_user = login_ns.model(
     {
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
-        "otp": fields.String(title="otp", required=True),
+        "otp": fields.Integer(title="otp", required=True),
     },
 )
 
@@ -117,10 +117,10 @@ class SendOTP(Resource):
             return {"message": "User not registered yet, please contact admin"}, 500
 
         if not user:
-            return {"message": "invalid username/email"}, 400
+            return {"message": "invalid username/email"}, 500
 
         if user.status == False:
-            return {"message": "user not activated"}, 400
+            return {"message": "user not activated"}, 500
 
         if os.environ.get("ENVIRONMENT") in ["dev", "uat"]:
             otp = 123456
@@ -204,10 +204,10 @@ class UserRegister(Resource):
                         setattr(user_data, key, value)
                 user_data.save_to_db()
             else:
-                return {"message": "user not found"}, 400
+                return {"message": "user not found"}, 500
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
-            return {"message": "user updation failed"}, 400
+            return {"message": "user updation failed"}, 500
         return {"message": "user updation success"}, 200
 
     @user_ns.expect(creation)
@@ -232,16 +232,16 @@ class UserRegister(Resource):
         try:
             user_data = UserModel.find_by_email(user_json["email"])
             if not user_data:
-                return {"message": "invalid email, user not found"}, 400
+                return {"message": "invalid email, user not found"}, 500
             if user_data.user_otp != user_json["otp"]:
-                return {"message": "invalid OTP"}, 400
+                return {"message": "invalid OTP"}, 500
             if user_data.status == False:
-                return {"message": "user not activated"}, 400
+                return {"message": "user not activated"}, 500
             user_data.password = user_json["password"]
             user_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
-            return {"message": "password reset failed"}, 400
+            return {"message": "password reset failed"}, 500
         return {"message": "password updated successfully"}, 200
 
 
