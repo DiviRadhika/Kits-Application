@@ -75,16 +75,7 @@ update_site_data = sites_data_ns.model(
 
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
-    @jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
