@@ -21,6 +21,7 @@ class SponsorModel(db.Model):
     zip_code = db.Column(db.String)
     country = db.Column(db.String)
     office_telephone = db.Column(db.String)
+    mobile_telephone = db.Column(db.String)
     extension = db.Column(db.String)
     email = db.Column(db.String)
     website = db.Column(db.String)

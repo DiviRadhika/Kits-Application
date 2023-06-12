@@ -32,6 +32,7 @@ cro = cros_ns.model(
         "region": fields.String(required=True),
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
+        "mobile_telephone": fields.String(required=True),
         "office_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
         "email": fields.String(required=True),

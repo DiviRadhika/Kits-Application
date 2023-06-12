@@ -33,6 +33,7 @@ sponsor = sponsor_ns.model(
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
+        "mobile_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
         "email": fields.String(required=True),
         "website": fields.String(required=True),
