@@ -13,6 +13,7 @@ from models.screening_kit import ScreeningKitDetailsModel
 from models.visit_kit import VisitKitDetailsModel
 from schemas.screening_kit import ScreeningKitDetailsSchema
 from schemas.visit_kit import VisitKitDetailsSchema
+from models.lab_test import LabtestModel
 
 cro_protocol_ns = Namespace(
     "cro_protocol", description="cro protocol related operations"
@@ -43,6 +44,7 @@ meterial_details = cro_protocol_ns.model(
 screening_kit_details = cro_protocol_ns.model(
     "screening_kit_details",
     {
+        # "visit_no": fields.Integer(required=True),
         "screening_kit_count": fields.Integer(required=True),
         "lab_test_ids": fields.List(fields.String(required=True)),
         "meterial_details": fields.List(fields.Nested(meterial_details)),
@@ -52,6 +54,7 @@ screening_kit_details = cro_protocol_ns.model(
 visit_kit_details = cro_protocol_ns.model(
     "visit_kit_details",
     {
+        # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
         "lab_test_ids": fields.List(fields.String(required=True)),
         "meterial_details": fields.List(fields.Nested(meterial_details)),
@@ -95,13 +98,37 @@ class CroProtocolActionsById(Resource):
             )
             if not screening_kit_details:
                 response["screening_kit_details"] = []
-            response["screening_kit_details"] = multi_screening_kit_details_schema.dump(
+
+            lab_test_names = []
+            for screening_kit_detail in screening_kit_details:
+                lab_test_ids = screening_kit_detail.lab_test_ids
+
+                for lab_test in lab_test_ids:
+                    lab_data = LabtestModel.get_by_id(lab_test)
+                    lab_test_names.append(lab_data.name)
+
+                screening_kit_detail.lab_test_ids = lab_test_names
+
+            updated_screeing_kit_details = multi_screening_kit_details_schema.dump(
                 screening_kit_details
             )
+
+            response["screening_kit_details"] = updated_screeing_kit_details
 
             visit_kit_details = VisitKitDetailsModel.get_by_protocol_id(cro_protocol_id)
             if not visit_kit_details:
                 response["visit_kit_details"] = []
+
+            visit_lab_test_names = []
+            for visit_kit_detail in visit_kit_details:
+                lab_test_ids = visit_kit_detail.lab_test_ids
+
+                for lab_test in lab_test_ids:
+                    lab_data = LabtestModel.get_by_id(lab_test)
+                    visit_lab_test_names.append(lab_data.name)
+
+                visit_kit_detail.lab_test_ids = visit_lab_test_names
+
             response["visit_kit_details"] = multi_visit_kit_details_schema.dump(
                 visit_kit_details
             )
@@ -139,6 +166,7 @@ class CroProtocol(Resource):
                     "lab_test_ids": item["lab_test_ids"],
                     "meterial_details": item["meterial_details"],
                     "protocol_id": cro_protocol_id,
+                    # "visit_no": item['visit_no'],
                     "screening_kit_count": item["screening_kit_count"],
                 }
                 screening_kit_data = screening_kit_details_schema.load(
@@ -152,6 +180,7 @@ class CroProtocol(Resource):
                     "protocol_id": cro_protocol_id,
                     "visit_kit_count": item["visit_kit_count"],
                     "lab_test_ids": item["lab_test_ids"],
+                    # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
                 }
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)

@@ -8,6 +8,7 @@ class VisitKitDetailsModel(db.Model):
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     protocol_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro_protocol.id"))
     visit_kit_count = db.Column(db.Integer)
+    # visit_no = db.Column(db.Integer)
     lab_test_ids = db.Column(ARRAY(db.String))
     meterial_details = db.Column(JSONB)
 
