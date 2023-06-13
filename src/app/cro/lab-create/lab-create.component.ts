@@ -74,6 +74,7 @@ export class LabCreateComponent {
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
     this.imgDisplay = true;
     this.editImage = false
+    console.log(this.bas2);
   }
   enable() {
     this.editImage = false
@@ -85,6 +86,7 @@ export class LabCreateComponent {
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
   submit() {
+console.log(this.bas2);
 
     if (this.labForm.invalid) {
       // Mark all form controls as touched to trigger validation
@@ -99,6 +101,7 @@ export class LabCreateComponent {
       {
         "name": this.labForm.get('material')?.value,
         "size": this.labForm.get('size')?.value,
+        
       }
      
       if (this.isEdit) {
@@ -125,6 +128,7 @@ export class LabCreateComponent {
 
       }
       else {
+        data.image = this.bas2
         this._cro.createMaterialDetails(data).subscribe(
           (data: any) => {
             alert('Material created successfully');

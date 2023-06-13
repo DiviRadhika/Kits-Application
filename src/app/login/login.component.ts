@@ -37,7 +37,7 @@ reset(){
   const obj = {
     email: this.loginForm.controls['username'].value,
     password: this.loginForm.controls['confirmPassword'].value,
-    otp: "123456"
+    otp: 123456
   }
   this.admin.reset(obj).subscribe(
     (data: any) => {

@@ -119,11 +119,15 @@ export class CROcreateComponent implements OnInit {
   }
 
   submit() {
+   console.log(this.CroForm.controls['mobile_telephone'].value.toString());
+   
+    
       if (this.CroForm.invalid) {
         // Mark all form controls as touched to trigger validation
         Object.keys(this.CroForm.controls).forEach(key => {
           this.CroForm.get(key)?.markAsTouched();
         });
+        alert('please fill all Mandatory Fields')
       }
     else {
       const obj: any = {
@@ -140,7 +144,7 @@ export class CROcreateComponent implements OnInit {
         "zip_code": this.CroForm.controls['zip_code'].value,
         "country": this.CroForm.controls['country'].value,
         "office_telephone": this.CroForm.controls['office_telephone'].value,
-        "mobile_telephone": this.CroForm.controls['mobile_telephone'].value,
+        "mobile_telephone": this.CroForm.controls['mobile_telephone'].value.toString(),
         "extension": this.CroForm.controls['extension'].value,
         "email": this.CroForm.controls['email'].value,
         "website": this.CroForm.controls['website'].value

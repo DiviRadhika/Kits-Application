@@ -138,7 +138,7 @@
                               <div class="form-group">
                                 <label>Country</label>
                                 <select  formControlName="country" class="form-select" aria-label="Default select example">
-                                  <option *ngFor="let option of myData" [value]="option">{{ option.text }}</option>
+                                  <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
                                 </select >
                               
                                 <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
