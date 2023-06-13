@@ -1,10 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { ProtocolService } from './protocol-registration.service';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
-import { LSponsers } from './lsponsers';
-import { LabTests } from './lab-tests';
-import { CROS } from './cros';
-import { Protocol } from './protocol';
 import { CrosService } from '../cros.service';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 @Component({
@@ -60,8 +56,8 @@ mlist:any
     total_visits :new FormControl("", [Validators.required]),
     selected_vkit_count:new FormControl("", [Validators.required]),
     selected_skit_count:new FormControl("", [Validators.required]),
-    labTestValue: new FormControl(""),
-    labTestValuev: new FormControl(""),
+    labTestValue: new FormControl("", [Validators.required]),
+    labTestValuev: new FormControl("", [Validators.required]),
  
   })
 
@@ -109,11 +105,6 @@ mlist:any
     });
 
 
-    this.ScreenKitForm = this.formBuilder.group({
-
-      labTestsList: this.formBuilder.array([this.addScreenKitData()])
-
-    })
 
     this.ScreenMaterialKitForm=this.formBuilder.group({
 
@@ -173,13 +164,7 @@ mlist:any
   dialogv(){
     this.displayv = true
   }
-  onScreenKitAdd() {
 
-    //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
-    const control1 = this.ScreenKitForm.get('labTestsList') as FormArray;
-    control1.push(this.addScreenKitData());
-    console.log(this.ScreenKitForm.get('labTestsList').controls);
-  }
   removeMatScreenKit(j: number) { 
     this.ScreenMaterialKitForm.get('materialList').removeAt(j);
   }
@@ -217,7 +202,13 @@ mlist:any
   //  this.materialList.push(this.addVisitKitMatData());
   } 
 } 
-  
+disableScroll() {
+  document.body.style.overflow = 'hidden';
+}
+
+enableScroll() {
+  document.body.style.overflow = 'auto';
+}
   onMaterialKitAdd() {
 
     //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
@@ -234,20 +225,20 @@ mlist:any
   addScreenmKitData() {
     return this.formBuilder.group({
      
-      meterial_id: [''],
-      size: [''],
-      quantity: [''],
-      frozen_status: [''],
+      meterial_id: new FormControl("", [Validators.required]),
+      size: new FormControl("", [Validators.required]),
+      quantity:new FormControl("", [Validators.required]),
+      frozen_status:new FormControl("", [Validators.required]),
       image: ['']
     })
   }
 
   addVisitKitMatData(){
     return this.formBuilder.group({
-      meterial_id: [''],
-      size: [''],
-      quantity:[''],
-      frozen_status: [''],
+      meterial_id: new FormControl("", [Validators.required]),
+      size: new FormControl("", [Validators.required]),
+      quantity:new FormControl("", [Validators.required]),
+      frozen_status: new FormControl("", [Validators.required]),
       image: ['']
     })
   }
@@ -298,8 +289,19 @@ mlist:any
     console.log(this.sites);
   }
 
+  shouldShowRequired(controlName: string): boolean {
+    const control = this.protocolForm.get(controlName);
+    return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
+
   SubmitData() {
-    console.log(this.multipleTestsvId);
+    if (this.protocolForm.invalid) {
+      alert('Please Fill All Mandatory Fields')
+      Object.keys(this.protocolForm.controls).forEach((key) => {
+        this.protocolForm.get(key)?.markAsTouched();
+      });
+    }
+    else{
     const data = {
       "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
       "protocol_name":this.protocolForm.controls['selected_protocol_name'].value,
@@ -324,6 +326,7 @@ mlist:any
           "meterial_details": this.VisitKitMatForm.value.materialList
         }
       ]
+    
     }
  
 
@@ -338,6 +341,7 @@ mlist:any
       }
       );
   }
+}
   image_url:any;
 
 sizeOptions: { [index: number]: string[] } = {};

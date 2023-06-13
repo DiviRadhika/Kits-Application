@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
@@ -10,10 +10,18 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration.component.css']
 })
 export class KitPreprationComponent implements OnInit {
- 
+
   kitId = 3;
   screenid = 4;
-  constructor(private protocolService: ProtocolService,private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
+  protocolIdDetails: any;
+  screenDetails: Array<any> = [];
+  sMatDetails: Array<any> = [];
+  visitDetails: Array<any> = [];
+  vMatDetails: Array<any> = [];
+  scount: any;
+  vcount: any;
+  displayValues: boolean = false;
+  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -24,7 +32,7 @@ export class KitPreprationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData =['InProgress', 'Completed']
+  preprationData = ['InProgress', 'Completed']
 
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -40,12 +48,18 @@ export class KitPreprationComponent implements OnInit {
   selected_vkit_variant: any;
   screening: boolean = true;
   visit: boolean = false;
-  sitesForm:any;
-  ScreenKitForm:any;
-  VisitKitForm:any;
-  customerFormGroup:any;
-  listItems: string[]=[];
+  sitesForm: any;
+  ScreenKitForm: any;
+  VisitKitForm: any;
+  customerFormGroup: any;
+  listItems: string[] = [];
+  protoId: any
+  protoName: any
 
+  public preparationForm: FormGroup = new FormGroup({
+    protocolId: new FormControl("", [Validators.required]),
+    protocol_name: new FormControl("", [Validators.required]),
+  });
   ngOnInit() {
     this.protocolService.getProtocol().subscribe((protocols) => {
       this.ProtoData(protocols);
@@ -58,35 +72,53 @@ export class KitPreprationComponent implements OnInit {
     this.adminService.getCro().subscribe((crosList) => {
       this.crosData(crosList);
     });
-  
+
 
     this.ScreenKitForm = this.formBuilder.group({
 
       screenKitList: this.formBuilder.array([this.addScreenKitData()])
 
     })
-    for(let i=0; i<this.screenid-1;i++){
+    for (let i = 0; i < this.screenid - 1; i++) {
       this.addScreenKit()
 
     }
-   
+
     this.VisitKitForm = this.formBuilder.group({
 
       visitKitList: this.formBuilder.array([])
 
     })
-   
-    this.listItems = []; 
-    for (let i = 0; i <= this.kitId-1; i++)
-     { this.listItems.push(`Item ${i}`); 
-     this.addVisitKit()
 
-  
-    } 
+    this.listItems = [];
+    for (let i = 0; i <= this.kitId - 1; i++) {
+      this.listItems.push(`Item ${i}`);
+      this.addVisitKit()
+
+
+    }
   }
+  getprotocolDetails(id: any) {
+    console.log(id.target.value);
 
-   
-    
+    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
+      console.log(protocols);
+      this.displayValues = true;
+      this.protocolIdDetails = protocols.protocol
+      this.protoName = this.protocolIdDetails.protocol_name
+      this.preparationForm.controls['protocol_name'].disable()
+      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      this.scount = this.protocolIdDetails.no_of_screens 
+      this.vcount =  this.protocolIdDetails.no_of_visits
+
+
+    });
+
+  }
 
   addScreenKit() {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData());
@@ -95,23 +127,23 @@ export class KitPreprationComponent implements OnInit {
 
   addVisitKit() {
     this.VisitKitForm.get('visitKitList').push(this.addVisitKitData());
-    
+
   }
   onScreenKitAdd() {
 
-   
+
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
     control1.push(this.addScreenKitData());
-   
+
   }
 
   addScreenKitData() {
-    
+
     return this.formBuilder.group({
-     ckitId:[''],
-     kitId: [''],
-     prepration:[''],
-   
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+
     })
   }
 
@@ -122,26 +154,26 @@ export class KitPreprationComponent implements OnInit {
     control1.push(this.addVisitKitData());
     console.log(this.VisitKitForm.get('visitKitList').controls);
   }
-  showsc(){
+  showsc() {
     this.screening = true;
     this.visit = false
   }
-  showv(){
+  showv() {
     // this.addVisitKit()
     this.screening = false;
     this.visit = true
-   
+
   }
   addVisitKitData() {
     return this.formBuilder.group({
-      ckitId:[''],
-     kitId: [''],
-     prepration:[''],
-   
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+
     })
   }
 
-  ProtoData(Protocols:any) {
+  ProtoData(Protocols: any) {
     Protocols.forEach((protocol: any) => {
       this.protocols.push(protocol);
     });
@@ -149,21 +181,21 @@ export class KitPreprationComponent implements OnInit {
     console.log(this.protocols);
   }
 
-  labTestsData(labTestsList:any) {
-    labTestsList.forEach((labTests:any) => {
+  labTestsData(labTestsList: any) {
+    labTestsList.forEach((labTests: any) => {
       this.labTestsList.push(labTests);
     });
     console.log(this.labTestsList);
   }
 
-  crosData(crosList:any) {
-    crosList.forEach((cros:any) => {
+  crosData(crosList: any) {
+    crosList.forEach((cros: any) => {
       this.crosList.push(cros);
     });
   }
 
-  sitesData(sites:any) {
-    sites.forEach((site:any) => {
+  sitesData(sites: any) {
+    sites.forEach((site: any) => {
       this.sites.push(site);
     });
     console.log(this.sites);
@@ -204,30 +236,29 @@ export class KitPreprationComponent implements OnInit {
     console.log(data);
 
     this.protocolService.postProtocol(data).subscribe(
-      (data:any) => {
+      (data: any) => {
         alert('protocol created successfully');
       },
-      (err:any)=>{
+      (err: any) => {
         alert('internal server err');
       }
-      );
+    );
   }
-  image_url:any;
-  onScreenKitChange(evt: any,index: any){
-    
-     let selected_lab_id = evt.target.value;
-     let selected_material ;
-     let selected_size;
-     let selected_image_string;
+  image_url: any;
+  onScreenKitChange(evt: any, index: any) {
+
+    let selected_lab_id = evt.target.value;
+    let selected_material;
+    let selected_size;
+    let selected_image_string;
     // this.labTestsList.filter(lab => {
     //   lab.lab_id == selected_lab_id
     // })
-    for(var item of this.labTestsList){
-      if (item['lab_id'] == evt.target.value) 
-      {
+    for (var item of this.labTestsList) {
+      if (item['lab_id'] == evt.target.value) {
         selected_material = item['material'];
         selected_size = item['size'];
-        selected_image_string = item['image'];        
+        selected_image_string = item['image'];
         this.ScreenKitForm.controls.labTestsList.controls[index].controls['Material'].setValue(selected_material);
         this.ScreenKitForm.controls.labTestsList.controls[index].controls['Size'].setValue(selected_size);
         const img = new Image();
@@ -236,45 +267,44 @@ export class KitPreprationComponent implements OnInit {
         console.log(img.src);
         this.image_url = img.src;
         this.ScreenKitForm.controls.labTestsList.controls[index].controls['Image'].setValue(img.src);
-          break;
-          
+        break;
+
       }
     }
 
-    
+
   }
 
   //image_url:any;
-  onVisitKitChange(evt: any,index: any){
-    
-    
-     let selected_lab_id = evt.target.value;
-     let selected_material ;
-     let selected_size;
-     let selected_image_string;
-    
+  onVisitKitChange(evt: any, index: any) {
+
+
+    let selected_lab_id = evt.target.value;
+    let selected_material;
+    let selected_size;
+    let selected_image_string;
+
     // this.labTestsList.filter(lab => {
     //   lab.lab_id == selected_lab_id
     // })
-    for(var item of this.labTestsList){
-      
-      if (item['lab_id'] == evt.target.value) 
-      {
+    for (var item of this.labTestsList) {
+
+      if (item['lab_id'] == evt.target.value) {
         selected_material = item['material'];
         selected_size = item['size'];
         selected_image_string = item['image'];
-        
+
         this.VisitKitForm.controls.labTestsList.controls[index].controls['Material'].setValue(selected_material);
         this.VisitKitForm.controls.labTestsList.controls[index].controls['Size'].setValue(selected_size);
         const img = new Image();
         img.src = 'data:image/jpeg;base64,' + selected_image_string;
         console.log(img.src);
-       // this.image_url = img.src;
-        this.VisitKitForm.controls.labTestsList.controls[index].controls['Image'].setValue(img.src);          
-          break;
-          
+        // this.image_url = img.src;
+        this.VisitKitForm.controls.labTestsList.controls[index].controls['Image'].setValue(img.src);
+        break;
+
       }
-    }    
+    }
   }
 
 }
