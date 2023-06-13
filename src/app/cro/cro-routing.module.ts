@@ -7,6 +7,7 @@ import { ProtocolRegistrationComponent} from './protocol-registration/protocol-r
 import { SponsorGridComponent } from './sponsor-grid/sponsor-grid.component';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
+import { MaterialComponent } from './material/material.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path:'csponsorUpdate/:id', component:SponsorComponent},
 
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
+  {path:'material', component:MaterialComponent},
  
 
 

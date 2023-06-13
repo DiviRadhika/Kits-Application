@@ -15,6 +15,7 @@ import {PickListModule} from 'primeng/picklist';
 import {ChipsModule} from 'primeng/chips';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DialogModule} from 'primeng/dialog';
+import {CardModule} from 'primeng/card';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -36,7 +37,8 @@ import {DialogModule} from 'primeng/dialog';
     PickListModule,
     ChipsModule,
     MultiSelectModule,
-    DialogModule
+    DialogModule,
+    CardModule
     
   ]
 })

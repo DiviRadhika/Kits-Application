@@ -30,21 +30,30 @@
 
                 <div class="card">
                     <div class="card-body">
+                        <form [formGroup]="preparationForm">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
+                           
+                            <div class="col-md-4 mb-3">
+                              
 
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
-                                    <select formControlName="prepration" class="form-select form-control">
-                                        <option *ngFor="let data of protocols">
+                                    <select formControlName="protocolId"   (change)="getprotocolDetails($event)" class="form-select form-control">
+                                        <option *ngFor="let data of protocols"   [value]="data.id">
                                             {{ data.protocol_id }}
                                         </option>
                                     </select>
                                 </div>
+                         
+                                <div *ngIf="displayValues" class="col-md-4 mb-3">
+
+                                <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
+                                <input type="text" placeholder="Protocol Name"
+                                formControlName="protocol_name" class="form-control"
+                                value=""/>
                             </div>
 
-
                         </div>
+                        </form>
 
 
                         <hr class="mt-4 mb-4" />
@@ -73,12 +82,24 @@
 
                                 </ul>
 
-                                <div class="tab-content pt-3 text-muted">
+                                <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
                                     <div class="tab-pane active" *ngIf="screening" id="screening" role="tabpanel">
                                         <h5 class="mb-sm-0 font-size-18">
-                                            Kit Count : {{screenid}}
+                                           screen Kit Count : {{scount}}
                                         </h5>
+                                        <br>
+                                        <div  class="row">
 
+                                            <div class="col-md-5 mb-3">
+                                        <ul  class="list-group">
+                                            <li class="list-group-item" style="text-align: center;"><b>&nbsp;&nbsp;Lab Tests</b>
+                                            </li>
+                                            <li class="list-group-item" style="text-align: center;"
+                                              *ngFor="let item of screenDetails let k = index">&nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}
+                                            </li>
+                                          </ul>
+                                          </div>
+                                          </div>
                                         <br>
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
@@ -95,13 +116,13 @@
                                                         <tbody>
 
                                                             <tr *ngFor="
-                                    let item of labTestsList
+                                    let item of screenDetails
                                       
                                     let i = index
                                   ">
                                                                 <th scope="row">
                                                                     <input type="text" class="form-control"
-                                                                        value={{item.lab_test}} />
+                                                                        value={{item}} />
 
                                                                 </th>
 
@@ -117,67 +138,22 @@
                                             </h5>
                                             <hr />
                                             <div class="row card-group">
-                                                <div class="col-md-3 mb-3" *ngFor="let item of labTestsList">
+                                                <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
                                                     <div class="card" style="background-color: lightgray;
-                                                    height: 189px;
+                                                    height: 230px;
                                                     width: 79%">
                                                         <img style="width:180px"
-                                                            src="{{'data:image/jpg;base64,' + item.image}}" />
-                                                        Material:{{item.material}} <br>
-                                                        size:{{item.size}}
+                                                            src="{{item.image}}" />
+                                                        Material:{{item.meterial_id}} <br>
+                                                        size:{{item.size}}<br>
+                                                        Qunatity:{{item.quqntity}}<br>
+                                                        Frozen Type:{{item.frozen_status}}
 
 
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-md-12 mb-3">
-                                            <div class="table-responsive">
-    
-                                                <table class="table table-striped mb-0">
-                                                    <thead Style="background:#EEE">
-                                                        <tr>
-                                                            
-                                                            <th>material</th>
-                                                            <th>Size</th>
-                                                            <th>Frozen at Site</th>
-                                                            <th>Image</th>
-                                                           
-                                                        </tr>
-                                                    </thead>
-    
-                                                    <tbody>
-    
-                                                        <tr *ngFor="
-                                        let item of labTestsList
                                           
-                                        let i = index
-                                      ">
-                                                        
-                                                            <td>
-                                                                <input type="text" class="form-control"
-                                                                    value={{item.material}} />
-                                                            </td>
-                                                            <td>
-                                                                <input type="text" class="form-control"
-                                                                    value={{item.size}} />
-                                                            </td>
-                                                            <td>
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    value="checked" id="debugInfo" />
-                                                            </td>
-                                                            <td>
-                                                                <img style="width:50px"
-                                                                    src="{{'data:image/jpg;base64,' + item.image}}" />
-                                                            </td>
-                                                           
-                                                        </tr>
-    
-    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                       </div> -->
-
                                         </div>
 
                                         <br>
@@ -199,12 +175,12 @@
                                             <table class="table table-striped mb-0" formArrayName="screenKitList">
                                                 <thead Style="background:#EEE">
                                                     <tr>
-
                                                         <th>KitId</th>
                                                         <th>Lab KitId</th>
                                                         <th>Prepration</th>
 
                                                         <th>Print Label</th>
+                                                      
                                                     </tr>
                                                 </thead>
 
@@ -248,9 +224,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane active" *ngIf="visit" id="visit" role="tabpanel">
+                                <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
+                                <div  class="tab-pane active" *ngIf="visit" id="visit" role="tabpanel">
                                     <h5 class="mb-sm-0 font-size-18">
-                                        Kit Count : {{kitId}}
+                                      Visit Kit Count : {{vcount}}
                                     </h5>
                                     <br>
                                     <div class="row">
@@ -268,13 +245,13 @@
                                                     <tbody>
 
                                                         <tr *ngFor="
-                                let item of labTestsList
+                                let item of visitDetails
                                   
                                 let i = index
                               ">
                                                             <th scope="row">
                                                                 <input type="text" class="form-control"
-                                                                    value={{item.lab_test}} />
+                                                                    value={{item}} />
 
                                                             </th>
 
@@ -290,67 +267,21 @@
                                         </h5>
                                         <hr />
                                         <div class="row card-group">
-                                            <div class="col-md-3 mb-3" *ngFor="let item of labTestsList">
+                                            <div class="col-md-3 mb-3" *ngFor="let item of vMatDetails">
                                                 <div class="card" style="background-color: lightgray;
-                                            height: 189px;
+                                            height: 230px;
                                             width: 79%">
                                                     <img style="width:180px"
-                                                        src="{{'data:image/jpg;base64,' + item.image}}" />
-                                                    Material:{{item.material}} <br>
-                                                    size:{{item.size}}
-
+                                                        src="{{item.image}}" />
+                                                        Material:{{item.meterial_id}} <br>
+                                                        size:{{item.size}}<br>
+                                                        Qunatity:{{item.quqntity}}<br>
+                                                        Frozen Type:{{item.frozen_status}}
 
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-md-12 mb-3">
-                                        <div class="table-responsive">
-
-                                            <table class="table table-striped mb-0">
-                                                <thead Style="background:#EEE">
-                                                    <tr>
-                                                        
-                                                        <th>material</th>
-                                                        <th>Size</th>
-                                                        <th>Frozen at Site</th>
-                                                        <th>Image</th>
-                                                        
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-
-                                                    <tr *ngFor="
-                                    let item of labTestsList
-                                      
-                                    let i = index
-                                  ">
-                                                    
-                                                        <td>
-                                                            <input type="text" class="form-control"
-                                                                value={{item.material}} />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control"
-                                                                value={{item.size}} />
-                                                        </td>
-                                                        <td>
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="checked" id="debugInfo" />
-                                                        </td>
-                                                        <td>
-                                                            <img style="width:50px"
-                                                                src="{{'data:image/jpg;base64,' + item.image}}" />
-                                                        </td>
-                                                       
-                                                    </tr>
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                   </div> -->
-
+                                    
                                     </div>
 
                                     <br>
@@ -372,12 +303,12 @@
                                         <table class="table table-striped mb-0" formArrayName="visitKitList">
                                             <thead Style="background:#EEE">
                                                 <tr>
-                                                    <th>CKitId</th>
                                                     <th>KitId</th>
+                                                    <th>Lab KitId</th>
                                                     <th>Prepration</th>
 
                                                     <th>Print Label</th>
-
+                                                  
                                                 </tr>
                                             </thead>
 
@@ -388,15 +319,15 @@
                                   .controls;
                                 let i = index
                               ">
-
+                              <td width="25%">
+                                <input type="text" placeholder="kitId" formControlName="kitId"
+                                    class="form-control" value="" />
+                            </td>
                                                     <td width="25%">
-                                                        <input type="text" placeholder="ckitId" formControlName="ckitId"
+                                                        <input type="text" placeholder="Lab KitId" formControlName="ckitId"
                                                             class="form-control" value="" />
                                                     </td>
-                                                    <td width="25%">
-                                                        <input type="text" placeholder="kitId" formControlName="kitId"
-                                                            class="form-control" value="" />
-                                                    </td>
+                                                  
                                                     <td width="25%">
                                                         <select formControlName="prepration"
                                                             class="form-select form-control">
@@ -419,6 +350,7 @@
                                         </table>
                                     </div>
 
+                                </div>
                                 </div>
                             </div>
                         </div>

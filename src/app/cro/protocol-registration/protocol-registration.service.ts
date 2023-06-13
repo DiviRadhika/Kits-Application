@@ -26,4 +26,7 @@ export class ProtocolService {
     getProtocol(){
         return this.http.get(endPointsUser.croProtocols)
     }
+    getProtocolId(id: any): Observable<any> {
+        return this.http.get(endPointsUser.getProtocolId + id)
+      }
  }  

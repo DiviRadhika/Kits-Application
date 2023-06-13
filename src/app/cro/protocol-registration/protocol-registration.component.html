@@ -36,20 +36,24 @@
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
                     <input type="text" formControlName="selected_protocol_id" class="form-control" id=""
-                      placeholder="Enter Protocol ID" />
+                      placeholder="Enter Protocol ID"  [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
+                      <!-- <div *ngIf="shouldShowRequired('selected_protocol_id')" class="text-danger">
+                        Protocol ID is required.
+                      </div> -->
                   </div>
+
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
                     <input type="text" formControlName="selected_protocol_name" class="form-control" id=""
-                      placeholder="Enter Protocol Name" />
+                      placeholder="Enter Protocol Name" [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
-                    <select formControlName="selected_sponsor_id" class="form-select form-control">
+                    <select formControlName="selected_sponsor_id" class="form-select form-control"  [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
                         {{ sponser.sponsor_name }}
                       </option>
@@ -59,7 +63,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">CRO ID / Name</label>
-                    <select formControlName="selected_cro_id" class="form-select form-control">
+                    <select formControlName="selected_cro_id" class="form-select form-control"  [class.is-invalid]="shouldShowRequired('selected_cro_id') && protocolForm.get('selected_cro_id')?.touched">
                       <option *ngFor="let cro of crosList" [value]="cro.cro_id">
                         {{ cro.cro_name }}
                       </option>
@@ -71,27 +75,27 @@
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Total No.of Patients</label>
                     <input type="text" formControlName="selected_patients_num" class="form-control" id=""
-                      placeholder=" " />
+                      placeholder=" " [class.is-invalid]="shouldShowRequired('selected_patients_num') && protocolForm.get('selected_patients_num')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
                     <input type="text" formControlName="total_visits" (input)="visits($event)" class="form-control"
-                      id="" placeholder=" " />
+                      id="" placeholder=" " [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
-                    <input type="text" formControlName="screens" class="form-control" id="" placeholder=" " />
+                    <input type="text" formControlName="screens" class="form-control" id="" placeholder=" " [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
-                    <input type="text" formControlName="screens" class="form-control" id="" placeholder=" " />
+                    <input type="text" formControlName="selected_skit_count" class="form-control" id="" placeholder=" " [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
 
@@ -136,29 +140,40 @@
                     </div>
 
                     <div class="row">
+                      <div class="col-ml-1 ml-1"></div>
+                      <div class="col-md-3 mb-3">
                       <button type="button" (click)="dialog()"
-                        class="btn btn-primary waves-effect btn-label waves-light r-blue">Select Lab Tests</button>
-                      <p-dialog header="Select Lab Test" [(visible)]="display">
+                        class="btn btn-primary  waves-light r-blue">Select Lab Tests</button>
+                        </div>
+                       
+                      <p-dialog [class.overlay]="display"  (onShow)="disableScroll()" (onHide)="enableScroll()" header="Select Lab Test" [(visible)]="display">
                         <div class="row">
+                          <div class="col-md-2 mb-3"></div>
+                          <div class="col-md-10 mb-3">
 
-                          <div class="col-md-12 mb-3">
-                            <p-multiSelect [options]="matList" [(ngModel)]="selectedTests"
+
+
+                            
+                            <p-multiSelect [options]="matList" styleClass="custom-multiselect" [(ngModel)]="selectedTests"
                               formControlName="labTestValue" optionLabel="name"></p-multiSelect>
                           </div>
                           <br>
                           <br>
                           <br>
                           <br>
-                          <div class="col-md-9 mb-3"></div>
-                          <div class="col-md-3 mb-3">
-                            <button type="button" align="right" (click)="labValues()"
+                          <div class="col-md-3 mb-3"></div>
+                          <div class="col-md-6 mb-3">
+                             <button type="button" align="right" (click)="labValues()"
                               class="btn btn-primary r-blue">Submit Lab Tests</button>
                           </div>
                         </div>
                       </p-dialog>
+                      
                       <br>
-                      <div class="col-md-3 mt-2 mb-3"></div>
-                      <div class="col-md-5 mt-2 mb-3">
+                      <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
+                      <div class="col-md-3 mt-2 mb-3">
+                           
+                      
                         <ul *ngIf="testDisplay" class="list-group">
                           <li class="list-group-item" style="text-align: center;"><b>&nbsp;&nbsp;Selected Lab Tests</b>
                           </li>
@@ -272,21 +287,28 @@
                       </div>
                     </div>
                     <div class="row">
+                      <div class="col-md-1 mb-1"></div>
+                      <div class="col-md-3 mb-3">
                       <button type="button" (click)="dialogv()"
-                        class="btn btn-primary waves-effect btn-label waves-light r-blue">Select Lab Tests</button>
-                      <p-dialog header="Select Lab Test" [(visible)]="displayv">
+                      class="btn btn-primary  waves-light r-blue">Select Lab Tests</button>
+                        </div>
+                        <p-dialog [class.overlay]="displayv"  (onShow)="disableScroll()" (onHide)="enableScroll()" header="Select Lab Test" [(visible)]="displayv">
                         <div class="row">
 
-                          <div class="col-md-12 mb-3">
-                            <p-multiSelect [options]="matList" formControlName="labTestValuev"
-                              optionLabel="name"></p-multiSelect>
+
+                          
+                          <div class="col-md-2 mb-3"></div>
+                          <div class="col-md-10 mb-3">
+                            <p-multiSelect [options]="matList" styleClass="custom-multiselect" 
+                            formControlName="labTestValuev" optionLabel="name"></p-multiSelect>
+                      
                           </div>
                           <br>
                           <br>
                           <br>
                           <br>
-                          <div class="col-md-9 mb-3"></div>
-                          <div class="col-md-3 mb-3">
+                          <div class="col-md-3 mb-3"></div>
+                          <div class="col-md-6 mb-3">
                             <button type="button" align="right" (click)="labValuesv()"
                               class="btn btn-primary r-blue">Submit Lab Tests</button>
                           </div>
@@ -295,8 +317,10 @@
                       <br>
                       <!-- <h5 *ngIf="testDisplayv">Selected Lab Tests are: {{multipleTestsv}}</h5> -->
 
-                      <div class="col-md-3 mt-2 mb-3"></div>
-                      <div class="col-md-5 mt-2 mb-3">
+                      <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
+                      <div class="col-md-3 mt-2 mb-3">
+                        
+                     
                         <ul *ngIf="testDisplayv" class="list-group">
                           <li class="list-group-item" style="text-align: center;"><b>&nbsp;&nbsp;Selected Lab Tests</b>
                           </li>
