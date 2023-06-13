@@ -13,6 +13,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MaterialComponent } from './material/material.component';
 import {PickListModule} from 'primeng/picklist';
 import {ChipsModule} from 'primeng/chips';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {DialogModule} from 'primeng/dialog';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -25,13 +27,17 @@ import {ChipsModule} from 'primeng/chips';
     MaterialComponent
   ],
   imports: [
+
     CommonModule,
     CRORoutingModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
     PickListModule,
-    ChipsModule
+    ChipsModule,
+    MultiSelectModule,
+    DialogModule
+    
   ]
 })
 export class CROModule { }

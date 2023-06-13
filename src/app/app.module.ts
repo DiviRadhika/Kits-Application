@@ -16,7 +16,7 @@ import { ApplicationadminModule } from './applicationadmin/applicationadmin.modu
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CROModule,
     SponsorModule,

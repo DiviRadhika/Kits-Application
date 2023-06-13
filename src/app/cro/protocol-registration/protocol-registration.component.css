@@ -44,12 +44,30 @@
 }
 
 
-::ng-deep .p-picklist .p-picklist-list{
-	height:250px;
+::ng-deep .p-picklist .p-picklist-list {
+	height: 250px;
 	width: 300px
-	}
-	
-	
+}
+
+::ng-deep .p-dialog {
+	width: 60%;
+	height: 60%
+}
+
+::ng-deep .p-multiselect {
+	width: 100%;
+
+}
+
+::ng-deep .p-multiselect .p-multiselect-items .p-multiselect-item-label {
+	line-height: 20px;
+	/* Adjust the line-height as needed */
+}
+
+::ng-deep .pi-multiselect-panel .ui-multiselect-item {
+	height: 20px; /* Adjust the height as needed */
+	line-height: 100%; /* Adjust the line-height as needed */
+  }
 
 .r-dark {
 	background: #000 !important;
@@ -162,15 +180,15 @@ hr {
 }
 
 
-.nav-tabs .nav-link{
-	border-radius:0px;
+.nav-tabs .nav-link {
+	border-radius: 0px;
 }
 
-.nav-tabs{
-	font-size:14px;
+.nav-tabs {
+	font-size: 14px;
 }
 
-.nav-tabs .nav-link.active{
-	background:#20456a;
-	color:#FFF;
+.nav-tabs .nav-link.active {
+	background: #20456a;
+	color: #FFF;
 }
