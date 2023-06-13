@@ -75,16 +75,7 @@ cro_protocol = cro_protocols_ns.model(
 
 class CrosProtocolsList(Resource):
     @cro_protocols_ns.doc("Get all the cros protocols")
-    @jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
 
 
