@@ -32,7 +32,7 @@ meterial_details = cro_protocol_ns.model(
     {
         "meterial_id": fields.String(required=True),
         "size": fields.String(required=True),
-        "frozen_status": fields.String(required=True),
+        "frozen_status": fields.Boolean(required=True),
         "image": fields.String(required=True),
         "quantity": fields.Integer(required=True),
     },
@@ -125,10 +125,13 @@ class CroProtocol(Resource):
     # @jwt_required(fresh=True)
     def post(self):
         request_json = request.get_json()
+        protocol_data = CroProtocolModel.get_by_protocol_id(request_json['protocol_id'])
+        if protocol_data:
+            return {"message": "protocol already exists"}, 500
         cro_protocol_json = {
             "protocol_id": request_json["protocol_id"],
             "protocol_name": request_json["protocol_name"],
-            "sponsor_id": request_json["sponser_id"],
+            "sponsor_id": request_json["sponsor_id"],
             "cro_id": request_json["cro_id"],
             "no_of_visits": request_json["no_of_visits"],
             "total_patients": request_json["total_patients"],
@@ -143,7 +146,7 @@ class CroProtocol(Resource):
                     "lab_test_ids": item["lab_test_ids"],
                     "meterial_details": item["meterial_details"],
                     "protocol_id": cro_protocol_id,
-                    "screening_kit_count": request_json["screening_kit_count"],
+                    "screening_kit_count": item["screening_kit_count"],
                 }
                 screening_kit_data = screening_kit_details_schema.load(
                     screening_item_json
@@ -154,7 +157,7 @@ class CroProtocol(Resource):
             for item in visit_kit_details:
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
-                    "visit_kit_count": request_json["visit_kit_count"],
+                    "visit_kit_count": item["visit_kit_count"],
                     "lab_test_ids": item["lab_test_ids"],
                     "meterial_details": item["meterial_details"],
                 }

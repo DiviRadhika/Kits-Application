@@ -12,7 +12,7 @@ class CroProtocolModel(db.Model):
     protocol_name = db.Column(db.String)
     sponsor_id = db.Column(UUID(as_uuid=True), db.ForeignKey("sponsor.sponsor_id"))
     cro_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro.cro_id"))
-    no_of_sites = db.Column(db.Integer)
+    no_of_visits = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
     no_of_screens = db.Column(db.Integer)
     # user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
@@ -24,6 +24,10 @@ class CroProtocolModel(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
+    
+    @classmethod
+    def get_by_protocol_id(cls, protocol_id):
+        return cls.query.filter_by(protocol_id=protocol_id).first()
 
     def save_to_db(self):
         db.session.add(self)
