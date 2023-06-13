@@ -24,7 +24,9 @@ cro_protocols_ns = Namespace(
 cro_protocol_schema = CroProtocolSchema()
 cro_list_protocols_schema = CroProtocolSchema(many=True)
 screening_kit_details_schema = ScreeningKitDetailsSchema()
+multi_screening_kit_details_schema = ScreeningKitDetailsSchema(many=True)
 visit_kit_details_schema = VisitKitDetailsSchema()
+multi_visit_kit_details_schema = VisitKitDetailsSchema(many=True)
 
 
 meterial_details = cro_protocol_ns.model(
@@ -101,15 +103,15 @@ class CroProtocolActionsById(Resource):
                 cro_protocol_id
             )
             if not screening_kit_details:
-                response["screening_kit_details"] = {}
-            response["screening_kit_details"] = screening_kit_details_schema.dump(
+                response["screening_kit_details"] = []
+            response["screening_kit_details"] = multi_screening_kit_details_schema.dump(
                 screening_kit_details
             )
 
             visit_kit_details = VisitKitDetailsModel.get_by_protocol_id(cro_protocol_id)
             if not visit_kit_details:
-                response["visit_kit_details"] = {}
-            response["visit_kit_details"] = visit_kit_details_schema.dump(
+                response["visit_kit_details"] = []
+            response["visit_kit_details"] = multi_visit_kit_details_schema.dump(
                 visit_kit_details
             )
             response["protocol"] = cro_dump_data
@@ -125,7 +127,7 @@ class CroProtocol(Resource):
     # @jwt_required(fresh=True)
     def post(self):
         request_json = request.get_json()
-        protocol_data = CroProtocolModel.get_by_protocol_id(request_json['protocol_id'])
+        protocol_data = CroProtocolModel.get_by_protocol_id(request_json["protocol_id"])
         if protocol_data:
             return {"message": "protocol already exists"}, 500
         cro_protocol_json = {

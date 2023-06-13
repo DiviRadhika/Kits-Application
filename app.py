@@ -45,6 +45,7 @@ from resources.cro_protocol import (
     CrosProtocolsList,
     cro_protocol_ns,
     cro_protocols_ns,
+    CroProtocolActionsById,
 )
 from resources.users import (
     login_ns,
@@ -206,6 +207,7 @@ lab_tests_ns.add_resource(LabtestssList, "")
 lab_test_ns.add_resource(LabActionsById, "/<string:lab_test_id>")
 cro_protocol_ns.add_resource(CroProtocol, "")
 cro_protocols_ns.add_resource(CrosProtocolsList, "")
+cro_protocol_ns.add_resource(CroProtocolActionsById, "/<string:cro_protocol_id>")
 clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")
 clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 login_ns.add_resource(SendOTP, "/sendotp")

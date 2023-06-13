@@ -24,10 +24,14 @@ class CroProtocolModel(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
-    
+
     @classmethod
     def get_by_protocol_id(cls, protocol_id):
         return cls.query.filter_by(protocol_id=protocol_id).first()
+
+    @classmethod
+    def get_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
 
     def save_to_db(self):
         db.session.add(self)
