@@ -15,6 +15,10 @@ class VisitKitDetailsModel(db.Model):
     def find_all(cls):
         return cls.query.all()
 
+    @classmethod
+    def get_by_protocol_id(cls, protocol_id):
+        return cls.query.filter_by(protocol_id=protocol_id).all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

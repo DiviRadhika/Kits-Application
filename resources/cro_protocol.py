@@ -9,6 +9,8 @@ from flask_jwt_extended import (
     get_jwt,
     current_user,
 )
+from models.screening_kit import ScreeningKitDetailsModel
+from models.visit_kit import VisitKitDetailsModel
 from schemas.screening_kit import ScreeningKitDetailsSchema
 from schemas.visit_kit import VisitKitDetailsSchema
 
@@ -82,6 +84,39 @@ class CrosProtocolsList(Resource):
                 "error": "not_authorized",
             }, 401
         return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
+
+
+class CroProtocolActionsById(Resource):
+    @cro_protocol_ns.doc("get by id")
+    def get(self, cro_protocol_id):
+        try:
+            cro_data = CroProtocolModel.get_by_id(cro_protocol_id)
+            if not cro_data:
+                return {"message": "cro data not found"}, 400
+
+            response = {}
+            cro_dump_data = cro_protocol_schema.dump(cro_data)
+            cro_protocol_id = cro_data.id
+            screening_kit_details = ScreeningKitDetailsModel.get_by_protocol_id(
+                cro_protocol_id
+            )
+            if not screening_kit_details:
+                response["screening_kit_details"] = {}
+            response["screening_kit_details"] = screening_kit_details_schema.dump(
+                screening_kit_details
+            )
+
+            visit_kit_details = VisitKitDetailsModel.get_by_protocol_id(cro_protocol_id)
+            if not visit_kit_details:
+                response["visit_kit_details"] = {}
+            response["visit_kit_details"] = visit_kit_details_schema.dump(
+                visit_kit_details
+            )
+            response["protocol"] = cro_dump_data
+            return response, 200
+        except (Exception, exc.SQLAlchemyError) as e:
+            print(e)
+            return {"error": "failed to get the data"}, 500
 
 
 class CroProtocol(Resource):

@@ -107,7 +107,7 @@ class Sitedata(Resource):
                 "email": site_data_json["email"],
                 "password": site_data_json["password"],
                 "status": site_data_json["status"],
-                "username": site_data_json["username"],
+                # "username": site_data_json["username"],
                 "role": site_data_json["role"],
             }
             user_table_data = user_schema.load(new_user_data)
