@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, ValidationErrors, FormArray, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 // import { AdminService } from '../admin.service';
@@ -10,6 +10,8 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
+  
+
   isEdit: boolean = false;
   status:  string[] = ['Active', 'In Active'];
   userForm: FormGroup = new FormGroup({
@@ -39,8 +41,11 @@ export class UserCreateComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private fb:FormBuilder
+  ) {
+  
+   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data: any) => {
@@ -113,4 +118,7 @@ export class UserCreateComponent implements OnInit {
       }
     }
   }
+
 }
+
+

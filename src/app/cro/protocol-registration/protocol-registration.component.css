@@ -50,8 +50,8 @@
 }
 
 ::ng-deep .p-dialog {
-	width: 30%;
-	height: 60%
+	width: 50%;
+	height: 80%
 }
 
 ::ng-deep .p-multiselect {
@@ -87,7 +87,7 @@
 ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
     font-size: 1.25rem;
-    margin-left: 27%;
+    margin-left: 25%;
     text-align: center;
 }
 

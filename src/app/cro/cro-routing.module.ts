@@ -8,6 +8,7 @@ import { SponsorGridComponent } from './sponsor-grid/sponsor-grid.component';
 import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
 import { MaterialComponent } from './material/material.component';
+import { VisitComponent } from './visit/visit.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
 
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
   {path:'material', component:MaterialComponent},
+  {path:'visits', component:VisitComponent},
  
 
 

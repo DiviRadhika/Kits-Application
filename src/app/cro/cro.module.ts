@@ -16,6 +16,9 @@ import {ChipsModule} from 'primeng/chips';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DialogModule} from 'primeng/dialog';
 import {CardModule} from 'primeng/card';
+import { VisitComponent } from './visit/visit.component';
+import {TabViewModule} from 'primeng/tabview';
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -25,7 +28,8 @@ import {CardModule} from 'primeng/card';
     SponsorGridComponent,
     AddSiteComponent,
     LabCreateComponent,
-    MaterialComponent
+    MaterialComponent,
+    VisitComponent
   ],
   imports: [
 
@@ -38,7 +42,9 @@ import {CardModule} from 'primeng/card';
     ChipsModule,
     MultiSelectModule,
     DialogModule,
-    CardModule
+    CardModule,
+    TabViewModule,
+    AccordionModule
     
   ]
 })
