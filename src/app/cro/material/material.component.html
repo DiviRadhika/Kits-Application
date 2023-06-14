@@ -89,11 +89,12 @@
                                     <div class="mb-3">
                                         <label for="formrow-firstname-input" class="form-label">Total No.of
                                             Visits</label>
-                                        <input type="text" formControlName="total_visits" [(ngModel)]="totalVisits"
-                                            (input)="addVisit($event)" class="form-control" id=""
-                                            placeholder=" "
-                                            [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
-                                    </div>
+                                        <input type="text" formControlName="total_visits" class="form-control"
+                                            (input)="visits($event)" id="" placeholder="">
+                                            <!-- [class.is-invalid]="shouldShowRequired('total_visits') && VisitKitMatForm.get('total_visits')?.touched"> -->
+
+
+                                                    </div>
                                 </div>
 
                                 <div class="col-md-4">
@@ -291,7 +292,10 @@
 
                                         </div>
                                     </div>
-                                    <div class="tab-pane active" *ngIf="visit" id="visit" role="tabpanel">
+                                   
+
+
+                                    <div class="tab-pane active" *ngIf="visit" role="tabpanel">
                                         <!-- <div *ngIf="visit" class="tab-pane"  role="tabpanel"> -->
                                         <div class="row">
                                             <div class="col-md-12 mt-2 mb-3">
@@ -346,112 +350,9 @@
 
                                                 </div>
 
-                                                <div id="visit" class="col-md-12 mb-3">
-
-                                                    <form [formGroup]="VisitKitMatForm">
-                                                        <div formArrayName="materialList">
-                                                            <div *ngFor="let visitGroup of  VisitKitMatForm.get('materialList').controls; let i = index"
-                                                                [formArrayName]='i'>
-
-                                                                <div class="col-md-12 mb-3" align="right">
-                                                                    <div class="mb-2 text-right" width="100%">
-                                                                        <button type="button"
-                                                                            class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
-                                                                            (click)="addVisitMatKit(i)">
-                                                                            <i class="bx bx-plus label-icon"></i> Add
-                                                                            Material
-                                                                        </button>
-                                                                    </div>
-                                                                </div>      
-                                                                    <div >
-                                                              <table class="table table-striped mb-0">
-                                                                                <thead Style="background:#EEE">
-                                                                                    <tr>
-                                                                                        <th>Material</th>
-                                                                                        <th>Size</th>
-                                                                                        <th>Quantity</th>
-                                                                                        <th>Frozen at Site</th>
-                                                                                        <th>Image</th>
-                                                                                        <th>
-                                                                                            Delete
-                                                                                        </th>
-
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <tr *ngFor="let visitGroup1 of visitGroup.controls; let j = index" [formGroupName]="j">
-                                      ">
-
-
-                                                                                        <th scope="row">
-                                                                                            <select
-                                                                                                formControlName="meterial_id"
-                                                                                                (change)="onVisitKitMatChange($event,j)"
-                                                                                                class="form-select form-control"
-                                                                                                aria-placeholder="Select Test">
-
-                                                                                                <option
-                                                                                                    *ngFor="let lab of labMatTestsList"
-                                                                                                    [value]="lab.meterial_id">
-                                                                                                    {{ lab.name }}
-                                                                                                </option>
-                                                                                            </select>
-                                                                                        </th>
-                                                                                        <td>
-                                                                                            <select
-                                                                                                formControlName="size"
-                                                                                                class="form-select form-control">
-                                                                                                <option
-                                                                                                    *ngFor="let lab of getSizev(j)">
-                                                                                                    {{ lab }}
-                                                                                                </option>
-                                                                                            </select>
-
-                                                                                        </td>
-                                                                                        <!-- <td>
-                                      <input formControlName="size" type="text" class="form-control" value="" />
-                                    </td> -->
-                                                                                        <td>
-                                                                                            <input
-                                                                                                formControlName="quantity"
-                                                                                                type="number"
-                                                                                                class="form-control"
-                                                                                                value="" />
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input
-                                                                                                formControlName="frozen_status"
-                                                                                                class="form-check-input"
-                                                                                                type="checkbox"
-                                                                                                value="checked"
-                                                                                                id="debugInfo" />
-                                                                                        </td>
-                                                                                        <td><img formControlName="image"
-                                                                                                ngDefaultControl
-                                                                                                class="bx bx-image-alt font-size-24"
-                                                                                                [src]="VisitKitMatForm.controls.materialList?.controls[j].controls['image'].value"
-                                                                                                width="30" height="30">
-                                                                                            <!-- <i
-                                          formControlName="Image"
-                                          class="bx bx-image-alt font-size-24"
-                                        ></i> -->
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <button type="button"
-                                                                                                (click)="removeVisitMatKit(j)"
-                                                                                                class="btn btn-danger ml-3 mt-2">Delete</button>
-                                                                                            <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
-                                                                                        </td>
-
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                     
-                                                                    </div>
-                                                                    </div>
-                                                                </div>
-                                                            
-                                                    </form>
+                                                <div id="visit" *ngIf="visit" class="col-md-12 mb-3">
+                                                    
+                                
 
                                                 </div>
 
@@ -473,10 +374,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </form>
                 <!-- end col -->
             </div>
@@ -498,6 +395,7 @@
 <!-- end main content-->
 <!-- </div> -->
 <!-- END layout-wrapper -->
+
 
 
 

@@ -29,8 +29,14 @@ export class ProtocolRegistrationComponent {
   multipleTestsvId: any[] = []
   selectedValue: any;
   selectedValuev: any;
+  formData: any;
+
+  labMatList: any;
+
+
+  selectedOption: any;
   // MaterialList: FormArray = new FormArray([])
-  constructor(private protocolService: ProtocolService, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
+  constructor(private protocolService: ProtocolService, private fb:FormBuilder, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
   sponsers: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -295,6 +301,16 @@ enableScroll() {
   }
 
   SubmitData() {
+    this.formData = [];
+  
+    // Iterate over the cards and access their form values
+    for (const card of this.cards) {
+      const formValues = card.form.value;
+      this.formData.push(formValues);
+    }
+  console.log(this.formData);
+  
+    
     if (this.protocolForm.invalid) {
       alert('Please Fill All Mandatory Fields')
       Object.keys(this.protocolForm.controls).forEach((key) => {
@@ -323,13 +339,13 @@ enableScroll() {
         {
           "visit_kit_count":Number(this.protocolForm.controls['selected_vkit_count'].value),
           "lab_test_ids":  this.multipleTestsvId,
-          "meterial_details": this.VisitKitMatForm.value.materialList
+          "meterial_details":  this.formData
         }
       ]
     
     }
  
-
+   
     console.log(data);
 
     this.protocolService.postProtocol(data).subscribe(
@@ -337,7 +353,7 @@ enableScroll() {
         alert('protocol created successfully');
       },
       (err:any)=>{
-        alert('internal server err');
+        alert(err.errorr.message)
       }
       );
   }
@@ -417,6 +433,106 @@ getSizev(index: number) {
   }
     
    }
+   
+  cards: { form: FormGroup }[] = [];
+
+
+  addCard() {
+    const initialRowsCount = this.cards.length + 1; 
+    const rowsArray = new FormArray([]);
+    const cardForm = this.fb.group({
+      visits: rowsArray
+    });
+    this.cards.push({ form: cardForm });
+  }
+    onMeterialIdChange(event: any, cardIndex: number, rowIndex: number) {
+      const selectedValue = event.target.value;
+      const cardForm = this.cards[cardIndex].form;
+    
+      // Find the selected option in the labMatTestsList
+      this.selectedOption = this.labMatTestsList.find((option) => option.meterial_id === selectedValue);
+      console.log(this.selectedOption);
+    
+      if (this.selectedOption) {
+        const rowFormArray = this.getRows(cardIndex);
+        console.log(rowFormArray);
+       
+        const rowFormGroup = rowFormArray?.at(rowIndex) as FormGroup;
+        console.log(rowFormGroup);  
+        if (rowFormGroup) {
+          const quantityControl = rowFormGroup.get('quantity');
+          const imageControl = rowFormGroup.get('image');
+          
+          console.log(quantityControl);
+    
+          if (quantityControl) {
+            quantityControl.setValue(this.selectedOption.name);
+          }
+          if (imageControl) {
+            imageControl.setValue(this.selectedOption.image);
+          }
+          console.log(this.selectedOption.image);
+          
+        }
+       
+        rowFormGroup.get('image')?.setValue('data:image/jpeg;base64,'+this.selectedOption.image);
+        rowFormGroup.get('size')?.setValue('');
+
+
+      
+      }
+    }
+    getSizesv(cardIndex: number, rowIndex: number): any {
+      const rowFormArray = this.getRows(cardIndex);
+      const rowFormGroup = rowFormArray.at(rowIndex) as FormGroup;
+      const selectedMaterialId = rowFormGroup.get('meterial_id')?.value;
+    
+      if (selectedMaterialId) {
+        const selectedOption = this.labMatTestsList.find((option) => option.meterial_id === selectedMaterialId);
+    
+        if (selectedOption) {
+          return selectedOption.size;
+        }
+      }
+    
+      return [];
+    }
+    
+getMaterialId(cardIndex: number, rowIndex: number): string {
+  const cardFormArray = this.getRowsFormArray(cardIndex);
+  const rowFormGroup = cardFormArray.at(rowIndex) as FormGroup;
+  return rowFormGroup.get('material_id')?.value;
+}
+  addRow1(cardIndex: number) {
+    const cardFormArray = this.getRowsFormArray(cardIndex);
+    cardFormArray.push(this.createRow());
+  }
+  deleteRow(cardIndex: number, rowIndex: number) {
+    const cardFormArray = this.getRowsFormArray(cardIndex);
+    cardFormArray.removeAt(rowIndex);
+  }
+
+  createRow(): FormGroup {
+    return this.fb.group({
+      meterial_id: ['', Validators.required],
+      size: ['', Validators.required],
+      image: ['', Validators.required],
+      quantity: ['', Validators.required],
+      frozen_status: ['']
+    });
+  }
+  
+  getRowsFormArray(cardIndex: number): FormArray {
+    const cardForm = this.cards[cardIndex].form;
+    return cardForm.get('visits') as FormArray;
+  }
+  getRows(cardIndex: number): FormArray {
+    const card = this.cards[cardIndex];
+    return card.form.get('visits') as FormArray;
+  }
+ 
+
+
  } 
 
 

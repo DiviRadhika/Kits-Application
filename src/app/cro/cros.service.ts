@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { endPointsUser } from '../api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrosService {
+  private formDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  formData$: Observable<any> = this.formDataSubject.asObservable();
+
+  sendFormData(formData: any) {
+    this.formDataSubject.next(formData);
+  }
   constructor(private _httpClient: HttpClient) { }
 
   // Services for Sponsors

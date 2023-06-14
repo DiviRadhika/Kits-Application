@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitDistributionComponent } from './kit-distribution/kit-distribution.component';
 import { SampleCollectionComponent } from './sample-collection/sample-collection.component';
 
+import {CardModule} from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SampleCollectionComponent } from './sample-collection/sample-collection
     CommonModule,
     CentralLabRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CardModule,
+    ButtonModule
   ]
 })
 export class CentralLabModule { }

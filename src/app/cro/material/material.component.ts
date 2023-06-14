@@ -15,7 +15,7 @@ export class MaterialComponent  {
   screening: boolean = true;
   visit: boolean = false;
   valueVisit: any= 0;
-  listItems: string[]=[];
+  listItems: any[]=[];
   listTabs: string[]=[];
   tabnum: number = 0;
   matList: any;
@@ -79,7 +79,7 @@ this.generateVisitForms(1)
 
     });
 
-  this.addVisit(1)
+  this.addVisit()
     this.croService.getLabTests().subscribe((labTestsList) => {
       this.matList = labTestsList
       this.vmatList = labTestsList
@@ -133,16 +133,74 @@ return this.VisitKitMatForm.get('materialList') as FormArray
 get visitMaterialList(): FormArray{
   return this.VisitKitMatForm.get('materialList') as FormArray
   }
-  addVisit(e:any){
-    console.log(e);
-    this.listItems = []; 
-    for (let i = 1; i <= e.data; i++)
-     { this.listItems.push(`Item ${i}`); 
+  visits(value: any) {
+    for (let i = 1; i <= value.data; i++)
+       { this.listItems.push(`Item ${i}`); 
+      
+      //  this.materialList.push(this.addVisitKitMatData());
+      }
+    console.log(value.data);
+    this.valueVisit = value;
+    const materialList = this.VisitKitMatForm.get('materialList') as FormArray;
+    const currentLength = materialList.length;
+  
+    if (currentLength < value.data) {
+      const additionalItems = value.data - currentLength;
+      for (let i = 0; i < additionalItems; i++) {
+        materialList.push(this.addVisitKitMatData());
+      }
+    } else if (currentLength > value.data) {
+      const itemsToRemove = currentLength - value.data;
+      for (let i = 0; i < itemsToRemove; i++) {
+        materialList.removeAt(materialList.length - 1);
+      }
+    }
+  }
+  activeTab: number = 0; 
+  setActiveTab(index: number) {
+    this.activeTab = index;
+  }
+  // visits(value: any){
+  //   console.log(value.data);
     
-     }
-    this.listItems.forEach(value=>{
-      this.materialList.push(this.addMaterialList())
-    })
+  //   this.valueVisit= value
+  //   this.listItems = []; 
+  //   for (let i = 1; i <= value.data; i++)
+  //    { this.listItems.push(`Item ${i}`); 
+    
+  //   //  this.materialList.push(this.addVisitKitMatData());
+  //   } 
+  //   this.listItems.push(this.addMaterialList())
+  // }
+  addVisit(){
+    console.log('kl');
+    this.screening = false;
+    this.visit = true
+    
+  
+      // this.listItems.push(this.listItems.length+1); 
+    
+     
+    // this.listItems.forEach(value=>{
+    //   this.materialList.push(this.addMaterialList())
+    // })
+    this.listItems.push(this.addMaterialList())
+  }
+  tabs: any[] = [];
+  addTab() {
+    const newTab = {
+      title: 'New Tab',
+      content: 'Tab Content'
+    };
+    this.listItems.push(this.addMaterialList())
+  }
+ 
+ 
+
+  addRecord(index: number) {
+    console.log(index);
+    const visitAtIndex = this.getVisitAtIndex(index);
+    visitAtIndex.push(this.addVisitKitMatData())
   }
   addMaterialList(){
     const FormGroup = this.addVisitKitMatData() as FormGroup;
@@ -154,6 +212,8 @@ getVisitAtIndex(index: any): FormArray{
 
 }
 addVisitMatKit(index: number): FormArray {
+  console.log(index);
+  
   return this.materialList.at(index) as FormArray
   // this.VisitKitMatForm.get('materialList').push(this.addVisitKitMatData());
 }
@@ -239,19 +299,7 @@ onMaterialKitAdd() {
   // get materialList(): FormArray {
   //   return this.VisitKitMatForm.get('materialList') as FormArray;
   // }
-  visits(value: any){
-  console.log(value.data);
-  
-  
-  this.valueVisit= value
-  this.listItems = []; 
-  for (let i = 1; i <= value.data; i++)
-   { this.listItems.push(`Item ${i}`); 
-  
-   this.materialList.push(this.createVisitForm());
-  } 
-} 
-  
+ 
 
 generateVisitForms(value: any) {
 
