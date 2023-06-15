@@ -55,6 +55,7 @@ visite_meterial_details = cro_protocol_ns.model(
     "visit_meterial_details",
     {
         "visits": fields.List(fields.Nested(meterial_details)),
+        "selected_lab_tests": fields.List(fields.String(required=True)),
     },
 )
 
@@ -63,7 +64,6 @@ visit_kit_details = cro_protocol_ns.model(
     {
         # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
-        "lab_test_ids": fields.List(fields.String(required=True)),
         "meterial_details": fields.List(fields.Nested(visite_meterial_details)),
     },
 )
