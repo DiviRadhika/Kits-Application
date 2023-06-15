@@ -21,6 +21,8 @@ export class KitPreprationComponent implements OnInit {
   scount: any;
   vcount: any;
   displayValues: boolean = false;
+  visitTabs:Array<any> = [];
+  visitRecords: any;
   constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
@@ -99,6 +101,43 @@ export class KitPreprationComponent implements OnInit {
     }
   }
   getprotocolDetails(id: any) {
+    
+  
+      // const printSection = document.getElementById('printSection');
+      // if (printSection) {
+      //   const printContent = printSection.innerHTML;
+      //   const printWindow = window.open('', '', 'height=500,width=500');
+      //   if (printWindow) {
+      //     const printDocument = printWindow.document;
+      //     printDocument.write(`
+      //       <html>
+      //       <head>
+      //         <title>Print</title>
+      //         <style>
+      //           /* Custom styling for the print output */
+      //           /* Add any necessary styles for your specific requirements */
+      //         </style>
+      //       </head>
+      //       <body>
+      //         ${printContent}
+      //         <script>
+      //           setTimeout(() => {
+      //             window.print();
+      //             window.onafterprint = function () {
+      //               window.close();
+      //             };
+      //           }, 100);
+      //         </script>
+      //       </body>
+      //       </html>
+      //     `);
+      //   }
+      // }
+    
+    
+    
+    
+
     console.log(id.target.value);
 
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
@@ -114,8 +153,21 @@ export class KitPreprationComponent implements OnInit {
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
       this.scount = this.protocolIdDetails.no_of_screens 
       this.vcount =  this.protocolIdDetails.no_of_visits
+console.log(this.visitDetails);
+this.vMatDetails.forEach((tabs: any) => {
+        this.visitTabs.push(tabs);
+        this.visitTabs.forEach((visitRecord: any) => {
+          this.visitRecords.push(visitRecord)
+      });
+
+    });
+console.log(this.visitTabs);
+console.log(this.visitRecords,'visitRecords');
 
 
+      // Protocols.forEach((protocol: any) => {
+      //   this.protocols.push(protocol);
+      // });
     });
 
   }
