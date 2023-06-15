@@ -69,7 +69,6 @@ visit_kit_details = cro_protocol_ns.model(
 )
 
 
-
 cro_protocol = cro_protocols_ns.model(
     "cro_protocol",
     {
