@@ -188,7 +188,7 @@ class CroProtocol(Resource):
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
                     "visit_kit_count": item["visit_kit_count"],
-                    "lab_test_ids": item["lab_test_ids"],
+                    #"lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
                 }
