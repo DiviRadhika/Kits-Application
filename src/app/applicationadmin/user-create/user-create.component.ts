@@ -49,7 +49,11 @@ export class UserCreateComponent implements OnInit {
       if (data.id) {
         this.isEdit = true;
         this.id = data.id;
-        (data.id).subscribe((data: any) => {
+      
+        
+        this.adminService.getUserbyId(data.id).subscribe((data: any) => {
+          console.log(data);
+          
           this.getUserData = data;
           this.userForm.patchValue(this.getUserData);
           this.userForm.controls['email'].disable();
@@ -106,7 +110,9 @@ export class UserCreateComponent implements OnInit {
           }
         );
       } else {
-        userObj.status = 'Active'
+        userObj.status = true
+        console.log(typeof(userObj.status));
+        
         this.adminService.createUser(userObj).subscribe(
           (data: any) => {
             alert('User details created successfully');

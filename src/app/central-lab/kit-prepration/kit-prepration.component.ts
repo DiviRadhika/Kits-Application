@@ -37,7 +37,7 @@ export class KitPreprationComponent implements OnInit {
   public base64textString: string = '';
   public bas2: string = '';
   preprationData = ['InProgress', 'Completed']
-
+  kitIdv: any =''
   /* nmModel Variables */
   selected_protocol_id: any;
   // selected_sponsor_id: any;
@@ -72,14 +72,14 @@ export class KitPreprationComponent implements OnInit {
     this.protocolService.getProtocol().subscribe((protocols) => {
       this.ProtoData(protocols);
     });
-  
+   
    
   
     this.ScreenKitForm = this.formBuilder.group({
 
-      screenKitList: this.formBuilder.array([this.addScreenKitData()])
-
-    })
+      screenKitList: this.formBuilder.array([])
+    });
+  
  
 
     this.VisitKitForm = this.formBuilder.group({
@@ -91,12 +91,70 @@ export class KitPreprationComponent implements OnInit {
     this.listItems = [];
    
   }
+  printLabel(i:any, id: any){
+
+
+  const kitId = this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').value;
+
+  const ckitId = this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').value;
+
+ 
+console.log(this.sMatDetails);
+
+ 
+    
+      const printSection = document.getElementById('printSection');
+      if (printSection) {
+        const printContent = printSection.innerHTML;
+        const printWindow = window.open('', '', 'height=500,width=500');
+        if (printWindow) {
+          const printDocument = printWindow.document;
+          printDocument.write(`
+            <html>
+            <head>
+              <title>Print</title>
+              <style>
+                /* Custom styling for the print output */
+                /* Add any necessary styles for your specific requirements */
+              </style>
+            </head>
+            <h1>Print Content</h1>
+            <p>KitId: ${kitId}</p>
+            <p>LabKitId: ${ckitId}</p>
+            <p>ProtocolId: ${this.protocolIdDetails.protocol_id}</p>
+            <p>ProtocolName: ${this.protocolIdDetails.protocol_name}</p>
+            <p>Type: Screening</p>
+            <p>Material:</p>
+            <div class="col-md-3 mb-3">
+            ${this.sMatDetails
+              .map(
+                (item) => `
+                <p>Material:</p>
+                  <p>Material ID: ${item.meterial_id}</p>
+                  <p>Size: ${item.size}</p>
+                  <p>Quantity: ${item.quantity}</p>
+                `
+              )
+              .join('')}
+          </div>
+              <script>
+                setTimeout(() => {
+                  window.print();
+                  window.onafterprint = function () {
+                    window.close();
+                  };
+                }, 100);
+              </script>
+            </body>
+            </html>
+          `);
+        }
+      }
+    
+  }
  
   getprotocolDetails(id: any) {
-
-
-  
-
+this.scount =''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
       console.log(protocols);
       this.displayValues = true;
@@ -115,7 +173,7 @@ export class KitPreprationComponent implements OnInit {
       this.visitTabs = []
       this.visitRecords = []
       this.visitRecordsRow = []
-  this.tets = []
+      this.tets = []
       this.vMatDetails.forEach((tabs: any) => {
       this.tets.push(tabs.selectedLabTests)
         this.visitTabs.push(tabs.visits);
@@ -125,71 +183,119 @@ export class KitPreprationComponent implements OnInit {
 
         });
       });
-    console.log(this.tets);
-    
-
-      console.log(this.visitRecords.length, 'records');
+  
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
-
-      console.log(this.visitRecordsRow, 'row');
-      for (let i = 1; i <= this.visitTabs.length; i++)
-      { 
-      this.addCard()
-      
-      this.addRow1(2)
-    
-     } 
+     
+   
+     
     });
 
-  
+     
   } 
+//   for (let i = 1; i <= this.scount ; i++)
+//   { 
+//     this.adjustScreenKitRows(this.scount);
+//  } 
+//  for (let i = 1; i <= this.vMatDetails.length; i++) {
+//   console.log('k');
+  
+
+//   this.addCard();
+
+
+  adjustvisitKitRows(count: number) {
  
-  addScreenKit() {
-    this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData());
+    const currentRowCount = this.getRows(0).length; // Assuming you're working with the first card
+  console.log(currentRowCount);
+  
+    if (count > currentRowCount) {
+      const rowsToAdd = count - currentRowCount;
+      for (let i = 0; i < rowsToAdd; i++) {
+        this.getRows(0).push(this.createRow()); // Assuming you're working with the first card and createRow() creates a new row FormGroup
+      }
+    } else if (count < currentRowCount) {
+      const rowsToRemove = currentRowCount - count;
+      for (let i = 0; i < rowsToRemove; i++) {
+        this.getRows(0).removeAt(this.getRows(0).length - 1); // Assuming you're working with the first card
+      }
+    }
+  }
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  adjustVisit(count: number) {
+    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
+    const currentRowCount = screenKitList.length;
+  
+    if (count < currentRowCount) {
+      // Remove excess rows
+      for (let i = currentRowCount - 1; i >= count; i--) {
+        screenKitList.removeAt(i);
+      }
+    } else if (count > currentRowCount) {
+      // Add new rows
+      for (let i = currentRowCount; i < count; i++) {
+        this.onScreenKitAdd(i);
+      }
+    }
+  }
+ 
+
+  adjustScreenKitRows(count: number) {
+    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
+    const currentRowCount = screenKitList.length;
+  
+    if (count < currentRowCount) {
+      // Remove excess rows
+      for (let i = currentRowCount - 1; i >= count; i--) {
+        screenKitList.removeAt(i);
+      }
+    } else if (count > currentRowCount) {
+      // Add new rows
+      for (let i = currentRowCount; i < count; i++) {
+        this.onScreenKitAdd(i);
+      }
+    }
+  }
+
+ 
+  addScreenKit(record:any) {
+    this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
     console.log(this.ScreenKitForm.controls);
+
+    // const screenKitListFormArray = this.ScreenKitForm.get('screenKitList') as FormArray;
+    // screenKitListFormArray.push(this.addScreenKitData(record))
   }
 
-  addVisitKit() {
-    this.VisitKitForm.get('visitKitList').push(this.addVisitKitData());
+ 
+  onScreenKitAdd(rec:any) {
 
-  }
-  onScreenKitAdd() {
-
-
+    
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
-    control1.push(this.addScreenKitData());
+    control1.push(this.addScreenKitData(rec));
+    
 
   }
 
-  addScreenKitData() {
+  addScreenKitData(record: string) {
 
     return this.formBuilder.group({
-      ckitId: [''],
+      ckitId: [{ value: this.protocolIdDetails.protocol_id+'sk', disabled: true }],
       kitId: [''],
       prepration: [''],
 
     })
   }
 
-  // onVisitKitAdd() {
-
-  //   //this.VisitKitForm.get('labTestsList').controls.push(this.addVisitKitData());
-  //   const control1 = this.VisitKitForm.get('visitKitList') as FormArray;
-  //   control1.push(this.addVisitKitData());
-  //   console.log(this.VisitKitForm.get('visitKitList').controls);
-  // }
-  showsc() {
-    this.screening = true;
-    this.visit = false
-  }
-  showv() {
-    // this.addVisitKit()
-    this.screening = false;
-    this.visit = true
-
-  }
+ 
   addVisitKitData() {
     return this.formBuilder.group({
       ckitId: [''],
@@ -203,73 +309,101 @@ export class KitPreprationComponent implements OnInit {
     Protocols.forEach((protocol: any) => {
       this.protocols.push(protocol);
 
-  
-  
     });
 
     console.log(this.protocols);
   }
 
- 
-
-
-
   SubmitData() {
-  console.log(this.VisitKitForm.value);
-  
-    const data =
-    {
-      protocol_id: this.selected_protocol_id,
-      // sponser_id: this.selected_sponsor_id,
-      // cro_id: this.selected_cro_id,
-      no_of_sites: Number(this.selected_sites_num),
-      total_patients: Number(this.selected_patients_num),
-      site_data: this.sitesForm.value.sites,
-      screening_kit_count: Number(this.selected_skit_count),
-      screening_kit_lab_test_details: this.ScreenKitForm.value.labTestsList,
-      visit_kit_count: Number(this.selected_vkit_count),
-      visit_kit_type: this.selected_vkit_variant,
-      visit_kit_details: this.VisitKitForm.value.labTestsList
+    const formData = [];
+ 
+    // Iterate over the cards and access their form values
+    for (const card of this.cards) {
+      const formValues = card.form.value;
+      formData.push(formValues);
     }
-
+     console.log(formData);
+    
+  
+    const data = {
+      "protocol_id": this.protocolIdDetails.protocol_id,
+      "screening_kit_details": [
+        {
+        
+         
+          "meterial_details": this.ScreenKitForm.value.screenKitList
+            
+      
+        }
+      ],
+      "visit_kit_details": [
+        {
+         
+         
+          "meterial_details":  formData
+        }
+      ]
+  
+    }
+ 
+   
     console.log(data);
 
     this.protocolService.postProtocol(data).subscribe(
-      (data: any) => {
+      (data:any) => {
         alert('protocol created successfully');
       },
-      (err: any) => {
-        alert('internal server err');
+      (err:any)=>{
+        alert(err.errorr.message)
       }
-    );
-  }
+      );
+  
+}
+ 
 
   cards: { form: FormGroup }[] = [];
-  visits(value: any){
-    console.log(value.data);
+ 
+
+  // addCard() {
+  //   const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
+  //   const rowsArray = new FormArray([]);
+  //   const cardForm = this.formBuilder.group({
+  //     visits: rowsArray
+  //   });
+  //   this.cards.push({ form: cardForm });
+  //   this.adjustvisitKitRows(this.vcount)
     
-    // this.valueVisit= value
-    // this.listItems = []; 
-   
-  }
+  // }
 
 
+
+  // addCard() {
+  //   alert('k')
+  //   const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
+  //   const rowsArray = new FormArray([]);
+  //   const cardForm = this.formBuilder.group({
+  //     rows: rowsArray
+  //   });
+  //   this.cards.push({ form: cardForm });
+
+  // }
 
   addCard() {
-    const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
-    const rowsArray = new FormArray([]);
     const cardForm = this.formBuilder.group({
-      rows: rowsArray
+      visits: this.formBuilder.array([]) // Initialize the visits form array
     });
+  
     this.cards.push({ form: cardForm });
+  
+    const cardIndex = this.cards.length - 1;
+    const visits = this.getRowsFormArray(cardIndex); // Get the visits form array of the newly added card
+  
+    for (let i = 0; i < this.vcount; i++) {
+      visits.push(this.createRow()); // Add a new row to the visits form array
+    }
   }
-
     
-getMaterialId(cardIndex: number, rowIndex: number): string {
-  const cardFormArray = this.getRowsFormArray(cardIndex);
-  const rowFormGroup = cardFormArray.at(rowIndex) as FormGroup;
-  return rowFormGroup.get('material_id')?.value;
-}
+
   addRow1(cardIndex: number) {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.push(this.createRow());
@@ -289,11 +423,11 @@ getMaterialId(cardIndex: number, rowIndex: number): string {
   
   getRowsFormArray(cardIndex: number): FormArray {
     const cardForm = this.cards[cardIndex].form;
-    return cardForm.get('rows') as FormArray;
+    return cardForm.get('visits') as FormArray;
   }
   getRows(cardIndex: number): FormArray {
     const card = this.cards[cardIndex];
-    return card.form.get('rows') as FormArray;
+    return card.form.get('visits') as FormArray;
   }
  
   onSubmit() {
