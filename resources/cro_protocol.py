@@ -128,15 +128,15 @@ class CroProtocolActionsById(Resource):
             if not visit_kit_details:
                 response["visit_kit_details"] = []
 
-            visit_lab_test_names = []
-            for visit_kit_detail in visit_kit_details:
-                lab_test_ids = visit_kit_detail.lab_test_ids
+            #visit_lab_test_names = []
+            #for visit_kit_detail in visit_kit_details:
+            #    lab_test_ids = visit_kit_detail.lab_test_ids
 
-                for lab_test in lab_test_ids:
-                    lab_data = LabtestModel.get_by_id(lab_test)
-                    visit_lab_test_names.append(lab_data.name)
+            #   for lab_test in lab_test_ids:
+            #      lab_data = LabtestModel.get_by_id(lab_test)
+            #      visit_lab_test_names.append(lab_data.name)
 
-                visit_kit_detail.lab_test_ids = visit_lab_test_names
+            # visit_kit_detail.lab_test_ids = visit_lab_test_names
 
             response["visit_kit_details"] = multi_visit_kit_details_schema.dump(
                 visit_kit_details
