@@ -161,16 +161,7 @@ class SendOTP(Resource):
 
 class UserList(Resource):
     @users_ns.doc("get user by id")
-    @jwt_required(fresh=True)
     def get(self, user_id):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         user_data = UserModel.find_by_id(id=user_id)
         if not user_data:
             return {"message": "user data not found"}, 400
@@ -185,16 +176,7 @@ class UserRegister(Resource):
 
     @user_ns.expect(creation)
     @user_ns.doc("User")
-    @jwt_required(fresh=True)
     def put(self):
-        userId = current_user.user_id
-        user_data = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user_data.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         user_json = request.json
         try:
             user_data = UserModel.find_by_email(user_json["email"])
