@@ -111,7 +111,7 @@ ngOnInit(): void {
        "district": this.sponsorForm.controls['district'].value,
        "region": this.sponsorForm.controls['region'].value,
        "zip_code": this.sponsorForm.controls['zip_code'].value,
-       "country": this.sponsorForm.controls['country'].value.value,
+       "country": this.sponsorForm.controls['country'].value,
        "office_telephone": this.sponsorForm.controls['office_telephone'].value,
        "mobile_telephone": this.sponsorForm.controls['mobile_telephone'].value.toString(),    
        "extension": this.sponsorForm.controls['extension'].value,

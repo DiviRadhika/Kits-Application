@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
-import { CrosService } from 'src/app/cro/cros.service';
-import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
+import { CrosService } from '../cros.service';
+import { ProtocolService } from '../protocol-registration/protocol-registration.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-kit-prepration',
-  templateUrl: './kit-prepration.component.html',
-  styleUrls: ['./kit-prepration.component.css']
+  selector: 'app-protocol-view',
+  templateUrl: './protocol-view.component.html',
+  styleUrls: ['./protocol-view.component.css']
 })
-export class KitPreprationComponent implements OnInit {
+export class ProtocolViewComponent implements OnInit {
+
+ 
 
   kitId = 3;
   screenid = 4;
@@ -25,7 +28,7 @@ export class KitPreprationComponent implements OnInit {
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
+  constructor(private route: Router,private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -91,11 +94,11 @@ export class KitPreprationComponent implements OnInit {
     this.listItems = [];
    
   }
+  pCreate(){
+    this.route.navigate(['/home/cro/protocolRegistration'])
+  }
  
   getprotocolDetails(id: any) {
-
-
-  
 
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
       console.log(protocols);
@@ -323,6 +326,7 @@ getMaterialId(cardIndex: number, rowIndex: number): string {
 
 
  
+
 
 
 

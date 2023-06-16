@@ -90,11 +90,19 @@
 
                   </div>
 
+                
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="text" class="form-control" id="Password" placeholder="Enter Password"
+                      <input type="password" class="form-control" id="password" placeholder="Enter Password"
                         formControlName="password">
+                      <div *ngIf="shouldShowRequired('password')" class="text-danger">
+                        Password is required.
+                      </div>
+                      <div *ngIf="siteForm.get('password')?.hasError('pattern')" class="text-danger">
+                        Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
+                      </div>
+                      
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -159,12 +167,14 @@
                     <div class="form-group">
                       <label>Country</label>
                       <select  formControlName="country" class="form-select" aria-label="Default select example">
-                        <option *ngFor="let option of myData" [value]="option">{{ option.text }}</option>
+                        <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
                       </select >
                     
                       <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
                         Country is required.     
                       </div>
+
+                
                     </div>
                   </div>
                   <div class="col-md-4">

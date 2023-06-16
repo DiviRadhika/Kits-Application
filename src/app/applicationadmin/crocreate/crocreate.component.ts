@@ -120,6 +120,7 @@ export class CROcreateComponent implements OnInit {
 
   submit() {
    console.log(this.CroForm.controls['mobile_telephone'].value.toString());
+   console.log(this.CroForm.controls['country'].value,);
    
     
       if (this.CroForm.invalid) {

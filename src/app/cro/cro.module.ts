@@ -19,6 +19,7 @@ import {CardModule} from 'primeng/card';
 import { VisitComponent } from './visit/visit.component';
 import {TabViewModule} from 'primeng/tabview';
 import {AccordionModule} from 'primeng/accordion';
+import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -29,7 +30,8 @@ import {AccordionModule} from 'primeng/accordion';
     AddSiteComponent,
     LabCreateComponent,
     MaterialComponent,
-    VisitComponent
+    VisitComponent,
+    ProtocolViewComponent
   ],
   imports: [
 
