@@ -50,7 +50,7 @@ export class AddSiteComponent  {
     site_data_name: new FormControl("", [Validators.required]),
     legal_site_data_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
-    address_2: new FormControl("", [Validators.required]),
+    address_2: new FormControl(""),
     address_3: new FormControl("", ),
     address_4: new FormControl(""),
     city: new FormControl("", [Validators.required]),
@@ -64,7 +64,10 @@ export class AddSiteComponent  {
     website:new FormControl(''),
     mobile_telephone:new FormControl(''),
     first_name:new FormControl("", [Validators.required]),
-    password:new FormControl(''),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/)
+    ]),
     uemail:new FormControl(''),
  
   });
@@ -98,6 +101,7 @@ export class AddSiteComponent  {
   }
 
   submit(){
+  console.log(this.siteForm.controls['country'].value);
   
       if (this.siteForm.invalid) {
         // Mark all form controls as touched to trigger validation
@@ -122,7 +126,7 @@ export class AddSiteComponent  {
       "zip_code": this.siteForm.controls['zip_code'].value,
       "country": this.siteForm.controls['country'].value,
       "office_telephone": this.siteForm.controls['office_telephone'].value,
-      "mobile_telephone": this.siteForm.controls['mobile_telephone'].value,
+      "mobile_telephone": Number(this.siteForm.controls['mobile_telephone'].value),
       "extension": this.siteForm.controls['extension'].value,
       "email": this.siteForm.controls['email'].value,
       "website": this.siteForm.controls['website'].value

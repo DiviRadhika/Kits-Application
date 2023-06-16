@@ -12,7 +12,7 @@ export class VisitComponent implements OnInit {
   materials: any;
   selectedValuev: any;
   selectedOption: any;
-
+  selectedLabTests: any[] = [];
   constructor(private fb: FormBuilder, private croService:CrosService) { 
     this.croService.meterials().subscribe((data:any)=>{
       console.log(data)
@@ -45,6 +45,7 @@ export class VisitComponent implements OnInit {
       rows: rowsArray
     });
     this.cards.push({ form: cardForm });
+    this.selectedLabTests.push([]);
   }
     onMeterialIdChange(event: any, cardIndex: number, rowIndex: number) {
       const selectedValue = event.target.value;
@@ -112,7 +113,7 @@ getMaterialId(cardIndex: number, rowIndex: number): string {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.removeAt(rowIndex);
   }
-
+  // selectedLabTests: any[] = [];
   createRow(): FormGroup {
     return this.fb.group({
       meterial_id: ['', Validators.required],
@@ -122,7 +123,7 @@ getMaterialId(cardIndex: number, rowIndex: number): string {
       frozen_status: ['']
     });
   }
-  
+ 
   getRowsFormArray(cardIndex: number): FormArray {
     const cardForm = this.cards[cardIndex].form;
     return cardForm.get('rows') as FormArray;
@@ -132,17 +133,35 @@ getMaterialId(cardIndex: number, rowIndex: number): string {
     return card.form.get('rows') as FormArray;
   }
  
+  
+ 
+
   onSubmit() {
-    const formData = [];
+    const formData: { selectedLabTests: any[], rows: any[] }[] = [];
   
     // Iterate over the cards and access their form values
     for (const card of this.cards) {
-      const formValues = card.form.value;
-      formData.push(formValues);
+      const cardForm = card.form;
+      const rowsArray = cardForm.get('rows') as FormArray;
+      const cardData = {
+        selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
+        rows: [] as any[] 
+      };
+  
+
+      for (const row of rowsArray.controls) {
+        const rowForm = row as FormGroup;
+        cardData.rows.push(rowForm.value);
+      }
+  
+      formData.push(cardData);
     }
-    this.croService.sendFormData(formData);
+
+    console.log(formData);
+  
 
   }
+  
 
   
   

@@ -59,6 +59,12 @@
 
 }
 
+::ng-deep.p-multiselect .p-multiselect-label {
+    padding: 0.3rem 0.3rem;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 3% !important;
+}
+
 /* 
 .custom-multiselect ::ng-deep .p-multiselect-label .p-multiselect-item-value {
 	font-family: var(--custom-font-family);

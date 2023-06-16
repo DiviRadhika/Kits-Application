@@ -14,29 +14,25 @@ export class UserCreateComponent implements OnInit {
 
   isEdit: boolean = false;
   status:  string[] = ['Active', 'In Active'];
+  // readonly passwordPattern: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/;
   userForm: FormGroup = new FormGroup({
     first_name: new FormControl("", [Validators.required]),
     last_name: new FormControl(),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(
-        "^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$"
-      )
-  
+      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/)
     ]),
-    
     role: new FormControl("", [Validators.required]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      this.emailDomainValidator.bind(this)
-    ]),
-    status: new FormControl("", [Validators.required]),
+
+    email: new FormControl("",[Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
+ 
+    status: new FormControl(),
   });
 
   options: string[] = ['Sponsor', 'CRO', 'Central Lab'];
   id: any;
   getUserData: any;
+  // passwordControl!: FormControl<any>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,6 +44,7 @@ export class UserCreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    // this.passwordControl = this.userForm.get('password') as FormControl;
     this.activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
         this.isEdit = true;
@@ -68,12 +65,14 @@ export class UserCreateComponent implements OnInit {
     const control = this.userForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
-
+  get passwordControl(): FormControl {
+    return this.userForm.get('password') as FormControl;
+  }
   emailDomainValidator(control: FormControl): ValidationErrors | null {
     const email = control.value;
     if (email && email.indexOf('@') !== -1) {
       const [_, domain] = email.split('@');
-      if (!['gmail.com'].includes(domain)) {
+      if (!['.com'].includes(domain)) {
         return { invalidDomain: true };
       }
     }
@@ -84,7 +83,9 @@ export class UserCreateComponent implements OnInit {
     if (this.userForm.invalid) {
       Object.keys(this.userForm.controls).forEach((key) => {
         this.userForm.get(key)?.markAsTouched();
+
       });
+      alert('Please Fill all Mandatory Fields')
     } else {
       const userObj: any = {
         first_name: this.userForm.controls['first_name'].value,

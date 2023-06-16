@@ -1,0 +1,215 @@
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">
+                                <i class="bx bxs-dashboard"></i> Protocol Registration
+                            </h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="">Central Lab</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Protocol Registration</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-2" >
+                      <div class="pull-Right mb-2 text-right" width="100%">
+                        <button type="button" (click)="pCreate()"
+                          class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+                          data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                            class="bx bx-plus label-icon"></i>
+                          Add Protocol</button>
+                      </div>
+                    </div>
+                  </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="preparationForm">
+                            <div class="row">
+                                <div id="printSection">
+                                    <p>Lakshmi</p> <!-- The value to be printed -->
+                                </div>
+                                <div class="col-md-4 mb-3">
+
+
+                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
+                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
+                                        class="form-select form-control">
+                                        <option *ngFor="let data of protocols" [value]="data.id">
+                                            {{ data.protocol_id }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div *ngIf="displayValues" class="col-md-4 mb-3">
+
+                                    <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
+                                    <input type="text" placeholder="Protocol Name" formControlName="protocol_name"
+                                        class="form-control" value="" />
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                        <hr class="mt-4 mb-4" />
+
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <h4 class="r-blue-text">Kit Details</h4>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                       
+
+
+                                <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
+                                    <div class="tab-pane active" role="tabpanel">
+
+                                        <br>
+
+                                        <p-tabView>
+                                            <p-tabPanel header="Screening">
+
+
+                                                <h5 class="mb-sm-0 font-size-18">
+                                                    screen Kit Count : {{scount}}
+                                                </h5>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-3 mt-2 mb-3">
+                                                        <h6 style="color: black"> <b>&nbsp;&nbsp;Selected Lab Tests</b>
+                                                        </h6>
+
+                                                        <h6 style="color: black"
+                                                            *ngFor="let item of screenDetails  let k = index">
+                                                            &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
+                                                    </div>
+                                                </div>
+                                                <br>
+
+
+                                                <h5 class="mb-sm-0 font-size-18">
+                                                    Materials
+                                                </h5>
+                                                <hr />
+                                                <div class="row card-group">
+                                                    <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
+                                                        <p-card [styleClass]="'custom-card'"
+                                                            [style]="{width: '200px', height:'300px'}"
+                                                            styleClass="p-card-shadow">
+                                                            <ng-template pTemplate="header">
+                                                                <img style="width:198px" src="{{item.image}}" />
+                                                            </ng-template>
+                                                            {{item.meterial_id}} <br>
+                                                            size: {{item.size}}<br>
+                                                            Qunatity: {{item.quantity}}<br>
+
+                                                        </p-card>
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                            
+
+
+
+                                            </p-tabPanel>
+
+                                            <p-tabPanel  
+                                            *ngFor="let item of vMatDetails let k = index"
+                                                header="visit{{k+1}}">
+                                                <h5>Selected Lab Tests</h5>
+                                                <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
+                                                    <p>{{items}}</p>
+                                                    </div> 
+                                                <br>
+                                 
+                                                <div class="row card-group">
+                                                    <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
+                                                    <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
+                                                        <p-card [style]="{width: '200px', height:'300px'}"
+                                                            styleClass="p-card-shadow">
+                                                            <ng-template pTemplate="header">
+                                                                <img style="width:200px" src="{{items.image}}" />
+                                                            </ng-template>
+                                                            {{items.meterial_id}} <br>
+                                                            size: {{items.size}}<br>
+                                                            Qunatity: {{items.quantity}}<br>
+
+                                                        </p-card>
+                                                        <!-- </div> -->
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                            
+                                        
+                                              </p-tabPanel>
+                                        
+
+                                        </p-tabView>
+
+
+
+
+
+                                        <br>
+                                        <br>
+                                        <div class="row">
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                     
+                    </div>
+
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- HTML template -->
+        
+
+
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">© Roboxa</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+</div>
+
+<!-- END layout-wrapper -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>

@@ -9,6 +9,7 @@ import { AddSiteComponent } from './add-site/add-site.component';
 import { LabCreateComponent } from './lab-create/lab-create.component';
 import { MaterialComponent } from './material/material.component';
 import { VisitComponent } from './visit/visit.component';
+import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
   {path:'material', component:MaterialComponent},
   {path:'visits', component:VisitComponent},
+  {path:'protocolView', component:ProtocolViewComponent},
  
 
 

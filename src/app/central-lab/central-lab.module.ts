@@ -11,6 +11,8 @@ import { SampleCollectionComponent } from './sample-collection/sample-collection
 
 import {CardModule} from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { TabViewModule } from 'primeng/tabview';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ButtonModule } from 'primeng/button';
     FormsModule, 
     ReactiveFormsModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    TabViewModule,
+    AccordionModule
   ]
 })
 export class CentralLabModule { }
