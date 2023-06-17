@@ -92,8 +92,6 @@
 
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
-
-
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     screen Kit Count : {{scount}}
                                                 </h5>
@@ -194,8 +192,6 @@
                                                                     </button>
                                                                 </td>
                                                             </tr>
-
-
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -203,30 +199,37 @@
 
                                             </p-tabPanel>
 
-                                            <p-tabPanel header="Visits" *ngFor="let item of vMatDetails let i = index"
+                                            <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
                                                 header="Visit {{i+1}}">
                                                 <!-- <p-tabPanel *ngFor="let card of cards let i = index" ;
                                                 header="visit{{i+1}}"> -->
-                                            
 
-
-                            
-                                                 
-
-                                                 <h5 class="mb-sm-0 font-size-18">
+                                                <div [formGroup]="visitKitFormGroup">
+                                                    <div formArrayName="visitKitList">
+                                                        <h1>senior</h1>
+                                                      <ng-container *ngIf="item.visitsList">
+                                                        <div *ngFor="let control of item.visitsList.controls; let j = index" [formGroupName]="j">
+                                                          <input type="text" placeholder="Lab KitId" formControlName="ckitId" class="form-control" />
+                                                          <input type="text" placeholder="KitId" formControlName="kitId" class="form-control" />
+                                                          <!-- Add any other form controls as needed -->
+                                                        </div>
+                                                      </ng-container>
+                                                    </div>
+                                                  </div>
+                                                
+                                                  
+                                                <h5 class="mb-sm-0 font-size-18">
                                                     Visit Kit Count : {{vcount}}
                                                 </h5>
-                                         
 
-
-                                                   <div 
-                                                   >
+                                                <div>
                                                     <h5>Selected Lab Tests</h5>
-                                                    <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
+                                                    <div class="col-md-6 mb-3"
+                                                        *ngFor="let items of item.selectedLabTests">
                                                         <p>{{items}}</p>
-                                                        </div> 
+                                                    </div>
                                                     <br>
-                                     
+
                                                     <div class="row card-group">
                                                         <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
                                                         <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
@@ -238,36 +241,29 @@
                                                                 {{items.meterial_id}} <br>
                                                                 size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
-    
+
                                                             </p-card>
                                                             <!-- </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
-                                          
-                                               <div *ngFor="let card of cards let i = index" >
+
+                                                <div *ngFor="let card of cards let m = index">
                                                     <div class="card">
 
                                                         <form [formGroup]="card.form">
                                                             <div formArrayName="visits">
-
-
                                                                 <table class="table table-striped mb-0">
                                                                     <thead Style="background:#EEE">
                                                                         <tr>
                                                                             <th>KitId</th>
                                                                             <th>Lab KitId</th>
                                                                             <th>Prepration</th>
-
                                                                             <th>Print Label</th>
-
                                                                         </tr>
                                                                     </thead>
-
-
                                                                     <tbody>
-
-                                                                        <tr *ngFor="let row of getRows(i).controls; let j = index"
+                                                                        <tr *ngFor="let row of getRows(m).controls; let j = index"
                                                                             [formGroupName]="j">
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="kitId"
@@ -297,99 +293,24 @@
                                                                                     Print
                                                                                 </button>
                                                                             </td>
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
 
                                                             </div>
 
                                                         </form>
+                                                        <div>
 
-
-                                                        <!-- <button (click)="onSubmit()">submit</button> -->
+                                                        </div>
                                                     </div>
-                                                    <!-- </p-accordionTab>
-                                                  </p-accordion> -->
 
 
-                                                    <!-- <button type="button" class="btn btn-warning  waves-light r-darkblue pull-Right" (click)="onSubmit()">Submit -->
 
-                                                    <!-- </button> -->
-                                                    <!-- </div> -->
-                                                    <!-- </div> -->
                                                 </div>
                                             </p-tabPanel>
 
-                                            <div *ngFor="let item of vMatDetails; let i = index">
-                                                <p-tabPanel header="Visit {{i+1}}">
-                                                  <!-- Display visit-specific information here -->
-                                              
-                                                  <div *ngFor="let card of cards; let j = index">
-                                                    <div class="card">
 
-                                                        <form [formGroup]="card.form">
-                                                            <div formArrayName="visits">
-
-
-                                                                <table class="table table-striped mb-0">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
-                                                                            <th>KitId</th>
-                                                                            <th>Lab KitId</th>
-                                                                            <th>Prepration</th>
-
-                                                                            <th>Print Label</th>
-
-                                                                        </tr>
-                                                                    </thead>
-
-
-                                                                    <tbody>
-
-                                                                        <tr *ngFor="let row of getRows(i).controls; let j = index"
-                                                                            [formGroupName]="j">
-                                                                            <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
-                                                                                    formControlName="kitId"
-                                                                                    class="form-control" value="" />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input type="text"
-                                                                                    placeholder="Lab KitId"
-                                                                                    formControlName="ckitId"
-                                                                                    class="form-control" value="" />
-                                                                            </td>
-
-                                                                            <td width="25%">
-                                                                                <select formControlName="prepration"
-                                                                                    class="form-select form-control">
-                                                                                    <option
-                                                                                        *ngFor="let data of preprationData">
-                                                                                        {{ data }}
-                                                                                    </option>
-                                                                                </select>
-                                                                            </td>
-
-                                                                            <td width="20%">
-                                                                                <button type="button"
-                                                                                    class="btn btn-primary  r-darkblue pull-Right">
-                                                                                    Print
-                                                                                </button>
-                                                                            </td>
-                                                                    </tbody>
-                                                                </table>
-
-                                                            </div>
-
-                                                        </form>
-
-
-                                                        <!-- <button (click)="onSubmit()">submit</button> -->
-                                                    </div>
-                                                  </div>
-                                              
-                                                  <!-- ...other content specific to the visit tab... -->
-                                                </p-tabPanel>
-                                              </div>
 
 
 
@@ -425,7 +346,7 @@
                             <div class="mb-2 text-right" width="100%">
                                 <button type="button"
                                     class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                    style="width: 150px; height: 40px" (click)="SubmitData()">
+                                    style="width: 150px; height: 40px" (click)="submitForm()">
                                     <i class="bx bx-hdd label-icon"></i> Submit
                                 </button>
                             </div>

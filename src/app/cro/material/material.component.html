@@ -1,0 +1,50 @@
+<div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> CRO</h4>
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end page title -->
+  
+        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+          <div class="tab-container">
+            
+            <div *ngFor="let tab of tabControls.controls; let i = index;">
+              <div class="tab-header"  >
+                Tab {{ i + 1 }}
+              </div>
+              <div class="tab-content" >
+                <div [formGroup]="getTabControls(i)">
+                    <ng-container *ngFor="let inputIndex of getInputIndexes()">
+                  <input formControlName="ckitId" placeholder="CKit ID" />
+                  <input formControlName="kitId" placeholder="Kit ID" />
+                  <input formControlName="preparation" placeholder="Preparation" />
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+  
+          <div class="text-center mt-3">
+            <button type="button" (click)="addTab()">Add Tab</button>
+            <!-- <button type="button" (click)="removeTab()">Remove Tab</button> -->
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -25,7 +25,28 @@ export class KitPreprationComponent implements OnInit {
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
+  myForm: any;
+  tabs: any[] = []; // Array to hold tabs
+  // activeTab: number = ''; // Active tab index
+count =2;
+  allTabsData: any[] = [];
+  index: any;
+  indexvalue: any;
+ 
+
+ 
+  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+    // this.visitKitFormGroup = this.formBuilder.group({
+    //   ckitId: [''],
+    //   kitId: [''],
+    //   prepration: [''],
+    // });
+
+    this.visitKitFormGroup = this.formBuilder.group({
+      // Other form controls...
+      visitKitList: this.formBuilder.array([]),
+    });
+   };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -64,11 +85,15 @@ export class KitPreprationComponent implements OnInit {
   materials: any;
   selectedValuev: any;
   selectedOption: any;
+  visitKitFormGroup: FormGroup;
   public preparationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      tabControls: this.formBuilder.array([]) // Create an empty FormArray
+    });
     this.protocolService.getProtocol().subscribe((protocols) => {
       this.ProtoData(protocols);
     });
@@ -80,13 +105,15 @@ export class KitPreprationComponent implements OnInit {
       screenKitList: this.formBuilder.array([])
     });
   
- 
+   
 
-    this.VisitKitForm = this.formBuilder.group({
+    // this.VisitKitForm = this.formBuilder.group({
 
-      visitKitList: this.formBuilder.array([])
+    //   // visitKitList: this.formBuilder.array([])/
+      
 
-    })
+
+    // })
 
     this.listItems = [];
    
@@ -174,36 +201,76 @@ this.scount =''
       this.visitRecords = []
       this.visitRecordsRow = []
       this.tets = []
+      
       this.vMatDetails.forEach((tabs: any) => {
+
+      //   tabs.visitKitList = this.formBuilder.array([]);
+      //   for (let i = 1; i <= this.vcount ; i++)
+      // { 
+      //   tabs.visitKitList.push(this.visitKitFormGroup);
+      const visitKitListArray = this.visitKitFormGroup.get('visitKitList') as FormArray;
+    visitKitListArray.push(this.createVisitKitGroup());
+   tabs.visitsList = visitKitListArray
+        
+     
+    //  console.log(tabs.visitKitList.controls);
+      
+       
+        
       this.tets.push(tabs.selectedLabTests)
         this.visitTabs.push(tabs.visits);
-        this.visitTabs.forEach((visitRecord: any) => {
-        
-          this.visitRecords.push(visitRecord);
-
-        });
+       console.log(this.cards);
       });
+      
+    console.log( this.vMatDetails);
+    
+    
+     
   
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
-     
+      for (let i = 1; i <= this.scount ; i++)
+      { 
+        this.adjustScreenKitRows(this.scount);
+     } 
+    
+  
+    this.addCard()
+    // this.addCard();
+    this.addTab()
    
-     
     });
-
+    
      
   } 
-//   for (let i = 1; i <= this.scount ; i++)
-//   { 
-//     this.adjustScreenKitRows(this.scount);
-//  } 
-//  for (let i = 1; i <= this.vMatDetails.length; i++) {
-//   console.log('k');
-  
+  createVisitKitGroup() {
+    return this.formBuilder.group({
+      ckitId: [''],
+      kitId: [''],
+      // Other form controls...
+    });
+  }
+  addVisitKit(record:any) {
+    this.VisitKitForm.get('visitKitList').push(this.addVisitKitData());
+    console.log(this.VisitKitForm.controls);
+  }
 
-//   this.addCard();
+ 
+  onVisitKitAdd(rec:any) {
 
+    const control1 = this.VisitKitForm.get('visitKitList') as FormArray;
+    control1.push(this.addVisitKitData());
+    
+  }
+  addVisitKitData() {
+    return this.formBuilder.group({
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+
+    })
+  }
 
   adjustvisitKitRows(count: number) {
  
@@ -223,31 +290,6 @@ this.scount =''
     }
   }
   
- 
-  
-  
-  
-  
-  
-  
-  
-  adjustVisit(count: number) {
-    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
-    const currentRowCount = screenKitList.length;
-  
-    if (count < currentRowCount) {
-      // Remove excess rows
-      for (let i = currentRowCount - 1; i >= count; i--) {
-        screenKitList.removeAt(i);
-      }
-    } else if (count > currentRowCount) {
-      // Add new rows
-      for (let i = currentRowCount; i < count; i++) {
-        this.onScreenKitAdd(i);
-      }
-    }
-  }
- 
 
   adjustScreenKitRows(count: number) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
@@ -270,19 +312,14 @@ this.scount =''
   addScreenKit(record:any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
     console.log(this.ScreenKitForm.controls);
-
-    // const screenKitListFormArray = this.ScreenKitForm.get('screenKitList') as FormArray;
-    // screenKitListFormArray.push(this.addScreenKitData(record))
   }
 
  
   onScreenKitAdd(rec:any) {
 
-    
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
     control1.push(this.addScreenKitData(rec));
     
-
   }
 
   addScreenKitData(record: string) {
@@ -296,14 +333,7 @@ this.scount =''
   }
 
  
-  addVisitKitData() {
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-
-    })
-  }
+ 
 
   ProtoData(Protocols: any) {
     Protocols.forEach((protocol: any) => {
@@ -314,6 +344,35 @@ this.scount =''
     console.log(this.protocols);
   }
 
+//   handleTabChange(event: any) {
+//    console.log(event);
+//    this.indexvalue = event.index
+//    console.log(this.indexvalue);
+//   //  this.addTab()
+
+//    if(event.index == 2){
+
+//  // Array to hold all tabs data
+  
+//     // Iterate over each tab control up to the specified count
+//     for (let i = 0; i < this.vcount; i++) {
+     
+//     this.tabControls.controls.forEach((tabControl, index) => {
+//       // Check if the tab index is within the specified count
+//       if (index < this.vcount) {
+//         const formData = tabControl.value;
+//         this.allTabsData.push(formData); // Add the tab data to the array
+//       }
+//     });
+//     console.log('All Tabs Data:', this.allTabsData);
+//   // Perform further actions with the data from all tabs
+//   }
+// }
+
+//   }
+   
+  
+
   SubmitData() {
     const formData = [];
  
@@ -323,7 +382,7 @@ this.scount =''
       formData.push(formValues);
     }
      console.log(formData);
-    
+    // this.submitForm()
   
     const data = {
       "protocol_id": this.protocolIdDetails.protocol_id,
@@ -364,45 +423,27 @@ this.scount =''
   cards: { form: FormGroup }[] = [];
  
 
-  // addCard() {
-  //   const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
-  //   const rowsArray = new FormArray([]);
-  //   const cardForm = this.formBuilder.group({
-  //     visits: rowsArray
-  //   });
-  //   this.cards.push({ form: cardForm });
-  //   this.adjustvisitKitRows(this.vcount)
-    
-  // }
-
-
-
-  // addCard() {
-  //   alert('k')
-  //   const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
-  //   const rowsArray = new FormArray([]);
-  //   const cardForm = this.formBuilder.group({
-  //     rows: rowsArray
-  //   });
-  //   this.cards.push({ form: cardForm });
-
-  // }
 
   addCard() {
+   
     const cardForm = this.formBuilder.group({
       visits: this.formBuilder.array([]) // Initialize the visits form array
     });
-  
     this.cards.push({ form: cardForm });
-  
-    const cardIndex = this.cards.length - 1;
+    const cardIndex = this.cards.length -1;
+    console.log(cardIndex, 'index');
     const visits = this.getRowsFormArray(cardIndex); // Get the visits form array of the newly added card
-  
-    for (let i = 0; i < this.vcount; i++) {
-      visits.push(this.createRow()); // Add a new row to the visits form array
-    }
-  }
+    console.log(visits);
     
+      for (let i = 0; i < this.vcount; i++) {
+        visits.push(this.createRow()); // Add a new row to the visits form array
+      }
+  
+  }
+  getRowsFormArray(cardIndex: number): FormArray {
+    const cardForm = this.cards[cardIndex].form;
+    return cardForm.get('visits') as FormArray;
+  }
 
   addRow1(cardIndex: number) {
     const cardFormArray = this.getRowsFormArray(cardIndex);
@@ -421,10 +462,7 @@ this.scount =''
     });
   }
   
-  getRowsFormArray(cardIndex: number): FormArray {
-    const cardForm = this.cards[cardIndex].form;
-    return cardForm.get('visits') as FormArray;
-  }
+ 
   getRows(cardIndex: number): FormArray {
     const card = this.cards[cardIndex];
     return card.form.get('visits') as FormArray;
@@ -448,9 +486,81 @@ this.scount =''
  
 
   
+  get tabControls(): FormArray {
+    return this.myForm.get('tabControls') as FormArray;
+  }
+
+  getTabControls(index: number): FormGroup {
+    // console.log(index);
+    
+    return this.tabControls.at(index) as FormGroup;
+
+  }
+
+  addTab() {
+    const newTab = this.formBuilder.group({
+      ckitId: [],
+      kitId: [''],
+      preparation: ['']
+    });
+    this.tabControls.push(newTab);
+for(let i=1; i>this.vcount; i++) {
+  console.log(i);
+  
+    // Push the FormGroup to the FormArray
+    this.tabs.push({});
+    this.addTab() // Add an entry to the tabs array
+  }
+}
+
+getInputIndexes(): number[] {
+  return Array(this.vcount).fill(0).map((_, index) => index);
+}
+
+
+
+next() {
+    const allTabsData: any[] = []; // Array to hold all tabs data
+  
+    // Iterate over each tab control up to the specified count
+    for (let i = 0; i < this.vcount; i++) {
+     
+    this.tabControls.controls.forEach((tabControl, index) => {
+      // Check if the tab index is within the specified count
+      if (index < this.vcount) {
+        const formData = tabControl.value;
+        allTabsData.push(formData); // Add the tab data to the array
+      }
+    });
+    console.log('All Tabs Data:', allTabsData);
+  // Perform further actions with the data from all tabs
+  }
+
+  }
+  submitForm() {
+    // Access the form values
+    const formValues = this.visitKitFormGroup.value;
+  
+    // Log the form values to the console
+    console.log(formValues);
+  
+    // You can also access specific form control values
+    const ckitIdValue = formValues.visitKitList[0].ckitId;
+    const kitIdValue = formValues.visitKitList[0].kitId;
+  
+    // Display the values in the UI or perform any other actions
+    // For example, you can assign the values to component properties
+    // this.submittedCkitId = ckitIdValue;
+    // this.submittedKitId = kitIdValue;
+  }
   
   
 }
+
+
+
+  
+
 
 
 
