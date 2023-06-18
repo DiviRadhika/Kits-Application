@@ -46,6 +46,7 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
     "clab_kit_preparation",
     {
         "protocol_id": fields.String(required=True),
+        "protocol_name": fields.String(required=True),
         "screening_kit_details": fields.List(fields.Nested(clab_screening_kit_details)),
         "visit_kit_details": fields.List(fields.Nested(clab_visit_kit_details)),
     },

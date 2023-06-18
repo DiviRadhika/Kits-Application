@@ -11,6 +11,7 @@ class ClabKitPreparationModel(db.Model):
     id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     protocol_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro_protocol.id"))
     screening_kit_details = db.Column(JSONB)
+    protocol_name = db.Column(db.String)
     visit_kit_details = db.Column(JSONB)
 
     @classmethod
