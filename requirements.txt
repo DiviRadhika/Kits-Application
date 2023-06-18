@@ -13,6 +13,7 @@ flask-marshmallow==0.14.0
 flask-restx==0.5.1
 Flask-SQLAlchemy==2.4.4
 Flask_JWT_Extended==4.3.0
+Flask-Migrate==4.0.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
 jsonschema==4.14.0

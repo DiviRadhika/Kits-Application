@@ -8,6 +8,10 @@ from flask_cors import CORS
 import os
 from db import db
 import flask_excel as excel
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
+
 
 
 from resources.sponsor import (
@@ -64,6 +68,7 @@ from resources.clab_kit_preparation import (
     clab_kit_preparations_ns,
     ClabKitPreparation,
     ClabKitPreparationList,
+    ClabKitProtocolActionsById,
 )
 
 app = Flask(__name__)
@@ -78,6 +83,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/postgres".fo
     os.environ.get("DB_IP"),
 )
 
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=45)
@@ -86,6 +92,9 @@ app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
 
 
 jwt = JWTManager(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
 
 
 @jwt.token_in_blocklist_loader
@@ -210,6 +219,9 @@ cro_protocols_ns.add_resource(CrosProtocolsList, "")
 cro_protocol_ns.add_resource(CroProtocolActionsById, "/<string:cro_protocol_id>")
 clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")
 clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
+clab_kit_preparation_ns.add_resource(
+    ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
+)
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")

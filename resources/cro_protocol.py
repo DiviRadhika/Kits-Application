@@ -114,7 +114,8 @@ class CroProtocolActionsById(Resource):
 
                 for lab_test in lab_test_ids:
                     lab_data = LabtestModel.get_by_id(lab_test)
-                    lab_test_names.append(lab_data.name)
+                    if lab_data:
+                        lab_test_names.append(lab_data.name)
 
                 screening_kit_detail.lab_test_ids = lab_test_names
 
@@ -128,8 +129,8 @@ class CroProtocolActionsById(Resource):
             if not visit_kit_details:
                 response["visit_kit_details"] = []
 
-            #visit_lab_test_names = []
-            #for visit_kit_detail in visit_kit_details:
+            # visit_lab_test_names = []
+            # for visit_kit_detail in visit_kit_details:
             #    lab_test_ids = visit_kit_detail.lab_test_ids
 
             #   for lab_test in lab_test_ids:
@@ -188,7 +189,7 @@ class CroProtocol(Resource):
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
                     "visit_kit_count": item["visit_kit_count"],
-                    #"lab_test_ids": item["lab_test_ids"],
+                    # "lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
                 }
