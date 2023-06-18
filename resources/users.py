@@ -63,12 +63,12 @@ def CreateDefaultUser():
     user_json = {
         "first_name": "kits",
         "last_name": "admin",
-        "email": "jafarp@pathbreakertech.com",
+        "email": "jafarp@roboxaservices.com",
         "status": True,
         "password": "Kits@123",
         "role": "admin",
     }
-    users_data = UserModel.find_by_email("jafarp@pathbreakertech.com")
+    users_data = UserModel.find_by_email("jafarp@roboxaservices.com")
     if users_data:
         print("User already in the database")
         return

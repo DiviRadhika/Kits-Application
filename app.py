@@ -8,7 +8,7 @@ from flask_cors import CORS
 import os
 from db import db
 import flask_excel as excel
-from flask_migrate import Migrate
+#from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -92,8 +92,8 @@ app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
 
 
 jwt = JWTManager(app)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+#migrate_db = SQLAlchemy(app)
+#migrate = Migrate(app, migrate_db)
 
 
 
