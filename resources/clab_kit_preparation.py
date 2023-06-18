@@ -3,17 +3,13 @@ from schemas.clab_kit_preparation import ClabKitPreparationSchema
 from flask import request
 from sqlalchemy import exc
 from models.clab_kit_preparation import ClabKitPreparationModel
-from models.users import UserModel
-from flask_jwt_extended import (
-    jwt_required,
-    get_jwt,
-    current_user,
-)
+from models.cro_protocol import CroProtocolModel
 
 
 clab_kit_preparation_ns = Namespace(
     "clab_kit_preparation", description="clab_kit_preparation related operations"
 )
+
 clab_kit_preparations_ns = Namespace(
     "clab_kit_preparations", description="clab_kit_preparation related operations"
 )
@@ -24,7 +20,6 @@ clab_kit_list_preparation_schema = ClabKitPreparationSchema(many=True)
 clab_screening_kit_details = clab_kit_preparation_ns.model(
     "screening_kit_details",
     {
-        # "visit_no": fields.Integer(required=True),
         "ckitid": fields.String(required=True),
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
@@ -61,14 +56,19 @@ class ClabKitPreparationList(Resource):
             200,
         )
 
-
 class ClabKitProtocolActionsById(Resource):
     @clab_kit_preparations_ns.doc("get by id")
     def get(self, cro_protocol_id):
         cro_data = ClabKitPreparationModel.get_by_id(cro_protocol_id)
         if not cro_data:
             return {"message": "cro data not found"}, 400
-        return clab_kit_preparation_schema.dump(cro_data), 200
+        cro_data = CroProtocolModel.get_by_id(cro_data.protocol_id)
+        response = {
+            "data":  clab_kit_preparation_schema.dump(cro_data),
+            "screen_count":  cro_data.no_of_screens,
+            "visit_count":  cro_data.no_of_visits,
+        }
+        return response, 200
 
 
 class ClabKitPreparation(Resource):
