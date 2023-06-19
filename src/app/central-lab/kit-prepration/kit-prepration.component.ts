@@ -231,9 +231,10 @@ export class KitPreprationComponent implements OnInit {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
+
   getLabKitId(tabIndex: number, recordIndex: number): string {
     const visitIndex = tabIndex + 1;
-    return `${this.protocolIdDetails.protocol_id}v${visitIndex}`;
+    return `${this.protocolIdDetails.protocol_id}v${visitIndex}00${recordIndex+1}`;
   }
   createVisitKitGroup() {
     return this.formBuilder.group({
@@ -312,17 +313,7 @@ export class KitPreprationComponent implements OnInit {
 
   }
 
-  printLabeld(tabIndex: number, rowIndex: number) {
-    const selectedTab = this.vMatDetails[tabIndex];
-    const selectedRow = selectedTab.visitsList.controls[rowIndex];
-
-    // Access the values of the selected row
-    const kitId = selectedRow.get('kitId').value;
-    const ckitId = selectedRow.get('ckitId').value;
-    const prepration = selectedRow.get('prepration').value;
-
-    // Perform the necessary printing logic using the values of the row
-  }
+ 
 
   printLabelv(tabIndex: number, rowIndex: number) {
     const selectedTab = this.vMatDetails[tabIndex];
@@ -352,7 +343,8 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         console.log(this.ScreenKitForm[i]);
-        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'sk')
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'sk00'+i+1)
+       
 
       }
     }
@@ -411,7 +403,6 @@ export class KitPreprationComponent implements OnInit {
       "protocol_id": this.uuid,
       "protocol_name": this.protoName,
       "screening_kit_details": this.ScreenKitForm.value.screenKitList,
-
       "visit_kit_details": this.vmdetails
 
 

@@ -129,10 +129,11 @@ export class AddSiteComponent  {
       "zip_code": this.siteForm.controls['zip_code'].value,
       "country": this.siteForm.controls['country'].value,
       "office_telephone": this.siteForm.controls['office_telephone'].value,
-      "mobile_telephone": Number(this.siteForm.controls['mobile_telephone'].value),
+      "mobile_telephone": this.siteForm.controls['mobile_telephone'].value,
       "extension": this.siteForm.controls['extension'].value,
       "email": this.siteForm.controls['email'].value,
-      "website": this.siteForm.controls['website'].value
+      "website": this.siteForm.controls['website'].value,
+      "status": true
     }
     if(this.isEdit){
       obj.site_id = this.id

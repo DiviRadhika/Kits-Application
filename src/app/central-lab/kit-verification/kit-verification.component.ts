@@ -23,8 +23,8 @@ export class KitVerificationComponent implements OnInit {
 
   tets: Array<any> = [];
 
-  tabs: any[] = []; // Array to hold tabs
-  // activeTab: number = ''; // Active tab index
+  tabs: any[] = [];
+
   count = 2;
   allTabsData: any[] = [];
   index: any;
@@ -33,15 +33,12 @@ export class KitVerificationComponent implements OnInit {
   uuid: any;
   skDetails: any[] = [];
   vkDetails: any;
-  // visitKitFormGroup: FormGroup
+  value: any;
+
 
 
   constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
-    // this.visitKitFormGroup = this.formBuilder.group({
-    //   ckitId: [''],
-    //   kitId: [''],
-    //   prepration: [''],
-    // });
+
 
 
   };
@@ -110,7 +107,14 @@ export class KitVerificationComponent implements OnInit {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
       this.uuid = id.target.value;
-    
+      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+
+        this.skDetails = protocolsData.data.screening_kit_details
+        this.vkDetails = protocolsData.data.visit_kit_details
+        console.log(this.vkDetails);
+
+
+      });
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
@@ -124,7 +128,7 @@ export class KitVerificationComponent implements OnInit {
       this.scount = this.protocolIdDetails.no_of_screens
       this.vcount = this.protocolIdDetails.no_of_visits
       console.log(this.vMatDetails, 'details');
-   
+
       this.tets = []
 
       this.vMatDetails.forEach((tabs: any) => {
@@ -144,78 +148,52 @@ export class KitVerificationComponent implements OnInit {
             visitKitList: this.formBuilder.array([]),
           });
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
+
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
-            visitKitListArray.at(j).get('ckitId')?.patchValue(this.getLabKitId(i, j));
+
+
+
+
           }
+
           tabs.visitsList = visitKitListArray;
           this.tets.push(tabs.selectedLabTests);
         }
 
         this.tets.push(tabs.selectedLabTests)
       });
-    
+
       for (let i = 1; i <= this.scount; i++) {
         this.adjustScreenKitRows(this.scount);
       }
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
-        console.log(protocolsData);
-        this.skDetails = protocolsData.screening_kit_details
-        this.vkDetails = protocolsData.visit_kit_details
-        // const skList = this.ScreenKitForm.get('screenKitList') as FormArray;
-   
-        // // Clear any existing form controls in the array
-        // while (skList.length) {
-        //   skList.removeAt(0);
-        // }
-        
-        // // Populate the form array with the new values
-        // protocolsData.screening_kit_details.forEach((kit:any) => {
-        //   skList.push(this.formBuilder.group({
-        //     kitId: [kit.kitId],
-        //     ckitId: [{ value: kit.ckitId, disabled: true }],
-        //     preparation: [{ value: kit.preparation, disabled: true }],
-        //     status: [''] // You can set any initial value here if needed
-        //   }));
-        });
-       });
-    // });
+
+    });
+
 
 
   }
 
- 
+
 
   getformGroup(i: any) {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
-  getLabKitId(tabIndex: number, recordIndex: number): any {
-    const visitIndex = tabIndex + 1;
-    // this.protocolService.getPreparationById(this.uuid).subscribe((protocolsData) => {
-    //   console.log(protocolsData);
-    //   this.vkDetails = protocolsData.data.visit_kit_details
-    //   console.log(this.vkDetails);
-      
-    //   // this.vkDetails.forEach((kit:any) => {
-    //   //   console.log(kit.ckitId);
-        
-    //   //   return `${this.protocolIdDetails.protocol_id}v${kit.ckitId}`;
-    //   // });
-     
-    // });
 
 
-  }
+
+
   createVisitKitGroup() {
+
     return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
+
       status: ['Not Verified']
 
     });
+
   }
+
 
   adjustScreenKitRows(count: number) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
@@ -232,10 +210,10 @@ export class KitVerificationComponent implements OnInit {
         this.onScreenKitAdd(i);
       }
     }
-    
+
 
   }
-  // ckitId: [{ value: this.protocolIdDetails.protocol_id+'sk', disabled: true }],
+
 
   addScreenKit(record: any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
@@ -250,13 +228,52 @@ export class KitVerificationComponent implements OnInit {
 
   }
 
+
+
+  addScreenKitData1() {
+    console.log(this.uuid);
+    this.protocolService.getPreparationById(this.uuid).subscribe((protocolsData) => {
+      console.log(protocolsData);
+      this.skDetails = protocolsData.data.screening_kit_details;
+      this.vkDetails = protocolsData.data.visit_kit_details;
+      console.log(this.vkDetails);
+
+      outerLoop:
+      for (let m = 0; m < this.skDetails.length; m++) {
+        console.log(1);
+
+        for (let n = 0; n < this.skDetails[m].length; n++) {
+          console.log(m, n);
+          console.log(`${this.skDetails[m][n].kitId}`);
+
+          if (n < this.vkDetails[m].length) {
+
+            continue outerLoop;
+          }
+
+          const visitKitGroup = this.formBuilder.group({
+            ckitId: [`${this.vkDetails[m][n].kitId}`],
+            kitId: [`${m}${n}`],
+            prepration: [''],
+            status: ['Not Verified']
+          });
+
+
+          visitKitGroup.get('kitId')?.patchValue(`${m}${n}`);
+
+
+
+        }
+      }
+
+    });
+  }
+
   addScreenKitData(record: string) {
 
 
     return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
+
       status: ['Not Verified']
 
     });
@@ -277,6 +294,8 @@ export class KitVerificationComponent implements OnInit {
 
 
   SubmitData() {
+    console.log(this.skDetails);
+    
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
@@ -284,28 +303,65 @@ export class KitVerificationComponent implements OnInit {
     }
 
 
+    for (let i = 0; i < this.vkDetails.length; i++) {
+      // for (let j = 0; i < this.vkDetails[i].length; j++) {
+      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
+
+      // this.vkDetails[j].push({"verification_status": 'val'})
+      console.log(this.vMatDetails[i].visitsList.value[i].status);
+
+      this.vkDetails[i].forEach((protocol: any, index: any) => {
+        for (let j = 0; j < this.vMatDetails.length; j++) {
+          // this.vMatDetails.forEach((data:any,index: any)=>{
+          console.log(this.vMatDetails[j].visitsList.value[index].status);
+          protocol.verification_status = this.vMatDetails[i].visitsList.value[index].status
+        }
+
+      })
+
+    }
+ 
+   
+
+
+      this.skDetails.forEach((protocol: any, index: any) => {
+   
+          // this.vMatDetails.forEach((data:any,index: any)=>{
+        
+          protocol.verification_status = this.ScreenKitForm.value.screenKitList[index].status
+        })
+
+    
+
+   
+        console.log(this.skDetails); 
+  
+    console.log(this.vkDetails);
+console.log( this.ScreenKitForm.value.screenKitList);
+
+
+    //   this.vkDetails.push()
 
     // console.log(this.vMatDetails.visitsList.FormArray.value)
     const data = {
       "protocol_id": this.uuid,
-      "screening_kit_details": this.ScreenKitForm.value.screenKitList,
-
-      "visit_kit_details": this.vmdetails
+      "screening_kit_details": this.skDetails,
+      "visit_kit_details": this.vkDetails
 
 
     }
-    sessionStorage.setItem('vmdet', JSON.stringify(data));
+ 
 
     console.log(data);
 
-    // this.protocolService.postProtocol(data).subscribe(
-    //   (data: any) => {
-    //     alert('protocol created successfully');
-    //   },
-    //   (err: any) => {
-    //     alert(err.errorr.message)
-    //   }
-    // );
+    this.protocolService.postProtocol(data).subscribe(
+      (data: any) => {
+        alert('protocol created successfully');
+      },
+      (err: any) => {
+        alert(err.errorr.message)
+      }
+    );
 
   }
 
@@ -313,16 +369,6 @@ export class KitVerificationComponent implements OnInit {
 
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
