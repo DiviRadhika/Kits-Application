@@ -23,7 +23,7 @@ clab_screening_kit_details = clab_kit_preparation_ns.model(
         "ckitid": fields.String(required=True),
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
-        "verificaton_status": fields.Boolean(default=False),
+        "verificaton_status": fields.String(default="Not Verified"),
     },
 )
 
@@ -33,7 +33,7 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
         "ckitid": fields.String(required=True),
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
-        "verification_status": fields.Boolean(default=False),
+        "verification_status": fields.String(default=False),
     },
 )
 
