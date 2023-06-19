@@ -361,7 +361,10 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
     console.log(this.sponsers)
 
   }
+
   SubmitData() {
+    console.log(this.skDetails);
+
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
@@ -369,23 +372,53 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
     }
 
 
+    for (let i = 0; i < this.vkDetails.length; i++) {
+      // for (let j = 0; i < this.vkDetails[i].length; j++) {
+      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
-    // console.log(this.vMatDetails.visitsList.FormArray.value)
+      // this.vkDetails[j].push({"verification_status": 'val'})
+      console.log(this.vMatDetails[i].visitsList.value[i].status);
+
+      this.vkDetails[i].forEach((protocol: any, index: any) => {
+        for (let j = 0; j < this.vMatDetails.length; j++) {
+          // this.vMatDetails.forEach((data:any,index: any)=>{
+          console.log(this.vMatDetails[j].visitsList.value[index].status);
+          protocol.siteId = this.vMatDetails[i].visitsList.value[index].siteId
+          // protocol.verification_status = false
+        }
+
+      })
+
+    }
+
+
+
+
+    this.skDetails.forEach((protocol: any, index: any) => {
+
+      // this.vMatDetails.forEach((data:any,index: any)=>{
+        // protocol.verification_status = false
+      protocol.siteId = this.ScreenKitForm.value.screenKitList[index].siteId
+    })
+
+
+
+
+
     const data = {
       "protocol_id": this.uuid,
-      "screening_kit_details": this.ScreenKitForm.value.screenKitList,
-
-      "visit_kit_details": this.vmdetails
+      "screening_kit_details": this.skDetails,
+      "visit_kit_details": this.vkDetails
 
 
     }
-    sessionStorage.setItem('vmdet', JSON.stringify(data));
+
 
     console.log(data);
 
-    this.protocolService.postProtocol(data).subscribe(
+    this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        alert('protocol created successfully');
+        alert('Kit Distribution Updated successfully');
       },
       (err: any) => {
         alert(err.errorr.message)

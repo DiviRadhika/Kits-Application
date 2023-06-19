@@ -413,7 +413,7 @@ export class KitPreprationComponent implements OnInit {
 
     this.protocolService.postPreparation(data).subscribe(
       (data: any) => {
-        alert('protocol created successfully');
+        alert('Kit Preparation Updated  successfully');
       },
       (err: any) => {
         alert(err.errorr.message)

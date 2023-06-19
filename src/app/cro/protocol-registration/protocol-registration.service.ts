@@ -35,6 +35,9 @@ export class ProtocolService {
     getPreparationById(id: any): Observable<any> {
         return this.http.get(endPointsUser.getPreparationById + id)
     }
+    updatePreparationById(data: any): Observable<any> {
+        return this.http.put(endPointsUser.postPreparation, data)
+    }
     
-    
+   
  }  

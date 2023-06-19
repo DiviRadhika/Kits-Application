@@ -134,20 +134,20 @@
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="kitId"
-                                                                                    class="form-control"
-                                                                                    value="{{item.kitId}}" />
+                                                                                    class="form-control"  [disabled]="true"
+                                                                                    value={{item.kitId}} />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text"
                                                                                     placeholder="LabKitId"
-                                                                                    value={{item.ckitId}}
+                                                                                    value={{item.ckitId}}  [disabled]="true"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text"
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}}
-                                                                                    class="form-control" />
+                                                                                    class="form-control"  [disabled]="true" />
                                                                             </td>
 
 
@@ -252,7 +252,6 @@
                                                                         <th>Lab KitId</th>
                                                                         <th>Prepration</th>
 
-                                                                        <th>Status</th>
 
                                                                     </tr>
                                                                 </thead>
@@ -263,28 +262,20 @@
                                                                     <tr *ngFor="let item of vkDetails[i]">
                                                                         <td width="25%">
                                                                             <input type="text" placeholder="kitId"
-                                                                                class="form-control"
+                                                                                class="form-control" readonly  [disabled]="true"
                                                                                 value="{{item.kitId}}" />
                                                                         </td>
                                                                         <td width="25%">
                                                                             <input type="text" placeholder="LabKitId"
-                                                                                value={{item.ckitId}}
+                                                                                value={{item.ckitId}} readonly  [disabled]="true"
                                                                                 class="form-control" />
                                                                         </td>
                                                                         <td width="25%">
                                                                             <input type="text" placeholder="Preparation"
-                                                                                value={{item.prepration}}
+                                                                                value={{item.prepration}} readonly  [disabled]="true"
                                                                                 class="form-control" />
                                                                         </td>
 
-                                                                        <td width="25%">
-                                                                            <select class="form-select form-control">
-                                                                                <option
-                                                                                    *ngFor="let data of preprationData">
-                                                                                    {{ data }}
-                                                                                </option>
-                                                                            </select>
-                                                                        </td>
 
 
                                                                     </tr>

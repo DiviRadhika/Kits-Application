@@ -295,7 +295,7 @@ export class KitVerificationComponent implements OnInit {
 
   SubmitData() {
     console.log(this.skDetails);
-    
+
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
@@ -315,34 +315,27 @@ export class KitVerificationComponent implements OnInit {
           // this.vMatDetails.forEach((data:any,index: any)=>{
           console.log(this.vMatDetails[j].visitsList.value[index].status);
           protocol.verification_status = this.vMatDetails[i].visitsList.value[index].status
+          // protocol.verification_status = false
         }
 
       })
 
     }
- 
-   
 
 
-      this.skDetails.forEach((protocol: any, index: any) => {
-   
-          // this.vMatDetails.forEach((data:any,index: any)=>{
-        
-          protocol.verification_status = this.ScreenKitForm.value.screenKitList[index].status
-        })
-
-    
-
-   
-        console.log(this.skDetails); 
-  
-    console.log(this.vkDetails);
-console.log( this.ScreenKitForm.value.screenKitList);
 
 
-    //   this.vkDetails.push()
+    this.skDetails.forEach((protocol: any, index: any) => {
 
-    // console.log(this.vMatDetails.visitsList.FormArray.value)
+      // this.vMatDetails.forEach((data:any,index: any)=>{
+        // protocol.verification_status = false
+      protocol.verification_status = this.ScreenKitForm.value.screenKitList[index].status
+    })
+
+
+
+
+
     const data = {
       "protocol_id": this.uuid,
       "screening_kit_details": this.skDetails,
@@ -350,13 +343,13 @@ console.log( this.ScreenKitForm.value.screenKitList);
 
 
     }
- 
+
 
     console.log(data);
 
-    this.protocolService.postProtocol(data).subscribe(
+    this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        alert('protocol created successfully');
+        alert('Kit Verification Updated successfully');
       },
       (err: any) => {
         alert(err.errorr.message)

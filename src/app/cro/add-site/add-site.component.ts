@@ -131,9 +131,14 @@ export class AddSiteComponent  {
       "office_telephone": this.siteForm.controls['office_telephone'].value,
       "mobile_telephone": this.siteForm.controls['mobile_telephone'].value,
       "extension": this.siteForm.controls['extension'].value,
-      "email": this.siteForm.controls['email'].value,
+      "email": this.siteForm.controls['uemail'].value,
       "website": this.siteForm.controls['website'].value,
-      "status": true
+      "status": true,
+      "password":this.siteForm.controls['password'].value,
+      "username": this.siteForm.controls['first_name'].value,
+      "role": 'CRA',
+     
+  
     }
     if(this.isEdit){
       obj.site_id = this.id
