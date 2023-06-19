@@ -14,10 +14,7 @@ import { endPointsUser } from 'src/app/api';
 export class ProtocolService { 
     constructor(private http:HttpClient) { }
 
-   /* sponsers: LSponsers[] | undefined;
-  crosList: CROS[]  | undefined;
-  protocolList: Protocol[] | undefined ;
-  labTestsList: LabTests[] | undefined ;*/
+   
   protocolList: Protocol[] =[];
 
     postProtocol(data:any):Observable<any>{
@@ -29,4 +26,15 @@ export class ProtocolService {
     getProtocolId(id: any): Observable<any> {
         return this.http.get(endPointsUser.getProtocolId + id)
       }
+      postPreparation(data:any):Observable<any>{
+        return this.http.post(endPointsUser.postPreparation, data)
+    }
+    getPreparation(){
+        return this.http.get(endPointsUser.getPreparation)
+    }
+    getPreparationById(id: any): Observable<any> {
+        return this.http.get(endPointsUser.getPreparationById + id)
+    }
+    
+    
  }  

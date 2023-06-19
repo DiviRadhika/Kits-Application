@@ -68,7 +68,10 @@ export class AddSiteComponent  {
       Validators.required,
       Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/)
     ]),
-    uemail:new FormControl(''),
+
+
+    uemail: new FormControl("",[Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
+
  
   });
 

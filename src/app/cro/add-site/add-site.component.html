@@ -90,8 +90,22 @@
 
                   </div>
 
-                
-                  <div class="col-md-4">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Email</label>
+
+
+                      <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                        formControlName="uemail">
+                      <div *ngIf="shouldShowRequired('uemail')" class="text-danger">
+                        Email is required.
+                      </div>
+                      <div *ngIf="siteForm.get('uemail')?.hasError('pattern')" class="text-danger">
+                        Please enter a valid email address.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
                     <div class="form-group">
                       <label>Password</label>
                       <input type="password" class="form-control" id="password" placeholder="Enter Password"
@@ -100,20 +114,14 @@
                         Password is required.
                       </div>
                       <div *ngIf="siteForm.get('password')?.hasError('pattern')" class="text-danger">
-                        Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
+                        Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one
+                        digit, and one special character.
                       </div>
-                      
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Email</label>
-                      <input type="text" class="form-control" id="email" placeholder="Enter Email"
-                        formControlName="uemail">
 
                     </div>
                   </div>
-                </div>
+                  </div>
+
 
               </form>
             </div>
@@ -150,7 +158,7 @@
                       <label>Address 3</label>
                       <input type="text" class="form-control" id="Address3" placeholder="Enter Address 3(optional)"
                         formControlName="address_3">
-                       
+
                     </div>
                   </div>
                 </div>
@@ -166,15 +174,15 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Country</label>
-                      <select  formControlName="country" class="form-select" aria-label="Default select example">
+                      <select formControlName="country" class="form-select" aria-label="Default select example">
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
-                      </select >
-                    
+                      </select>
+
                       <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
-                        Country is required.     
+                        Country is required.
                       </div>
 
-                
+
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -188,8 +196,8 @@
                       </div>
                     </div>
                   </div>
-                 
-                  
+
+
                 </div>
                 <br>
                 <div class="row">
@@ -220,7 +228,7 @@
                       <input type="text" class="form-control" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
-                      <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
+                      <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is required and enter valid Zipcode.
                       </div>
                       <div *ngIf="shouldShowLengthError('zip_code')" class="invalid-feedback">
@@ -231,7 +239,7 @@
                 </div>
                 <br>
                 <div class="row">
-                 
+
                 </div>
 
               </form>
@@ -257,7 +265,7 @@
                       <label>Extension</label>
                       <input type="text" class="form-control" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
-                       
+
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -265,7 +273,7 @@
                       <label>Mobile Number</label>
                       <input type="number" class="form-control" id="mobile_no" placeholder="Enter Mobile Number"
                         formControlName="mobile_telephone">
-                       
+
                     </div>
                   </div>
                 </div>
@@ -276,7 +284,7 @@
                       <label>Email</label>
                       <input type="text" class="form-control" id="Address 1" placeholder="Enter Email"
                         formControlName="email">
-                       
+
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -284,7 +292,7 @@
                       <label>Website</label>
                       <input type="text" class="form-control" id="Address" placeholder="Enter Website"
                         formControlName="website">
-                      
+
                     </div>
                   </div>
                 </div>
