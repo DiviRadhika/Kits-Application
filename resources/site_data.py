@@ -43,7 +43,7 @@ create_site_data = sites_data_ns.model(
         "password": fields.String(required=True),
         "first_name": fields.String(required=True),
         "role": fields.String(required=True),
-        "status": fields.Boolean(required=True),
+        "status": fields.String(default="inactive"),
         "website": fields.String(required=True),
     },
 )

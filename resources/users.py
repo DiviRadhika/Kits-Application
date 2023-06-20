@@ -42,7 +42,7 @@ creation = login_ns.model(
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
         "role": fields.String(title="Role", required=True),
-        "status": fields.Boolean(title="Status", required=True),
+        "status": fields.String(title="Status", default="inactive"),
     },
 )
 
@@ -64,7 +64,7 @@ def CreateDefaultUser():
         "first_name": "kits",
         "last_name": "admin",
         "email": "jafarp@roboxaservices.com",
-        "status": True,
+        "status": "active",
         "password": "Kits@123",
         "role": "admin",
     }
@@ -119,7 +119,7 @@ class SendOTP(Resource):
         if not user:
             return {"message": "invalid username/email"}, 500
 
-        if user.status == False:
+        if user.status != "active":
             return {"message": "user not activated"}, 500
 
         if os.environ.get("ENVIRONMENT") in ["dev", "uat"]:
@@ -217,7 +217,7 @@ class UserRegister(Resource):
                 return {"message": "invalid email, user not found"}, 500
             if user_data.user_otp != user_json["otp"]:
                 return {"message": "invalid OTP"}, 500
-            if user_data.status == False:
+            if user_data.status != "active":
                 return {"message": "user not activated"}, 500
             user_data.password = user_json["password"]
             user_data.save_to_db()
@@ -272,13 +272,15 @@ class UserLogin(Resource):
             return {"message": "User does not exist"}, 404
 
         if str(user.user_otp) != otp:
-            return {"message": "invalid OTP"}, 400
+            return {"message": "invalid OTP"}, 500
 
         if str(user.password) != password:
-            return {"message": "invalid password"}, 400
+            return {"message": "invalid password"}, 500
 
         if user.is_logged_in and clear_session == False:
-            return {"message": "User already logged in"}, 409
+            return {"message": "User already logged in"}, 500
+        if user.status != "active":
+            return {"message": "user is inactive"}, 500
 
         sent_time = user.otp_sent_time
         current_time = datetime.now()
