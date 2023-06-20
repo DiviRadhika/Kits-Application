@@ -70,6 +70,11 @@ from resources.clab_kit_preparation import (
     ClabKitPreparationList,
     ClabKitProtocolActionsById,
 )
+from resources.sample_ack import(
+    AckclabKitProtocolActionsById,
+    AckclabKitPreparation,
+    sample_ack_ns
+)
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -182,6 +187,8 @@ api.add_namespace(user_ns)
 api.add_namespace(users_ns)
 api.add_namespace(meterials_ns)
 api.add_namespace(meterial_ns)
+api.add_namespace(sample_ack_ns)
+
 
 
 # cors = flask_cors.CORS()
@@ -217,6 +224,8 @@ lab_test_ns.add_resource(LabActionsById, "/<string:lab_test_id>")
 cro_protocol_ns.add_resource(CroProtocol, "")
 cro_protocols_ns.add_resource(CrosProtocolsList, "")
 cro_protocol_ns.add_resource(CroProtocolActionsById, "/<string:cro_protocol_id>")
+sample_ack_ns.add_resource(AckclabKitProtocolActionsById, "/<string:cro_protocol_id>/<string:site_id>")
+sample_ack_ns.add_resource(AckclabKitPreparation, "")
 clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")
 clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 clab_kit_preparation_ns.add_resource(
