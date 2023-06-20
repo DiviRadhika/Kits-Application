@@ -41,7 +41,7 @@ create_site_data = sites_data_ns.model(
         "mobile_telephone": fields.String(required=True),
         "email": fields.String(required=True),
         "password": fields.String(required=True),
-        "username": fields.String(required=True),
+        "first_name": fields.String(required=True),
         "role": fields.String(required=True),
         "status": fields.Boolean(required=True),
         "website": fields.String(required=True),
@@ -107,7 +107,7 @@ class Sitedata(Resource):
                 "email": site_data_json["email"],
                 "password": site_data_json["password"],
                 "status": site_data_json["status"],
-                # "username": site_data_json["username"],
+                "first_name": site_data_json["first_name"],
                 "role": site_data_json["role"],
             }
             user_table_data = user_schema.load(new_user_data)

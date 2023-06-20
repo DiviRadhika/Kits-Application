@@ -24,6 +24,9 @@ clab_screening_kit_details = clab_kit_preparation_ns.model(
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
         "verificaton_status": fields.String(default="Not Verified"),
+        "patient_id": fields.String(),
+        "site_id": fields.String(),
+        "collection": fields.String(default="pending"),
     },
 )
 
@@ -34,6 +37,9 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
         "verification_status": fields.String(default="Not Verified"),
+        "patient_id": fields.String(),
+        "site_id": fields.String(),
+        "collection": fields.String(default="pending"),
     },
 )
 
