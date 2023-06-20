@@ -39,21 +39,14 @@
 
 
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
-                                    <select formControlName="protocolId" (change)="site($event)"
+                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
                                             {{ data.user_protocol_id }}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="formrow-firstname-input" class="form-label">Site ID</label>
-                                    <select class="form-select form-control" (change)="getprotocolDetails($event)"  formControlName="siteId">
-                                        <option [value]="data.site_data_code" *ngFor="let data of sponsers">
-                                            {{ data.site_data_name }}
-                                        </option>
-                                    </select>
-                                </div>
+                              
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
@@ -96,7 +89,7 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
-                                                                            <th>Sample Collection</th>
+                                                                            <th>Collection</th>
 
 
 
@@ -123,7 +116,7 @@
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
-                                                                                    value={{item.siteId}}
+                                                                                    value=ST001
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
@@ -159,7 +152,7 @@
 
                                                                             <th>Sample Acknowledgement</th>
                                                                             <th>Remarks</th>
-                                                                      
+                                                              
 
                                                                         </tr>
                                                                     </thead>
@@ -224,7 +217,7 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id></th>
-                                                                            <th>Sample Collection</th>
+                                                                            <th>Collection </th>
 
                                                                         </tr>
                                                                     </thead>
@@ -248,7 +241,7 @@
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
-                                                                                    value={{item.siteId}}
+                                                                                    value=ST001
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
@@ -280,9 +273,9 @@
                                                                     <thead Style="background:#EEE">
                                                                         <tr>
 
-                                                                            <th>Acknowledgement</th>
+                                                                            <th>Sample Acknowledgement</th>
                                                                             <th>Remarks</th>
-                                                                          
+                                                                         
 
                                                                         </tr>
                                                                     </thead>

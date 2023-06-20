@@ -108,14 +108,9 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
-  site(id: any){
-    this.site = id.target.value
-  }
   getprotocolDetails(id: any) {
-    console.log(this.site,id.target.value);
-    
     this.scount = ''
-    this.protocolService.sampleack(this.site,id.target.value).subscribe((protocols) => {
+    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
       this.uuid = id.target.value;
       this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
         console.log(protocolsData);
