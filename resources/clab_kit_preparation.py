@@ -33,7 +33,7 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
         "ckitid": fields.String(required=True),
         "kitid": fields.String(required=True),
         "preparation": fields.String(required=True),
-        "verification_status": fields.String(default=False),
+        "verification_status": fields.String(default="Not Verified"),
     },
 )
 
@@ -51,10 +51,24 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
 class ClabKitPreparationList(Resource):
     @clab_kit_preparations_ns.doc("Get all the CLab Kit Preparations")
     def get(resource):
-        return (
-            clab_kit_list_preparation_schema.dump(ClabKitPreparationModel.find_all()),
-            200,
-        )
+        kits = ClabKitPreparationModel.find_all()
+        if len(kits) == 0:
+            return {"data": [], "message": ""}
+        response = {
+            "data": []
+        }
+        for kit in kits:
+            cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
+            if not cro_data:
+                continue
+            user_protocol_id = cro_data.protocol_id
+            cro_kit_data = clab_kit_preparation_schema.dump(kit)
+            cro_kit_data['user_protocol_id'] = user_protocol_id
+            response['data'].append(cro_kit_data)
+
+        #kits = clab_kit_list_preparation_schema.dump(ClabKitPreparationModel.find_all())
+        return response, 200
+
 
 class ClabKitProtocolActionsById(Resource):
     @clab_kit_preparations_ns.doc("get by id")
@@ -67,6 +81,7 @@ class ClabKitProtocolActionsById(Resource):
             "data":  clab_kit_preparation_schema.dump(cro_kit_data),
             "screen_count":  cro_data.no_of_screens,
             "visit_count":  cro_data.no_of_visits,
+            "cro_name": cro_data.protocol_id,
         }
         return response, 200
 
@@ -92,8 +107,8 @@ class ClabKitPreparation(Resource):
     def put(self):
         request_json = request.get_json()
         kit_data = ClabKitPreparationModel.get_by_id(request_json["protocol_id"])
-        if kit_data:
-            return {"message": "kit not found"}, 500
+        if not kit_data:
+            return {"message": "kit data not found"}, 500
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:
                 setattr(kit_data, key, value)
