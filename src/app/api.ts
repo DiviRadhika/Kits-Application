@@ -39,7 +39,14 @@ export const endPointsUser = {
     // Endpoints for Protocol
     postProtocol: `${api}/cro_protocol`,
     croProtocols: `${api}/cro_protocols`,
-    getProtocolId : `${api}/cro_protocol/`
+    getProtocolId : `${api}/cro_protocol/`,
+        
+    // Endpoints for Preparatiion
+    getPreparation:`${api}/clab_kit_preparations`,
+    postPreparation:`${api}/clab_kit_preparation`,
+    getPreparationById:`${api}/clab_kit_preparation/`,
+    sampleack:`${api}/sample_ack/`,
+    sampleackput:`${api}/sample_ack`,
    
 
 }

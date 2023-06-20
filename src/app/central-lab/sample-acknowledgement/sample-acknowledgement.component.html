@@ -20,7 +20,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="">Central Lab</a>
                                     </li>
-                                    <li class="breadcrumb-item active"> Sample Acknowledgement</li>
+                                    <li class="breadcrumb-item active">Sample Acknowledgement</li>
                                 </ol>
                             </div>
                         </div>
@@ -30,245 +30,332 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
+                        <form [formGroup]="preparationForm">
+                            <div class="row">
+                                <div id="printSection">
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+
 
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
-                                    <select class="form-select form-control">
-                                        <option *ngFor="let data of protocols">
-                                            {{ data.protocol_id }}
+                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
+                                        class="form-select form-control">
+                                        <option *ngFor="let data of protocols" [value]="data.protocol_id">
+                                            {{ data.user_protocol_id }}
                                         </option>
                                     </select>
                                 </div>
+                              
+
+                                <div *ngIf="displayValues" class="col-md-4 mb-3">
+
+                                    <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
+                                    <input type="text" placeholder="Protocol Name" formControlName="protocol_name"
+                                        class="form-control" value="" />
+                                </div>
+
                             </div>
-
-
-                        </div>
+                        </form>
 
 
                         <hr class="mt-4 mb-4" />
 
                         <div class="row">
-                            <!-- <div class="col-md-12 mb-3">
-                                <h4 class="r-blue-text">Kit Details</h4>
-                            </div> -->
                             <div class="col-md-12 mb-3">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" (click)="showsc()" data-bs-toggle="tab"
-                                            href="#screening" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Screening</span>
-                                        </a>
-                                    </li>
-                                    <li *ngFor="let item of listItems let j = index" class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" (click)="showv()" href="#visit"
-                                            role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Visit {{j+1}}</span>
-                                        </a>
+                                <h4 class="r-blue-text">Kit Details</h4>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
+                                    <div class="tab-pane active" role="tabpanel">
 
-                                    </li>
-                                </ul>
+                                        <br>
 
-                                <div class="tab-content pt-3 text-muted">
-                                    <div class="tab-pane active" *ngIf="screening" id="screening" role="tabpanel">
-                                        <div class="table-responsive" [formGroup]="ScreenKitForm">
-                                            <table class="table table-striped mb-0" formArrayName="screenKitList">
-                                                <thead Style="background:#EEE">
-                                                    <tr>
-
-                                                        <th>KitId</th>
-                                                        <th>Site ID</th>
-                                                        <th>CKit Id</th>
-                                                        <th>Patient Id</th>
-                                                        <th>Sample Collection</th>
-                                                        <th>Sample Acknowledgement</th>
-                                                        <th width="20%">Remarks</th>
-                                                        <th width="15%">upload</th>
-
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-
-                                                    <tr [formGroupName]="i" *ngFor="
-                                                            let item of ScreenKitForm.get('screenKitList')
-                                                            .controls;
-                                                            let i = index
-                                                        ">
-                                                        <td>
-                                                            <input type="text" placeholder="kitId"
-                                                                formControlName="kitId" class="form-control" value="" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" placeholder="siteId"
-                                                                formControlName="siteId" class="form-control"
-                                                                value="" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" placeholder="ckitId"
-                                                                formControlName="cKitId" class="form-control"
-                                                                value="" />
-                                                        </td>
-
-                                                        <td>
-                                                            <input type="text" placeholder="patientId"
-                                                                formControlName="patientId" class="form-control"
-                                                                value="" />
-
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" placeholder="Collected"
-                                                                formControlName="collected" class="form-control"
-                                                                value="" />
-                                                        </td>
-                                                        <td>
-                                                            <select formControlName="acknowldgement"
-                                                                class="form-select form-control">
-                                                                <option *ngFor="let data of statusData">
-                                                                    {{ data }}
-                                                                </option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td>
-                                                            <input type="text" placeholder="Remarks"
-                                                                formControlName="remarks" class="form-control"
-                                                                value="" />
+                                        <p-tabView>
+                                            <p-tabPanel header="Screening">
 
 
-                                                        </td>
-                                                        <td>
-                                                           
-
-                                                            <button type="submit"
-                                                            class="btn btn-primary  r-darkblue pull-Right"
-                                                                (click)="fileInput.click()">Upload PDF</button>
-                                                                <div class="avatar-upload">
-                                                                    <div class="avatar-edit">
-                                                                        <input type='file' id="imageUpload"
-                                                                        accept="application/pdf" #fileInput
-                                                                            (change)="uploadFile($event)" />
-                                                                    </div>
-                                                                </div>
-
-                                                        </td>
-
-                                                    </tr>
 
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" *ngIf="visit" id="visit" role="tabpanel">
-                                    <div class="table-responsive" [formGroup]="VisitKitForm">
-                                        <table class="table table-striped mb-0" formArrayName="visitKitList">
-                                            <thead Style="background:#EEE">
-                                                <tr>
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="form-group">
 
-                                                    <th>KitId</th>
-                                                    <th>Site ID</th>
-                                                    <th>CKit Id</th>
-                                                    <th>Patient Id</th>
-                                                    <th>Sample Collection</th>
-                                                    <th>Sample Acknowledgement</th>
-                                                    <th width="20%">Remarks</th>
-                                                    <th>Upload</th>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped mb-0">
+                                                                    <thead Style="background:#EEE">
+                                                                        <tr>
+                                                                            <th>KitId</th>
+                                                                            <th>Lab KitId</th>
+                                                                            <th>Site Id</th>
+                                                                            <th>Patient Id</th>
+                                                                            <th>Collection</th>
 
 
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
-                                                <tr [formGroupName]="i" *ngFor="
-                                let item of VisitKitForm.get('visitKitList')
-                                  .controls;
-                                let i = index
-                              ">
-
-                                                    <td>
-                                                        <input type="text" placeholder="kitId" formControlName="kitId"
-                                                            class="form-control" value="" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" placeholder="siteId" formControlName="siteId"
-                                                            class="form-control" value="" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" placeholder="ckitId" formControlName="cKitId"
-                                                            class="form-control" value="" />
-                                                    </td>
-
-                                                    <td>
-                                                        <input type="text" placeholder="patientId"
-                                                            formControlName="patientId" class="form-control" value="" />
-
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" placeholder="Collected"
-                                                            formControlName="collected" class="form-control" value="" />
-
-                                                    </td>
-                                                    <td>
-                                                        <select formControlName="acknowldgement"
-                                                            class="form-select form-control">
-                                                            <option *ngFor="let data of statusData">
-                                                                {{ data }}
-                                                            </option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" placeholder="Remarks"
-                                                            formControlName="remarks" class="form-control" value="" />
 
 
-                                                    </td>
-                                                    <td>
-                                                           
+                                                                        </tr>
+                                                                    </thead>
 
-                                                        <button type="submit"
-                                                        class="btn btn-primary  r-darkblue pull-Right"
-                                                            (click)="fileInput.click()">Upload Image</button>
-                                                            <div class="avatar-upload">
-                                                                <div class="avatar-edit">
-                                                                    <input type='file' id="imageUpload"
-                                                                    accept="application/pdf" #fileInput
-                                                                        (change)="uploadFile($event)" />
-                                                                </div>
+                                                                    <tbody>
+
+
+                                                                        <tr *ngFor="let item of skDetails">
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="kitId"
+                                                                                    [disabled]="true"
+                                                                                    class="form-control"
+                                                                                    value="{{item.kitId}}" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" [disabled]="true"
+                                                                                    placeholder="LabKitId"
+                                                                                    value={{item.ckitId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="Site Id"
+                                                                                    [disabled]="true"
+                                                                                    value=ST001
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" [disabled]="true"
+                                                                                    placeholder="patient Id"
+                                                                                    value={{item.patientId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    placeholder="collection"
+                                                                                    [disabled]="true"
+                                                                                    value={{item.collection}}
+                                                                                    class="form-control" />
+                                                                            </td>
+
+
+
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive" [formGroup]="ScreenKitForm">
+                                                                <table class="table table-striped mb-0"
+                                                                    formArrayName="screenKitList">
+                                                                    <thead Style="background:#EEE">
+                                                                        <tr>
 
-                                                    </td>
-                                                </tr>
+                                                                            <th>Sample Acknowledgement</th>
+                                                                            <th>Remarks</th>
+                                                              
+
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+
+                                                                        <tr [formGroupName]="i" *ngFor="
+                                                            let item of ScreenKitForm.get('screenKitList')
+                                                              .controls;
+                                                            let i = index
+                                                          ">
 
 
-                                            </tbody>
-                                        </table>
+                                                                            <td>
+                                                                                <select class="form-select form-control"
+                                                                                    formControlName="acknowledgement">
+                                                                                    <option
+                                                                                        *ngFor="let data of statusData">
+                                                                                        {{ data }}
+                                                                                    </option>
+                                                                                </select>
+
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    formControlName="remarks"
+                                                                                    placeholder="Remarks" value=''
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                   
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                            </p-tabPanel>
+
+                                            <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
+                                                header="Visit {{i+1}}">
+
+
+
+
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+
+
+
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped mb-0">
+                                                                    <thead Style="background:#EEE">
+                                                                        <tr>
+                                                                            <th>KitId</th>
+                                                                            <th>Lab KitId</th>
+                                                                            <th>Site Id</th>
+                                                                            <th>Patient Id></th>
+                                                                            <th>Collection </th>
+
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+
+
+                                                                        <tr *ngFor="let item of vkDetails[i]">
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="kitId"
+                                                                                    [disabled]="true"
+                                                                                    class="form-control"
+                                                                                    value="{{item.kitId}}" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" [disabled]="true"
+                                                                                    placeholder="LabKitId"
+                                                                                    value={{item.ckitId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="Site Id"
+                                                                                    [disabled]="true"
+                                                                                    value=ST001
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" [disabled]="true"
+                                                                                    placeholder="patient Id"
+                                                                                    value={{item.patientId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" [disabled]="true"
+                                                                                    placeholder="collection"
+                                                                                    value={{item.collection}}
+                                                                                    class="form-control" />
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <div class="table-responsive"
+                                                                [formGroup]="item.visitKitFormGroup">
+                                                                <table class="table table-striped mb-0"
+                                                                    formArrayName="visitKitList">
+                                                                    <thead Style="background:#EEE">
+                                                                        <tr>
+
+                                                                            <th>Sample Acknowledgement</th>
+                                                                            <th>Remarks</th>
+                                                                         
+
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody *ngIf="item.visitsList">
+
+
+                                                                        <tr *ngFor="let control of item.visitsList.controls; let j = index"
+                                                                            [formGroupName]="j">
+
+
+                                                                            <td>
+                                                                                <select class="form-select form-control"
+                                                                                    formControlName="acknowledgement">
+                                                                                    <option
+                                                                                        *ngFor="let data of statusData">
+                                                                                        {{ data }}
+                                                                                    </option>
+                                                                                </select>
+
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    formControlName="remarks"
+                                                                                    placeholder="Remarks" value=''
+                                                                                    class="form-control" />
+                                                                            </td>
+                                         
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </p-tabPanel>
+                                            <br>
+
+                                            <div class="col-md-12 mb-3" align="right">
+                                                <div class="mb-2 text-right" width="100%">
+                                                    <button type="button"
+                                                        class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                                        style="width: 150px; height: 40px" (click)="SubmitData()">
+                                                        <i class="bx bx-hdd label-icon"></i> Submit
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </p-tabView>
+
+
+
+
+
+                                        <br>
+                                        <br>
+                                        <div class="row">
+
+
+
+                                        </div>
+
+
                                     </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12 mb-3" align="right">
-                            <div class="mb-2 text-right" width="100%">
-                                <button type="button"
-                                    class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                    style="width: 150px; height: 40px" (click)="SubmitData()">
-                                    <i class="bx bx-hdd label-icon"></i> Submit
-                                </button>
-                            </div>
-                        </div>
+
                     </div>
 
                     <!-- end col -->
                 </div>
                 <!-- end row -->
             </div>
+            <!-- HTML template -->
+
+
+
             <!-- container-fluid -->
         </div>
         <!-- End Page-content -->

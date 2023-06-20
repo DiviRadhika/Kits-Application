@@ -1,406 +1,50 @@
-<!-- Begin page -->
-<div id="layout-wrapper">
-
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-content">
-        <div class="page-content">
-            <div class="container-fluid">
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Protocol Registration
-                            </h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item">
-                                        <a href="">Transactonal Data</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Protocol Registration</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
+<div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> CRO</h4>
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                  <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end page title -->
+  
+        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
+          <div class="tab-container">
+            
+            <div *ngFor="let tab of tabControls.controls; let i = index;">
+              <div class="tab-header"  >
+                Tab {{ i + 1 }}
+              </div>
+              <div class="tab-content" >
+                <div [formGroup]="getTabControls(i)">
+                    <ng-container *ngFor="let inputIndex of getInputIndexes()">
+                  <input formControlName="ckitId" placeholder="CKit ID" />
+                  <input formControlName="kitId" placeholder="Kit ID" />
+                  <input formControlName="preparation" placeholder="Preparation" />
+                  </ng-container>
                 </div>
-                <!-- end page title -->
-                <form [formGroup]="protocolForm">
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
-                                        <input type="text" formControlName="selected_protocol_id" class="form-control"
-                                            id="" placeholder="Enter Protocol ID"
-                                            [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
-                                        <!-- <div *ngIf="shouldShowRequired('selected_protocol_id')" class="text-danger">
-                          Protocol ID is required.
-                        </div> -->
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
-                                        <input type="text" formControlName="selected_protocol_name" class="form-control"
-                                            id="" placeholder="Enter Protocol Name"
-                                            [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Sponsor ID /
-                                            Name</label>
-                                        <select formControlName="selected_sponsor_id" class="form-select form-control"
-                                            [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
-                                            <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
-                                                {{ sponser.sponsor_name }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">CRO ID / Name</label>
-                                        <select formControlName="selected_cro_id" class="form-select form-control"
-                                            [class.is-invalid]="shouldShowRequired('selected_cro_id') && protocolForm.get('selected_cro_id')?.touched">
-                                            <option *ngFor="let cro of crosList" [value]="cro.cro_id">
-                                                {{ cro.cro_name }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Total No.of
-                                            Patients</label>
-                                        <input type="text" formControlName="selected_patients_num" class="form-control"
-                                            id="" placeholder=" "
-                                            [class.is-invalid]="shouldShowRequired('selected_patients_num') && protocolForm.get('selected_patients_num')?.touched">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Total No.of
-                                            Visits</label>
-                                        <input type="text" formControlName="total_visits" class="form-control"
-                                            (input)="visits($event)" id="" placeholder="">
-                                            <!-- [class.is-invalid]="shouldShowRequired('total_visits') && VisitKitMatForm.get('total_visits')?.touched"> -->
-
-
-                                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
-                                        <input type="text" formControlName="screens" class="form-control" id=""
-                                            placeholder=" "
-                                            [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
-                                        <input type="text" formControlName="selected_skit_count" class="form-control"
-                                            id="" placeholder=" "
-                                            [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-
-
-
-                        <hr class="mt-4 mb-4" />
-
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <h4 class="r-blue-text">Kit Details</h4>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" (click)="showsc()"
-                                            href="#screening" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Screening</span>
-                                        </a>
-                                    </li>
-                                    <li *ngFor="let visit of listItems; let i = index" (click)="showv()"
-                                        class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#visit" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">visit {{i}}</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-
-                                <div class="tab-content pt-3 text-muted">
-                                    <div class="tab-pane active" *ngIf="screening" id="screening" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-md-12 mt-2 mb-3">
-                                                <h5>Screening Kit Details</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <button type="button" (click)="dialog()"
-                                                class="btn btn-primary waves-effect btn-label waves-light r-blue">Select
-                                                Lab Tests</button>
-                                            <p-dialog header="Select Lab Test" [(visible)]="display">
-                                                <div class="row">
-
-                                                    <div class="col-md-12 mb-3">
-                                                        <p-multiSelect [options]="matList" [(ngModel)]="selectedTests"
-                                                            formControlName="labTestValue"
-                                                            optionLabel="name"></p-multiSelect>
-                                                    </div>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <div class="col-md-9 mb-3"></div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <button type="button" align="right" (click)="labValues()"
-                                                            class="btn btn-primary r-blue">Submit Lab Tests</button>
-                                                    </div>
-                                                </div>
-                                            </p-dialog>
-                                            <br>
-                                            <div class="col-md-3 mt-2 mb-3"></div>
-                                            <div class="col-md-5 mt-2 mb-3">
-
-
-                                                <ul *ngIf="testDisplay" class="list-group">
-                                                    <li class="list-group-item" style="text-align: center;">
-                                                        <b>&nbsp;&nbsp;Selected Lab Tests</b>
-                                                    </li>
-                                                    <li class="list-group-item" style="text-align: center;"
-                                                        *ngFor="let item of multipleTests let k = index">
-                                                        &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-8 mb-3"></div>
-                                            <div class="col-md-11 mb-3" align="right">
-                                                <div class="mb-2 text-right" width="100%">
-                                                    <button type="button"
-                                                        class="btn btn-warning waves-effect btn-label waves-light r-darkblue pull-Right"
-                                                        (click)="onMaterialKitAdd()">
-                                                        <i class="bx bx-plus label-icon"></i> Add Material
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-3">
-
-                                                <div class="table-responsive" [formGroup]="ScreenMaterialKitForm">
-                                                    <table class="table table-striped mb-0"
-                                                        formArrayName="materialList">
-                                                        <thead Style="background:#EEE">
-                                                            <tr>
-                                                                <th>Material</th>
-                                                                <th>Size</th>
-                                                                <th>Quantity</th>
-                                                                <th>Frozen at Site</th>
-                                                                <th>Image</th>
-                                                                <th>Delete</th>
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody>
-
-                                                            <tr [formGroupName]="j" *ngFor="
-                                      let item of ScreenMaterialKitForm.get('materialList')
-                                        .controls;
-                                      let j = index
-                                    ">
-                                                                <th scope="row">
-                                                                    <select (change)="onScreenKitChange($event,j)"
-                                                                        formControlName="meterial_id"
-                                                                        class="form-select form-control">
-                                                                        <option *ngFor="let lab of labMatTestsList"
-                                                                            [value]="lab.meterial_id">
-                                                                            {{ lab.name }}
-                                                                        </option>
-                                                                    </select>
-                                                                </th>
-
-                                                                <td>
-                                                                    <select formControlName="size"
-                                                                        class="form-select form-control">
-                                                                        <option *ngFor="let lab of getSizes(j)">
-                                                                            {{ lab }}
-                                                                        </option>
-                                                                    </select>
-
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" formControlName="quantity"
-                                                                        class="form-control" value="" />
-                                                                </td>
-                                                                <td>
-                                                                    <input class="form-check-input"
-                                                                        formControlName="frozen_status" type="checkbox"
-                                                                        value="checked" id="debugInfo" />
-                                                                </td>
-                                                                <td>
-                                                                    <img formControlName="image" ngDefaultControl
-                                                                        class="bx bx-image-alt font-size-24"
-                                                                        [src]="ScreenMaterialKitForm.controls.materialList?.controls[j].controls['image'].value"
-                                                                        width="30" height="30">
-                                                                    <!-- <img [src]="imageURL" [alt]="Image"> -->
-                                                                    <!-- <i
-                                      formControlName="Image"
-                                      class="bx bx-image-alt font-size-24"
-                                    ></i> -->
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                        (click)="removeMatScreenKit(j)"
-                                                                        class="btn btn-danger ml-3 mt-2">Delete</button>
-                                                                    <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
-                                                                </td>
-                                                                <!-- <td>
-                                <button type="button" class="btn btn-danger waves-effect delete-btn waves-light">
-                                  <img src="../../assets/images/delete-button-svgrepo-com.svg" width="20" height="20" />
-                                </button>
-                              </td> -->
-                                                            </tr>
-
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 mt-2 mb-3">
-
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-
-                                        </div>
-                                    </div>
-                                   
-
-
-                                    <div class="tab-pane active" *ngIf="visit" role="tabpanel">
-                                        <!-- <div *ngIf="visit" class="tab-pane"  role="tabpanel"> -->
-                                        <div class="row">
-                                            <div class="col-md-12 mt-2 mb-3">
-                                                <h5>Visit Kit Details</h5>
-                                            </div>
-
-                                            <div class="col-md-3 mb-3">
-                                                <input type="text" formControlName="selected_vkit_count"
-                                                    class="form-control" placeholder="Enter Kit Count" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <button type="button" (click)="dialogv()"
-                                                class="btn btn-primary waves-effect btn-label waves-light r-blue">Select
-                                                Lab Tests</button>
-                                            <p-dialog header="Select Lab Test" [(visible)]="displayv">
-                                                <div class="row">
-
-                                                    <div class="col-md-12 mb-3">
-                                                        <p-multiSelect [options]="matList"
-                                                            formControlName="labTestValuev"
-                                                            optionLabel="name"></p-multiSelect>
-                                                    </div>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <br>
-                                                    <div class="col-md-9 mb-3"></div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <button type="button" align="right" (click)="labValuesv()"
-                                                            class="btn btn-primary r-blue">Submit Lab Tests</button>
-                                                    </div>
-                                                </div>
-                                            </p-dialog>
-                                            <br>
-                                            <!-- <h5 *ngIf="testDisplayv">Selected Lab Tests are: {{multipleTestsv}}</h5> -->
-
-                                            <div class="col-md-3 mt-2 mb-3"></div>
-                                            <div class="col-md-5 mt-2 mb-3">
-                                                <ul *ngIf="testDisplayv" class="list-group">
-                                                    <li class="list-group-item" style="text-align: center;">
-                                                        <b>&nbsp;&nbsp;Selected Lab Tests</b>
-                                                    </li>
-                                                    <li class="list-group-item" style="text-align: center;"
-                                                        *ngFor="let item of multipleTestsv let k = index">
-                                                        &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 mb-3">
-
-                                                </div>
-
-                                                <div id="visit" *ngIf="visit" class="col-md-12 mb-3">
-                                                    
-                                
-
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mb-3" align="right">
-                                <div class="mb-2 text-right" width="100%">
-                                    <button type="button"
-                                        class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                        style="width: 150px; height: 40px" (click)="SubmitData()">
-                                        <i class="bx bx-hdd label-icon"></i> Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!-- end col -->
+              </div>
             </div>
-            <!-- end row -->
-        </div>
-        <!-- container-fluid -->
+          </div>
+
+
+  
+          <div class="text-center mt-3">
+            <button type="button" (click)="addTab()">Add Tab</button>
+            <!-- <button type="button" (click)="removeTab()">Remove Tab</button> -->
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <!-- End Page-content -->
-
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">© Roboxa</div>
-            </div>
-        </div>
-    </footer>
-
-</div>
-<!-- end main content-->
-<!-- </div> -->
-<!-- END layout-wrapper -->
-
-
-
-
-<!-- Tab Content -->
-
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
+  </div>
+  

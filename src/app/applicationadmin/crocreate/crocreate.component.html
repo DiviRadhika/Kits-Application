@@ -130,6 +130,7 @@
                     <div class="form-group">
                       <label>Country</label>
                       <select  formControlName="country" class="form-select" aria-label="Default select example">
+                        <option  selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
                       </select >
                     
@@ -182,11 +183,9 @@
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
-                        Zipcode is required and enter valid Zipcode.
+                        Zipcode is required.
                       </div>
-                      <div *ngIf="shouldShowLengthError('zip_code')" class="invalid-feedback">
-                        Zipcode Must be 6characters.
-                      </div>
+                     
                     </div>
                   </div>
                 </div>

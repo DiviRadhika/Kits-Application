@@ -52,6 +52,21 @@
 
                 <div class="col-md-3">
                   <div class="form-group">
+                    <label>Email</label>
+
+
+                    <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                      formControlName="email">
+                    <div *ngIf="shouldShowRequired('email')" class="text-danger">
+                      Email is required.
+                    </div>
+                    <div *ngIf="userForm.get('email')?.hasError('pattern')" class="text-danger">
+                      Please enter a valid email address.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
                     <label>Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter Password"
                       formControlName="password">
@@ -59,56 +74,43 @@
                       Password is required.
                     </div>
                     <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
-                      Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
+                      Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one
+                      digit, and one special character.
                     </div>
-                    
-                  </div>
-                </div>
-              
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label>Email</label>
 
-                    
-                    <input type="text" class="form-control" id="email" placeholder="Enter Email"
-  formControlName="email">
-  <div *ngIf="shouldShowRequired('email')" class="text-danger">
-    Email is required.
-  </div>
-  <div *ngIf="userForm.get('email')?.hasError('pattern')" class="text-danger">
-    Please enter a valid email address.
-  </div>
                   </div>
                 </div>
+
 
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>Role</label>
+                   
                     <select formControlName="role" class="form-select" aria-label="Default select example">
+                      <option disabled selected value="">Select Role</option>
                       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                     </select>
                     <div *ngIf="shouldShowRequired('role')" class="text-danger">
-                      Role is required.
+                      Please Select Role.
                     </div>
                   </div>
                 </div>
-                <div *ngIf="isEdit" class="col-md-3">
+                <!-- <div *ngIf="isEdit" class="col-md-3">
                   <div class="form-group">
                     <label>Status</label>
-                    <select formControlName="role" class="form-select" aria-label="Default select example">
-                      <option *ngFor="let option of status" [value]="option">{{ option }}</option>
+                    <select formControlName="status" class="form-select" aria-label="Default select example">
+                      <option  selected value="">Select Status</option>
+                      <option *ngFor="let option of status"[ngValue]="option">{{ option }}</option>
                     </select>
-                    <div *ngIf="shouldShowRequired('status')" class="text-danger">
-                      Role is required.
-                    </div>
+                   
                   </div>
-                </div>
+                </div> -->
               </div>
 
               <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                 <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
               </div>
-             
+
             </form>
           </div>
         </div>

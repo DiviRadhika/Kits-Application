@@ -11,8 +11,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 })
 export class KitPreprationComponent implements OnInit {
 
-  kitId = 3;
-  screenid = 4;
+
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];
@@ -21,11 +20,31 @@ export class KitPreprationComponent implements OnInit {
   scount: any;
   vcount: any;
   displayValues: boolean = false;
-  visitTabs: Array<any> = [];
+
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
+
+  tabs: any[] = []; // Array to hold tabs
+  // activeTab: number = ''; // Active tab index
+  count = 2;
+  allTabsData: any[] = [];
+  index: any;
+  indexvalue: any;
+  vmdetails: any[] = [];
+  uuid: any;
+  // visitKitFormGroup: FormGroup
+
+
+  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+    // this.visitKitFormGroup = this.formBuilder.group({
+    //   ckitId: [''],
+    //   kitId: [''],
+    //   prepration: [''],
+    // });
+
+
+  };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -36,8 +55,8 @@ export class KitPreprationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['InProgress', 'Completed']
-
+  preprationData = ['In Progress', 'Completed']
+  kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
   // selected_sponsor_id: any;
@@ -64,40 +83,143 @@ export class KitPreprationComponent implements OnInit {
   materials: any;
   selectedValuev: any;
   selectedOption: any;
+
   public preparationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
+
     this.protocolService.getProtocol().subscribe((protocols) => {
       this.ProtoData(protocols);
     });
-  
-   
-  
+
+
+
     this.ScreenKitForm = this.formBuilder.group({
 
-      screenKitList: this.formBuilder.array([this.addScreenKitData()])
+      screenKitList: this.formBuilder.array([])
+    });
 
-    })
- 
 
-    this.VisitKitForm = this.formBuilder.group({
 
-      visitKitList: this.formBuilder.array([])
-
-    })
-
-    this.listItems = [];
-   
   }
- 
-  getprotocolDetails(id: any) {
 
 
+  printLabel(i: any, id: any) {
+    const kitId = this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').value;
+    const ckitId = this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').value;
+
+    console.log(this.sMatDetails);
+
+    const printSection = document.getElementById('printSection');
+    if (printSection) {
+      const printContent = printSection.innerHTML;
+      const printWindow = window.open('', '', 'height=500,width=500');
+      if (printWindow) {
+        const printDocument = printWindow.document;
+        printDocument.write(`
+          <html>
+          <head>
+            <title>Print</title>
+            <style>
+              /* Custom styling for the print output */
+              /* Add any necessary styles for your specific requirements */
+              .print-container {
+                display: flex;
+              }
   
+              .left-content {
+                padding: 10px;
+              }
+  
+              .left-content p {
+                margin: 5px 0;
+              }
+  
+              .material-table {
+                margin-top: 5px;
+                border-collapse: collapse;
+              }
+  
+              .material-table td,
+              .material-table th {
+                border: 1px solid #ccc;
+                padding: 5px;
+              }
+  
+              .material-table th {
+                background-color: #f2f2f2;
+              }
+              h2{
+                text-align:center;
+              }
+              .ok{
+                margin-top:30px
+              }
+            </style>
+          </head>
+          <body>
+            <div class="print-container">
+            <div class="left-content">
+            <h2>Screening Kit</h2>
+            <p><strong>Kit Id:</strong> ${kitId}</p>
+            <p><strong>LabKit Id:</strong> ${ckitId}</p>
+            <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+            <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
+            
+            <p><strong>Type:</strong> Screening</p>
+        
+            <div class=ok>
+                <h4>Material</h4>
+                <table class="material-table">
+                  <thead>
+                    <tr>
+                      <th>Material ID</th>
+                      <th>Size</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${this.sMatDetails
+            .map(
+              (item) => `
+                          <tr>
+                            <td>${item.meterial_id}</td>
+                            <td>${item.size}</td>
+                            <td>${item.quantity}</td>
+                          </tr>
+                        `
+            )
+            .join('')}
+                  </tbody>
+                </table>
+              </div>
+              </div>
 
+            </div>
+            <script>
+              setTimeout(() => {
+                window.print();
+                window.onafterprint = function () {
+                  window.close();
+                };
+              }, 100);
+            </script>
+          </body>
+          </html>
+        `);
+      }
+    }
+  }
+
+
+
+  getprotocolDetails(id: any) {
+    this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
+      this.uuid = id.target.value;
+
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
@@ -110,219 +232,307 @@ export class KitPreprationComponent implements OnInit {
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
       this.scount = this.protocolIdDetails.no_of_screens
       this.vcount = this.protocolIdDetails.no_of_visits
-      // console.log(this.visitDetails);
       console.log(this.vMatDetails, 'details');
-      this.visitTabs = []
       this.visitRecords = []
       this.visitRecordsRow = []
-  this.tets = []
+      this.tets = []
+
       this.vMatDetails.forEach((tabs: any) => {
-      this.tets.push(tabs.selectedLabTests)
-        this.visitTabs.push(tabs.visits);
-        this.visitTabs.forEach((visitRecord: any) => {
-        
-          this.visitRecords.push(visitRecord);
+        tabs.visitKitFormGroup = this.formBuilder.group({
 
+          visitKitList: this.formBuilder.array([]),
         });
-      });
-    console.log(this.tets);
-    
+        const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
+        for (let i = 1; i <= this.vcount; i++) {
+          visitKitListArray.push(this.createVisitKitGroup());
+          console.log(tabs.visitKitFormGroup[i]);
+        }
+        tabs.visitsList = visitKitListArray
+        for (let i = 0; i < this.vMatDetails.length; i++) {
+          const tabs = this.vMatDetails[i];
+          tabs.visitKitFormGroup = this.formBuilder.group({
+            visitKitList: this.formBuilder.array([]),
+          });
+          const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
+          for (let j = 0; j < this.vcount; j++) {
+            visitKitListArray.push(this.createVisitKitGroup());
+            visitKitListArray.at(j).get('ckitId')?.patchValue(this.getLabKitId(i, j));
+          }
+          tabs.visitsList = visitKitListArray;
+          this.tets.push(tabs.selectedLabTests);
+        }
 
-      console.log(this.visitRecords.length, 'records');
+        this.tets.push(tabs.selectedLabTests)
+      });
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
+      for (let i = 1; i <= this.scount; i++) {
+        this.adjustScreenKitRows(this.scount);
+      }
 
-      console.log(this.visitRecordsRow, 'row');
-      for (let i = 1; i <= this.visitTabs.length; i++)
-      { 
-      this.addCard()
-      
-      this.addRow1(2)
-    
-     } 
     });
 
-  
-  } 
+
+  }
+
+  getformGroup(i: any) {
+    return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
+
+  }
+
+  getLabKitId(tabIndex: number, recordIndex: number): string {
+    const visitIndex = tabIndex + 1;
+    return `${this.protocolIdDetails.protocol_id}V${visitIndex}00${recordIndex+1}`;
+  }
+  createVisitKitGroup() {
+    return this.formBuilder.group({
+      ckitId: [''],
+      kitId: [''],
+      prepration: ['In Progress']
+
+    });
+  }
+
+  printLabelm(tabIndex: number, rowIndex: number) {
+    const selectedTab = this.vMatDetails[tabIndex];
+    const matdetails = selectedTab.visits;
+    console.log(matdetails);
+
+
+    const selectedRow = selectedTab.visitsList.controls[rowIndex];
+
+
+    // Access the values of the selected row
+    const kitId = selectedRow.get('kitId').value;
+    const ckitId = selectedRow.get('ckitId').value;
+    const prepration = selectedRow.get('prepration').value;
+
+    const printSection = document.getElementById('printSection');
+    if (printSection) {
+      const printContent = printSection.innerHTML;
+      const printWindow = window.open('', '', 'height=500,width=500');
+      if (printWindow) {
+        const printDocument = printWindow.document;
+        printDocument.write(`
+            <html>
+            <head>
+              <title>Print</title>
+              <style>
+                /* Custom styling for the print output */
+                /* Add any necessary styles for your specific requirements */
+                .print-container {
+                  display: flex;
+                }
+    
+                .left-content {
+                  padding: 10px;
+                }
+    
+                .left-content p {
+                  margin: 5px 0;
+                }
+    
+                .material-table {
+                  margin-top: 5px;
+                  border-collapse: collapse;
+                }
+    
+                .material-table td,
+                .material-table th {
+                  border: 1px solid #ccc;
+                  padding: 5px;
+                }
+    
+                .material-table th {
+                  background-color: #f2f2f2;
+                }
+                h2{
+                  text-align:center;
+                }
+                .ok{
+                  margin-top:30px
+                }
+              </style>
+            </head>
+            <body>
+       
+          </body>
+          <div class="print-container">
+          <div class="left-content">
+          <h2>Visit Kit</h2>
+          <p><strong>Kit Id:</strong> ${kitId}</p>
+          <p><strong>LabKit Id:</strong> ${ckitId}</p>
+          <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+          <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
+          <p><strong>Type:</strong> Screening</p>
+          <div class=ok>
+          <h4>Material</h4>
+          <table class="material-table">
+                  <thead>
+                    <tr>
+                      <th>Material ID</th>
+                      <th>Size</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+            ${matdetails
+            .map(
+              (item: any) => `
+              <tr>
+              <td>${item.meterial_id}</td>
+              <td>${item.size}</td>
+              <td>${item.quantity}</td>
+            </tr>
+                `
+            )
+            .join('')}
+            </tbody>
+            </table>
+            </div>
+            </div>
+          </div>
+              <script>
+                setTimeout(() => {
+                  window.print();
+                  window.onafterprint = function () {
+                    window.close();
+                  };
+                }, 100);
+              </script>
+            </body>
+            </html>
+          `);
+      }
+    }
+
+  }
+
  
-  addScreenKit() {
-    this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData());
+
+  printLabelv(tabIndex: number, rowIndex: number) {
+    const selectedTab = this.vMatDetails[tabIndex];
+    const selectedRow = selectedTab.visitsList.controls[rowIndex];
+
+    // Access the values of the selected row
+    const kitId = selectedRow.get('kitId').value;
+    const ckitId = selectedRow.get('ckitId').value;
+    const prepration = selectedRow.get('prepration').value;
+
+    // Perform the necessary printing logic using the values of the row
+  }
+
+
+
+  adjustScreenKitRows(count: number) {
+    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
+    const currentRowCount = screenKitList.length;
+
+    if (count < currentRowCount) {
+      // Remove excess rows
+      for (let i = currentRowCount - 1; i >= count; i--) {
+        screenKitList.removeAt(i);
+      }
+    } else if (count > currentRowCount) {
+      // Add new rows
+      for (let i = currentRowCount; i < count; i++) {
+        this.onScreenKitAdd(i);
+        console.log(this.ScreenKitForm[i]);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'SK00'+i+1)
+       
+
+      }
+    }
+
+  }
+  // ckitId: [{ value: this.protocolIdDetails.protocol_id+'sk', disabled: true }],
+
+  addScreenKit(record: any) {
+    this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
     console.log(this.ScreenKitForm.controls);
   }
 
-  addVisitKit() {
-    this.VisitKitForm.get('visitKitList').push(this.addVisitKitData());
 
-  }
-  onScreenKitAdd() {
-
+  onScreenKitAdd(rec: any) {
 
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
-    control1.push(this.addScreenKitData());
+    control1.push(this.addScreenKitData(rec));
 
   }
 
-  addScreenKitData() {
+  addScreenKitData(record: string) {
 
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
-      prepration: [''],
+      prepration: ['In Progress'],
 
     })
   }
 
-  // onVisitKitAdd() {
 
-  //   //this.VisitKitForm.get('labTestsList').controls.push(this.addVisitKitData());
-  //   const control1 = this.VisitKitForm.get('visitKitList') as FormArray;
-  //   control1.push(this.addVisitKitData());
-  //   console.log(this.VisitKitForm.get('visitKitList').controls);
-  // }
-  showsc() {
-    this.screening = true;
-    this.visit = false
-  }
-  showv() {
-    // this.addVisitKit()
-    this.screening = false;
-    this.visit = true
 
-  }
-  addVisitKitData() {
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-
-    })
-  }
 
   ProtoData(Protocols: any) {
     Protocols.forEach((protocol: any) => {
       this.protocols.push(protocol);
 
-  
-  
     });
 
     console.log(this.protocols);
   }
 
- 
-
 
 
   SubmitData() {
-  console.log(this.VisitKitForm.value);
-  
-    const data =
-    {
-      protocol_id: this.selected_protocol_id,
-      // sponser_id: this.selected_sponsor_id,
-      // cro_id: this.selected_cro_id,
-      no_of_sites: Number(this.selected_sites_num),
-      total_patients: Number(this.selected_patients_num),
-      site_data: this.sitesForm.value.sites,
-      screening_kit_count: Number(this.selected_skit_count),
-      screening_kit_lab_test_details: this.ScreenKitForm.value.labTestsList,
-      visit_kit_count: Number(this.selected_vkit_count),
-      visit_kit_type: this.selected_vkit_variant,
-      visit_kit_details: this.VisitKitForm.value.labTestsList
+    this.vmdetails = []
+    for (let i = 0; i < this.vMatDetails.length; i++) {
+      this.vmdetails.push(this.vMatDetails[i].visitsList.value)
+
     }
+
+
+
+    // console.log(this.vMatDetails.visitsList.FormArray.value)
+    const data = {
+      "protocol_id": this.uuid,
+      "protocol_name": this.protoName,
+      "screening_kit_details": this.ScreenKitForm.value.screenKitList,
+      "visit_kit_details": this.vmdetails
+
+
+    }
+    // sessionStorage.setItem('vmdet', JSON.stringify(data));
 
     console.log(data);
 
-    this.protocolService.postProtocol(data).subscribe(
+    this.protocolService.postPreparation(data).subscribe(
       (data: any) => {
-        alert('protocol created successfully');
+        alert('Kit Preparation Updated  successfully');
       },
       (err: any) => {
-        alert('internal server err');
+        alert(err.errorr.message)
       }
     );
-  }
 
-  cards: { form: FormGroup }[] = [];
-  visits(value: any){
-    console.log(value.data);
-    
-    // this.valueVisit= value
-    // this.listItems = []; 
-   
   }
 
 
 
-  addCard() {
-    const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
-    const rowsArray = new FormArray([]);
-    const cardForm = this.formBuilder.group({
-      rows: rowsArray
-    });
-    this.cards.push({ form: cardForm });
-  }
 
-    
-getMaterialId(cardIndex: number, rowIndex: number): string {
-  const cardFormArray = this.getRowsFormArray(cardIndex);
-  const rowFormGroup = cardFormArray.at(rowIndex) as FormGroup;
-  return rowFormGroup.get('material_id')?.value;
-}
-  addRow1(cardIndex: number) {
-    const cardFormArray = this.getRowsFormArray(cardIndex);
-    cardFormArray.push(this.createRow());
-  }
-  deleteRow(cardIndex: number, rowIndex: number) {
-    const cardFormArray = this.getRowsFormArray(cardIndex);
-    cardFormArray.removeAt(rowIndex);
-  }
-
-  createRow(): FormGroup {
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-    });
-  }
-  
-  getRowsFormArray(cardIndex: number): FormArray {
-    const cardForm = this.cards[cardIndex].form;
-    return cardForm.get('rows') as FormArray;
-  }
-  getRows(cardIndex: number): FormArray {
-    const card = this.cards[cardIndex];
-    return card.form.get('rows') as FormArray;
-  }
- 
-  onSubmit() {
-    const formData = [];
-  
-    // Iterate over the cards and access their form values
-    for (const card of this.cards) {
-      const formValues = card.form.value;
-      formData.push(formValues);
-    }
-    console.log(formData);
-    
-    // this.croService.sendFormData(formData);
-
-  }
-
- 
- 
-
-  
-  
-  
 }
 
 
 
 
 
- 
+
+
+
+
+
+
 
 
 

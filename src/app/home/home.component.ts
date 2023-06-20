@@ -6,6 +6,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+
+
+
+  menuItems :any[] = [];
+
+  toggleSubItems(item: any) {
+    this.menuItems.forEach(menuItem => {
+      if (menuItem !== item) {
+        menuItem.expanded = false;
+      }
+    });
+    item.expanded = !item.expanded;
+  }
+  
+
+
+  public showSubheadings = false;
+
   role: any 
   adminRole: boolean = false;
   sponsorRole: boolean = false;
@@ -15,39 +34,82 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.role = sessionStorage.getItem('role')
     if(this.role === 'admin'){
-      this.adminRole = true;
-      this.sponsorRole = true;
-      this.croRole = true;
-      this.centralLab = true;
-      this.siteRole = true;
+      this.menuItems = [
+        {
+          label: 'Application Admin',
+          icon: 'bx bxs-user-check',
+          expanded: false,
+          subItems: [
+            { label: 'CRO Create', link: '/home/admin/croGrid' },
+            { label: 'User Create', link: '/home/admin/userGrid' }
+          ]
+        
+        
+        }
+      
+       
+     
+        // Other menu items for admin role...
+      ];
     }
     else if(this.role === 'Sponsor'){
-      this.adminRole = false;
-      this.sponsorRole = true;
-      this.croRole = false;
-      this.centralLab = false;
-      this.siteRole = false;
+      // this.menuItems = [
+      //   {
+      //     label: 'Sponsor',
+      //     icon: 'bx bxs-user-check',
+      //     expanded: false,
+      //     subItems: [
+      //       { label: 'Protocol', link: '/home/Sponsor/protocol' }
+      //     ]
+      //   }
+      //   // Other menu items for admin role...
+      // ];
     }
     else if(this.role === 'CRO'){
-      this.adminRole = false;
-      this.sponsorRole = false;
-      this.croRole = true;
-      this.centralLab = false;
-      this.siteRole = false;
+      this.menuItems = [
+        {
+          label: 'CRO',
+          icon: 'bx bxs-user-check',
+          expanded: false,
+          subItems: [
+            { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
+            { label: 'Site', link: '/home/cro/siteGrid' },
+            { label: 'LabTest', link: '/home/cro/labTestGrid' },
+            { label: 'Protocol Summary', link: '/home/cro/protocolView' }
+          ]
+        },
+        // Other menu items for admin role...
+      ];
     }
     else if(this.role === 'Central Lab'){
-      this.adminRole = false;
-      this.sponsorRole = false;
-      this.croRole = false;
-      this.centralLab = true;
-      this.siteRole = false;
+      this.menuItems = [
+        {
+          label: 'Central Lab',
+          icon: 'bx bxs-analyse',
+          expanded: false,
+          subItems: [
+            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
+            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+            
+          ]
+        },
+        // Other menu items for admin role...
+      ];
     }
-    else if(this.role === 'Site'){
-      this.adminRole = false;
-      this.sponsorRole = false;
-      this.croRole = false;
-      this.centralLab = false;
-      this.siteRole = true;
+    else if(this.role === 'CRA'){
+      this.menuItems = [
+        {
+          label: 'CRA',
+          icon: 'bx bxs-analyse',
+          expanded: false,
+          subItems: [
+            { label: 'Sample Collection', link: '/home/site/sampleCollection' }
+          ]
+        }
+        // Other menu items for admin role...
+      ];
     }
     const navLinks = document.querySelectorAll('.nav-link');
     const collapses = document.querySelectorAll('.collapse');
@@ -71,7 +133,28 @@ export class HomeComponent implements OnInit {
   clear(){
     sessionStorage.clear()
   }
+  sidebarToggle!: HTMLElement;
+  sidebar!: HTMLElement;
+  isSidebarShrunk: boolean;
+
+  constructor() {
+    this.isSidebarShrunk = false;
+  }
+
+  ngAfterViewInit() {
+    this.sidebarToggle = document.getElementById('sidebar-toggle')!;
+    this.sidebar = document.getElementById('sidebar')!;
+
+    if (this.sidebarToggle && this.sidebar) {
+      this.sidebarToggle.addEventListener('click', () => {
+        if (this.isSidebarShrunk) {
+          this.sidebar.style.width = '200px'; // Expand the sidebar
+        } else {
+          this.sidebar.style.width = '100px'; // Shrink the sidebar
+        }
+
+        this.isSidebarShrunk = !this.isSidebarShrunk;
+      });
+    }
+  }
 }
-
-  
-

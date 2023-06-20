@@ -32,7 +32,7 @@
                                 <img src="assets/images/roboxa-logo-lite.png" alt="" height="35">
                             </span>
                         </a>
-                             
+
                         <a href="index.html" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-icon-lite.png" alt="" height="35">
@@ -43,9 +43,9 @@
                         </a>
                     </div>
 
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
-                        id="vertical-menu-btn">
-                        <i class="fa fa-fw fa-bars"></i>
+                    <button type="button"  id="sidebar-toggle" class="btn btn-sm px-3 font-size-16 header-item waves-effect">
+                        <!-- id="vertical-menu-btn"> -->
+                        <i class="mdi mdi-menu"></i>
                     </button>
 
                     <!-- App Search-->
@@ -84,11 +84,8 @@
                             </form>
                         </div>
                     </div>
-
-
                     <div class="dropdown d-none d-lg-inline-block ms-1">
-                        <button type="button" class="btn header-item noti-icon waves-effect"
-                            data-bs-toggle="fullscreen">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
@@ -102,8 +99,9 @@
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item--> 
-                            <a  routerLink="/login" (click)="clear()" class="dropdown-item text-danger" href="login.html"><i
+                            <!-- item-->
+                            <a routerLink="/login" (click)="clear()" class="dropdown-item text-danger"
+                                href="login.html"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout">Logout</span></a>
                         </div>
@@ -113,134 +111,29 @@
             </div>
         </header>
 
-        <!-- ========== Left Sidebar Start ========== -->
         <div class="vertical-menu">
-
             <div data-simplebar class="h-100">
-
-                <!--- Sidemenu -->
                 <div id="sidebar-menu">
-                    <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title" key="t-menu">Menu</li>
-                        <li *ngIf="adminRole">
-                            <a  class="waves-effect">
-                                <i class="bx bxs-user-check"></i>
-                                <span key="t-chat">Application Admin</span>
+
+                        <!-- Loop through menu items -->
+                        <li *ngFor="let item of menuItems">
+                            <a class="waves-effect" (click)="toggleSubItems(item)">
+                                <i [class]="item.icon"></i>
+                                <span key="t-chat">{{ item.label }}</span>
                             </a>
-                            <ul>
-                                <li><a routerLink="/home/admin/croGrid" class="waves-effect">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span key="t-chat">CRO Create</span>
-                                    </a> </li>
-                                <li><a routerLink="/home/admin/userGrid" class="waves-effect">
-                                    <i class="entypo-add-user"></i>
-                                        <span key="t-chat">User Create</span>
-                                    </a> </li>
-
-                            </ul>
-                        <li>
-
-
-                        <li *ngIf="croRole">
-                            <a class="waves-effect">
-                                <i class="bx bxs-user-check"></i>
-                                <span key="t-chat">CRO</span>
-                            </a>
-                            <ul>
-                                <li><a routerLink="/home/cro/sponsorGrid" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Sponsor</span>
-                                    </a> </li>
-
-                                <li><a routerLink="/home/cro/siteGrid" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Site</span>
-                                    </a> </li>
-
-                                <li><a routerLink="/home/cro/labTestGrid" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">LabTest</span>
-                                    </a> </li>
-
-                                <li><a routerLink="/home/cro/protocolRegistration" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Protocol Registration</span>
-                                    </a> </li>
-                                    <li><a routerLink="/home/cro/visits" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Visits</span>
-                                    </a> </li>
-                                    <li><a routerLink="/home/cro/protocolView" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Protocol View</span>
-                                    </a> </li>
-                            </ul>
-
-                        </li>
-                        <li *ngIf="sponsorRole">
-                            <a  class="waves-effect">
-                                <i class="bx bxs-user-check"></i>
-                                <span key="t-chat">Sponsor</span>
-                            </a>
-                            <ul>
-                                <li><a routerLink="/home/Sponsor/protocol" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Protocol</span>
-                                    </a> </li>
-                            </ul>
-                        <li>
-                            
-                        <li *ngIf="centralLab">
-                            <a class="waves-effect">
-                                <i class="bx bxs-analyse"></i>
-                                <span key="t-chat">Central Lab</span>
-                            </a>
-                            <ul>
-                                <li><a routerLink="/home/centralLab/kitPrepration" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Kit Prepration</span>
-                                    </a> </li>
-                                <li><a routerLink="/home/centralLab/kitVerification" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Kit Verification</span>
-                                    </a> </li>
-                                    <li><a routerLink="/home/centralLab/kitDistribution" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Kit Distribution</span>
-                                    </a> </li>
-                                
-                                <li><a routerLink="/home/centralLab/sampleAcknowledgement" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Sample Acknowledgement</span>
-                                    </a> </li>
-                                <!-- <li><a routerLink="/home/cro/csponsor" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Upload Results</span>
-                                    </a> </li> -->
+                            <ul *ngIf="item.expanded">
+                                <li *ngFor="let subItem of item.subItems">
+                                    <a [routerLink]="subItem.link" class="waves-effect">{{ subItem.label }}</a>
+                                </li>
                             </ul>
                         </li>
-                        <li *ngIf="siteRole">
-                            <a class="waves-effect">
-                                <i class="bx bxs-analyse"></i>
-                                <span key="t-chat">Site</span>
-                            </a>
-                            <ul>
-                                <li><a routerLink="/home/site/sampleCollection" class="waves-effect">
-                                        <i class="bx bxs-user-check"></i>
-                                        <span key="t-chat">Sample Collection</span>
-                                    </a> </li>
-                            </ul>
-                        </li>
-
-
-
                     </ul>
                 </div>
-                <!-- Sidebar -->
             </div>
         </div>
-        <!-- Left Sidebar End -->
+
 
 
 
@@ -260,6 +153,9 @@
 
 </body>
 <!-- JAVASCRIPT -->
+<script>
+  
+</script>
 
 
 </html>

@@ -35,7 +35,7 @@ export class SponsorGridComponent implements OnInit {
        console.log(data)
       },
       (err:any)=>{
-        alert("err")
+        alert(err.error.message)
       }
     )
   }
