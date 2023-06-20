@@ -85,25 +85,26 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>Role</label>
+                   
                     <select formControlName="role" class="form-select" aria-label="Default select example">
+                      <option disabled selected value="">Select Role</option>
                       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                     </select>
                     <div *ngIf="shouldShowRequired('role')" class="text-danger">
-                      Role is required.
+                      Please Select Role.
                     </div>
                   </div>
                 </div>
-                <div *ngIf="isEdit" class="col-md-3">
+                <!-- <div *ngIf="isEdit" class="col-md-3">
                   <div class="form-group">
                     <label>Status</label>
-                    <select formControlName="role" class="form-select" aria-label="Default select example">
-                      <option *ngFor="let option of status" [value]="option">{{ option }}</option>
+                    <select formControlName="status" class="form-select" aria-label="Default select example">
+                      <option  selected value="">Select Status</option>
+                      <option *ngFor="let option of status"[ngValue]="option">{{ option }}</option>
                     </select>
-                    <div *ngIf="shouldShowRequired('status')" class="text-danger">
-                      Role is required.
-                    </div>
+                   
                   </div>
-                </div>
+                </div> -->
               </div>
 
               <div class="col-12 mt-auto mb-2 d-flex justify-content-end">

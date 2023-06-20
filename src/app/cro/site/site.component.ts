@@ -13,7 +13,7 @@ export class SiteComponent implements OnInit {
   allSiteDetails: any[] = [];
   page = 1;
   totalCount = 0
-  pageSize = 2;
+  pageSize = 10;
   p = 1;
   searchText= ''
 

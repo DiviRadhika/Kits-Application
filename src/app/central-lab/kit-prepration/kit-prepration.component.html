@@ -41,6 +41,7 @@
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
+                                        <option  selected value="">Select Protocol ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.id">
                                             {{ data.protocol_id }}
                                         </option>
@@ -95,7 +96,7 @@
                                                       .controls;
                                                     let i = index
                                                   ">
-                                                                <td width="25%">
+                                                                <td width="30%">
                                                                     <input type="text" placeholder="kitId"
                                                                         formControlName="kitId" class="form-control"
                                                                         value="" />
@@ -105,9 +106,10 @@
                                                                     [disabled]="true" readonly  formControlName="ckitId" class="form-control" />
                                                                 </td>
 
-                                                                <td width="25%">
+                                                                <td width="30%">
                                                                     <select formControlName="prepration"
                                                                         class="form-select form-control">
+                                                                        <!-- <option  selected value="">Select Protocol ID</option> -->
                                                                         <option *ngFor="let data of preprationData">
                                                                             {{ data }}
                                                                         </option>

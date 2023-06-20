@@ -55,7 +55,7 @@ export class KitPreprationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['InProgress', 'Completed']
+  preprationData = ['In Progress', 'Completed']
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -104,17 +104,13 @@ export class KitPreprationComponent implements OnInit {
 
 
   }
+
+
   printLabel(i: any, id: any) {
-
-
     const kitId = this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').value;
-
     const ckitId = this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').value;
 
-
     console.log(this.sMatDetails);
-
-
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -123,48 +119,101 @@ export class KitPreprationComponent implements OnInit {
       if (printWindow) {
         const printDocument = printWindow.document;
         printDocument.write(`
-            <html>
-            <head>
-              <title>Print</title>
-              <style>
-                /* Custom styling for the print output */
-                /* Add any necessary styles for your specific requirements */
-              </style>
-            </head>
-            <h1>Print Content</h1>
-            <p>KitId: ${kitId}</p>
-            <p>LabKitId: ${ckitId}</p>
-            <p>ProtocolId: ${this.protocolIdDetails.protocol_id}</p>
-            <p>ProtocolName: ${this.protocolIdDetails.protocol_name}</p>
-            <p>Type: Screening</p>
-            <p>Material:</p>
-            <div class="col-md-3 mb-3">
-            ${this.sMatDetails
+          <html>
+          <head>
+            <title>Print</title>
+            <style>
+              /* Custom styling for the print output */
+              /* Add any necessary styles for your specific requirements */
+              .print-container {
+                display: flex;
+              }
+  
+              .left-content {
+                padding: 10px;
+              }
+  
+              .left-content p {
+                margin: 5px 0;
+              }
+  
+              .material-table {
+                margin-top: 5px;
+                border-collapse: collapse;
+              }
+  
+              .material-table td,
+              .material-table th {
+                border: 1px solid #ccc;
+                padding: 5px;
+              }
+  
+              .material-table th {
+                background-color: #f2f2f2;
+              }
+              h2{
+                text-align:center;
+              }
+              .ok{
+                margin-top:30px
+              }
+            </style>
+          </head>
+          <body>
+            <div class="print-container">
+            <div class="left-content">
+            <h2>Screening Kit</h2>
+            <p><strong>Kit Id:</strong> ${kitId}</p>
+            <p><strong>LabKit Id:</strong> ${ckitId}</p>
+            <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+            <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
+            
+            <p><strong>Type:</strong> Screening</p>
+        
+            <div class=ok>
+                <h4>Material</h4>
+                <table class="material-table">
+                  <thead>
+                    <tr>
+                      <th>Material ID</th>
+                      <th>Size</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${this.sMatDetails
             .map(
               (item) => `
-                <p>Material:</p>
-                  <p>Material ID: ${item.meterial_id}</p>
-                  <p>Size: ${item.size}</p>
-                  <p>Quantity: ${item.quantity}</p>
-                `
+                          <tr>
+                            <td>${item.meterial_id}</td>
+                            <td>${item.size}</td>
+                            <td>${item.quantity}</td>
+                          </tr>
+                        `
             )
             .join('')}
-          </div>
-              <script>
-                setTimeout(() => {
-                  window.print();
-                  window.onafterprint = function () {
-                    window.close();
-                  };
-                }, 100);
-              </script>
-            </body>
-            </html>
-          `);
+                  </tbody>
+                </table>
+              </div>
+              </div>
+
+            </div>
+            <script>
+              setTimeout(() => {
+                window.print();
+                window.onafterprint = function () {
+                  window.close();
+                };
+              }, 100);
+            </script>
+          </body>
+          </html>
+        `);
       }
     }
-
   }
+
+
 
   getprotocolDetails(id: any) {
     this.scount = ''
@@ -234,13 +283,13 @@ export class KitPreprationComponent implements OnInit {
 
   getLabKitId(tabIndex: number, recordIndex: number): string {
     const visitIndex = tabIndex + 1;
-    return `${this.protocolIdDetails.protocol_id}v${visitIndex}00${recordIndex+1}`;
+    return `${this.protocolIdDetails.protocol_id}V${visitIndex}00${recordIndex+1}`;
   }
   createVisitKitGroup() {
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
-      prepration: ['inprogress']
+      prepration: ['In Progress']
 
     });
   }
@@ -272,30 +321,77 @@ export class KitPreprationComponent implements OnInit {
               <style>
                 /* Custom styling for the print output */
                 /* Add any necessary styles for your specific requirements */
+                .print-container {
+                  display: flex;
+                }
+    
+                .left-content {
+                  padding: 10px;
+                }
+    
+                .left-content p {
+                  margin: 5px 0;
+                }
+    
+                .material-table {
+                  margin-top: 5px;
+                  border-collapse: collapse;
+                }
+    
+                .material-table td,
+                .material-table th {
+                  border: 1px solid #ccc;
+                  padding: 5px;
+                }
+    
+                .material-table th {
+                  background-color: #f2f2f2;
+                }
+                h2{
+                  text-align:center;
+                }
+                .ok{
+                  margin-top:30px
+                }
               </style>
             </head>
             <body>
        
           </body>
-             <h1>Print Content</h1>
-             <p>KitId: ${kitId}</p>
-             <p>LabKitId: ${ckitId}</p>
-             <p>ProtocolId: ${this.protocolIdDetails.protocol_id}</p>
-             <p>ProtocolName: ${this.protocolIdDetails.protocol_name}</p>
-            <p>Type: Visit</p>
-            <p>Material:</p>
-            <div class="col-md-3 mb-3">
-            <div class="col-md-3 mb-3">
+          <div class="print-container">
+          <div class="left-content">
+          <h2>Visit Kit</h2>
+          <p><strong>Kit Id:</strong> ${kitId}</p>
+          <p><strong>LabKit Id:</strong> ${ckitId}</p>
+          <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+          <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
+          <p><strong>Type:</strong> Screening</p>
+          <div class=ok>
+          <h4>Material</h4>
+          <table class="material-table">
+                  <thead>
+                    <tr>
+                      <th>Material ID</th>
+                      <th>Size</th>
+                      <th>Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
             ${matdetails
             .map(
               (item: any) => `
-                <p>Material:</p>
-                  <p>Material ID: ${item.meterial_id}</p>
-                  <p>Size: ${item.size}</p>
-                  <p>Quantity: ${item.quantity}</p>
+              <tr>
+              <td>${item.meterial_id}</td>
+              <td>${item.size}</td>
+              <td>${item.quantity}</td>
+            </tr>
                 `
             )
             .join('')}
+            </tbody>
+            </table>
+            </div>
+            </div>
           </div>
               <script>
                 setTimeout(() => {
@@ -343,7 +439,7 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         console.log(this.ScreenKitForm[i]);
-        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'sk00'+i+1)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'SK00'+i+1)
        
 
       }
@@ -370,7 +466,7 @@ export class KitPreprationComponent implements OnInit {
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
-      prepration: [''],
+      prepration: ['In Progress'],
 
     })
   }

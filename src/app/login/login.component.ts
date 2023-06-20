@@ -54,11 +54,12 @@ reset(){
       this.route.navigate(['/home'])
       console.log(data)
       sessionStorage.setItem('role', data.role)
+    
       sessionStorage.setItem('access_token', data.access_token)
       this.myModal.hide();
     },
     (err: any) => {
-      alert("err")
+      alert(err.error.message)
     }
   )
 }
@@ -76,6 +77,8 @@ reset(){
         console.log(data)
         this.route.navigate(['/home'])
         console.log(data)
+        sessionStorage.setItem('email', this.loginForm.controls['username'].value)
+    
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('access_token', data.access_token)
       },

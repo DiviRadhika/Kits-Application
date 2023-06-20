@@ -21,6 +21,28 @@ export class AddSiteComponent  {
    ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {    
+
+
+        this.siteForm = new FormGroup({
+          site_data_code: new FormControl("", [Validators.required]),
+          site_data_name: new FormControl("", [Validators.required]),
+          legal_site_data_name: new FormControl("", [Validators.required]),
+          address_1: new FormControl("", [Validators.required]),
+          address_2: new FormControl(""),
+          address_3: new FormControl("", ),
+          address_4: new FormControl(""),
+          city: new FormControl("", [Validators.required]),
+          district: new FormControl("", [Validators.required]),
+          region: new FormControl("", [Validators.required]),
+          zip_code: new FormControl("", [Validators.required]),
+          country: new FormControl("", [Validators.required]),
+          office_telephone: new FormControl(""),
+          extension: new FormControl(""),
+          email: new FormControl(''),
+          website:new FormControl(''),
+          mobile_telephone:new FormControl(''),
+      
+        });
         this.isEdit = true;
         this.id = data.id;
         _cro.getSiteById(data.id).subscribe((data: any) => {
@@ -56,11 +78,10 @@ export class AddSiteComponent  {
     city: new FormControl("", [Validators.required]),
     district: new FormControl("", [Validators.required]),
     region: new FormControl("", [Validators.required]),
-    zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
+    zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
-    email: new FormControl(''),
     website:new FormControl(''),
     mobile_telephone:new FormControl(''),
     first_name:new FormControl("", [Validators.required]),
@@ -130,18 +151,16 @@ export class AddSiteComponent  {
       "country": this.siteForm.controls['country'].value,
       "office_telephone": this.siteForm.controls['office_telephone'].value,
       "mobile_telephone": this.siteForm.controls['mobile_telephone'].value,
-      "extension": this.siteForm.controls['extension'].value,
-      "email": this.siteForm.controls['uemail'].value,
+      "extension": this.siteForm.controls['extension'].value,    
       "website": this.siteForm.controls['website'].value,
-      "status": true,
-      "password":this.siteForm.controls['password'].value,
-      "username": this.siteForm.controls['first_name'].value,
-      "role": 'CRA',
+    
      
   
     }
     if(this.isEdit){
       obj.site_id = this.id
+     
+      obj.email = this.siteForm.controls['email'].value,
       this._cro.updateSiteDetails(obj).subscribe(
         (data:any)=>{
           alert('Site Deatails updated successfully');
@@ -153,13 +172,19 @@ export class AddSiteComponent  {
       );
     }
     else{
+      obj.email = this.siteForm.controls['uemail'].value,
+      obj.status = 'Active' ,
+      obj.password = this.siteForm.controls['password'].value,
+      obj.first_name= this.siteForm.controls['first_name'].value,
+      obj.role = 'CRA',
       this._cro.CreateSiteDetails(obj).subscribe(
         (data:any)=>{
           alert("Site Deatails Created Successfully");
           this.router.navigate(['/home/cro/siteGrid'])
         },
         (err:any)=>{
-          alert("err")
+          alert(err.error.message)
+         
         }
       )
     }

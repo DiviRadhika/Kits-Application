@@ -40,8 +40,9 @@
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
+                                        <option  selected value="">Select Protocol ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
-                                            {{ data.protocol_id }}
+                                            {{ data.user_protocol_id }}
                                         </option>
                                     </select>
                                 </div>

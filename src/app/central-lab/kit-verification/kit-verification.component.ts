@@ -34,6 +34,7 @@ export class KitVerificationComponent implements OnInit {
   skDetails: any[] = [];
   vkDetails: any;
   value: any;
+  details: any;
 
 
 
@@ -89,6 +90,8 @@ export class KitVerificationComponent implements OnInit {
 
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
+      
+    this.details = protocols
 
       this.ProtoData(protocols);
     });
@@ -283,7 +286,9 @@ export class KitVerificationComponent implements OnInit {
 
 
   ProtoData(Protocols: any) {
-    Protocols.forEach((protocol: any) => {
+    Protocols.data.forEach((protocol: any) => {
+      console.log(protocol);
+      
       this.protocols.push(protocol);
 
     });

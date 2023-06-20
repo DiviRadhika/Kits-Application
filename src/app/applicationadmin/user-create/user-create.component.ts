@@ -10,10 +10,10 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-  
+    status:  string[] = ['Active', 'InActive'];
 
   isEdit: boolean = false;
-  status:  string[] = ['Active', 'In Active'];
+ 
   // readonly passwordPattern: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/;
   userForm: FormGroup = new FormGroup({
     first_name: new FormControl("", [Validators.required]),
@@ -26,10 +26,10 @@ export class UserCreateComponent implements OnInit {
 
     email: new FormControl("",[Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
  
-    status: new FormControl(),
+    status: new FormControl(''),
   });
 
-  options: string[] = ['Sponsor', 'CRO', 'Central Lab'];
+  options: string[] = ['Sponsor', 'CRO', 'Central Lab', 'Admin'];
   id: any;
   getUserData: any;
   // passwordControl!: FormControl<any>;
@@ -99,7 +99,7 @@ export class UserCreateComponent implements OnInit {
         role: this.userForm.controls['role'].value
       };
       if (this.isEdit) {
-      userObj.status = this.userForm.controls['status'].value
+      userObj.status = 'active'
         this.adminService.updateUser(userObj).subscribe(
           (data: any) => {
             alert('User updated successfully');
@@ -110,7 +110,7 @@ export class UserCreateComponent implements OnInit {
           }
         );
       } else {
-        userObj.status = true
+        userObj.status = 'active'
         console.log(typeof(userObj.status));
         
         this.adminService.createUser(userObj).subscribe(

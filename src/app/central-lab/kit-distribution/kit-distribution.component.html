@@ -41,8 +41,9 @@
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
+                                        <option  selected value="">Select Protocol ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
-                                            {{ data.protocol_id }}
+                                            {{ data.user_protocol_id }}
                                         </option>
                                     </select>
                                 </div>
@@ -192,7 +193,7 @@
                                                                                 <select class="form-select form-control"
                                                                                     formControlName="siteId">
                                                                                     <option
-                                                                                        [value]="data.site_data_name"
+                                                                                        [value]="data.site_data_code"
                                                                                         *ngFor="let data of sponsers">
                                                                                         {{ data.site_data_name }}
                                                                                     </option>
@@ -340,7 +341,7 @@
                                                                                     formControlName="siteId">
                                                                                     <option
                                                                                         *ngFor="let data of sponsers"
-                                                                                        [value]="data.site_data_name">
+                                                                                        [value]="data.site_data_code">
                                                                                         {{ data.site_data_name }}
                                                                                     </option>
                                                                                 </select>

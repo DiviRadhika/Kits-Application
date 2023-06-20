@@ -79,7 +79,7 @@ ngOnInit(): void {
     city: new FormControl("", [Validators.required]),
     district: new FormControl("", [Validators.required]),
     region: new FormControl("", [Validators.required]),
-    zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
+    zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
@@ -125,6 +125,7 @@ ngOnInit(): void {
       console.log(obj)
        this._cro.updateSponsorDetails(obj).subscribe(
          (data: any) => {
+          alert('Sponsor Updated Successfully')
           this.route.navigate(['/home/cro/sponsorGrid'])
  
          },

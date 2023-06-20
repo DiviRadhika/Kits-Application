@@ -57,7 +57,7 @@ export class CROcreateComponent implements OnInit {
     city: new FormControl("", [Validators.required]),
     district: new FormControl("", [Validators.required]),
     region: new FormControl("", [Validators.required]),
-    zip_code: new FormControl("", [Validators.required, Validators.min(100000), Validators.max(999999)]),
+    zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
@@ -169,7 +169,7 @@ export class CROcreateComponent implements OnInit {
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-            alert("err")
+            alert(err.error.message)
           }
         )
       }

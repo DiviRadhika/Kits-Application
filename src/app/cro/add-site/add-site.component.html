@@ -74,7 +74,7 @@
 
                 </div>
                 <br>
-                <div class="row">
+                <div *ngIf="!isEdit" class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>User Name</label>
@@ -120,7 +120,7 @@
 
                     </div>
                   </div>
-                  </div>
+                </div>
 
 
               </form>
@@ -175,6 +175,7 @@
                     <div class="form-group">
                       <label>Country</label>
                       <select formControlName="country" class="form-select" aria-label="Default select example">
+                        <option  selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
                       </select>
 
@@ -229,11 +230,9 @@
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
-                        Zipcode is required and enter valid Zipcode.
+                        Zipcode is Required.
                       </div>
-                      <div *ngIf="shouldShowLengthError('zip_code')" class="invalid-feedback">
-                        Zipcode Must be 6characters.
-                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -279,7 +278,7 @@
                 </div>
                 <br>
                 <div class="row">
-                 
+
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
@@ -289,7 +288,17 @@
                     </div>
                   </div>
                 </div>
+                <div class="col-md-4">
+                  <div *ngIf="isEdit" class="form-group">
+                    <label>Email</label>
 
+
+                    <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                      formControlName="uemail">
+
+
+                  </div>
+                </div>
               </form>
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">

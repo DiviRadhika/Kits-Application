@@ -35,6 +35,12 @@ export class ProtocolService {
     getPreparationById(id: any): Observable<any> {
         return this.http.get(endPointsUser.getPreparationById + id)
     }
+    sampleack(id: any,id1: any): Observable<any> {
+        return this.http.get(endPointsUser.sampleack + id + '/'+ id1)
+    }
+    sampleackput(data:any): Observable<any> {
+        return this.http.put(endPointsUser.sampleackput,data )
+    }
     updatePreparationById(data: any): Observable<any> {
         return this.http.put(endPointsUser.postPreparation, data)
     }

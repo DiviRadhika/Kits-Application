@@ -11,7 +11,7 @@ export class CroGridComponent implements OnInit {
   croDetails: any[] = []
   page = 1;
   totalCount = 0
-  pageSize = 2;
+  pageSize = 10;
   p = 1;
   searchText: any
   allcroDetails: any;
@@ -58,7 +58,7 @@ export class CroGridComponent implements OnInit {
         this.totalCount = this.croDetails.length
       },
       (err: any) => {
-        alert("err")
+        alert(err.error.message)
       }
     )
   }

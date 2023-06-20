@@ -18,9 +18,10 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item">
-                                        <a href="">Central Lab</a>
+                                        <a href="">CRA</a>
                                     </li>
                                     <li class="breadcrumb-item active">Sample Collection</li>
+                                    <li class="breadcrumb-item active">Site: {{ID}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -41,8 +42,9 @@
                                     <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
+                                        <option  selected value="">Select Protocol ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
-                                            {{ data.protocol_id }}
+                                            {{ data.user_protocol_id }}
                                         </option>
                                     </select>
                                 </div>
@@ -103,13 +105,13 @@
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="kitId"
-                                                                                    class="form-control"
+                                                                                    class="form-control"    [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text"
                                                                                     placeholder="LabKitId"
-                                                                                    value={{item.ckitId}}
+                                                                                    [disabled]="true"  value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                          
@@ -133,7 +135,7 @@
 
 
                                                                             <th>Patiend Id</th>
-                                                                            <th>Sample Collection</th>
+                                                                            <th>Collection</th>
                                                                          
  x
                                                                         </tr>
@@ -207,13 +209,13 @@
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="kitId"
-                                                                                    class="form-control"
+                                                                                    class="form-control"    [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text"
                                                                                     placeholder="LabKitId"
-                                                                                    value={{item.ckitId}}
+                                                                                    [disabled]="true"   value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                 

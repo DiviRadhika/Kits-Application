@@ -3,6 +3,7 @@ import { ProtocolService } from './protocol-registration.service';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
 import { CrosService } from '../cros.service';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-protocol-registration',
   templateUrl: './protocol-registration.component.html',
@@ -37,7 +38,7 @@ export class ProtocolRegistrationComponent {
 
   selectedOption: any;
   // MaterialList: FormArray = new FormArray([])
-  constructor(private protocolService: ProtocolService, private fb:FormBuilder, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
+  constructor(private protocolService: ProtocolService, private route: Router, private fb:FormBuilder, private adminService:AdminService, private croService:CrosService, private formBuilder: FormBuilder) { };
   sponsers: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -249,7 +250,7 @@ enableScroll() {
       meterial_id: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       quantity:new FormControl("", [Validators.required]),
-      frozen_status:new FormControl("", [Validators.required]),
+      frozen_status:new FormControl(false, [Validators.required]),
       image: ['']
     })
   }
@@ -259,7 +260,7 @@ enableScroll() {
       meterial_id: new FormControl("", [Validators.required]),
       size: new FormControl("", [Validators.required]),
       quantity:new FormControl("", [Validators.required]),
-      frozen_status: new FormControl("", [Validators.required]),
+      frozen_status: new FormControl(false, [Validators.required]),
       image: ['']
     })
   }
@@ -418,6 +419,7 @@ enableScroll() {
     this.protocolService.postProtocol(data).subscribe(
       (data:any) => {
         alert('protocol created successfully');
+        this.route.navigate(['/home/cro/protocolView'])
       },
       (err:any)=>{
         alert(err.errorr.message)
@@ -623,7 +625,7 @@ getSizev(index: number) {
        formData.push(cardData);
      }
  
-     console.log(formData);
+   
    
  
    }

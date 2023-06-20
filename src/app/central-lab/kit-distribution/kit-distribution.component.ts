@@ -271,7 +271,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
        
           </body>
              <h1>Site Id</h1>
-             <p>KitId: ${siteId}</p>
+             <p>${siteId}</p>
              
         
               <script>
@@ -341,7 +341,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
   ProtoData(Protocols: any) {
-    Protocols.forEach((protocol: any) => {
+    Protocols.data.forEach((protocol: any) => {
       this.protocols.push(protocol);
 
     });
@@ -354,9 +354,12 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
     sponsers.forEach((sponser: any) => {
 
+
+
       this.sponsers.push(sponser);
 
     });
+
 
     console.log(this.sponsers)
 

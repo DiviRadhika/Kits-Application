@@ -10,8 +10,8 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sample-collection.component.css']
 })
 export class SampleCollectionComponent implements OnInit {
- 
-  statusData =['Pending','Collected']
+
+  statusData = ['Pending', 'Collected']
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];
@@ -23,7 +23,7 @@ export class SampleCollectionComponent implements OnInit {
 
   tets: Array<any> = [];
 
-  tabs: any[] = []; 
+  tabs: any[] = [];
 
   count = 2;
   allTabsData: any[] = [];
@@ -35,12 +35,14 @@ export class SampleCollectionComponent implements OnInit {
   vkDetails: any;
   value: any;
   sponsers: Array<any> = [];
+  email: string | null;
+  ID: any;
 
 
 
   constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
- 
 
+    this.email =sessionStorage.getItem('email')
 
   };
   protocols: Array<any> = [];
@@ -153,12 +155,12 @@ export class SampleCollectionComponent implements OnInit {
             visitKitList: this.formBuilder.array([]),
           });
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-         
+
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
-         
-           
-           
+
+
+
 
           }
 
@@ -186,112 +188,23 @@ export class SampleCollectionComponent implements OnInit {
 
   }
 
-  
- 
+
+
 
   createVisitKitGroup() {
-  
+
     return this.formBuilder.group({
-    
+
       patientId: [''],
-      collection: ['']
-      
-      
+      collection: ['Pending']
+
+
 
     });
 
   }
-  printLabel(i: any) {
-console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
-    const siteId = this.ScreenKitForm.get('screenKitList').controls[i].get('siteId').value;
-
-
-
-    const printSection = document.getElementById('printSection');
-    if (printSection) {
-      const printContent = printSection.innerHTML;
-      const printWindow = window.open('', '', 'height=500,width=500');
-      if (printWindow) {
-        const printDocument = printWindow.document;
-        printDocument.write(`
-            <html>
-            <head>
-              <title>Print</title>
-              <style>
-                /* Custom styling for the print output */
-                /* Add any necessary styles for your specific requirements */
-              </style>
-            </head>
-            <h1>siteId</h1>
-            <p>${siteId}</p>
-
-              <script>
-                setTimeout(() => {
-                  window.print();
-                  window.onafterprint = function () {
-                    window.close();
-                  };
-                }, 100);
-              </script>
-            </body>
-            </html>
-          `);
-      }
-    }
-
-  }
-  printLabelm(tabIndex: number, rowIndex: number) {
-    const selectedTab = this.vMatDetails[tabIndex];
-    const matdetails = selectedTab.visits;
-    console.log(matdetails);
-
-
-    const selectedRow = selectedTab.visitsList.controls[rowIndex];
-
-
-    // Access the values of the selected row
-    const siteId = selectedRow.get('siteId').value;
-  
-
-    const printSection = document.getElementById('printSection');
-    if (printSection) {
-      const printContent = printSection.innerHTML;
-      const printWindow = window.open('', '', 'height=500,width=500');
-      if (printWindow) {
-        const printDocument = printWindow.document;
-        printDocument.write(`
-            <html>
-            <head>
-              <title>Print</title>
-              <style>
-                /* Custom styling for the print output */
-                /* Add any necessary styles for your specific requirements */
-              </style>
-            </head>
-            <body>
-       
-          </body>
-             <h1>Site Id</h1>
-             <p>KitId: ${siteId}</p>
-             
-        
-              <script>
-                setTimeout(() => {
-                  window.print();
-                  window.onafterprint = function () {
-                    window.close();
-                  };
-                }, 100);
-              </script>
-            </body>
-            </html>
-          `);
-      }
-    }
-
-  }
 
   adjustScreenKitRows(count: number) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
@@ -311,7 +224,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
   }
- 
+
 
   addScreenKit(record: any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
@@ -328,15 +241,15 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
 
-  
+
   addScreenKitData(record: string) {
 
 
     return this.formBuilder.group({
       patientId: [''],
-      collection: ['']
-      
-    
+      collection: ['Pendig']
+
+
 
     });
   }
@@ -345,7 +258,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
   ProtoData(Protocols: any) {
-    Protocols.forEach((protocol: any) => {
+    Protocols.data.forEach((protocol: any) => {
       this.protocols.push(protocol);
 
     });
@@ -354,23 +267,30 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
   }
 
 
-  sponsersData(sponsers:any) {
+  sponsersData(sponsers: any) {
 
     sponsers.forEach((sponser: any) => {
+console.log(sponsers);
 
       this.sponsers.push(sponser);
-
+      this.sponsers.forEach((res: any) => {
+        if(sponser.email == this.email){
+        console.log(sponser.email, this.email)
+        this.ID = sponser.site_data_code
+        
+        }
+      });
     });
 
-    console.log(this.sponsers)
+      console.log(this.sponsers)
 
-  }
+    }
 
   SubmitData() {
-    console.log(this.skDetails);
+      console.log(this.skDetails);
 
-    this.vmdetails = []
-    for (let i = 0; i < this.vMatDetails.length; i++) {
+      this.vmdetails = []
+    for(let i = 0; i< this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
@@ -387,22 +307,20 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
         for (let j = 0; j < this.vMatDetails.length; j++) {
           // this.vMatDetails.forEach((data:any,index: any)=>{
           console.log(this.vMatDetails[j].visitsList.value[index].status);
-          protocol.siteId = this.vMatDetails[i].visitsList.value[index].siteId
-          // protocol.verification_status = false
+          protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
+          protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
+          protocol.siteID = this.ID
+
         }
 
       })
 
     }
 
-
-
-
     this.skDetails.forEach((protocol: any, index: any) => {
-
-      // this.vMatDetails.forEach((data:any,index: any)=>{
-        // protocol.verification_status = false
-      protocol.siteId = this.ScreenKitForm.value.screenKitList[index].siteId
+      protocol.siteID = this.ID
+      protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
+      protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
     })
 
 
@@ -422,7 +340,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        alert('Kit Distribution Updated successfully');
+        alert('Sample Collection Updated successfully');
       },
       (err: any) => {
         alert(err.errorr.message)
