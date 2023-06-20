@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   siteRole: boolean = false;
   ngOnInit(): void {
     this.role = sessionStorage.getItem('role')
-    if(this.role === 'admin'){
+    if(this.role === 'Admin'){
       this.menuItems = [
         {
           label: 'Application Admin',
