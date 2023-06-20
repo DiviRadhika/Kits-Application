@@ -37,7 +37,7 @@ create_site_data = sites_data_ns.model(
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
-        "extension": fields.String(required=True),
+        "extension": fields.String(),
         "mobile_telephone": fields.String(required=True),
         "email": fields.String(required=True),
         "password": fields.String(required=True),
