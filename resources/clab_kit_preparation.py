@@ -27,6 +27,10 @@ clab_screening_kit_details = clab_kit_preparation_ns.model(
         "patient_id": fields.String(),
         "site_id": fields.String(),
         "collection": fields.String(default="pending"),
+        "acknowledgement": fields.String(),
+        "remarks": fields.String(),
+        "pdf": fields.String(),
+
     },
 )
 
@@ -40,7 +44,18 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
         "patient_id": fields.String(),
         "site_id": fields.String(),
         "collection": fields.String(default="pending"),
+        "acknowledgement": fields.String(),
+        "remarks": fields.String(),
+        "pdf": fields.String(),
     },
+)
+
+pdf_details = clab_kit_preparation_ns.model(
+  "pdf_details",{
+      "row": fields.String(required=True),
+      "visit": fields.String(),
+      "pdf": fields.String(),
+    }
 )
 
 clab_kit_preparation = clab_kit_preparation_ns.model(
@@ -50,6 +65,8 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
         "protocol_name": fields.String(required=True),
         "screening_kit_details": fields.List(fields.Nested(clab_screening_kit_details)),
         "visit_kit_details": fields.List(fields.Nested(clab_visit_kit_details)),
+        "visit_pdf_details": fields.List(fields.Nested(pdf_details)),
+        "screening_pdf_details": fields.List(fields.Nested(pdf_details)),
     },
 )
 

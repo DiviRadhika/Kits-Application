@@ -36,15 +36,15 @@ create_site_data = sites_data_ns.model(
         "region": fields.String(required=True),
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
-        "office_telephone": fields.String(required=True),
+        "office_telephone": fields.String(),
         "extension": fields.String(),
-        "mobile_telephone": fields.String(required=True),
+        "mobile_telephone": fields.String(),
         "email": fields.String(required=True),
         "password": fields.String(required=True),
         "first_name": fields.String(required=True),
         "role": fields.String(required=True),
         "status": fields.String(default="inactive"),
-        "website": fields.String(required=True),
+        "website": fields.String(),
     },
 )
 
@@ -66,7 +66,7 @@ update_site_data = sites_data_ns.model(
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
-        "mobile_telephone": fields.String(required=True),
+        "mobile_telephone": fields.String(),
         "email": fields.String(required=True),
         "website": fields.String(required=True),
     },
@@ -115,12 +115,12 @@ class Sitedata(Resource):
             del site_data_json["password"]
             del site_data_json["status"]
             del site_data_json["role"]
-            del site_data_json["username"]
+            del site_data_json["first_name"]
             site_data_data = site_data_schema.load(site_data_json)
             site_data_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
     @site_data_ns.expect(update_site_data)
