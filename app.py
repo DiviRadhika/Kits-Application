@@ -11,9 +11,6 @@ import flask_excel as excel
 #from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-
-
-
 from resources.sponsor import (
     Sponser,
     SponsersList,
@@ -82,10 +79,11 @@ bluePrint = Blueprint("api", __name__, url_prefix="/api")
 api = Api(bluePrint, doc="/doc", title="KITS APPLICATION")
 app.register_blueprint(bluePrint)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/postgres".format(
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
     os.environ.get("DB_USERNAME"),
     os.environ.get("DB_PASSWORD"),
     os.environ.get("DB_IP"),
+    os.environ.get("DB_DATABASE"),
 )
 
 

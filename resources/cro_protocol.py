@@ -3,12 +3,6 @@ from schemas.cro_protocol import CroProtocolSchema
 from flask import request
 from sqlalchemy import exc
 from models.cro_protocol import CroProtocolModel
-from models.users import UserModel
-from flask_jwt_extended import (
-    jwt_required,
-    get_jwt,
-    current_user,
-)
 from models.screening_kit import ScreeningKitDetailsModel
 from models.visit_kit import VisitKitDetailsModel
 from schemas.screening_kit import ScreeningKitDetailsSchema
@@ -44,7 +38,6 @@ meterial_details = cro_protocol_ns.model(
 screening_kit_details = cro_protocol_ns.model(
     "screening_kit_details",
     {
-        # "visit_no": fields.Integer(required=True),
         "screening_kit_count": fields.Integer(required=True),
         "lab_test_ids": fields.List(fields.String(required=True)),
         "meterial_details": fields.List(fields.Nested(meterial_details)),
@@ -62,7 +55,6 @@ visite_meterial_details = cro_protocol_ns.model(
 visit_kit_details = cro_protocol_ns.model(
     "visit_kit_details",
     {
-        # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
         "meterial_details": fields.List(fields.Nested(visite_meterial_details)),
     },

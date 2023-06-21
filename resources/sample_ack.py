@@ -52,12 +52,27 @@ ack_clab_kit_preparation = sample_ack_ns.model(
 
 
 class AckclabKitProtocolActionsById(Resource):
-    @sample_ack_ns.doc("get by id")
-    def get(self, cro_protocol_id):
+    @sample_ack_ns.doc("get by ids")
+    def get(self, cro_protocol_id, site_id):
         cro_kit_data = ClabKitPreparationModel.get_by_id(cro_protocol_id)
         if not cro_kit_data:
             return {"message": "cro data not found"}, 400
         cro_data = CroProtocolModel.get_by_id(cro_kit_data.protocol_id)
+        screening_kit_details  = cro_kit_data.screening_kit_details
+        if screening_kit_details is not None:
+            import pdb; pdb.set_trace()
+            for index in range(0, len(screening_kit_details)):
+                kit_details = screening_kit_details[index]
+                if kit_details['siteId'] !=  site_id:
+                    screening_kit_details.pop(index)
+        visit_kit_details = cro_kit_data.visit_kit_details
+        if visit_kit_details is not None:
+            for index in range(0, len(visit_kit_details)):
+                vkit_details = visit_kit_details[index]
+                for i in range(0, len(vkit_details)):
+                    vvkit_details = visit_kit_details[index][i]
+                    if vvkit_details['siteId'] != site_id:
+                        vvkit_details.pop(i)
         response = {
             "data":  clab_kit_preparation_schema.dump(cro_kit_data),
             "screen_count":  cro_data.no_of_screens,

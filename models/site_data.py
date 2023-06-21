@@ -8,7 +8,7 @@ class SiteDataModel(db.Model):
     __tablename__ = "sitedata"
     # extend_existing=True
     site_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
-    site_data_code = db.Column(db.String)
+    site_data_code = db.Column(db.String, unique=True)
     site_data_name = db.Column(db.String)
     legal_site_data_name = db.Column(db.String)
     address_1 = db.Column(db.String)
