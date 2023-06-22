@@ -93,6 +93,7 @@
                                                                         <tr>
                                                                             <th>KitId</th>
                                                                             <th>Lab KitId</th>
+                                                                            <th>Expiration Date</th>
                                                                          
 
 
@@ -113,6 +114,12 @@
                                                                                     placeholder="LabKitId"
                                                                                     [disabled]="true"  value={{item.ckitId}}
                                                                                     class="form-control" />
+                                                                            </td>
+                                                                            <td width="40%">
+                                                                                <input type="text"
+                                                                                    placeholder="Expiration Date"
+                                                                                    value={{item.expiryDate}}
+                                                                                    class="form-control"  [disabled]="true" />
                                                                             </td>
                                                                          
                                                                       
@@ -198,6 +205,7 @@
                                                                         <tr>
                                                                             <th>KitId</th>
                                                                             <th>Lab KitId</th>
+                                                                            <th>Expiration Date</th>
                                                   
 
                                                                         </tr>
@@ -218,7 +226,12 @@
                                                                                     [disabled]="true"   value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
-                
+                                                                            <td width="40%">
+                                                                                <input type="text"
+                                                                                    placeholder="Expiration Date"
+                                                                                    value={{item.expiryDate}}
+                                                                                    class="form-control"  [disabled]="true" />
+                                                                            </td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

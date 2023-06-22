@@ -637,8 +637,3 @@ getSizev(index: number) {
    
    
  }
- 
- 
- 
- 
- 

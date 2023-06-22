@@ -24,6 +24,7 @@ submitted = false;
 
 
 
+
 ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -65,7 +66,7 @@ reset(){
     this.admin.reset(obj).subscribe(
       (data: any) => {
         alert('Password Reset Successfully')
-        this.route.navigate(['/home']);
+        this.route.navigate(['/login']);
         console.log(data);
         sessionStorage.setItem('role', data.role);
         sessionStorage.setItem('access_token', data.access_token);
@@ -123,7 +124,7 @@ reset(){
       
         alert(err.error.message)
       }
-    )
+    ),
     this.admin['set'](obj).subscribe(
       (data: any) => {
         this.disableFields = true

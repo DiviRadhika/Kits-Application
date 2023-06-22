@@ -367,9 +367,3 @@ export class KitVerificationComponent implements OnInit {
 
 
 }
-
-
-
-
-
-

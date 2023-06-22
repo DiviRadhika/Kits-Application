@@ -232,8 +232,7 @@ export class KitPreprationComponent implements OnInit {
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
       this.scount = this.protocolIdDetails.no_of_screens
     
-      alert(this.scount)
-      alert(this.protocolIdDetails.no_of_screens)
+     
       this.vcount = this.protocolIdDetails.no_of_visits
       console.log(this.vMatDetails, 'details');
       this.visitRecords = []
