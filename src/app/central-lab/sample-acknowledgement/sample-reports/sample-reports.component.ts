@@ -7,6 +7,58 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 // import * as pdfMake from 'pdfmake/build/pdfmake';
 // import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 // (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+import { PDFDocument, StandardFonts } from 'pdf-lib';
+
+async function downloadStringAsPDF() {
+  const stringToDownload = 'This is the string to be downloaded as a PDF';
+
+  // Create a new PDFDocument
+  const pdfDoc = await PDFDocument.create();
+
+  // Add a new page to the document
+  const page = pdfDoc.addPage();
+
+  // Embed a standard font
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+  // Set the font and size for the text
+  page.setFont(font);
+  page.setFontSize(12);
+
+  // Add the string content to the page
+  page.drawText(stringToDownload, { x: 50, y: 50 });
+
+  // Serialize the PDFDocument to bytes
+  const pdfBytes = await pdfDoc.save();
+
+  // Convert the bytes to a Blob
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+  // Create a URL for the Blob
+  const url = URL.createObjectURL(blob);
+
+  // Create a link element and set its attributes
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'downloaded-file.pdf';
+
+  // Programmatically click the link to trigger the download
+  link.click();
+
+  // Clean up by revoking the URL
+  URL.revokeObjectURL(url);
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  alert('i')
+  const downloadButton = document.getElementById('downloadButton');
+  if (downloadButton) {
+    downloadButton.addEventListener('click', downloadStringAsPDF);
+  }
+});
+
+
 @Component({
   selector: 'app-sample-reports',
   templateUrl: './sample-reports.component.html',
@@ -40,6 +92,7 @@ export class SampleReportsComponent implements OnInit {
   sponsers: Array<any> = [];
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
+  base64String: any;
 
 
 
@@ -116,7 +169,7 @@ export class SampleReportsComponent implements OnInit {
   // download(){
   //   const svalue= "JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9UaXRsZSAoZGV0Y"
 
-   
+
   //     const len = download.fileName.lastIndexOf('.');
   //     const extension = download.fileName.substring(len + 1);
   //     if (extension === 'txt') {
@@ -188,8 +241,8 @@ export class SampleReportsComponent implements OnInit {
   //       downloadLink.click();
   //     }
   //   }
-  
-  
+
+
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
@@ -355,7 +408,7 @@ export class SampleReportsComponent implements OnInit {
   }
 
   SubmitData() {
-  
+
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
@@ -369,16 +422,16 @@ export class SampleReportsComponent implements OnInit {
       // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
       // this.vkDetails[j].push({"verification_status": 'val'})
-    
+
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
           // this.vMatDetails.forEach((data:any,index: any)=>{
-      
+
           protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
           protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
-   
-        
+
+
         }
 
       })
@@ -394,18 +447,18 @@ export class SampleReportsComponent implements OnInit {
     })
     // for(let i = 0; i<this.skDetails.length; i++ ) {
     // for(let j=0 ; j<i; j++){
-      // console.log(this.pdfValues[i], this.pdfValues);
-      // this.pdfValues.forEach((k:any, index: any)=>{
-      //   if(index != k[index].row){
-    
-        
-      //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
-  
-      //   // }
-  
-      // }
-      // })
-    
+    // console.log(this.pdfValues[i], this.pdfValues);
+    // this.pdfValues.forEach((k:any, index: any)=>{
+    //   if(index != k[index].row){
+
+
+    //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
+
+    //   // }
+
+    // }
+    // })
+
 
     // }
     // this.skDetails.push(this.pdfValues)
@@ -481,7 +534,7 @@ export class SampleReportsComponent implements OnInit {
       statusElement.textContent = uploadedFiles[rowIndex];
     }
 
-  
+
     const file = this.files1[0];
     this.file2 = this.files1[0].name;
     const fileSize = this.files1[0].size;
@@ -491,7 +544,7 @@ export class SampleReportsComponent implements OnInit {
 
 
       const reader = new FileReader();
-   
+
       reader.onload = this._handleReaderLoaded1.bind(this, rowIndex);
       reader.readAsBinaryString(file);
     }
@@ -503,7 +556,7 @@ export class SampleReportsComponent implements OnInit {
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
- 
+
     // this.pdfValues.push(({row:readerEvt, pdf:this.bas2}))
 
     const existingPdf = this.pdfValues.find((pdfValue: any) => pdfValue.row === readerEvt);
@@ -516,7 +569,7 @@ export class SampleReportsComponent implements OnInit {
     }
 
     this.pdfValues.push({ row: readerEvt, pdf: this.bas2 });
-  
+
   }
 
 
@@ -539,54 +592,86 @@ export class SampleReportsComponent implements OnInit {
 
 
       const reader = new FileReader();
-   
+
       reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
       reader.readAsBinaryString(file);
     }
   }
 
   _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {
-  
+
 
 
     const binaryString = id.target.result;
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
- 
- 
+
+
 
     const existingPdf = this.pdfValuesv.find((pdfValue: any) => pdfValue.visit === readerEvt);
- 
 
-    if (existingPdf ) {
-      if(this.pdfValuesv.find((pdfValue: any) => pdfValue.row === rowindex)){
-      // PDF already exists for the row, remove it
-      const pdfIndex = this.pdfValuesv.indexOf(existingPdf);
-      this.pdfValuesv.splice(pdfIndex, 1);
+
+    if (existingPdf) {
+      if (this.pdfValuesv.find((pdfValue: any) => pdfValue.row === rowindex)) {
+        // PDF already exists for the row, remove it
+        const pdfIndex = this.pdfValuesv.indexOf(existingPdf);
+        this.pdfValuesv.splice(pdfIndex, 1);
+      }
     }
+
+    this.pdfValuesv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
+
+
   }
 
-  this.pdfValuesv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
 
+  Download(id: any) {
+
+    this.base64String = id
+    if(this.base64String == ''){
+      this.base64String  = 'NOt Uploaded Any PDF'
+    }
+
+    // Convert the base64 string to a Uint8Array
+    const binaryArray = Uint8Array.from(atob(this.base64String), c => c.charCodeAt(0));
+
+    // Create a Blob from the binary data
+    const blob = new Blob([binaryArray], { type: 'application/pdf' });
+
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element and set its attributes
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'downloaded-file.pdf';
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Clean up by revoking the URL
+    URL.revokeObjectURL(url);
 
   }
-  // downloadStringAsPDF() {
-  //   const stringToDownload = 'This is the string to be downloaded as a PDF';
 
-  //   const docDefinition = {
-  //     content: [
-  //       { text: stringToDownload, fontSize: 12 }
-  //     ]
-  //   };
 
-  //   const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-  //   pdfDocGenerator.getBlob((blob: Blob) => {
-  //     saveAs(blob, 'downloaded-file.pdf');
-  //   });
-  // }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

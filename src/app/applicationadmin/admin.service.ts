@@ -6,6 +6,7 @@ import { endPointsUser, country } from '../api';
   providedIn: 'root'
 })
 export class AdminService {
+  [x: string]: any;
 headers = new HttpHeaders({
   // 'Content-Type': 'application/json',
   // 'Access-Control-Allow-Origin': '*'

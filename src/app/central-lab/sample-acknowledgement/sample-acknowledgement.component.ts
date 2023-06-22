@@ -363,14 +363,14 @@ export class SampleAcknowledgementComponent implements OnInit {
 
     // console.log(data);
 
-    // this.protocolService.updatePreparationById(data).subscribe(
-    //   (data: any) => {
-    //     alert('Sample Acknowledgement Updated successfully');
-    //   },
-    //   (err: any) => {
-    //     alert(err.errorr.message)
-    //   }
-    // );
+    this.protocolService.updatePreparationById(data).subscribe(
+      (data: any) => {
+        alert('Sample Acknowledgement Updated successfully');
+      },
+      (err: any) => {
+        alert(err.errorr.message)
+      }
+    );
 
   }
   fileSelected(fileInput: any, rowIndex: number): void {

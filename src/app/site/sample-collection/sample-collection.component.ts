@@ -309,7 +309,7 @@ console.log(sponsers);
           console.log(this.vMatDetails[j].visitsList.value[index].status);
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
-          protocol.siteID = this.ID
+          protocol.site_id= this.ID
 
         }
 
@@ -318,7 +318,7 @@ console.log(sponsers);
     }
 
     this.skDetails.forEach((protocol: any, index: any) => {
-      protocol.siteID = this.ID
+      protocol.site_id = this.ID
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
     })

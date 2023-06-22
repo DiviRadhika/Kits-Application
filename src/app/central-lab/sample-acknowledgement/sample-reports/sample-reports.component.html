@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Sample Acknowledgement
+                                <i class="bx bxs-dashboard"></i> Sample Reports
                             </h4>
 
                             <div class="page-title-right">
@@ -20,7 +20,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="">Central Lab</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Sample Acknowledgement</li>
+                                    <li class="breadcrumb-item active">Sample Reports</li>
                                 </ol>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
 
                                                             <div class="table-responsive">
@@ -89,8 +89,8 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
-                                                                            <th>Collection</th>
-
+                                                                         
+                                                                            <th>PDF</th>
 
 
 
@@ -101,6 +101,7 @@
 
 
                                                                         <tr *ngFor="let item of skDetails">
+
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="kitId"
                                                                                     [disabled]="true"
@@ -115,22 +116,38 @@
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
-                                                                                    [disabled]="true"  value={{item.siteId}}
+                                                                                    [disabled]="true"
+                                                                                    value={{item.siteId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <td width="25%">
+                                                                            <td width="20%">
                                                                                 <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <td width="25%">
-                                                                                <input type="text"
-                                                                                    placeholder="collection"
-                                                                                    [disabled]="true"
-                                                                                    value={{item.collection}}
-                                                                                    class="form-control" />
-                                                                            </td>
+                                                                            <td width="20%">
+                                                                                <ng-container *ngIf="item.pdf">
+                                                                                  <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                                                                    style="width: 150px; height: 40px" (click)="Download(item.pdf)">
+                                                                                    <i class="bx bx-hdd label-icon"></i>
+                                                                                    Download PDF
+                                                                                  </button>
+                                                                                </ng-container>
+                                                                                <ng-container *ngIf="!item.pdf">
+                                                                                  <span>No PDF available</span>
+                                                                                </ng-container>
+                                                                              </td>
+<!--                                                                             
+                                                                            <td width="20%">
+                                                                                <button type="button"
+                                                                                    class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                                                                    style="width: 150px; height: 40px"
+                                                                                    (click)="Download(item.pdf)">
+                                                                                    <i class="bx bx-hdd label-icon"></i>
+                                                                                    Download pdf
+                                                                                </button>
+                                                                            </td> -->
 
 
 
@@ -141,73 +158,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <div class="table-responsive" [formGroup]="ScreenKitForm">
-                                                                <table class="table table-striped mb-0"
-                                                                    formArrayName="screenKitList">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
 
-                                                                            <th>Acknowledgement</th>
-                                                                            <th>Remarks</th>
-                                                                            <th>Upload PDF
-
-                                                                            </th>
-
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-
-                                                                        <tr [formGroupName]="i" *ngFor="
-                                                            let item of ScreenKitForm.get('screenKitList')
-                                                              .controls;
-                                                            let i = index
-                                                          ">
-
-
-                                                                            <td>
-                                                                                <select class="form-select form-control"
-                                                                                    formControlName="acknowledgement">
-                                                                                    <option
-                                                                                        *ngFor="let data of statusData">
-                                                                                        {{ data }}
-                                                                                    </option>
-                                                                                </select>
-
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input type="text"
-                                                                                    formControlName="remarks"
-                                                                                    placeholder="Remarks" value=''
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td>
-                                                                                <!-- sampleacknowledgement.component.html-->
-                                                                                <div>
-                                                                                    <input type="file"
-                                                                                        id="imageUpload{{i}}"
-                                                                                        accept="application/pdf"
-                                                                                        #fileInput style="display: none"
-                                                                                        (change)="uploadFile($event, i)" />
-                                                                                    <button (click)="fileInput.click()"
-                                                                                        class="btn btn-primary">UploadResults</button>
-                                                                                    <br />
-                                                                        
-
-                                                                                </div>
-                                                                                <span id="status_0"></span>
-                                                                            </td>
-                                                                          
-                                                                           
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
 
 
@@ -223,7 +174,7 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
 
 
@@ -236,7 +187,8 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
-                                                                            <th>Collection </th>
+                                                                          
+                                                                            <th>PDF</th>
 
                                                                         </tr>
                                                                     </thead>
@@ -259,21 +211,29 @@
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
-                                                                                    [disabled]="true" value={{item.siteId}}
+                                                                                    [disabled]="true"
+                                                                                    value={{item.siteId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <td width="25%">
+                                                                            <td width="20%">
                                                                                 <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <td width="25%">
-                                                                                <input type="text" [disabled]="true"
-                                                                                    placeholder="collection"
-                                                                                    value={{item.collection}}
-                                                                                    class="form-control" />
-                                                                            </td>
+                                                                            <td width="20%">
+                                                                                <ng-container *ngIf="item.pdf">
+                                                                                  <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
+                                                                                    style="width: 150px; height: 40px" (click)="Download(item.pdf)">
+                                                                                    <i class="bx bx-hdd label-icon"></i>
+                                                                                    Download PDF
+                                                                                  </button>
+                                                                                </ng-container>
+                                                                                <ng-container *ngIf="!item.pdf">
+                                                                                  <span>No PDF available</span>
+                                                                                </ng-container>
+                                                                              </td>
+
 
                                                                         </tr>
                                                                     </tbody>
@@ -282,72 +242,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-5">
-                                                        <div class="form-group">
-                                                            <div class="table-responsive"
-                                                                [formGroup]="item.visitKitFormGroup">
-                                                                <table class="table table-striped mb-0"
-                                                                    formArrayName="visitKitList">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
 
-                                                                            <th>Acknowledgement</th>
-                                                                            <th>Remarks</th>
-                                                                            <th>Upload PDF</th>
-
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody *ngIf="item.visitsList">
-
-
-                                                                        <tr *ngFor="let control of item.visitsList.controls; let j = index"
-                                                                            [formGroupName]="j">
-
-
-                                                                            <td>
-                                                                                <select class="form-select form-control"
-                                                                                    formControlName="acknowledgement">
-                                                                                    <option
-                                                                                        *ngFor="let data of statusData">
-                                                                                        {{ data }}
-                                                                                    </option>
-                                                                                </select>
-
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input type="text"
-                                                                                    formControlName="remarks"
-                                                                                    placeholder="Remarks" value=''
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td>
-                                                                                <!-- sampleacknowledgement.component.html-->
-                                                                                <div>
-                                                                                    <input type="file"
-                                                                                        id="imageUpload{{i}}"
-                                                                                        accept="application/pdf"
-                                                                                        #fileInput style="display: none"
-                                                                                        (change)="uploadFilev($event, i, j)" />
-                                                                                    <button (click)="fileInput.click()"
-                                                                                        class="btn btn-primary">UploadResults</button>
-                                                                                    <br />
-                                                                                    <!-- <a *ngIf="fileURLs[i]"
-                                                                                        [href]="fileURLs[i]"
-                                                                                        (click)="downloadFile(fileURLs[i]!)">Download
-                                                                                        Results</a> -->
-
-                                                                                </div>
-
-                                                                            </td>
-
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </p-tabPanel>
                                             <br>
@@ -363,6 +258,7 @@
                                             </div>
 
 
+                                            <!-- <button (click)="downloadStringAsPDF()">Download PDF</button> -->
                                         </p-tabView>
 
 
