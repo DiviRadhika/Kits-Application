@@ -117,6 +117,8 @@ class ClabKitPreparation(Resource):
         kit_data = ClabKitPreparationModel.get_by_id(clab_kit_prep_json["protocol_id"])
         if kit_data:
             return {"message": "kit details already present in the db"}, 500
+        del clab_kit_prep_json["visit_pdf_details"]
+        del clab_kit_prep_json["screening_pdf_details"]
         try:
             clab_kit_prep_data = clab_kit_preparation_schema.load(clab_kit_prep_json)
             clab_kit_prep_data.save_to_db()
@@ -132,6 +134,18 @@ class ClabKitPreparation(Resource):
         kit_data = ClabKitPreparationModel.get_by_id(request_json["protocol_id"])
         if not kit_data:
             return {"message": "kit data not found"}, 500
+        
+        visit_pdf_details = request_json.get('visit_pdf_details', [])
+        screeing_pdf_details = request_json.get('screening_pdf_details', [])
+
+        del(request_json['visit_pdf_details'])
+        del(request_json['screening_pdf_details'])
+
+        for pdf_details in screeing_pdf_details:
+            for index in range(0, len(request_json['screening_kit_details'])):
+                if pdf_details.row == index:
+                    screeing_pdf_details[index]['pdf'] = pdf_details.pdf
+        
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:
                 setattr(kit_data, key, value)
