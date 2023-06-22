@@ -161,7 +161,6 @@ console.log(typeof(value));
     }
     if(this.isEdit){
       obj.site_id = this.id
-     
       obj.email = this.siteForm.controls['email'].value,
       this._cro.updateSiteDetails(obj).subscribe(
         (data:any)=>{
@@ -175,7 +174,7 @@ console.log(typeof(value));
     }
     else{
       obj.email = this.siteForm.controls['uemail'].value,
-      obj.status = 'Active' ,
+      obj.status = 'active' ,
       obj.password = this.siteForm.controls['password'].value,
       obj.first_name= this.siteForm.controls['first_name'].value,
       obj.role = 'CRA',

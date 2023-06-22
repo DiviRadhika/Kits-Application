@@ -43,7 +43,9 @@ headers = new HttpHeaders({
   updateUser(data: []): Observable<any> {
     return this._httpClient.put(endPointsUser.getUserAddUpdate, data)
   }
-
+  getUserUpdate(id: any, data:any): Observable<any> {
+    return this._httpClient.put(endPointsUser.getUserUpdate + id, data)
+  }
   // Login Services
   login(data: any): Observable<any> {
     return this._httpClient.post(endPointsUser.login, data)

@@ -89,11 +89,35 @@ export class SampleCollectionComponent implements OnInit {
     protocol_name: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
+    // this.sponsersData()
     this.croService.getSites().subscribe((sites) => {
 
       this.sponsersData(sites);
 
     });
+
+   
+      this.croService.getSites().subscribe((data:any)=>{
+        //  console.log(data)
+        //  this.siteDetails = data
+        //  this.allSiteDetails = data
+
+
+         data.forEach((sponser: any) => {
+
+
+          // this.sponsers.push(sponser);
+          data.forEach((res: any) => {
+            if(data.email == this.email){
+       
+            this.ID = sponser.site_data_code
+            
+            }
+          });
+        });
+       })
+   
+    
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
 
@@ -270,7 +294,7 @@ export class SampleCollectionComponent implements OnInit {
   sponsersData(sponsers: any) {
 
     sponsers.forEach((sponser: any) => {
-console.log(sponsers);
+
 
       this.sponsers.push(sponser);
       this.sponsers.forEach((res: any) => {
@@ -324,6 +348,7 @@ console.log(sponsers);
     })
 
 
+console.log(this.ID);
 
 
 

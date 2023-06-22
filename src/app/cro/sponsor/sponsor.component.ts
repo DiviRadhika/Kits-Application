@@ -83,7 +83,7 @@ ngOnInit(): void {
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
-    email: new FormControl(''),
+    email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
     website:new FormControl(''),
     mobile_telephone:new FormControl(''),
   });

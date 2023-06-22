@@ -10,10 +10,10 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-    status:  string[] = ['Active', 'InActive'];
+  status: string[] = ['Active', 'InActive'];
 
   isEdit: boolean = false;
- 
+
   // readonly passwordPattern: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/;
   userForm: FormGroup = new FormGroup({
     first_name: new FormControl("", [Validators.required]),
@@ -24,8 +24,8 @@ export class UserCreateComponent implements OnInit {
     ]),
     role: new FormControl("", [Validators.required]),
 
-    email: new FormControl("",[Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
- 
+    email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
+
     status: new FormControl(''),
   });
 
@@ -38,10 +38,10 @@ export class UserCreateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private adminService: AdminService,
     private router: Router,
-    private fb:FormBuilder
+    private fb: FormBuilder
   ) {
-  
-   }
+
+  }
 
   ngOnInit(): void {
     // this.passwordControl = this.userForm.get('password') as FormControl;
@@ -49,11 +49,11 @@ export class UserCreateComponent implements OnInit {
       if (data.id) {
         this.isEdit = true;
         this.id = data.id;
-      
-        
+
+
         this.adminService.getUserbyId(data.id).subscribe((data: any) => {
           console.log(data);
-          
+
           this.getUserData = data;
           this.userForm.patchValue(this.getUserData);
           this.userForm.controls['email'].disable();
@@ -99,11 +99,13 @@ export class UserCreateComponent implements OnInit {
         role: this.userForm.controls['role'].value
       };
       if (this.isEdit) {
-      userObj.status = 'active'
-        this.adminService.updateUser(userObj).subscribe(
+      
+        userObj.status = 'active'
+        this.adminService.getUserUpdate( this.id,userObj).subscribe(
           (data: any) => {
-            alert('User updated successfully');
+
             this.router.navigate(['/home/admin/userGrid']);
+            alert('User updated successfully');
           },
           (err: any) => {
             alert('Server error');
@@ -111,12 +113,13 @@ export class UserCreateComponent implements OnInit {
         );
       } else {
         userObj.status = 'active'
-        console.log(typeof(userObj.status));
-        
+        console.log(typeof (userObj.status));
+
         this.adminService.createUser(userObj).subscribe(
           (data: any) => {
-            alert('User details created successfully');
+
             this.router.navigate(['/home/admin/userGrid']);
+            alert('User details created successfully');
           },
           (err: any) => {
             alert('Error');

@@ -244,6 +244,12 @@
                                 <label>Email</label>
                                 <input type="text" class="form-control" id="Address 1" placeholder="Enter Email"
                                   formControlName="email">
+                                  <div *ngIf="shouldShowRequired('email')" class="text-danger">
+                                    Email is required.
+                                  </div>
+                                  <div *ngIf="sponsorForm.get('email')?.hasError('pattern')" class="text-danger">
+                                    Please enter a valid email address.
+                                  </div>
                                  
                               </div>
                             </div>

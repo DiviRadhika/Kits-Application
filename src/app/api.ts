@@ -10,6 +10,7 @@ export const endPointsUser = {
     getUser: `${api}/user/register`,
     getUserById: `${api}/user_actions/`,
     getUserAddUpdate: `${api}/user/register`,
+    getUserUpdate: `${api}/user_actions/`,
 
     // Endpoints for  Login 
     login: `${api}/login`,

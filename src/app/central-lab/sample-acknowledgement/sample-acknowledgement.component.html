@@ -78,7 +78,7 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-8">
                                                         <div class="form-group">
 
                                                             <div class="table-responsive">
@@ -89,6 +89,7 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
+                                                                            <th>Expiration Date</th>
                                                                             <th>Collection</th>
 
 
@@ -115,13 +116,20 @@
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
-                                                                                    [disabled]="true"  value={{item.siteId}}
+                                                                                    [disabled]="true"  value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    placeholder="expiryDate"
+                                                                                    [disabled]="true"
+                                                                                    value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
@@ -141,7 +149,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                                 <table class="table table-striped mb-0"
@@ -223,7 +231,7 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-8">
                                                         <div class="form-group">
 
 
@@ -236,6 +244,7 @@
                                                                             <th>Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
+                                                                            <th>Expiration Date</th>
                                                                             <th>Collection </th>
 
                                                                         </tr>
@@ -259,13 +268,20 @@
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
-                                                                                    [disabled]="true" value={{item.siteId}}
+                                                                                    [disabled]="true" value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
                                                                                 <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    placeholder="expiryDate"
+                                                                                    [disabled]="true"
+                                                                                    value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
@@ -282,7 +298,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <div class="table-responsive"
                                                                 [formGroup]="item.visitKitFormGroup">

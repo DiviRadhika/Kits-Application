@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
           ]
         
         
-        }
-       
+        } 
+        
        
      
         // Other menu items for admin role...
