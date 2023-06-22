@@ -223,7 +223,7 @@ class UserRegister(Resource):
             user_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
-            return {"message": "password reset failed"}, 500
+            return {"message": "password reset failed {}".format(str(e))}, 500
         return {"message": "password updated successfully"}, 200
 
 
