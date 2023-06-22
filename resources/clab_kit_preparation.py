@@ -29,6 +29,7 @@ clab_screening_kit_details = clab_kit_preparation_ns.model(
         "collection": fields.String(default="pending"),
         "acknowledgement": fields.String(),
         "remarks": fields.String(),
+        "expiry_data": fields.String(),
         "pdf": fields.String(),
 
     },
@@ -47,13 +48,14 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
         "acknowledgement": fields.String(),
         "remarks": fields.String(),
         "pdf": fields.String(),
+        "expiry_data": fields.String(),
     },
 )
 
 pdf_details = clab_kit_preparation_ns.model(
   "pdf_details",{
-      "row": fields.String(required=True),
-      "visit": fields.String(),
+      "row": fields.Integer(),
+      "visit": fields.Integer(),
       "pdf": fields.String(),
     }
 )
@@ -118,9 +120,9 @@ class ClabKitPreparation(Resource):
         if kit_data:
             return {"message": "kit details already present in the db"}, 500
         if 'visit_pdf_details' in clab_kit_prep_json:
-            del clab_kit_prep_json["visit_pdf_details"]
+            del(clab_kit_prep_json['visit_pdf_details'])
         if 'screening_pdf_details' in clab_kit_prep_json:
-            del clab_kit_prep_json["screening_pdf_details"]
+            del(clab_kit_prep_json['screening_pdf_details'])
         try:
             clab_kit_prep_data = clab_kit_preparation_schema.load(clab_kit_prep_json)
             clab_kit_prep_data.save_to_db()
@@ -145,10 +147,38 @@ class ClabKitPreparation(Resource):
         if 'screening_pdf_details' in request_json:
             del(request_json['screening_pdf_details'])
 
+        #import pdb; pdb.set_trace()
+
+        screening_kit_details = request_json['screening_kit_details']
+        screening_pdf_visited = False
+        visit_pdf_visited = False
+
         for pdf_details in screeing_pdf_details:
-            for index in range(0, len(request_json['screening_kit_details'])):
-                if pdf_details.row == str(index):
-                    screeing_pdf_details[index]['pdf'] = pdf_details.pdf
+            for inner_index in range(0, len(request_json['screening_kit_details'])):
+                visit_wise_data = screening_kit_details[inner_index]
+                for row_index in range(0, len(visit_wise_data)):
+                    for inner_pdf_details in pdf_details:
+                        if inner_pdf_details['row'] == row_index:
+                            screening_pdf_visited = True
+                            screening_kit_details[inner_index][row_index]['pdf'] = inner_pdf_details['pdf']
+           
+        visit_kit_details = request_json['visit_kit_details']
+        for pdf_details in visit_pdf_details:
+            for inner_index in range(0, len(visit_kit_details)): #outside index not useful
+                total_visit_details = visit_kit_details[inner_index]
+                for visit_index in range(0, len(total_visit_details)): #total visits details visit-0, visit-1 ...etc
+                    visit_wise_data = total_visit_details[visit_index] #visit-0
+                    for row_index in range(0, len(visit_wise_data)):  #total rows of visit wise
+                        row_wise_data = visit_wise_data[row_index] #row data
+                        for inner_pdf_details in pdf_details: 
+                            if inner_pdf_details['visit'] == visit_index and inner_pdf_details['row'] == row_index:
+                                    visit_pdf_visited = True
+                                    visit_kit_details[inner_index][visit_index][row_index]['pdf'] = inner_pdf_details['pdf']
+        
+        if visit_pdf_visited == True:
+            request_json['visit_kit_details'] = request_json['visit_kit_details'][0]
+        if screening_pdf_visited == True:
+            request_json['screening_kit_details'] = request_json['screening_kit_details'][0]
         
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:
@@ -159,3 +189,4 @@ class ClabKitPreparation(Resource):
             print(e)
             return {"error": "failed to update kit details"}, 500
         return {"message": "kit details updated successfully"}, 201
+
