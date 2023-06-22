@@ -186,8 +186,8 @@
                           role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                           <thead>
                             <tr role="row">
-                              <th width="50%">Lab Test Id</th>
-                              <th width="50%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              <th width="30%">Lab Test Id</th>
+                              <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                 style="width: 243.2px;" aria-sort="ascending"
                                 aria-label="Lab Test: activate to sort column descending">Lab Test</th>
                              <th  width="20%" >Delete</th>
@@ -205,7 +205,7 @@
                               {{i+1}}
                               
                              </td> -->
-                             <td class="sorting_1 dtr-control">{{labData.lab_id}}</td>
+                             <td class="sorting_1 dtr-control">{{i+1}}</td>
                               <td class="sorting_1 dtr-control">{{labData.name}}</td>
                              <td>
                               <button type="button" (click)="deletelab(labData.lab_id)"

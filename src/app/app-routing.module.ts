@@ -5,11 +5,13 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthGuard } from './auth-gaurd.service';
 import { ProtocolRegistrationComponent } from './cro/protocol-registration/protocol-registration.component';
+import { MaterialComponent } from './cro/material/material.component';
 
 const routes: Routes = [
 {path:'',redirectTo:'login', pathMatch:'full'},
 {path:'login',  component: LoginComponent},
 {path:'header',  component:HeaderComponent},
+{path:'material', component:MaterialComponent},
 {path: 'home', component:HomeComponent,
 children: [
 {

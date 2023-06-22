@@ -231,6 +231,9 @@ export class KitPreprationComponent implements OnInit {
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
       this.scount = this.protocolIdDetails.no_of_screens
+    
+      alert(this.scount)
+      alert(this.protocolIdDetails.no_of_screens)
       this.vcount = this.protocolIdDetails.no_of_visits
       console.log(this.vMatDetails, 'details');
       this.visitRecords = []
@@ -256,7 +259,7 @@ export class KitPreprationComponent implements OnInit {
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
-            visitKitListArray.at(j).get('ckitId')?.patchValue(this.getLabKitId(i, j));
+            visitKitListArray.at(j).get('kitId')?.patchValue(this.getLabKitId(i, j));
           }
           tabs.visitsList = visitKitListArray;
           this.tets.push(tabs.selectedLabTests);
@@ -289,7 +292,8 @@ export class KitPreprationComponent implements OnInit {
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
-      prepration: ['In Progress']
+      prepration: ['In Progress'],
+      expiryDate:['']
 
     });
   }
@@ -439,7 +443,7 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         console.log(this.ScreenKitForm[i]);
-        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(this.protocolIdDetails.protocol_id + 'SK00'+i+1)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK00'+i+1)
        
 
       }
@@ -467,6 +471,7 @@ export class KitPreprationComponent implements OnInit {
       ckitId: [''],
       kitId: [''],
       prepration: ['In Progress'],
+      expiryDate:['']
 
     })
   }

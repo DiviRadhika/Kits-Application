@@ -386,7 +386,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
         for (let j = 0; j < this.vMatDetails.length; j++) {
           // this.vMatDetails.forEach((data:any,index: any)=>{
           console.log(this.vMatDetails[j].visitsList.value[index].status);
-          protocol.siteId = this.vMatDetails[i].visitsList.value[index].siteId
+          protocol.site_id = this.vMatDetails[i].visitsList.value[index].siteId
           // protocol.verification_status = false
         }
 
@@ -401,7 +401,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
       // this.vMatDetails.forEach((data:any,index: any)=>{
         // protocol.verification_status = false
-      protocol.siteId = this.ScreenKitForm.value.screenKitList[index].siteId
+      protocol.site_id = this.ScreenKitForm.value.screenKitList[index].siteId
     })
 
 

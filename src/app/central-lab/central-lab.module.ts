@@ -13,6 +13,7 @@ import {CardModule} from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
 import { AccordionModule } from 'primeng/accordion';
+import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AccordionModule } from 'primeng/accordion';
     KitVerificationComponent,
     SampleAcknowledgementComponent,
     KitDistributionComponent,
-    SampleCollectionComponent
+    SampleCollectionComponent,
+    SampleReportsComponent
   ],
   imports: [
     CommonModule,

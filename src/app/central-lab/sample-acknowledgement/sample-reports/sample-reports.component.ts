@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
-
+// import { saveAs } from 'file-saver';
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 @Component({
-  selector: 'app-sample-acknowledgement',
-  templateUrl: './sample-acknowledgement.component.html',
-  styleUrls: ['./sample-acknowledgement.component.css']
+  selector: 'app-sample-reports',
+  templateUrl: './sample-reports.component.html',
+  styleUrls: ['./sample-reports.component.css']
 })
-export class SampleAcknowledgementComponent implements OnInit {
+export class SampleReportsComponent implements OnInit {
   uploadedFiles: Array<File | null> = [];
   fileURLs: Array<string | null> = [];
   protocolIdDetails: any;
@@ -110,6 +113,83 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  // download(){
+  //   const svalue= "JVBERi0xLjQKJdPr6eEKMSAwIG9iago8PC9UaXRsZSAoZGV0Y"
+
+   
+  //     const len = download.fileName.lastIndexOf('.');
+  //     const extension = download.fileName.substring(len + 1);
+  //     if (extension === 'txt') {
+  //       const linkSource = 'data:text/plain;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     } else if (extension === 'doc') {
+  //       const linkSource = 'data:application/msword;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     } else if (extension === 'pdf') {
+  //       const linkSource = 'data:application/pdf;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     } else if (extension === 'docx') {
+  //       const linkSource = 'data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     } else if (extension === 'odt') {
+  //       const linkSource = 'data:application/vnd.oasis.opendocument.text;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     }
+  //     else if (extension === 'jpeg' || extension === 'jpg' || extension === 'JPG' || extension === 'png') {
+  //       const linkSource = 'data:image/jpeg;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     }
+  //     else if (extension === 'png') {
+  //       const linkSource = 'data:image/png;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     }
+  //     else if (extension === 'xlsx') {
+  //       const linkSource = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     }
+  //     else if (extension === 'xls') {
+  //       const linkSource = 'data:application/vnd.ms-excel;base64,' + download.base64Content;
+  //       const downloadLink = document.createElement('a');
+  //       const fileName = download.fileName;
+  //       downloadLink.href = linkSource;
+  //       downloadLink.download = fileName;
+  //       downloadLink.click();
+  //     }
+  //   }
+  
+  
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
@@ -361,16 +441,16 @@ export class SampleAcknowledgementComponent implements OnInit {
     // }
 
 
-    // console.log(data);
+    console.log(data);
 
-    // this.protocolService.updatePreparationById(data).subscribe(
-    //   (data: any) => {
-    //     alert('Sample Acknowledgement Updated successfully');
-    //   },
-    //   (err: any) => {
-    //     alert(err.errorr.message)
-    //   }
-    // );
+    this.protocolService.updatePreparationById(data).subscribe(
+      (data: any) => {
+        alert('Sample Acknowledgement Updated successfully');
+      },
+      (err: any) => {
+        alert(err.errorr.message)
+      }
+    );
 
   }
   fileSelected(fileInput: any, rowIndex: number): void {
@@ -491,7 +571,20 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  // downloadStringAsPDF() {
+  //   const stringToDownload = 'This is the string to be downloaded as a PDF';
 
+  //   const docDefinition = {
+  //     content: [
+  //       { text: stringToDownload, fontSize: 12 }
+  //     ]
+  //   };
+
+  //   const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+  //   pdfDocGenerator.getBlob((blob: Blob) => {
+  //     saveAs(blob, 'downloaded-file.pdf');
+  //   });
+  // }
 
 }
 

@@ -1,50 +1,118 @@
 <div class="main-content">
-    <div class="page-content">
-      <div class="container-fluid">
-        <!-- start page title -->
-        <div class="row">
-          <div class="col-12">
-            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> CRO</h4>
-              <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                  <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li>
-                </ol>
-              </div>
+  <div class="page-content">
+    <div class="container-fluid">
+ 
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Dashboards</h4>
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <!-- <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li> -->
+              </ol>
             </div>
           </div>
         </div>
-        <!-- end page title -->
-  
-        <form [formGroup]="myForm" (ngSubmit)="submitForm()">
-          <div class="tab-container">
-            
-            <div *ngFor="let tab of tabControls.controls; let i = index;">
-              <div class="tab-header"  >
-                Tab {{ i + 1 }}
-              </div>
-              <div class="tab-content" >
-                <div [formGroup]="getTabControls(i)">
-                    <ng-container *ngFor="let inputIndex of getInputIndexes()">
-                  <input formControlName="ckitId" placeholder="CKit ID" />
-                  <input formControlName="kitId" placeholder="Kit ID" />
-                  <input formControlName="preparation" placeholder="Preparation" />
-                  </ng-container>
-                </div>
-              </div>
+      </div>
+      <!-- end page title -->
+
+      <form [formGroup]="myForm">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">CRO</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
             </div>
           </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Protocols</h5>
+                <h6 style="margin-left: 41%;">6</h6>
 
 
-  
-          <div class="text-center mt-3">
-            <button type="button" (click)="addTab()">Add Tab</button>
-            <!-- <button type="button" (click)="removeTab()">Remove Tab</button> -->
-            <button type="submit">Submit</button>
+              </p-card>
+            </div>
           </div>
-        </form>
-      </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Sites</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Sponsors</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Lab Tests</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Materials</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 24%;">Sponsors</h5>
+                <h6 style="margin-left: 41%;">8</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 34%;">Site</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 16%;">Central Lab</h5>
+                <h6 style="margin-left: 41%;">6</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

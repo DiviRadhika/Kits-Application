@@ -73,7 +73,42 @@
 
                                         <p-tabView >
                                             <p-tabPanel header="Screening">
+                                                <h5 class="mb-sm-0 font-size-18">
+                                                    screen Kit Count : {{scount}}
+                                                </h5>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-3 mt-2 mb-3">
+                                                        <h6 style="color: black"> <b>&nbsp;&nbsp;Selected Lab Tests</b>
+                                                        </h6>
 
+                                                        <h6 style="color: black"
+                                                            *ngFor="let item of screenDetails  let k = index">
+                                                            &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
+                                                    </div>
+                                                </div>
+                                                <br>
+
+
+                                                <h5 class="mb-sm-0 font-size-18">
+                                                    Materials
+                                                </h5>
+                                                <hr />
+                                                <div class="row card-group">
+                                                    <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
+                                                        <p-card [styleClass]="'custom-card'"
+                                                            [style]="{width: '200px', height:'300px'}"
+                                                            styleClass="p-card-shadow">
+                                                            <ng-template pTemplate="header">
+                                                                <img style="width:198px" src="{{item.image}}" />
+                                                            </ng-template>
+                                                            {{item.meterial_id}} <br>
+                                                            size: {{item.size}}<br>
+                                                            Qunatity: {{item.quantity}}<br>
+
+                                                        </p-card>
+                                                    </div>
+                                                </div>
 
                                                 <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                     <table class="table table-striped mb-0"
@@ -82,8 +117,9 @@
                                                             <tr>
                                                                 <th>KitId</th>
                                                                 <th>Lab KitId</th>
+                                                                <th>Expiry Date</th>
                                                                 <th>Prepration</th>
-
+                                                               
                                                                 <th>Print Label</th>
 
                                                             </tr>
@@ -99,11 +135,15 @@
                                                                 <td width="30%">
                                                                     <input type="text" placeholder="kitId"
                                                                         formControlName="kitId" class="form-control"
-                                                                        value="" />
+                                                                        value=""  [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
                                                                     <input type="text"  placeholder="LabKitId"
-                                                                    [disabled]="true" readonly  formControlName="ckitId" class="form-control" />
+                                                                     formControlName="ckitId" class="form-control" />
+                                                                </td>
+                                                                <td width="25%">
+                                                                    <input type="text"  placeholder="Expiry Date"
+                                                                     formControlName="expiryDate" class="form-control" />
                                                                 </td>
 
                                                                 <td width="30%">
@@ -171,8 +211,9 @@
                                                         <thead Style="background:#EEE">
                                                             <tr>
                                                                 <th>KitId</th>
-                                                                <th>Lab KitId</th>
+                                                                <th>Central Lab KitId</th>
                                                                 <th>Prepration</th>
+                                                                <th>Expiry Date</th>
 
                                                                 <th>Print Label</th>
 
@@ -185,14 +226,17 @@
                                                             <tr *ngFor="let control of item.visitsList.controls; let j = index" [formGroupName]="j">
                                                                 <td width="25%">
                                                                     <input type="text" placeholder="kitId"
-                                                                        formControlName="kitId" class="form-control"
+                                                                        formControlName="kitId"   [disabled]="true" readonly [value]="getLabKitId(i, j)"class="form-control"
                                                                         value="" />
                                                                 </td>
                                                                 <td width="25%">
                                                                     <input type="text"  placeholder="LabKitId"
-                                                                    [disabled]="true" [value]="getLabKitId(i, j)"readonly  formControlName="ckitId" class="form-control" />
+                                                                    value=""  formControlName="ckitId" class="form-control" />
                                                                 </td>
-
+                                                                <td width="25%">
+                                                                    <input type="text"  placeholder="Expiry Date"
+                                                                     formControlName="expiryDate" class="form-control" />
+                                                                </td>
                                                                 <td width="25%">
                                                                     <select formControlName="prepration" 
                                                                         class="form-select form-control">
