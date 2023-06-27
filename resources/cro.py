@@ -4,11 +4,6 @@ from flask import request
 from sqlalchemy import exc
 from models.cro import CroModel
 from models.users import UserModel
-from flask_jwt_extended import (
-    jwt_required,
-    get_jwt,
-    current_user,
-)
 
 cro_ns = Namespace("cro", description="cro related operations")
 cros_ns = Namespace("cros", description="cros related operations")

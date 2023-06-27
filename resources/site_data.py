@@ -40,10 +40,6 @@ create_site_data = sites_data_ns.model(
         "extension": fields.String(),
         "mobile_telephone": fields.String(),
         "email": fields.String(required=True),
-        "password": fields.String(required=True),
-        "first_name": fields.String(required=True),
-        "role": fields.String(required=True),
-        "status": fields.String(default="inactive"),
         "website": fields.String(),
     },
 )

@@ -37,6 +37,7 @@ sponsor = sponsor_ns.model(
         "extension": fields.String(required=True),
         "email": fields.String(required=True),
         "website": fields.String(required=True),
+        "user_id": fields.String(),
     },
 )
 
@@ -60,6 +61,7 @@ update_sponsor = sponsor_ns.model(
         "extension": fields.String(required=True),
         "email": fields.String(required=True),
         "website": fields.String(required=True),
+        "user_id": fields.String(),
     },
 )
 

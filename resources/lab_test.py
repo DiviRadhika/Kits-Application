@@ -19,7 +19,10 @@ lab_tests_schema = LabtestSchema(many=True)
 
 lab_test = lab_tests_ns.model(
     "lab_test",
-    {"name": fields.String(required=True)},
+    {
+        "name": fields.String(required=True),
+     "created_by": fields.String(),
+    }
 )
 
 update_lab_test = lab_tests_ns.model(
@@ -30,6 +33,7 @@ update_lab_test = lab_tests_ns.model(
         "material": fields.String(required=True),
         "size": fields.String(required=True),
         "image": fields.String(required=True),
+        "created_by": fields.String(),
     },
 )
 

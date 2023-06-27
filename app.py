@@ -12,8 +12,6 @@ import flask_excel as excel
 from flask_sqlalchemy import SQLAlchemy
 
 
-
-
 from resources.sponsor import (
     Sponser,
     SponsersList,
@@ -76,16 +74,22 @@ from resources.sample_ack import(
     sample_ack_ns
 )
 
+from resources.dashboard import(
+    dashboard_ns,
+    Dashboard,
+)
+
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 bluePrint = Blueprint("api", __name__, url_prefix="/api")
 api = Api(bluePrint, doc="/doc", title="KITS APPLICATION")
 app.register_blueprint(bluePrint)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/postgres".format(
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
     os.environ.get("DB_USERNAME"),
     os.environ.get("DB_PASSWORD"),
     os.environ.get("DB_IP"),
+    os.environ.get("DB_DATABASE"),
 )
 
 
@@ -188,6 +192,7 @@ api.add_namespace(users_ns)
 api.add_namespace(meterials_ns)
 api.add_namespace(meterial_ns)
 api.add_namespace(sample_ack_ns)
+api.add_namespace(dashboard_ns)
 
 
 
@@ -240,6 +245,7 @@ cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
 meterial_ns.add_resource(Meterial, "")
 meterials_ns.add_resource(MeterialsList, "")
 meterial_ns.add_resource(MeterialActionsById, "/<string:meterial_id>")
+dashboard_ns.add_resource(Dashboard, "")
 
 
 if __name__ == "__main__":

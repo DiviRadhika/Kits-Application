@@ -43,6 +43,7 @@ creation = login_ns.model(
         "password": fields.String(title="Password", required=True),
         "role": fields.String(title="Role", required=True),
         "status": fields.String(title="Status", default="inactive"),
+        "created_user_id": fields.String(),
     },
 )
 
