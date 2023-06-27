@@ -167,16 +167,10 @@ class UserList(Resource):
             return {"message": "user data not found"}, 400
 
         return (user_schema.dump(user_data), 200)
-
-
-class UserRegister(Resource):
-    @user_ns.doc("Get all the sponsers")
-    def get(self):
-        return (user_list_schema.dump(UserModel.find_all()), 200)
-
-    @user_ns.expect(creation)
-    @user_ns.doc("User")
-    def put(self):
+    
+    @users_ns.expect(creation)
+    @users_ns.doc("update a user")
+    def put(self, user_id):
         user_json = request.json
         try:
             user_data = UserModel.find_by_email(user_json["email"])
@@ -191,6 +185,12 @@ class UserRegister(Resource):
             print(str(e))
             return {"message": "user updation failed"}, 500
         return {"message": "user updation success"}, 200
+
+
+class UserRegister(Resource):
+    @user_ns.doc("Get all the sponsers")
+    def get(self):
+        return (user_list_schema.dump(UserModel.find_all()), 200)
 
     @user_ns.expect(creation)
     @user_ns.doc("User")
