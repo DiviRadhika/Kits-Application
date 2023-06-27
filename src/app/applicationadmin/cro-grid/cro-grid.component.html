@@ -11,7 +11,7 @@
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"> <a routerLink="'/home/cro/dashboards'" class="waves-effect">Dashboard</a>
                 <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li>
               </ol>
             </div>
@@ -20,100 +20,110 @@
         </div>
       </div>
       <!-- end page title -->
-
+      <p-toast></p-toast>
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <div class="pull-Right mb-2 text-right" width="100%">
-                <button type="button" (click)="croCreate()"
-                  class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right" data-bs-toggle="modal"
-                  data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
-                  Add CRO</button>
+              <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-2">
+                  <div class="pull-Right mb-2 text-right" width="100%">
+                    <button type="button" (click)="croCreate()"
+                      class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right" data-bs-toggle="modal"
+                      data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
+                      Add CRO</button>
+                  </div>
+                </div>
               </div>
+
               <hr width="100%" class="mb-4">
               <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">
+
+
                   <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_length" id="datatable_length"><label>Show <select name="datatable_length"
-                          aria-controls="datatable" class="custom-select custom-select-sm form-control form-control-sm">
-                          <option value="10">10</option>
-                          <option value="25">25</option>
-                          <option value="50">50</option>
-                          <option value="100">100</option>
-                        </select> entries</label></div>
+
+                    <div class="col-sm-12 col-md-6">
+                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                            placeholder="Search " (keyup)="applyFilter(searchText)" />
+                        </label></div>
+                    </div>
                   </div>
-                  <div class="col-sm-12 col-md-6">
+               
+
+
+                <!-- <div class="col-sm-12 col-md-6">
                     <div id="datatable_filter" class="dataTables_filter"><label>Search:
                         <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
                           placeholder="Search " (keyup)="applyFilter(searchText)" />
                       </label></div>
+                  </div> -->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table id="datatable"
+                      class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid"
+                      aria-describedby="datatable_info" style="width: 1182px;">
+                      <thead>
+                        <tr role="row">
+                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 243.2px;" aria-sort="ascending"
+                            aria-label="Code: activate to sort column descending">Code</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Name</th>
+                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending">Legal
+                            Name</th>
+                          <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+
+                        <tr class="odd"
+                          *ngFor="let croData of croDetails  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                          <td class="sorting_1 dtr-control">{{croData.cro_code}}</td>
+                          <td>{{croData.cro_name}}</td>
+                          <td>{{croData.legal_cro_name}}</td>
+                          <td>
+                            <button type="button" (click)="edit(croData.cro_id)"
+                              class="btn btn-success waves-effect edit-btn waves-light">
+                              <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <table id="datatable"
-                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
-                        role="grid" aria-describedby="datatable_info" style="width: 1182px;">
-                        <thead>
-                          <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 243.2px;" aria-sort="ascending"
-                              aria-label="Code: activate to sort column descending">Code</th>
-                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Name</th>
-                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending">Legal
-                              Name</th>
-                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                              colspan="1" style="width: 150.2px;"
-                              aria-label="Actions: activate to sort column ascending">Actions</th>
-                          </tr>
-                        </thead>
-
-
-                        <tbody>
-
-                          <tr class="odd"
-                            *ngFor="let croData of croDetails  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
-                            <td class="sorting_1 dtr-control">{{croData.cro_code}}</td>
-                            <td>{{croData.cro_name}}</td>
-                            <td>{{croData.legal_cro_name}}</td>
-                            <td>
-                              <button type="button" (click)="edit(croData.cro_id)"
-                                class="btn btn-success waves-effect edit-btn waves-light">
-                                <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                                Edit
-                              </button>
-                            </td>
-                          </tr>
-
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
-                    *ngIf="croDetails && croDetails.length"></pagination-controls>
                 </div>
+                <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
+                  *ngIf="croDetails && croDetails.length"></pagination-controls>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- end col -->
-      </div> <!-- end row -->
-    </div>
-    <!-- container-fluid -->
+      <!-- end col -->
+    </div> <!-- end row -->
   </div>
-  <!-- End Page-content -->
+  <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
 
 
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
-        </div>
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 </div>

@@ -6,6 +6,7 @@ import { SampleCollectionComponent } from './sample-collection/sample-collection
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabView, TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CardModule } from 'primeng/card';
     FormsModule,
     ReactiveFormsModule,
     TabViewModule,
-    CardModule
+    CardModule,
+    ToastModule
   ]
 })
 export class SiteModule { }

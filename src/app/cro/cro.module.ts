@@ -20,6 +20,9 @@ import { VisitComponent } from './visit/visit.component';
 import {TabViewModule} from 'primeng/tabview';
 import {AccordionModule} from 'primeng/accordion';
 import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
+import { ToastModule } from 'primeng/toast';
+import { ChartModule } from 'primeng/chart';
+
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -46,7 +49,9 @@ import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
     DialogModule,
     CardModule,
     TabViewModule,
-    AccordionModule
+    AccordionModule,
+    ToastModule,
+    ChartModule
     
   ]
 })

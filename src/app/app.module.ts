@@ -17,8 +17,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastModule } from 'primeng/toast'
 import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     UploadResultsComponent,
     HeaderComponent,
     FooterComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -42,11 +43,12 @@ import { HttpClientModule } from '@angular/common/http';
     ApplicationadminModule,
     FormsModule,
     NgxPaginationModule,
-   HttpClientModule,
+    HttpClientModule,
+    ToastModule
 
   ],
   // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }

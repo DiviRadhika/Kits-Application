@@ -11,7 +11,7 @@
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"> <a routerLink="'/home/cro/dashboards'" class="waves-effect">Dashboard</a>
                 <li class="breadcrumb-item"><a href="subjects.html">Users</a></li>
               </ol>
             </div>
@@ -20,17 +20,25 @@
         </div>
       </div>
       <!-- end page title -->
-
+      <p-toast></p-toast>
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <div class="pull-Right mb-2 text-right" width="100%">
-                <button type="button" (click)="addUser()"
-                  class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right" data-bs-toggle="modal"
-                  data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
-                  Add User</button>
+             
+              <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-2">
+                  <div class="pull-Right mb-2 text-right" width="100%">
+                    <button type="button"  (click)="addUser()"
+                      class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+                      data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                        class="bx bx-plus label-icon"></i>
+                        Add Users</button>
+                  </div>
+                </div>
               </div>
+
               <hr width="100%" class="mb-4">
               <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                 <div class="row">

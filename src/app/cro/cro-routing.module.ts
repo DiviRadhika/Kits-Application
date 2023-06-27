@@ -19,6 +19,7 @@ const routes: Routes = [
   {path: 'updateSite/:id', component:AddSiteComponent},
 
   {path:'labTestGrid', component:LabTestComponent},
+  {path:'labTestgrid', component:LabTestComponent},
   {path: 'createLabTest', component:LabCreateComponent},
   {path:'updateLabTest/:id', component:LabCreateComponent},
 
@@ -27,7 +28,7 @@ const routes: Routes = [
   {path:'csponsorUpdate/:id', component:SponsorComponent},
 
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
-  {path:'material', component:MaterialComponent},
+  {path:'dashboards', component:MaterialComponent},
   {path:'visits', component:VisitComponent},
   {path:'protocolView', component:ProtocolViewComponent},
  

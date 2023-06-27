@@ -16,3 +16,49 @@ h6 {
     font-weight: bold;
    
   } */
+  /* ::ng-deep .p-card{
+    background-color:pink
+}
+
+h6 {
+   
+    color:maroon;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  h5 {
+   
+    color:blue;
+    font-size: 16px;
+    font-weight: bold;
+   
+  } */
+/* ::ng-deep .p-card{
+    background-color:pink
+}
+
+h6 {
+   
+    color:maroon;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  h5 {
+   
+    color:blue;
+    font-size: 16px;
+    font-weight: bold;
+   
+  } */
+  .main-content {
+    /* background-color: rgb(204, 230, 245); */
+  }
+  .cra{
+    order: -1;
+  }
+
+ ::ng-deep .p-card{
+    background-color:rgb(204, 230, 245)
+}

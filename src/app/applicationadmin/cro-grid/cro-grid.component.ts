@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cro-grid',
@@ -16,7 +17,8 @@ export class CroGridComponent implements OnInit {
   searchText: any
   allcroDetails: any;
   constructor(private route: Router,
-    private admin: AdminService) { }
+    private admin: AdminService,
+    private messageService: MessageService) { }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -58,7 +60,7 @@ export class CroGridComponent implements OnInit {
         this.totalCount = this.croDetails.length
       },
       (err: any) => {
-        alert(err.error.message)
+        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     )
   }

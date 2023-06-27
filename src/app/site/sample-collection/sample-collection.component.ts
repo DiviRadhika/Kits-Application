@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
@@ -40,7 +41,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
 
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
 
     this.email =sessionStorage.getItem('email')
 
@@ -365,13 +366,14 @@ console.log(this.ID);
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        alert('Sample Collection Updated successfully');
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Collection Updated successfully' });
       },
       (err: any) => {
-        alert(err.errorr.message)
+       
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
+        
       }
     );
-
   }
 
 

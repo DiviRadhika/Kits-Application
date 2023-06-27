@@ -5,7 +5,6 @@ import { KitVerificationComponent } from './kit-verification/kit-verification.co
 import { SampleAcknowledgementComponent } from './sample-acknowledgement/sample-acknowledgement.component';
 import { UploadResultsComponent } from '../central/upload-results/upload-results.component';
 import { KitDistributionComponent } from './kit-distribution/kit-distribution.component';
-import { SampleCollectionComponent } from './sample-collection/sample-collection.component';
 import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
 
 const routes: Routes = [

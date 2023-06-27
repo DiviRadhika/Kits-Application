@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrosService } from '../cros.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lab-test',
@@ -26,9 +27,11 @@ export class LabTestComponent implements OnInit {
   labFormval: boolean = false;
   disableAdd: boolean  = true
   totalCountmaterial = 0;
-  constructor(private route: Router, private _cro:CrosService) { }
+  constructor(private route: Router, private _cro:CrosService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
+
   this.labDetailsData();
   this.meterialsData()
   }
@@ -91,7 +94,9 @@ export class LabTestComponent implements OnInit {
       Object.keys(this.labForm.controls).forEach(key => {
         this.labForm.get(key)?.markAsTouched();
       });
-      alert('Please Fill All Mandatory Fields')
+
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Lab Test' });
+  
     }
    else {
 
@@ -104,14 +109,22 @@ export class LabTestComponent implements OnInit {
     
         this._cro.createTestDetails(data).subscribe(
           (data: any) => {
-            alert('Test results created successfully');
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
+    if(this.route.url === '/home/cro/labTestGrid'){
+
             this.route.navigate(['/home/cro/labTestGrid'])
+    }
+    else{
+      this.route.navigate(['/home/cro/labTestgrid'])
+    }
             this.labFormval = false
             this.disableAdd = true
 
           },
           (err: any) => {
-            alert('internal server err');
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+  
+       
           }
         );
       }

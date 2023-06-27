@@ -7,13 +7,14 @@ import { KitVerificationComponent } from './kit-verification/kit-verification.co
 import { SampleAcknowledgementComponent } from './sample-acknowledgement/sample-acknowledgement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KitDistributionComponent } from './kit-distribution/kit-distribution.component';
-import { SampleCollectionComponent } from './sample-collection/sample-collection.component';
+
 
 import {CardModule} from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
 import { AccordionModule } from 'primeng/accordion';
 import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/
     KitVerificationComponent,
     SampleAcknowledgementComponent,
     KitDistributionComponent,
-    SampleCollectionComponent,
+  
     SampleReportsComponent
   ],
   imports: [
@@ -32,7 +33,8 @@ import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/
     CardModule,
     ButtonModule,
     TabViewModule,
-    AccordionModule
+    AccordionModule,
+    ToastModule
   ]
 })
 export class CentralLabModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
@@ -36,7 +37,8 @@ export class KitPreprationComponent implements OnInit {
   // visitKitFormGroup: FormGroup
 
 
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService, 
+   private messageService: MessageService, private formBuilder: FormBuilder) {
     // this.visitKitFormGroup = this.formBuilder.group({
     //   ckitId: [''],
     //   kitId: [''],
@@ -512,13 +514,16 @@ export class KitPreprationComponent implements OnInit {
     console.log(data);
 
     this.protocolService.postPreparation(data).subscribe(
-      (data: any) => {
-        alert('Kit Preparation Updated  successfully');
-      },
-      (err: any) => {
-        alert(err.errorr.message)
-      }
-    );
+   
+        (data: any) => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+        },
+        (err: any) => {
+         
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
+          
+        }
+      );
 
   }
 

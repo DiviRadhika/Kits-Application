@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApplicationadminRoutingModule } from './applicationadmin-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
-
-
+import {ToastModule} from 'primeng/toast';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ToastModule
+   
+    
   ]
 })
 export class ApplicationadminModule { }

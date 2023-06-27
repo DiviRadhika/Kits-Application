@@ -5,6 +5,7 @@ import { log } from 'console';
 import { SponsorService } from 'src/app/sponsor/sponsor.service';
 import { CrosService } from '../cros.service';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sponsor',
@@ -23,7 +24,8 @@ export class SponsorComponent implements OnInit {
     private route: Router,
     private _cro:CrosService,
     private _activatedRoute: ActivatedRoute,
-    private admin: AdminService
+    private admin: AdminService,
+    private messageService: MessageService
    ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -95,7 +97,8 @@ ngOnInit(): void {
       Object.keys(this.sponsorForm.controls).forEach(key => {
         this.sponsorForm.get(key)?.markAsTouched();
       });
-      alert('Please Fill All Mandatory Fields')
+     
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'Please Fill All Mandatory Fields'});
     }
  
  else {
@@ -116,7 +119,8 @@ ngOnInit(): void {
        "mobile_telephone": this.sponsorForm.controls['mobile_telephone'].value.toString(),    
        "extension": this.sponsorForm.controls['extension'].value,
        "email": this.sponsorForm.controls['email'].value,
-       "website": "string"
+       "website": this.sponsorForm.controls['website'].value,
+       "user_id": sessionStorage.getItem('userid')
      }
      console.log(obj)
      
@@ -125,22 +129,28 @@ ngOnInit(): void {
       console.log(obj)
        this._cro.updateSponsorDetails(obj).subscribe(
          (data: any) => {
-          alert('Sponsor Updated Successfully')
+          setTimeout(() => {
+            this.messageService.add({severity:'success', summary:'Success Message', detail:'Sponsor Updated Successfully'});
+          }, 1000);
+  
           this.route.navigate(['/home/cro/sponsorGrid'])
  
          },
          (err: any) => {
-           alert('internal server error');
+          this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
          }
        );
      }
      else {
        this._cro.CreateSponsorDetails(obj).subscribe(
          (data: any) => {
-          alert('Sponsor Created Successfully')
+          setTimeout(() => {
+            this.messageService.add({severity:'success', summary:'Success Message', detail:'Sponsor Created Successfully'});
+          }, 1000);
           this.route.navigate(['/home/cro/sponsorGrid'])
          },
          (err: any) => {
+          this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
  
          }
        )

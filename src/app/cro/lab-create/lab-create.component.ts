@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrosService } from '../cros.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lab-create',
@@ -24,7 +25,8 @@ export class LabCreateComponent {
   constructor(
     private _cro: CrosService,
     private _activatedRoute: ActivatedRoute,
-    private _formbuilder: FormBuilder, private route: Router
+    private _formbuilder: FormBuilder, private route: Router,
+    private messageService: MessageService
 
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
@@ -86,24 +88,25 @@ export class LabCreateComponent {
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
   submit() {
-console.log(this.bas2);
+    console.log(this.bas2);
 
     if (this.labForm.invalid) {
       // Mark all form controls as touched to trigger validation
       Object.keys(this.labForm.controls).forEach(key => {
         this.labForm.get(key)?.markAsTouched();
       });
-      alert('Please Fill All Mandatory Fields')
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
+
     }
-   else {
+    else {
 
       const data: any =
       {
         "name": this.labForm.get('material')?.value,
         "size": this.labForm.get('size')?.value,
-        
+
       }
-     
+
       if (this.isEdit) {
         if (this.imageChanged == true) {
           data.image = this.labData.image
@@ -112,17 +115,20 @@ console.log(this.bas2);
           data.image = this.bas2
         }
         // data.material_id = this.id
-     console.log(this.id);
-     console.log(this.labData.image);
-     console.log(data)
-     
+
+
         this._cro.updateMaterialDetails(this.id, data).subscribe(
           (data: any) => {
-            alert('Material updated successfully');
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Updated successfully' });
+
+            }, 1000);
             this.route.navigate(['/home/cro/labTestGrid'])
           },
           (err: any) => {
-            alert('internal server error')
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+
+
           }
         );
 
@@ -131,11 +137,16 @@ console.log(this.bas2);
         data.image = this.bas2
         this._cro.createMaterialDetails(data).subscribe(
           (data: any) => {
-            alert('Material created successfully');
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Created successfully' });
+
+            }, 1000);
+
             this.route.navigate(['/home/cro/labTestGrid'])
           },
           (err: any) => {
-            alert('internal server err');
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+
           }
         );
       }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrosService } from '../cros.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sponsor-grid',
@@ -16,7 +17,7 @@ export class SponsorGridComponent implements OnInit {
   p = 1;
   searchText = ''
   constructor(private route:Router, 
-    private _cro:CrosService) { }
+    private _cro:CrosService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getSponsorDetails()
@@ -35,7 +36,7 @@ export class SponsorGridComponent implements OnInit {
        console.log(data)
       },
       (err:any)=>{
-        alert(err.error.message)
+        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     )
   }

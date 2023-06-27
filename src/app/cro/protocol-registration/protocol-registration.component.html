@@ -11,7 +11,7 @@
                   
                   <div class="page-title-right">
                       <ol class="breadcrumb m-0">
-                          <li class="breadcrumb-item"> <a routerLink="/home" class="waves-effect">Dashboard</a>
+                          <li class="breadcrumb-item"> <a routerLink="'/home/cro/dashboards'" class="waves-effect">Dashboard</a>
                           </li>
                           <li class="breadcrumb-item"><a routerLink="/home/cro/protocolView"
                                   class="waves-effect">Protocol Registration</a></li>
@@ -23,6 +23,7 @@
               </div>
           </div>
       </div>
+      <p-toast></p-toast>
 
         <form [formGroup]="protocolForm">
           <div class="card">
@@ -149,7 +150,7 @@
                       <div class="col-md-1 mb-3"></div>
                       <div class="col-md-8 mb-3">
                         <p-multiSelect [options]="matList" styleClass="custom-multiselect" [(ngModel)]="selectedTests"
-                          formControlName="labTestValue" optionLabel="name"></p-multiSelect>
+                          formControlName="labTestValue" optionLabel="name"  [class.is-invalid]="shouldShowRequired('labTestValue') && protocolForm.get('labTestValue')?.touched"></p-multiSelect>
                       </div>
                       <br>
                       <br>

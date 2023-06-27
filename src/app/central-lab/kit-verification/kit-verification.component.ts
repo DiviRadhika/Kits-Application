@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
@@ -38,7 +39,9 @@ export class KitVerificationComponent implements OnInit {
 
 
 
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService, 
+    private formBuilder: FormBuilder,
+    private messageService: MessageService) {
 
 
 
@@ -354,10 +357,12 @@ export class KitVerificationComponent implements OnInit {
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        alert('Kit Verification Updated successfully');
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Verification Updated successfully' });
       },
       (err: any) => {
-        alert(err.errorr.message)
+       
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
+        
       }
     );
 

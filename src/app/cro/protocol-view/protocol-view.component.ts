@@ -217,35 +217,7 @@ export class ProtocolViewComponent implements OnInit {
 
 
 
-  SubmitData() {
-  console.log(this.VisitKitForm.value);
-  
-    const data =
-    {
-      protocol_id: this.selected_protocol_id,
-      // sponser_id: this.selected_sponsor_id,
-      // cro_id: this.selected_cro_id,
-      no_of_sites: Number(this.selected_sites_num),
-      total_patients: Number(this.selected_patients_num),
-      site_data: this.sitesForm.value.sites,
-      screening_kit_count: Number(this.selected_skit_count),
-      screening_kit_lab_test_details: this.ScreenKitForm.value.labTestsList,
-      visit_kit_count: Number(this.selected_vkit_count),
-      visit_kit_type: this.selected_vkit_variant,
-      visit_kit_details: this.VisitKitForm.value.labTestsList
-    }
-
-    console.log(data);
-
-    this.protocolService.postProtocol(data).subscribe(
-      (data: any) => {
-        alert('protocol created successfully');
-      },
-      (err: any) => {
-        alert('internal server err');
-      }
-    );
-  }
+ 
 
   cards: { form: FormGroup }[] = [];
   visits(value: any){

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, ValidationErrors, Form
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { HttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crocreate',
@@ -16,7 +17,8 @@ export class CROcreateComponent implements OnInit {
   public id: any = '';
   getcroData: any;
   constructor(private admin: AdminService,
-    private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient
+    private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
+    private messageService: MessageService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -28,7 +30,7 @@ export class CROcreateComponent implements OnInit {
           this.CroForm.controls['cro_code'].disable()
           this.CroForm.controls['cro_name'].disable()
           this.CroForm.controls['legal_cro_name'].disable()
-          this.CroForm.controls['email'].disable()
+          // this.CroForm.controls['email'].disable()
 
         });
 
@@ -128,7 +130,9 @@ export class CROcreateComponent implements OnInit {
         Object.keys(this.CroForm.controls).forEach(key => {
           this.CroForm.get(key)?.markAsTouched();
         });
-        alert('please fill all Mandatory Fields')
+        this.messageService.add({severity:'error', summary:'Error Message', detail:'Please Fill All Mandatory Fields'});
+      
+        
       }
     else {
       const obj: any = {
@@ -154,22 +158,29 @@ export class CROcreateComponent implements OnInit {
         obj.cro_id = this.id
         this.admin.updateCroDetaild(obj).subscribe(
           (data: any) => {
-            alert(' CRO Details updated successfully');
+            setTimeout(() => {
+              this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Updated Successfully'});
+             }, 1000);
+               
+
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-            alert("server errorr")
+            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
           }
         );
       }
       else {
         this.admin.CreateCroDetails(obj).subscribe(
           (data: any) => {
-            alert("CRO Details Created Successfully");
+         setTimeout(() => {
+          this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Created Successfully'});
+         }, 1000);
+           
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-            alert(err.error.message)
+            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
           }
         )
       }

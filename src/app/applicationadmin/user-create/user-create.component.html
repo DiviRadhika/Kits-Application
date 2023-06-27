@@ -10,7 +10,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item">
-                  <a routerLink="/home" class="waves-effect">Dashboard</a>
+                  <a routerLink="'/home/cro/dashboards'" class="waves-effect">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
                   <a routerLink="/home/admin/userGrid" class="waves-effect">User</a>
@@ -29,7 +29,8 @@
             <h6 style="color: rgb(250, 39, 39);">User Form</h6>
             <hr>
 
-            <form [formGroup]="userForm" (ngSubmit)="submit()">
+            <p-toast></p-toast>
+            <form [formGroup]="userForm" >
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
@@ -86,7 +87,9 @@
                   <div class="form-group">
                     <label>Role</label>
                    
-                    <select formControlName="role" class="form-select" aria-label="Default select example">
+                    <select formControlName="role"  (change)="roleChange($event)" class="form-select" aria-label="Default select example"
+                    class="form-select form-control"
+                      [class.is-invalid]="shouldShowRequired('role') && userForm.get('role')?.touched">
                       <option disabled selected value="">Select Role</option>
                       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                     </select>
@@ -95,16 +98,40 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div *ngIf="isEdit" class="col-md-3">
+                <div *ngIf="sponsor" class="col-md-3">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Sponsor Name</label>
+                    <select formControlName="sId" class="form-select form-control"
+                      [class.is-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
+                      <option  selected value="">Select Sponsor Name</option>
+                      <option *ngFor="let sponser of sponsorDetails" [value]="sponser.sponsor_id">
+                        {{ sponser.sponsor_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngIf="site" class="col-md-3">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Site Name</label>
+                    <select formControlName="sId" class="form-select form-control"
+                      [class.is-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
+                      <option  selected value="">Select Site Name</option>
+                      <option *ngFor="let site of siteDetails" [value]="site.site_id">
+                        {{ site.site_data_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngIf="isEdit" class="col-md-3">
                   <div class="form-group">
                     <label>Status</label>
                     <select formControlName="status" class="form-select" aria-label="Default select example">
                       <option  selected value="">Select Status</option>
-                      <option *ngFor="let option of status"[ngValue]="option">{{ option }}</option>
+                      <option *ngFor="let option of status" [value]="option.id">{{ option.label }}</option>
                     </select>
                    
                   </div>
-                </div> -->
+                </div>
               </div>
 
               <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
