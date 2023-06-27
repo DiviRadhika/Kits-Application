@@ -82,7 +82,7 @@ class SponserActionsById(Resource):
             return (sponsor_schema.dump(data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to get the data"}, 500
+            return {"error": "failed to get the data {}".format(str(e))}, 500
 
 
 class Sponser(Resource):

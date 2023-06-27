@@ -63,7 +63,7 @@ class LabActionsById(Resource):
                 return {"message": "deletion failed, lab_test not found"}, 400
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"message": "deletion failed, internal server error"}, 500
+            return {"message": "deletion failed, internal server error{}".format(str(e))}, 500
 
         return {"message": "lab test deleted successfully"}, 200
 
@@ -78,7 +78,7 @@ class Labtest(Resource):
             lab_test_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data{}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
     """@lab_test_ns.expect(update_lab_test)

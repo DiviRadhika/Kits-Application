@@ -23,6 +23,7 @@ meterial_test = meterial_ns.model(
         "name": fields.String(required=True),
         "image": fields.String(required=True),
         "size": fields.List(fields.String(required=True)),
+        "created_by": fields.String(),
     },
 )
 
@@ -77,7 +78,7 @@ class MeterialActionsById(Resource):
                 return {"message": "updation failed,  meterial data not found"}, 400
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"message": "updation failed, internal server error"}, 500
+            return {"message": "updation failed, internal server error{}".format(str(e))}, 500
 
         return {"message": "meterail data updated successfully"}, 200
 
@@ -92,7 +93,7 @@ class Meterial(Resource):
             meterial_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"message": "creation failed, internal server error"}, 500
+            return {"message": "creation failed, internal server error{}".format(str(e))}, 500
 
         return {"message": "meterial data created successfully"}, 201
 

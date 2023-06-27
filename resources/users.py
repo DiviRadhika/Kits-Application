@@ -205,7 +205,7 @@ class UserRegister(Resource):
             user_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
-            return {"message": "user creation failed"}, 400
+            return {"message": "user creation failed {}".format(str(e))}, 400
         return {"message": "user registration success"}, 201
 
     @user_ns.expect(update_user)
@@ -252,7 +252,7 @@ class UserLogin(Resource):
             )
             logger.log(log_type="info", path=path, cursor="END", uniqueId="")
             # abort(400,str(e))
-            return {"message": "Input Request Error"}, 400
+            return {"message": "Input Request Error {}".format(str(e))}, 400
 
         # find user in database
         try:

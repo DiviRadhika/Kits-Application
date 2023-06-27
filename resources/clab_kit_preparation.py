@@ -128,7 +128,7 @@ class ClabKitPreparation(Resource):
             clab_kit_prep_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data{}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
     @clab_kit_preparation_ns.expect(clab_kit_preparation)
@@ -187,6 +187,6 @@ class ClabKitPreparation(Resource):
             kit_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to update kit details"}, 500
+            return {"error": "failed to update kit details{}".format(str(e))}, 500
         return {"message": "kit details updated successfully"}, 201
 

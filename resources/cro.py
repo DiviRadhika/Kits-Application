@@ -75,7 +75,7 @@ class CroActionsById(Resource):
             return (cro_schema.dump(cro_data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to get the data"}, 500
+            return {"error": "failed to get the data {}".format(str(e))}, 500
 
 
 class Cro(Resource):
@@ -88,7 +88,7 @@ class Cro(Resource):
             cro_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to save data"}, 500
+            return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
     @cro_ns.expect(update_cro)

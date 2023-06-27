@@ -3,12 +3,6 @@ from schemas.site_data import SiteDataSchema
 from flask import request
 from sqlalchemy import exc
 from models.site_data import SiteDataModel
-from models.users import UserModel
-from flask_jwt_extended import (
-    jwt_required,
-    get_jwt,
-    current_user,
-)
 
 from schemas.users import UserSchema
 
@@ -41,6 +35,7 @@ create_site_data = sites_data_ns.model(
         "mobile_telephone": fields.String(),
         "email": fields.String(required=True),
         "website": fields.String(),
+        "user_id": fields.String(),
     },
 )
 
@@ -65,6 +60,7 @@ update_site_data = sites_data_ns.model(
         "mobile_telephone": fields.String(),
         "email": fields.String(required=True),
         "website": fields.String(required=True),
+        "user_id": fields.String(),
     },
 )
 
@@ -86,7 +82,7 @@ class SiteActionsById(Resource):
             return (site_data_schema.dump(data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"error": "failed to get the data"}, 500
+            return {"error": "failed to get the data {}".format(str(e))}, 500
 
 
 class Sitedata(Resource):
@@ -96,22 +92,6 @@ class Sitedata(Resource):
     def post(self):
         site_data_json = request.get_json()
         try:
-            user_data = UserModel.find_by_email(site_data_json["email"])
-            if user_data:
-                return {"message": "user already registered"}, 500
-            new_user_data = {
-                "email": site_data_json["email"],
-                "password": site_data_json["password"],
-                "status": site_data_json["status"],
-                "first_name": site_data_json["first_name"],
-                "role": site_data_json["role"],
-            }
-            user_table_data = user_schema.load(new_user_data)
-            user_table_data.save_to_db()
-            del site_data_json["password"]
-            del site_data_json["status"]
-            del site_data_json["role"]
-            del site_data_json["first_name"]
             site_data_data = site_data_schema.load(site_data_json)
             site_data_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
