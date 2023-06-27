@@ -20,6 +20,7 @@ class UserModel(db.Model):
     access_token = db.Column(db.String)
     refresh_token = db.Column(db.String)
     role = db.Column(db.String)
+    created_user_id = db.Column(db.String)
 
     @classmethod
     def find_all(cls):
