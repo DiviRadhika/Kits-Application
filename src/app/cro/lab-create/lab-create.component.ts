@@ -104,6 +104,7 @@ export class LabCreateComponent {
       {
         "name": this.labForm.get('material')?.value,
         "size": this.labForm.get('size')?.value,
+        "created_by":sessionStorage.getItem('userid')
 
       }
 

@@ -103,6 +103,7 @@ export class LabTestComponent implements OnInit {
       const data: any =
       {
         "name": this.labForm.get('lab_test')?.value,
+        "created_by":sessionStorage.getItem('userid')
         
       }
       console.log(data)
