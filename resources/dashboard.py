@@ -32,9 +32,11 @@ class Dashboard(Resource):
             "no_of_sites": 0,
             "no_of_prepared_kits": 0,
             "no_of_verified_kits": 0,
-            "no_of_progress_kits": 0,
+            "no_of_completed_kits": 0,
             "no_of_pending_collections": 0,
             "no_of_received_collections": 0,
+            "no_of_not_verified_kits": 0,
+            "no_of_inprogress_kits": 0,
         }
         try:
             sponsors = SponsorModel.find_all()

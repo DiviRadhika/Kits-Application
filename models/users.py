@@ -39,6 +39,7 @@ class UserModel(db.Model):
         return cls.query.filter_by(user_id=id).first()
 
     def save_to_db(self):  # -> None:
+        self.created_user_id = str(self.created_user_id)
         db.session.add(self)
         db.session.commit()
         return self.user_id

@@ -322,6 +322,7 @@ class UserLogin(Resource):
             "access_token": access_token,
             "refresh_token": refresh_token,
             "role": user.role,
+            "user_id": str(user.user_id),
         }, 200
 
 
