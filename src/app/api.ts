@@ -1,4 +1,4 @@
-export const api = "http://34.100.227.119:5001/api";
+export const api = "http://34.100.227.119:5002/api";
 export const country ='https://trial.mobiscroll.com/content/countries.json'
 export const endPointsUser = {
     // Endpoints for UserCreate
@@ -16,6 +16,7 @@ export const endPointsUser = {
     login: `${api}/login`,
     sendotp: `${api}/login/sendotp`,
     reset:`${api}/user/register`,
+    dashboard: `${api}/dashboard`,
 
     // Endpoints for sponsors
     getSponsors: `${api}/sponsors`,

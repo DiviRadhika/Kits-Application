@@ -57,6 +57,10 @@ headers = new HttpHeaders({
     return this._httpClient.put(endPointsUser.reset, data)
   }
 
+  dashboard(){
+    return this._httpClient.get(endPointsUser.dashboard)
+  }
+
 
   //country
   country(){

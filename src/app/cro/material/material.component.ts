@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 
 @Component({
   selector: 'app-material',
@@ -35,36 +37,33 @@ export class MaterialComponent implements OnInit {
   dataCentralLabs: any;
   dataCro: any;
   dataCra: any
-
-  constructor(private fb: FormBuilder) { }
+  dashboardsData: any;
+  crocenable: boolean = false;
+  cracenable: boolean = false;
+  sponsorcenable: boolean = false;
+  labcenable: boolean = false;
+  adminc: boolean = false;;
+  constructor(private fb: FormBuilder, private admin: AdminService) { }
 
   ngOnInit() {
-    this.myForm = this.fb.group({
-      tabControls: this.fb.array([]) // Create an empty FormArray
-    });
-
-    this.dashboardform = this.fb.group({
-      cardControls: this.fb.array([])
-
-    })
-
-    this.craform = this.fb.group({
-      cardControls: this.fb.array([])
-
-    })
-    this.sponserForm = this.fb.group({
-      cardControls: this.fb.array([])
-    })
+   this.admin.dashboard().subscribe((data:any)=>{
+    this.dashboardsData = data
+    console.log(this.dashboardsData);
     this.dataCra = {
+     
+     
+      
       labels: ['No.of Protocols',
         'Received Samples',
-       ' Pending Samples'
+       'Pending Samples'
         ,'No.of Kits',
         'No.of Patients',
         'No.of Sites'],
       datasets: [
           {
-              data: [300, 50, 100,353,244,200],
+            
+              data: [this.dashboardsData.no_of_protocols, this.dashboardsData.no_of_received_collections, this.dashboardsData.no_of_pending_collections,
+                this.dashboardsData.no_of_kits,this.dashboardsData.no_of_patients,this.dashboardsData.no_of_sites],
               backgroundColor: [
                 "#D98880 ",
                 '#F5B7B1',
@@ -83,7 +82,10 @@ export class MaterialComponent implements OnInit {
                                ]
           }
       ]
+      
   };
+
+  
   this.dataCro = {
     labels: ['Protocols',
     'Sites',
@@ -93,7 +95,9 @@ export class MaterialComponent implements OnInit {
   ],
     datasets: [
         {
-            data: [300, 50, 100],
+            data: [this.dashboardsData.no_of_protocols, this.dashboardsData.no_of_sites, this.dashboardsData.no_of_sponsors, this.dashboardsData.no_of_lab_tests,
+              this.dashboardsData.no_of_materials],
+             
             backgroundColor: [
               "#D98880 ",
               '#F5B7B1',
@@ -112,18 +116,25 @@ export class MaterialComponent implements OnInit {
     ]
 };
     this.dataCentralLabs = {
-      labels: ['No.of Kits',
+      labels: ['No.of Protocols',
+      'No.of Kits',
         'No.of Patients',
         'Prepared Kits',
         'In Progress Kits',
         'Verified Kits',
-        'Not Verified Kits',   
-        'No.of Protocols',
+        'Not Verified Kits',       
         'Pending Samples',
         'Recieved Samples'],
       datasets: [
         {
-          data: [300, 50, 20, 40, 50,59, 78, 60,80],
+          data: [this.dashboardsData.no_of_protocols,
+            this.dashboardsData.no_of_kits,
+             this.dashboardsData.no_of_patients,
+             this.dashboardsData.no_of_completed_kits
+            , this.dashboardsData.no_of_inprogress_kits,
+             this.dashboardsData.no_of_verified_kits,
+             this.dashboardsData.no_of_not_verified_kits,this.dashboardsData.no_of_pending_collections,
+              this.dashboardsData.no_of_received_collections],
           backgroundColor: [
             "#D98880 ",
             '#F5B7B1',
@@ -154,7 +165,7 @@ export class MaterialComponent implements OnInit {
       labels: ['No.of Sponsors', 'No.of Protocols'],
       datasets: [
         {
-          data: [300, 50],
+          data: [this.dashboardsData.no_of_sponsors, this.dashboardsData.no_of_protocols],
           backgroundColor: [
             "#D98880 ",
             '#F5B7B1'
@@ -168,14 +179,34 @@ export class MaterialComponent implements OnInit {
     };
 
 
+   })
+    this.myForm = this.fb.group({
+      tabControls: this.fb.array([]) // Create an empty FormArray
+    });
+
+    this.dashboardform = this.fb.group({
+      cardControls: this.fb.array([])
+
+    })
+
+    this.craform = this.fb.group({
+      cardControls: this.fb.array([])
+
+    })
+    this.sponserForm = this.fb.group({
+      cardControls: this.fb.array([])
+    })
+  
+
 
 
     this.role = sessionStorage.getItem('role')
-    if (this.role === 'admin') {
+    if(this.role === 'Admin' ||this.role === 'admin' ) {
       this.enableFields = true;
       this.disablefields = true;
       this.disappearfields = true;
       this.appearfields = true;
+      this.adminc = true
 
 
     }
@@ -184,12 +215,22 @@ export class MaterialComponent implements OnInit {
       this.disablefields = false;
       this.disappearfields = false;
       this.appearfields = true;
+      this.crocenable = false;
+      this.cracenable= false;
+      this.sponsorcenable = true;
+      this.labcenable = false;
+      this.adminc = false
     }
     else if (this.role === 'CRO') {
       this.enableFields = false;
       this.disablefields = true;
       this.disappearfields = false;
       this.appearfields = false;
+      this.crocenable = true;
+      this.cracenable= false;
+      this.sponsorcenable = false;
+      this.labcenable = false;
+      this.adminc = false
 
     }
     else if (this.role === 'Central Lab') {
@@ -197,6 +238,11 @@ export class MaterialComponent implements OnInit {
       this.disablefields = false;
       this.disappearfields = false
       this.appearfields = false;
+      this.crocenable = false;
+      this.cracenable= false;
+      this.sponsorcenable = false;
+      this.labcenable = true;
+      this.adminc = false
 
     }
     else if (this.role === 'CRA') {
@@ -204,6 +250,10 @@ export class MaterialComponent implements OnInit {
       this.disablefields = false;
       this.disappearfields = true;
       this.appearfields = false;
+      this.crocenable = false;
+      this.cracenable= true;
+      this.sponsorcenable = false;
+      this.labcenable = false;
     }
 
   }

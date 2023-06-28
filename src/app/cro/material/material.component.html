@@ -9,7 +9,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <!-- <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li> -->
+                  <!-- <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li> -->
               </ol>
             </div>
           </div>
@@ -29,7 +29,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Protocols</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">6</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
               </p-card>
             </div>
           </div>
@@ -37,7 +37,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Sites</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">6</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sites}}</h6>
 
 
               </p-card>
@@ -47,7 +47,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Sponsors</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">6</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sponsors}}</h6>
 
 
               </p-card>
@@ -57,7 +57,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Lab Tests</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">6</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests}}</h6>
 
 
               </p-card>
@@ -67,7 +67,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Materials</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">6</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_materials}}</h6>
 
 
               </p-card>
@@ -86,11 +86,22 @@
         <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Central Lab</h4>
         <hr>
         <div class="row">
+
           <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card class="row">
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Protocols</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Kits</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits}}</h6>
 
 
               </p-card>
@@ -100,7 +111,7 @@
             <div class="form-group">
               <p-card class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Patients</h5>
-                <h6 style="margin-left: 41%;">25</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
               </p-card>
             </div>
           </div>
@@ -108,17 +119,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Prepared Kits</h5>
-                <h6 style="margin-left: 41%;">9</h6>
-
-
-              </p-card>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <p-card>
-                <h5 style="margin-left: 34%;" style="text-align: center;">Verified Kits</h5>
-                <h6 style="margin-left: 41%;">15</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_completed_kits}}</h6>
 
 
               </p-card>
@@ -128,29 +129,43 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">InProgress kits</h5>
-                <h6 style="margin-left: 41%;">10</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_inprogress_kits}}</h6>
 
 
               </p-card>
             </div>
           </div>
         </div>
+
         <div class="row" style="padding-top: 10px;">
-          <div class="col-md-2" style="padding: 10px;" style="margin-left: 20px;">
+          <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 24%;" style="text-align: center;">Verified Kits</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
+
+
+              </p-card>
+
+            </div>
+          </div>
+          <div class="col-md-2">
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 24%;" style="text-align: center;">Not Verified kits</h5>
-                <h6 style="margin-left: 41%;">8</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits}}</h6>
 
 
               </p-card>
             </div>
           </div>
-          <div class="col-md-2" style="padding-left: 10px;">
+
+
+          <div class="col-md-2">
             <div class="form-group">
-              <p-card class="row">
-                <h5 style="margin-left: 34%;" style="text-align: center;">Number of Protocols</h5>
-                <h6 style="margin-left: 41%;">6</h6>
+              <p-card>
+                <h5 style="margin-left: 34%;" style="text-align: center;">Pending Samples </h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_pending_collections}}</h6>
 
 
               </p-card>
@@ -159,33 +174,23 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 34%;" style="text-align: center;">Collections Pending</h5>
-                <h6 style="margin-left: 41%;">15</h6>
+                <h5 style="margin-left: 34%;" style="text-align: center;">Received Samples</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_received_collections}}</h6>
 
 
               </p-card>
             </div>
           </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <p-card>
-                <h5 style="margin-left: 34%;" style="text-align: center;">Collections Received</h5>
-                <h6 style="margin-left: 41%;">15</h6>
-
-
-              </p-card>
-            </div>
-          </div>
-          <div class="col-md-2">
+          <!-- <div class="col-md-2">
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">Number of Sites</h5>
-                <h6 style="margin-left: 41%;">15</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
 
 
               </p-card>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -204,7 +209,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
               </p-card>
             </div>
           </div>
@@ -212,16 +217,18 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 54%;" style="text-align: center;"> Received Collections </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h5 style="margin-left: 54%;" style="text-align: center;"> Received Samples </h5>
+                <h6 style="margin-left: 71%;" style="text-align: center;">
+                  {{this.dashboardsData.no_of_received_collections}}</h6>
               </p-card>
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 54%;" style="text-align: center;">Pending Collections </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h5 style="margin-left: 54%;" style="text-align: center;">Pending Samples </h5>
+                <h6 style="margin-left: 71%;" style="text-align: center;">
+                  {{this.dashboardsData.no_of_pending_collections}}</h6>
               </p-card>
             </div>
           </div>
@@ -229,7 +236,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 54%;" style="text-align: center;">Number of Kits</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits}}</h6>
               </p-card>
             </div>
           </div>
@@ -237,7 +244,7 @@
             <div class="form-group">
               <p-card class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Number of Patients</h5>
-                <h6 style="margin-left: 41%;">25</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
               </p-card>
             </div>
           </div>
@@ -245,7 +252,7 @@
             <div class="form-group" style="padding-top: 10px;">
               <p-card>
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
-                <h6 style="margin-left: 41%;">15</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
 
 
               </p-card>
@@ -262,7 +269,7 @@
         <!-- <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;" style>Sponsers</h4>
         <hr> -->
 
-        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Sponsers</h4>
+        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Sponsors</h4>
         <hr>
 
         <div class="row">
@@ -270,7 +277,7 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Sponsers</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">30</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_sponsors}}</h6>
               </p-card>
             </div>
           </div>
@@ -278,43 +285,90 @@
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">28</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
               </p-card>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-
-        <div class="col-md-4" style="margin-left: 20px;">
-          <div class="form-group">
-            <p-chart type="doughnut" [data]="dataCro" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
-          </div>
-        </div>
-
+      <div *ngIf="adminc">
         <div class="row">
 
+          <div class="col-md-4" style="margin-left: 20px; margin-top: 2%;">
+            <div class="form-group">
+              <h4 style="text-align: center;">CRO</h4>
+              <p-chart type="doughnut" [data]="dataCro" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4" style="margin-left: 20px;">
+            <div class="form-group">
+              <h4 style="text-align: center;">CRA</h4>
+              <p-chart type="doughnut" [data]="dataCra" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+            </div>
+          </div>
+
+          <div class="col-md-4" style="margin-left: 20px; margin-top:6%">
+            <div class="form-group">
+              <h4 style="text-align: center;">Sponsor</h4>
+              <p-chart type="doughnut" [data]="dataSponsor" [options]="chartOptions"
+                [style]="{'width': '40%'}"></p-chart>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-4" style="margin-left: 20px;">
+            <div class="form-group">
+              <h4 style="text-align: center;">Central Lab</h4>
+              <p-chart type="doughnut" [data]="dataCentralLabs" [options]="chartOptions"
+                [style]="{'width': '40%'}"></p-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="crocenable">
+        <div class="row">
+
+          <div class="col-md-4" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-chart type="doughnut" [data]="dataCro" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="cracenable">
+        <div class="row">
+  
           <div class="col-md-4" style="margin-left: 20px;">
             <div class="form-group">
               <p-chart type="doughnut" [data]="dataCra" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
             </div>
           </div>
-          <div class="row">
+        </div>
+      </div>
 
-            <div class="col-md-4" style="margin-left: 20px;">
-              <div class="form-group">
-                <p-chart type="doughnut" [data]="dataSponsor" [options]="chartOptions"
-                  [style]="{'width': '40%'}"></p-chart>
-              </div>
+      <div *ngIf="sponsorcenable">
+        <div class="row">
+
+          <div class="col-md-4" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-chart type="doughnut" [data]="dataSponsor" [options]="chartOptions"
+                [style]="{'width': '40%'}"></p-chart>
             </div>
-
-            <div class="col-md-4" style="margin-left: 20px;">
-              <div class="form-group">
-                <p-chart type="doughnut" [data]="dataCentralLabs" [options]="chartOptions"
-                  [style]="{'width': '40%'}"></p-chart>
-              </div>
+          </div>
+        </div>
+      </div>
+   
+      <div *ngIf="labcenable">
+        <div class="row">
+          <div class="col-md-5" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-chart type="doughnut" [data]="dataCentralLabs" [options]="chartOptions"
+                [style]="{'width': '40%'}"></p-chart>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+  </div>

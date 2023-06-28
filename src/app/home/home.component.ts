@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
    
     this.role = sessionStorage.getItem('role')
-    if(this.role === 'admin'){
+    if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [
         {
           label: 'Application Admin',
@@ -47,39 +47,10 @@ export class HomeComponent implements OnInit {
           ]
         
         
-        } ,
-        {
-          label: 'CRO',
-          icon: 'bx bxs-user-check',
-          expanded: false,
-          subItems: [
-            { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
-            { label: 'Site', link: '/home/cro/siteGrid' },
-            { label: 'LabTest', link: '/home/cro/labTestGrid' },
-            { label: 'Protocol Summary', link: '/home/cro/protocolView' }
-          ]
-        },
-        {
-          label: 'Central Lab',
-          icon: 'bx bxs-analyse',
-          expanded: false,
-          subItems: [
-            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
-            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
-            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
-            
-          ]
-        },
-        {
-          label: 'CRA',
-          icon: 'bx bxs-analyse',
-          expanded: false,
-          subItems: [
-            { label: 'Sample Collection', link: '/home/site/sampleCollection' }
-          ]
-        }
+        } 
+     
+      
+        
         
        
      

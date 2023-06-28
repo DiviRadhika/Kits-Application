@@ -16,6 +16,7 @@ export class CROcreateComponent implements OnInit {
   public isEdit: boolean = false;
   public id: any = '';
   getcroData: any;
+  mobile: any;
   constructor(private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
     private messageService: MessageService
@@ -121,8 +122,12 @@ export class CROcreateComponent implements OnInit {
   }
 
   submit() {
-   console.log(this.CroForm.controls['mobile_telephone'].value.toString());
-   console.log(this.CroForm.controls['country'].value,);
+    if (this.CroForm.controls['mobile_telephone'].value === '' || this.CroForm.controls['mobile_telephone'].value === null) {
+      this.mobile = ''
+    }
+    else {
+      this.mobile = this.CroForm.controls['mobile_telephone'].value.toString()
+    }
    
     
       if (this.CroForm.invalid) {
@@ -149,7 +154,7 @@ export class CROcreateComponent implements OnInit {
         "zip_code": this.CroForm.controls['zip_code'].value,
         "country": this.CroForm.controls['country'].value,
         "office_telephone": this.CroForm.controls['office_telephone'].value,
-        "mobile_telephone": this.CroForm.controls['mobile_telephone'].value.toString(),
+        "mobile_telephone": this.mobile,
         "extension": this.CroForm.controls['extension'].value,
         "email": this.CroForm.controls['email'].value,
         "website": this.CroForm.controls['website'].value

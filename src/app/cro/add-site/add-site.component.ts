@@ -103,14 +103,13 @@ export class AddSiteComponent {
   submit() {
     console.log(this.siteForm.controls['mobile_telephone'].value);
 
-    if (this.siteForm.controls['mobile_telephone'].value === '') {
+    if (this.siteForm.controls['mobile_telephone'].value === '' ||  this.siteForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }
     else {
       this.mobile = this.siteForm.controls['mobile_telephone'].value.toString()
     }
-
-
+   
 
     if (this.siteForm.invalid) {
       // Mark all form controls as touched to trigger validation

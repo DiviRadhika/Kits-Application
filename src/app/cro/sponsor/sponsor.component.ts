@@ -16,6 +16,7 @@ export class SponsorComponent implements OnInit {
   public isEdit: boolean = false;
   public id: any = '';
   myData: { text: any; value: any; }[]= [];
+  mobile: any;
 
 
   
@@ -91,6 +92,12 @@ ngOnInit(): void {
   });
 
   submit() {
+    if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {
+      this.mobile = ''
+    }
+    else {
+      this.mobile = this.sponsorForm.controls['mobile_telephone'].value.toString()
+    }
  
     if (this.sponsorForm.invalid) {
       // Mark all form controls as touched to trigger validation
@@ -116,7 +123,7 @@ ngOnInit(): void {
        "zip_code": this.sponsorForm.controls['zip_code'].value,
        "country": this.sponsorForm.controls['country'].value,
        "office_telephone": this.sponsorForm.controls['office_telephone'].value,
-       "mobile_telephone": this.sponsorForm.controls['mobile_telephone'].value.toString(),    
+       "mobile_telephone": this.mobile,    
        "extension": this.sponsorForm.controls['extension'].value,
        "email": this.sponsorForm.controls['email'].value,
        "website": this.sponsorForm.controls['website'].value,
