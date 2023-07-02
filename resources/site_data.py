@@ -14,7 +14,7 @@ site_data_schema = SiteDataSchema()
 site_datas_list_schema = SiteDataSchema(many=True)
 user_schema = UserSchema()
 
-investigator_emails = sponsor_ns.mode(
+investigator_emails = sites_data_ns.model(
     "emails",
     {
         "email": fields.String(required=True),
