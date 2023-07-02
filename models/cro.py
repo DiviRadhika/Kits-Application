@@ -13,8 +13,6 @@ class CroModel(db.Model):
     legal_cro_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
-    address_3 = db.Column(db.String)
-    address_4 = db.Column(db.String)
     city = db.Column(db.String)
     district = db.Column(db.String)
     region = db.Column(db.String)

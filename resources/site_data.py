@@ -14,6 +14,14 @@ site_data_schema = SiteDataSchema()
 site_datas_list_schema = SiteDataSchema(many=True)
 user_schema = UserSchema()
 
+investigator_emails = sponsor_ns.mode(
+    "emails",
+    {
+        "email": fields.String(required=True),
+        "name": fields.String(required=True),
+        "role": fields.String(required=True),
+    }
+)
 
 create_site_data = sites_data_ns.model(
     "create_site_data",
@@ -23,10 +31,8 @@ create_site_data = sites_data_ns.model(
         "legal_site_data_name": fields.String(required=True),
         "address_1": fields.String(required=True),
         "address_2": fields.String(),
-        "address_3": fields.String(),
-        "address_4": fields.String(),
         "city": fields.String(required=True),
-        "district": fields.String(required=True),
+        "district": fields.String(),
         "region": fields.String(required=True),
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
@@ -36,6 +42,7 @@ create_site_data = sites_data_ns.model(
         "email": fields.String(required=True),
         "website": fields.String(),
         "user_id": fields.String(),
+        "notifier_emails": fields.List(fields.Nested(investigator_emails)),
     },
 )
 

@@ -1,7 +1,7 @@
 from db import db
 import uuid
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 
 
 class SiteDataModel(db.Model):
@@ -13,8 +13,6 @@ class SiteDataModel(db.Model):
     legal_site_data_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
-    address_3 = db.Column(db.String)
-    address_4 = db.Column(db.String)
     city = db.Column(db.String)
     district = db.Column(db.String)
     region = db.Column(db.String)
@@ -25,6 +23,7 @@ class SiteDataModel(db.Model):
     mobile_telephone = db.Column(db.String)
     email = db.Column(db.String)
     website = db.Column(db.String)
+    notifier_emails = db.Column(JSONB)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))

@@ -15,27 +15,26 @@ sponsor_ns = Namespace("sponsor", description="Sponsor related operations")
 sponsors_ns = Namespace("sponsors", description="Sponsors related operations")
 
 sponsor_schema = SponsorSchema()
-sponsors_list_schema = SponsorSchema(many=True)
+sponsors_list_schema = SponsorSchema(many=True) 
 
 sponsor = sponsor_ns.model(
     "sponsor",
     {
         "sponsor_code": fields.String(required=True),
         "sponsor_name": fields.String(required=True),
+        "existing_sponsor_code": fields.String(),
         "legal_sponsor_name": fields.String(required=True),
         "address_1": fields.String(required=True),
         "address_2": fields.String(),
-        "address_3": fields.String(),
-        "address_4": fields.String(),
         "city": fields.String(required=True),
-        "district": fields.String(required=True),
+        "district": fields.String(),
         "region": fields.String(required=True),
         "zip_code": fields.String(required=True),
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
         "mobile_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
-        "email": fields.String(required=True),
+        "email": fields.List(fields.String(required=True)),
         "website": fields.String(required=True),
         "user_id": fields.String(),
     },
@@ -45,6 +44,7 @@ update_sponsor = sponsor_ns.model(
     "update_sponsor",
     {
         "sponsor_id": fields.String(required=True),
+        "existing_sponsor_code": fields.String(),
         "sponsor_code": fields.String(required=True),
         "sponsor_name": fields.String(required=True),
         "legal_sponsor_name": fields.String(required=True),
@@ -59,7 +59,7 @@ update_sponsor = sponsor_ns.model(
         "country": fields.String(required=True),
         "office_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
-        "email": fields.String(required=True),
+        "email": fields.List(fields.String(required=True)),
         "website": fields.String(required=True),
         "user_id": fields.String(),
     },

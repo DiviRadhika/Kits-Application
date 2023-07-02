@@ -1,7 +1,7 @@
 from db import db
 import uuid
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, ARRAY
 
 
 class SponsorModel(db.Model):
@@ -9,12 +9,11 @@ class SponsorModel(db.Model):
     # extend_existing=True
     sponsor_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     sponsor_code = db.Column(db.String)
+    existing_sponsor_code = db.Column(db.String)
     sponsor_name = db.Column(db.String)
     legal_sponsor_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
-    address_3 = db.Column(db.String)
-    address_4 = db.Column(db.String)
     city = db.Column(db.String)
     district = db.Column(db.String)
     region = db.Column(db.String)
@@ -23,7 +22,7 @@ class SponsorModel(db.Model):
     office_telephone = db.Column(db.String)
     mobile_telephone = db.Column(db.String)
     extension = db.Column(db.String)
-    email = db.Column(db.String)
+    email = db.Column(ARRAY(db.String))
     website = db.Column(db.String)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)

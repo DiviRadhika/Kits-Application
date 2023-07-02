@@ -53,6 +53,7 @@ update_user = login_ns.model(
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
         "otp": fields.Integer(title="otp", required=True),
+        "is_forgot": fields.Boolean(title="is_forgot", default=True),
     },
 )
 
@@ -216,7 +217,7 @@ class UserRegister(Resource):
             user_data = UserModel.find_by_email(user_json["email"])
             if not user_data:
                 return {"message": "invalid email, user not found"}, 500
-            if user_data.user_otp != user_json["otp"]:
+            if user_json['is_forgot'] == True and user_data.user_otp != user_json["otp"]:
                 return {"message": "invalid OTP"}, 500
             if user_data.status != "active":
                 return {"message": "user not activated"}, 500
@@ -322,6 +323,8 @@ class UserLogin(Resource):
             "access_token": access_token,
             "refresh_token": refresh_token,
             "role": user.role,
+            "user_id": user.id,
+            "email": user.email,
         }, 200
 
 
