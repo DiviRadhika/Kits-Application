@@ -10,6 +10,7 @@ from db import db
 import flask_excel as excel
 #from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+import uuid
 
 
 from resources.sponsor import (
@@ -93,12 +94,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
 )
 
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=45)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(hours=24)
 app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
-
+app.config['SECRET_KEY'] = uuid.uuid4().hex
 
 jwt = JWTManager(app)
 #migrate_db = SQLAlchemy(app)

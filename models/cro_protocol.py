@@ -15,7 +15,6 @@ class CroProtocolModel(db.Model):
     sponsor_id = db.Column(db.String)
     cro_id = db.Column(db.String)
     no_of_visits = db.Column(db.Integer)
-    total_patients = db.Column(db.Integer)
     no_of_screens = db.Column(db.Integer)
     global_sample_size = db.Column(db.Integer)
     avant_sample_size = db.Column(db.Integer)
