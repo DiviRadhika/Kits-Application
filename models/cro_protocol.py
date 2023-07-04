@@ -17,6 +17,8 @@ class CroProtocolModel(db.Model):
     no_of_visits = db.Column(db.Integer)
     total_patients = db.Column(db.Integer)
     no_of_screens = db.Column(db.Integer)
+    global_sample_size = db.Column(db.Integer)
+    avant_sample_size = db.Column(db.Integer)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))

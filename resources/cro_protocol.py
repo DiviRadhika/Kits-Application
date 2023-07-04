@@ -81,6 +81,8 @@ cro_protocol = cro_protocols_ns.model(
         "no_of_visits": fields.Integer(required=True),
         "no_of_screens": fields.Integer(required=True),
         "total_patients": fields.Integer(required=True),
+        "global_sample_size": fields.Integer(required=True),
+        "avant_sample_size": fields.Integer(required=True),
         "screening_kit_details": fields.List(fields.Nested(screening_kit_details)),
         "visit_kit_details": fields.List(fields.Nested(visit_kit_details)),
     },

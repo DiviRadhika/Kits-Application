@@ -18,8 +18,10 @@ investigator_emails = sites_data_ns.model(
     "emails",
     {
         "email": fields.String(required=True),
-        "name": fields.String(required=True),
+        "first_name": fields.String(required=True),
+        "last_name": fields.String(required=True),
         "role": fields.String(required=True),
+        "contact": fields.String(required=True),
     }
 )
 

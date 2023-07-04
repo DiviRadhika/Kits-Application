@@ -11,11 +11,22 @@ from flask_jwt_extended import (
 )
 
 
+
 sponsor_ns = Namespace("sponsor", description="Sponsor related operations")
 sponsors_ns = Namespace("sponsors", description="Sponsors related operations")
 
 sponsor_schema = SponsorSchema()
 sponsors_list_schema = SponsorSchema(many=True) 
+
+contact_emails = sponsor_ns.model(
+    "contact_emails",
+    {
+        "email": fields.String(required=True),
+        "first_name": fields.String(required=True),
+        "last_name": fields.String(required=True),
+        "contact": fields.String(required=True),
+    }
+)
 
 sponsor = sponsor_ns.model(
     "sponsor",
@@ -34,9 +45,10 @@ sponsor = sponsor_ns.model(
         "office_telephone": fields.String(required=True),
         "mobile_telephone": fields.String(required=True),
         "extension": fields.String(required=True),
-        "email": fields.List(fields.String(required=True)),
+        "email": fields.String(required=True),
         "website": fields.String(required=True),
         "user_id": fields.String(),
+        "notifier_details": fields.List(fields.Nested(contact_emails)),
     },
 )
 
@@ -62,6 +74,7 @@ update_sponsor = sponsor_ns.model(
         "email": fields.List(fields.String(required=True)),
         "website": fields.String(required=True),
         "user_id": fields.String(),
+        "notifier_details": fields.List(fields.Nested(contact_emails)),
     },
 )
 

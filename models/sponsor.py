@@ -1,7 +1,7 @@
 from db import db
 import uuid
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import UUID, ARRAY
+from sqlalchemy.dialects.postgresql import UUID, ARRAY, JSONB
 
 
 class SponsorModel(db.Model):
@@ -22,7 +22,8 @@ class SponsorModel(db.Model):
     office_telephone = db.Column(db.String)
     mobile_telephone = db.Column(db.String)
     extension = db.Column(db.String)
-    email = db.Column(ARRAY(db.String))
+    email = db.Column(db.String)
+    notifier_details =  db.Column(JSONB)
     website = db.Column(db.String)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
