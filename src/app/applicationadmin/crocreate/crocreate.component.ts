@@ -17,6 +17,7 @@ export class CROcreateComponent implements OnInit {
   public id: any = '';
   getcroData: any;
   mobile: any;
+  view: boolean = false;
   constructor(private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
     private messageService: MessageService
@@ -34,6 +35,14 @@ export class CROcreateComponent implements OnInit {
           // this.CroForm.controls['email'].disable()
 
         });
+        if(data.val == 'view'){
+          this.view = true
+          this.CroForm.disable()
+          
+        }
+        else{
+       
+        }
 
       }
     });
@@ -55,10 +64,9 @@ export class CROcreateComponent implements OnInit {
     legal_cro_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
-    address_3: new FormControl("",),
-    address_4: new FormControl(""),
+   
     city: new FormControl("", [Validators.required]),
-    district: new FormControl("", [Validators.required]),
+     district: new FormControl(""),
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
@@ -146,8 +154,7 @@ export class CROcreateComponent implements OnInit {
         "legal_cro_name": this.CroForm.controls['legal_cro_name'].value,
         "address_1": this.CroForm.controls['address_1'].value,
         "address_2": this.CroForm.controls['address_2'].value,
-        "address_3": this.CroForm.controls['address_3'].value,
-        "address_4": this.CroForm.controls['address_4'].value,
+      
         "city": this.CroForm.controls['city'].value,
         "district": this.CroForm.controls['district'].value,
         "region": this.CroForm.controls['region'].value,

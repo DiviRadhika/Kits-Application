@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast'
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     NgxPaginationModule,
     HttpClientModule,
-    ToastModule
+    ToastModule,
+    DialogModule
 
   ],
   // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}

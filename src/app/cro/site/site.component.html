@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <li class="breadcrumb-item"><a href="subjects.html">Site</a></li>
+                <li class="breadcrumb-item"><a >Site</a></li>
                 <!-- <li class="breadcrumb-item active">Add CRO</li> -->
               </ol>
             </div>
@@ -55,6 +55,40 @@
                         </label></div>
                     </div>
                   </div>
+                  <p-dialog [class.overlay]="display" (onShow)="disableScroll()" (onHide)="enableScroll()"
+                  header="Assosciated Study Id's" [(visible)]="display">
+                 
+                    <table id="datatable"
+                    class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                    role="grid" aria-describedby="datatable_info" style="width: 1182px;">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                          style="width: 243.2px;" aria-sort="ascending"
+                          aria-label="Code: activate to sort column descending">Study ID</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                          style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Stydy Name</th>
+                       
+                      </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                      <tr class="odd"
+                        *ngFor="let siteData of siteDetails  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+
+                        
+                        <td>P001</td>
+                        <td>study title</td>
+                  
+                     
+                       
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </p-dialog>
 
 
                   <div class="row">
@@ -72,7 +106,8 @@
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 282.2px;" aria-label="Email: activate to sort column ascending">
                               Email</th>
-                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                            
+                            <th width="15%" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
@@ -88,12 +123,23 @@
 
                             <td>{{siteData.site_data_name}}</td>
                             <td>{{siteData.email}}</td>
+                         
                             <td>
-                              <button type="button" (click)="edit(siteData.site_id)"
+                              <button type="button"  (click)="study()"
+                              class="btn btn-success waves-effect edit-btn waves-light">
+                              <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
+                              Assosciated Studies
+                            </button>&nbsp;
+                              <button type="button" (click)="edit(siteData.site_id, 'edit')"
                                 class="btn btn-success waves-effect edit-btn waves-light">
                                 <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                                 Edit
-                              </button>
+                              </button>&nbsp;
+                              <button type="button" (click)="edit(siteData.site_id, 'view')"
+                              class="btn btn-success waves-effect edit-btn waves-light">
+                              <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                              View
+                            </button>
                             </td>
                           </tr>
 

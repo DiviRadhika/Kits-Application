@@ -7,11 +7,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TabView, TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { ViewSitesComponent } from './view-sites/view-sites.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
   declarations: [
-    SampleCollectionComponent
+    SampleCollectionComponent,
+    ViewSitesComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     TabViewModule,
     CardModule,
-    ToastModule
+    ToastModule,
+    NgxPaginationModule,
   ]
 })
 export class SiteModule { }

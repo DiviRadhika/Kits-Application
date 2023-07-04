@@ -48,8 +48,8 @@ export class CroGridComponent implements OnInit {
   croCreate() {
     this.route.navigate(['/home/admin/croCreate'])
   }
-  edit(id: string) {
-    this.route.navigate(['/home/admin/croUpdate', id])
+  edit(id: string, val: string) {
+    this.route.navigate(['/home/admin/croUpdate', id, val])
   }
   getCRoDetails() {
     this.admin.getCro().subscribe(

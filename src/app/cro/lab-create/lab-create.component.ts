@@ -21,6 +21,7 @@ export class LabCreateComponent {
   editImage: boolean = false
   imageChanged: boolean = true;
   fieldDisplay: boolean = true
+  view: boolean= false;
 
   constructor(
     private _cro: CrosService,
@@ -44,7 +45,16 @@ export class LabCreateComponent {
         });
         console.log(this.id)
       }
+      if(data.val == 'view'){
+        this.view = true
+        this.labForm.disable()
+        
+      }
+      else{
+     
+      }
     });
+  
   }
   public labForm: FormGroup = new FormGroup({
     material: new FormControl("", [Validators.required]),

@@ -1,0 +1,136 @@
+<div class="main-content">
+
+    <div class="page-content">
+      <div class="container-fluid">
+  
+        <!-- start page title -->
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Study</h4>
+  
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                  <li class="breadcrumb-item"><a >Study</a></li>
+                  <!-- <li class="breadcrumb-item active">Add CRO</li> -->
+                </ol>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+        <!-- end page title -->
+        <p-toast></p-toast>
+  
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+  
+  
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-2" >
+                      <div class="pull-Right mb-2 text-right" width="100%">
+                        <button type="button" (click)="pCreate()"
+                          class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
+                          data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
+                            class="bx bx-plus label-icon"></i>
+                          Add Study</button>
+                      </div>
+                    </div>
+                  </div>
+  
+                <hr width="100%" class="mb-4">
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                  <div class="row">
+  
+  
+                    <div class="col-sm-12 col-md-6">
+  
+                      <div class="col-sm-12 col-md-6">
+                        <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                            <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                              placeholder="Search " (keyup)="applyFilter(searchText)" />
+                          </label></div>
+                      </div>
+                    </div>
+  
+  
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <table id="datatable"
+                          class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                          role="grid" aria-describedby="datatable_info" style="width: 1182px;">
+                          <thead>
+                            <tr role="row">
+                              <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 243.2px;" aria-sort="ascending"
+                                aria-label="Code: activate to sort column descending">Code</th>
+                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Name</th>
+                            
+                              <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                                colspan="1" style="width: 150.2px;"
+                                aria-label="Actions: activate to sort column ascending">Actions</th>
+                            </tr>
+                          </thead>
+  
+  
+                          <tbody>
+  
+                            <tr class="odd"
+                              *ngFor="let protocolData of protocolDetails  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+  
+                              <td class="sorting_1 dtr-control">{{protocolData.protocol_id}}</td>
+  
+                              <td>{{protocolData.protocol_name}}</td>
+                           
+                              <td>
+                                <!-- <button type="button" (click)="edit(protocolData.id)"
+                                class="btn btn-success waves-effect edit-btn waves-light">
+                                <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                                Edit
+                              </button> -->
+                                <button type="button" (click)="view(protocolData.id)"
+                                  class="btn btn-success waves-effect edit-btn waves-light">
+                                 
+                                  View
+                                </button>
+                              </td>
+                            </tr>
+  
+                          </tbody>
+                        </table>
+                        <pagination-controls id="sitePagination" (pageChange)="pageChange($event)"
+                          *ngIf="protocolDetails && protocolDetails.length"></pagination-controls>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+  
+              </div>
+            </div>
+          </div>
+  
+          <!-- end col -->
+        </div> <!-- end row -->
+      </div>
+      <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+  
+  
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6">
+            <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>

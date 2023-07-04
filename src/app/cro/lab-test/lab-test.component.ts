@@ -43,8 +43,8 @@ export class LabTestComponent implements OnInit {
     this.lab = false
     this.material= true
   }
-  edit(id:any){
-    this.route.navigate(['/home/cro/updateLabTest',id])
+  edit(id:any, val: any){
+    this.route.navigate(['/home/cro/updateLabTest',id, val])
   }
   materialCreate(){
     this.route.navigate(['/home/cro/createLabTest'])
@@ -111,12 +111,16 @@ export class LabTestComponent implements OnInit {
         this._cro.createTestDetails(data).subscribe(
           (data: any) => {
             this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
+            console.log(this.route.url);
+            
     if(this.route.url === '/home/cro/labTestGrid'){
 
             this.route.navigate(['/home/cro/labTestGrid'])
+            this.labDetailsData()
     }
     else{
       this.route.navigate(['/home/cro/labTestgrid'])
+      this.labDetailsData()
     }
             this.labFormval = false
             this.disableAdd = true

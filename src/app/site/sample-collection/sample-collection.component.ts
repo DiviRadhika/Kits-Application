@@ -38,12 +38,20 @@ export class SampleCollectionComponent implements OnInit {
   sponsers: Array<any> = [];
   email: string | null;
   ID: any;
+  date: string;
 
 
 
   constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
 
     this.email =sessionStorage.getItem('email')
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Note: Month starts from 0, so add 1 to get the actual month
+    const day = currentDate.getDate();
+
+    this.date = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
+
 
   };
   protocols: Array<any> = [];

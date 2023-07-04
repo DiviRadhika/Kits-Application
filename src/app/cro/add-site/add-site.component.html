@@ -7,15 +7,39 @@
       <div class="row">
         <div class="col-12">
           <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Site</h4>
-            <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Site</h4>
-            <div class="page-title-right">
+            <div *ngIf="!view">
+              <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Site</h4>
+              <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Site</h4>
+            </div>
+            <div *ngIf="view">
+              <h4 *ngIf="view" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View Site</h4>
+            </div>
+            <!-- <h4 *ngIf="view" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View Site</h4> -->
+
+            <div *ngIf="!view" class="page-title-right">
               <ol class="breadcrumb m-0">
-                <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a></li>
+                <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                </li>
 
                 <li class="breadcrumb-item"><a routerLink="/home/cro/siteGrid" class="waves-effect">Site</a></li>
-                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Site</li>
-                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Site</li>
+              
+                  <li *ngIf="!isEdit" class="breadcrumb-item active"> Add Site</li>
+                  <li *ngIf="isEdit" class="breadcrumb-item active">Edit Site</li>
+              
+                <!-- <li *ngIf="view" class="breadcrumb-item active">View Site</li> -->
+              </ol>
+            </div>
+            
+            <div *ngIf="view" class="page-title-right">
+              <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                </li>
+
+                <li class="breadcrumb-item"><a routerLink="/home/cro/siteGrid" class="waves-effect">Site</a></li>
+              
+                
+              
+                <li *ngIf="view" class="breadcrumb-item active">View Site</li>
               </ol>
             </div>
 
@@ -32,7 +56,7 @@
             <div class="card-body">
               <h6 style="color: rgb(250, 39, 39);">Site Form</h6>
               <hr>
-              <form [formGroup]="siteForm" (ngSubmit)="submit()">
+              <form [formGroup]="siteForm">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
@@ -94,7 +118,7 @@
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Email</label>
+                      <label>Email Id</label>
 
 
                       <input type="text" class="form-control" id="email" placeholder="Enter Email"
@@ -129,7 +153,8 @@
             </div>
 
           </div>
-          <br>
+
+
           <div class="container">
             <div class="card-body">
               <h6 style="color: rgb(250, 49, 49);">Address</h6>
@@ -157,24 +182,6 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Address 3</label>
-                      <input type="text" class="form-control" id="Address3" placeholder="Enter Address 3(optional)"
-                        formControlName="address_3">
-
-                    </div>
-                  </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Address 4</label>
-                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 4"
-                        formControlName="address_4">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
                       <label>Country</label>
                       <select formControlName="country" class="form-select" aria-label="Default select example">
                         <option selected value="">Select Country</option>
@@ -188,6 +195,11 @@
 
                     </div>
                   </div>
+                </div>
+
+                <br>
+
+                <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
@@ -200,19 +212,12 @@
                     </div>
                   </div>
 
-
-                </div>
-                <br>
-                <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
                       <input type="text" class="form-control" id="District" placeholder="Enter District"
-                        formControlName="district"
-                        [class.is-invalid]="shouldShowRequired('district') && siteForm.get('district')?.touched">
-                      <div *ngIf="shouldShowRequired('district')" class="invalid-feedback">
-                        District is required.
-                      </div>
+                        formControlName="district">
+
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -225,6 +230,13 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <br>
+                <div class="row">
+
+
+
+
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
@@ -238,16 +250,13 @@
                     </div>
                   </div>
                 </div>
-                <br>
-                <div class="row">
 
-                </div>
 
               </form>
             </div>
 
           </div>
-          <br>
+
           <div class="container">
             <div class="card-body">
               <h6 style="color: rgb(250, 49, 49);">Communication</h6>
@@ -289,26 +298,264 @@
 
                     </div>
                   </div>
-                
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Email</label>
 
-
-                    <input type="text" class="form-control" id="email" placeholder="Enter Email"
-                      formControlName="email">
-
-
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Email Id</label>
+                      <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                        formControlName="email">
+                    </div>
                   </div>
                 </div>
+              </form>
+            </div>
+
+          </div>
+          <div class="container">
+            <div class="card-body">
+              <!-- <h6 style="color: rgb(250, 49, 49);">Communication</h6> -->
+              <hr>
+
+
+              <div *ngIf="!isEdit" class="row">
+
+                <div class="col-3 mt-auto mb-2 ">
+                  <button (click)="addInvestigators()" class="btn btn-primary">Add CRA</button>
+                </div>
+                <div class="col-md-8 mb-3"></div>
+
+                <div  *ngIf="table" class="col-md-12 mb-3">
+                  <form [formGroup]="investigatorForm">
+                    <div formArrayName="investigator">
+                      <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                          <thead Style="background:#EEE">
+                            <tr>
+                              <th>Select Role</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Email Id</th>
+                              <th>Mobile Phone</th>
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr [formGroupName]="i"
+                              *ngFor="let invest of investigatorForm.get('investigator').controls; let i = index;">
+                              <th>
+                                <select formControlName="role" class="form-select" aria-label="Default select example">
+                                  <option selected value="">Select Investigator</option>
+                                  <option *ngFor="let option of investigate" [value]="option">{{ option }}</option>
+                                </select>
+                              </th>
+
+                              <th scope="row">
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                  formControlName="first_name">
+                              </th>
+
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                  formControlName="last_name">
+
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Email Id " formControlName="email">
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Mobile Number" formControlName="contact">
+                              </td>
+
+                              <!-- <td>
+                            <button type="button" (click)="removeMatScreenKit(j)"
+                              class="btn btn-danger ml-3 mt-2">Delete</button>
+                           
+                          </td>
+                   -->
+                            </tr>
+
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
+              <div *ngIf="isEdit" class="row">
+
+                <div class="col-3 mt-auto mb-2 ">
+                  <button *ngIf="!view" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                </div>
+                <div class="col-md-8 mb-3"></div>
+
+                <div *ngIf ="tableE"
+                Eclass="col-md-12 mb-3">
+                  <form [formGroup]="investigatorFormedit">
+                    <div formArrayName="investigatoredit">
+                      <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                          <thead Style="background:#EEE">
+                            <tr>
+                              <th>Select Role</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Email Id</th>
+                              <th>Mobile Phone</th>
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr [formGroupName]="i"
+                              *ngFor="let invest of investigatorFormedit.get('investigatoredit').controls; let i = index;">
+                              <th>
+                                <select formControlName="role" class="form-select" aria-label="Default select example">
+                                  <option selected value="">Select Investigator</option>
+                                  <option *ngFor="let option of investigate" [value]="option">{{ option }}</option>
+                                </select>
+                              </th>
+
+                              <th scope="row">
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                  formControlName="first_name">
+                              </th>
+
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                  formControlName="last_name">
+
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Email Id " formControlName="email">
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Mobile Number" formControlName="contact">
+                              </td>
+
+                              <!-- <td>
+                            <button type="button" (click)="removeMatScreenKit(j)"
+                              class="btn btn-danger ml-3 mt-2">Delete</button>
+                           
+                          </td>
+                   -->
+                            </tr>
+
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="container">
+            <div class="card-body">
+              <h6 style="color: rgb(250, 49, 49);">Principal Investigator</h6>
+              <hr>
+              <form [formGroup]="siteForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name"
+                        formControlName="investigator_name">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Email Id</label>
+                      <input type="text" class="form-control" id="Extension" placeholder="Enter Email"
+                        formControlName="investigator_email">
+
+                    </div>
+                  </div>
+                  
+                </div>
+           
+               
+              </form>
+            </div>
+          
+          </div>
+     
+          <div class="container">
+            <div class="card-body">
+              <h6 style="color: rgb(250, 49, 49);">Sub Investigator</h6>
+              <hr>
+              <form [formGroup]="siteForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name"
+                        formControlName="sub_investigator_name">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Email Id</label>
+                      <input type="text" class="form-control" id="Extension" placeholder="Enter Email"
+                        formControlName="sub_investigator_email">
+
+                    </div>
+                  </div>
+                  
+                </div>
+          
+               
+              </form>
+            </div>
+          
+          </div>
+      
+          <div class="container">
+            <div class="card-body">
+              <h6 style="color: rgb(250, 49, 49);">Study Coordinator</h6>
+              <hr>
+              <form [formGroup]="siteForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name"
+                        formControlName="coordinator_name">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Email Id</label>
+                      <input type="text" class="form-control" id="Extension" placeholder="Enter Email"
+                        formControlName="coordinator_email">
+
+                    </div>
+                  </div>
+                  
+                </div>
+            
+               
               </form>
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
               <button (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
-          </div>
-        </div>
+          
+          </div> -->
+        <!-- </div> -->
       </form>
     </div>
   </div>

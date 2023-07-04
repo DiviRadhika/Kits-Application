@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { AdminService } from 'src/app/applicationadmin/admin.service';
-import { CrosService } from '../cros.service';
+
 import { ProtocolService } from '../protocol-registration/protocol-registration.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-protocol-view',
@@ -12,10 +11,6 @@ import { Router } from '@angular/router';
 })
 export class ProtocolViewComponent implements OnInit {
 
- 
-
-  kitId = 3;
-  screenid = 4;
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];
@@ -28,13 +23,15 @@ export class ProtocolViewComponent implements OnInit {
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
-  constructor(private route: Router,private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) { };
+  constructor(private route: Router,
+    private protocolService: ProtocolService,
+    private _activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
   labTestsList: Array<any> = [];
   sites: Array<any> = [];
-
   files1: any;
   file2: any;
   public base64textString: string = '';
@@ -56,8 +53,7 @@ export class ProtocolViewComponent implements OnInit {
   screening: boolean = true;
   visit: boolean = false;
   sitesForm: any;
-  ScreenKitForm: any;
-  VisitKitForm: any;
+
   customerFormGroup: any;
   listItems: string[] = [];
   protoId: any
@@ -71,36 +67,23 @@ export class ProtocolViewComponent implements OnInit {
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
   });
+  public isEdit: boolean = false;
+  public id: any = '';
   ngOnInit() {
-    this.protocolService.getProtocol().subscribe((protocols) => {
-      this.ProtoData(protocols);
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
+        this.isEdit = true;
+        this.id = data.id;
+        this.getprotocolDetails(this.id)
+      }
     });
-  
-   
-  
-    this.ScreenKitForm = this.formBuilder.group({
 
-      screenKitList: this.formBuilder.array([this.addScreenKitData()])
 
-    })
- 
-
-    this.VisitKitForm = this.formBuilder.group({
-
-      visitKitList: this.formBuilder.array([])
-
-    })
-
-    this.listItems = [];
-   
   }
-  pCreate(){
-    this.route.navigate(['/home/cro/protocolRegistration'])
-  }
- 
+
   getprotocolDetails(id: any) {
 
-    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
+    this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
@@ -118,186 +101,56 @@ export class ProtocolViewComponent implements OnInit {
       this.visitTabs = []
       this.visitRecords = []
       this.visitRecordsRow = []
-  this.tets = []
+      this.tets = []
       this.vMatDetails.forEach((tabs: any) => {
-      this.tets.push(tabs.selectedLabTests)
+        this.tets.push(tabs.selectedLabTests)
         this.visitTabs.push(tabs.visits);
         this.visitTabs.forEach((visitRecord: any) => {
-        
+
           this.visitRecords.push(visitRecord);
 
         });
       });
-    console.log(this.tets);
-    
-
-      console.log(this.visitRecords.length, 'records');
-      this.visitRecords.forEach((visitRecordrow: any) => {
-        this.visitRecordsRow.push(visitRecordrow);
-      });
-
-      console.log(this.visitRecordsRow, 'row');
-      for (let i = 1; i <= this.visitTabs.length; i++)
-      { 
-      this.addCard()
-      
-      this.addRow1(2)
-    
-     } 
-    });
-
   
-  } 
- 
-  addScreenKit() {
-    this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData());
-    console.log(this.ScreenKitForm.controls);
-  }
-
-  addVisitKit() {
-    this.VisitKitForm.get('visitKitList').push(this.addVisitKitData());
-
-  }
-  onScreenKitAdd() {
-
-
-    const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
-    control1.push(this.addScreenKitData());
-
-  }
-
-  addScreenKitData() {
-
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-
-    })
-  }
-
-  // onVisitKitAdd() {
-
-  //   //this.VisitKitForm.get('labTestsList').controls.push(this.addVisitKitData());
-  //   const control1 = this.VisitKitForm.get('visitKitList') as FormArray;
-  //   control1.push(this.addVisitKitData());
-  //   console.log(this.VisitKitForm.get('visitKitList').controls);
-  // }
-  showsc() {
-    this.screening = true;
-    this.visit = false
-  }
-  showv() {
-    // this.addVisitKit()
-    this.screening = false;
-    this.visit = true
-
-  }
-  addVisitKitData() {
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-
-    })
-  }
-
-  ProtoData(Protocols: any) {
-    Protocols.forEach((protocol: any) => {
-      this.protocols.push(protocol);
-
-  
-  
-    });
-
-    console.log(this.protocols);
-  }
-
- 
-
-
-
- 
-
-  cards: { form: FormGroup }[] = [];
-  visits(value: any){
-    console.log(value.data);
-    
-    // this.valueVisit= value
-    // this.listItems = []; 
    
-  }
-
-
-
-  addCard() {
-    const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
-    const rowsArray = new FormArray([]);
-    const cardForm = this.formBuilder.group({
-      rows: rowsArray
     });
-    this.cards.push({ form: cardForm });
-  }
 
-    
-getMaterialId(cardIndex: number, rowIndex: number): string {
-  const cardFormArray = this.getRowsFormArray(cardIndex);
-  const rowFormGroup = cardFormArray.at(rowIndex) as FormGroup;
-  return rowFormGroup.get('material_id')?.value;
-}
-  addRow1(cardIndex: number) {
-    const cardFormArray = this.getRowsFormArray(cardIndex);
-    cardFormArray.push(this.createRow());
-  }
-  deleteRow(cardIndex: number, rowIndex: number) {
-    const cardFormArray = this.getRowsFormArray(cardIndex);
-    cardFormArray.removeAt(rowIndex);
-  }
-
-  createRow(): FormGroup {
-    return this.formBuilder.group({
-      ckitId: [''],
-      kitId: [''],
-      prepration: [''],
-    });
-  }
-  
-  getRowsFormArray(cardIndex: number): FormArray {
-    const cardForm = this.cards[cardIndex].form;
-    return cardForm.get('rows') as FormArray;
-  }
-  getRows(cardIndex: number): FormArray {
-    const card = this.cards[cardIndex];
-    return card.form.get('rows') as FormArray;
-  }
- 
-  onSubmit() {
-    const formData = [];
-  
-    // Iterate over the cards and access their form values
-    for (const card of this.cards) {
-      const formValues = card.form.value;
-      formData.push(formValues);
-    }
-    console.log(formData);
-    
-    // this.croService.sendFormData(formData);
 
   }
 
- 
- 
 
-  
-  
-  
+
+
+
 }
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -25,8 +25,9 @@ export class SponsorGridComponent implements OnInit {
   sponsorCreate(){
     this.route.navigate(['/home/cro/csponsor'])
   }
-  edit(id:string){
-    this.route.navigate(['/home/cro/csponsorUpdate',id])
+  edit(id:string, val: string){
+    console.log(val)
+    this.route.navigate(['/home/cro/csponsorUpdate',id, val])
   }
   getSponsorDetails(){
     this._cro.getsponsors().subscribe(

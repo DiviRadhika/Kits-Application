@@ -48,8 +48,8 @@ export class UserGridComponent implements OnInit {
   addUser() {
     this.route.navigate(['/home/admin/userCreate'])
   }
-  edit(id: string) {
-    this.route.navigate(['/home/admin/userUpdate', id])
+  edit(id: string, val: string) {
+    this.route.navigate(['/home/admin/userUpdate', id, val])
   }
   getUser() {
     this.getUserData = this.admin.getUser().subscribe((data: any) => {

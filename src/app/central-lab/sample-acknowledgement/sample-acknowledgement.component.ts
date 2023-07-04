@@ -38,11 +38,19 @@ export class SampleAcknowledgementComponent implements OnInit {
   sponsers: Array<any> = [];
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
-
-
+  date: string;
 
   constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Note: Month starts from 0, so add 1 to get the actual month
+    const day = currentDate.getDate();
+
+    this.date = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
+
+    // Print the current date
+
 
 
   };
@@ -276,7 +284,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   }
 
   SubmitData() {
-  
+
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
@@ -290,16 +298,16 @@ export class SampleAcknowledgementComponent implements OnInit {
       // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
       // this.vkDetails[j].push({"verification_status": 'val'})
-    
+
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
           // this.vMatDetails.forEach((data:any,index: any)=>{
-      
+
           protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
           protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
-   
-        
+
+
         }
 
       })
@@ -315,18 +323,18 @@ export class SampleAcknowledgementComponent implements OnInit {
     })
     // for(let i = 0; i<this.skDetails.length; i++ ) {
     // for(let j=0 ; j<i; j++){
-      // console.log(this.pdfValues[i], this.pdfValues);
-      // this.pdfValues.forEach((k:any, index: any)=>{
-      //   if(index != k[index].row){
-    
-        
-      //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
-  
-      //   // }
-  
-      // }
-      // })
-    
+    // console.log(this.pdfValues[i], this.pdfValues);
+    // this.pdfValues.forEach((k:any, index: any)=>{
+    //   if(index != k[index].row){
+
+
+    //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
+
+    //   // }
+
+    // }
+    // })
+
 
     // }
     // this.skDetails.push(this.pdfValues)
@@ -366,12 +374,12 @@ export class SampleAcknowledgementComponent implements OnInit {
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Acknowledgement Updated successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
       },
       (err: any) => {
-       
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
-        
+
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
       }
     );
 
@@ -404,7 +412,7 @@ export class SampleAcknowledgementComponent implements OnInit {
       statusElement.textContent = uploadedFiles[rowIndex];
     }
 
-  
+
     const file = this.files1[0];
     this.file2 = this.files1[0].name;
     const fileSize = this.files1[0].size;
@@ -414,7 +422,7 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
       const reader = new FileReader();
-   
+
       reader.onload = this._handleReaderLoaded1.bind(this, rowIndex);
       reader.readAsBinaryString(file);
     }
@@ -426,7 +434,7 @@ export class SampleAcknowledgementComponent implements OnInit {
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
- 
+
     // this.pdfValues.push(({row:readerEvt, pdf:this.bas2}))
 
     const existingPdf = this.pdfValues.find((pdfValue: any) => pdfValue.row === readerEvt);
@@ -439,7 +447,7 @@ export class SampleAcknowledgementComponent implements OnInit {
     }
 
     this.pdfValues.push({ row: readerEvt, pdf: this.bas2 });
-  
+
   }
 
 
@@ -462,35 +470,35 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
       const reader = new FileReader();
-   
+
       reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
       reader.readAsBinaryString(file);
     }
   }
 
   _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {
-  
+
 
 
     const binaryString = id.target.result;
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
- 
- 
+
+
 
     const existingPdf = this.pdfValuesv.find((pdfValue: any) => pdfValue.visit === readerEvt);
- 
 
-    if (existingPdf ) {
-      if(this.pdfValuesv.find((pdfValue: any) => pdfValue.row === rowindex)){
-      // PDF already exists for the row, remove it
-      const pdfIndex = this.pdfValuesv.indexOf(existingPdf);
-      this.pdfValuesv.splice(pdfIndex, 1);
+
+    if (existingPdf) {
+      if (this.pdfValuesv.find((pdfValue: any) => pdfValue.row === rowindex)) {
+        // PDF already exists for the row, remove it
+        const pdfIndex = this.pdfValuesv.indexOf(existingPdf);
+        this.pdfValuesv.splice(pdfIndex, 1);
+      }
     }
-  }
 
-  this.pdfValuesv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
+    this.pdfValuesv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
 
 
   }

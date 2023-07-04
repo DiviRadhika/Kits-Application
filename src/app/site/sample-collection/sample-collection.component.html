@@ -18,7 +18,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item">
-                                        <a href="">CRA</a>
+                                        <a >CRA</a>
                                     </li>
                                     <li class="breadcrumb-item active">Sample Collection</li>
                                     <li class="breadcrumb-item active">Site: {{ID}}</li>
@@ -40,10 +40,10 @@
                                 <div class="col-md-4 mb-3">
 
 
-                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
+                                    <label for="formrow-firstname-input" class="form-label">Study ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
-                                        <option  selected value="">Select Protocol ID</option>
+                                        <option  selected value="">Select Study ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
                                             {{ data.user_protocol_id }}
                                         </option>
@@ -52,8 +52,8 @@
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
-                                    <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
-                                    <input type="text" placeholder="Protocol Name" formControlName="protocol_name"
+                                    <label for="formrow-firstname-input" class="form-label">Study Name</label>
+                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
 
@@ -143,9 +143,10 @@
 
 
                                                                             <th>Patiend Id</th>
-                                                                            <th>Collection</th>
+                                                                            <th>Sample Collection</th>
+                                                                            <th>Collection Date</th>
                                                                          
- x
+ 
                                                                         </tr>
                                                                     </thead>
 
@@ -172,6 +173,11 @@
                                                                                     </option>
                                                                                 </select>
 
+                                                                            </td>
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="Date"  
+                                                                                    class="form-control"
+                                                                                    value={{date}} />
                                                                             </td>
                                      
                                                                         </tr>
@@ -251,7 +257,7 @@
 
                                                                             <th>Patient Id</th>
                                                                             <th>Sample Collection</th>
-
+                                                                            <th>Collection Date</th>
                                                                         </tr>
                                                                     </thead>
 
@@ -275,7 +281,11 @@
                                                                                 </select>
                                                                             </td>
                                                                            
-                                                                           
+                                                                            <td width="25%">
+                                                                                <input type="text" placeholder="Date"  
+                                                                                    class="form-control"
+                                                                                    value={{date}} />
+                                                                            </td>
                                        
                                                                         </tr>
                                                                     </tbody>

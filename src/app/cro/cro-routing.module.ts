@@ -10,27 +10,31 @@ import { LabCreateComponent } from './lab-create/lab-create.component';
 import { MaterialComponent } from './material/material.component';
 import { VisitComponent } from './visit/visit.component';
 import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
+import { ProtocolGridComponent } from './protocol-grid/protocol-grid.component';
+import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
 
 
 const routes: Routes = [
  
   {path:'siteGrid', component:SiteComponent},
   {path: 'addSite', component:AddSiteComponent},
-  {path: 'updateSite/:id', component:AddSiteComponent},
+  {path: 'updateSite/:id/:val', component:AddSiteComponent},
 
   {path:'labTestGrid', component:LabTestComponent},
   {path:'labTestgrid', component:LabTestComponent},
   {path: 'createLabTest', component:LabCreateComponent},
-  {path:'updateLabTest/:id', component:LabCreateComponent},
+  {path:'updateLabTest/:id/:val', component:LabCreateComponent},
 
   {path:'csponsor', component:SponsorComponent},
   {path:'sponsorGrid', component:SponsorGridComponent},
-  {path:'csponsorUpdate/:id', component:SponsorComponent},
+  {path:'csponsorUpdate/:id/:val', component:SponsorComponent},
 
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
   {path:'dashboards', component:MaterialComponent},
   {path:'visits', component:VisitComponent},
-  {path:'protocolView', component:ProtocolViewComponent},
+  {path:'protocolView/:id', component:ProtocolViewComponent},
+  {path:'protocolGrid', component:ProtocolGridComponent},
+  {path:'protocolUpdate/:id', component:EditProtocolComponent},
  
 
 

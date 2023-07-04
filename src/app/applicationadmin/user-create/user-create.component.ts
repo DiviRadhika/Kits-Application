@@ -39,6 +39,7 @@ export class UserCreateComponent implements OnInit {
   site: boolean = false;
   siteDetails: any;
   idValue: any;
+  view: boolean = false;
   // passwordControl!: FormControl<any>;
 
   constructor(
@@ -75,6 +76,14 @@ export class UserCreateComponent implements OnInit {
         });
       } else {
         this.isEdit = false;
+      }
+      if(data.val == 'view'){
+        this.view = true
+        this.userForm.disable()
+        
+      }
+      else{
+     
       }
     });
   }

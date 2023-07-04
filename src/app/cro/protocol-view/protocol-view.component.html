@@ -12,15 +12,18 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Protocol Registration
+                                <i class="bx bxs-dashboard"></i> Study View
                             </h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item">
-                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                                        <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Protocol Registration</li>
+                                    <li class="breadcrumb-item">
+                                        <a routerLink="/home/cro/protocolGrid" class="waves-effect">Study</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Study View</li>
                                 </ol>
                             </div>
                         </div>
@@ -29,7 +32,7 @@
                 <p-toast></p-toast>
 
                 <!-- end page title -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-9"></div>
                     <div class="col-md-2" >
                       <div class="pull-Right mb-2 text-right" width="100%">
@@ -37,46 +40,19 @@
                           class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
                           data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
                             class="bx bx-plus label-icon"></i>
-                          Add Protocol</button>
+                          Add Study</button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="preparationForm">
-                            <div class="row">
-                             
-                                <div class="col-md-4 mb-3">
-
-
-                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
-                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
-                                        class="form-select form-control">
-                                        <option *ngFor="let data of protocols" [value]="data.id">
-                                            {{ data.protocol_id }}
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div *ngIf="displayValues" class="col-md-4 mb-3">
-
-                                    <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
-                                    <input type="text" placeholder="Protocol Name" formControlName="protocol_name"
-                                        class="form-control" value="" />
-                                </div>
-
-                            </div>
-                        </form>
-
-
                         <hr class="mt-4 mb-4" />
-
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <h4 class="r-blue-text">Kit Details</h4>
                             </div>
                             <div class="col-md-12 mb-3">
-                       
+
 
 
                                 <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
@@ -109,6 +85,8 @@
                                                     Materials
                                                 </h5>
                                                 <hr />
+                                            
+
                                                 <div class="row card-group">
                                                     <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
                                                         <p-card [styleClass]="'custom-card'"
@@ -126,21 +104,22 @@
                                                 </div>
 
                                                 <br>
-                                            
+
 
 
 
                                             </p-tabPanel>
 
-                                            <p-tabPanel  
-                                            *ngFor="let item of vMatDetails let k = index"
+                                            <p-tabPanel *ngFor="let item of vMatDetails let k = index"
                                                 header="visit{{k+1}}">
                                                 <h5>Selected Lab Tests</h5>
                                                 <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
                                                     <p>{{items}}</p>
-                                                    </div> 
+                                                </div>
                                                 <br>
-                                 
+                                        
+
+
                                                 <div class="row card-group">
                                                     <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
                                                     <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
@@ -157,12 +136,11 @@
                                                         <!-- </div> -->
                                                     </div>
                                                 </div>
-                                                
-                                                
-                                            
-                                        
-                                              </p-tabPanel>
-                                        
+
+                                             
+
+                                            </p-tabPanel>
+
 
                                         </p-tabView>
 
@@ -183,7 +161,7 @@
                             </div>
                         </div>
 
-                     
+
                     </div>
 
                     <!-- end col -->
@@ -191,7 +169,7 @@
                 <!-- end row -->
             </div>
             <!-- HTML template -->
-        
+
 
 
             <!-- container-fluid -->

@@ -42,10 +42,32 @@ export class MaterialComponent implements OnInit {
   cracenable: boolean = false;
   sponsorcenable: boolean = false;
   labcenable: boolean = false;
-  adminc: boolean = false;;
+  adminc: boolean = false;
+  basicData: any;
+  basicOptions: any;
   constructor(private fb: FormBuilder, private admin: AdminService) { }
 
   ngOnInit() {
+    this.basicData = {
+      labels: ['P001', 'P002'],
+      datasets: [
+          {
+              label: 'Completed',
+              backgroundColor: '#42A5F5',
+              data: [65, 12]
+          },
+          {
+              label: 'In Progress',
+              backgroundColor: '#FFA726',
+              data: [28, 14]
+          },
+          {
+            label: 'Pending',
+            backgroundColor: '#FFA726',
+            data: [28, 23]
+        }
+      ]
+  };
    this.admin.dashboard().subscribe((data:any)=>{
     this.dashboardsData = data
     console.log(this.dashboardsData);

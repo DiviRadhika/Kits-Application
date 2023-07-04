@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li>
+                <li class="breadcrumb-item"><a >CRO</a></li>
               </ol>
             </div>
 
@@ -89,11 +89,16 @@
                           <td>{{croData.cro_name}}</td>
                           <td>{{croData.legal_cro_name}}</td>
                           <td>
-                            <button type="button" (click)="edit(croData.cro_id)"
+                            <button type="button" (click)="edit(croData.cro_id, 'edit')"
                               class="btn btn-success waves-effect edit-btn waves-light">
                               <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                               Edit
-                            </button>
+                            </button>&nbsp;
+                            <button type="button" (click)="edit(croData.cro_id, 'view')"
+                            class="btn btn-success waves-effect edit-btn waves-light">
+                            <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
+                            View
+                          </button>
                           </td>
                         </tr>
 

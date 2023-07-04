@@ -16,6 +16,7 @@ export class SiteComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText= ''
+  display: boolean = false;
 
   constructor(private route: Router, private _cro:CrosService) { }
 
@@ -26,8 +27,8 @@ export class SiteComponent implements OnInit {
   siteCreate(){
     this.route.navigate(['/home/cro/addSite'])
   }
-  edit(id:string){
-    this.route.navigate(['/home/cro/updateSite',id])
+  edit(id:string, val: string){
+    this.route.navigate(['/home/cro/updateSite',id, val])
   }
   getSitedetails(){
    this._cro.getSites().subscribe((data:any)=>{
@@ -51,6 +52,17 @@ export class SiteComponent implements OnInit {
           (siteData.email && siteData.email.toLowerCase().includes(filterValue))
       );
     }
+  }
+  study(){
+    this.display = true
+
+  }
+  disableScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+
+  enableScroll() {
+    document.body.style.overflow = 'auto';
   }
   pageChange(event: number) {
     this.page = event;

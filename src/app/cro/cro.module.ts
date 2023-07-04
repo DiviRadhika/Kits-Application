@@ -22,7 +22,9 @@ import {AccordionModule} from 'primeng/accordion';
 import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
 import { ToastModule } from 'primeng/toast';
 import { ChartModule } from 'primeng/chart';
-
+import { ProtocolGridComponent } from './protocol-grid/protocol-grid.component';
+import {DataViewModule} from 'primeng/dataview';
+import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -34,7 +36,9 @@ import { ChartModule } from 'primeng/chart';
     LabCreateComponent,
     MaterialComponent,
     VisitComponent,
-    ProtocolViewComponent
+    ProtocolViewComponent,
+    ProtocolGridComponent,
+    EditProtocolComponent
   ],
   imports: [
 
@@ -51,7 +55,8 @@ import { ChartModule } from 'primeng/chart';
     TabViewModule,
     AccordionModule,
     ToastModule,
-    ChartModule
+    ChartModule,
+    DataViewModule
     
   ]
 })

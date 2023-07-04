@@ -9,7 +9,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                  <!-- <li class="breadcrumb-item"><a href="subjects.html">CRO</a></li> -->
+                  <!-- <li class="breadcrumb-item"><a >CRO</a></li> -->
               </ol>
             </div>
           </div>
@@ -138,10 +138,10 @@
         </div>
 
         <div class="row" style="padding-top: 10px;">
-          <div class="col-md-2" style="margin-left: 20px;">
+          <div class="col-md-2" style="margin-left: 1%;" >
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 24%;" style="text-align: center;">Verified Kits</h5>
+                <h5 style="margin-left: 24%;" style="text-align: center;">No.of Verified Kits</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
 
 
@@ -149,8 +149,8 @@
 
             </div>
           </div>
-          <div class="col-md-2">
-            <div class="form-group">
+          <div class="col-md-2" >
+            <div class="form-group" >
               <p-card>
                 <h5 style="margin-left: 24%;" style="text-align: center;">Not Verified kits</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits}}</h6>
@@ -184,7 +184,7 @@
           <!-- <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 34%;" style="text-align: center;">Number of Sites</h5>
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
 
 
@@ -217,7 +217,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 54%;" style="text-align: center;"> Received Samples </h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">ReceivedSamples </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">
                   {{this.dashboardsData.no_of_received_collections}}</h6>
               </p-card>
@@ -226,7 +226,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 54%;" style="text-align: center;">Pending Samples </h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">PendingSamples </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">
                   {{this.dashboardsData.no_of_pending_collections}}</h6>
               </p-card>
@@ -235,7 +235,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card>
-                <h5 style="margin-left: 54%;" style="text-align: center;">Number of Kits</h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Kits</h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits}}</h6>
               </p-card>
             </div>
@@ -243,7 +243,7 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="row">
-                <h5 style="margin-left: 34%;" style="text-align: center;">Number of Patients</h5>
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Patients</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
               </p-card>
             </div>
@@ -369,6 +369,17 @@
           </div>
         </div>
       </div>
+      <!-- <div class="row">
+
+        <div class="col-md-4" style="margin-left: 20px;">
+          <div class="form-group">
+      <div class="card">
+     
+        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+    </div>
+    </div>
+    </div>
+    </div> -->
     </div>
 
   </div>

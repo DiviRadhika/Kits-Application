@@ -96,11 +96,14 @@ export class LoginComponent implements OnInit {
     this.admin.login(obj).subscribe(
       (data: any) => {
         console.log(data)
+        // this.route.navigate(['/home'])
         this.route.navigate(['/home/cro/dashboards'])
         console.log(data.role)
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('userid', data.user_id)
         sessionStorage.setItem('access_token', data.access_token)
+        sessionStorage.setItem('firstName', data.first_name)
+        sessionStorage.setItem('lastName', data.last_name)
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});

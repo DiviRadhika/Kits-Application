@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <li class="breadcrumb-item"><a href="subjects.html">Lab Test</a></li>
+                <li class="breadcrumb-item"><a >Lab Test</a></li>
                 <!-- <li class="breadcrumb-item active">Add CRO</li> -->
               </ol>
             </div>
@@ -105,11 +105,16 @@
                                 <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
                               </td>
                               <td>
-                                <button type="button" (click)="edit(labData.meterial_id)"
+                                <button type="button" (click)="edit(labData.meterial_id, 'edit')"
                                   class="btn btn-success waves-effect edit-btn waves-light">
                                   <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                                   Edit
-                                </button>
+                                </button>&nbsp;
+                                <button type="button" (click)="edit(labData.meterial_id, 'view')"
+                                class="btn btn-success waves-effect edit-btn waves-light">
+                              
+                                View
+                              </button>
                               </td>
                             </tr>
                           </tbody>

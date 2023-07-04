@@ -444,7 +444,7 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         console.log(this.ScreenKitForm[i]);
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK00'+i+1)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001SK0001'+(i+1))
        
 
       }

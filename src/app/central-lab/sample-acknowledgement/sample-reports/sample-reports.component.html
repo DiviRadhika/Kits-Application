@@ -38,7 +38,7 @@
                                 <div class="col-md-4 mb-3">
 
 
-                                    <label for="formrow-firstname-input" class="form-label">Protocol ID</label>
+                                    <label for="formrow-firstname-input" class="form-label">Study ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
@@ -50,8 +50,8 @@
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
-                                    <label for="formrow-firstname-input" class="form-label">Protocol Name</label>
-                                    <input type="text" placeholder="Protocol Name" formControlName="protocol_name"
+                                    <label for="formrow-firstname-input" class="form-label">Study Name</label>
+                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
 
@@ -117,7 +117,7 @@
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
-                                                                                    value={{item.siteId}}
+                                                                                    value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
@@ -212,7 +212,7 @@
                                                                             <td width="25%">
                                                                                 <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
-                                                                                    value={{item.siteId}}
+                                                                                    value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
@@ -230,7 +230,7 @@
                                                                                   </button>
                                                                                 </ng-container>
                                                                                 <ng-container *ngIf="!item.pdf">
-                                                                                  <span>PDF Not Updated</span>
+                                                                                  <span>PDF Not Uploaded</span>
                                                                                 </ng-container>
                                                                               </td>
 

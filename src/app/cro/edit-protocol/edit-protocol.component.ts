@@ -1,16 +1,25 @@
-import { Component, NgModule } from '@angular/core';
-import { ProtocolService } from './protocol-registration.service';
-import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
-import { CrosService } from '../cros.service';
-import { AdminService } from 'src/app/applicationadmin/admin.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { CrosService } from '../cros.service';
+import { ProtocolService } from '../protocol-registration/protocol-registration.service';
+
 @Component({
-  selector: 'app-protocol-registration',
-  templateUrl: './protocol-registration.component.html',
-  styleUrls: ['./protocol-registration.component.css']
+  selector: 'app-edit-protocol',
+  templateUrl: './edit-protocol.component.html',
+  styleUrls: ['./edit-protocol.component.css']
 })
-export class ProtocolRegistrationComponent {
+export class EditProtocolComponent implements OnInit {
+  protocolIdDetails: any;
+  screenDetails: Array<any> = [];
+  sMatDetails: Array<any> = [];
+  visitDetails: Array<any> = [];
+  vMatDetails: Array<any> = [];
+  scount: any;
+  vcount: any;
+  displayValues: boolean = false;
   selectedLabTests: any[] = [];
   labMatTestsList: Array<any> = [];
   screening: boolean = true;
@@ -38,13 +47,19 @@ export class ProtocolRegistrationComponent {
 
 
   selectedOption: any;
+  id: any;
+  protoName: any;
+  preparationForm: any;
+ 
+
   // MaterialList: FormArray = new FormArray([])
   constructor(private protocolService: ProtocolService,
     private route: Router, private fb: FormBuilder,
     private adminService: AdminService,
     private croService: CrosService,
     private formBuilder: FormBuilder,
-    private messageService: MessageService) { };
+    private messageService: MessageService,
+    private _activatedRoute: ActivatedRoute) { };
   sponsers: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -65,15 +80,15 @@ export class ProtocolRegistrationComponent {
     selected_protocol_name: new FormControl("", [Validators.required]),
     selected_sponsor_id: new FormControl("", [Validators.required]),
     cro_study_id: new FormControl(""),
-    avant_sample_size: new FormControl(""),
-    global_sample_size: new FormControl("", [Validators.required]),
+    // selected_cro_id: new FormControl("", [Validators.required]),
+    selected_patients_num: new FormControl("", [Validators.required]),
     screens: new FormControl("", [Validators.required]),
     total_visits: new FormControl("", [Validators.required]),
     // selected_vkit_count:new FormControl("", [Validators.required]),
     selected_skit_count: new FormControl("", [Validators.required]),
     labTestValue: new FormControl("", [Validators.required]),
     // labTestValuev: new FormControl("", [Validators.required]),
-    avantc: new FormControl(false)
+
   })
 
 
@@ -85,6 +100,13 @@ export class ProtocolRegistrationComponent {
   customerFormGroup: any;
 
   ngOnInit() {
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
+    
+        this.id = data.id;
+        this.getprotocolDetails(this.id)
+      }
+    });
 
     this.croService.getsponsors().subscribe((sponsers) => {
       this.sponsersData(sponsers);
@@ -134,31 +156,55 @@ export class ProtocolRegistrationComponent {
     })
 
   }
-  handleClick(e:any){
-    console.log(this.protocolForm.controls['avantc'].value);
+  getprotocolDetails(id: any) {
 
-  }
-  avantCheck(event:any){
+    this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
+      console.log(protocols);
+      this.displayValues = true;
+      this.protocolIdDetails = protocols.protocol
+      this.protoName = this.protocolIdDetails.protocol_name
   
-    if(event.target.checked==true){
-     this.protocolForm.controls['avant_sample_size'].setValue(this.protocolForm.controls['global_sample_size'].value)
-     this.protocolForm.controls['avant_sample_size'].disable()
-    }
-    else{
-      console.log('checkbox is unchecked');
-      this.protocolForm.controls['avant_sample_size'].setValue('')
-      this.protocolForm.controls['avant_sample_size'].enable()
-    }
-  }
-  getsize(){
-  
-    if(this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
-    
-    }
-    else{
+      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      this.scount = this.protocolIdDetails.no_of_screens
+      this.vcount = this.protocolIdDetails.no_of_visits
+      // console.log(this.visitDetails);
+      console.log(this.vMatDetails, 'details');
+      // this.visitTabs = []
+      // this.visitRecords = []
+      // this.visitRecordsRow = []
+      // this.tets = []
+      // this.vMatDetails.forEach((tabs: any) => {
+      //   this.tets.push(tabs.selectedLabTests)
+      //   this.visitTabs.push(tabs.visits);
+      //   this.visitTabs.forEach((visitRecord: any) => {
 
-    }
+      //     this.visitRecords.push(visitRecord);
+
+      //   });
+      // });
+
+
+      this.protocolForm.controls['selected_protocol_id'].setValue(this.protocolIdDetails.protocol_id)
+      this.protocolForm.controls['selected_protocol_name'].setValue(this.protocolIdDetails.protocol_name)
+      this.protocolForm.controls['selected_sponsor_id'].setValue(this.protocolIdDetails.sponsor_id)
+      this.protocolForm.controls['selected_patients_num'].setValue(this.protocolIdDetails.total_patients)
+      this.protocolForm.controls['total_visits'].setValue(this.protocolIdDetails.no_of_visits)
+      this.protocolForm.controls['screens'].setValue(this.protocolIdDetails.no_of_screens)
+
+ 
+      this.protocolForm.controls['selected_skit_count'].setValue(protocols.screening_kit_details[0].screening_kit_count)
+      this.protocolForm.controls['labTestValue'].setValue(protocols.screening_kit_details[0].lab_test_ids)
+      // this.protocolForm.get('labTestValue').setValue(protocols.screening_kit_details[0].lab_test_ids);
+      // this.protocolForm.controls['labTestValue'].value.forEach(element => {
+      //   console.log(element.value);
+      //   console.log(this.editRes.role);
+      this.protocolForm.controls['labTestValue'].setValue(['Coronary Heart Disease']);
+    });
+
+
   }
   labValues() {
     this.multipleTests = [];
@@ -319,7 +365,7 @@ export class ProtocolRegistrationComponent {
     console.log(this.labMatTestsList);
   }
 
-  
+
   crosData(crosList: any) {
     crosList.forEach((cros: any) => {
       this.crosList.push(cros);
@@ -341,7 +387,6 @@ export class ProtocolRegistrationComponent {
 
 
   SubmitData() {
-    
     const errorMessages = [];
     const formData: { selectedLabTests: any[], visits: any[] }[] = [];
 
@@ -395,11 +440,10 @@ export class ProtocolRegistrationComponent {
         "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
         "protocol_name": this.protocolForm.controls['selected_protocol_name'].value,
         "sponsor_id": this.protocolForm.controls['selected_sponsor_id'].value,
-        "cro_id": this.protocolForm.controls['cro_study_id'].value,
+        // "cro_id": this.protocolForm.controls['selected_cro_id'].value,
         "no_of_visits": Number(this.protocolForm.controls['total_visits'].value),
         "no_of_screens": Number(this.protocolForm.controls['screens'].value),
-        "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
-        "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
+        "total_patients": Number(this.protocolForm.controls['selected_patients_num'].value),
         "screening_kit_details": [
           {
             "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
