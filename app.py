@@ -8,7 +8,8 @@ from flask_cors import CORS
 import os
 from db import db
 import flask_excel as excel
-#from flask_migrate import Migrate
+
+# from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import uuid
 
@@ -68,14 +69,15 @@ from resources.clab_kit_preparation import (
     ClabKitPreparation,
     ClabKitPreparationList,
     ClabKitProtocolActionsById,
+    GetProtocolsBySiteId,
 )
-from resources.sample_ack import(
+from resources.sample_ack import (
     AckclabKitProtocolActionsById,
     AckclabKitPreparation,
-    sample_ack_ns
+    sample_ack_ns,
 )
 
-from resources.dashboard import(
+from resources.dashboard import (
     dashboard_ns,
     Dashboard,
 )
@@ -99,12 +101,11 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=45)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(hours=24)
 app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
-app.config['SECRET_KEY'] = uuid.uuid4().hex
+app.config["SECRET_KEY"] = uuid.uuid4().hex
 
 jwt = JWTManager(app)
-#migrate_db = SQLAlchemy(app)
-#migrate = Migrate(app, migrate_db)
-
+# migrate_db = SQLAlchemy(app)
+# migrate = Migrate(app, migrate_db)
 
 
 @jwt.token_in_blocklist_loader
@@ -196,7 +197,6 @@ api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
 
 
-
 # cors = flask_cors.CORS()
 @app.before_first_request
 def create_tables():
@@ -230,13 +230,16 @@ lab_test_ns.add_resource(LabActionsById, "/<string:lab_test_id>")
 cro_protocol_ns.add_resource(CroProtocol, "")
 cro_protocols_ns.add_resource(CrosProtocolsList, "")
 cro_protocol_ns.add_resource(CroProtocolActionsById, "/<string:cro_protocol_id>")
-sample_ack_ns.add_resource(AckclabKitProtocolActionsById, "/<string:cro_protocol_id>/<string:site_id>")
+sample_ack_ns.add_resource(
+    AckclabKitProtocolActionsById, "/<string:cro_protocol_id>/<string:site_id>"
+)
 sample_ack_ns.add_resource(AckclabKitPreparation, "")
 clab_kit_preparations_ns.add_resource(ClabKitPreparationList, "")
 clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 clab_kit_preparation_ns.add_resource(
     ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
 )
+clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_id>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")

@@ -14,7 +14,7 @@ from models.visit_kit import VisitKitDetailsModel
 from schemas.screening_kit import ScreeningKitDetailsSchema
 from schemas.visit_kit import VisitKitDetailsSchema
 from models.lab_test import LabtestModel
-from models.meterial import MeterialModel 
+from models.meterial import MeterialModel
 
 cro_protocol_ns = Namespace(
     "cro_protocol", description="cro protocol related operations"
@@ -176,9 +176,9 @@ class CroProtocol(Resource):
             for item in screening_kit_details:
                 meterial_details = item["meterial_details"]
                 for meterial in meterial_details:
-                    meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
+                    meterial_data = MeterialModel.get_by_id(meterial["meterial_id"])
                     if meterial_data:
-                        meterial['meterial_name'] = meterial_data.name
+                        meterial["meterial_name"] = meterial_data.name
 
                 screening_item_json = {
                     "lab_test_ids": item["lab_test_ids"],
@@ -194,12 +194,12 @@ class CroProtocol(Resource):
             # loop over visit_kit_details and prepare visit_item_json and then load to visit_kit_details and save_to_db
             visit_kit_details = request_json["visit_kit_details"]
             for item in visit_kit_details:
-            #    import pdb; pdb.set_trace()
-            #    meterial_details = item["meterial_details"]
-            #    for meterial in meterial_details:
-            #        meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
-            #        if meterial_data:
-            #            meterial['meterial_name'] = meterial_data.name
+                #    import pdb; pdb.set_trace()
+                #    meterial_details = item["meterial_details"]
+                #    for meterial in meterial_details:
+                #        meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
+                #        if meterial_data:
+                #            meterial['meterial_name'] = meterial_data.name
 
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,

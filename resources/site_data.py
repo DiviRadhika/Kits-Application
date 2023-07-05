@@ -22,7 +22,7 @@ investigator_emails = sites_data_ns.model(
         "last_name": fields.String(required=True),
         "role": fields.String(required=True),
         "contact": fields.String(required=True),
-    }
+    },
 )
 
 create_site_data = sites_data_ns.model(

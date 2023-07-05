@@ -31,7 +31,6 @@ clab_screening_kit_details = clab_kit_preparation_ns.model(
         "remarks": fields.String(),
         "expiry_data": fields.String(),
         "pdf": fields.String(),
-
     },
 )
 
@@ -53,11 +52,12 @@ clab_visit_kit_details = clab_kit_preparation_ns.model(
 )
 
 pdf_details = clab_kit_preparation_ns.model(
-  "pdf_details",{
-      "row": fields.Integer(),
-      "visit": fields.Integer(),
-      "pdf": fields.String(),
-    }
+    "pdf_details",
+    {
+        "row": fields.Integer(),
+        "visit": fields.Integer(),
+        "pdf": fields.String(),
+    },
 )
 
 clab_kit_preparation = clab_kit_preparation_ns.model(
@@ -79,19 +79,17 @@ class ClabKitPreparationList(Resource):
         kits = ClabKitPreparationModel.find_all()
         if len(kits) == 0:
             return {"data": [], "message": ""}
-        response = {
-            "data": []
-        }
+        response = {"data": []}
         for kit in kits:
             cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
             if not cro_data:
                 continue
             user_protocol_id = cro_data.protocol_id
             cro_kit_data = clab_kit_preparation_schema.dump(kit)
-            cro_kit_data['user_protocol_id'] = user_protocol_id
-            response['data'].append(cro_kit_data)
+            cro_kit_data["user_protocol_id"] = user_protocol_id
+            response["data"].append(cro_kit_data)
 
-        #kits = clab_kit_list_preparation_schema.dump(ClabKitPreparationModel.find_all())
+        # kits = clab_kit_list_preparation_schema.dump(ClabKitPreparationModel.find_all())
         return response, 200
 
 
@@ -103,11 +101,60 @@ class ClabKitProtocolActionsById(Resource):
             return {"message": "cro data not found"}, 400
         cro_data = CroProtocolModel.get_by_id(cro_kit_data.protocol_id)
         response = {
-            "data":  clab_kit_preparation_schema.dump(cro_kit_data),
-            "screen_count":  cro_data.no_of_screens,
-            "visit_count":  cro_data.no_of_visits,
+            "data": clab_kit_preparation_schema.dump(cro_kit_data),
+            "screen_count": cro_data.no_of_screens,
+            "visit_count": cro_data.no_of_visits,
             "cro_name": cro_data.protocol_id,
         }
+        return response, 200
+
+
+class GetProtocolsBySiteId(Resource):
+    @clab_kit_preparations_ns.doc("get protocols by site id")
+    def get(self, site_id):
+        response = {
+            "screening_data": [],
+            "visit_data": [],
+        }
+        kits = ClabKitPreparationModel.find_all()
+
+        for kit in kits:
+            screening_kit_details = kit.screening_kit_details
+            visit_kit_details = kit.visit_kit_details
+
+            for screening_kit_data in screening_kit_details:
+                if "site_id" in screening_kit_data:
+                    if site_id == screening_kit_data["site_id"]:
+                        cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
+                        if not cro_data:
+                            continue
+                        obj = {
+                            "protocol_id": cro_data.protocol_id,
+                            "protocol_name": cro_data.protocol_name,
+                            "creation_time": str(cro_data.created_on),
+                            "expiry_date": "",
+                        }
+                        if "exprity_data" in screening_kit_data:
+                            obj["expiry_date"] = (screening_kit_data["expiry_data"],)
+                        response["screening_data"].append(obj)
+
+            for visits in visit_kit_details:
+                for visit_kit_data in visits:
+                    if "site_id" in visit_kit_data:
+                        if site_id == visit_kit_data["site_id"]:
+                            cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
+                            if not cro_data:
+                                continue
+                            obj = {
+                                "protocol_id": cro_data.protocol_id,
+                                "protocol_name": cro_data.protocol_name,
+                                "creation_time": str(cro_data.created_on),
+                                "expiry_date": "",
+                            }
+                            if "exprity_data" in visit_kit_data:
+                                obj["expiry_date"] = (visit_kit_data["expiry_data"],)
+
+                            response["visit_data"].append(obj)
         return response, 200
 
 
@@ -119,10 +166,10 @@ class ClabKitPreparation(Resource):
         kit_data = ClabKitPreparationModel.get_by_id(clab_kit_prep_json["protocol_id"])
         if kit_data:
             return {"message": "kit details already present in the db"}, 500
-        if 'visit_pdf_details' in clab_kit_prep_json:
-            del(clab_kit_prep_json['visit_pdf_details'])
-        if 'screening_pdf_details' in clab_kit_prep_json:
-            del(clab_kit_prep_json['screening_pdf_details'])
+        if "visit_pdf_details" in clab_kit_prep_json:
+            del clab_kit_prep_json["visit_pdf_details"]
+        if "screening_pdf_details" in clab_kit_prep_json:
+            del clab_kit_prep_json["screening_pdf_details"]
         try:
             clab_kit_prep_data = clab_kit_preparation_schema.load(clab_kit_prep_json)
             clab_kit_prep_data.save_to_db()
@@ -138,48 +185,63 @@ class ClabKitPreparation(Resource):
         kit_data = ClabKitPreparationModel.get_by_id(request_json["protocol_id"])
         if not kit_data:
             return {"message": "kit data not found"}, 500
-        
-        visit_pdf_details = request_json.get('visit_pdf_details', [])
-        screeing_pdf_details = request_json.get('screening_pdf_details', [])
 
-        if 'visit_pdf_details' in request_json:
-            del(request_json['visit_pdf_details'])
-        if 'screening_pdf_details' in request_json:
-            del(request_json['screening_pdf_details'])
+        visit_pdf_details = request_json.get("visit_pdf_details", [])
+        screeing_pdf_details = request_json.get("screening_pdf_details", [])
 
-        #import pdb; pdb.set_trace()
+        if "visit_pdf_details" in request_json:
+            del request_json["visit_pdf_details"]
+        if "screening_pdf_details" in request_json:
+            del request_json["screening_pdf_details"]
 
-        screening_kit_details = request_json['screening_kit_details']
+        # import pdb; pdb.set_trace()
+
+        screening_kit_details = request_json["screening_kit_details"]
         screening_pdf_visited = False
         visit_pdf_visited = False
 
         for pdf_details in screeing_pdf_details:
-            for inner_index in range(0, len(request_json['screening_kit_details'])):
+            for inner_index in range(0, len(request_json["screening_kit_details"])):
                 visit_wise_data = screening_kit_details[inner_index]
                 for row_index in range(0, len(visit_wise_data)):
                     for inner_pdf_details in pdf_details:
-                        if inner_pdf_details['row'] == row_index:
+                        if inner_pdf_details["row"] == row_index:
                             screening_pdf_visited = True
-                            screening_kit_details[inner_index][row_index]['pdf'] = inner_pdf_details['pdf']
-           
-        visit_kit_details = request_json['visit_kit_details']
+                            screening_kit_details[inner_index][row_index][
+                                "pdf"
+                            ] = inner_pdf_details["pdf"]
+
+        visit_kit_details = request_json["visit_kit_details"]
         for pdf_details in visit_pdf_details:
-            for inner_index in range(0, len(visit_kit_details)): #outside index not useful
+            for inner_index in range(
+                0, len(visit_kit_details)
+            ):  # outside index not useful
                 total_visit_details = visit_kit_details[inner_index]
-                for visit_index in range(0, len(total_visit_details)): #total visits details visit-0, visit-1 ...etc
-                    visit_wise_data = total_visit_details[visit_index] #visit-0
-                    for row_index in range(0, len(visit_wise_data)):  #total rows of visit wise
-                        row_wise_data = visit_wise_data[row_index] #row data
-                        for inner_pdf_details in pdf_details: 
-                            if inner_pdf_details['visit'] == visit_index and inner_pdf_details['row'] == row_index:
-                                    visit_pdf_visited = True
-                                    visit_kit_details[inner_index][visit_index][row_index]['pdf'] = inner_pdf_details['pdf']
-        
+                for visit_index in range(
+                    0, len(total_visit_details)
+                ):  # total visits details visit-0, visit-1 ...etc
+                    visit_wise_data = total_visit_details[visit_index]  # visit-0
+                    for row_index in range(
+                        0, len(visit_wise_data)
+                    ):  # total rows of visit wise
+                        row_wise_data = visit_wise_data[row_index]  # row data
+                        for inner_pdf_details in pdf_details:
+                            if (
+                                inner_pdf_details["visit"] == visit_index
+                                and inner_pdf_details["row"] == row_index
+                            ):
+                                visit_pdf_visited = True
+                                visit_kit_details[inner_index][visit_index][row_index][
+                                    "pdf"
+                                ] = inner_pdf_details["pdf"]
+
         if visit_pdf_visited == True:
-            request_json['visit_kit_details'] = request_json['visit_kit_details'][0]
+            request_json["visit_kit_details"] = request_json["visit_kit_details"][0]
         if screening_pdf_visited == True:
-            request_json['screening_kit_details'] = request_json['screening_kit_details'][0]
-        
+            request_json["screening_kit_details"] = request_json[
+                "screening_kit_details"
+            ][0]
+
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:
                 setattr(kit_data, key, value)
@@ -189,4 +251,3 @@ class ClabKitPreparation(Resource):
             print(e)
             return {"error": "failed to update kit details{}".format(str(e))}, 500
         return {"message": "kit details updated successfully"}, 201
-

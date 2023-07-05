@@ -21,8 +21,8 @@ lab_test = lab_tests_ns.model(
     "lab_test",
     {
         "name": fields.String(required=True),
-     "created_by": fields.String(),
-    }
+        "created_by": fields.String(),
+    },
 )
 
 update_lab_test = lab_tests_ns.model(
@@ -63,7 +63,9 @@ class LabActionsById(Resource):
                 return {"message": "deletion failed, lab_test not found"}, 400
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
-            return {"message": "deletion failed, internal server error{}".format(str(e))}, 500
+            return {
+                "message": "deletion failed, internal server error{}".format(str(e))
+            }, 500
 
         return {"message": "lab test deleted successfully"}, 200
 

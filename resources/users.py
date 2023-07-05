@@ -169,7 +169,7 @@ class UserList(Resource):
             return {"message": "user data not found"}, 400
 
         return (user_schema.dump(user_data), 200)
-    
+
     @users_ns.expect(creation)
     @users_ns.doc("update a user")
     def put(self, user_id):
@@ -217,7 +217,10 @@ class UserRegister(Resource):
             user_data = UserModel.find_by_email(user_json["email"])
             if not user_data:
                 return {"message": "invalid email, user not found"}, 500
-            if user_json['is_forgot'] == True and user_data.user_otp != user_json["otp"]:
+            if (
+                user_json["is_forgot"] == True
+                and user_data.user_otp != user_json["otp"]
+            ):
                 return {"message": "invalid OTP"}, 500
             if user_data.status != "active":
                 return {"message": "user not activated"}, 500

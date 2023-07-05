@@ -6,9 +6,7 @@ from models.clab_kit_preparation import ClabKitPreparationModel
 from models.cro_protocol import CroProtocolModel
 
 
-sample_ack_ns = Namespace(
-    "sample_ack", description="sample ack related operations"
-)
+sample_ack_ns = Namespace("sample_ack", description="sample ack related operations")
 
 
 clab_kit_preparation_schema = ClabKitPreparationSchema()
@@ -59,9 +57,9 @@ class AckclabKitProtocolActionsById(Resource):
             return {"message": "cro data not found"}, 400
         cro_data = CroProtocolModel.get_by_id(cro_kit_data.protocol_id)
         response = {
-            "data":  clab_kit_preparation_schema.dump(cro_kit_data),
-            "screen_count":  cro_data.no_of_screens,
-            "visit_count":  cro_data.no_of_visits,
+            "data": clab_kit_preparation_schema.dump(cro_kit_data),
+            "screen_count": cro_data.no_of_screens,
+            "visit_count": cro_data.no_of_visits,
             "cro_name": cro_data.protocol_id,
         }
         return response, 200
