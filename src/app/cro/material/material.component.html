@@ -138,7 +138,7 @@
         </div>
 
         <div class="row" style="padding-top: 10px;">
-          <div class="col-md-2" style="margin-left: 1%;" >
+          <div class="col-md-2" style="margin-left: 1%;">
             <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 24%;" style="text-align: center;">No.of Verified Kits</h5>
@@ -149,8 +149,8 @@
 
             </div>
           </div>
-          <div class="col-md-2" >
-            <div class="form-group" >
+          <div class="col-md-2">
+            <div class="form-group">
               <p-card>
                 <h5 style="margin-left: 24%;" style="text-align: center;">Not Verified kits</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits}}</h6>
@@ -265,9 +265,8 @@
       <br> -->
 
       <br *ngIf="disablefields">
-      <div *ngIf="appearfields">
-        <!-- <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;" style>Sponsers</h4>
-        <hr> -->
+      <!-- <div *ngIf="appearfields">
+     
 
         <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Sponsors</h4>
         <hr>
@@ -368,18 +367,31 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="row">
 
         <div class="col-md-4" style="margin-left: 20px;">
           <div class="form-group">
-      <div class="card">
-     
-        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            <div class="card">
+
+              <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-md-4" style="margin-left: 20px;">
+          <div class="form-group">
+            <div class="card">
+
+              <p-chart type="bar" [data]="basicData2" [options]="basicOptions"></p-chart>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
-    </div>
-    </div>
-    </div> -->
-    </div>
+
+
+
 
   </div>

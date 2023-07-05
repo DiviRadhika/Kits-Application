@@ -102,15 +102,19 @@ input[type=password] {
   border: 1px solid #ccc;
   
 }
-
+.view{
+  text-align: center;
+  color: #59c3da;
+  margin-left: 4%;
+}
 label {
    
   display: inline-block;
 }
-.view{
+/* .view{
   width: 30%;
 	height: 40% 
-}
+} */
 /* ::ng-deep .p-dialog {
 	width: 40%;
 	height: 50%

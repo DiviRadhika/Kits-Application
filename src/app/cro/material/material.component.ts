@@ -9,6 +9,7 @@ import { AdminService } from 'src/app/applicationadmin/admin.service';
   styleUrls: ['./material.component.css']
 })
 export class MaterialComponent implements OnInit {
+  date1: any
   enableFields: boolean = false;
   disablefields: boolean = false;
   disappearfields: boolean = false;
@@ -44,6 +45,7 @@ export class MaterialComponent implements OnInit {
   labcenable: boolean = false;
   adminc: boolean = false;
   basicData: any;
+  basicData2: any;
   basicOptions: any;
   constructor(private fb: FormBuilder, private admin: AdminService) { }
 
@@ -68,6 +70,45 @@ export class MaterialComponent implements OnInit {
         }
       ]
   };
+  this.basicData2 = {
+
+    labels: ['Sponsors', 'Sites', 'Lab Tests', 'Materials', 'Protocols'],
+
+    datasets: [
+
+        {
+
+            label: 'CRO',
+
+            backgroundColor: '#42A5F5',
+
+            data: [6, 12, 2, 4, 5]
+
+        },
+
+      //   {
+
+      //       label: 'In Progress',
+
+      //       backgroundColor: '#FFA726',
+
+      //       data: [28, 14]
+
+      //   },
+
+      //   {
+
+      //     label: 'Pending',
+
+      //     backgroundColor: '#FFA726',
+
+      //     data: [28, 23]
+
+      // }
+
+    ]
+
+};
    this.admin.dashboard().subscribe((data:any)=>{
     this.dashboardsData = data
     console.log(this.dashboardsData);
@@ -277,6 +318,12 @@ export class MaterialComponent implements OnInit {
       this.sponsorcenable = false;
       this.labcenable = false;
     }
+
+  }
+  dateselect(val: any){
+    console.log(val);
+    console.log(val +1);
+    
 
   }
   // function bringCardToTop(cardClass:string):void{

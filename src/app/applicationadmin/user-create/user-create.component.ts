@@ -73,6 +73,49 @@ export class UserCreateComponent implements OnInit {
           this.userForm.patchValue(this.getUserData);
           this.userForm.controls['email'].disable();
           this.userForm.controls['role'].disable();
+
+          if(this.getUserData.role === 'CRO'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+        
+          }
+           else if(this.getUserData.role === 'Sponsor'){
+            this.sponsor = true
+            this.site = false
+            this.getSponsorDetails()
+            this.userForm.controls['sId'].setValidators(Validators.required)
+            this.userForm.controls['sId'].updateValueAndValidity()
+            this.userForm.controls['sId'].setValue(this.getUserData.created_user_id)
+            
+          
+        
+           }
+           else if(this.getUserData.role === 'CRA'){
+
+
+            this.sponsor = false
+            this.site = true
+            this.getSitedetails()
+            this.userForm.controls['sId'].setValidators(Validators.required)
+            this.userForm.controls['sId'].updateValueAndValidity()
+            this.userForm.controls['sId'].setValue(this.getUserData.created_user_id)
+        
+           }
+           else if(this.getUserData.role === 'Central Lab'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+           }
+           else if(this.getUserData.role === 'CRO'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+        
+           }
         });
       } else {
         this.isEdit = false;
@@ -125,7 +168,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
-   else if(this.idValue === 'Admin'){
+   else if(this.idValue === 'Admin' || this.idValue === 'admin'){
     this.sponsor = false
     this.site = false
     this.userForm.controls['sId'].clearValidators()
@@ -187,7 +230,7 @@ export class UserCreateComponent implements OnInit {
         password: this.userForm.controls['password'].value,
         role: this.userForm.controls['role'].value
       };
-      if(this.idValue === 'Sponsor' || this.idValue === 'CRA'){
+      if(this.idValue === 'Sponsor' || this.idValue === 'CRA' || this.getUserData.role === 'Sponsor' || this.getUserData.role === 'CRA'){
         userObj.created_user_id = this.userForm.controls['sId'].value
     
       }
@@ -196,7 +239,7 @@ export class UserCreateComponent implements OnInit {
       }
         console.log(userObj);
         
-       
+        // 37e820d4-0098-4dd0-9c6b-a38db965062d
     
       if (this.isEdit) {
       

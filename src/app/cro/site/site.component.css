@@ -11,6 +11,6 @@
 	position: fixed;
   }
   ::ng-deep .p-dialog {
-	width: 70%;
+	width: 40%;
 	height: 80%
 }

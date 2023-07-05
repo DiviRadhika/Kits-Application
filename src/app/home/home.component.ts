@@ -94,6 +94,7 @@ export class HomeComponent implements OnInit {
           icon: 'bx bxs-analyse',
           expanded: false,
           subItems: [
+            // { label: 'Sample Collection', link: '/home/site/viewCRA' }
             { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           ]
         }
@@ -157,6 +158,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
+            // { label: 'Sample Collection', link: '/home/site/viewCRA' }
             { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]
         // }

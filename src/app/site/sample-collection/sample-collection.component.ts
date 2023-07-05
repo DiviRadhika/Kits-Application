@@ -59,7 +59,7 @@ export class SampleCollectionComponent implements OnInit {
   protocolList: Array<any> = [];
   labTestsList: Array<any> = [];
   sites: Array<any> = [];
-
+  uniqueCombinedArray : Array<any> = [];
   files1: any;
   file2: any;
   public base64textString: string = '';
@@ -124,6 +124,7 @@ export class SampleCollectionComponent implements OnInit {
             }
           });
         });
+      
        })
    
     
@@ -143,6 +144,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
   }
+
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {

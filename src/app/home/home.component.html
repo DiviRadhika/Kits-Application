@@ -125,70 +125,10 @@
                 </div>
             </div>
         </header>
-        <p-dialog  [class.overlay]="profile" [(visible)]="profile" *ngIf="addprofile">
-        
-            <label  style="text-align: center;"> Email: {{role}}</label>
-          
     
-          <br>
-          <hr>
-        
-  
-  </p-dialog>
   
 <div >
-    <form [formGroup]="updatepasswordForm" >
-        <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword" >
-         
-
-            <label >Enter Current Password</label>
-                <input class="right" type="password" class="text-center mb-3" id="" formControlName="oldpassword"
-                  placeholder="Enter Old Password">
-                  <div *ngIf="updatepasswordForm.get('oldpassword')?.touched && updatepasswordForm.get('oldpassword')?.hasError('required')"
-                    class="text-danger text-center">
-                    Password is required
-                  </div>
-            
-                 <div> 
-                  <label>Enter New Password</label>
-                <input  type="password" class="text-center mb-3" id="" formControlName="password"
-                  placeholder="Enter New Password">
-                </div>
-                <div> 
-                    <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('required')"
-                    class="text-danger text-center">
-                    Password is required
-                  </div>
-                  <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('minlength')"
-                    class="text-danger">
-                    Password should contain a minimum of 8 characters
-                  </div>
-                </div>
-                <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('pattern')"
-                  class="text-danger">
-                  Password should include at least one lowercase letter, one uppercase letter, one digit, and one
-                  special character
-                </div>
-                    <label >Enter Confirm Password</label>
-                  <input  type="password" class="text-center mb-3" id="" formControlName="confirmPassword"
-                    placeholder="Enter Confirm Password">
-                    <div *ngIf="updatepasswordForm.get('confirmPassword')?.touched && updatepasswordForm.get('confirmPassword')?.hasError('required')"
-                    class="text-danger text-center">
-                     Confirm Password is required
-                  </div> 
-                  <div *ngIf="updatepasswordForm.get('confirmPassword')?.hasError('password1')" class="text-danger">
-                    Password and Confirm Password Must Be Same
-                  </div> 
-                         
-              <hr>
-              <div *ngIf="updatepasswordForm" class="reset" class=" mb-3 text-center modal-footer">
-                  <button #myModal style="margin-right: 36%;" type="submit" data-bs-dismiss="modal"  (click)="reset()"
-                  class="btn btn-primary w-md">Update</button>
-                </div>
-    
-        </p-dialog>
-      
-    </form>
+  
 </div>
 
         <div *ngIf="role=='admin'" class="vertical-menu">

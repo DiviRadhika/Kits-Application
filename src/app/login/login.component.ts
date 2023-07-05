@@ -57,17 +57,17 @@ export class LoginComponent implements OnInit {
 
     if (this.forgetForm.controls['npassword'].value === '' || this.forgetForm.controls['npassword'].value === undefined) {
       // alert('Please Enter Password')
-      this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Please Enter Password'});
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Password' });
     }
     else if (this.forgetForm.controls['confirmPassword'].value === undefined || this.forgetForm.controls['confirmPassword'].value === '') {
       // alert('Please Enter Confirm Password')
-      this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Error occurred while resetting password'});
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Error occurred while resetting password' });
     }
     else {
 
       this.admin.reset(obj).subscribe(
         (data: any) => {
-          this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Reset Successfully'});
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
 
           this.route.navigate(['/login']);
           console.log(data);
@@ -77,8 +77,8 @@ export class LoginComponent implements OnInit {
         },
         (err: any) => {
           console.log(err); // Log the specific error message to the console
-     
-          this.messageService.add({severity:'error', summary:'Error Message', detail:'Error occurred while resetting password'});
+
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
         }
       );
       ;
@@ -102,11 +102,18 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('userid', data.user_id)
         sessionStorage.setItem('access_token', data.access_token)
-        sessionStorage.setItem('firstName', data.first_name)
-        sessionStorage.setItem('lastName', data.last_name)
+      
+
+        this.admin.getUserbyId(data.user_id).subscribe((data: any) => {
+          console.log(data);
+          sessionStorage.setItem('firstName', data.first_name)
+          sessionStorage.setItem('lastName', data.last_name)
+          sessionStorage.setItem('email', data.email)
+        });
+
       },
       (err: any) => {
-        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
       }
     )
   }
@@ -122,8 +129,8 @@ export class LoginComponent implements OnInit {
     }
     this.admin.otp(obj).subscribe(
       (data: any) => {
-        this.messageService.add({severity:'success', summary:'Success Message', detail:'OTP sent to your Email'});
-     
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'OTP sent to your Email' });
+
         this.disableFields = true
         // this.route.navigate(['/home'])
       },
@@ -131,7 +138,7 @@ export class LoginComponent implements OnInit {
 
         this.disableFields = false
 
-        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
       }
     ),
       this.admin['set'](obj).subscribe(
@@ -143,7 +150,7 @@ export class LoginComponent implements OnInit {
 
           this.disableFields = false
 
-          this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
         }
       )
 
@@ -168,8 +175,8 @@ export class LoginComponent implements OnInit {
       (err: any) => {
 
         this.enableFields = false
-        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-   
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+
       }
     )
   }

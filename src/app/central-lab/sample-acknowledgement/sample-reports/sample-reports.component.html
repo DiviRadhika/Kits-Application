@@ -86,7 +86,7 @@
                                                                     <thead Style="background:#EEE">
                                                                         <tr>
                                                                             <th>KitId</th>
-                                                                            <th>Lab KitId</th>
+                                                                            <th>Central Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
                                                                          
@@ -128,6 +128,24 @@
                                                                             </td>
                                                                             <td width="20%">
                                                                                 <ng-container *ngIf="item.pdf">
+                                                                                    <button class="text-center" type="button" class="md btn btn-warning r-blue"
+                                                                                    style="width: 40px; height: 40px" (click)="Download(item.pdf)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
+                                                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                                                      </svg>
+                                                                                
+                                                                                  </button>                                                                                </ng-container>
+                                                                                <ng-container *ngIf="!item.pdf">
+
+                                                                                    <span  class="md btn btn-warning r-blue">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+                                                                                            <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                                                          </svg>
+                                                                                        </span>                                                                                </ng-container>
+                                                                              </td>
+                                                                            <!-- <td width="20%">
+                                                                                <ng-container *ngIf="item.pdf">
                                                                                   <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
                                                                                     style="width: 150px; height: 40px" (click)="Download(item.pdf)">
                                                                                     <i class="bx bx-hdd label-icon"></i>
@@ -137,7 +155,7 @@
                                                                                 <ng-container *ngIf="!item.pdf">
                                                                                     <span>PDF Not Updated</span>
                                                                                 </ng-container>
-                                                                              </td>
+                                                                              </td> -->
 <!--                                                                             
                                                                             <td width="20%">
                                                                                 <button type="button"
@@ -184,7 +202,7 @@
                                                                     <thead Style="background:#EEE">
                                                                         <tr>
                                                                             <th>KitId</th>
-                                                                            <th>Lab KitId</th>
+                                                                            <th>Central Lab KitId</th>
                                                                             <th>Site Id</th>
                                                                             <th>Patient Id</th>
                                                                           
@@ -221,7 +239,7 @@
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <td width="20%">
+                                                                            <!-- <td width="20%">
                                                                                 <ng-container *ngIf="item.pdf">
                                                                                   <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
                                                                                     style="width: 150px; height: 40px" (click)="Download(item.pdf)">
@@ -232,8 +250,25 @@
                                                                                 <ng-container *ngIf="!item.pdf">
                                                                                   <span>PDF Not Uploaded</span>
                                                                                 </ng-container>
-                                                                              </td>
+                                                                              </td> -->
+                                                                              <td width="20%">
+                                                                                <ng-container *ngIf="item.pdf">
+                                                                                    <button class="text-center" type="button" class="md btn btn-warning r-blue"
+                                                                                    style="width: 40px; height: 40px" (click)="Download(item.pdf)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
+                                                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                                                      </svg>
+                                                                                
+                                                                                  </button>                                                                                </ng-container>
+                                                                                <ng-container *ngIf="!item.pdf">
 
+                                                                                    <span  class="md btn btn-warning r-blue">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-x" viewBox="0 0 16 16">
+                                                                                            <path d="M6.854 7.146a.5.5 0 1 0-.708.708L7.293 9l-1.147 1.146a.5.5 0 0 0 .708.708L8 9.707l1.146 1.147a.5.5 0 0 0 .708-.708L8.707 9l1.147-1.146a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146z"/>
+                                                                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                                                                          </svg>
+                                                                                        </span>                                                                                </ng-container>
+                                                                              </td>
 
                                                                         </tr>
                                                                     </tbody>

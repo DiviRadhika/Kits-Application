@@ -39,7 +39,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
   date: string;
-
+  results: any[] = [];
   constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
     const currentDate = new Date();
@@ -54,6 +54,7 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   };
+  resultsv: any[][] = [];
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -438,7 +439,7 @@ export class SampleAcknowledgementComponent implements OnInit {
     // this.pdfValues.push(({row:readerEvt, pdf:this.bas2}))
 
     const existingPdf = this.pdfValues.find((pdfValue: any) => pdfValue.row === readerEvt);
-
+    this.results[readerEvt] = this.bas2;
 
     if (existingPdf) {
       // PDF already exists for the row, remove it
@@ -484,6 +485,18 @@ export class SampleAcknowledgementComponent implements OnInit {
     this.base64textString = btoa(binaryString);
     this.bas2 = 'data:text/html;base64,' + this.base64textString;
     this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
+
+    // const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
+
+    const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
+
+  // Ensure the results array has the necessary dimensions
+  if (!this.resultsv[readerEvt]) {
+    this.resultsv[readerEvt] = [];
+  }
+
+  // Store the uploaded result in the resultsv array
+  this.resultsv[readerEvt][rowindex] = uploadedResult;
 
 
 

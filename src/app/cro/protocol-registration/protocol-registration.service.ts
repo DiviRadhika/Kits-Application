@@ -32,6 +32,9 @@ export class ProtocolService {
     getPreparation(){
         return this.http.get(endPointsUser.getPreparation)
     }
+    getPreparationBySId(id1: any){
+        return this.http.get(endPointsUser.getPreparation+ '/'+ id1)
+    }
     getPreparationById(id: any): Observable<any> {
         return this.http.get(endPointsUser.getPreparationById + id)
     }

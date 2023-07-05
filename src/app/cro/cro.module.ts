@@ -25,6 +25,7 @@ import { ChartModule } from 'primeng/chart';
 import { ProtocolGridComponent } from './protocol-grid/protocol-grid.component';
 import {DataViewModule} from 'primeng/dataview';
 import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -56,7 +57,8 @@ import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
     AccordionModule,
     ToastModule,
     ChartModule,
-    DataViewModule
+    DataViewModule,
+    CalendarModule
     
   ]
 })
