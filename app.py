@@ -28,6 +28,7 @@ from resources.site_data import (
     site_data_ns,
     sites_data_ns,
     SiteActionsById,
+    SiteActionsByEmail,
 )
 from resources.lab_test import (
     LabtestssList,
@@ -224,6 +225,7 @@ cros_ns.add_resource(CrosList, "")
 site_data_ns.add_resource(Sitedata, "")
 site_data_ns.add_resource(SiteActionsById, "/<string:site_id>")
 sites_data_ns.add_resource(SitedatasList, "")
+sites_data_ns.add_resource(SiteActionsByEmail, "/<string:email>")
 lab_test_ns.add_resource(Labtest, "")
 lab_tests_ns.add_resource(LabtestssList, "")
 lab_test_ns.add_resource(LabActionsById, "/<string:lab_test_id>")

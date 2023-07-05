@@ -80,6 +80,12 @@ class SitedatasList(Resource):
         return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
+class SiteActionsByEmail(Resource):
+    @sites_data_ns.doc("Get all the sites_data")
+    def get(self, email):
+        return (site_datas_list_schema.dump(SiteDataModel.get_by_email(email)), 200)
+
+
 class SiteActionsById(Resource):
     @site_data_ns.doc("get by id")
     # @jwt_required(fresh=True)

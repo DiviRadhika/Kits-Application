@@ -129,7 +129,8 @@ class GetProtocolsBySiteId(Resource):
                         if not cro_data:
                             continue
                         obj = {
-                            "protocol_id": cro_data.protocol_id,
+                            "protocol_id": str(cro_data.id),
+                            "user_protocol_id": cro_data.protocol_id,
                             "protocol_name": cro_data.protocol_name,
                             "creation_time": str(cro_data.created_on),
                             "expiry_date": "",
@@ -137,6 +138,7 @@ class GetProtocolsBySiteId(Resource):
                         if "exprity_data" in screening_kit_data:
                             obj["expiry_date"] = (screening_kit_data["expiry_data"],)
                         response["screening_data"].append(obj)
+                        break
 
             for visits in visit_kit_details:
                 for visit_kit_data in visits:
@@ -146,7 +148,8 @@ class GetProtocolsBySiteId(Resource):
                             if not cro_data:
                                 continue
                             obj = {
-                                "protocol_id": cro_data.protocol_id,
+                                "protocol_id": str(cro_data.id),
+                                "user_protocol_id": cro_data.protocol_id,
                                 "protocol_name": cro_data.protocol_name,
                                 "creation_time": str(cro_data.created_on),
                                 "expiry_date": "",
@@ -155,6 +158,7 @@ class GetProtocolsBySiteId(Resource):
                                 obj["expiry_date"] = (visit_kit_data["expiry_data"],)
 
                             response["visit_data"].append(obj)
+                            break
         return response, 200
 
 
