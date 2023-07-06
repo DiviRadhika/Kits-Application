@@ -25,7 +25,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   tets: Array<any> = [];
 
   tabs: any[] = [];
-
+  base64String: any;
   count = 2;
   allTabsData: any[] = [];
   index: any;
@@ -496,7 +496,8 @@ export class SampleAcknowledgementComponent implements OnInit {
   }
 
   // Store the uploaded result in the resultsv array
-  this.resultsv[readerEvt][rowindex] = uploadedResult;
+  // this.resultsv[readerEvt][rowindex] = uploadedResult;
+  this.resultsv[readerEvt][rowindex]  = this.bas2;
 
 
 
@@ -516,7 +517,34 @@ export class SampleAcknowledgementComponent implements OnInit {
 
   }
 
+  Download(id: any) {
 
+    this.base64String = id
+    if(this.base64String == ''){
+      this.base64String  = 'NOt Uploaded Any PDF'
+    }
+
+    // Convert the base64 string to a Uint8Array
+    const binaryArray = Uint8Array.from(atob(this.base64String), c => c.charCodeAt(0));
+
+    // Create a Blob from the binary data
+    const blob = new Blob([binaryArray], { type: 'application/pdf' });
+
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element and set its attributes
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'downloaded-file.pdf';
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Clean up by revoking the URL
+    URL.revokeObjectURL(url);
+
+  }
 }
 
 
