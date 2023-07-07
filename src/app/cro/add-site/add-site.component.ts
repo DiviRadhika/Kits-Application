@@ -187,6 +187,9 @@ export class AddSiteComponent {
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
 
+  removeSite(j: number) {
+    this.investigatorForm.get('investigator').removeAt(j);
+  }
   submit() {
     console.log(this.investigatorForm.value);
 

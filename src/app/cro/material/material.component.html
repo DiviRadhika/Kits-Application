@@ -18,7 +18,7 @@
       <!-- end page title -->
 
 
-      <div *ngIf="disablefields">
+  <div *ngIf="disablefields">
 
         <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">CRO</h4>
         <hr>
@@ -263,6 +263,59 @@
       <!-- <br>
       <br>
       <br> -->
+  
+      <!-------------------================ Sponser =============------------------>
+      <!-------------------================ Sponser =============------------------>
+
+
+
+      <br>
+    
+      <div *ngIf="sponserfields">
+        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Sponsor</h4>
+
+        <hr>
+      
+        <div class="row">
+          <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols </h5>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
+              </p-card>
+            </div>
+          </div>
+          <!-- <div class="row"> -->
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Sponser </h5>
+                <h6 style="margin-left: 71%;" style="text-align: center;">
+                  {{this.dashboardsData.no_of_sponsors}}</h6>
+              </p-card>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       <br *ngIf="disablefields">
       <!-- <div *ngIf="appearfields">

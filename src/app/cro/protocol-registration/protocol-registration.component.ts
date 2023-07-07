@@ -424,12 +424,13 @@ export class ProtocolRegistrationComponent {
 
       this.protocolService.postProtocol(data).subscribe(
         (data:any) => {
+          this.route.navigate(['home/cro/protocolGrid'])
           setTimeout(() => {
             this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created successfully' });
 
           }, 1000);
 
-          this.route.navigate(['/home/cro/protocolView'])
+          // this.route.navigate(['/home/cro/protocolView'])
         },
         (err:any)=>{
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });

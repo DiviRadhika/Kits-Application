@@ -35,6 +35,9 @@ export class ProtocolService {
     getPreparationBySId(id1: any){
         return this.http.get(endPointsUser.getPreparation+ '/'+ id1)
     }
+    getPreparationBySponsor(id1: any){
+        return this.http.get(endPointsUser.croProtocols+ '/'+ id1)
+    }
     getPreparationById(id: any): Observable<any> {
         return this.http.get(endPointsUser.getPreparationById + id)
     }

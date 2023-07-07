@@ -20,7 +20,10 @@
                                     <li class="breadcrumb-item">
                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item">
+                                    <li *ngIf="sponsor" class="breadcrumb-item">
+                                        <a routerLink="/home/Sponsor/sponsorStudies" class="waves-effect">Study</a>
+                                    </li>
+                                    <li *ngIf="!sponsor" class="breadcrumb-item">
                                         <a routerLink="/home/cro/protocolGrid" class="waves-effect">Study</a>
                                     </li>
                                     <li class="breadcrumb-item active">Study View</li>

@@ -47,14 +47,12 @@ export class CROcreateComponent implements OnInit {
       }
     });
     this.admin.country().subscribe((resp: any) => {
-      console.log(resp)
       const countries = [];
       for (let i = 0; i < resp.length; ++i) {
           const country = resp[i];
           countries.push({ text: country.text, value: country.value });
       }
       this.myData = countries;
-      console.log(countries)
   });
   }
 

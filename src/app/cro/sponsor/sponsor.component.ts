@@ -105,6 +105,9 @@ export class SponsorComponent implements OnInit {
 
     this.getSponsorDetails()
   }
+  removeSponsor(j: number) {
+    this.contactForm.get('contacts').removeAt(j);
+  }
   setContactFormValues(contacts: any[]) {
     const contactFormArray = this.editcontactsForm.get('editcontacts') as FormArray;
 
@@ -118,7 +121,7 @@ export class SponsorComponent implements OnInit {
         first_name: [contact.first_name],
         last_name: [contact.last_name],
         email: [contact.email],
-        mobile_telephone: [contact.mobile_telephone]
+        contact: [contact.contact]
         // name: [contact.name],
         // email: [contact.email],
       });

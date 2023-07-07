@@ -53,7 +53,6 @@ export class UserGridComponent implements OnInit {
   }
   getUser() {
     this.getUserData = this.admin.getUser().subscribe((data: any) => {
-      console.log(data)
       this.userDetails = data
       this.allUserData = data
       this.totalCount = this.userDetails.length

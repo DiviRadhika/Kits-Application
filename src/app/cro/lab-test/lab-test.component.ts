@@ -71,7 +71,11 @@ export class LabTestComponent implements OnInit {
        this.totalCountmaterial = this.materials.length
      })
    }  
-  
+   pageChangem(event: number){
+    this.page = event;
+    this.meterialsData()
+
+   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -112,6 +116,7 @@ export class LabTestComponent implements OnInit {
           (data: any) => {
             this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
             console.log(this.route.url);
+            this.labForm.reset()
             
     if(this.route.url === '/home/cro/labTestGrid'){
 
@@ -140,6 +145,8 @@ export class LabTestComponent implements OnInit {
     this._cro.deleteLab(id).subscribe(
       (data: any) => {
         console.log(data)
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results Deleted successfully' });
+        this.labDetailsData()
       });
 
   }

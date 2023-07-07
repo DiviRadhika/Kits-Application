@@ -66,7 +66,7 @@ export class UserCreateComponent implements OnInit {
 
 
         this.adminService.getUserbyId(data.id).subscribe((data: any) => {
-          console.log(data);
+      
 
           this.getUserData = data;
           // this.getUserData.status = 'inactive'
@@ -87,7 +87,7 @@ export class UserCreateComponent implements OnInit {
             this.getSponsorDetails()
             this.userForm.controls['sId'].setValidators(Validators.required)
             this.userForm.controls['sId'].updateValueAndValidity()
-            this.userForm.controls['sId'].setValue(this.getUserData.created_user_id)
+            this.userForm.controls['sId'].setValue(this.getUserData.sponsor_id)
             
           
         
@@ -100,7 +100,7 @@ export class UserCreateComponent implements OnInit {
             this.getSitedetails()
             this.userForm.controls['sId'].setValidators(Validators.required)
             this.userForm.controls['sId'].updateValueAndValidity()
-            this.userForm.controls['sId'].setValue(this.getUserData.created_user_id)
+            this.userForm.controls['sId'].setValue(this.getUserData.site_id)
         
            }
            else if(this.getUserData.role === 'Central Lab'){
@@ -179,7 +179,7 @@ export class UserCreateComponent implements OnInit {
   }
   getSitedetails(){
     this._cro.getSites().subscribe((data:any)=>{
-       console.log(data)
+   
        this.siteDetails = data
      })
  
@@ -228,22 +228,40 @@ export class UserCreateComponent implements OnInit {
         last_name: this.userForm.controls['last_name'].value,
         email: emailvalue,
         password: this.userForm.controls['password'].value,
-        role: this.userForm.controls['role'].value
+        role: this.userForm.controls['role'].value,
+        created_by:sessionStorage.getItem('userid')
       };
-      if(this.idValue === 'Sponsor' || this.idValue === 'CRA' || this.getUserData.role === 'Sponsor' || this.getUserData.role === 'CRA'){
-        userObj.created_user_id = this.userForm.controls['sId'].value
-    
+      if(this.idValue === 'CRA'){
+        userObj.site_id = this.userForm.controls['sId'].value
+        userObj.sponsor_id = ''
+      }
+      else if(this.idValue === 'Sponsor'){
+        userObj.sponsor_id = this.userForm.controls['sId'].value
+        userObj.site_id = ''
       }
       else{
-        userObj.created_user_id  = ''
+        userObj.site_id  = ''
+        userObj.sponsor_id  = ''
       }
-        console.log(userObj);
+       
         
         // 37e820d4-0098-4dd0-9c6b-a38db965062d
     
       if (this.isEdit) {
       
-        userObj.status = 'active'
+        userObj.status = this.userForm.controls['status'].value
+        if(this.getUserData.role === 'CRA'){
+          userObj.site_id = this.userForm.controls['sId'].value
+          userObj.sponsor_id = ''
+        }
+        else if(this.getUserData.role === 'Sponsor' ){
+          userObj.sponsor_id = this.userForm.controls['sId'].value
+          userObj.site_id = ''
+        }
+        else{
+          userObj.site_id  = ''
+          userObj.sponsor_id  = ''
+        }
         this.adminService.getUserUpdate( this.id,userObj).subscribe(
           (data: any) => {
 
@@ -261,7 +279,7 @@ export class UserCreateComponent implements OnInit {
         );
       } else {
         userObj.status = 'active'
-        console.log(typeof (userObj.status));
+      
 
         this.adminService.createUser(userObj).subscribe(
           (data: any) => {

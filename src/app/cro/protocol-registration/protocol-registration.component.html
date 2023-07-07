@@ -68,18 +68,7 @@
                     </select>
                   </div>
                 </div>
-                <!-- <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">CRO ID / Name</label>
-                    <select formControlName="selected_cro_id" class="form-select form-control"
-                      [class.is-invalid]="shouldShowRequired('selected_cro_id') && protocolForm.get('selected_cro_id')?.touched">
-                      <option  selected value="">Select CRO ID</option>
-                      <option *ngFor="let cro of crosList" [value]="cro.cro_id">
-                        {{ cro.cro_name }}
-                      </option>
-                    </select>
-                  </div>
-                </div> -->
+             
 
                 <div class="col-md-4">
                   <div class="mb-3">
@@ -92,7 +81,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
-                  (  &nbsp;<input class="form-check-input" (change)="avantCheck($event)" formControlName="avantc" type="checkbox"
+                  (&nbsp;<input class="form-check-input" (change)="avantCheck($event)" formControlName="avantc" type="checkbox"
                     value="checked" id="debugInfo" />
                     &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
             

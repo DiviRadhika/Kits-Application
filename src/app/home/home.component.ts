@@ -109,17 +109,18 @@ export class HomeComponent implements OnInit {
       ];
     }
     else if(this.role === 'Sponsor'){
-      // this.menuItems = [
-      //   {
-      //     label: 'Sponsor',
-      //     icon: 'bx bxs-user-check',
-      //     expanded: false,
-      //     subItems: [
-      //       { label: 'Protocol', link: '/home/Sponsor/protocol' }
-      //     ]
-      //   }
-      //   // Other menu items for admin role...
-      // ];
+      this.menuItems = [
+        // {
+          // label: 'CRO',
+          // icon: 'bx bxs-user-check',
+          // expanded: false,
+          // subItems: [
+            { label: 'Sponsor', link: '/home/Sponsor/sponsorStudies' },
+        
+          // ]
+        // },
+      
+      ];
     }
     else if(this.role === 'CRO'){
       this.menuItems = [
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit {
             { label: 'Study Summary', link: '/home/cro/protocolGrid' }
           // ]
         // },
-        // Other menu items for admin role...
+      
       ];
     }
     else if(this.role === 'Central Lab'){
@@ -162,8 +163,8 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            // { label: 'Sample Collection', link: '/home/site/viewCRA' }
-            { label: 'Sample Collection', link: '/home/site/sampleCollection' }
+            { label: 'Sample Collection', link: '/home/site/viewCRA' }
+            // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]
         // }
         // Other menu items for admin role...

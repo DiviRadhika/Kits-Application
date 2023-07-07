@@ -95,7 +95,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="rounded-circle header-profile-user" src="assets/images/profile_img.jpg"
                                 alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">CRO Admin</span>
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{role |uppercase}}</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -153,7 +153,7 @@
                 <label>Email:&nbsp;&nbsp;{{email}}</label>
             </div>
             <div style="text-align: center">
-                <label>Role:&nbsp;&nbsp;{{last_name}}</label>
+                <label>Role:&nbsp;&nbsp;{{role}}</label>
             </div>
             <br>
             <hr>

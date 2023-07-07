@@ -14,6 +14,7 @@ export class MaterialComponent implements OnInit {
   disablefields: boolean = false;
   disappearfields: boolean = false;
   appearfields: boolean = false;
+  sponserfields:boolean = false;
 
   dashboardform: any;
   myForm: any;
@@ -269,7 +270,8 @@ export class MaterialComponent implements OnInit {
       this.disablefields = true;
       this.disappearfields = true;
       this.appearfields = true;
-      this.adminc = true
+      this.adminc = true;
+      this.sponserfields = true;
 
 
     }
@@ -282,7 +284,8 @@ export class MaterialComponent implements OnInit {
       this.cracenable= false;
       this.sponsorcenable = true;
       this.labcenable = false;
-      this.adminc = false
+      this.adminc = false;
+      this.sponserfields= true;
     }
     else if (this.role === 'CRO') {
       this.enableFields = false;
@@ -293,7 +296,9 @@ export class MaterialComponent implements OnInit {
       this.cracenable= false;
       this.sponsorcenable = false;
       this.labcenable = false;
-      this.adminc = false
+      this.adminc = false;
+      this.sponserfields = false;
+
 
     }
     else if (this.role === 'Central Lab') {
@@ -305,7 +310,9 @@ export class MaterialComponent implements OnInit {
       this.cracenable= false;
       this.sponsorcenable = false;
       this.labcenable = true;
-      this.adminc = false
+      this.adminc = false;
+      this.sponserfields = false;
+
 
     }
     else if (this.role === 'CRA') {
@@ -317,6 +324,8 @@ export class MaterialComponent implements OnInit {
       this.cracenable= true;
       this.sponsorcenable = false;
       this.labcenable = false;
+      this.sponserfields = false;
+
     }
 
   }

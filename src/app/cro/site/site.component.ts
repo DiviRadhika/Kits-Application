@@ -59,6 +59,8 @@ export class SiteComponent implements OnInit {
 
 
 study(id: any) {
+  console.log(id);
+  
   this.display = true;
   this.protocol.getPreparationBySId(id).subscribe((data: any) => {
     const uniqueScreeningData = this.getUniqueObjects(data.screening_data, 'user_protocol_id');

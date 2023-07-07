@@ -109,6 +109,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('firstName', data.first_name)
           sessionStorage.setItem('lastName', data.last_name)
           sessionStorage.setItem('email', data.email)
+          sessionStorage.setItem('siteId', data.site_id)
+          sessionStorage.setItem('sponsorId', data.sponsor_id)
         });
 
       },

@@ -32,7 +32,7 @@ const routes: Routes = [
   {path:'protocolRegistration', component:ProtocolRegistrationComponent},
   {path:'dashboards', component:MaterialComponent},
   {path:'visits', component:VisitComponent},
-  {path:'protocolView/:id', component:ProtocolViewComponent},
+  {path:'protocolView/:id/:type', component:ProtocolViewComponent},
   {path:'protocolGrid', component:ProtocolGridComponent},
   {path:'protocolUpdate/:id', component:EditProtocolComponent},
  

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
 @Component({
-  selector: 'app-view-sites',
-  templateUrl: './view-sites.component.html',
-  styleUrls: ['./view-sites.component.css']
+  selector: 'app-sponsor-study',
+  templateUrl: './sponsor-study.component.html',
+  styleUrls: ['./sponsor-study.component.css']
 })
-export class ViewSitesComponent implements OnInit {
+export class SponsorStudyComponent implements OnInit {
   protocolDetails: any[] = [];
   allprotocolDetails: any[] = [];
   page = 1;
@@ -32,10 +33,8 @@ export class ViewSitesComponent implements OnInit {
   siteCreate(){
       this.route.navigate(['/home/cro/protocol'])
     }
-  view(id: string){
-
-
-      this.route.navigate(['/home/cro/protocolView', id])
+  view(id: string, sponsor: string){
+      this.route.navigate(['/home/cro/protocolView', id, sponsor])
     }
   edit(id: string){
     console.log(id);
@@ -48,46 +47,16 @@ export class ViewSitesComponent implements OnInit {
       console.log(this.ID);
       
   
-      this.protocol.getPreparationBySId(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+      this.protocol.getPreparationBySponsor(sessionStorage.getItem('sponsorId')).subscribe((data: any) => {
         console.log(data);
         
-        const uniqueScreeningData = this.getUniqueObjects(data.screening_data, 'user_protocol_id');
-        const uniqueVisitData = this.getUniqueObjects(data.visit_data, 'user_protocol_id');
-    
-        const newScreeningObj: { uniqueScreeningData: any[] } = { uniqueScreeningData: [] };
-        const newVisitObj: { uniqueVisitData: any[] } = { uniqueVisitData: [] };
-    
-        uniqueScreeningData.forEach((obj: any) => {
-          newScreeningObj.uniqueScreeningData.push(obj);
-        });
-    
-        uniqueVisitData.forEach((obj: any) => {
-          newVisitObj.uniqueVisitData.push(obj);
-        });
-        const combinedArray = newScreeningObj.uniqueScreeningData.concat(newVisitObj.uniqueVisitData);
-    
-        this.uniqueCombinedArray = this.getUniqueObjects(combinedArray, 'user_protocol_id');
+        this.uniqueCombinedArray =data
       });
-      console.log( this.uniqueCombinedArray);
+   
       
     }
     
     // getUniqueObjects function remains the same as mentioned in the previous response
-    
-      getUniqueObjects(arr: any[], uniqueProperty: string): any[] {
-        const uniqueObjects: any[] = [];
-        const uniqueValues: Set<any> = new Set();
-      
-        arr.forEach((obj: any) => {
-          const value = obj[uniqueProperty];
-          if (!uniqueValues.has(value)) {
-            uniqueValues.add(value);
-            uniqueObjects.push(obj);
-          }
-        });
-      
-        return uniqueObjects;
-      }
   applyFilter(filterValue: string) {
       filterValue = filterValue.trim(); // Remove whitespace
       filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -39,12 +40,16 @@ export class SampleCollectionComponent implements OnInit {
   email: string | null;
   ID: any;
   date: string;
+  id: any;
 
 
 
-  constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService, private activatedRoute: ActivatedRoute, private router: Router,
+     private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
 
     this.email =sessionStorage.getItem('email')
+    console.log(this.email);
+    
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1; // Note: Month starts from 0, so add 1 to get the actual month
@@ -98,6 +103,11 @@ export class SampleCollectionComponent implements OnInit {
     protocol_name: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
+    this.activatedRoute.params.subscribe((data: any) => {
+        this.id = data.id;  
+        this.getprotocolDetails(this.id)
+    
+    });
     // this.sponsersData()
     this.croService.getSites().subscribe((sites) => {
 
@@ -105,28 +115,15 @@ export class SampleCollectionComponent implements OnInit {
 
     });
 
-   
-      this.croService.getSites().subscribe((data:any)=>{
-        //  console.log(data)
-        //  this.siteDetails = data
-        //  this.allSiteDetails = data
-
-
-         data.forEach((sponser: any) => {
-
-
-          // this.sponsers.push(sponser);
-          data.forEach((res: any) => {
-            if(data.email == this.email){
-       
-            this.ID = sponser.site_data_code
-            
-            }
-          });
-        });
+    this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+      console.log(data);
+      this.ID = data.site_data_code
+      console.log(this.ID);
       
-       })
-   
+      
+    });
+
+
     
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
@@ -147,9 +144,9 @@ export class SampleCollectionComponent implements OnInit {
 
   getprotocolDetails(id: any) {
     this.scount = ''
-    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
-      this.uuid = id.target.value;
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+    this.protocolService.getProtocolId(id).subscribe((protocols) => {
+      this.uuid = id;
+      this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
@@ -376,7 +373,13 @@ console.log(this.ID);
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Collection Updated successfully' });
+        setTimeout(() => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Collection Updated successfully' });
+        }, 1000);
+        this.router.navigate(['/home/site/viewCRA'])
+
+       
+        
       },
       (err: any) => {
        

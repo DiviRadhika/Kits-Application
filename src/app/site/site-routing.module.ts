@@ -4,7 +4,7 @@ import { SampleCollectionComponent } from './sample-collection/sample-collection
 import { ViewSitesComponent } from './view-sites/view-sites.component';
 
 const routes: Routes = [
-  {path:'sampleCollection', component:SampleCollectionComponent},
+  {path:'sampleCollection/:id', component:SampleCollectionComponent},
   {path:'viewCRA', component:ViewSitesComponent},
 
 ];

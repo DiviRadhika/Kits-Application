@@ -29,7 +29,7 @@ export class ProtocolGridComponent implements OnInit {
   view(id:string){
 
     
-    this.route.navigate(['/home/cro/protocolView',id])
+    this.route.navigate(['/home/cro/protocolView',id, 'protocol'])
   }
   edit(id:string){
     this.route.navigate(['/home/cro/protocolUpdate',id])

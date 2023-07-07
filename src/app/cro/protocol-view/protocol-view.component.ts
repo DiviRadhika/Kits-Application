@@ -23,6 +23,7 @@ export class ProtocolViewComponent implements OnInit {
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
+  sponsor: boolean = false;
   constructor(private route: Router,
     private protocolService: ProtocolService,
     private _activatedRoute: ActivatedRoute,
@@ -75,6 +76,12 @@ export class ProtocolViewComponent implements OnInit {
         this.isEdit = true;
         this.id = data.id;
         this.getprotocolDetails(this.id)
+        if(data.type === 'sponsor'){
+          this.sponsor = true;
+        }
+        else{
+          this.sponsor = false;
+        }
       }
     });
 
