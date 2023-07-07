@@ -17,6 +17,8 @@ from resources.utils import generate_otp, get_otp_email_template
 from datetime import datetime
 from config import logger
 from schemas.users import UserSchema
+from models.site_data import SiteDataModel
+from models.sponsor import SponsorModel
 
 
 login_ns = Namespace("login", description="login related operations")
@@ -43,7 +45,9 @@ creation = login_ns.model(
         "password": fields.String(title="Password", required=True),
         "role": fields.String(title="Role", required=True),
         "status": fields.String(title="Status", default="inactive"),
-        "created_user_id": fields.String(),
+        "created_by": fields.String(title="created_by", required=True),
+        "site_id": fields.String(),  # if role is  cra then site_id will be there
+        "sponsor_id": fields.String(),  # if role is sponsor then sponsor id will be there
     },
 )
 
@@ -201,12 +205,40 @@ class UserRegister(Resource):
         try:
             user_data = UserModel.find_by_email(user_json["email"])
             if user_data:
-                return {"message": "user already exists"}, 400
+                return {"message": "user already exists"}, 500
+            user_data = UserModel.find_by_id(user_json["created_by"])
+            if not user_data:
+                return {
+                    "message": "invalid logged in person, plz logout and login again"
+                }, 500
+            if user_json["role"].lower() == "cra" and user_json["site_id"] != "":
+                site_data = SiteDataModel.find_by_id(user_json["site_id"])
+                if not site_data:
+                    return {"message": "invalid site id"}, 500
+            if user_json["role"].lower == "sponsor" and user_json["sponsor_id"] != "":
+                sponsor_data = SponsorModel.find_by_id(user_json["sponsor_id"])
+                if not sponsor_data:
+                    return {"message": "invalid sponsor id"}, 500
+
+            if user_json["role"].lower() != "cra" and user_json["site_id"] != "":
+                return {
+                    "message": "for {} role site_id should not present".format(
+                        user_json["role"]
+                    )
+                }, 500
+
+            if user_json["role"].lower() != "sponsor" and user_json["sponsor_id"] != "":
+                return {
+                    "message": "for {} role sponsor_id should not present".format(
+                        user_json["role"]
+                    )
+                }, 500
+
             user_data = user_schema.load(user_json)
             user_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(str(e))
-            return {"message": "user creation failed {}".format(str(e))}, 400
+            return {"message": "user creation failed {}".format(str(e))}, 500
         return {"message": "user registration success"}, 201
 
     @user_ns.expect(update_user)

@@ -4,6 +4,7 @@ from flask import request
 from sqlalchemy import exc
 from models.clab_kit_preparation import ClabKitPreparationModel
 from models.cro_protocol import CroProtocolModel
+from models.site_data import SiteDataModel
 
 
 clab_kit_preparation_ns = Namespace(
@@ -111,11 +112,15 @@ class ClabKitProtocolActionsById(Resource):
 
 class GetProtocolsBySiteId(Resource):
     @clab_kit_preparations_ns.doc("get protocols by site id")
-    def get(self, site_id):
+    def get(self, site_uuid):
         response = {
             "screening_data": [],
             "visit_data": [],
         }
+        site_data = SiteDataModel.find_by_id(site_uuid)
+        if not site_data:
+            return {"message": "invalid site_id"}, 500
+        site_id = site_data.site_data_code
         kits = ClabKitPreparationModel.find_all()
 
         for kit in kits:

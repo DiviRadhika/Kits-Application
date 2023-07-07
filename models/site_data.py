@@ -39,6 +39,10 @@ class SiteDataModel(db.Model):
         return cls.query.filter_by(site_id=id).first()
 
     @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(site_id=id).first()
+
+    @classmethod
     def get_by_email(cls, email):
         return cls.query.filter_by(email=email).all()
 

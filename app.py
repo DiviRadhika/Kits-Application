@@ -241,7 +241,7 @@ clab_kit_preparation_ns.add_resource(ClabKitPreparation, "")
 clab_kit_preparation_ns.add_resource(
     ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
 )
-clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_id>")
+clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")

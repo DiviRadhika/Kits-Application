@@ -39,6 +39,10 @@ class SponsorModel(db.Model):
     def get_by_id(cls, id):
         return cls.query.filter_by(sponsor_id=id).first()
 
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(sponsor_id=id).first()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
