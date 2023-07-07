@@ -36,6 +36,10 @@ class CroProtocolModel(db.Model):
     def get_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
 
+    @classmethod
+    def get_by_sponsor_id(cls, sponsor_id):
+        return cls.query.filter_by(sponsor_id=sponsor_id).all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

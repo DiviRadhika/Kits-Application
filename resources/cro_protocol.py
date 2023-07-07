@@ -94,6 +94,17 @@ class CrosProtocolsList(Resource):
         return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
 
 
+class CroProtocolBySponsorId(Resource):
+    @cro_protocols_ns.doc("get by sponsor id")
+    def get(self, sponsor_id):
+        return (
+            cro_list_protocols_schema.dump(
+                CroProtocolModel.get_by_sponsor_id(sponsor_id)
+            ),
+            200,
+        )
+
+
 class CroProtocolActionsById(Resource):
     @cro_protocol_ns.doc("get by id")
     def get(self, cro_protocol_id):
