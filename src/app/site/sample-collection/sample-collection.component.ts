@@ -341,7 +341,7 @@ export class SampleCollectionComponent implements OnInit {
           console.log(this.vMatDetails[j].visitsList.value[index].status);
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
-          protocol.site_id= this.ID
+          // protocol.site_id= this.ID
 
         }
 
@@ -350,13 +350,13 @@ export class SampleCollectionComponent implements OnInit {
     }
 
     this.skDetails.forEach((protocol: any, index: any) => {
-      protocol.site_id = this.ID
+      // protocol.site_id = this.ID
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
     })
 
 
-console.log(this.ID);
+
 
 
 

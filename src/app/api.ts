@@ -18,7 +18,7 @@ export const endPointsUser = {
     login: `${apin}/login`,
     sendotp: `${apin}/login/sendotp`,
     reset:`${apin}/user/register`,
-    dashboard: `${api2}/dashboard`,
+    dashboard: `${apin}/dashboard`,
 
     // Endpoints for sponsors
     getSponsors: `${apin}/sponsors`,

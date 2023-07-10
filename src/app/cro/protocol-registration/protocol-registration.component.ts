@@ -341,7 +341,7 @@ export class ProtocolRegistrationComponent {
 
 
   SubmitData() {
-    
+ 
     const errorMessages = [];
     const formData: { selectedLabTests: any[], visits: any[] }[] = [];
 
@@ -354,7 +354,7 @@ export class ProtocolRegistrationComponent {
         visits: [] as any[]
 
       };
-      console.log(cardData.selectedLabTests, this.cards.indexOf(card));
+   
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
 
@@ -372,10 +372,16 @@ export class ProtocolRegistrationComponent {
       const combinedErrorMessage = errorMessages.join('\n');
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests in All visits' });
     }
+    else if(this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value){
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
+    
+    }
     else if(this.kitCountval === ''){
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Visit Kit Count' });
       
     }
+ 
+  
    else{
 
     if (this.protocolForm.invalid) {
