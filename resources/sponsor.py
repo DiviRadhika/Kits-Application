@@ -24,6 +24,7 @@ contact_emails = sponsor_ns.model(
         "first_name": fields.String(required=True),
         "last_name": fields.String(required=True),
         "contact": fields.String(required=True),
+        "designation": fields.String(),
     },
 )
 
@@ -36,7 +37,6 @@ sponsor = sponsor_ns.model(
         "legal_sponsor_name": fields.String(required=True),
         "address_1": fields.String(required=True),
         "address_2": fields.String(),
-        "designation": fields.String(),
         "city": fields.String(required=True),
         "district": fields.String(),
         "region": fields.String(required=True),

@@ -58,7 +58,6 @@ visite_meterial_details = cro_protocol_ns.model(
     {
         "visits": fields.List(fields.Nested(meterial_details)),
         "selected_lab_tests": fields.List(fields.String(required=True)),
-        "alternate_names": fields.String(),
     },
 )
 
@@ -68,6 +67,7 @@ visit_kit_details = cro_protocol_ns.model(
         # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
         "meterial_details": fields.List(fields.Nested(visite_meterial_details)),
+        "alternate_names": fields.String(),
     },
 )
 
@@ -220,6 +220,7 @@ class CroProtocol(Resource):
                     # "lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
+                    "alternate_names": item['alternate_names'],
                 }
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)
                 visit_kit_data.save_to_db()
