@@ -9,6 +9,7 @@ class LabtestModel(db.Model):
     # extend_existing=True
     lab_id = db.Column(UUID(as_uuid=True), default=uuid.uuid4, primary_key=True)
     name = db.Column(db.String)
+    classfication = db.Column(db.String)
     """lab_test = db.Column(db.String)
     material = db.Column(db.String)
     size = db.Column(db.String)

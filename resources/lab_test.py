@@ -22,6 +22,7 @@ lab_test = lab_tests_ns.model(
     {
         "name": fields.String(required=True),
         "created_by": fields.String(),
+        "classfication": fields.String(),
     },
 )
 

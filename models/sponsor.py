@@ -14,6 +14,7 @@ class SponsorModel(db.Model):
     legal_sponsor_name = db.Column(db.String)
     address_1 = db.Column(db.String)
     address_2 = db.Column(db.String)
+    designation = db.Column(db.String)
     city = db.Column(db.String)
     district = db.Column(db.String)
     region = db.Column(db.String)

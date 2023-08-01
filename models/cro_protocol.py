@@ -16,6 +16,7 @@ class CroProtocolModel(db.Model):
     cro_id = db.Column(db.String)
     no_of_visits = db.Column(db.Integer)
     no_of_screens = db.Column(db.Integer)
+    special_instructions = db.Column(db.String)
     global_sample_size = db.Column(db.Integer)
     avant_sample_size = db.Column(db.Integer)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))

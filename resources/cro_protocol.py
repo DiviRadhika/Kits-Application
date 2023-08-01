@@ -58,6 +58,7 @@ visite_meterial_details = cro_protocol_ns.model(
     {
         "visits": fields.List(fields.Nested(meterial_details)),
         "selected_lab_tests": fields.List(fields.String(required=True)),
+        "alternate_names": fields.String(),
     },
 )
 
@@ -79,6 +80,7 @@ cro_protocol = cro_protocols_ns.model(
         "sponsor_id": fields.String(required=True),
         "cro_id": fields.String(required=True),
         "no_of_visits": fields.Integer(required=True),
+        "special_instructions": fields.String(),
         "no_of_screens": fields.Integer(required=True),
         "global_sample_size": fields.Integer(required=True),
         "avant_sample_size": fields.Integer(required=True),
