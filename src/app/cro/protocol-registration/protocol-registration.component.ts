@@ -417,7 +417,7 @@ export class ProtocolRegistrationComponent {
         "no_of_screens": Number(this.protocolForm.controls['screens'].value),
         "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
         "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
-        "special_instructions": Number(this.protocolForm.controls['specialInstructions'].value),
+        "special_instructions":this.protocolForm.controls['specialInstructions'].value,
         "screening_kit_details": [
           {
             "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),

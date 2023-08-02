@@ -54,7 +54,15 @@
                                     <input type="text" placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
+                                <div *ngIf="displayValues" class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="formrow-firstname-input" class="form-label">Special
+                                            Instructions</label>
+                                        <textarea class="form-control" rows="3" cols="5"
+                                            formControlName="specialInstructions" id="comment"></textarea>
 
+                                    </div>
+                                </div>
                             </div>
                         </form>
 
@@ -62,10 +70,10 @@
                         <hr class="mt-4 mb-4" />
 
                         <div class="row">
-                            <div class="col-md-12 mb-3">
+                            <div *ngIf="displayValues" class="col-md-12 mb-3">
                                 <h4 class="r-blue-text">Kit Details</h4>
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-12 mb-3" style="margin-top:-5%">
                                 <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
                                     <div class="tab-pane active" role="tabpanel">
 

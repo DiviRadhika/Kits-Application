@@ -143,6 +143,7 @@ export class SampleReportsComponent implements OnInit {
   public preparationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
+    specialInstructions: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
     this.croService.getSites().subscribe((sites) => {
@@ -261,6 +262,9 @@ export class SampleReportsComponent implements OnInit {
       this.protoName = this.protocolIdDetails.protocol_name
       this.preparationForm.controls['protocol_name'].disable()
       this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+      this.preparationForm.controls['specialInstructions'].disable()
+      this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
+     
       this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
