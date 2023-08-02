@@ -11,7 +11,6 @@ class VisitKitDetailsModel(db.Model):
     # visit_no = db.Column(db.Integer)
     lab_test_ids = db.Column(ARRAY(db.String))
     meterial_details = db.Column(JSONB)
-    alternate_names = db.Column(db.String)
 
     @classmethod
     def find_all(cls):

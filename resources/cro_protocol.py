@@ -58,6 +58,7 @@ visite_meterial_details = cro_protocol_ns.model(
     {
         "visits": fields.List(fields.Nested(meterial_details)),
         "selected_lab_tests": fields.List(fields.String(required=True)),
+        "alternate_names": fields.String(),
     },
 )
 
@@ -67,7 +68,6 @@ visit_kit_details = cro_protocol_ns.model(
         # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
         "meterial_details": fields.List(fields.Nested(visite_meterial_details)),
-        "alternate_names": fields.String(),
     },
 )
 
@@ -180,6 +180,7 @@ class CroProtocol(Resource):
             "sponsor_id": request_json["sponsor_id"],
             "cro_id": request_json["cro_id"],
             "no_of_visits": request_json["no_of_visits"],
+            "special_instructions": request_json["special_instructions"],
             "no_of_screens": request_json["no_of_screens"],
         }
         try:
@@ -220,7 +221,6 @@ class CroProtocol(Resource):
                     # "lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
-                    "alternate_names": item['alternate_names'],
                 }
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)
                 visit_kit_data.save_to_db()
