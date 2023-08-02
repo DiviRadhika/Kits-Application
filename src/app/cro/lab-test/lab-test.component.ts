@@ -10,9 +10,9 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./lab-test.component.css']
 })
 export class LabTestComponent implements OnInit {
-  LabDetails: any[]= [];
+  LabDetails: any[] = [];
   allLabDetails: any;
-  materials: any[]= [];
+  materials: any[] = [];
   allmaterials: any;
   page = 1;
   totalCount = 0
@@ -23,59 +23,60 @@ export class LabTestComponent implements OnInit {
   material: boolean = false;
   public labForm: FormGroup = new FormGroup({
     lab_test: new FormControl("", [Validators.required]),
+    classification: new FormControl("")
   })
   labFormval: boolean = false;
-  disableAdd: boolean  = true
+  disableAdd: boolean = true
   totalCountmaterial = 0;
-  constructor(private route: Router, private _cro:CrosService,
+  classifications = [];
+  constructor(private route: Router, private _cro: CrosService,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
-
-  this.labDetailsData();
-  this.meterialsData()
+    this.labDetailsData();
+    this.meterialsData()
   }
-  showLab(){
+  showLab() {
     this.lab = true
-    this.material= false
+    this.material = false
   }
-  showMat(){
+  showMat() {
     this.lab = false
-    this.material= true
+    this.material = true
   }
-  edit(id:any, val: any){
-    this.route.navigate(['/home/cro/updateLabTest',id, val])
+  edit(id: any, val: any) {
+    this.route.navigate(['/home/cro/updateLabTest', id, val])
   }
-  materialCreate(){
+  materialCreate() {
     this.route.navigate(['/home/cro/createLabTest'])
 
   }
-  labCreate(){
+  labCreate() {
     this.labFormval = true
     this.disableAdd = false
 
   }
-  labDetailsData(){
-   this._cro.getLabTests().subscribe((data:any)=>{
+  labDetailsData() {
+    this._cro.getLabTests().subscribe((data: any) => {
       console.log(data)
       this.LabDetails = data
       this.allLabDetails = data
       this.totalCount = this.LabDetails.length
     })
-  }  
-  meterialsData(){
-    this._cro.meterials().subscribe((data:any)=>{
-       console.log(data)
-       this.materials = data
-       this.allmaterials = data
-       this.totalCountmaterial = this.materials.length
-     })
-   }  
-   pageChangem(event: number){
+  }
+  meterialsData() {
+    this._cro.meterials().subscribe((data: any) => {
+      console.log(data)
+      this.materials = data
+      this.allmaterials = data
+      this.totalCountmaterial = this.materials.length
+    })
+  }
+  pageChangem(event: number) {
     this.page = event;
     this.meterialsData()
 
-   }
+  }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -98,50 +99,40 @@ export class LabTestComponent implements OnInit {
       Object.keys(this.labForm.controls).forEach(key => {
         this.labForm.get(key)?.markAsTouched();
       });
-
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Lab Test' });
-  
     }
-   else {
-
+    else {
       const data: any =
       {
         "name": this.labForm.get('lab_test')?.value,
-        "created_by":sessionStorage.getItem('userid')
-        
+        "classfication": this.labForm.get('classification')?.value,
+        "created_by": sessionStorage.getItem('userid')
       }
-      console.log(data)
-    
-        this._cro.createTestDetails(data).subscribe(
-          (data: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
-            console.log(this.route.url);
-            this.labForm.reset()
-            
-    if(this.route.url === '/home/cro/labTestGrid'){
-
+      this._cro.createTestDetails(data).subscribe(
+        (data: any) => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
+          this.labForm.reset()
+          if (this.route.url === '/home/cro/labTestGrid') {
             this.route.navigate(['/home/cro/labTestGrid'])
             this.labDetailsData()
-    }
-    else{
-      this.route.navigate(['/home/cro/labTestgrid'])
-      this.labDetailsData()
-    }
-            this.labFormval = false
-            this.disableAdd = true
-
-          },
-          (err: any) => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
-  
-       
           }
-        );
-      }
-      console.log(this.labForm.value);
-    
+          else {
+            this.route.navigate(['/home/cro/labTestgrid'])
+            this.labDetailsData()
+          }
+          this.labFormval = false
+          this.disableAdd = true
+        },
+        (err: any) => {
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+
+
+        }
+      );
+    }
+
   }
-  deletelab(id: any){
+  deletelab(id: any) {
     this._cro.deleteLab(id).subscribe(
       (data: any) => {
         console.log(data)

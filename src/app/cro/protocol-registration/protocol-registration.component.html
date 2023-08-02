@@ -5,25 +5,25 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-              <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                  <h4  class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Study Registration
-                  </h4>
-                  
-                  <div class="page-title-right">
-                      <ol class="breadcrumb m-0">
-                          <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                          </li>
-                          <li class="breadcrumb-item"><a routerLink="/home/cro/protocolGrid" class="waves-effect">Study</a>
-                                </li>
-                          <li  class="breadcrumb-item active">Add Study Registration</li>
-                        
-                      </ol>
-                  </div>
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Study Registration
+              </h4>
 
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item"><a routerLink="/home/cro/protocolGrid" class="waves-effect">Study</a>
+                  </li>
+                  <li class="breadcrumb-item active">Add Study Registration</li>
+
+                </ol>
               </div>
+
+            </div>
           </div>
-      </div>
-      <p-toast></p-toast>
+        </div>
+        <p-toast></p-toast>
 
         <form [formGroup]="protocolForm">
           <div class="card">
@@ -53,7 +53,7 @@
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
                     <input type="text" formControlName="cro_study_id" class="form-control" id=""
                       placeholder="Enter CRO Study ID">
-                      
+
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -61,32 +61,31 @@
                     <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
                     <select formControlName="selected_sponsor_id" class="form-select form-control"
                       [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
-                      <option  selected value="">Select Sponsor ID</option>
+                      <option selected value="">Select Sponsor ID</option>
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
-                        {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name  }}
+                        {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
                       </option>
                     </select>
                   </div>
                 </div>
-             
+
 
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Global Sample Size</label>
-                    <input type="number" formControlName="global_sample_size" class="form-control" id=""
-                      placeholder=" "
+                    <input type="number" formControlName="global_sample_size" class="form-control" id="" placeholder=" "
                       [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
-                  (&nbsp;<input class="form-check-input" (change)="avantCheck($event)" formControlName="avantc" type="checkbox"
-                    value="checked" id="debugInfo" />
+                    (&nbsp;<input class="form-check-input" (change)="avantCheck($event)" formControlName="avantc"
+                      type="checkbox" value="checked" id="debugInfo" />
                     &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
-            
-                    <input type="number" formControlName="avant_sample_size" (blur)="getsize()" class="form-control" id=""
-                      placeholder=" "
+
+                    <input type="number" formControlName="avant_sample_size" (blur)="getsize()" class="form-control"
+                      id="" placeholder=" "
                       [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
                 </div>
@@ -113,6 +112,15 @@
                       [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Special Instructions</label>
+                    <textarea class="form-control" rows="5" cols="5" formControlName="specialInstructions"
+                      id="comment"></textarea>
+
+
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -124,10 +132,10 @@
                 <!-- <h4 class="r-blue-text">Kit Details</h4> -->
               </div>
               <div class="col-md-12 mb-3">
-          
+
 
                 <div class="tab-content pt-3 text-muted">
-                   </div>
+                </div>
               </div>
             </div>
 
@@ -159,7 +167,8 @@
                       <div class="col-md-1 mb-3"></div>
                       <div class="col-md-8 mb-3">
                         <p-multiSelect [options]="matList" styleClass="custom-multiselect" [(ngModel)]="selectedTests"
-                          formControlName="labTestValue" optionLabel="name" defaultLabel="Select Lab Tests"  [class.is-invalid]="shouldShowRequired('labTestValue') && protocolForm.get('labTestValue')?.touched"></p-multiSelect>
+                          formControlName="labTestValue" optionLabel="name" defaultLabel="Select Lab Tests"
+                          [class.is-invalid]="shouldShowRequired('labTestValue') && protocolForm.get('labTestValue')?.touched"></p-multiSelect>
                       </div>
                       <br>
                       <br>
@@ -188,7 +197,7 @@
               </form>
 
               <div class="row">
-                
+
 
                 <div class="col-md-8 mb-3"></div>
 
@@ -218,7 +227,7 @@
                           <th scope="row">
                             <select (change)="onScreenKitChange($event,j)" formControlName="meterial_id"
                               class="form-select form-control">
-                              <option  selected value="">Select Materials</option>
+                              <option selected value="">Select Materials</option>
                               <option *ngFor="let lab of labMatTestsList" [value]="lab.meterial_id">
                                 {{ lab.name }}
                               </option>
@@ -227,7 +236,7 @@
 
                           <td>
                             <select formControlName="size" class="form-select form-control">
-                              <option  selected value="">Select Size</option>
+                              <option selected value="">Select Size</option>
                               <option *ngFor="let lab of getSizes(j)">
                                 {{ lab }}
                               </option>
@@ -255,12 +264,13 @@
                             ></i> -->
                           </td>
                           <td>
-                            <button type="button" (click)="removeMatScreenKit(j)"
-                              class="btn btn-danger">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            <button type="button" (click)="removeMatScreenKit(j)" class="btn btn-danger">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                               </svg>
-                              </button>
+                            </button>
                             <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
                           </td>
                           <!-- <td>
@@ -268,7 +278,7 @@
                               class="btn btn-danger ml-3 mt-2">Delete</button>
                         
                           </td> -->
-                      
+
                         </tr>
 
 
@@ -285,7 +295,7 @@
               </div>
             </div>
           </p-tabPanel>
-          
+
           <p-tabPanel header="Visits" *ngFor="let card of cards; let i = index" header="Visit {{i+1}}">
 
             <div class="row">
@@ -294,8 +304,11 @@
               </div>
 
               <div class="col-md-3 mb-3">
-                <input type="text" [(ngModel)]="kitCountval"  class="form-control"
-                  placeholder="Enter Kit Count" />
+                <input type="text" [(ngModel)]="kitCountval" class="form-control" placeholder="Enter Kit Count" />
+              </div>
+              
+              <div class="col-md-3 mb-3">
+              <input type="text"  class="form-control"  placeholder="Alternate Week Name" [(ngModel)]="alternatenames[i]" value="" />
               </div>
             </div>
 
@@ -306,23 +319,19 @@
                 <div class="col-md-3 mb-3">
                   <button type="button" (click)="dialogv()" class="btn btn-primary  waves-light r-blue">Select Lab
                     Tests</button>
-
-
                 </div>
                 <div class="col-md-2 mb-3" align="right" style="margin-left: -11%;">
-                  <button type="button"  class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
-                   </button>
-                 
+                  <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
+                  </button>
                 </div>
-
                 <p-dialog [class.overlay]="displayv" (onShow)="disableScroll()" (onHide)="enableScroll()"
                   header="Select Lab Tests" [(visible)]="displayv">
                   <div class="row">
                     <div class="col-md-1 mb-3"></div>
                     <div class="col-md-8 mb-3">
                       <p-multiSelect [options]="matList" [(ngModel)]="selectedLabTests[i]"
-                      defaultLabel="Select Lab Tests" optionLabel="name" optionValue="name"></p-multiSelect>
-                  
+                        defaultLabel="Select Lab Tests" optionLabel="name" optionValue="name"></p-multiSelect>
+
                     </div>
                     <br>
                     <br>
@@ -341,25 +350,19 @@
                 </p-dialog>
 
                 <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
-          
+
               </div>
-              
-                  <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
-                  <div class="col-md-3 mt-2 mb-3">
-                    <h6 style="color: black" *ngIf="testDisplayv"> <b>&nbsp;&nbsp;Selected Lab Tests</b> </h6>
 
-                    <h6 style="color: black" *ngFor="let material of selectedLabTests[i]  let k = index">
-                      &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ material }}</h6>
-                      </div>
-
-<div>
-           
-            </div>
-
+              <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
+              <div class="col-md-3 mt-2 mb-3">
+                <h6 style="color: black" *ngIf="testDisplayv"> <b>&nbsp;&nbsp;Selected Lab Tests</b> </h6>
+                <h6 style="color: black" *ngFor="let material of selectedLabTests[i]  let k = index">
+                  &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ material }}</h6>
+              </div>
+              <div>
+              </div>
               <form [formGroup]="card.form">
                 <div formArrayName="visits">
-
-                  
                   <table class="table table-striped mb-0">
                     <thead Style="background:#EEE">
                       <tr>
@@ -369,18 +372,14 @@
                         <th>Frozen at Site</th>
                         <th>Image</th>
                         <th>Delete</th>
-
                       </tr>
                     </thead>
-
-
                     <tbody>
-
                       <tr *ngFor="let row of getRows(i).controls; let j = index" [formGroupName]="j">
                         <th scope="row">
                           <select formControlName="meterial_id" class="form-select form-control"
                             aria-placeholder="Select Test" (change)="onMeterialIdChange($event, i, j)">
-                            <option  selected value="">Select Materials</option>
+                            <option selected value="">Select Materials</option>
                             <option *ngFor="let lab of labMatTestsList" [value]="lab.meterial_id">
                               {{ lab.name }}
                             </option>
@@ -388,7 +387,7 @@
                         </th>
                         <td>
                           <select formControlName="size" class="form-select form-control">
-                            <option  selected value="">Select SiZe</option>
+                            <option selected value="">Select SiZe</option>
                             <option *ngFor="let size of getSizesv(i, j)" [value]="size">{{ size }}</option>
                           </select>
 
@@ -404,17 +403,17 @@
                           <img [src]="row.get('image')?.value" width="30" height="30" *ngIf="row.get('image')?.value"
                             alt="Material Image" />
                         </td>
-
                         <!-- <td>
                           <button type="button" (click)="deleteRow(i, j)"
                             class="btn btn-danger ml-3 mt-2">Delete</button>
 
                         </td> -->
                         <td>
-                          <button type="button" (click)="deleteRow(i, j)"
-                            class="btn btn-danger ml-3 mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                              class="bi bi-x" viewBox="0 0 16 16">
+                              <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg></button>
 
                         </td>
@@ -422,10 +421,7 @@
                   </table>
 
                 </div>
-
               </form>
-
-
               <!-- <button (click)="onSubmit()">submit</button> -->
             </div>
             <!-- </p-accordionTab>
@@ -437,9 +433,9 @@
             <!-- </button> -->
 
             <br>
-           </p-tabPanel>
+          </p-tabPanel>
 
-           <div class="col-md-12 mb-3" align="right">
+          <div class="col-md-12 mb-3" align="right">
             <div class="mb-2 text-right" width="100%">
               <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
                 style="width: 150px; height: 40px" (click)="SubmitData()">
@@ -448,7 +444,7 @@
             </div>
           </div>
         </p-tabView>
-       
+
 
         <!-- end page title -->
 

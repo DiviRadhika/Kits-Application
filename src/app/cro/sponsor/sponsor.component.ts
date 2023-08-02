@@ -121,7 +121,8 @@ export class SponsorComponent implements OnInit {
         first_name: [contact.first_name],
         last_name: [contact.last_name],
         email: [contact.email],
-        contact: [contact.contact]
+        contact: [contact.contact],
+        designation: [contact.designation]
         // name: [contact.name],
         // email: [contact.email],
       });
@@ -145,7 +146,8 @@ export class SponsorComponent implements OnInit {
       first_name: [''],
       last_name: [''],
       email: [''],
-      contact: ['']
+      contact: [''],
+      designation: ['']
 
     });
   }

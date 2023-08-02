@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ProtocolRegistrationComponent {
   selectedLabTests: any[] = [];
+  alternatenames: any[] = [];
   labMatTestsList: Array<any> = [];
   screening: boolean = true;
   visit: boolean = false;
@@ -72,7 +73,7 @@ export class ProtocolRegistrationComponent {
     // selected_vkit_count:new FormControl("", [Validators.required]),
     selected_skit_count: new FormControl("", [Validators.required]),
     labTestValue: new FormControl("", [Validators.required]),
-    // labTestValuev: new FormControl("", [Validators.required]),
+    specialInstructions: new FormControl(""),
     avantc: new FormControl(false)
   })
 
@@ -343,7 +344,7 @@ export class ProtocolRegistrationComponent {
   SubmitData() {
  
     const errorMessages = [];
-    const formData: { selectedLabTests: any[], visits: any[] }[] = [];
+    const formData: { selectedLabTests: any[], alternate_names:any,  visits: any[] }[] = [];
 
     // Iterate over the cards and access their form values
     for (const [index, card] of this.cards.entries()) {
@@ -351,9 +352,11 @@ export class ProtocolRegistrationComponent {
       const rowsArray = cardForm.get('visits') as FormArray;
       const cardData = {
         selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
+        alternate_names:this.alternatenames[this.cards.indexOf(card)] ,
         visits: [] as any[]
 
       };
+      
    
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
@@ -406,6 +409,7 @@ export class ProtocolRegistrationComponent {
         "no_of_screens": Number(this.protocolForm.controls['screens'].value),
         "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
         "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
+        "special_instructions": Number(this.protocolForm.controls['specialInstructions'].value),
         "screening_kit_details": [
           {
             "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
@@ -532,6 +536,7 @@ export class ProtocolRegistrationComponent {
     });
     this.cards.push({ form: cardForm });
     this.selectedLabTests.push([]);
+    this.alternatenames.push([])
   }
   onMeterialIdChange(event: any, cardIndex: number, rowIndex: number) {
     const selectedValue = event.target.value;
@@ -601,6 +606,7 @@ export class ProtocolRegistrationComponent {
   }
   // selectedLabTests: any[] = [];
   createRow(): FormGroup {
+    
     return this.fb.group({
       meterial_id: ['', Validators.required],
       size: ['', Validators.required],
@@ -622,31 +628,6 @@ export class ProtocolRegistrationComponent {
 
 
 
-  onSubmit() {
-    const formData: { selectedLabTests: any[], visits: any[] }[] = [];
-
-    // Iterate over the cards and access their form values
-    for (const card of this.cards) {
-      const cardForm = card.form;
-      const rowsArray = cardForm.get('visits') as FormArray;
-      const cardData = {
-        selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
-        visits: [] as any[]
-      };
-
-
-      for (const row of rowsArray.controls) {
-        const rowForm = row as FormGroup;
-        cardData.visits.push(rowForm.value);
-      }
-
-      formData.push(cardData);
-    }
-
-
-
-
-  }
 
 
 
