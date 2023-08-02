@@ -236,7 +236,6 @@ export class KitPreprationComponent implements OnInit {
     
      
       this.vcount = this.protocolIdDetails.no_of_visits
-      console.log(this.vMatDetails, 'details');
       this.visitRecords = []
       this.visitRecordsRow = []
       this.tets = []

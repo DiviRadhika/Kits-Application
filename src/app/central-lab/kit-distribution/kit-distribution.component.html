@@ -231,7 +231,7 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="Visit {{i+1}}">
+                                                header="{{item.alternate_names}}">  >
 
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Visit Kit Count : {{vcount}}

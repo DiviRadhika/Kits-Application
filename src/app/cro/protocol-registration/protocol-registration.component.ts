@@ -344,6 +344,7 @@ export class ProtocolRegistrationComponent {
   SubmitData() {
  
     const errorMessages = [];
+    const errorMessagesalter = [];
     const formData: { selectedLabTests: any[], alternate_names:any,  visits: any[] }[] = [];
 
     // Iterate over the cards and access their form values
@@ -361,7 +362,10 @@ export class ProtocolRegistrationComponent {
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
 
-      } else {
+      }else if(cardData.alternate_names.length === 0){
+        errorMessagesalter.push(`Please give Alternate Week Name in All visits`);
+      }
+       else {
         console.log(`selectedLabTests is not empty for card at index ${index}`);
       }
       for (const row of rowsArray.controls) {
@@ -374,6 +378,10 @@ export class ProtocolRegistrationComponent {
     if (errorMessages.length > 0) {
       const combinedErrorMessage = errorMessages.join('\n');
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests in All visits' });
+    }
+    else if(errorMessagesalter.length > 0) {
+      const combinedErrorMessage = errorMessagesalter.join('\n');
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please give Alternate Week Name in All visits' });
     }
     else if(this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value){
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
@@ -422,7 +430,6 @@ export class ProtocolRegistrationComponent {
         "visit_kit_details": [
           {
             "visit_kit_count": Number(this.kitCountval),
-            "lab_test_ids": this.multipleTestsvId,
             "meterial_details": formData
           }
         ]

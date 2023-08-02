@@ -114,7 +114,7 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel *ngFor="let item of vMatDetails let k = index"
-                                                header="visit{{k+1}}">
+                                            header="{{item.alternate_names}}">  
                                                 <h5>Selected Lab Tests</h5>
                                                 <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
                                                     <p>{{items}}</p>

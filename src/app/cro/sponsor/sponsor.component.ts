@@ -238,12 +238,10 @@ export class SponsorComponent implements OnInit {
 
 
       }
-      console.log(obj)
 
       if (this.isEdit) {
         obj.sponsor_id = this.id
         obj.notifier_details = this.editcontactsForm.value.editcontacts
-        console.log(obj)
         this._cro.updateSponsorDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
