@@ -72,8 +72,8 @@ export class SponsorComponent implements OnInit {
           this.sponsorForm.controls['country'].setValue(data.country)
           this.sponsorForm.controls['country'].setValue(data.country)
           this.sponsorForm.controls['sponsor_code'].disable()
-          this.sponsorForm.controls['sponsor_name'].disable()
-          this.sponsorForm.controls['legal_sponsor_name'].disable()
+          // this.sponsorForm.controls['sponsor_name'].disable()
+          // this.sponsorForm.controls['legal_sponsor_name'].disable()
           this.sponsorForm.controls['email'].disable()
         });
 

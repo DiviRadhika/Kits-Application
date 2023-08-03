@@ -30,8 +30,8 @@ export class CROcreateComponent implements OnInit {
           this.getcroData = data
           this.CroForm.patchValue(data)
           this.CroForm.controls['cro_code'].disable()
-          this.CroForm.controls['cro_name'].disable()
-          this.CroForm.controls['legal_cro_name'].disable()
+          // this.CroForm.controls['cro_name'].disable()
+          // this.CroForm.controls['legal_cro_name'].disable()
           // this.CroForm.controls['email'].disable()
 
         });

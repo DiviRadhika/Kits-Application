@@ -67,13 +67,17 @@ export class UserCreateComponent implements OnInit {
 
         this.adminService.getUserbyId(data.id).subscribe((data: any) => {
       
-
+       
           this.getUserData = data;
           // this.getUserData.status = 'inactive'
           this.userForm.patchValue(this.getUserData);
+    
+          if(this.getUserData.role === 'admin' || this.getUserData.role === 'admin'){
+            this.userForm.controls['role'].setValue('Admin')
+          }
           this.userForm.controls['email'].disable();
           this.userForm.controls['role'].disable();
-
+// this.roleChange(event);
           if(this.getUserData.role === 'CRO'){
             this.sponsor = false
             this.site = false
@@ -82,15 +86,13 @@ export class UserCreateComponent implements OnInit {
         
           }
            else if(this.getUserData.role === 'Sponsor'){
+          console.log(this.getUserData.sponsor_id)
             this.sponsor = true
             this.site = false
             this.getSponsorDetails()
+            this.userForm.controls['sId'].setValue(this.getUserData.sponsor_id)
             this.userForm.controls['sId'].setValidators(Validators.required)
             this.userForm.controls['sId'].updateValueAndValidity()
-            this.userForm.controls['sId'].setValue(this.getUserData.sponsor_id)
-            
-          
-        
            }
            else if(this.getUserData.role === 'CRA'){
 
@@ -132,14 +134,14 @@ export class UserCreateComponent implements OnInit {
   }
   roleChange(event: any){
     this.idValue = event.target.value
-  if(this.idValue === 'CRO'){
+  if(this.idValue === 'CRO' ){
     this.sponsor = false
     this.site = false
     this.userForm.controls['sId'].clearValidators()
     this.userForm.controls['sId'].updateValueAndValidity()
 
   }
-   else if(this.idValue === 'Sponsor'){
+   else if(this.idValue === 'Sponsor' || this.getUserData.role === 'Sponsor'){
     this.sponsor = true
     this.site = false
     this.getSponsorDetails()
@@ -147,7 +149,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
-   else if(this.idValue === 'CRA'){
+   else if(this.idValue === 'CRA' || this.getUserData.role === 'CRA'){
     this.sponsor = false
     this.site = true
     this.getSitedetails()
@@ -213,6 +215,8 @@ export class UserCreateComponent implements OnInit {
   }
   
   submit(): void {
+  
+   
     const emailvalue = this.userForm.controls['email'].value.toLowerCase();
 
     if (this.userForm.invalid) {

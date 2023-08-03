@@ -5,8 +5,8 @@
 
       <!-- start page title -->
       <div class="row">
-        <div class="col-12">
-          <div  *ngIf="!view" class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <div  class="col-12">
+          <div style="padding:1px"   *ngIf="!view" class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Sponsor
             </h4>
             <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Sponsor
@@ -22,7 +22,7 @@
             </div>
 
           </div>
-          <div *ngIf="view" class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <div style="padding:1px" *ngIf="view" class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View  Sponsor
             </h4>
            
@@ -296,9 +296,10 @@
 
              
               <div *ngIf="!isEdit" class="row">
-                <div class="col-3 mt-auto mb-2 ">
-                  <button (click)="addContact()" class="btn btn-primary">Add Secondary Contct Details</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button  style="font-size: 11px; margin-right: -20px" (click)="addContact()" class="btn btn-primary">Add Secondary Contact Details</button>
                 </div>
+               
                 <div class="col-md-8 mb-3"></div>
 
                 <div *ngIf="table" class="col-md-12 mb-3">
@@ -367,9 +368,10 @@
                 </div>
               </div>
               <div *ngIf="isEdit" class="row" >
-                <div class="col-3 mt-auto mb-2 ">
-                  <button *ngIf="!view" (click)="addContacte()" class="btn btn-primary">Add Secondary Contct Details</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button  style="font-size: 11px; margin-right: -20px" (click)="addContacte()" class="btn btn-primary">Add Secondary Contact Details</button>
                 </div>
+             
                 <div class="col-md-8 mb-3"></div>
 
                 <div *ngIf=tableE class="col-md-12 mb-3">
@@ -460,7 +462,7 @@
 
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="font-size: 11px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>

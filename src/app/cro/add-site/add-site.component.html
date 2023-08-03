@@ -6,7 +6,7 @@
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
             <div *ngIf="!view">
               <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Site</h4>
               <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Site</h4>
@@ -318,10 +318,10 @@
 
 
               <div *ngIf="!isEdit" class="row">
-
-                <div class="col-3 mt-auto mb-2 ">
-                  <button (click)="addInvestigators()" class="btn btn-primary">Add CRA</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button style="margin-right: -17px" (click)="addInvestigators()" class="btn btn-primary">Add CRA</button>
                 </div>
+               
                 <div class="col-md-8 mb-3"></div>
 
                 <div  *ngIf="table" class="col-md-12 mb-3">
@@ -346,7 +346,7 @@
                               *ngFor="let invest of investigatorForm.get('investigator').controls; let i = index;">
                               <th>
                                 <select formControlName="role" class="form-select" aria-label="Default select example">
-                                  <option selected value="">Select Investigator</option>
+                                  <option selected value="">Select CRA</option>
                                   <option *ngFor="let option of investigate" [value]="option">{{ option }}</option>
                                 </select>
                               </th>
@@ -372,8 +372,9 @@
                               <td>
                                 <button type="button" (click)="removeSite(i)"
                                   class="btn btn-danger">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
                                   </svg>
                                   </button>
                                 <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
@@ -389,10 +390,14 @@
                 </div>
               </div>
               <div *ngIf="isEdit" class="row">
-
-                <div class="col-3 mt-auto mb-2 ">
-                  <button *ngIf="!view" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button style="margin-right: -17px" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
                 </div>
+               
+                <!-- <div class="col-3 mt-auto mb-2 ">
+
+                  <button *ngIf="!view" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                </div> -->
                 <div class="col-md-8 mb-3"></div>
 
                 <div *ngIf ="tableE"
@@ -417,7 +422,7 @@
                               *ngFor="let invest of investigatorFormedit.get('investigatoredit').controls; let i = index;">
                               <th>
                                 <select formControlName="role" class="form-select" aria-label="Default select example">
-                                  <option selected value="">Select Investigator</option>
+                                  <option selected value="">Select CRA</option>
                                   <option *ngFor="let option of investigate" [value]="option">{{ option }}</option>
                                 </select>
                               </th>

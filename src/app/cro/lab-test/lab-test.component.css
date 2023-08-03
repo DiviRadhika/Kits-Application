@@ -1,0 +1,86 @@
+/* Add this CSS to your stylesheet or <style> tag */
+#datatable,
+#labdatatable {
+  border-collapse: collapse; /* Merge the borders between cells */
+  width: 100%; /* Make the table span the entire width */
+  border-spacing: 0; /* Reduce the space between cells */
+}
+
+#datatable th,
+#labdatatable th,
+#datatable td,
+#labdatatable td {
+  border: 1px solid #ccc; /* Add a 1px solid border to header cells and data cells */
+  padding: 8px; /* Add some padding to cells for better appearance */
+}
+
+#datatable tbody tr,
+#labdatatable tbody tr {
+  margin-bottom: 5px; /* Adjust the value to decrease the space between rows */
+}
+
+#datatable td,
+#labdatatable td {
+  padding: 5px; /* Adjust the value to decrease the space inside each cell */
+}
+
+/* Reduce the size of the icons */
+#datatable .edit-btn,
+#labdatatable .edit-btn {
+  font-size: 14px;
+}
+
+#datatable .edit-btn svg,
+#labdatatable .edit-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+#datatable .edit-btn i,
+#labdatatable .edit-btn i {
+  font-size: 14px;
+}
+
+
+
+/* Add this CSS to your stylesheet or <style> tag */
+#labdatatable {
+    border-collapse: collapse; /* Merge the borders between cells */
+    width: 100%; /* Make the table span the entire width */
+    border-spacing: 0; /* Reduce the space between cells */
+  }
+  
+  #labdatatable th,
+  #labdatatable td {
+    border: 1px solid #ccc; /* Add a 1px solid border to header cells and data cells */
+    padding: 8px; /* Add some padding to cells for better appearance */
+  }
+  
+  #labdatatable tbody tr {
+    margin-bottom: 5px; /* Adjust the value to decrease the space between rows */
+  }
+  
+  #labdatatable td {
+    padding: 5px; /* Adjust the value to decrease the space inside each cell */
+  }
+  
+  /* Reduce the size of the icons */
+  #labdatatable .edit-btn {
+    font-size: 14px;
+  }
+  
+  #labdatatable .edit-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  #labdatatable .edit-btn i {
+    font-size: 14px;
+  }
+  
+/* Adjust the delete button size */
+#labdatatable .btn.btn-danger {
+    font-size: 8px;
+    padding: 4px 8px; /* Adjust the padding to control the button size */
+  }
+  

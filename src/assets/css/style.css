@@ -175,3 +175,32 @@ hr {
 	background:#20456a;
 	color:#FFF;
 }
+
+/* Add this CSS to your stylesheet or <style> tag */
+#datatable tbody tr {
+	margin-bottom: 5px; /* Adjust the value to decrease the space between rows */
+	height: 30px; /* Adjust the value to reduce the height of rows */
+  }
+  
+  #datatable tbody td {
+	padding: 5px; /* Adjust the value to decrease the space inside each cell */
+  }
+  
+  #datatable .edit-btn {
+	font-size: 12px; /* Adjust the value to reduce the font size and scale the button and its content */
+	line-height: 1; /* Set line-height to 1 to reduce any extra spacing inside the button */
+	padding: 4px 8px; /* Adjust the padding to control the button size */
+	/* width: 15px */
+  }
+  
+  #datatable .edit-btn svg {
+	width: 12px; /* Adjust the value to reduce the width of the icon */
+	height: 16px; /* Adjust the value to reduce the height of the icon */
+  }
+
+  /* Add this CSS to your stylesheet or <style> tag */
+
+
+
+  
+  

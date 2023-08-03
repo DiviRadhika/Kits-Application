@@ -46,8 +46,8 @@ export class AddSiteComponent {
           this.setContactFormValues(this.notifierEmails)
           this.getData = data
           this.siteForm.controls['site_data_code'].disable();
-          this.siteForm.controls['site_data_name'].disable();
-          this.siteForm.controls['legal_site_data_name'].disable();
+          // this.siteForm.controls['site_data_name'].disable();
+          // this.siteForm.controls['legal_site_data_name'].disable();
           // this.siteForm.controls['email'].disable();
         });
       }

@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
-            { label: 'CRO Create', link: '/home/admin/croGrid' },
-            { label: 'User Create', link: '/home/admin/userGrid' },
+            { label: 'CRO', link: '/home/admin/croGrid' },
+            { label: 'User', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
           // ]
         

@@ -1,0 +1,10 @@
+#datatable tbody tr {
+    margin-bottom: 5px; /* Adjust the value to decrease the space between rows */
+  }
+  
+  #datatable tbody td {
+    padding: 5px; /* Adjust the value to decrease the space inside each cell */
+  }
+  #datatable thead th {
+    padding: 5px; /* Adjust the value to decrease the space inside each header cell */
+  }
