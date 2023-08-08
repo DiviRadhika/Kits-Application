@@ -164,8 +164,8 @@ export class SampleCollectionComponent implements OnInit {
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      this.scount = this.protocolIdDetails.no_of_screens
-      this.vcount = this.protocolIdDetails.no_of_visits
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      this.vcount = protocols.visit_kit_details[0].visit_kit_count
       console.log(this.vMatDetails, 'details');
 
       this.tets = []

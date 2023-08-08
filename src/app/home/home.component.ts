@@ -130,6 +130,7 @@ export class HomeComponent implements OnInit {
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
+            // { label: 'Lab Creation', link: '/home/cro/labGrid' },
             { label: 'Study Summary', link: '/home/cro/protocolGrid' }
           // ]
         // },
@@ -143,15 +144,30 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
-            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+            
             { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
             { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
             
           // ]
         // },
         // Other menu items for admin role...
+      ];
+    }
+    else if(this.role === 'Central Lab-Preparation'){
+      this.menuItems = [
+
+            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Verification'){
+      this.menuItems = [
+
+        { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Distribution'){
+      this.menuItems = [
+        { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
       ];
     }
     else if(this.role === 'CRA'){

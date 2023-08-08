@@ -26,6 +26,8 @@ import { ProtocolGridComponent } from './protocol-grid/protocol-grid.component';
 import {DataViewModule} from 'primeng/dataview';
 import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
 import {CalendarModule} from 'primeng/calendar';
+import { LabTestCreateComponent } from './lab-test-create/lab-test-create.component';
+import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.component';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -39,7 +41,9 @@ import {CalendarModule} from 'primeng/calendar';
     VisitComponent,
     ProtocolViewComponent,
     ProtocolGridComponent,
-    EditProtocolComponent
+    EditProtocolComponent,
+    LabTestCreateComponent,
+    LabCreateGridComponent
   ],
   imports: [
 

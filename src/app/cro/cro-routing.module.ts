@@ -12,6 +12,8 @@ import { VisitComponent } from './visit/visit.component';
 import { ProtocolViewComponent } from './protocol-view/protocol-view.component';
 import { ProtocolGridComponent } from './protocol-grid/protocol-grid.component';
 import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
+import { LabTestCreateComponent } from './lab-test-create/lab-test-create.component';
+import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.component';
 
 
 const routes: Routes = [
@@ -23,7 +25,11 @@ const routes: Routes = [
   {path:'labTestGrid', component:LabTestComponent},
   {path:'labTestgrid', component:LabTestComponent},
   {path: 'createLabTest', component:LabCreateComponent},
+  {path: 'createlabtest', component:LabTestCreateComponent},
+  {path: 'labGrid', component:LabCreateGridComponent},
   {path:'updateLabTest/:id/:val', component:LabCreateComponent},
+  {path:'updatecLabTest/:id/:val', component:LabTestCreateComponent},
+  
 
   {path:'csponsor', component:SponsorComponent},
   {path:'sponsorGrid', component:SponsorGridComponent},

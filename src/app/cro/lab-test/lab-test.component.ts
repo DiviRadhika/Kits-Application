@@ -51,7 +51,9 @@ export class LabTestComponent implements OnInit {
     this.route.navigate(['/home/cro/createLabTest'])
 
   }
+ 
   labCreate() {
+    // this.route.navigate(['/home/cro/createlabtest'])
     this.labFormval = true
     this.disableAdd = false
 

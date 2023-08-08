@@ -35,7 +35,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   skDetails: any[] = [];
   vkDetails: any;
   value: any;
-  sponsers: Array<any> = [];
+  sponsers: Array<any> = [];  pdfValuesfull: Array<any> = [];  pdfValuesfullv: Array<any> = [];
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
   date: string;
@@ -54,7 +54,10 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   };
+  resultsfull: any[] = [];
+  resultsfullv: any[][] = [];
   resultsv: any[][] = [];
+  resultsvfull: any[][] = [];
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -146,8 +149,8 @@ export class SampleAcknowledgementComponent implements OnInit {
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      this.scount = this.protocolIdDetails.no_of_screens
-      this.vcount = this.protocolIdDetails.no_of_visits
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      this.vcount = protocols.visit_kit_details[0].visit_kit_count
       console.log(this.vMatDetails, 'details');
 
       this.tets = []
@@ -326,31 +329,17 @@ export class SampleAcknowledgementComponent implements OnInit {
       // protocol.pdf =  this.pdfValues[index].pdf
 
     })
-    // for(let i = 0; i<this.skDetails.length; i++ ) {
-    // for(let j=0 ; j<i; j++){
-    // console.log(this.pdfValues[i], this.pdfValues);
-    // this.pdfValues.forEach((k:any, index: any)=>{
-    //   if(index != k[index].row){
-
-
-    //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
-
-    //   // }
-
-    // }
-    // })
-
-
-    // }
-    // this.skDetails.push(this.pdfValues)
+   
     const data = {
       "protocol_id": this.uuid,
       "protocol_name": this.protoName,
       "screening_pdf_details": [
-        this.pdfValues
+        this.pdfValues,
+        // this.pdfValuesfull
       ],
       "visit_pdf_details": [
-        this.pdfValuesv
+        this.pdfValuesv,
+        // this.pdfValuesfullv
       ],
 
       "screening_kit_details": [
@@ -405,6 +394,52 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  uploadFileFull(evt: any, rowIndex: any) {
+    let uploadedFilesfull = [];
+    this.files1 = evt.target.files;
+    uploadedFilesfull[rowIndex] = this.files1 ? 'File Uploaded' : '';
+
+    // Update the corresponding span element with the file status
+    const statusElement = document.getElementById(`status_${rowIndex}`);
+    if (statusElement) {
+      statusElement.textContent = uploadedFilesfull[rowIndex];
+    }
+
+
+    const file = this.files1[0];
+    this.file2 = this.files1[0].name;
+    const fileSize = this.files1[0].size;
+    if (fileSize >= 1084) {
+    }
+    if (this.files1 && file) {
+
+
+      const reader = new FileReader();
+
+      reader.onload = this._handleReaderLoadedfull.bind(this, rowIndex);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoadedfull(readerEvt: any, id: any) {
+
+    const binaryString = id.target.result;
+    this.base64textString = btoa(binaryString);
+    this.bas2 = 'data:text/html;base64,' + this.base64textString;
+    this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
+
+    const existingPdf = this.pdfValuesfull.find((pdfValue: any) => pdfValue.row === readerEvt);
+    this.resultsfull[readerEvt] = this.bas2;
+
+    if (existingPdf) {
+      // PDF already exists for the row, remove it
+      const pdfIndex = this.pdfValuesfull.indexOf(existingPdf);
+      this.pdfValuesfull.splice(pdfIndex, 1);
+    }
+
+    ;
+
+  }
 
   uploadFile(evt: any, rowIndex: any) {
     let uploadedFiles = [];
@@ -457,6 +492,67 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
 
+
+  uploadFilevfull(evt: any, tabindex: any, rowIndex: any) {
+
+
+    this.files1 = evt.target.files;
+
+
+    const file = this.files1[0];
+    this.file2 = this.files1[0].name;
+    const fileSize = this.files1[0].size;
+    if (fileSize >= 1084) {
+    }
+    if (this.files1 && file) {
+
+
+      const reader = new FileReader();
+
+      reader.onload = this._handleReaderLoadedvfull.bind(this, tabindex, rowIndex);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoadedvfull(readerEvt: any, rowindex: any, id: any) {
+
+
+
+    const binaryString = id.target.result;
+    this.base64textString = btoa(binaryString);
+    this.bas2 = 'data:text/html;base64,' + this.base64textString;
+    this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
+
+    // const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
+
+    const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
+
+  // Ensure the results array has the necessary dimensions
+  if (!this.resultsvfull[readerEvt]) {
+    this.resultsvfull[readerEvt] = [];
+  }
+
+  // Store the uploaded result in the resultsv array
+  // this.resultsv[readerEvt][rowindex] = uploadedResult;
+  this.resultsvfull[readerEvt][rowindex]  = this.bas2;
+
+
+
+    const existingPdf = this.pdfValuesfullv.find((pdfValue: any) => pdfValue.visit === readerEvt);
+
+
+    if (existingPdf) {
+      if (this.pdfValuesfullv.find((pdfValue: any) => pdfValue.row === rowindex)) {
+        // PDF already exists for the row, remove it
+        const pdfIndex = this.pdfValuesfullv.indexOf(existingPdf);
+        this.pdfValuesfullv.splice(pdfIndex, 1);
+      }
+    }
+
+    this.pdfValuesfullv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
+
+
+  }
 
 
 
@@ -533,13 +629,14 @@ export class SampleAcknowledgementComponent implements OnInit {
 
     // Create a Blob from the binary data
     const blob = new Blob([binaryArray], { type: 'application/pdf' });
-
+    console.log(blob)
     // Create a URL for the Blob
     const url = URL.createObjectURL(blob);
-
+    console.log(url)
     // Create a link element and set its attributes
     const link = document.createElement('a');
     link.href = url;
+    console.log(link.href)
     link.download = 'downloaded-file.pdf';
 
     // Programmatically click the link to trigger the download
@@ -549,6 +646,9 @@ export class SampleAcknowledgementComponent implements OnInit {
     URL.revokeObjectURL(url);
 
   }
+ 
+
+
 }
 
 

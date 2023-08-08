@@ -31,7 +31,7 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Central Lab','Sponsor','CRA'];
+  options: string[] = ['Admin','CRO','Central Lab','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution'];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
@@ -167,6 +167,27 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
    }
    else if(this.idValue === 'CRO'){
+    this.sponsor = false
+    this.site = false
+    this.userForm.controls['sId'].clearValidators()
+    this.userForm.controls['sId'].updateValueAndValidity()
+
+   }
+   else if(this.idValue === 'Central Lab-Distribution'){
+    this.sponsor = false
+    this.site = false
+    this.userForm.controls['sId'].clearValidators()
+    this.userForm.controls['sId'].updateValueAndValidity()
+
+   }
+   else if(this.idValue === 'Central Lab-Verification'){
+    this.sponsor = false
+    this.site = false
+    this.userForm.controls['sId'].clearValidators()
+    this.userForm.controls['sId'].updateValueAndValidity()
+
+   }
+   else if(this.idValue === 'Central Lab-Preparation'){
     this.sponsor = false
     this.site = false
     this.userForm.controls['sId'].clearValidators()
