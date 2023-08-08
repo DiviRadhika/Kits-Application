@@ -91,7 +91,7 @@
                           <tr class="odd"
                             *ngFor="let protocolData of protocolDetails  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
-                            <td class="sorting_1 dtr-control" (click)="view(protocolData.id)" style="color:blue">
+                            <td class="sorting_1 dtr-control" (click)="view(protocolData.id)" style="color:blue;cursor: pointer">
                               {{protocolData.protocol_id}}</td>
 
                             <td>{{protocolData.protocol_name}}</td>

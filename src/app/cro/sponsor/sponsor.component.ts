@@ -196,7 +196,9 @@ export class SponsorComponent implements OnInit {
 
 
   submit() {
-    console.log(this.contactForm.value, sessionStorage.getItem('userid'))
+    
+    // Assign the trimmed contacts to the notifier_details property of the obj object
+   
     if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }
@@ -241,7 +243,13 @@ export class SponsorComponent implements OnInit {
 
       if (this.isEdit) {
         obj.sponsor_id = this.id
-        obj.notifier_details = this.editcontactsForm.value.editcontacts
+        const trimmedContactse = this.editcontactsForm.value.editcontacts.map((contact: any) => {
+          return {
+            ...contact,
+            email: contact.email.trim()
+          };
+        });
+        obj.notifier_details = trimmedContactse
         this._cro.updateSponsorDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
@@ -257,7 +265,19 @@ export class SponsorComponent implements OnInit {
         );
       }
       else {
-        obj.notifier_details = this.contactForm.value.contacts
+  
+        const trimmedContacts = this.contactForm.value.contacts.map((contact: any) => {
+          return {
+            ...contact,
+            email: contact.email.trim()
+          };
+        });
+       
+        
+        obj.notifier_details = trimmedContacts
+        console.log(obj.notifier_details)
+        console.log(obj)
+       
         this._cro.CreateSponsorDetails(obj).subscribe(
 
           (data: any) => {

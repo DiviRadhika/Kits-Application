@@ -87,7 +87,7 @@
 
                         <tr class="odd"
                           *ngFor="let croData of croDetails  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
-                          <td class="sorting_1 dtr-control"  style="color:blue" (click)="edit(croData.cro_id, 'view')">{{croData.cro_code}}</td>
+                          <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(croData.cro_id, 'view')">{{croData.cro_code}}</td>
                           <td>{{croData.cro_name}}</td>
                           <td>{{croData.legal_cro_name}}</td>
                           <td>

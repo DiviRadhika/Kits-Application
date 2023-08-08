@@ -119,6 +119,7 @@ export class KitVerificationComponent implements OnInit {
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
         console.log(this.vkDetails);
+        console.log(protocolsData)
 
 
       });

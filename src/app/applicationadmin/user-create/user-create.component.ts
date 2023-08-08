@@ -95,6 +95,7 @@ export class UserCreateComponent implements OnInit {
             this.userForm.controls['sId'].updateValueAndValidity()
            }
            else if(this.getUserData.role === 'CRA'){
+          
 
 
             this.sponsor = false
@@ -133,6 +134,7 @@ export class UserCreateComponent implements OnInit {
     });
   }
   roleChange(event: any){
+
     this.idValue = event.target.value
   if(this.idValue === 'CRO' ){
     this.sponsor = false
@@ -141,7 +143,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
   }
-   else if(this.idValue === 'Sponsor' || this.getUserData.role === 'Sponsor'){
+   else if(this.idValue === 'Sponsor'){
     this.sponsor = true
     this.site = false
     this.getSponsorDetails()
@@ -149,7 +151,8 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
-   else if(this.idValue === 'CRA' || this.getUserData.role === 'CRA'){
+   else if(this.idValue === 'CRA' ){
+  
     this.sponsor = false
     this.site = true
     this.getSitedetails()
@@ -301,7 +304,9 @@ export class UserCreateComponent implements OnInit {
             
           }
         );
+        
       }
+      // console.log(userObj)
     }
   }
 

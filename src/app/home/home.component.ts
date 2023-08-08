@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   menuItems :any[] = [];
   profileval: boolean = false;
-  fullName: string = ''
+  fullName: any
 
   toggleSubItems(item: any) {
     this.menuItems.forEach(menuItem => {
@@ -51,9 +51,7 @@ export class HomeComponent implements OnInit {
   centralLab: boolean = false;
   siteRole: boolean = false;
   ngOnInit(): void {
-   
-
-    this.fullName =  sessionStorage.getItem('firstName') + ' '+ sessionStorage.getItem('lastName')
+  
     this.role = sessionStorage.getItem('role')
     if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [
@@ -300,6 +298,9 @@ export class HomeComponent implements OnInit {
 
 constructor(private messageService:MessageService ,private admin: AdminService, private route: Router, private formBuilder: FormBuilder,) {
     this.isSidebarShrunk = false;
+
+console.log(sessionStorage.getItem('fullName') )
+    this.fullName =  sessionStorage.getItem('fullName') 
   }
 
   ngAfterViewInit() {

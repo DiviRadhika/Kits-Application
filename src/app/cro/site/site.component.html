@@ -131,7 +131,7 @@
                           <tr class="odd"
                             *ngFor="let siteData of siteDetails  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
-                            <td class="sorting_1 dtr-control"  style="color:blue" (click)="edit(siteData.site_id, 'view')">{{siteData.site_data_code}}</td>
+                            <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(siteData.site_id, 'view')">{{siteData.site_data_code}}</td>
 
                             <td>{{siteData.site_data_name}}</td>
                             <td>{{siteData.email}}</td>

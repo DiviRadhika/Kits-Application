@@ -85,8 +85,10 @@
                             *ngFor="let user of userDetails  | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <!-- <th>{{(page-1) * pageSize + i+1}}</th> -->
-
-                            <td class="sorting_1 dtr-control"  (click)="edit(user.user_id, 'view')"style="color:blue">{{user.first_name}}&nbsp;{{user.last_name}}</td>
+                            <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
+                              {{user.first_name}}&nbsp;{{user.last_name}}
+                            </td>
+                          
                             <td>{{user.email}}</td>
                             <td>{{user.role}}</td>
                             <td>
