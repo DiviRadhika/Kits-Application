@@ -169,11 +169,12 @@
                                                                             <td width="20%">
                                                                                 <!-- sampleacknowledgement.component.html-->
                                                                                 <div>
+                                                                                    
                                                                                     <input type="file"
-                                                                                        id="imageUpload{{i}}"
+                                                                                        id="imageUpload{{i}}" multiple
                                                                                         accept="application/pdf"
                                                                                         #fileInput style="display: none"
-                                                                                        (change)="uploadFile($event, i)" />
+                                                                                        (change)="_uploadFile($event, i)" />
 
                                                                                     <button style="margin-left: -8%;"
                                                                                         (click)="fileInput.click()"
@@ -189,8 +190,29 @@
                                                                                                 d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
                                                                                         </svg>
                                                                                     </button>
-                                                                              
-                                                                                    <button *ngIf="results[i]"
+                                                                                    <div *ngIf="uploadedFiles[i] && uploadedFiles[i].length > 0">
+                                                                                        <div *ngFor="let file of uploadedFiles[i]; let fileIndex = index">
+                                                                                            <div>{{ file.name }}</div>
+                                                                                            <button (click)="viewPdf(i, fileIndex)" style="margin-bottom: -7%" class="btn btn-success waves-effect edit-btn waves-light">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                                                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                                                                                    <path
+                                                                                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                                    <path
+                                                                                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                                </svg>
+                                                                                            </button>
+                                                                                            <button type="button" (click)="deleteFile(i, fileIndex)"
+                                                                                            class="btn btn-danger ml-3 mt-2">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                                                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                                                            </svg>
+                                                                                            </button>
+                                                                                          
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- <button *ngIf="results[i]"
                                                                                         style="margin-left: 7%;"
                                                                                         (click)="Download(results[i])"
                                                                                         class="btn btn-success waves-effect edit-btn waves-light"><svg
@@ -203,7 +225,7 @@
                                                                                                 d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                                                                                             <path
                                                                                                 d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                                                                        </svg></button>
+                                                                                        </svg></button> -->
                                                                                     <!-- <span *ngIf="results[i]">Results Uploaded: {{ results[i] }}</span> -->
                                                                                     <!-- <span *ngIf="results[i]">PDF Uploaded</span> -->
 
@@ -295,7 +317,7 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names}}"> >
+                                                header="{{item.alternate_names}}"> 
 
 
 
@@ -396,7 +418,7 @@
                                                                             <td>
                                                                               
                                                                                 <div>
-                                                                                    <input type="file"
+                                                                                    <input type="file" multiple
                                                                                         id="imageUpload{{i}}"
                                                                                         accept="application/pdf"
                                                                                         #fileInputv
@@ -417,23 +439,30 @@
                                                                                                 d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
                                                                                         </svg>
                                                                                     </button>
-                                                                             
-
-                                                                                    <button style="margin-left: 7%;"
-                                                                                        *ngIf="resultsv[i] && resultsv[i][j]"
-                                                                                        (click)="Download(resultsv[i][j])"
-                                                                                        class="btn btn-success waves-effect edit-btn waves-light"><svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            width="16" height="16"
-                                                                                            fill="currentColor"
-                                                                                            class="bi bi-eye"
-                                                                                            viewBox="0 0 16 16">
-                                                                                            <path
-                                                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                                                                            <path
-                                                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                                                                        </svg></button>
-                                                                                   
+                                                                                    <div *ngIf="uploadedFilesv[i]?.[j] && uploadedFilesv[i][j].length > 0">
+                                                                                        <div *ngFor="let file of uploadedFilesv[i][j]; let fileIndex = index">
+                                                                                            <div>
+                                                                                                {{ file.name }}
+                                                                                                <button (click)="viewFilev(i, j, fileIndex)" style="margin-bottom: -7%" class="btn btn-success waves-effect edit-btn waves-light">
+                                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                                                                        class="bi bi-eye" viewBox="0 0 16 16">
+                                                                                                        <path
+                                                                                                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                                        <path
+                                                                                                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                                    </svg>
+                                                                                                </button>
+                                                                                                <button type="button" (click)="removeFile(i, j, fileIndex)"
+                                                                                                class="btn btn-danger ml-3 mt-2">
+                                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                                                                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                                                                </svg>
+                                                                                                </button>
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
 
                                                                             </td>

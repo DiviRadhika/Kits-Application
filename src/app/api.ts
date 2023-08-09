@@ -1,7 +1,7 @@
 export const api = "http://34.100.227.119:5001/api";
 export const api2 = "http://34.100.227.119:5001/api";
-export const country ='https://trial.mobiscroll.com/content/countries.json'
-export const apin ="http://34.100.227.119:5001/api"
+export const country = 'https://trial.mobiscroll.com/content/countries.json'
+export const apin = "http://34.100.227.119:5001/api"
 
 
 
@@ -20,13 +20,18 @@ export const endPointsUser = {
     // Endpoints for  Login 
     login: `${apin}/login`,
     sendotp: `${apin}/login/sendotp`,
-    reset:`${apin}/user/register`,
+    reset: `${apin}/user/register`,
     dashboard: `${apin}/dashboard`,
 
     // Endpoints for sponsors
     getSponsors: `${apin}/sponsors`,
     getSponsorsById: `${apin}/sponsor/`,
     getSponsorsAddUpdate: `${apin}/sponsor`,
+
+    // Endpoints for sponsors
+    getLab: `${apin}/labs`,
+    getLabById: `${apin}/lab/`,
+    getLabAddUpdate: `${apin}/lab`,
 
     // Endpoints for Site
     getSites: `${apin}/sites_data`,
@@ -38,22 +43,22 @@ export const endPointsUser = {
     getLabTestById: `${apin}/lab_test/`,
     getLabTestAddUpdate: `${apin}/lab_test`,
 
-   // Endpoints for Material
-   meterials: `${apin}/meterials`,
-   materialAddUpdate:  `${apin}/meterial`,
-   getmeterialById: `${apin}/meterial/`,
+    // Endpoints for Material
+    meterials: `${apin}/meterials`,
+    materialAddUpdate: `${apin}/meterial`,
+    getmeterialById: `${apin}/meterial/`,
 
     // Endpoints for Protocol
     postProtocol: `${apin}/cro_protocol`,
     croProtocols: `${apin}/cro_protocols`,
-    getProtocolId : `${apin}/cro_protocol/`,
-        
+    getProtocolId: `${apin}/cro_protocol/`,
+
     // Endpoints for Preparatiion
-    getPreparation:`${apin}/clab_kit_preparations`,
-    postPreparation:`${apin}/clab_kit_preparation`,
-    getPreparationById:`${apin}/clab_kit_preparation/`,
-    sampleack:`${apin}/sample_ack/`,
-    sampleackput:`${apin}/sample_ack`,
-   
+    getPreparation: `${apin}/clab_kit_preparations`,
+    postPreparation: `${apin}/clab_kit_preparation`,
+    getPreparationById: `${apin}/clab_kit_preparation/`,
+    sampleack: `${apin}/sample_ack/`,
+    sampleackput: `${apin}/sample_ack`,
+
 
 }

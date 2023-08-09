@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { CrosService } from '../cros.service';
 
 @Component({
   selector: 'app-lab-test-create',
@@ -18,7 +19,7 @@ export class LabTestCreateComponent implements OnInit {
   getcroData: any;
   mobile: any;
   view: boolean = false;
-  constructor(private admin: AdminService,
+  constructor(private cro: CrosService, private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
     private messageService: MessageService
   ) {
@@ -26,12 +27,12 @@ export class LabTestCreateComponent implements OnInit {
       if (data.id) {
         this.isEdit = true;
         this.id = data.id;
-        admin.getCrobyId(data.id).subscribe((data: any) => {
+        cro.getLabById(data.id).subscribe((data: any) => {
           this.getcroData = data
           this.labTestCreateForm.patchValue(data)
-          this.labTestCreateForm.controls['lab_test_code'].disable()
-          // this.labTestCreateForm.controls['lab_test_name'].disable()
-          // this.labTestCreateForm.controls['legal_lab_test_name'].disable()
+          this.labTestCreateForm.controls['cro_code'].disable()
+          // this.labTestCreateForm.controls['cro_name'].disable()
+          // this.labTestCreateForm.controls['legal_cro_name'].disable()
           // this.labTestCreateForm.controls['email'].disable()
 
         });
@@ -57,9 +58,9 @@ export class LabTestCreateComponent implements OnInit {
   }
 
   public labTestCreateForm: FormGroup = new FormGroup({
-    lab_test_code: new FormControl("", [Validators.required]),
-    lab_test_name: new FormControl("", [Validators.required]),
-    legal_lab_test_name: new FormControl("", [Validators.required]),
+    cro_code: new FormControl("", [Validators.required]),
+    cro_name: new FormControl("", [Validators.required]),
+    legal_cro_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
     classification: new FormControl(""),
@@ -147,12 +148,11 @@ export class LabTestCreateComponent implements OnInit {
       }
     else {
       const obj: any = {
-        "lab_test_code": this.labTestCreateForm.controls['lab_test_code'].value,
-        "lab_test_name": this.labTestCreateForm.controls['lab_test_name'].value,
-        "legal_lab_test_name": this.labTestCreateForm.controls['legal_lab_test_name'].value,
+        "cro_code": this.labTestCreateForm.controls['cro_code'].value,
+        "cro_name": this.labTestCreateForm.controls['cro_name'].value,
+        "legal_cro_name": this.labTestCreateForm.controls['legal_cro_name'].value,
         "address_1": this.labTestCreateForm.controls['address_1'].value,
         "address_2": this.labTestCreateForm.controls['address_2'].value,
-       "classification": this.labTestCreateForm.controls['classification'].value,
         "city": this.labTestCreateForm.controls['city'].value,
         "district": this.labTestCreateForm.controls['district'].value,
         "region": this.labTestCreateForm.controls['region'].value,
@@ -166,14 +166,14 @@ export class LabTestCreateComponent implements OnInit {
       }
       if (this.isEdit) {
         obj.cro_id = this.id
-        this.admin.updateCroDetaild(obj).subscribe(
+        this.cro.updateLabDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Updated Successfully'});
+              this.messageService.add({severity:'success', summary:'Success Message', detail:'Lab Updated Successfully'});
              }, 1000);
                
 
-            this.router.navigate(['/home/admin/croGrid'])
+            this.router.navigate(['/home/cro/labGrid'])
           },
           (err: any) => {
             this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -181,13 +181,13 @@ export class LabTestCreateComponent implements OnInit {
         );
       }
       else {
-        this.admin.CreateCroDetails(obj).subscribe(
+        this.cro.CreateLabDetails(obj).subscribe(
           (data: any) => {
          setTimeout(() => {
-          this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Created Successfully'});
+          this.messageService.add({severity:'success', summary:'Success Message', detail:'Lab Created Successfully'});
          }, 1000);
            
-            this.router.navigate(['/home/admin/croGrid'])
+            this.router.navigate(['/home/cro/labGrid'])
           },
           (err: any) => {
             this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});

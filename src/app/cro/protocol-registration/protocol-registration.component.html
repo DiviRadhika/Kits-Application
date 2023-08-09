@@ -92,7 +92,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
-                    <input type="text" formControlName="total_visits" (input)="visits($event)" class="form-control"
+                    <input type="text" formControlName="total_visits" (blur)="visits($event)" class="form-control"
                       id="" placeholder=" "
                       [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>

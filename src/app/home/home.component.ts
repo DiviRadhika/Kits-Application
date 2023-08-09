@@ -130,29 +130,30 @@ export class HomeComponent implements OnInit {
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
-            // { label: 'Lab Creation', link: '/home/cro/labGrid' },
-            { label: 'Study Summary', link: '/home/cro/protocolGrid' }
+            { label: 'Lab Creation', link: '/home/cro/labGrid' },
+            { label: 'Study Summary', link: '/home/cro/protocolGrid' },
+            
           // ]
         // },
       
       ];
     }
-    else if(this.role === 'Central Lab'){
-      this.menuItems = [
-        // {
-          // label: 'Central Lab',
-          // icon: 'bx bxs-analyse',
-          // expanded: false,
-          // subItems: [
+    // else if(this.role === 'Central Lab'){
+    //   this.menuItems = [
+    //     // {
+    //       // label: 'Central Lab',
+    //       // icon: 'bx bxs-analyse',
+    //       // expanded: false,
+    //       // subItems: [
             
-            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
+    //         { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+    //         { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
             
-          // ]
-        // },
-        // Other menu items for admin role...
-      ];
-    }
+    //       // ]
+    //     // },
+    //     // Other menu items for admin role...
+    //   ];
+    // }
     else if(this.role === 'Central Lab-Preparation'){
       this.menuItems = [
 
@@ -168,6 +169,16 @@ export class HomeComponent implements OnInit {
     else if(this.role === 'Central Lab-Distribution'){
       this.menuItems = [
         { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Acknowledgement'){
+      this.menuItems = [
+        { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Reports'){
+      this.menuItems = [
+        { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
       ];
     }
     else if(this.role === 'CRA'){
@@ -256,7 +267,6 @@ export class HomeComponent implements OnInit {
   reset(){
     this.passwordvisible=true
  const obj ={
-  
   email: sessionStorage.getItem('email'),
   password: this.updatepasswordForm.controls['password'].value,
   otp:this.updatepasswordForm.controls['otp'].value,

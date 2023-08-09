@@ -112,8 +112,8 @@ export class KitPreprationComponent implements OnInit {
   printLabel(i: any, id: any) {
     const kitId = this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').value;
     const ckitId = this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').value;
-
-    console.log(this.sMatDetails);
+    const expirydate = this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').value;
+   
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -168,6 +168,7 @@ export class KitPreprationComponent implements OnInit {
             <h2>Screening Kit</h2>
             <p><strong>Kit Id:</strong> ${kitId}</p>
             <p><strong>LabKit Id:</strong> ${ckitId}</p>
+            <p><strong>Expiry Date:</strong> ${expirydate}</p>
             <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
             <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
             
@@ -312,7 +313,7 @@ export class KitPreprationComponent implements OnInit {
     // Access the values of the selected row
     const kitId = selectedRow.get('kitId').value;
     const ckitId = selectedRow.get('ckitId').value;
-    const prepration = selectedRow.get('prepration').value;
+    const expirydate = selectedRow.get('expirydate').value;
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -369,6 +370,7 @@ export class KitPreprationComponent implements OnInit {
           <h2>Visit Kit</h2>
           <p><strong>Kit Id:</strong> ${kitId}</p>
           <p><strong>LabKit Id:</strong> ${ckitId}</p>
+          <p><strong>Expiry Date :</strong> ${expirydate}</p>
           <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
           <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
           <p><strong>Type:</strong> Screening</p>
@@ -416,18 +418,6 @@ export class KitPreprationComponent implements OnInit {
   }
 
  
-
-  printLabelv(tabIndex: number, rowIndex: number) {
-    const selectedTab = this.vMatDetails[tabIndex];
-    const selectedRow = selectedTab.visitsList.controls[rowIndex];
-
-    // Access the values of the selected row
-    const kitId = selectedRow.get('kitId').value;
-    const ckitId = selectedRow.get('ckitId').value;
-    const prepration = selectedRow.get('prepration').value;
-
-    // Perform the necessary printing logic using the values of the row
-  }
 
 
 

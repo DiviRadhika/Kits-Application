@@ -76,6 +76,21 @@ export class CrosService {
   getmeterialById(id: any): Observable<any> {
     return this._httpClient.get(endPointsUser.getmeterialById +id)
   }
+
+  // labs
+  getlabs(): Observable<any> {
+    return this._httpClient.get(endPointsUser.getLab)
+  }
+  getLabById(id: any): Observable<any> {
+    return this._httpClient.get(endPointsUser.getLabById + id)
+  }
+  CreateLabDetails(data: any): Observable<any> {
+    return this._httpClient.post(endPointsUser.getLabAddUpdate, data)
+  }
+
+  updateLabDetails(data: any): Observable<any> {
+    return this._httpClient.put(endPointsUser.getLabAddUpdate, data)
+  }
   
 }
 

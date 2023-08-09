@@ -11,7 +11,9 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sample-acknowledgement.component.css']
 })
 export class SampleAcknowledgementComponent implements OnInit {
-  uploadedFiles: Array<File | null> = [];
+  // uploadedFiles: Array<File | null> = [];
+  uploadedFiles: Array<File>[] = [];
+  // uploadedFilesv: Array<File>[][] = [];
   fileURLs: Array<string | null> = [];
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
@@ -440,19 +442,45 @@ export class SampleAcknowledgementComponent implements OnInit {
     ;
 
   }
+  // uploadFile(evt: any, rowIndex: any) {
+  //   const files: FileList = evt.target.files;
+  //   if (files && files.length > 0) {
+  //     if (!this.uploadedFiles[rowIndex]) {
+  //       this.uploadedFiles[rowIndex] = []; // Initialize if not exists
+  //     }
+  
+  //     for (let i = 0; i < files.length; i++) {
+  //       this.uploadedFiles[rowIndex].push(files[i]); // Store the uploaded file
+  //     }
+  //   }
+   
+  // }
+  
 
+  
+  
+  
   uploadFile(evt: any, rowIndex: any) {
     let uploadedFiles = [];
     this.files1 = evt.target.files;
     uploadedFiles[rowIndex] = this.files1 ? 'File Uploaded' : '';
 
     // Update the corresponding span element with the file status
-    const statusElement = document.getElementById(`status_${rowIndex}`);
-    if (statusElement) {
-      statusElement.textContent = uploadedFiles[rowIndex];
+    // const statusElement = document.getElementById(`status_${rowIndex}`);
+    // if (statusElement) {
+    //   statusElement.textContent = uploadedFiles[rowIndex];
+    // }
+    const files: FileList = evt.target.files;
+    if (files && files.length > 0) {
+      if (!this.uploadedFiles[rowIndex]) {
+        this.uploadedFiles[rowIndex] = []; // Initialize if not exists
+      }
+  
+      for (let i = 0; i < files.length; i++) {
+        this.uploadedFiles[rowIndex].push(files[i]); // Store the uploaded file
+      }
     }
-
-
+console.log(  this.uploadedFiles)
     const file = this.files1[0];
     this.file2 = this.files1[0].name;
     const fileSize = this.files1[0].size;
@@ -486,9 +514,44 @@ export class SampleAcknowledgementComponent implements OnInit {
       this.pdfValues.splice(pdfIndex, 1);
     }
 
-    this.pdfValues.push({ row: readerEvt, pdf: this.bas2 });
+    this.pdfValues.push({ row: readerEvt, pdf: this.uploadedFiles });
+    console.log(this.pdfValues)
 
   }
+  _uploadFile(evt: any, rowIndex: any) {
+    const files: FileList = evt.target.files;
+    if (files && files.length > 0) {
+      if (!this.uploadedFiles[rowIndex]) {
+        this.uploadedFiles[rowIndex] = [];
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        this.uploadedFiles[rowIndex].push(files[i]);
+
+        const reader = new FileReader();
+        reader.onload = (readerEvt: any) => {
+          const binaryString = readerEvt.target.result;
+          const base64 = btoa(binaryString);
+          this.pdfValues.push({ row: rowIndex, pdf: base64 });
+          console.log(this.pdfValues);
+          
+        };
+        reader.readAsBinaryString(files[i]);
+      }
+    }
+  }
+  deleteFile(rowIndex: number, fileIndex: number) {
+    this.uploadedFiles[rowIndex].splice(fileIndex, 1);
+    // Optionally, perform any additional cleanup or API calls if needed
+}
+  viewPdf(rowIndex: number, fileIndex: number) {
+    const fileToView = this.uploadedFiles[rowIndex][fileIndex];
+    const url = URL.createObjectURL(fileToView);
+  
+    // Open the PDF in a new window
+    window.open(url, '_blank');
+  }
+  
 
 
 
@@ -553,29 +616,69 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  viewFilev(tabindex: number, rowIndex: number, fileIndex: number) {
+    const fileToView = this.uploadedFilesv[tabindex][rowIndex][fileIndex];
+    const url = URL.createObjectURL(fileToView);
+  
+    // Open the PDF in a new window
+    window.open(url, '_blank');
+  }
 
-
-
-  uploadFilev(evt: any, tabindex: any, rowIndex: any) {
-
-
-    this.files1 = evt.target.files;
-
-
-    const file = this.files1[0];
-    this.file2 = this.files1[0].name;
-    const fileSize = this.files1[0].size;
-    if (fileSize >= 1084) {
-    }
-    if (this.files1 && file) {
-
-
-      const reader = new FileReader();
-
-      reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
-      reader.readAsBinaryString(file);
+  removeFile(tabindex: number, rowIndex: number, fileIndex: number) {
+    if (this.uploadedFilesv[tabindex]?.[rowIndex]) {
+      this.uploadedFilesv[tabindex][rowIndex].splice(fileIndex, 1);
     }
   }
+  uploadedFilesv: Array<Array<Array<File>>> = []; // Initialize the array structure
+  
+  // Other component properties and methods
+  
+  uploadFilev(evt: any, tabindex: any, rowIndex: any) {
+    const files: FileList = evt.target.files;
+
+    if (files && files.length > 0) {
+      if (!this.uploadedFilesv[tabindex]) {
+        this.uploadedFilesv[tabindex] = [];
+      }
+
+      if (!this.uploadedFilesv[tabindex][rowIndex]) {
+        this.uploadedFilesv[tabindex][rowIndex] = [];
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        this.uploadedFilesv[tabindex][rowIndex].push(files[i]);
+
+        const reader = new FileReader();
+        reader.onload = (readerEvt: any) => {
+          const binaryString = readerEvt.target.result;
+          const base64 = btoa(binaryString);
+          this.pdfValuesv.push({ visit: tabindex, row: rowIndex, pdf: base64 });
+          console.log(this.pdfValuesv);
+        };
+        reader.readAsBinaryString(files[i]);
+      }
+    }
+  
+
+
+    // this.files1 = evt.target.files;
+
+
+    // const file = this.files1[0];
+    // this.file2 = this.files1[0].name;
+    // const fileSize = this.files1[0].size;
+    // if (fileSize >= 1084) {
+    // }
+    // if (this.files1 && file) {
+
+
+    //   const reader = new FileReader();
+
+    //   reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
+    //   reader.readAsBinaryString(file);
+    // }
+  }
+
 
   _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {
 

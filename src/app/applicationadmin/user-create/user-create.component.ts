@@ -31,7 +31,7 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Central Lab','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution'];
+  options: string[] = ['Admin','CRO','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
