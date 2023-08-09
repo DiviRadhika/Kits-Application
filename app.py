@@ -22,6 +22,7 @@ from resources.sponsor import (
     SponserActionsById,
 )
 from resources.cro import CrosList, Cro, cro_ns, cros_ns, CroActionsById
+from resources.lab import LabsList, Lab, lab_ns, labs_ns, LabActionsById
 from resources.site_data import (
     SitedatasList,
     Sitedata,
@@ -223,6 +224,10 @@ sponsor_ns.add_resource(SponserActionsById, "/<string:sponsor_id>")
 sponsors_ns.add_resource(SponsersList, "")
 cro_ns.add_resource(Cro, "")
 cros_ns.add_resource(CrosList, "")
+cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
+lab_ns.add_resource(Lab, "")
+labs_ns.add_resource(LabsList, "")
+lab_ns.add_resource(LabActionsById, "/<string:lab_id>")
 site_data_ns.add_resource(Sitedata, "")
 site_data_ns.add_resource(SiteActionsById, "/<string:site_id>")
 sites_data_ns.add_resource(SitedatasList, "")
@@ -249,7 +254,6 @@ login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
 users_ns.add_resource(UserList, "/<string:user_id>")
-cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
 meterial_ns.add_resource(Meterial, "")
 meterials_ns.add_resource(MeterialsList, "")
 meterial_ns.add_resource(MeterialActionsById, "/<string:meterial_id>")

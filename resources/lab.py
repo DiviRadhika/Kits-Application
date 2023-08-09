@@ -1,19 +1,19 @@
 from flask_restx import Namespace, fields, Resource
-from schemas.cro import CroSchema
+from schemas.lab import LabSchema
 from flask import request
 from sqlalchemy import exc
-from models.cro import CroModel
+from models.lab import LabModel
 from models.users import UserModel
 
-lab_ns = Namespace("cro", description="cro related operations")
-lab_ns = Namespace("cros", description="cros related operations")
+lab_ns = Namespace("lab", description="lab related operations")
+labs_ns = Namespace("labs", description="labs related operations")
 
 
-cro_schema = CroSchema()
-cros_list_schema = CroSchema(many=True)
+lab_schema = LabSchema()
+lab_list_schema = LabSchema(many=True)
 
-cro = cros_ns.model(
-    "cro",
+lab = lab_ns.model(
+    "lab",
     {
         "cro_code": fields.String(required=True),
         "cro_name": fields.String(required=True),
@@ -33,8 +33,8 @@ cro = cros_ns.model(
     },
 )
 
-update_cro = cros_ns.model(
-    "Updatecro",
+update_lab = lab_ns.model(
+    "Updatelab",
     {
         "cro_id": fields.String(required=True),
         "cro_code": fields.String(required=True),
@@ -57,44 +57,44 @@ update_cro = cros_ns.model(
 )
 
 
-class CrosList(Resource):
-    @cros_ns.doc("Get all the cros")
+class LabsList(Resource):
+    @labs_ns.doc("Get all the cros")
     def get(self):
-        return (cros_list_schema.dump(CroModel.find_all()), 200)
+        return (lab_list_schema.dump(LabModel.find_all()), 200)
 
 
-class CroActionsById(Resource):
-    @cro_ns.doc("get by id")
-    def get(self, cro_id):
+class LabActionsById(Resource):
+    @lab_ns.doc("get by id")
+    def get(self, lab_id):
         try:
-            cro_data = CroModel.get_by_id(cro_id)
+            cro_data = LabModel.get_by_id(lab_id)
             if not cro_data:
-                return {"message": "cro data not found"}, 400
-            return (cro_schema.dump(cro_data), 200)
+                return {"message": "lab data not found"}, 400
+            return (lab_schema.dump(cro_data), 200)
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to get the data {}".format(str(e))}, 500
 
 
-class Cro(Resource):
-    @cro_ns.expect(cro)
-    @cro_ns.doc("Create a cro")
+class Lab(Resource):
+    @lab_ns.expect(lab)
+    @lab_ns.doc("Create a cro")
     def post(self):
         cro_json = request.get_json()
         try:
-            cro_data = cro_schema.load(cro_json)
+            cro_data = lab_schema.load(cro_json)
             cro_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
             print(e)
             return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
-    @cro_ns.expect(update_cro)
-    @cro_ns.doc("Update a cro")
+    @lab_ns.expect(update_lab)
+    @lab_ns.doc("Update a cro")
     def put(self):
         request_json = request.get_json()
         try:
-            cro_data = CroModel.get_by_id(request_json["cro_id"])
+            cro_data = LabModel.get_by_id(request_json["cro_id"])
             if not cro_data:
                 return {"message": "cro data not found"}, 500
             for key, value in request_json.items():
