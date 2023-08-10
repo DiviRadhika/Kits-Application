@@ -24,7 +24,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="index.html" class="logo logo-dark">
+                        <a  class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-icon-dark.png" alt="" height="35">
                             </span>
@@ -181,13 +181,13 @@
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label>
                         <input class="right" type="text" class="text-center mb-3" id="" formControlName="otp"
-                            class="form-control" placeholder="Enter OTP">
+                            class="form-control" placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
                             class="text-danger text-center">
                             OTP is required
                         </div>
                         <label>Enter New Password</label>
-                        <input type="password" class="text-center mb-3" id="" formControlName="password"
+                        <input type="password" class="text-center mb-3" maxlength="16" id="" formControlName="password"
                             placeholder="Enter New Password">
 
                         <div>
@@ -244,7 +244,9 @@
             <div data-simplebar class="h-100">
                 <div id="sidebar-menu">
                     <ul style="line-height: 7px;" class="metismenu list-unstyled" id="side-menu">
-                        <li  style="font-size: 11px"class="menu-title" key="t-menu">{{role}}</li>
+                        <li style="font-size: 11px"class="menu-title" key="t-menu"> <a routerLink="/home/cro/dashboards" class="waves-effect">{{role}}</a>
+                        <!-- <a routerLink="/home/cro/dashboards"></a>
+                        <li  style="font-size: 11px"class="menu-title" key="t-menu">{{role}} </li> -->
 
                         <!-- Loop through menu items -->
                         <li *ngFor="let subItem of menuItems">

@@ -15,6 +15,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { AccordionModule } from 'primeng/accordion';
 import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
 import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     TabViewModule,
     AccordionModule,
-    ToastModule
+    ToastModule,
+    DialogModule
   ]
 })
 export class CentralLabModule { }

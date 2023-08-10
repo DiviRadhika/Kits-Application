@@ -97,12 +97,12 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         console.log(data)
         // this.route.navigate(['/home'])
-        this.route.navigate(['/home/cro/dashboards'])
+      
         console.log(data.role)
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('userid', data.user_id)
         sessionStorage.setItem('access_token', data.access_token)
-      
+        // this.route.navigate(['/home/cro/dashboards'])
 
         this.admin.getUserbyId(data.user_id).subscribe((data: any) => {
           console.log(data);
@@ -111,14 +111,19 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('email', data.email)
           sessionStorage.setItem('siteId', data.site_id)
           sessionStorage.setItem('sponsorId', data.sponsor_id)
-          sessionStorage.setItem('fullName', data.first_name + ' '+ data.last_name)
+          sessionStorage.setItem('fullName', data.first_name + ' '+data.last_name)
+          this.route.navigate(['/home/cro/dashboards'])
         });
-
+        
       },
+      
       (err: any) => {
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
       }
     )
+  }
+  preventPaste(event: ClipboardEvent): void {
+    event.preventDefault();
   }
   set() {
     this.disableFields = true

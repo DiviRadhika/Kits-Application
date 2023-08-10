@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   
     this.role = sessionStorage.getItem('role')
+    this.fullName =  sessionStorage.getItem('fullName') 
     if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [
         // {
@@ -132,6 +133,12 @@ export class HomeComponent implements OnInit {
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
             { label: 'Lab Creation', link: '/home/cro/labGrid' },
             { label: 'Study Summary', link: '/home/cro/protocolGrid' },
+                  { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
+            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
+            { label: 'Sample Collection', link: '/home/site/viewCRA' }
             
           // ]
         // },
@@ -325,8 +332,8 @@ export class HomeComponent implements OnInit {
 constructor(private messageService:MessageService ,private admin: AdminService, private route: Router, private formBuilder: FormBuilder,) {
     this.isSidebarShrunk = false;
 
-console.log(sessionStorage.getItem('fullName') )
-    this.fullName =  sessionStorage.getItem('fullName') 
+
+    
   }
 
   ngAfterViewInit() {

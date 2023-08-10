@@ -13,7 +13,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 export class SampleAcknowledgementComponent implements OnInit {
   // uploadedFiles: Array<File | null> = [];
   uploadedFiles: Array<File>[] = [];
-  // uploadedFilesv: Array<File>[][] = [];
+  uploadedFilesv: Array<File>[][] = [];
   fileURLs: Array<string | null> = [];
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
@@ -42,6 +42,11 @@ export class SampleAcknowledgementComponent implements OnInit {
   pdfValuesv: Array<any> = [];
   date: string;
   results: any[] = [];
+  display: boolean = false;
+  indexs: number = 0;
+  displayv: boolean = false;
+  tabi: number= 0;
+  indexv: number = 0;
   constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
     const currentDate = new Date();
@@ -126,6 +131,22 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  disableScroll() {
+    document.body.style.overflow = 'hidden';
+  }
+  dialog() {
+    this.display = true
+    
+  }
+  uploadv(){
+    this.displayv = false 
+  }
+  upload(){
+    this.display = false
+  }
+  enableScroll() {
+    document.body.style.overflow = 'auto';
+  }
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
@@ -198,15 +219,26 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  openUploadDialog(rowIndex: number): void {
+ 
+    this.display = true;
+   this.indexs = rowIndex
+}
 
-
-
+openUploadDialogv(tabIndex:number, rowIndex: number): void {
+  
+     this.displayv = true;
+    this.tabi = tabIndex;
+    this.indexv = rowIndex
+ }
   getformGroup(i: any) {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
 
-
+  enable(){
+    this.display= true
+  }
 
 
   createVisitKitGroup() {
@@ -518,31 +550,141 @@ console.log(  this.uploadedFiles)
     console.log(this.pdfValues)
 
   }
+  files: File[] = [];
+  onFileSelect(event: any) {
+    const selectedFiles = event.target.files;
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+      this.files.push(selectedFiles[i]);
+    }
+  }
+
+  uploadFiles() {
+    const apiUrl = 'YOUR_API_ENDPOINT_HERE'; // Replace with your API endpoint
+    const formData = new FormData();
+
+    for (let i = 0; i < this.files.length; i++) {
+      formData.append('files', this.files[i]);
+    }
+  }
   _uploadFile(evt: any, rowIndex: any) {
     const files: FileList = evt.target.files;
+  
     if (files && files.length > 0) {
       if (!this.uploadedFiles[rowIndex]) {
         this.uploadedFiles[rowIndex] = [];
       }
-
+  
+      const pdfList = this.pdfValues.find(item => item.row === rowIndex);
+  
+      if (!pdfList) {
+        // Create a list for the row if it doesn't exist
+        this.pdfValues.push({ row: rowIndex, pdf: [] });
+      }
+  
       for (let i = 0; i < files.length; i++) {
         this.uploadedFiles[rowIndex].push(files[i]);
-
+  
         const reader = new FileReader();
         reader.onload = (readerEvt: any) => {
           const binaryString = readerEvt.target.result;
           const base64 = btoa(binaryString);
-          this.pdfValues.push({ row: rowIndex, pdf: base64 });
-          console.log(this.pdfValues);
-          
+          const pdfName = files[i].name;
+          // Find the pdfList for the current row
+          const pdfList = this.pdfValues.find(item => item.row === rowIndex);
+  
+          if (pdfList) {
+            // Push the base64-encoded PDF into the pdfList for the current row
+            pdfList.pdf.push({ content: base64, name: pdfName });
+            // pdfList.pdf.push(base64);
+            console.log(this.pdfValues);
+          }
         };
         reader.readAsBinaryString(files[i]);
       }
     }
   }
+
+  uploadFilev(evt: any, tabindex: any, rowIndex: any) {
+    const files: FileList = evt.target.files;
+  
+    if (files && files.length > 0) {
+      if (!this.uploadedFilesv[tabindex]) {
+        this.uploadedFilesv[tabindex] = [];
+      }
+  
+      if (!this.uploadedFilesv[tabindex][rowIndex]) {
+        this.uploadedFilesv[tabindex][rowIndex] = [];
+      }
+  
+      const pdfList = this.pdfValuesv.find(item => item.visit === tabindex && item.row === rowIndex);
+  
+      if (!pdfList) {
+        // Create a pdfList for the tab and row if it doesn't exist
+        this.pdfValuesv.push({ visit: tabindex, row: rowIndex, pdf: [] });
+      }
+  
+      for (let i = 0; i < files.length; i++) {
+        this.uploadedFilesv[tabindex][rowIndex].push(files[i]);
+  
+        const reader = new FileReader();
+        reader.onload = (readerEvt: any) => {
+          const binaryString = readerEvt.target.result;
+          const base64 = btoa(binaryString);
+          const pdfName = files[i].name;
+          const pdfList = this.pdfValuesv.find(item => item.visit === tabindex && item.row === rowIndex);
+  
+          if (pdfList) {
+            // Push the base64-encoded PDF into the pdfList for the tab and row
+            // pdfList.pdf.push(base64);
+            pdfList.pdf.push({ content: base64, name: pdfName });
+            console.log(this.pdfValuesv);
+          }
+        };
+        reader.readAsBinaryString(files[i]);
+      }
+    }
+  }
+
+  // _uploadFile(evt: any, rowIndex: any) {
+  //   const files: FileList = evt.target.files;
+  //   if (files && files.length > 0) {
+  //     if (!this.uploadedFiles[rowIndex]) {
+  //       this.uploadedFiles[rowIndex] = [];
+  //     }
+
+  //     for (let i = 0; i < files.length; i++) {
+  //       this.uploadedFiles[rowIndex].push(files[i]);
+
+  //       // const formData = new FormData();
+
+  //       // for (let i = 0; i < this.uploadedFiles[rowIndex].length; i++) {
+  //       //   formData.append('files', this.uploadedFiles[rowIndex][i]);
+  //       // }
+  //       // console.log(formData)
+
+  //       // this.pdfValues.push({ row: rowIndex, pdf: formData });
+  //       // console.log(this.pdfValues);
+
+  //       const reader = new FileReader();
+  //       reader.onload = (readerEvt: any) => {
+  //         const binaryString = readerEvt.target.result;
+  //         const base64 = btoa(binaryString);
+  //         this.pdfValues.push({ row: rowIndex, pdf: base64 });
+  //         console.log(this.pdfValues);
+          
+  //       };
+  //       reader.readAsBinaryString(files[i]);
+  //     }
+  //   }
+  // }
   deleteFile(rowIndex: number, fileIndex: number) {
     this.uploadedFiles[rowIndex].splice(fileIndex, 1);
-    // Optionally, perform any additional cleanup or API calls if needed
+   
+}
+deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
+  this.uploadedFiles[rowIndex].splice(fileIndex, 1);
+ 
 }
   viewPdf(rowIndex: number, fileIndex: number) {
     const fileToView = this.uploadedFiles[rowIndex][fileIndex];
@@ -629,55 +771,11 @@ console.log(  this.uploadedFiles)
       this.uploadedFilesv[tabindex][rowIndex].splice(fileIndex, 1);
     }
   }
-  uploadedFilesv: Array<Array<Array<File>>> = []; // Initialize the array structure
+
   
-  // Other component properties and methods
-  
-  uploadFilev(evt: any, tabindex: any, rowIndex: any) {
-    const files: FileList = evt.target.files;
-
-    if (files && files.length > 0) {
-      if (!this.uploadedFilesv[tabindex]) {
-        this.uploadedFilesv[tabindex] = [];
-      }
-
-      if (!this.uploadedFilesv[tabindex][rowIndex]) {
-        this.uploadedFilesv[tabindex][rowIndex] = [];
-      }
-
-      for (let i = 0; i < files.length; i++) {
-        this.uploadedFilesv[tabindex][rowIndex].push(files[i]);
-
-        const reader = new FileReader();
-        reader.onload = (readerEvt: any) => {
-          const binaryString = readerEvt.target.result;
-          const base64 = btoa(binaryString);
-          this.pdfValuesv.push({ visit: tabindex, row: rowIndex, pdf: base64 });
-          console.log(this.pdfValuesv);
-        };
-        reader.readAsBinaryString(files[i]);
-      }
-    }
   
 
-
-    // this.files1 = evt.target.files;
-
-
-    // const file = this.files1[0];
-    // this.file2 = this.files1[0].name;
-    // const fileSize = this.files1[0].size;
-    // if (fileSize >= 1084) {
-    // }
-    // if (this.files1 && file) {
-
-
-    //   const reader = new FileReader();
-
-    //   reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
-    //   reader.readAsBinaryString(file);
-    // }
-  }
+  
 
 
   _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {

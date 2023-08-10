@@ -10,7 +10,13 @@
     z-index: 1;
     top: 13px;
   }
-  
+  ::ng-deep .p-dialog {
+    width: 50%;
+    height: 80%
+  }
+  .table tbody tr {
+    margin-bottom: 5px; /* Adjust this value to control the spacing between rows */
+}
   .avatar-upload .avatar-edit input {
     display: none;
   }

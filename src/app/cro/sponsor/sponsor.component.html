@@ -198,7 +198,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" class="form-control" id="Zip Code" placeholder="Enter Zip Code"
+                      <input type="text" class="form-control" maxlength="10" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -225,14 +225,14 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Office Telephone"
+                      <input type="text" class="form-control" maxlength="16" id="Office Telephone" placeholder="Enter Office Telephone"
                         formControlName="office_telephone">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" class="form-control" id="Extension" placeholder="Enter Extension"
+                      <input type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
 
                     </div>
@@ -240,7 +240,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                      <input type="number" class="form-control" id="mobile_no" placeholder="Enter Mobile Number"
+                      <input type="number" class="form-control" maxlength="12" id="mobile_no" placeholder="Enter Mobile Number"
                         formControlName="mobile_telephone">
 
                     </div>
@@ -340,7 +340,7 @@
                               formControlName="designation">
                           </td>
                           <td>
-                            <input type="text" class="form-control" id="Office Telephone"
+                            <input type="number"  class="form-control" id="Office Telephone"
                               placeholder="Enter Mobile Number" formControlName="contact">
                           </td>
 
@@ -369,7 +369,7 @@
               </div>
               <div *ngIf="isEdit" class="row" >
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button  style="font-size: 11px; margin-right: -20px" (click)="addContacte()" class="btn btn-primary">Add Secondary Contact Details</button>
+                  <button  *ngIf="!view" style="font-size: 11px; margin-right: -20px" (click)="addContacte()" class="btn btn-primary">Add Secondary Contact Details</button>
                 </div>
              
                 <div class="col-md-8 mb-3"></div>
@@ -411,8 +411,8 @@
                               formControlName="designation">
                           </td>
                           <td>
-                            <input type="text" class="form-control" id="Office Telephone"
-                              placeholder="Enter Mobile Number" formControlName="contact">
+                            <input type="number" class="form-control" id="Office Telephone"
+                              placeholder="Enter Mobile Number" type="number"  formControlName="contact">
                           </td>
 
                           <!-- <td>

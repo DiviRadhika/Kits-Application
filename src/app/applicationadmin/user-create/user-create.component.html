@@ -86,8 +86,8 @@
                   <div class="form-group">
                     <label>Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter Password"
-                      formControlName="password">
-                    <div *ngIf="shouldShowRequired('password')" class="text-danger">
+                      formControlName="password" maxlength="16">
+                    <div *ngIf="shouldShowRequired('password')"  class="text-danger">
                       Password is required.
                     </div>
                     <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
