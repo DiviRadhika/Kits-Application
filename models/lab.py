@@ -35,7 +35,7 @@ class LabModel(db.Model):
 
     @classmethod
     def get_by_id(cls, id):
-        return cls.query.filter_by(cro_id=id).first()
+        return cls.query.filter_by(lab_id=id).first()
 
     def save_to_db(self):
         db.session.add(self)

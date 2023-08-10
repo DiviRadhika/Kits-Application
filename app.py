@@ -22,7 +22,7 @@ from resources.sponsor import (
     SponserActionsById,
 )
 from resources.cro import CrosList, Cro, cro_ns, cros_ns, CroActionsById
-from resources.lab import LabsList, Lab, lab_ns, labs_ns, LabActionsById
+from resources.lab import ZlabsList, Zlab, zlab_ns, zlabs_ns, ZlabActionsById
 from resources.site_data import (
     SitedatasList,
     Sitedata,
@@ -183,6 +183,8 @@ api.add_namespace(sponsors_ns)
 api.add_namespace(sponsor_ns)
 api.add_namespace(cro_ns)
 api.add_namespace(cros_ns)
+api.add_namespace(zlab_ns)
+api.add_namespace(zlabs_ns)
 api.add_namespace(site_data_ns)
 api.add_namespace(sites_data_ns)
 api.add_namespace(lab_test_ns)
@@ -225,9 +227,11 @@ sponsors_ns.add_resource(SponsersList, "")
 cro_ns.add_resource(Cro, "")
 cros_ns.add_resource(CrosList, "")
 cro_ns.add_resource(CroActionsById, "/<string:cro_id>")
-lab_ns.add_resource(Lab, "")
-labs_ns.add_resource(LabsList, "")
-lab_ns.add_resource(LabActionsById, "/<string:lab_id>")
+
+zlab_ns.add_resource(Zlab, "")
+zlabs_ns.add_resource(ZlabsList, "")
+zlab_ns.add_resource(ZlabActionsById, "/<string:lab_id>")
+
 site_data_ns.add_resource(Sitedata, "")
 site_data_ns.add_resource(SiteActionsById, "/<string:site_id>")
 sites_data_ns.add_resource(SitedatasList, "")

@@ -5,15 +5,15 @@ from sqlalchemy import exc
 from models.lab import LabModel
 from models.users import UserModel
 
-lab_ns = Namespace("lab", description="lab related operations")
-labs_ns = Namespace("labs", description="labs related operations")
+zlab_ns = Namespace("lab", description="lab related operations")
+zlabs_ns = Namespace("labs", description="labs related operations")
 
 
 lab_schema = LabSchema()
 lab_list_schema = LabSchema(many=True)
 
-lab = lab_ns.model(
-    "lab",
+lab = zlab_ns.model(
+    "zlab",
     {
         "cro_code": fields.String(required=True),
         "cro_name": fields.String(required=True),
@@ -33,8 +33,8 @@ lab = lab_ns.model(
     },
 )
 
-update_lab = lab_ns.model(
-    "Updatelab",
+update_lab = zlab_ns.model(
+    "Zupdatelab",
     {
         "cro_id": fields.String(required=True),
         "cro_code": fields.String(required=True),
@@ -57,14 +57,14 @@ update_lab = lab_ns.model(
 )
 
 
-class LabsList(Resource):
-    @labs_ns.doc("Get all the cros")
+class ZlabsList(Resource):
+    @zlabs_ns.doc("Get all the cros")
     def get(self):
         return (lab_list_schema.dump(LabModel.find_all()), 200)
 
 
-class LabActionsById(Resource):
-    @lab_ns.doc("get by id")
+class ZlabActionsById(Resource):
+    @zlab_ns.doc("get by id")
     def get(self, lab_id):
         try:
             cro_data = LabModel.get_by_id(lab_id)
@@ -76,9 +76,9 @@ class LabActionsById(Resource):
             return {"error": "failed to get the data {}".format(str(e))}, 500
 
 
-class Lab(Resource):
-    @lab_ns.expect(lab)
-    @lab_ns.doc("Create a cro")
+class Zlab(Resource):
+    @zlab_ns.expect(lab)
+    @zlab_ns.doc("Create a cro")
     def post(self):
         cro_json = request.get_json()
         try:
@@ -89,8 +89,8 @@ class Lab(Resource):
             return {"error": "failed to save data {}".format(str(e))}, 500
         return {"data": [], "message": "success"}, 201
 
-    @lab_ns.expect(update_lab)
-    @lab_ns.doc("Update a cro")
+    @zlab_ns.expect(update_lab)
+    @zlab_ns.doc("Update a cro")
     def put(self):
         request_json = request.get_json()
         try:
