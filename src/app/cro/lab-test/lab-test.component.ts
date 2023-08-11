@@ -19,6 +19,7 @@ export class LabTestComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText = '';
+  searchTextm = '';
   lab: boolean = true;
   material: boolean = false;
   public labForm: FormGroup = new FormGroup({
@@ -60,7 +61,6 @@ export class LabTestComponent implements OnInit {
   }
   labDetailsData() {
     this._cro.getLabTests().subscribe((data: any) => {
-      console.log(data)
       this.LabDetails = data
       this.allLabDetails = data
       this.totalCount = this.LabDetails.length
@@ -68,7 +68,6 @@ export class LabTestComponent implements OnInit {
   }
   meterialsData() {
     this._cro.meterials().subscribe((data: any) => {
-      console.log(data)
       this.materials = data
       this.allmaterials = data
       this.totalCountmaterial = this.materials.length
@@ -88,9 +87,24 @@ export class LabTestComponent implements OnInit {
     else {
       this.LabDetails = this.allLabDetails.filter(
         (labDetails: any) =>
-          (labDetails.lab_test && labDetails.lab_test.toLowerCase().includes(filterValue)) ||
-          (labDetails.material && labDetails.material.toLowerCase().includes(filterValue)) ||
-          (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
+          (labDetails.name && labDetails.name.toLowerCase().includes(filterValue)) ||
+          (labDetails.classfication && labDetails.classfication.toLowerCase().includes(filterValue)) 
+          // (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
+      );
+    }
+  }
+  applyFilterm(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    if (filterValue === '') {
+      this.materials = this.allmaterials;
+    }
+    else {
+      this.materials = this.allmaterials.filter(
+        (labDetails: any) =>
+          (labDetails.name && labDetails.name.toLowerCase().includes(filterValue)) ||
+          (labDetails.size && labDetails.size.includes(filterValue)) 
+          // (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
       );
     }
   }

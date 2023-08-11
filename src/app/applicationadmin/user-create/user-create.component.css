@@ -1,25 +1,35 @@
-
-
-
 .validation-feedback {
 
-    margin-top: 8px;
+  margin-top: 8px;
 
-  }
-
-
+}
 
 
-  .invalid-feedback,
 
-  .valid-feedback {
 
-    display:inline;
+.invalid-feedback,
 
-    margin-top: 4px;
+.valid-feedback {
 
-    font-size: 14px;
+  display:inline;
 
-    font-family: 'Times New Roman', Times, serif;
+  margin-top: 4px;
 
-  }
+  font-size: 14px;
+
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
+
+.password-label {
+  position: relative;
+}
+
+.eye-button {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+}

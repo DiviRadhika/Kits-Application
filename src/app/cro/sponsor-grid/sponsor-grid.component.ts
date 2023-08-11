@@ -53,7 +53,7 @@ export class SponsorGridComponent implements OnInit {
         (sponsor: any) =>
           (sponsor.sponsor_code && sponsor.sponsor_code.toLowerCase().includes(filterValue)) ||
           (sponsor.sponsor_name && sponsor.sponsor_name.toLowerCase().includes(filterValue)) ||
-          (sponsor.legal_cro_name && sponsor.legal_sponsor_name.toLowerCase().includes(filterValue))
+          (sponsor.email && sponsor.email.toLowerCase().includes(filterValue))
       );
     }
 

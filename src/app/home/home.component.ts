@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+
+ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
   role: any 
   adminRole: boolean = false;
   sponsorRole: boolean = false;
+  isfullscreen = false;
   croRole: boolean= false;
   centralLab: boolean = false;
   siteRole: boolean = false;
@@ -220,6 +222,47 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+  openfullscreen() {
+    const docElmWithBrowsersFullScreenFunctions = document.documentElement as HTMLElement & {
+      mozRequestFullScreen(): Promise<void>;
+      webkitRequestFullscreen(): Promise<void>;
+      msRequestFullscreen(): Promise<void>;
+    };
+    if (!this.isfullscreen) {
+      if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
+        docElmWithBrowsersFullScreenFunctions.requestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) { /* Firefox */
+        docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) { /* IE/Edge */
+        docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
+      }
+      this.isfullscreen = true;
+    } else {
+      const docWithBrowsersExitFunctions = document as Document & {
+        mozCancelFullScreen(): Promise<void>;
+        webkitExitFullscreen(): Promise<void>;
+        msExitFullscreen(): Promise<void>;
+      };
+      if (docWithBrowsersExitFunctions.exitFullscreen) {
+        docWithBrowsersExitFunctions.exitFullscreen();
+      } else if (docWithBrowsersExitFunctions.mozCancelFullScreen) { /* Firefox */
+        docWithBrowsersExitFunctions.mozCancelFullScreen();
+      } else if (docWithBrowsersExitFunctions.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        docWithBrowsersExitFunctions.webkitExitFullscreen();
+      } else if (docWithBrowsersExitFunctions.msExitFullscreen) { /* IE/Edge */
+        docWithBrowsersExitFunctions.msExitFullscreen();
+      }
+      this.isfullscreen = false;
+
+    }
+
+
+  
+
+  }
+
   showLogout:boolean=false;
   toggleLogout(){
     this.showLogout=!this.showLogout
