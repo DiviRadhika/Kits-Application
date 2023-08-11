@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../applicationadmin/admin.service';
 import { Router } from '@angular/router';
 import { password1 } from 'src/password';
 import { ThisReceiver } from '@angular/compiler';
 import { MessageService } from 'primeng/api'
-
+import 'bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   emailvalue: any;
   emailvaluef: any;
   constructor(private admin: AdminService, private route: Router, private formBuilder: FormBuilder,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private elementRef: ElementRef,private renderer: Renderer2) { }
 
   loginForm!: FormGroup;
   forgetForm!: FormGroup;
@@ -48,13 +48,7 @@ export class LoginComponent implements OnInit {
 
   }
   reset() {
-    this.disableFields = true
-    const obj = {
-      email: this.emailvaluef,
-      password: this.forgetForm.controls['confirmPassword'].value,
-      otp: 123456
-    }
-
+ 
 
     if (this.forgetForm.controls['npassword'].value === '' || this.forgetForm.controls['npassword'].value === undefined) {
       // alert('Please Enter Password')
@@ -66,23 +60,38 @@ export class LoginComponent implements OnInit {
     }
     else {
 
-      this.admin.reset(obj).subscribe(
-        (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
+      alert('k')
+      this.disableFields = true
+      const obj = {
+        email: this.emailvaluef,
+        password: this.forgetForm.controls['confirmPassword'].value,
+        otp: 123456
+      }
+  
+      // this.admin.reset(obj).subscribe(
+      //   (data: any) => {
+      //     this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
 
-          this.route.navigate(['/login']);
-          console.log(data);
-          sessionStorage.setItem('role', data.role);
-          sessionStorage.setItem('access_token', data.access_token);
-          this.myModal.hide();
-        },
-        (err: any) => {
-          console.log(err); // Log the specific error message to the console
+      //     this.route.navigate(['/login']);
+      //     console.log(data);
+      //     sessionStorage.setItem('role', data.role);
+      //     sessionStorage.setItem('access_token', data.access_token);
+      //     this.myModal.hide();
+      //   },
+      //   (err: any) => {
+      //     console.log(err); // Log the specific error message to the console
 
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
-        }
-      );
-      ;
+      //     this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
+      //   }
+      // );
+      // ;
+      // const modalElement = document.querySelector('.transaction-detailModal') as HTMLElement;
+      // const bootstrapModal = new bootstrap.Modal(modalElement);
+      // bootstrapModal.hide();
+  
+      // const modalElement = this.elementRef.nativeElement.querySelector('.transaction-detailModal');
+      // this.renderer.removeClass(modalElement, 'show');
+      // this.renderer.setStyle(modalElement, 'display', 'none');
 
     }
 

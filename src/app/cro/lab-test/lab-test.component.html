@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" style="margin-top: -4%;">
 
   <div class="page-content">
     <div class="container-fluid">
@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <li class="breadcrumb-item"><a >Lab Test</a></li>
+                <li class="breadcrumb-item"><a>Lab Test</a></li>
                 <!-- <li class="breadcrumb-item active">Add CRO</li> -->
               </ol>
             </div>
@@ -31,7 +31,7 @@
         <li style="cursor: pointer" class="nav-item">
           <a class="nav-link" data-bs-toggle="tab" (click)="showMat()" role="tab">
             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-            <span   class="d-none d-sm-block">Material</span>
+            <span class="d-none d-sm-block">Material</span>
           </a>
         </li>
       </ul>
@@ -71,13 +71,13 @@
 
                     </div>
                     <div class="col-sm-12 col-md-6">
-                  
+
                       <button style="margin-left: 72%; font-size: 11px;" type="button" (click)="materialCreate()"
                         class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
                         data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                         Add Material</button>
-                    
-                  </div>
+
+                    </div>
 
                     <div class="row">
                       <div class="col-sm-12">
@@ -108,7 +108,8 @@
                             <tr class="odd"
                               *ngFor="let labData of materials  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountmaterial }; let i=index">
                               <!-- <td class="sorting_1 dtr-control">{{labData.lab_test}}</td> -->
-                              <td style="color:blue;cursor: pointer" (click)="edit(labData.meterial_id, 'view')">{{labData.name}}</td>
+                              <td style="color:blue;cursor: pointer" (click)="edit(labData.meterial_id, 'view')">
+                                {{labData.name}}</td>
                               <td>{{labData.size}}</td>
                               <td>
                                 <img style="width:50px" src="{{'data:image/jpg;base64,' + labData.image}}" />
@@ -117,17 +118,22 @@
                                 <button type="button" (click)="edit(labData.meterial_id, 'edit')"
                                   class="btn btn-success waves-effect edit-btn waves-light">
                                   <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                                  
+
                                 </button>&nbsp;
                                 <!-- <button type="button" (click)="edit(labData.meterial_id, 'view')"
                                 class="btn btn-success waves-effect edit-btn waves-light">
                               
                                 View
                               </button> -->
-                              <button style="margin-left: 5px;" (click)="edit(labData.meterial_id, 'view')" class="btn btn-success waves-effect edit-btn waves-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                              </svg></button>
+                                <button style="margin-left: 5px;" (click)="edit(labData.meterial_id, 'view')"
+                                  class="btn btn-success waves-effect edit-btn waves-light"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path
+                                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                    <path
+                                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                  </svg></button>
                               </td>
                             </tr>
                           </tbody>
@@ -181,22 +187,20 @@
                           <div class="col-md-3">
                             <div class="form-group">
                               <label>Classification</label>
-                              
-                                <select formControlName="classification"
-                                class="form-select form-control">
-                                <option
-                                    *ngFor="let data of classifications">
-                                    {{ data }}
+
+                              <select formControlName="classification" class="form-select form-control">
+                                <option *ngFor="let data of classifications">
+                                  {{ data }}
                                 </option>
-                            </select>
+                              </select>
 
                             </div>
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
                               <br>
-                            <button (click)="submit()" class="btn btn-primary">Submit</button>
-</div>
+                              <button (click)="submit()" class="btn btn-primary">Submit</button>
+                            </div>
                           </div>
                         </div>
                       </form>
@@ -221,14 +225,14 @@
                           </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                  
-                          <button style="margin-left: 72%; font-size: 11px;" type="button"  (click)="labCreate()"
+
+                          <button style="margin-left: 72%; font-size: 11px;" type="button" (click)="labCreate()"
                             class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
                             data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                             Add Lab Test</button>
-                        
-                      </div>
-                        
+
+                        </div>
+
 
                         <div class="row">
                           <!-- <div class="col-sm-3"></div> -->
@@ -242,7 +246,7 @@
                                   <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
                                     colspan="1" style="width: 243.2px;" aria-sort="ascending"
                                     aria-label="Lab Test: activate to sort column descending">Lab Test</th>
-                                    <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
+                                  <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
                                     colspan="1" style="width: 243.2px;" aria-sort="ascending"
                                     aria-label="Lab Test: activate to sort column descending">Classification</th>
                                   <th width="20%">Delete</th>
@@ -269,13 +273,16 @@
 
                                   </td> -->
                                   <td>
-                                    <button type="button" (click)="deletelab(labData.lab_id)"
+                                    <button type="button" (click)="confirm2(labData.lab_id, labData.name)" 
                                       class="btn btn-danger ml-3 mt-2">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                        <path
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                                       </svg>
-                                      </button>
+                                    </button>
 
                                   </td>
 
@@ -296,8 +303,10 @@
               </div>
             </div>
           </div>
+          <!-- <p-confirmDialog [style]="{width: '30vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog> -->
 
-         <footer class="footer" style="position: fixed;">
+          <p-button  icon="pi pi-times" label="Delete"></p-button>
+          <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-6">
@@ -307,3 +316,7 @@
             </div>
           </footer>
         </div>
+      </div>
+    </div>
+  </div>
+</div>

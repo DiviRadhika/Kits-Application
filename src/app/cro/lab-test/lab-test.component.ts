@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrosService } from '../cros.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lab-test',
@@ -31,7 +31,7 @@ export class LabTestComponent implements OnInit {
   totalCountmaterial = 0;
   classifications = [];
   constructor(private route: Router, private _cro: CrosService,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.labDetailsData();
@@ -73,6 +73,27 @@ export class LabTestComponent implements OnInit {
       this.totalCountmaterial = this.materials.length
     })
   }
+  confirm2(id: any, name: any) {
+    this.confirmationService.confirm({
+    
+        message: `Are you sure you want to delete the Lab Test '${name}'?`,
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.deletelab(id)
+        },
+        reject: (type: any) => {
+            // switch(type) {
+            //     case ConfirmEventType.REJECT:
+            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            //     break;
+            //     case ConfirmEventType.CANCEL:
+            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            //     break;
+            // }
+        }
+    });
+}
   pageChangem(event: number) {
     this.page = event;
     this.meterialsData()

@@ -37,7 +37,7 @@ export class KitPreprationComponent implements OnInit {
   uuid: any;
   skDetails: any[] = [];
   vkDetails: any;
-  isEdit: boolean = false;
+
   id: any;
   mode: any = '';
   // visitKitFormGroup: FormGroup
@@ -60,7 +60,7 @@ export class KitPreprationComponent implements OnInit {
        
       }
       if(data.mode === 'add'){
-        this.isEdit = true;
+      
       }
       else{
        router.navigate(['/home/centralLab/kitpreprationedit', this.id])
@@ -297,15 +297,12 @@ export class KitPreprationComponent implements OnInit {
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
-      if(this.isEdit !== true){
+     
       for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRowsedit(this.scount, this.skDetails);
+        this.adjustScreenKitRows(this.scount);
       }
-    }
-    else{
-      this.adjustScreenKitRows(this.scount);
-    }
-
+    
+   
     });
 
  
@@ -327,7 +324,7 @@ export class KitPreprationComponent implements OnInit {
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
-      prepration: [''],
+      prepration: ['In Progress'],
       expiryDate:['']
 
     });
@@ -449,45 +446,7 @@ export class KitPreprationComponent implements OnInit {
 
   }
 
-  
-  adjustScreenKitRowsedit(count: number, skDetails: any) {
-  
-    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
-    const currentRowCount = screenKitList.length;
-
-    if (count < currentRowCount) {
-      // Remove excess rows
-      for (let i = currentRowCount - 1; i >= count; i--) {
-        screenKitList.removeAt(i);
-      }
-    } else if (count > currentRowCount) {
-      // Add new rows
-      for (let i = currentRowCount; i < count; i++) {
-        this.onScreenKitAdd(i);
-
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
-        if (i < skDetails.length) {
-          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
-          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
-          this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
-          const preprationValue = skDetails[i].prepration;
-          console.log('preprationValue:', preprationValue);
-          
-          const preprationControl = this.ScreenKitForm.get('screenKitList').controls[i].get('prepration');
-          console.log('preprationControl:', preprationControl);
-          
-          if (preprationControl instanceof FormControl) {
-              preprationControl.patchValue(preprationValue);
-          } else {
-              console.log('preprationControl is not a FormControl instance');
-          }
-        }
-       
-
-      }
-    }
-
-  }
+ 
 
 
   adjustScreenKitRows(count: number) {
@@ -592,7 +551,10 @@ export class KitPreprationComponent implements OnInit {
     this.protocolService.postPreparation(data).subscribe(
    
         (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+          setTimeout(() => {
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+           }, 1000);
+         this.router.navigate(['/home/centralLab/kitPreparationGrid'])
         },
         (err: any) => {
          

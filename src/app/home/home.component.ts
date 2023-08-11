@@ -2,7 +2,7 @@
  import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService,ConfirmEventType, MessageService } from 'primeng/api';
 import { AdminService } from '../applicationadmin/admin.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   menuItems :any[] = [];
   profileval: boolean = false;
   fullName: any
+  log: boolean = false;
 
   toggleSubItems(item: any) {
     this.menuItems.forEach(menuItem => {
@@ -31,6 +32,13 @@ export class HomeComponent implements OnInit {
   }
   
 
+  constructor(private messageService:MessageService ,private admin: AdminService, private route: Router,
+    private formBuilder: FormBuilder, private confirmationService: ConfirmationService, private router: Router) {
+     this.isSidebarShrunk = false;
+ 
+ 
+     
+   }
 
   public showSubheadings = false;
   public updatepasswordForm: FormGroup = new FormGroup({
@@ -44,7 +52,26 @@ export class HomeComponent implements OnInit {
     
   
   });
-
+  confirm2() {
+    this.confirmationService.confirm({
+        message: 'Are you sure Do you want to logout?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.clear()
+        },
+        reject: (type: any) => {
+            // switch(type) {
+            //     case ConfirmEventType.REJECT:
+            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            //     break;
+            //     case ConfirmEventType.CANCEL:
+            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            //     break;
+            // }
+        }
+    });
+}
   role: any 
   adminRole: boolean = false;
   sponsorRole: boolean = false;
@@ -362,25 +389,25 @@ export class HomeComponent implements OnInit {
               }
           
             }
-
+            updaten(){
+              // this.log=true
+              this.confirm2()
+              // this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
+            }
  
   update(){
     this.updatepassword=true
     this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
   }
   clear(){
+    
     sessionStorage.clear()
+    this.router.navigate(['/login'])
   }
   sidebarToggle!: HTMLElement;
   sidebar!: HTMLElement;
   isSidebarShrunk: boolean;
 
-constructor(private messageService:MessageService ,private admin: AdminService, private route: Router, private formBuilder: FormBuilder,) {
-    this.isSidebarShrunk = false;
-
-
-    
-  }
 
   ngAfterViewInit() {
     this.sidebarToggle = document.getElementById('sidebar-toggle')!;

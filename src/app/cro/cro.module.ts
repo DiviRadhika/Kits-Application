@@ -28,6 +28,7 @@ import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
 import {CalendarModule} from 'primeng/calendar';
 import { LabTestCreateComponent } from './lab-test-create/lab-test-create.component';
 import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.component';
+import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -62,7 +63,8 @@ import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.compon
     ToastModule,
     ChartModule,
     DataViewModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
     
   ]
 })

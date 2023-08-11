@@ -40,7 +40,8 @@ export class KitPreparationEditComponent implements OnInit {
 
 
   constructor(private protocolService: ProtocolService,
-   private messageService: MessageService, private formBuilder: FormBuilder, private _activatedRoute:ActivatedRoute) {
+   private messageService: MessageService, private formBuilder: FormBuilder, private _activatedRoute:ActivatedRoute,
+   private router: Router) {
     // this.visitKitFormGroup = this.formBuilder.group({
     //   ckitId: [''],
     //   kitId: [''],
@@ -584,7 +585,11 @@ export class KitPreparationEditComponent implements OnInit {
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+        setTimeout(() => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+         }, 1000);
+      
+        this.router.navigate(['/home/centralLab/kitPreparationGrid'])
       },
       (err: any) => {
        

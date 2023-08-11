@@ -21,6 +21,8 @@ import { ToastModule } from 'primeng/toast'
 import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -46,11 +48,13 @@ import { DialogModule } from 'primeng/dialog';
     NgxPaginationModule,
     HttpClientModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    ConfirmDialogModule
+
 
   ],
   // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }
