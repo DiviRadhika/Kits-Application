@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'CRO', link: '/home/admin/croGrid' },
             { label: 'User', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
@@ -114,6 +115,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/Sponsor/sponsorStudies' },
         
           // ]
@@ -128,17 +130,14 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+         
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
             { label: 'Lab Creation', link: '/home/cro/labGrid' },
             { label: 'Study Summary', link: '/home/cro/protocolGrid' },
-                  { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
-            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
-            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
-            { label: 'Sample Collection', link: '/home/site/viewCRA' }
+           
             
           // ]
         // },
@@ -163,28 +162,31 @@ export class HomeComponent implements OnInit {
     // }
     else if(this.role === 'Central Lab-Preparation'){
       this.menuItems = [
-
-            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Verification'){
       this.menuItems = [
-
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
       ];
     }
     else if(this.role === 'Central Lab-Distribution'){
       this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
       ];
     }
     else if(this.role === 'Central Lab-Acknowledgement'){
       this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
       ];
     }
     else if(this.role === 'Central Lab-Reports'){
       this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
       ];
     }
@@ -195,6 +197,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sample Collection', link: '/home/site/viewCRA' }
             // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]

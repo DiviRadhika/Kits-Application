@@ -92,7 +92,7 @@
                   <label>
                     Enter New Password 
                   </label>
-                <div class="mb-3 text-center"><input type="text" formControlName="npassword"
+                <div class="mb-3 text-center"><input type="text"  maxlength="16" formControlName="npassword"
                     class="form-control text-center mb-3" id="" placeholder="Passowrd" required minlength="6">
                   <div *ngIf="forgetForm.get('npassword')?.touched && forgetForm.get('npassword')?.hasError('required')"
                     class="text-danger">
@@ -119,7 +119,7 @@
                     Enter Confirm Password 
                   </label>
                 <div class="mb-3 text-center">
-                  <input type="text" formControlName="confirmPassword" class="form-control text-center mb-3" id=""
+                  <input type="text"  maxlength="16" formControlName="confirmPassword"  class="form-control text-center mb-3" id=""
                     placeholder=" Confirm Passowrd">
                   <div *ngIf="forgetForm.get('confirmPassword')?.hasError('password1')" class="text-danger">
                     Password and Confirm Password Must Be Same

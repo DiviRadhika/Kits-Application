@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { AdminService } from 'src/app/applicationadmin/admin.service';
-import { CrosService } from 'src/app/cro/cros.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
 @Component({
-  selector: 'app-kit-prepration',
-  templateUrl: './kit-prepration.component.html',
-  styleUrls: ['./kit-prepration.component.css']
+  selector: 'app-kit-preparation-edit',
+  templateUrl: './kit-preparation-edit.component.html',
+  styleUrls: ['./kit-preparation-edit.component.css']
 })
-export class KitPreprationComponent implements OnInit {
+export class KitPreparationEditComponent implements OnInit {
 
 
   protocolIdDetails: any;
@@ -37,15 +35,12 @@ export class KitPreprationComponent implements OnInit {
   uuid: any;
   skDetails: any[] = [];
   vkDetails: any;
-  isEdit: boolean = false;
   id: any;
-  mode: any = '';
   // visitKitFormGroup: FormGroup
 
 
-  constructor(private protocolService: ProtocolService, 
-   private messageService: MessageService, private formBuilder: FormBuilder,
-   private _activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private protocolService: ProtocolService,
+   private messageService: MessageService, private formBuilder: FormBuilder, private _activatedRoute:ActivatedRoute) {
     // this.visitKitFormGroup = this.formBuilder.group({
     //   ckitId: [''],
     //   kitId: [''],
@@ -55,16 +50,11 @@ export class KitPreprationComponent implements OnInit {
       if (data.id) {
      
         this.id = data.id;
-        this.mode =data.mode 
+       
         this.getprotocolDetails(this.id)
        
       }
-      if(data.mode === 'add'){
-        this.isEdit = true;
-      }
-      else{
-       router.navigate(['/home/centralLab/kitpreprationedit', this.id])
-      }
+    
     });
 
 
@@ -153,26 +143,26 @@ export class KitPreprationComponent implements OnInit {
               .print-container {
                 display: flex;
               }
-  
+ 
               .left-content {
                 padding: 10px;
               }
-  
+ 
               .left-content p {
                 margin: 5px 0;
               }
-  
+ 
               .material-table {
                 margin-top: 5px;
                 border-collapse: collapse;
               }
-  
+ 
               .material-table td,
               .material-table th {
                 border: 1px solid #ccc;
                 padding: 5px;
               }
-  
+ 
               .material-table th {
                 background-color: #f2f2f2;
               }
@@ -193,9 +183,9 @@ export class KitPreprationComponent implements OnInit {
             <p><strong>Expiry Date:</strong> ${expirydate}</p>
             <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
             <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
-            
+           
             <p><strong>Type:</strong> Screening</p>
-        
+       
             <div class=ok>
                 <h4>Material</h4>
                 <table class="material-table">
@@ -244,26 +234,32 @@ export class KitPreprationComponent implements OnInit {
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
-     
+      // this.uuid = id.target.value;
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
-      console.log(this.protocolIdDetails.protocol_name, this.protocolIdDetails)
+
       this.protoName = this.protocolIdDetails.protocol_name
+      this.protocolService.getPreparationById(this.id).subscribe((protocolsData) => {
+
+        this.skDetails = protocolsData.data.screening_kit_details
+        this.vkDetails = protocolsData.data.visit_kit_details
       this.preparationForm.controls['protocol_name'].disable()
       this.preparationForm.controls['protocol_name'].setValue(this.protoName)
       this.preparationForm.controls['specialInstructions'].disable()
       this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
-
+     
       this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
       this.vMatDetails = protocols.visit_kit_details[0].meterial_details
       this.scount = protocols.screening_kit_details[0].screening_kit_count
+   
+     
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
       this.visitRecords = []
       this.visitRecordsRow = []
       this.tets = []
-    
+
       this.vMatDetails.forEach((tabs: any) => {
         tabs.visitKitFormGroup = this.formBuilder.group({
 
@@ -283,9 +279,32 @@ export class KitPreprationComponent implements OnInit {
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
-            visitKitListArray.at(j).get('kitId')?.patchValue(this.getLabKitId(i, j));
-       
+            // visitKitListArray.at(j).get('kitId')?.patchValue(this.getLabKitId(i, j));
+            const kitIdControl = visitKitListArray.at(j).get('kitId');
+            if (kitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
+               
+            }
          
+            const ckitIdControl = visitKitListArray.at(j).get('ckitId');
+            if (ckitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
+               
+            }
+            const expirydControl = visitKitListArray.at(j).get('expiryDate');
+            if (expirydControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
+            }
+            const prepControl = visitKitListArray.at(j).get('prepration');
+            if (prepControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+               
+                prepControl.patchValue(vkDetailForRowAndTab.prepration);
+               
+            }
            
           }
           tabs.visitsList = visitKitListArray;
@@ -297,18 +316,13 @@ export class KitPreprationComponent implements OnInit {
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
-      if(this.isEdit !== true){
       for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRowsedit(this.scount, this.skDetails);
+        this.adjustScreenKitRows(this.scount, this.skDetails);
       }
-    }
-    else{
-      this.adjustScreenKitRows(this.scount);
-    }
 
     });
+  });
 
- 
 
   }
 
@@ -321,7 +335,7 @@ export class KitPreprationComponent implements OnInit {
   getLabKitId(tabIndex: number, recordIndex: number): string {
     const visitIndex = tabIndex + 1;
     return `${this.protocolIdDetails.protocol_id}V${visitIndex}00${recordIndex+1}`;
-    
+   
   }
   createVisitKitGroup() {
     return this.formBuilder.group({
@@ -363,26 +377,26 @@ export class KitPreprationComponent implements OnInit {
                 .print-container {
                   display: flex;
                 }
-    
+   
                 .left-content {
                   padding: 10px;
                 }
-    
+   
                 .left-content p {
                   margin: 5px 0;
                 }
-    
+   
                 .material-table {
                   margin-top: 5px;
                   border-collapse: collapse;
                 }
-    
+   
                 .material-table td,
                 .material-table th {
                   border: 1px solid #ccc;
                   padding: 5px;
                 }
-    
+   
                 .material-table th {
                   background-color: #f2f2f2;
                 }
@@ -449,9 +463,12 @@ export class KitPreprationComponent implements OnInit {
 
   }
 
-  
-  adjustScreenKitRowsedit(count: number, skDetails: any) {
-  
+ 
+
+
+
+  adjustScreenKitRows(count: number, skDetails:any) {
+ 
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -465,63 +482,14 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
 
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
         if (i < skDetails.length) {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
           this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
           this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
           this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
-          const preprationValue = skDetails[i].prepration;
-          console.log('preprationValue:', preprationValue);
-          
-          const preprationControl = this.ScreenKitForm.get('screenKitList').controls[i].get('prepration');
-          console.log('preprationControl:', preprationControl);
-          
-          if (preprationControl instanceof FormControl) {
-              preprationControl.patchValue(preprationValue);
-          } else {
-              console.log('preprationControl is not a FormControl instance');
-          }
+        
         }
-       
-
-      }
-    }
-
-  }
-
-
-  adjustScreenKitRows(count: number) {
-  
-    const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
-    const currentRowCount = screenKitList.length;
-
-    if (count < currentRowCount) {
-      // Remove excess rows
-      for (let i = currentRowCount - 1; i >= count; i--) {
-        screenKitList.removeAt(i);
-      }
-    } else if (count > currentRowCount) {
-      // Add new rows
-      for (let i = currentRowCount; i < count; i++) {
-        this.onScreenKitAdd(i);
-// console.log(skDetails)
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
-        // if (i < skDetails.length) {
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
-          // const preprationValue = skDetails[i].prepration;
-          // console.log('preprationValue:', preprationValue);
-          
-          // const preprationControl = this.ScreenKitForm.get('screenKitList').controls[i].get('prepration');
-          // console.log('preprationControl:', preprationControl);
-          
-          // if (preprationControl instanceof FormControl) {
-          //     preprationControl.patchValue(preprationValue);
-          // } else {
-          //     console.log('preprationControl is not a FormControl instance');
-          // }
-        // }
        
 
       }
@@ -566,8 +534,9 @@ export class KitPreprationComponent implements OnInit {
    
   }
 
- 
   SubmitData() {
+    console.log(this.skDetails);
+
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
@@ -575,39 +544,62 @@ export class KitPreprationComponent implements OnInit {
     }
 
 
+    for (let i = 0; i < this.vkDetails.length; i++) {
+      // for (let j = 0; i < this.vkDetails[i].length; j++) {
+      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
-    // console.log(this.vMatDetails.visitsList.FormArray.value)
-    const data = {
-      "protocol_id": this.id,
-      "protocol_name": this.protoName,
-      "screening_kit_details": this.ScreenKitForm.value.screenKitList,
-      "visit_kit_details": this.vmdetails
+      // this.vkDetails[j].push({"verification_status": 'val'})
+     
 
+      this.vkDetails[i].forEach((protocol: any, index: any) => {
+        for (let j = 0; j < this.vMatDetails.length; j++) {
+          // this.vMatDetails.forEach((data:any,index: any)=>{
+
+          protocol.ckitId = this.vMatDetails[i].visitsList.value[index].ckitId
+          protocol.prepration = this.vMatDetails[i].visitsList.value[index].prepration
+          protocol.expiryDate = this.vMatDetails[i].visitsList.value[index].expiryDate
+          // protocol.verification_status = false
+        }
+
+      })
 
     }
-    // sessionStorage.setItem('vmdet', JSON.stringify(data));
+    this.skDetails.forEach((protocol: any, index: any) => {
+
+      // this.vMatDetails.forEach((data:any,index: any)=>{
+        // protocol.verification_status = false
+      protocol.ckitId = this.ScreenKitForm.value.screenKitList[index].ckitId
+      protocol.prepration = this.ScreenKitForm.value.screenKitList[index].prepration
+       protocol.expiryDate = this.ScreenKitForm.value.screenKitList[index].expiryDate
+    })
+
+    const data = {
+      "protocol_id": this.id,
+      "screening_kit_details": this.skDetails,
+      "visit_kit_details": this.vkDetails
+
+    }
 
     console.log(data);
 
-    this.protocolService.postPreparation(data).subscribe(
-   
-        (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
-        },
-        (err: any) => {
-         
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
-          
-        }
-      );
+    this.protocolService.updatePreparationById(data).subscribe(
+      (data: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
+      },
+      (err: any) => {
+       
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
+       
+      }
+    );
 
   }
 
 
 
 
-}
 
+}
 
 
 

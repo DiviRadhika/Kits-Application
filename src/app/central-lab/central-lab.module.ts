@@ -16,6 +16,9 @@ import { AccordionModule } from 'primeng/accordion';
 import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
+import { PreparationGridComponent } from './preparation-grid/preparation-grid.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { KitPreparationEditComponent } from './kit-preparation-edit/kit-preparation-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { DialogModule } from 'primeng/dialog';
     SampleAcknowledgementComponent,
     KitDistributionComponent,
   
-    SampleReportsComponent
+    SampleReportsComponent,
+        PreparationGridComponent,
+        KitPreparationEditComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +41,7 @@ import { DialogModule } from 'primeng/dialog';
     TabViewModule,
     AccordionModule,
     ToastModule,
-    DialogModule
+    DialogModule, NgxPaginationModule
   ]
 })
 export class CentralLabModule { }
