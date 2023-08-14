@@ -67,10 +67,42 @@ export class LoginComponent implements OnInit {
       this.valid = false
     }
     else {
-
-    
-      this.disableFields = true
       this.valid = true
+      this.disableFields = true
+    this.resetn()
+    
+    
+      // const obj = {
+      //   email: this.emailvaluef,
+      //   password: this.forgetForm.controls['confirmPassword'].value,
+      //   otp: 123456
+      // }
+  
+      // this.admin.reset(obj).subscribe(
+      //   (data: any) => {
+      //     this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
+
+      //     this.route.navigate(['/login']);
+      //     console.log(data);
+      //     sessionStorage.setItem('role', data.role);
+      //     sessionStorage.setItem('access_token', data.access_token);
+      //     this.myModal.hide();
+      //     this.reset()
+      //   },
+      //   (err: any) => {
+      //     console.log(err); // Log the specific error message to the console
+      //     this.valid = false
+      //     this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
+      //   }
+      // );
+      // ;
+   
+    }
+
+  }
+  resetn() {    
+      this.disableFields = true
+
       const obj = {
         email: this.emailvaluef,
         password: this.forgetForm.controls['confirmPassword'].value,
@@ -82,11 +114,10 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
 
           this.route.navigate(['/login']);
-          console.log(data);
           sessionStorage.setItem('role', data.role);
           sessionStorage.setItem('access_token', data.access_token);
           this.myModal.hide();
-          this.reset()
+       
         },
         (err: any) => {
           console.log(err); // Log the specific error message to the console
@@ -96,7 +127,7 @@ export class LoginComponent implements OnInit {
       );
       ;
    
-    }
+    
 
   }
   login() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { CrosService } from '../cros.service';
 
 @Component({
   selector: 'app-lab-create-grid',
@@ -17,7 +18,7 @@ export class LabCreateGridComponent implements OnInit {
   searchText: any
   allcroDetails: any;
   constructor(private route: Router,
-    private admin: AdminService,
+    private cro: CrosService,
     private messageService: MessageService) { }
 
   applyFilter(filterValue: string) {
@@ -49,10 +50,11 @@ export class LabCreateGridComponent implements OnInit {
     this.route.navigate(['/home/cro/createlabtest'])
   }
   edit(id: string, val: string) {
+    console.log(id, val)
     this.route.navigate(['/home/cro/updatecLabTest', id, val])
   }
   getCRoDetails() {
-    this.admin.getCro().subscribe(
+    this.cro.getlabs().subscribe(
       (data: any) => {
         this.croDetails = data
         this.allcroDetails = data

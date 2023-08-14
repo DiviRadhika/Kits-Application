@@ -1,4 +1,4 @@
-<div class="main-content" style="margin-top: -4%;">
+<div class="main-content" style="margin-top: -5%;">
 
     <div class="page-content">
         <div class="container-fluid">
@@ -8,32 +8,32 @@
                 <div class="col-12">
                     <div style="padding:1px" *ngIf="!view"
                         class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab Test
+                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab 
                         </h4>
-                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab Test
+                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab 
                         </h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards"
                                         class="waves-effect">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labGrid"
-                                        class="waves-effect">Lab Test</a></li>
-                                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Lab Test</li>
-                                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Lab Test</li>
+                                        class="waves-effect">Lab </a></li>
+                                <li *ngIf="!isEdit" class="breadcrumb-item active">Add Lab </li>
+                                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Lab </li>
                             </ol>
                         </div>
                     </div>
                     <div style="padding:1px" *ngIf="view"
                         class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View Lab Test</h4>
+                        <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View Lab </h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards"
                                         class="waves-effect">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labGrid"
-                                        class="waves-effect">Lab Test</a></li>
-                                <li class="breadcrumb-item active">View Lab Test</li>
+                                        class="waves-effect">Lab </a></li>
+                                <li class="breadcrumb-item active">View Lab </li>
 
                             </ol>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="container">
 
                         <div class="card-body">
-                            <h6 style="color: rgb(250, 39, 39);">Lab Test Form</h6>
+                            <h6 style="color: rgb(250, 39, 39);">Lab  Form</h6>
                             <hr>
                             <form [formGroup]="labTestCreateForm">
                                 <div class="row">
@@ -56,13 +56,13 @@
                                         <div class="form-group">
                                             <label>Lab Code</label>
                                             <input type="text" class="form-control" id="LabtestCode"
-                                                placeholder="Enter Lab Test Code" formControlName="lab_test_code"
-                                                [class.is-invalid]="shouldShowRequired('lab_test_code') && labTestCreateForm.get('lab_test_code')?.touched">
+                                                placeholder="Enter Lab Test Code" formControlName="cro_code"
+                                                [class.is-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
 
-                                            <div *ngIf="shouldShowRequired('lab_test_code')" class="invalid-feedback">
+                                            <div *ngIf="shouldShowRequired('cro_code')" class="invalid-feedback">
                                                 Lab Test Code is required.
                                             </div>
-                                            <div *ngIf="shouldShowLengthError('lab_test_code')"
+                                            <div *ngIf="shouldShowLengthError('cro_code')"
                                                 class="invalid-feedback">
                                                 Lab Test Code should contain between 5 and 15 characters.
                                             </div>
@@ -73,12 +73,12 @@
                                         <div class="form-group">
                                             <label>Lab Name</label>
                                             <input type="text" class="form-control" id="LabTestName"
-                                                placeholder="Enter Lab Test Name" formControlName="lab_test_name"
-                                                [class.is-invalid]="shouldShowRequired('lab_test_name') && labTestCreateForm.get('lab_test_name')?.touched">
-                                            <div *ngIf="shouldShowRequired('lab_test_name')" class="invalid-feedback">
+                                                placeholder="Enter Lab Test Name" formControlName="cro_name"
+                                                [class.is-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
+                                            <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
                                                 Lab Test Name is required.
                                             </div>
-                                            <div *ngIf="shouldShowLengthError('lab_test_name')"
+                                            <div *ngIf="shouldShowLengthError('cro_name')"
                                                 class="invalid-feedback">
                                                 Lab Test Name should contain between 5 and 15 characters.
                                             </div>
@@ -90,13 +90,13 @@
                                             <label>Legal Lab Name</label>
                                             <input type="text" class="form-control" id="LegalLabTestName"
                                                 placeholder="Enter legal Lab Test name"
-                                                formControlName="legal_lab_test_name"
-                                                [class.is-invalid]="shouldShowRequired('legal_lab_test_name') && labTestCreateForm.get('legal_lab_test_name')?.touched">
-                                            <div *ngIf="shouldShowRequired('legal_lab_test_name')"
+                                                formControlName="legal_cro_name"
+                                                [class.is-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
+                                            <div *ngIf="shouldShowRequired('legal_cro_name')"
                                                 class="invalid-feedback">
                                                 Legal Lab Test Name is required.
                                             </div>
-                                            <div *ngIf="shouldShowLengthError('legal_lab_test_name')"
+                                            <div *ngIf="shouldShowLengthError('legal_cro_name')"
                                                 class="invalid-feedback">
                                                 Legal Lab Test Name should contain between 5 and 15 characters.
                                             </div>

@@ -29,7 +29,7 @@ export class LabTestComponent implements OnInit {
   labFormval: boolean = false;
   disableAdd: boolean = true
   totalCountmaterial = 0;
-  classifications = [];
+  classifications = ['classification1', 'classification2'];
   constructor(private route: Router, private _cro: CrosService,
     private messageService: MessageService, private confirmationService: ConfirmationService) { }
 

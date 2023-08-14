@@ -142,9 +142,9 @@
             </div>
           </div>
           <div *ngIf="disableFields" class="reset" class=" mb-3 text-center modal-footer">
-            <button *ngIf="!valid" #myModal  style="margin-right: 36%;" type="submit"  (click)="reset()" class="btn btn-primary w-md">saven</button>
+            <button *ngIf="!valid" #myModal  style="margin-right: 36%;" type="submit"  (click)="reset()" class="btn btn-primary w-md">save</button>
          
-            <button *ngIf="valid"  #myModal style="margin-right: 36%;" type="submit" data-bs-dismiss="modal" (click)="reset()" class="btn btn-primary w-md">save</button>
+            <button *ngIf="valid"  #myModal style="margin-right: 36%;" type="submit" data-bs-dismiss="modal" (click)="resetn()" class="btn btn-primary w-md">save</button>
           </div>
         </div>
       </div>

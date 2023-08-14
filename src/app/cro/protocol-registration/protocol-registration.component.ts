@@ -237,7 +237,8 @@ export class ProtocolRegistrationComponent {
   }
   visits(value: any) {
     console.log(value.data);
-    this.valueVisit = value.data;
+    this.valueVisit =  this.protocolForm.controls['total_visits'].value;
+   
 
     // Clear the existing cards
     this.cards = [];
@@ -250,7 +251,7 @@ export class ProtocolRegistrationComponent {
   disableScroll() {
     document.body.style.overflow = 'hidden';
   }
-
+ 
   enableScroll() {
     document.body.style.overflow = 'auto';
   }
