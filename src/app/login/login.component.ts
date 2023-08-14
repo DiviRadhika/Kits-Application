@@ -15,6 +15,7 @@ import 'bootstrap';
 export class LoginComponent implements OnInit {
   enableFields: boolean = false;
   showPassword: boolean = false;
+  showPasswordc: boolean = false;
   @ViewChild('myModal') myModal: any;
   disableFields: boolean = false;
   emailvalue: any;
@@ -106,7 +107,7 @@ export class LoginComponent implements OnInit {
       const obj = {
         email: this.emailvaluef,
         password: this.forgetForm.controls['confirmPassword'].value,
-        otp: 123456
+        otp:  Number(this.forgetForm.controls['otp'].value)
       }
   
       this.admin.reset(obj).subscribe(
@@ -122,7 +123,7 @@ export class LoginComponent implements OnInit {
         (err: any) => {
           console.log(err); // Log the specific error message to the console
           this.valid = false
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
         }
       );
       ;
@@ -136,7 +137,7 @@ export class LoginComponent implements OnInit {
       username: this.emailvalue,
       password: this.loginForm.controls['password'].value,
       clear_session: true,
-      otp: this.loginForm.controls['otp'].value
+      otp:  this.loginForm.controls['otp'].value
     }
     if(this.loginForm.controls['otp'].value === '' || this.loginForm.controls['otp'].value === undefined || this.loginForm.controls['otp'].value === null){
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter OTP' });

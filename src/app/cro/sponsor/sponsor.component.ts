@@ -307,6 +307,26 @@ export class SponsorComponent implements OnInit {
     return null; // Return null for valid email format
   }
 
+   validateMobileNumber(input: any, phone: any) {
+    let inputValue = input.value.trim();
+    
+    // Remove non-numeric characters
+    let numericValue = inputValue.replace(/\D/g, '');
+
+    if(phone ==='mobile'){
+    if (numericValue.length > 12) {
+        numericValue = numericValue.slice(0, 12);
+    }
+  }
+  else{
+    if (numericValue.length > 16) {
+      numericValue = numericValue.slice(0, 16);
+  }
+  }
+    
+    input.value = numericValue;
+  
+}
 
 
 

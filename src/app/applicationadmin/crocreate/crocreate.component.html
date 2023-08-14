@@ -208,24 +208,24 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Office Telephone"
+                      <input type="text" class="form-control" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
                         formControlName="office_telephone">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" class="form-control" id="Extension" placeholder="Enter Extension"
+                      <input type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
-                       
+
                     </div>
                   </div>
+               
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                      <input type="number" class="form-control" id="mobile_no" placeholder="Enter Mobile Number"
-                        formControlName="mobile_telephone">
-                       
+                              <input type="text" class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
+
                     </div>
                   </div>
                 </div>
