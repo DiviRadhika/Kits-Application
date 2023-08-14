@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../applicationadmin/admin.service';
 import { Router } from '@angular/router';
 import { password1 } from 'src/password';
 import { ThisReceiver } from '@angular/compiler';
 import { MessageService } from 'primeng/api'
-
+import 'bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +14,14 @@ import { MessageService } from 'primeng/api'
 })
 export class LoginComponent implements OnInit {
   enableFields: boolean = false;
+  showPassword: boolean = false;
   @ViewChild('myModal') myModal: any;
   disableFields: boolean = false;
   emailvalue: any;
   emailvaluef: any;
+  valid: boolean = false;
   constructor(private admin: AdminService, private route: Router, private formBuilder: FormBuilder,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private elementRef: ElementRef,private renderer: Renderer2) { }
 
   loginForm!: FormGroup;
   forgetForm!: FormGroup;
@@ -47,24 +49,34 @@ export class LoginComponent implements OnInit {
 
   }
   reset() {
-    this.disableFields = true
-    const obj = {
-      email: this.emailvaluef,
-      password: this.forgetForm.controls['confirmPassword'].value,
-      otp: 123456
-    }
-
+ 
 
     if (this.forgetForm.controls['npassword'].value === '' || this.forgetForm.controls['npassword'].value === undefined) {
       // alert('Please Enter Password')
       this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Password' });
+      this.valid = false
     }
     else if (this.forgetForm.controls['confirmPassword'].value === undefined || this.forgetForm.controls['confirmPassword'].value === '') {
       // alert('Please Enter Confirm Password')
-      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Error occurred while resetting password' });
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Confirm Password' });
+      this.valid = false
+    }
+    else if (this.forgetForm.controls['otp'].value === undefined || this.forgetForm.controls['otp'].value === '') {
+      // alert('Please Enter Confirm Password')
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter OTP' });
+      this.valid = false
     }
     else {
 
+    
+      this.disableFields = true
+      this.valid = true
+      const obj = {
+        email: this.emailvaluef,
+        password: this.forgetForm.controls['confirmPassword'].value,
+        otp: 123456
+      }
+  
       this.admin.reset(obj).subscribe(
         (data: any) => {
           this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
@@ -74,35 +86,47 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('role', data.role);
           sessionStorage.setItem('access_token', data.access_token);
           this.myModal.hide();
+          this.reset()
         },
         (err: any) => {
           console.log(err); // Log the specific error message to the console
-
+          this.valid = false
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
         }
       );
       ;
-
+   
     }
 
   }
   login() {
+    this.messageService.clear()
     const obj = {
       username: this.emailvalue,
       password: this.loginForm.controls['password'].value,
       clear_session: true,
       otp: this.loginForm.controls['otp'].value
     }
+    if(this.loginForm.controls['otp'].value === '' || this.loginForm.controls['otp'].value === undefined || this.loginForm.controls['otp'].value === null){
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter OTP' });
+
+    }
+    else{
+      if(this.loginForm.controls['password'].value === '' || this.loginForm.controls['password'].value === undefined || this.loginForm.controls['password'].value === null){
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter Password' });
+  
+      }
+      else{
     this.admin.login(obj).subscribe(
       (data: any) => {
         console.log(data)
         // this.route.navigate(['/home'])
-        this.route.navigate(['/home/cro/dashboards'])
+      
         console.log(data.role)
         sessionStorage.setItem('role', data.role)
         sessionStorage.setItem('userid', data.user_id)
         sessionStorage.setItem('access_token', data.access_token)
-      
+        // this.route.navigate(['/home/cro/dashboards'])
 
         this.admin.getUserbyId(data.user_id).subscribe((data: any) => {
           console.log(data);
@@ -111,18 +135,31 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('email', data.email)
           sessionStorage.setItem('siteId', data.site_id)
           sessionStorage.setItem('sponsorId', data.sponsor_id)
-          sessionStorage.setItem('fullName', data.first_name + ' '+ data.last_name)
+          sessionStorage.setItem('fullName', data.first_name + ' '+data.last_name)
+          this.route.navigate(['/home/cro/dashboards'])
         });
-
+        
       },
+      
       (err: any) => {
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
       }
     )
+      }
+    }
+  }
+  preventPaste(event: ClipboardEvent): void {
+    event.preventDefault();
   }
   set() {
-    this.disableFields = true
+  this.messageService.clear()
     this.emailvaluef = this.forgetForm.controls['email1'].value.toLowerCase();
+    if(this.emailvaluef === '' || this.emailvaluef === undefined || this.emailvaluef === null){
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name' });
+
+    }
+    else{
+      this.disableFields = true
     const obj = {
       username: this.emailvaluef,
       clear_session: 'false',
@@ -156,11 +193,18 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
         }
       )
+    }
 
   }
 
   otp() {
+    this.messageService.clear();
     this.emailvalue = this.loginForm.controls['username'].value.toLowerCase();
+    if(this.emailvalue === '' || this.emailvalue === undefined || this.emailvalue === null){
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name' });
+
+    }
+    else{
     this.enableFields = true
     const obj = {
       username: this.emailvalue,
@@ -183,5 +227,6 @@ export class LoginComponent implements OnInit {
       }
     )
   }
+}
 
 }

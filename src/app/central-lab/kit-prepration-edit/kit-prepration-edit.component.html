@@ -23,8 +23,7 @@
                                     <li class="breadcrumb-item">
                                         <a routerLink="/home/centralLab/kitPreparationGrid" class="waves-effect">Kit Prepration</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Kit Prepration Add</li>
-                                
+                                    <li class="breadcrumb-item active">Kit Prepration Edit</li>
                                 </ol>
                             </div>
                         </div>
@@ -39,7 +38,18 @@
                                 <div id="printSection">
 
                                 </div>
-                               
+                                <!-- <div class="col-md-4 mb-3">
+
+
+                                    <label for="formrow-firstname-input" class="form-label">Study ID</label>
+                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
+                                        class="form-select form-control">
+                                        <option selected value="">Select Study ID</option>
+                                        <option *ngFor="let data of protocols" [value]="data.id">
+                                            {{ data.protocol_id }}
+                                        </option>
+                                    </select>
+                                </div> -->
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
@@ -145,17 +155,17 @@
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
-                                                             
-                                                                <td width="30%">
-                                                                
-                                                                    <select formControlName="prepration"
-                                                                        class="form-select form-control">
-                                                                        <!-- <option  selected value="">Select Study ID</option> -->
-                                                                        <option *ngFor="let data of preprationData">
-                                                                            {{ data }}
-                                                                        </option>
-                                                                    </select>
+                                                                <td width="25%">
+                                                                    <ng-container *ngIf="!skDetails|| skDetails[i]?.prepration === 'In Progress'; else inputField">
+                                                                        <select formControlName="prepration" class="form-select form-control">
+                                                                            <option *ngFor="let data of preprationData">{{ data }}</option>
+                                                                        </select>
+                                                                    </ng-container>
+                                                                    <ng-template #inputField>
+                                                                        <input type="text" formControlName="prepration" [disabled]="true" class="form-control" />
+                                                                    </ng-template>
                                                                 </td>
+                                                            
 
                                                                 <td width="20%">
                                                                     <button type="button"
@@ -244,17 +254,19 @@
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
+                                                           
                                                                 <td width="25%">
-                                                                    <select formControlName="prepration"
-                                                                        class="form-select form-control">
-                                                                        <option *ngFor="let data of preprationData">
-                                                                            {{ data }}
-                                                                        </option>
-                                                                    </select>
+                                                                    <ng-container *ngIf="!vkDetails|| vkDetails[i][j]?.prepration === 'In Progress'; else inputField">
+                                                                        <select formControlName="prepration" class="form-select form-control">
+                                                                            <option *ngFor="let data of preprationData">{{ data }}</option>
+                                                                        </select>
+                                                                    </ng-container>
+                                                                    <ng-template #inputField>
+                                                                        <input type="text" formControlName="prepration" [disabled]="true"  class="form-control"  />
+                                                                    </ng-template>
                                                                 </td>
-                                                             
 
-                                                                <td  width="20%">
+                                                                <td width="20%">
                                                                     <button type="button" (click)="printLabelm(i, j)"
                                                                         class="btn btn-primary  r-darkblue pull-Right">
                                                                         Print

@@ -1,7 +1,8 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService,ConfirmEventType, MessageService } from 'primeng/api';
 import { AdminService } from '../applicationadmin/admin.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   menuItems :any[] = [];
   profileval: boolean = false;
   fullName: any
+  log: boolean = false;
 
   toggleSubItems(item: any) {
     this.menuItems.forEach(menuItem => {
@@ -30,6 +32,13 @@ export class HomeComponent implements OnInit {
   }
   
 
+  constructor(private messageService:MessageService ,private admin: AdminService, private route: Router,
+    private formBuilder: FormBuilder, private confirmationService: ConfirmationService, private router: Router) {
+     this.isSidebarShrunk = false;
+ 
+ 
+     
+   }
 
   public showSubheadings = false;
   public updatepasswordForm: FormGroup = new FormGroup({
@@ -43,16 +52,37 @@ export class HomeComponent implements OnInit {
     
   
   });
-
+  confirm2() {
+    this.confirmationService.confirm({
+        message: 'Are you sure Do you want to logout?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.clear()
+        },
+        reject: (type: any) => {
+            // switch(type) {
+            //     case ConfirmEventType.REJECT:
+            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            //     break;
+            //     case ConfirmEventType.CANCEL:
+            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            //     break;
+            // }
+        }
+    });
+}
   role: any 
   adminRole: boolean = false;
   sponsorRole: boolean = false;
+  isfullscreen = false;
   croRole: boolean= false;
   centralLab: boolean = false;
   siteRole: boolean = false;
   ngOnInit(): void {
   
     this.role = sessionStorage.getItem('role')
+    this.fullName =  sessionStorage.getItem('fullName') 
     if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [
         // {
@@ -60,6 +90,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'CRO', link: '/home/admin/croGrid' },
             { label: 'User', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
@@ -113,6 +144,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/Sponsor/sponsorStudies' },
         
           // ]
@@ -127,47 +159,64 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
+         
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
-            // { label: 'Lab Creation', link: '/home/cro/labGrid' },
-            { label: 'Study Summary', link: '/home/cro/protocolGrid' }
+            { label: 'Lab Creation', link: '/home/cro/labGrid' },
+            { label: 'Study Summary', link: '/home/cro/protocolGrid' },
+           
+            
           // ]
         // },
       
       ];
     }
-    else if(this.role === 'Central Lab'){
-      this.menuItems = [
-        // {
-          // label: 'Central Lab',
-          // icon: 'bx bxs-analyse',
-          // expanded: false,
-          // subItems: [
+    // else if(this.role === 'Central Lab'){
+    //   this.menuItems = [
+    //     // {
+    //       // label: 'Central Lab',
+    //       // icon: 'bx bxs-analyse',
+    //       // expanded: false,
+    //       // subItems: [
             
-            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
+    //         { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+    //         { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
             
-          // ]
-        // },
-        // Other menu items for admin role...
-      ];
-    }
+    //       // ]
+    //     // },
+    //     // Other menu items for admin role...
+    //   ];
+    // }
     else if(this.role === 'Central Lab-Preparation'){
       this.menuItems = [
-
-            { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Verification'){
       this.menuItems = [
-
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
       ];
     }
     else if(this.role === 'Central Lab-Distribution'){
       this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
         { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Acknowledgement'){
+      this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+      ];
+    }
+    else if(this.role === 'Central Lab-Reports'){
+      this.menuItems = [
+        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
       ];
     }
     else if(this.role === 'CRA'){
@@ -177,6 +226,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
+            { label: 'Dashboards', link: '/home/cro/dashboards' },
             { label: 'Sample Collection', link: '/home/site/viewCRA' }
             // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]
@@ -199,6 +249,47 @@ export class HomeComponent implements OnInit {
       });
     });
   }
+  openfullscreen() {
+    const docElmWithBrowsersFullScreenFunctions = document.documentElement as HTMLElement & {
+      mozRequestFullScreen(): Promise<void>;
+      webkitRequestFullscreen(): Promise<void>;
+      msRequestFullscreen(): Promise<void>;
+    };
+    if (!this.isfullscreen) {
+      if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
+        docElmWithBrowsersFullScreenFunctions.requestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) { /* Firefox */
+        docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) { /* IE/Edge */
+        docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
+      }
+      this.isfullscreen = true;
+    } else {
+      const docWithBrowsersExitFunctions = document as Document & {
+        mozCancelFullScreen(): Promise<void>;
+        webkitExitFullscreen(): Promise<void>;
+        msExitFullscreen(): Promise<void>;
+      };
+      if (docWithBrowsersExitFunctions.exitFullscreen) {
+        docWithBrowsersExitFunctions.exitFullscreen();
+      } else if (docWithBrowsersExitFunctions.mozCancelFullScreen) { /* Firefox */
+        docWithBrowsersExitFunctions.mozCancelFullScreen();
+      } else if (docWithBrowsersExitFunctions.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+        docWithBrowsersExitFunctions.webkitExitFullscreen();
+      } else if (docWithBrowsersExitFunctions.msExitFullscreen) { /* IE/Edge */
+        docWithBrowsersExitFunctions.msExitFullscreen();
+      }
+      this.isfullscreen = false;
+
+    }
+
+
+  
+
+  }
+
   showLogout:boolean=false;
   toggleLogout(){
     this.showLogout=!this.showLogout
@@ -256,7 +347,6 @@ export class HomeComponent implements OnInit {
   reset(){
     this.passwordvisible=true
  const obj ={
-  
   email: sessionStorage.getItem('email'),
   password: this.updatepasswordForm.controls['password'].value,
   otp:this.updatepasswordForm.controls['otp'].value,
@@ -299,25 +389,25 @@ export class HomeComponent implements OnInit {
               }
           
             }
-
+            updaten(){
+              // this.log=true
+              this.confirm2()
+              // this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
+            }
  
   update(){
     this.updatepassword=true
     this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
   }
   clear(){
+    
     sessionStorage.clear()
+    this.router.navigate(['/login'])
   }
   sidebarToggle!: HTMLElement;
   sidebar!: HTMLElement;
   isSidebarShrunk: boolean;
 
-constructor(private messageService:MessageService ,private admin: AdminService, private route: Router, private formBuilder: FormBuilder,) {
-    this.isSidebarShrunk = false;
-
-console.log(sessionStorage.getItem('fullName') )
-    this.fullName =  sessionStorage.getItem('fullName') 
-  }
 
   ngAfterViewInit() {
     this.sidebarToggle = document.getElementById('sidebar-toggle')!;

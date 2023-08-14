@@ -16,13 +16,13 @@ export class UserCreateComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  // readonly passwordPattern: RegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/;
+  // readonly passwordPattern: RegExp = /^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#$%^&*()]).{8,}$/;
   userForm: FormGroup = new FormGroup({
     first_name: new FormControl("", [Validators.required]),
     last_name: new FormControl(),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()]).{8,}$/)
+      Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#$%^&*()]).{8,}$/)
     ]),
     role: new FormControl("", [Validators.required]),
     sId:new FormControl(""),
@@ -31,12 +31,14 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Central Lab','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution'];
+  options: string[] = ['Admin','CRO','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
   sponsor: boolean = false;
   site: boolean = false;
+  showPassword = false;
+
   siteDetails: any;
   idValue: any;
   view: boolean = false;
@@ -210,6 +212,9 @@ export class UserCreateComponent implements OnInit {
      })
  
    }
+   preventPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+  }
   shouldShowRequired(controlName: string): boolean {
     const control = this.userForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
@@ -332,5 +337,3 @@ export class UserCreateComponent implements OnInit {
   }
 
 }
-
-

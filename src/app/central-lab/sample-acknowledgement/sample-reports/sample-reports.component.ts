@@ -93,7 +93,10 @@ export class SampleReportsComponent implements OnInit {
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
   base64String: any;
-
+  display: boolean = false;
+  pdfValuesview:Array<any> = [];
+  displayv: boolean = false;
+  pdfValuesviewv:Array<any> = [];
 
 
   constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
@@ -411,105 +414,105 @@ export class SampleReportsComponent implements OnInit {
 
   }
 
-  SubmitData() {
+  // SubmitData() {
 
 
-    this.vmdetails = []
-    for (let i = 0; i < this.vMatDetails.length; i++) {
-      this.vmdetails.push(this.vMatDetails[i].visitsList.value)
+  //   this.vmdetails = []
+  //   for (let i = 0; i < this.vMatDetails.length; i++) {
+  //     this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
-    }
-
-
-    for (let i = 0; i < this.vkDetails.length; i++) {
-      // for (let j = 0; i < this.vkDetails[i].length; j++) {
-      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
-
-      // this.vkDetails[j].push({"verification_status": 'val'})
+  //   }
 
 
-      this.vkDetails[i].forEach((protocol: any, index: any) => {
-        for (let j = 0; j < this.vMatDetails.length; j++) {
-          // this.vMatDetails.forEach((data:any,index: any)=>{
+  //   for (let i = 0; i < this.vkDetails.length; i++) {
+  //     // for (let j = 0; i < this.vkDetails[i].length; j++) {
+  //     // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
-          protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
-          protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
-
-
-        }
-
-      })
-
-    }
-
-    this.skDetails.forEach((protocol: any, index: any) => {
-
-      protocol.acknowledgement = this.ScreenKitForm.value.screenKitList[index].acknowledgement
-      protocol.remarks = this.ScreenKitForm.value.screenKitList[index].remarks
-      // protocol.pdf =  this.pdfValues[index].pdf
-
-    })
-    // for(let i = 0; i<this.skDetails.length; i++ ) {
-    // for(let j=0 ; j<i; j++){
-    // console.log(this.pdfValues[i], this.pdfValues);
-    // this.pdfValues.forEach((k:any, index: any)=>{
-    //   if(index != k[index].row){
+  //     // this.vkDetails[j].push({"verification_status": 'val'})
 
 
-    //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
+  //     this.vkDetails[i].forEach((protocol: any, index: any) => {
+  //       for (let j = 0; j < this.vMatDetails.length; j++) {
+  //         // this.vMatDetails.forEach((data:any,index: any)=>{
 
-    //   // }
-
-    // }
-    // })
-
-
-    // }
-    // this.skDetails.push(this.pdfValues)
-    const data = {
-      "protocol_id": this.uuid,
-      "protocol_name": this.protoName,
-      "screening_pdf_details": [
-        this.pdfValues
-      ],
-      "visit_pdf_details": [
-        this.pdfValuesv
-      ],
-
-      "screening_kit_details": [
-        this.skDetails,
-
-      ],
-      "visit_kit_details": [
-        this.vkDetails,
-
-      ]
-    }
-
-    console.log(data);
+  //         protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
+  //         protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
 
 
-    // const data = {
-    //   "protocol_id": this.uuid,
-    //   "screening_kit_details": this.skDetails,
-    //   "visit_kit_details": this.vkDetails
+  //       }
+
+  //     })
+
+  //   }
+
+  //   this.skDetails.forEach((protocol: any, index: any) => {
+
+  //     protocol.acknowledgement = this.ScreenKitForm.value.screenKitList[index].acknowledgement
+  //     protocol.remarks = this.ScreenKitForm.value.screenKitList[index].remarks
+  //     // protocol.pdf =  this.pdfValues[index].pdf
+
+  //   })
+  //   // for(let i = 0; i<this.skDetails.length; i++ ) {
+  //   // for(let j=0 ; j<i; j++){
+  //   // console.log(this.pdfValues[i], this.pdfValues);
+  //   // this.pdfValues.forEach((k:any, index: any)=>{
+  //   //   if(index != k[index].row){
 
 
-    // }
+  //   //     this.pdfValues.push({ row: index, pdf: 'No PDF Uploaded' });
+
+  //   //   // }
+
+  //   // }
+  //   // })
 
 
-    console.log(data);
+  //   // }
+  //   // this.skDetails.push(this.pdfValues)
+  //   const data = {
+  //     "protocol_id": this.uuid,
+  //     "protocol_name": this.protoName,
+  //     "screening_pdf_details": [
+  //       this.pdfValues
+  //     ],
+  //     "visit_pdf_details": [
+  //       this.pdfValuesv
+  //     ],
 
-    this.protocolService.updatePreparationById(data).subscribe(
-      (data: any) => {
-        alert('Sample Acknowledgement Updated successfully');
-      },
-      (err: any) => {
-        alert(err.errorr.message)
-      }
-    );
+  //     "screening_kit_details": [
+  //       this.skDetails,
 
-  }
+  //     ],
+  //     "visit_kit_details": [
+  //       this.vkDetails,
+
+  //     ]
+  //   }
+
+  //   console.log(data);
+
+
+  //   // const data = {
+  //   //   "protocol_id": this.uuid,
+  //   //   "screening_kit_details": this.skDetails,
+  //   //   "visit_kit_details": this.vkDetails
+
+
+  //   // }
+
+
+  //   console.log(data);
+
+  //   this.protocolService.updatePreparationById(data).subscribe(
+  //     (data: any) => {
+  //       alert('Sample Acknowledgement Updated successfully');
+  //     },
+  //     (err: any) => {
+  //       alert(err.errorr.message)
+  //     }
+  //   );
+
+  // }
   fileSelected(fileInput: any, rowIndex: number): void {
     const file = fileInput.files[0];
     this.uploadedFiles[rowIndex] = file;
@@ -527,110 +530,22 @@ export class SampleReportsComponent implements OnInit {
 
   }
 
-  uploadFile(evt: any, rowIndex: any) {
-    let uploadedFiles = [];
-    this.files1 = evt.target.files;
-    uploadedFiles[rowIndex] = this.files1 ? 'File Uploaded' : '';
 
-    // Update the corresponding span element with the file status
-    const statusElement = document.getElementById(`status_${rowIndex}`);
-    if (statusElement) {
-      statusElement.textContent = uploadedFiles[rowIndex];
-    }
-
-
-    const file = this.files1[0];
-    this.file2 = this.files1[0].name;
-    const fileSize = this.files1[0].size;
-    if (fileSize >= 1084) {
-    }
-    if (this.files1 && file) {
-
-
-      const reader = new FileReader();
-
-      reader.onload = this._handleReaderLoaded1.bind(this, rowIndex);
-      reader.readAsBinaryString(file);
-    }
-  }
-
-  _handleReaderLoaded1(readerEvt: any, id: any) {
-
-    const binaryString = id.target.result;
-    this.base64textString = btoa(binaryString);
-    this.bas2 = 'data:text/html;base64,' + this.base64textString;
-    this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
-
-    // this.pdfValues.push(({row:readerEvt, pdf:this.bas2}))
-
-    const existingPdf = this.pdfValues.find((pdfValue: any) => pdfValue.row === readerEvt);
-
-
-    if (existingPdf) {
-      // PDF already exists for the row, remove it
-      const pdfIndex = this.pdfValues.indexOf(existingPdf);
-      this.pdfValues.splice(pdfIndex, 1);
-    }
-
-    this.pdfValues.push({ row: readerEvt, pdf: this.bas2 });
-
+  openDialogv(value: any){
+    this.displayv = true;
+    this.pdfValuesviewv = value;
+    console.log(this.pdfValuesviewv)
   }
 
 
-
-
-
-
-  uploadFilev(evt: any, tabindex: any, rowIndex: any) {
-
-
-    this.files1 = evt.target.files;
-
-
-    const file = this.files1[0];
-    this.file2 = this.files1[0].name;
-    const fileSize = this.files1[0].size;
-    if (fileSize >= 1084) {
-    }
-    if (this.files1 && file) {
-
-
-      const reader = new FileReader();
-
-      reader.onload = this._handleReaderLoadedv.bind(this, tabindex, rowIndex);
-      reader.readAsBinaryString(file);
-    }
+ 
+  openDialog(value: any){
+    this.display = true;
+    this.pdfValuesview = value;
   }
 
-  _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {
-
-
-
-    const binaryString = id.target.result;
-    this.base64textString = btoa(binaryString);
-    this.bas2 = 'data:text/html;base64,' + this.base64textString;
-    this.bas2 = this.bas2.substring(this.bas2.indexOf(',') + 1);
-
-
-
-    const existingPdf = this.pdfValuesv.find((pdfValue: any) => pdfValue.visit === readerEvt);
-
-
-    if (existingPdf) {
-      if (this.pdfValuesv.find((pdfValue: any) => pdfValue.row === rowindex)) {
-        // PDF already exists for the row, remove it
-        const pdfIndex = this.pdfValuesv.indexOf(existingPdf);
-        this.pdfValuesv.splice(pdfIndex, 1);
-      }
-    }
-
-    this.pdfValuesv.push(({ visit: readerEvt, row: rowindex, pdf: this.bas2 }))
-
-
-  }
-
-
-  Download(id: any) {
+  Download(id: any, name: string) {
+    console.log(id)
 
     this.base64String = id
     if(this.base64String == ''){
@@ -649,7 +564,7 @@ export class SampleReportsComponent implements OnInit {
     // Create a link element and set its attributes
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'downloaded-file.pdf';
+    link.download = name;
 
     // Programmatically click the link to trigger the download
     link.click();

@@ -8,7 +8,18 @@ body {
 .form-group {
 	margin-bottom: 20px;
   }
-  
+  .password-label {
+    position: relative;
+}
+
+.eye-button {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+	height: 20pt;
+}
   label {
 	display: block;
   } 

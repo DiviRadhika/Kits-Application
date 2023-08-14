@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrosService } from '../cros.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-lab-test',
@@ -19,6 +19,7 @@ export class LabTestComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText = '';
+  searchTextm = '';
   lab: boolean = true;
   material: boolean = false;
   public labForm: FormGroup = new FormGroup({
@@ -30,7 +31,7 @@ export class LabTestComponent implements OnInit {
   totalCountmaterial = 0;
   classifications = [];
   constructor(private route: Router, private _cro: CrosService,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.labDetailsData();
@@ -60,7 +61,6 @@ export class LabTestComponent implements OnInit {
   }
   labDetailsData() {
     this._cro.getLabTests().subscribe((data: any) => {
-      console.log(data)
       this.LabDetails = data
       this.allLabDetails = data
       this.totalCount = this.LabDetails.length
@@ -68,12 +68,32 @@ export class LabTestComponent implements OnInit {
   }
   meterialsData() {
     this._cro.meterials().subscribe((data: any) => {
-      console.log(data)
       this.materials = data
       this.allmaterials = data
       this.totalCountmaterial = this.materials.length
     })
   }
+  confirm2(id: any, name: any) {
+    this.confirmationService.confirm({
+    
+        message: `Are you sure you want to delete the Lab Test '${name}'?`,
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.deletelab(id)
+        },
+        reject: (type: any) => {
+            // switch(type) {
+            //     case ConfirmEventType.REJECT:
+            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            //     break;
+            //     case ConfirmEventType.CANCEL:
+            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            //     break;
+            // }
+        }
+    });
+}
   pageChangem(event: number) {
     this.page = event;
     this.meterialsData()
@@ -88,9 +108,24 @@ export class LabTestComponent implements OnInit {
     else {
       this.LabDetails = this.allLabDetails.filter(
         (labDetails: any) =>
-          (labDetails.lab_test && labDetails.lab_test.toLowerCase().includes(filterValue)) ||
-          (labDetails.material && labDetails.material.toLowerCase().includes(filterValue)) ||
-          (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
+          (labDetails.name && labDetails.name.toLowerCase().includes(filterValue)) ||
+          (labDetails.classfication && labDetails.classfication.toLowerCase().includes(filterValue)) 
+          // (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
+      );
+    }
+  }
+  applyFilterm(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    if (filterValue === '') {
+      this.materials = this.allmaterials;
+    }
+    else {
+      this.materials = this.allmaterials.filter(
+        (labDetails: any) =>
+          (labDetails.name && labDetails.name.toLowerCase().includes(filterValue)) ||
+          (labDetails.size && labDetails.size.includes(filterValue)) 
+          // (labDetails.size && labDetails.size.toLowerCase().includes(filterValue))
       );
     }
   }

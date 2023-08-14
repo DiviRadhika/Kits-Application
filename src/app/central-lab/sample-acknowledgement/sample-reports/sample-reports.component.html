@@ -4,7 +4,7 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-    <div class="main-content">
+    <div class="main-content" style="margin-top: -4%;">
         <div class="page-content">
             <div class="container-fluid">
                 <!-- start page title -->
@@ -88,7 +88,63 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
+                                                             <p-dialog header="Upload Multiple PDF's"
+                                                            [(visible)]="display" [modal]="true">
+                                                            
+                                                            <table id="datatable"
+                                                                class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                                role="grid" aria-describedby="datatable_info"
+                                                                style="width: 1182px;">
+                                                                <thead>
+                                                                    <tr role="row">
+                                                                       
+                                                                        <th class="sorting" tabindex="0"
+                                                                            aria-controls="datatable"
+                                                                            rowspan="1" colspan="1"
+                                                                            style="width: 200.2px;"
+                                                                            aria-label="Name: activate to sort column ascending">
+                                                                            View</th>
+                                                                        <th class="sorting" tabindex="0"
+                                                                            aria-controls="datatable"
+                                                                            rowspan="1" colspan="1"
+                                                                            style="width: 200.2px;"
+                                                                            aria-label="Legal Name: activate to sort column ascending">
+                                                                            Delete</th>
 
+                                                                    </tr>
+                                                                </thead>
+
+
+                                                                <tbody>
+
+                                                                    <ng-container
+                                                                        >
+                                                                        <tr
+                                                                            *ngFor="let file of pdfValuesview; let fileIndex = index">
+                                                                            <td>{{file.name}}
+
+                                                                            </td>
+                                                                        
+                                                                            <td>
+                                                                                <button class="text-center" type="button" class="md btn btn-warning r-blue"
+                                                                                style="width: 40px; height: 40px" (click)="Download(file.content, file.name)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
+                                                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                                                  </svg>
+                                                                            
+                                                                              </button>                                                                                
+                                                                            </td>
+
+
+                                                                        </tr>
+                                                                    </ng-container>
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+                                                        </p-dialog> 
                                                             <div class="table-responsive">
                                                                 <table class="table table-striped mb-0">
                                                                     <thead Style="background:#EEE">
@@ -134,14 +190,21 @@
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
+                                                     
                                                                             <td width="20%">
+                                                                                
                                                                                 <ng-container *ngIf="item.pdf">
                                                                                     <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                                    style="width: 40px; height: 40px" (click)="Download(item.pdf)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
-                                                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                                                                      </svg>
-                                                                                
+                                                                                    style="width: 40px; height: 40px" (click)="openDialog(item.pdf)">    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="16" height="16"
+                                                                                                fill="currentColor"
+                                                                                                class="bi bi-eye"
+                                                                                                viewBox="0 0 16 16">
+                                                                                                <path
+                                                                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                                <path
+                                                                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                            </svg>
                                                                                   </button>                                                                                </ng-container>
                                                                                 <ng-container *ngIf="!item.pdf">
 
@@ -152,29 +215,7 @@
                                                                                           </svg>
                                                                                         </span>                                                                                </ng-container>
                                                                               </td>
-                                                                            <!-- <td width="20%">
-                                                                                <ng-container *ngIf="item.pdf">
-                                                                                  <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                                                    style="width: 150px; height: 40px" (click)="Download(item.pdf)">
-                                                                                    <i class="bx bx-hdd label-icon"></i>
-                                                                                    Download PDF
-                                                                                  </button>
-                                                                                </ng-container>
-                                                                                <ng-container *ngIf="!item.pdf">
-                                                                                    <span>PDF Not Updated</span>
-                                                                                </ng-container>
-                                                                              </td> -->
-<!--                                                                             
-                                                                            <td width="20%">
-                                                                                <button type="button"
-                                                                                    class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                                                    style="width: 150px; height: 40px"
-                                                                                    (click)="Download(item.pdf)">
-                                                                                    <i class="bx bx-hdd label-icon"></i>
-                                                                                    Download pdf
-                                                                                </button>
-                                                                            </td> -->
-
+                         
 
 
 
@@ -194,7 +235,7 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names}}">  >
+                                                header="{{item.alternate_names}}">
 
 
 
@@ -202,7 +243,63 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
+                                                            <p-dialog header="Upload Multiple PDF's"
+                                                            [(visible)]="displayv" [modal]="true">
+                                                            
+                                                            <table id="datatable"
+                                                                class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                                role="grid" aria-describedby="datatable_info"
+                                                                style="width: 1182px;">
+                                                                <thead>
+                                                                    <tr role="row">
+                                                                       
+                                                                        <th class="sorting" tabindex="0"
+                                                                            aria-controls="datatable"
+                                                                            rowspan="1" colspan="1"
+                                                                            style="width: 200.2px;"
+                                                                            aria-label="Name: activate to sort column ascending">
+                                                                            View</th>
+                                                                        <th class="sorting" tabindex="0"
+                                                                            aria-controls="datatable"
+                                                                            rowspan="1" colspan="1"
+                                                                            style="width: 200.2px;"
+                                                                            aria-label="Legal Name: activate to sort column ascending">
+                                                                            Delete</th>
 
+                                                                    </tr>
+                                                                </thead>
+
+
+                                                                <tbody>
+
+                                                                    <ng-container
+                                                                        >
+                                                                        <tr
+                                                                            *ngFor="let file of pdfValuesviewv; let fileIndex = index">
+                                                                            <td>{{file.name}}
+
+                                                                            </td>
+                                                                        
+                                                                            <td>
+                                                                                <button class="text-center" type="button" class="md btn btn-warning r-blue"
+                                                                                style="width: 40px; height: 40px" (click)="Download(file.content, file.name)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
+                                                                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                                                  </svg>
+                                                                            
+                                                                              </button>                                                                                
+                                                                            </td>
+
+
+                                                                        </tr>
+                                                                    </ng-container>
+
+                                                                </tbody>
+                                                            </table>
+
+
+
+                                                        </p-dialog> 
 
 
                                                             <div class="table-responsive">
@@ -247,26 +344,20 @@
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
-                                                                            <!-- <td width="20%">
-                                                                                <ng-container *ngIf="item.pdf">
-                                                                                  <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                                                    style="width: 150px; height: 40px" (click)="Download(item.pdf)">
-                                                                                    <i class="bx bx-hdd label-icon"></i>
-                                                                                    Download PDF
-                                                                                  </button>
-                                                                                </ng-container>
-                                                                                <ng-container *ngIf="!item.pdf">
-                                                                                  <span>PDF Not Uploaded</span>
-                                                                                </ng-container>
-                                                                              </td> -->
-                                                                              <td width="20%">
+                                               <td width="20%">
+                                                                                
                                                                                 <ng-container *ngIf="item.pdf">
                                                                                     <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                                    style="width: 40px; height: 40px" (click)="Download(item.pdf)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-center" class="bi bi-download" viewBox="0 0 16 16">
-                                                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                                                                      </svg>
-                                                                                
+                                                                                    style="width: 40px; height: 40px" (click)="openDialogv(item.pdf)">    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="16" height="16"
+                                                                                                fill="currentColor"
+                                                                                                class="bi bi-eye"
+                                                                                                viewBox="0 0 16 16">
+                                                                                                <path
+                                                                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                                <path
+                                                                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                            </svg>
                                                                                   </button>                                                                                </ng-container>
                                                                                 <ng-container *ngIf="!item.pdf">
 
@@ -276,7 +367,7 @@
                                                                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                                                                           </svg>
                                                                                         </span>                                                                                </ng-container>
-                                                                              </td>
+                                                                              </td>                             
 
                                                                         </tr>
                                                                     </tbody>
@@ -290,7 +381,7 @@
                                             </p-tabPanel>
                                             <br>
 
-                                            <div class="col-md-12 mb-3" align="right">
+                                            <!-- <div class="col-md-12 mb-3" align="right">
                                                 <div class="mb-2 text-right" width="100%">
                                                     <button type="button"
                                                         class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
@@ -298,7 +389,7 @@
                                                         <i class="bx bx-hdd label-icon"></i> Submit
                                                     </button>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
 
                                             <!-- <button (click)="downloadStringAsPDF()">Download PDF</button> -->
