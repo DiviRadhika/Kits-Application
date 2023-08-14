@@ -176,10 +176,13 @@ export class KitDistributionComponent implements OnInit {
       for (let i = 1; i <= this.scount; i++) {
         this.adjustScreenKitRows(this.scount);
       }
+    }, (err: any) => {
 
-    });
+      this.displayValues = false
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
 
-
+    }
+    );
 
   }
 

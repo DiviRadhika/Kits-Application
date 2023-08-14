@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   confirm2() {
     this.confirmationService.confirm({
         message: 'Are you sure Do you want to logout?',
-        header: 'Delete Confirmation',
+        header: 'Logout Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
           this.clear()

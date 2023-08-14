@@ -43,9 +43,9 @@ export class KitPreprationComponent implements OnInit {
   // visitKitFormGroup: FormGroup
 
 
-  constructor(private protocolService: ProtocolService, 
-   private messageService: MessageService, private formBuilder: FormBuilder,
-   private _activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private protocolService: ProtocolService,
+    private messageService: MessageService, private formBuilder: FormBuilder,
+    private _activatedRoute: ActivatedRoute, private router: Router) {
     // this.visitKitFormGroup = this.formBuilder.group({
     //   ckitId: [''],
     //   kitId: [''],
@@ -53,17 +53,17 @@ export class KitPreprationComponent implements OnInit {
     // });
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
-     
+
         this.id = data.id;
-        this.mode =data.mode 
+        this.mode = data.mode
         this.getprotocolDetails(this.id)
-       
+
       }
-      if(data.mode === 'add'){
-      
+      if (data.mode === 'add') {
+
       }
-      else{
-       router.navigate(['/home/centralLab/kitpreprationedit', this.id])
+      else {
+        router.navigate(['/home/centralLab/kitpreprationedit', this.id])
       }
     });
 
@@ -135,7 +135,7 @@ export class KitPreprationComponent implements OnInit {
     const kitId = this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').value;
     const ckitId = this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').value;
     const expirydate = this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').value;
-   
+
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -244,7 +244,7 @@ export class KitPreprationComponent implements OnInit {
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
-     
+
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       console.log(this.protocolIdDetails.protocol_name, this.protocolIdDetails)
@@ -263,7 +263,7 @@ export class KitPreprationComponent implements OnInit {
       this.visitRecords = []
       this.visitRecordsRow = []
       this.tets = []
-    
+
       this.vMatDetails.forEach((tabs: any) => {
         tabs.visitKitFormGroup = this.formBuilder.group({
 
@@ -284,9 +284,9 @@ export class KitPreprationComponent implements OnInit {
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
             visitKitListArray.at(j).get('kitId')?.patchValue(this.getLabKitId(i, j));
-       
-         
-           
+
+
+
           }
           tabs.visitsList = visitKitListArray;
           this.tets.push(tabs.selectedLabTests);
@@ -297,15 +297,15 @@ export class KitPreprationComponent implements OnInit {
       this.visitRecords.forEach((visitRecordrow: any) => {
         this.visitRecordsRow.push(visitRecordrow);
       });
-     
+
       for (let i = 1; i <= this.scount; i++) {
         this.adjustScreenKitRows(this.scount);
       }
-    
-   
+
+
     });
 
- 
+
 
   }
 
@@ -313,19 +313,19 @@ export class KitPreprationComponent implements OnInit {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
- 
+
 
   getLabKitId(tabIndex: number, recordIndex: number): string {
     const visitIndex = tabIndex + 1;
-    return `${this.protocolIdDetails.protocol_id}V${visitIndex}00${recordIndex+1}`;
-    
+    return `${this.protocolIdDetails.protocol_id}V${visitIndex}00${recordIndex + 1}`;
+
   }
   createVisitKitGroup() {
     return this.formBuilder.group({
       ckitId: [''],
       kitId: [''],
       prepration: ['In Progress'],
-      expiryDate:['']
+      expiryDate: ['']
 
     });
   }
@@ -342,7 +342,7 @@ export class KitPreprationComponent implements OnInit {
     // Access the values of the selected row
     const kitId = selectedRow.get('kitId').value;
     const ckitId = selectedRow.get('ckitId').value;
-    const expirydate = selectedRow.get('expirydate').value;
+    const expirydate = selectedRow.get('expiryDate').value;
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -446,11 +446,11 @@ export class KitPreprationComponent implements OnInit {
 
   }
 
- 
+
 
 
   adjustScreenKitRows(count: number) {
-  
+
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -463,25 +463,25 @@ export class KitPreprationComponent implements OnInit {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
-// console.log(skDetails)
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
+        // console.log(skDetails)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001' + (i + 1))
         // if (i < skDetails.length) {
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
-          // this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
-          // const preprationValue = skDetails[i].prepration;
-          // console.log('preprationValue:', preprationValue);
-          
-          // const preprationControl = this.ScreenKitForm.get('screenKitList').controls[i].get('prepration');
-          // console.log('preprationControl:', preprationControl);
-          
-          // if (preprationControl instanceof FormControl) {
-          //     preprationControl.patchValue(preprationValue);
-          // } else {
-          //     console.log('preprationControl is not a FormControl instance');
-          // }
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
+        // const preprationValue = skDetails[i].prepration;
+        // console.log('preprationValue:', preprationValue);
+
+        // const preprationControl = this.ScreenKitForm.get('screenKitList').controls[i].get('prepration');
+        // console.log('preprationControl:', preprationControl);
+
+        // if (preprationControl instanceof FormControl) {
+        //     preprationControl.patchValue(preprationValue);
+        // } else {
+        //     console.log('preprationControl is not a FormControl instance');
         // }
-       
+        // }
+
 
       }
     }
@@ -508,7 +508,7 @@ export class KitPreprationComponent implements OnInit {
       ckitId: [''],
       kitId: [''],
       prepration: ['In Progress'],
-      expiryDate:['']
+      expiryDate: ['']
 
     })
   }
@@ -522,10 +522,10 @@ export class KitPreprationComponent implements OnInit {
 
     });
 
-   
+
   }
 
- 
+
   SubmitData() {
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
@@ -549,19 +549,19 @@ export class KitPreprationComponent implements OnInit {
     console.log(data);
 
     this.protocolService.postPreparation(data).subscribe(
-   
-        (data: any) => {
-          setTimeout(() => {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Preparation Updated successfully' });
-           }, 1000);
-         this.router.navigate(['/home/centralLab/kitPreparationGrid'])
-        },
-        (err: any) => {
-         
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
-          
-        }
-      );
+
+      (data: any) => {
+        setTimeout(() => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Preparation Updated successfully' });
+        }, 1000);
+        this.router.navigate(['/home/centralLab/kitPreparationGrid'])
+      },
+      (err: any) => {
+
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
+      }
+    );
 
   }
 

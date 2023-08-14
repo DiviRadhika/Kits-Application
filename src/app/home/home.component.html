@@ -102,13 +102,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <a (click)="updaten()"class="dropdown-item text-danger"
-                               >
-                                <i
-                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
-                                     <span
-                                    key="t-logout">Logout</span></a>
-
+                           
                               
 <!-- 
                                     <a (click)="profile()" class="dropdown-item text-danger" data-toggle="modal"
@@ -128,6 +122,13 @@
                                         <path
                                             d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                                     </svg> <span key="t-logout">Update Password</span></a>
+                                    <a (click)="updaten()"class="dropdown-item text-danger"
+                                    >
+                                     <i
+                                         class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+                                          <span
+                                         key="t-logout">Logout</span></a>
+     
                                                             </div>
 
                     </div>
@@ -137,7 +138,7 @@
             <!-- <p-toast></p-toast> -->
 
         </header>
-        <p-confirmDialog [style]="{width: '30vw'}"  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [style]="{width: '30vw', height:'18vw'}"  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-button (click)="confirm2()" icon="pi pi-times" label="Delete"></p-button>
         <p-dialog [class.overlay]="profile" [(visible)]="profile" *ngIf="addprofile">

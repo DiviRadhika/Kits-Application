@@ -123,7 +123,7 @@ export class KitVerificationComponent implements OnInit {
 
 
       });
-      console.log(protocols);
+    
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
@@ -178,7 +178,13 @@ export class KitVerificationComponent implements OnInit {
         this.adjustScreenKitRows(this.scount);
       }
 
-    });
+    }, (err: any) => {
+
+      this.displayValues = false
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
+    }
+    );
 
 
 

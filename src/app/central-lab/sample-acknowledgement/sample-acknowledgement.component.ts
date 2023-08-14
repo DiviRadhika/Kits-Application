@@ -214,9 +214,13 @@ export class SampleAcknowledgementComponent implements OnInit {
         this.adjustScreenKitRows(this.scount);
       }
 
-    });
+    }, (err: any) => {
 
+      this.displayValues = false
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
 
+    }
+    );
 
   }
   openUploadDialog(rowIndex: number): void {

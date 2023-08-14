@@ -314,9 +314,13 @@ export class SampleReportsComponent implements OnInit {
         this.adjustScreenKitRows(this.scount);
       }
 
-    });
+    }, (err: any) => {
 
+      this.displayValues = false
+      // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
 
+    }
+    );
 
   }
 
