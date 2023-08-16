@@ -1,7 +1,7 @@
-export const api = "http://34.100.227.119:5001/api";
-export const api2 = "http://34.100.227.119:5001/api";
+export const api = "http://34.100.239.252:5001/api";
+export const api2 = "http://34.100.239.252:5001/api";
 export const country = 'https://trial.mobiscroll.com/content/countries.json'
-export const apin = "http://34.100.227.119:5001/api"
+export const apin = "http://34.100.239.252:5001/api"
 
 
 

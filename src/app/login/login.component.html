@@ -105,7 +105,7 @@
               <div class="mb-3" *ngIf="disableFields">
                 <label for="password" *ngIf="disableFields"
               class="password-label form-group has-top-label w-100">
-              <span>Password</span>
+              <span>Enter New Password</span>
               <input class="form-control" id="password"
                   [type]="showPassword ? 'text' : 'password'"  formControlName="npassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
                   placeholder="Passowrd">
@@ -165,7 +165,7 @@
               <div class="mb-3" *ngIf="disableFields">
                 <label for="password" *ngIf="disableFields"
               class="password-label form-group has-top-label w-100">
-              <span>Password</span>
+              <span>Enter Confirm Password</span>
               <input class="form-control" id="password"
                   [type]="showPasswordc ? 'text' : 'password'"  formControlName="confirmPassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
                   placeholder="Passowrd">

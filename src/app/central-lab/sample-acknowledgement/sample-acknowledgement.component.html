@@ -1,4 +1,3 @@
-<!-- Begin page -->
 <div id="layout-wrapper">
 
     <!-- ============================================================== -->
@@ -145,6 +144,10 @@
                                                             <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                                 <p-dialog header="Upload Multiple PDF's"
                                                                     [(visible)]="display" [modal]="true">
+                                                                    <!-- <input type="text"
+                                                                   
+                                                                    placeholder="Fi" value=''
+                                                                    class="form-control" /> -->
                                                                     <input type="file" id="imageUpload{{indexs}}"
                                                                         (change)="_uploadFile($event, indexs)"
                                                                         accept="application/pdf" multiple>

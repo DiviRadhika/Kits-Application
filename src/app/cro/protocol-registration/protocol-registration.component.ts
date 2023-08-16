@@ -104,7 +104,7 @@ export class ProtocolRegistrationComponent {
 
 
     this.croService.meterials().subscribe((data: any) => {
-      console.log(data)
+
       this.materials = data
       this.labMatData(data)
 
@@ -123,7 +123,7 @@ export class ProtocolRegistrationComponent {
 
 
     this.ScreenMaterialKitForm = this.formBuilder.group({
-
+      kitVarient:new FormControl("", [Validators.required]),
       materialList: this.formBuilder.array([this.addScreenmKitData()])
 
     })
@@ -135,10 +135,7 @@ export class ProtocolRegistrationComponent {
     })
 
   }
-  handleClick(e:any){
-    console.log(this.protocolForm.controls['avantc'].value);
 
-  }
   avantCheck(event:any){
   
     if(event.target.checked==true){
@@ -146,7 +143,7 @@ export class ProtocolRegistrationComponent {
      this.protocolForm.controls['avant_sample_size'].disable()
     }
     else{
-      console.log('checkbox is unchecked');
+  
       this.protocolForm.controls['avant_sample_size'].setValue('')
       this.protocolForm.controls['avant_sample_size'].enable()
     }
@@ -236,7 +233,7 @@ export class ProtocolRegistrationComponent {
     return this.VisitKitMatForm.get('materialList') as FormArray;
   }
   visits(value: any) {
-    console.log(value.data);
+   
     this.valueVisit =  this.protocolForm.controls['total_visits'].value;
    
 
@@ -260,7 +257,7 @@ export class ProtocolRegistrationComponent {
     //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
     const control1 = this.ScreenMaterialKitForm.get('materialList') as FormArray;
     control1.push(this.addScreenmKitData());
-    console.log(this.ScreenMaterialKitForm.get('materialList').controls);
+  
   }
   addScreenKitData() {
     return this.formBuilder.group({
@@ -290,7 +287,7 @@ export class ProtocolRegistrationComponent {
   }
   addScreenKit() {
     this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
-    console.log(this.ScreenKitForm.controls);
+
   }
 
 
@@ -304,21 +301,21 @@ export class ProtocolRegistrationComponent {
       this.sponsers.push(sponser);
     });
 
-    console.log(this.sponsers);
+
   }
 
   labTestsData(labTestsList: any) {
     labTestsList.forEach((labTests: any) => {
       this.labTestsList.push(labTests);
     });
-    console.log(this.labTestsList);
+
   }
 
   labMatData(labMatList: any) {
     labMatList.forEach((labTests: any) => {
       this.labMatTestsList.push(labTests);
     });
-    console.log(this.labMatTestsList);
+
   }
 
   
@@ -332,7 +329,7 @@ export class ProtocolRegistrationComponent {
     sites.forEach((site: any) => {
       this.sites.push(site);
     });
-    console.log(this.sites);
+
   }
 
   shouldShowRequired(controlName: string): boolean {
@@ -343,6 +340,7 @@ export class ProtocolRegistrationComponent {
 
 
   SubmitData() {
+   
  
     const errorMessages = [];
     const errorMessagesalter = [];
@@ -351,14 +349,17 @@ export class ProtocolRegistrationComponent {
     // Iterate over the cards and access their form values
     for (const [index, card] of this.cards.entries()) {
       const cardForm = card.form;
+   
       const rowsArray = cardForm.get('visits') as FormArray;
       const cardData = {
+        kit_varient: cardForm.value.kitVarient,
         selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
         alternate_names:this.alternatenames[this.cards.indexOf(card)] ,
         visits: [] as any[]
 
       };
-      
+  
+
    
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
@@ -367,7 +368,7 @@ export class ProtocolRegistrationComponent {
         errorMessagesalter.push(`Please give Alternate Week Name in All visits`);
       }
        else {
-        console.log(`selectedLabTests is not empty for card at index ${index}`);
+      
       }
       for (const row of rowsArray.controls) {
         const rowForm = row as FormGroup;
@@ -423,7 +424,8 @@ export class ProtocolRegistrationComponent {
           {
             "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
             "lab_test_ids": this.multipleTestsId,
-            "meterial_details": this.ScreenMaterialKitForm.value.materialList
+            "meterial_details": this.ScreenMaterialKitForm.value.materialList,
+            "kit_varient": this.ScreenMaterialKitForm.value.kitVarient
 
 
           }
@@ -438,7 +440,7 @@ export class ProtocolRegistrationComponent {
       }
 
 
-      console.log(data);
+
 
       this.protocolService.postProtocol(data).subscribe(
         (data:any) => {
@@ -540,6 +542,7 @@ export class ProtocolRegistrationComponent {
     const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
     const rowsArray = new FormArray([]);
     const cardForm = this.fb.group({
+      kitVarient :new FormControl(""),
       visits: rowsArray
     });
     this.cards.push({ form: cardForm });
@@ -552,19 +555,19 @@ export class ProtocolRegistrationComponent {
 
     // Find the selected option in the labMatTestsList
     this.selectedOption = this.labMatTestsList.find((option) => option.meterial_id === selectedValue);
-    console.log(this.selectedOption);
+    
 
     if (this.selectedOption) {
       const rowFormArray = this.getRows(cardIndex);
-      console.log(rowFormArray);
+
 
       const rowFormGroup = rowFormArray?.at(rowIndex) as FormGroup;
-      console.log(rowFormGroup);
+
       if (rowFormGroup) {
         const quantityControl = rowFormGroup.get('quantity');
         const imageControl = rowFormGroup.get('image');
 
-        console.log(quantityControl);
+  
 
         if (quantityControl) {
           quantityControl.setValue(this.selectedOption.name);
@@ -572,7 +575,7 @@ export class ProtocolRegistrationComponent {
         if (imageControl) {
           imageControl.setValue(this.selectedOption.image);
         }
-        console.log(this.selectedOption.image);
+       
 
       }
 
@@ -639,8 +642,8 @@ export class ProtocolRegistrationComponent {
 
 
 
-
-
+ 
+ 
 
 
 }

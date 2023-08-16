@@ -111,13 +111,17 @@ export class LoginComponent implements OnInit {
       }
   
       this.admin.reset(obj).subscribe(
-        (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
-
+        (data: any) => { 
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Reset Successfully' });
+           setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+          
           this.route.navigate(['/login']);
           sessionStorage.setItem('role', data.role);
           sessionStorage.setItem('access_token', data.access_token);
           this.myModal.hide();
+       
        
         },
         (err: any) => {

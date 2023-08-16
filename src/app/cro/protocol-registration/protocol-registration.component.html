@@ -135,13 +135,19 @@
               <form [formGroup]="protocolForm">
                 <div class="row">
                   <div class="col-ml-1 ml-1"></div>
+                  <div class="col-md-3 mb-3" style="margin-top: -7px"  [formGroup]="ScreenMaterialKitForm">
+                    <label for="formrow-firstname-input" class="form-label">Kit Varient</label>
+                    <input type="text"  class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
+                    </div>
                   <div class="col-md-3 mb-3">
+                    <br>
                     <button type="button" (click)="dialog()" class="btn btn-primary  waves-light r-blue">Select Lab
                       Tests</button>
 
 
                   </div>
                   <div class="col-md-2 mb-3" style="margin-left: -11%;">
+                    <br>
                     <button style="margin-left: 7%;" type="button" (click)="onMaterialKitAdd()"
                       class="btn btn-primary  waves-light r-blue">Add Material</button>
                   </div>
@@ -288,9 +294,15 @@
               </div>
   
               <div class="col-md-3 mb-3">
+                <label for="formrow-firstname-input" class="form-label">Alternate Week Name</label>
                 <input type="text"  class="form-control"  placeholder="Alternate Week Name" [(ngModel)]="alternatenames[i]" value="" />
                 </div>
+                <div class="col-md-3 mb-3" [formGroup]="card.form">
+                  <label for="formrow-firstname-input" class="form-label">Kit Varient</label>
+                  <input type="text"  class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
+                  </div>
               <div class="col-md-3 mb-3">
+                <label for="formrow-firstname-input" class="form-label">Kit Count</label>
                 <input type="text" [(ngModel)]="kitCountval" class="form-control" placeholder="Enter Kit Count" />
               </div>
             
@@ -304,6 +316,7 @@
                   <button type="button" (click)="dialogv()" class="btn btn-primary  waves-light r-blue">Select Lab
                     Tests</button>
                 </div>
+               
                 <div class="col-md-2 mb-3" align="right" style="margin-left: -11%;">
                   <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
                   </button>
@@ -346,6 +359,8 @@
               <div>
               </div>
               <form [formGroup]="card.form">
+                
+             
                 <div formArrayName="visits">
                   <table class="table table-striped mb-0">
                     <thead Style="background:#EEE">

@@ -82,12 +82,20 @@
                     </div>
                   </div>
                 </div>
+               
+                
                 <div class="col-md-3">
                   <label>Password</label>
-                
+                  <!-- <input type="password" id="password" formControlName="password">
+                  <div *ngIf="userForm.get('password')?.hasError('pattern')">
+                    Password must haven at least 12 characters, one uppercase letter, one lowercase letter, one digit, and one special symbol.
+                  </div> -->
                   <input type="text" class="form-control" id="password" placeholder="Enter Password"
                   formControlName="password"  [type]="showPassword ? 'text' : 'password'"  (paste)="preventPaste($event)" maxlength="16"  >
-
+              
+                <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
+                    Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
+                </div>
                 
                   <button type="button" class="eye-button" tabindex="-1"
                       (click)="showPassword = !showPassword">
@@ -96,15 +104,9 @@
                       <i *ngIf="!showPassword" class="fa fa-eye-slash"
                           aria-hidden="true"></i>
                   </button>
-            
+             
           
-                    <div *ngIf="shouldShowRequired('password')"  class="text-danger">
-                      Password is required.
-                    </div>
-                    <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
-                      Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one
-                      digit, and one special character.
-                    </div>
+                  
 
                   </div>
 

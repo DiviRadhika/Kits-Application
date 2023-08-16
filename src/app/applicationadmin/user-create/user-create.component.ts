@@ -22,7 +22,9 @@ export class UserCreateComponent implements OnInit {
     last_name: new FormControl(),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#$%^&*()]).{8,}$/)
+    
+      Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+
     ]),
     role: new FormControl("", [Validators.required]),
     sId:new FormControl(""),

@@ -109,19 +109,7 @@ export class HomeComponent implements OnInit {
         //     { label: 'Study Summary', link: '/home/cro/protocolGrid' }
         //   ]
         // },
-        // {
-        //   label: 'Central Lab',
-        //   icon: 'bx bxs-analyse',
-        //   expanded: false,
-        //   subItems: [
-        //     { label: 'Kit Prepration', link: '/home/centralLab/kitPrepration' },
-        //     { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-        //     { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
-        //     { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-        //     { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
-            
-        //   ]
-        // },
+       
         // {
         //   label: 'CRA',
         //   icon: 'bx bxs-analyse',
@@ -173,22 +161,24 @@ export class HomeComponent implements OnInit {
       
       ];
     }
-    // else if(this.role === 'Central Lab'){
-    //   this.menuItems = [
-    //     // {
-    //       // label: 'Central Lab',
-    //       // icon: 'bx bxs-analyse',
-    //       // expanded: false,
-    //       // subItems: [
+    else if(this.role === 'Central Lab'){
+      this.menuItems = [
+        // {
+          // label: 'Central Lab',
+          // icon: 'bx bxs-analyse',
+          // expanded: false,
+          // subItems: [
+            { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },  
+               { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+               { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
             
-    //         { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-    //         { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
-            
-    //       // ]
-    //     // },
-    //     // Other menu items for admin role...
-    //   ];
-    // }
+          // ]
+        // },
+        // Other menu items for admin role...
+      ];
+    }
     else if(this.role === 'Central Lab-Preparation'){
       this.menuItems = [
         { label: 'Dashboards', link: '/home/cro/dashboards' },

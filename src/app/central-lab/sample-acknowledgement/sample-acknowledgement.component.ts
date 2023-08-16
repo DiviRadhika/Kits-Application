@@ -855,19 +855,3 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
