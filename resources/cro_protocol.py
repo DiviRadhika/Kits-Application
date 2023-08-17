@@ -50,6 +50,7 @@ screening_kit_details = cro_protocol_ns.model(
         "screening_kit_count": fields.Integer(required=True),
         "lab_test_ids": fields.List(fields.String(required=True)),
         "meterial_details": fields.List(fields.Nested(meterial_details)),
+        "kit_varient": fields.String(required=True),
     },
 )
 
@@ -68,6 +69,7 @@ visit_kit_details = cro_protocol_ns.model(
         # "visit_no": fields.Integer(required=True),
         "visit_kit_count": fields.Integer(required=True),
         "meterial_details": fields.List(fields.Nested(visite_meterial_details)),
+        "kit_varient": fields.String(required=True),
     },
 )
 
@@ -200,6 +202,7 @@ class CroProtocol(Resource):
                     "protocol_id": cro_protocol_id,
                     # "visit_no": item['visit_no'],
                     "screening_kit_count": item["screening_kit_count"],
+                    "kit_varient": item["kit_varient"],
                 }
                 screening_kit_data = screening_kit_details_schema.load(
                     screening_item_json
@@ -208,12 +211,11 @@ class CroProtocol(Resource):
             # loop over visit_kit_details and prepare visit_item_json and then load to visit_kit_details and save_to_db
             visit_kit_details = request_json["visit_kit_details"]
             for item in visit_kit_details:
-                #    import pdb; pdb.set_trace()
-                #    meterial_details = item["meterial_details"]
-                #    for meterial in meterial_details:
-                #        meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
-                #        if meterial_data:
-                #            meterial['meterial_name'] = meterial_data.name
+                meterial_details = item["meterial_details"]
+                for meterial in meterial_details:
+                    meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
+                    if meterial_data:
+                        meterial['meterial_name'] = meterial_data.name
 
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
@@ -221,6 +223,7 @@ class CroProtocol(Resource):
                     # "lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
                     "meterial_details": item["meterial_details"],
+                    "kit_varient": item["kit_varient"],
                 }
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)
                 visit_kit_data.save_to_db()
