@@ -6,7 +6,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 export class InputRestrictionDirective {
     inputElement: ElementRef;
 
-    @Input('appInputRestriction') appInputRestriction: string= '';
+    @Input('appInputRestriction') appInputRestriction!: string;
     @Input('length') length: number = 0;
     nameRegex = /^[a-zA-Z\s]*$/;
     mobileNumRegex = /^[0-9]*$/;
@@ -45,7 +45,16 @@ export class InputRestrictionDirective {
             return false;
         }
     }
-
+    @HostListener('paste', ['$event']) onPaste(event:any) {
+        let regex;
+        if (this.appInputRestriction === 'name') {
+            regex = this.nameRegex;
+        } else if (this.appInputRestriction === 'noSpecialChars') {
+            regex = this.noSpclChar;
+        }
+        const e = <ClipboardEvent>event;
+            return true;
+      }
 
    
 

@@ -22,7 +22,7 @@ export class SponsorComponent implements OnInit {
   contactForm: any
   public sponsorForm: FormGroup = new FormGroup({
     sp_auto_code: new FormControl(''),
-    sponsor_code: new FormControl("", [Validators.required]),
+    sponsor_code: new FormControl("", [Validators.required,Validators.minLength(5)]),
     sponsor_name: new FormControl("", [Validators.required]),
     legal_sponsor_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
@@ -30,7 +30,7 @@ export class SponsorComponent implements OnInit {
     city: new FormControl("", [Validators.required]),
     district: new FormControl(""),
     region: new FormControl("", [Validators.required]),
-    zip_code: new FormControl("", [Validators.required]),
+    zip_code: new FormControl("", [Validators.required,Validators.maxLength(12)]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),

@@ -636,6 +636,32 @@ export class ProtocolRegistrationComponent {
     return card.form.get('visits') as FormArray;
   }
 
+ValidateVisits(input:any){
+  let inputValue = input.value.trim();
+  //Remove non-numeric charecters
+  let numericValue = inputValue.replace(/\D/g,'');
+  
+    if (numericValue.length > 5) {
+      numericValue = numericValue.slice(0, 5);
+  }
+
+  input.value = numericValue;
+
+}  
+ValidateScreening(input:any){
+  let inputValue = input.value.trim();
+  //Remove non-numeric charecters
+  let numericValue = inputValue.replace(/\D/g,'');
+  
+    if (numericValue.length > 5) {
+      numericValue = numericValue.slice(0, 5);
+  }
+
+  input.value = numericValue;
+
+}  
+ 
+
 
 
 
@@ -644,6 +670,5 @@ export class ProtocolRegistrationComponent {
 
  
  
-
 
 }
