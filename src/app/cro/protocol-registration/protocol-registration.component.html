@@ -33,7 +33,10 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input"  class="form-label">Sponor Study ID</label>
-                    <input type="text"   formControlName="selected_protocol_id" class="form-control" id=""
+                    <input type="text" 
+
+
+  formControlName="selected_protocol_id" class="form-control" id=""
                       placeholder="Enter Study ID"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
@@ -43,7 +46,10 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Study Title</label>
-                    <input type="text" formControlName="selected_protocol_name" class="form-control" id=""
+                    <input type="text" 
+
+
+formControlName="selected_protocol_name" class="form-control" id=""
                       placeholder="Enter Study Title"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
@@ -51,7 +57,10 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
-                    <input type="text" formControlName="cro_study_id" class="form-control" id=""
+                    <input type="text" 
+
+
+formControlName="cro_study_id" class="form-control" id=""
                       placeholder="Enter CRO Study ID">
 
                   </div>
@@ -92,7 +101,10 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
-                    <input type="text" maxlength="5"  formControlName="total_visits"   (input)="ValidateVisits($event.target)"   (blur)="visits($event)" class="form-control"
+                    <input type="text" 
+
+
+maxlength="5"  formControlName="total_visits"   (input)="ValidateVisits($event.target)"   (blur)="visits($event)" class="form-control"
                       [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
@@ -100,14 +112,20 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
-                    <input type="text" maxlength="5"  formControlName="screens" (input)="ValidateScreening($event.target)" class="form-control" id="" placeholder=" "
+                    <input type="text" 
+
+
+maxlength="5"  formControlName="screens" (input)="ValidateScreening($event.target)" class="form-control" id="" placeholder=" "
                       [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
-                    <input type="text" maxlength="5"  (input)="ValidateScreening($event.target)" formControlName="selected_skit_count" class="form-control" id="" placeholder=" "
+                    <input type="text" 
+
+
+maxlength="5"  (input)="ValidateScreening($event.target)" formControlName="selected_skit_count" class="form-control" id="" placeholder=" "
                       [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
@@ -136,7 +154,10 @@
                   <div class="col-ml-1 ml-1"></div>
                   <div class="col-md-3 mb-3" style="margin-top: -7px"  [formGroup]="ScreenMaterialKitForm">
                     <label for="formrow-firstname-input" class="form-label">Kit Varient</label>
-                    <input type="text"  maxlength="5"  class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
+                    <input type="text" 
+
+
+ maxlength="5"  class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
                     </div>
                   <div class="col-md-3 mb-3">
                     <br>
@@ -294,15 +315,24 @@
   
               <div class="col-md-3 mb-3">
                 <label for="formrow-firstname-input" class="form-label">Alternate Week Name</label>
-                <input type="text"  class="form-control"  placeholder="Alternate Week Name" [(ngModel)]="alternatenames[i]" value="" />
+                <input type="text" 
+
+
+ class="form-control"  placeholder="Alternate Week Name" [(ngModel)]="alternatenames[i]" value="" />
                 </div>
                 <div class="col-md-3 mb-3" [formGroup]="card.form">
                   <label for="formrow-firstname-input" class="form-label">Kit Varient</label>
-                  <input type="text"  class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
+                  <input type="text" 
+
+
+ class="form-control"  placeholder="Kit Varient" formControlName="kitVarient" value="" />
                   </div>
               <div class="col-md-3 mb-3">
                 <label for="formrow-firstname-input" class="form-label">Kit Count</label>
-                <input type="text" [(ngModel)]="kitCountval" class="form-control" placeholder="Enter Kit Count" />
+                <input type="text" 
+
+
+[(ngModel)]="kitCountval" class="form-control" placeholder="Enter Kit Count" />
               </div>
             
             </div>

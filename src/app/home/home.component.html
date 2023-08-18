@@ -53,7 +53,8 @@
                     <!-- App Search-->
                     <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input type="text" 
+ autocomplete="off"class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
                     </form>
@@ -75,7 +76,8 @@
                             <form class="p-3">
                                 <div class="form-group m-0">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search ..."
+                                        <input type="text" 
+ autocomplete="off"class="form-control" placeholder="Search ..."
                                             aria-label="Recipient's username">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit"><i
@@ -140,11 +142,11 @@
         </header>
         <p-confirmDialog [style]="{width: '30vw', height:'18vw'}"  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
-        <p-button (click)="confirm2()" icon="pi pi-times" label="Delete"></p-button>
+        <p-button style="font-size: 10px;" (click)="confirm2()" icon="pi pi-times" label="Delete"></p-button>
         <p-dialog [class.overlay]="profile" [(visible)]="profile" *ngIf="addprofile">
-            <div class="view" style="width: 400px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor"
-                    class="bi bi-person-check-fill" viewBox="0 0 16 16">
+            <div class="view" style="width: 200px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+                    class="bi bi-person-check-fill" viewBox="0 0 15 15">
                     <path fill-rule="evenodd"
                         d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
                     <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -175,9 +177,11 @@
                     <p-toast style = "margin-left:20%"></p-toast>
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label>
-                        <input type="text" *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
+                        <input type="text" 
+ autocomplete="off"*ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
-                        <input type="text" *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
+                        <input type="text" 
+ autocomplete="off"*ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
 
                     </div>

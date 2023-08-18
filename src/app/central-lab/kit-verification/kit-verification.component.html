@@ -51,7 +51,10 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
+                                    <input type="text" 
+
+
+placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
@@ -143,25 +146,34 @@
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input type="text" 
+
+
+placeholder="kitId"
                                                                                     class="form-control"  [disabled]="true"
                                                                                     value={{item.kitId}} />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}  [disabled]="true"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}}
                                                                                     class="form-control"  [disabled]="true" />
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control"  [disabled]="true" />
@@ -278,23 +290,34 @@
 
                                                                     <tr *ngFor="let item of vkDetails[i]">
                                                                         <td width="25%">
-                                                                            <input type="text" placeholder="kitId"
+                                                                            <input type="text" 
+
+
+placeholder="kitId"
                                                                                 class="form-control" readonly  [disabled]="true"
                                                                                 value={{item.kitId}}/>
                                                                         </td>
                                                                         <td width="25%">
-                                                                            <input type="text" placeholder="LabKitId"
+                                                                            <input type="text" 
+
+
+placeholder="LabKitId"
                                                                                 value={{item.ckitId}} readonly  [disabled]="true"
                                                                                 class="form-control" />
                                                                         </td>
                                                                         <td width="25%">
-                                                                            <input type="text" placeholder="Preparation"
+                                                                            <input type="text" 
+
+
+placeholder="Preparation"
                                                                                 value={{item.prepration}} readonly  [disabled]="true"
                                                                                 class="form-control" />
                                                                         </td>
 
                                                                         <td width="25%">
-                                                                            <input type="text"
+                                                                            <input type="text" 
+
+
                                                                                 placeholder="Expiration Date"
                                                                                 value={{item.expiryDate}}
                                                                                 class="form-control"  [disabled]="true" />

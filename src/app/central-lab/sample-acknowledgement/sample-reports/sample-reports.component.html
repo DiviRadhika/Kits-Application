@@ -51,7 +51,10 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
+                                    <input type="text" 
+
+
+placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
@@ -103,13 +106,13 @@
                                                                             rowspan="1" colspan="1"
                                                                             style="width: 200.2px;"
                                                                             aria-label="Name: activate to sort column ascending">
-                                                                            View</th>
+                                                                            File Name</th>
                                                                         <th class="sorting" tabindex="0"
                                                                             aria-controls="datatable"
                                                                             rowspan="1" colspan="1"
                                                                             style="width: 200.2px;"
                                                                             aria-label="Legal Name: activate to sort column ascending">
-                                                                            Delete</th>
+                                                                            Download</th>
 
                                                                     </tr>
                                                                 </thead>
@@ -167,25 +170,37 @@
                                                                         <tr *ngFor="let item of skDetails">
 
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input type="text" 
+
+
+placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Site Id"
+                                                                                <input type="text" 
+
+
+placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
@@ -258,13 +273,13 @@
                                                                             rowspan="1" colspan="1"
                                                                             style="width: 200.2px;"
                                                                             aria-label="Name: activate to sort column ascending">
-                                                                            View</th>
+                                                                            File Name</th>
                                                                         <th class="sorting" tabindex="0"
                                                                             aria-controls="datatable"
                                                                             rowspan="1" colspan="1"
                                                                             style="width: 200.2px;"
                                                                             aria-label="Legal Name: activate to sort column ascending">
-                                                                            Delete</th>
+                                                                            Download</th>
 
                                                                     </tr>
                                                                 </thead>
@@ -321,25 +336,37 @@
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input type="text" 
+
+
+placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Site Id"
+                                                                                <input type="text" 
+
+
+placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />

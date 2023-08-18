@@ -58,7 +58,10 @@
                                     <div class="form-group">
 
                                         <label>Material</label>
-                                        <input type="text" class="form-control" id="material" formControlName="material"
+                                        <input type="text" 
+
+
+class="form-control" id="material" formControlName="material"
                                             placeholder=" Enter Material"
                                             [class.is-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
                                         <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">

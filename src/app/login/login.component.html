@@ -13,7 +13,7 @@
     <div class="p-2">
       <form [formGroup]="loginForm" class="form-horizontal" action="index.html">
         <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
+          <label for="username" class="form-label">UserName</label>
           <input *ngIf="!enableFields" type="text" formControlName="username" class="form-control" id="username"
             placeholder="Enter User Name">
           <input *ngIf="enableFields" type="text" [attr.disabled]="true" class="form-control" formControlName="username"
@@ -22,7 +22,10 @@
         </div>
         <div class="mb-3" *ngIf="enableFields">
           <label for="username" class="form-label">Enter OTP</label>
-          <input type="text" formControlName="otp" maxlength="6"class="form-control text-center mb-3" id="" placeholder="OTP">
+          <input type="text" 
+
+
+formControlName="otp" maxlength="6"class="form-control text-center mb-3" id="" placeholder="OTP">
         </div>
      
         <div class="mb-3" *ngIf="enableFields">
@@ -31,7 +34,7 @@
         <span>Password</span>
         <input class="form-control" id="password"
             [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
-            placeholder="Passowrd">
+            placeholder="Password">
         <button type="button" class="eye-button" tabindex="-1"
             (click)="showPassword = !showPassword">
             <i *ngIf="showPassword" class="fa fa-eye"
@@ -97,7 +100,10 @@
               </div>
               <div class="mb-3" class="password" *ngIf="disableFields">
                 <label for="username" class="form-label">Enter OTP Sent To Your Email</label>
-                <input type="text" formControlName="otp" class="form-control text-center mb-3" id=""
+                <input type="text" 
+
+
+formControlName="otp" class="form-control text-center mb-3" id=""
                   placeholder="OTP">
               </div>
               
@@ -108,7 +114,7 @@
               <span>Enter New Password</span>
               <input class="form-control" id="password"
                   [type]="showPassword ? 'text' : 'password'"  formControlName="npassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
-                  placeholder="Passowrd">
+                  placeholder="Password">
               <button type="button" class="eye-button" tabindex="-1"
                   (click)="showPassword = !showPassword">
                   <i *ngIf="showPassword" class="fa fa-eye"
@@ -139,7 +145,10 @@
 
 
                   
-                  <input type="text"  maxlength="16" formControlName="npassword"
+                  <input type="text" 
+
+
+ maxlength="16" formControlName="npassword"
                     class="form-control text-center mb-3" id="" placeholder="Passowrd" required minlength="6">
                   <div *ngIf="forgetForm.get('npassword')?.touched && forgetForm.get('npassword')?.hasError('required')"
                     class="text-danger">
@@ -168,7 +177,7 @@
               <span>Enter Confirm Password</span>
               <input class="form-control" id="password"
                   [type]="showPasswordc ? 'text' : 'password'"  formControlName="confirmPassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
-                  placeholder="Passowrd">
+                  placeholder="Password">
               <button type="button" class="eye-button" tabindex="-1"
                   (click)="showPasswordc = !showPasswordc">
                   <i *ngIf="showPasswordc" class="fa fa-eye"
@@ -187,7 +196,10 @@
                     Enter Confirm Password 
                   </label>
                 <div class="mb-3 text-center">
-                  <input type="text"  maxlength="16" formControlName="confirmPassword"  class="form-control text-center mb-3" id=""
+                  <input type="text" 
+
+
+ maxlength="16" formControlName="confirmPassword"  class="form-control text-center mb-3" id=""
                     placeholder=" Confirm Passowrd">
                   <div *ngIf="forgetForm.get('confirmPassword')?.hasError('password1')" class="text-danger">
                     Password and Confirm Password Must Be Same

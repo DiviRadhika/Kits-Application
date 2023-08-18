@@ -49,7 +49,10 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
+                                    <input type="text" 
+
+
+placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
@@ -96,38 +99,54 @@
                                                                     <tbody>
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="32%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input type="text" 
+
+
+placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Site Id"
+                                                                                <input type="text" 
+
+
+placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="expiryDate"
                                                                                     [disabled]="true"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="collection"
                                                                                     [disabled]="true"
                                                                                     value={{item.collection}}
@@ -144,7 +163,9 @@
                                                             <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                                 <p-dialog header="Upload Multiple PDF's"
                                                                     [(visible)]="display" [modal]="true">
-                                                                    <!-- <input type="text"
+                                                                    <!-- <input type="text" 
+
+
                                                                    
                                                                     placeholder="Fi" value=''
                                                                     class="form-control" /> -->
@@ -307,14 +328,19 @@
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     formControlName="remarks"
                                                                                     placeholder="Remarks" value=''
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="15%">
 
-                                                                                <input type="text" placeholder="Remarks"
+                                                                                <input type="text" 
+
+
+placeholder="Remarks"
                                                                                     value={{date}}
                                                                                     class="form-control" />
 
@@ -366,38 +392,55 @@
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input type="text" 
+
+
+placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Site Id"
+                                                                                <input type="text" 
+
+
+placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     placeholder="expiryDate"
                                                                                     [disabled]="true"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" [disabled]="true"
+                                                                                <input type="text" 
+
+
+[disabled]="true"
                                                                                     placeholder="collection"
                                                                                     value={{item.collection}}
                                                                                     class="form-control" />
@@ -583,14 +626,19 @@
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input type="text" 
+
+
                                                                                     formControlName="remarks"
                                                                                     placeholder="Remarks" value=''
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
 
-                                                                                <input type="text" placeholder="Remarks"
+                                                                                <input type="text" 
+
+
+placeholder="Remarks"
                                                                                     value={{date}}
                                                                                     class="form-control" />
 

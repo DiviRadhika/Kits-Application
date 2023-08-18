@@ -142,16 +142,25 @@
                                                     let i = index
                                                   ">
                                                                 <td width="30%">
-                                                                    <input type="text" placeholder="kitId"
+                                                                    <input type="text" 
+
+
+placeholder="kitId"
                                                                         formControlName="kitId" class="form-control"
                                                                         value="" [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId"
+                                                                    <input type="text" 
+
+
+placeholder="LabKitId"
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="Expiry Date"
+                                                                    <input type="text" 
+
+
+placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
@@ -162,7 +171,10 @@
                                                                         </select>
                                                                     </ng-container>
                                                                     <ng-template #inputField>
-                                                                        <input type="text" formControlName="prepration" [disabled]="true" class="form-control" />
+                                                                        <input type="text" 
+
+
+formControlName="prepration" [disabled]="true" class="form-control" />
                                                                     </ng-template>
                                                                 </td>
                                                             
@@ -240,17 +252,26 @@
                                                             <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                 [formGroupName]="j">
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="kitId"
+                                                                    <input type="text" 
+
+
+placeholder="kitId"
                                                                         formControlName="kitId" [disabled]="true"
                                                                         readonly [value]="getLabKitId(i, j)"
                                                                         class="form-control" value="" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId" value=""
+                                                                    <input type="text" 
+
+
+placeholder="LabKitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="Expiry Date"
+                                                                    <input type="text" 
+
+
+placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
@@ -262,7 +283,10 @@
                                                                         </select>
                                                                     </ng-container>
                                                                     <ng-template #inputField>
-                                                                        <input type="text" formControlName="prepration" [disabled]="true"  class="form-control"  />
+                                                                        <input type="text" 
+
+
+formControlName="prepration" [disabled]="true"  class="form-control"  />
                                                                     </ng-template>
                                                                 </td>
 

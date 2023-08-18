@@ -57,7 +57,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Sponsor Code</label>
-                      <input type="text" class="form-control" id="SponsorCode" placeholder="Enter Sponsor Code"
+                      <input type="text" 
+
+
+class="form-control" id="SponsorCode" placeholder="Enter Sponsor Code"
                         formControlName="sp_auto_code">
 
 
@@ -66,7 +69,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Reference Sponsor Code</label>
-                      <input type="text" class="form-control" maxlength="10" id="SponsorCode" placeholder="Enter Sponsor Code"
+                      <input type="text" 
+
+
+class="form-control" maxlength="10" id="SponsorCode" placeholder="Enter Sponsor Code"
                         formControlName="sponsor_code"
                         [class.is-invalid]="shouldShowRequired('sponsor_code') && sponsorForm.get('sponsor_code')?.touched">
 
@@ -82,7 +88,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Sponsor Name</label>
-                      <input type="text" class="form-control" maxlength="100" id="SponsorName" placeholder="Enter Sponsor Name"
+                      <input type="text" 
+
+
+class="form-control" maxlength="100" id="SponsorName" placeholder="Enter Sponsor Name"
                         formControlName="sponsor_name"
                         [class.is-invalid]="shouldShowRequired('sponsor_name') && sponsorForm.get('sponsor_name')?.touched">
                       <div *ngIf="shouldShowRequired('sponsor_name')" class="invalid-feedback">
@@ -99,7 +108,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal Sponsor Name</label>
-                      <input type="text" class="form-control" maxlength="100" id="LegalSponsorName"
+                      <input type="text" 
+
+
+class="form-control" maxlength="100" id="LegalSponsorName"
                         placeholder="Enter legal sponsor name" formControlName="legal_sponsor_name"
                         [class.is-invalid]="shouldShowRequired('legal_sponsor_name') && sponsorForm.get('legal_sponsor_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_sponsor_name')" class="invalid-feedback">
@@ -126,7 +138,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 1</label>
-                      <input type="text" class="form-control" maxlength="80" appInputRestriction="mobileNum" id="Address 1" placeholder="Enter Address 1"
+                      <input type="text" 
+
+
+class="form-control" maxlength="80" appInputRestriction="mobileNum" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1"
                         [class.is-invalid]="shouldShowRequired('address_1') && sponsorForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
@@ -138,7 +153,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(optional)"
+                      <input type="text" 
+
+
+class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(optional)"
                         formControlName="address_2">
                     </div>
                   </div>
@@ -164,7 +182,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
-                      <input type="text" class="form-control" maxlength="40" id="Region" placeholder="Enter Region/ State"
+                      <input type="text" 
+
+
+class="form-control" maxlength="40" id="Region" placeholder="Enter Region/ State"
                         formControlName="region"
                         [class.is-invalid]="shouldShowRequired('region') && sponsorForm.get('region')?.touched">
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
@@ -176,7 +197,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
-                      <input type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
+                      <input type="text" 
+
+
+class="form-control" maxlength="40" id="District" placeholder="Enter District"
                         formControlName="district">
 
                     </div>
@@ -198,7 +222,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
+                      <input type="text" 
+
+
+class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -225,14 +252,20 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" class="form-control" maxlength="20" appInputRestriction="mobileNum" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
+                      <input type="text" 
+
+
+class="form-control" maxlength="20" appInputRestriction="mobileNum" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
                         formControlName="office_telephone">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
+                      <input type="text" 
+
+
+class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
 
                     </div>
@@ -241,7 +274,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                              <input type="text" class="form-control" appInputRestriction="mobileNum" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
+                              <input type="text" 
+
+
+class="form-control" appInputRestriction="mobileNum" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
 
                     </div>
                   </div>
@@ -251,7 +287,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Primary Representative Email Id</label>
-                      <input type="text" class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
+                      <input type="text" 
+
+
+class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
                         formControlName="email">
                       <div *ngIf="shouldShowRequired('email')" class="text-danger">
                         Email is required.
@@ -265,7 +304,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
+                      <input type="text" 
+
+
+class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
                         formControlName="website">
 
                     </div>
@@ -322,21 +364,33 @@
                       <tbody>
                         <tr  [formGroupName]="i" *ngFor="let contact of contactForm.get('contacts').controls; let i = index;">
                           <th scope="row">
-                            <input type="text" maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                            <input type="text" 
+
+
+maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
                               formControlName="first_name">
                           </th>
 
                           <td>
-                            <input type="text" maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                            <input type="text" 
+
+
+maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
                               formControlName="last_name">
 
                           </td>
                           <td>
-                            <input type="text" maxlength="60"class="form-control" id="Office Telephone" placeholder="Enter Email Id "
+                            <input type="text" 
+
+
+maxlength="60"class="form-control" id="Office Telephone" placeholder="Enter Email Id "
                               formControlName="email">
                           </td>
                           <td>
-                            <input type="text" class="form-control" id="Designation" placeholder="Enter Designation"
+                            <input type="text" 
+
+
+class="form-control" id="Designation" placeholder="Enter Designation"
                               formControlName="designation">
                           </td>
                           <td>
@@ -393,21 +447,33 @@
                       <tbody>
                         <tr  [formGroupName]="i" *ngFor="let contact of editcontactsForm.get('editcontacts').controls; let i = index;">
                           <th scope="row">
-                            <input type="text" maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                            <input type="text" 
+
+
+maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
                               formControlName="first_name">
                           </th>
 
                           <td>
-                            <input type="text" maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                            <input type="text" 
+
+
+maxlength="100" class="form-control" id="Office Telephone" placeholder="Enter Name "
                               formControlName="last_name">
 
                           </td>
                           <td>
-                            <input type="text" class="form-control" maxlength="40" id="Office Telephone" placeholder="Enter Email Id "
+                            <input type="text" 
+
+
+class="form-control" maxlength="40" id="Office Telephone" placeholder="Enter Email Id "
                               formControlName="email">
                           </td>
                           <td>
-                            <input type="text" class="form-control" id="Designation" placeholder="Enter Designation"
+                            <input type="text" 
+
+
+class="form-control" id="Designation" placeholder="Enter Designation"
                               formControlName="designation">
                           </td>
                           <td>

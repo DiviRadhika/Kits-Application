@@ -51,7 +51,8 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>User First Name</label>
-                    <input type="text" class="form-control" id="first_name" placeholder="Enter First Name"
+                    <input type="text" 
+ class="form-control" id="first_name" placeholder="Enter First Name"
                       formControlName="first_name">
                     <div *ngIf="shouldShowRequired('first_name')" class="text-danger">
                       First Name is required.
@@ -62,7 +63,10 @@
                 <div class="col-md-3">
                   <label>User Last Name</label>
                   <div class="form-group">
-                    <input type="text" class="form-control" id="last_name" placeholder="Enter Last Name"
+                    <input type="text" 
+
+
+class="form-control" id="last_name" placeholder="Enter Last Name"
                       formControlName="last_name">
                   </div>
                 </div>
@@ -72,7 +76,8 @@
                     <label>Email Id</label>
 
 
-                    <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                    <input type="text" 
+ class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">
                     <div *ngIf="shouldShowRequired('email')" class="text-danger">
                       Email is required.
@@ -90,7 +95,8 @@
                   <div *ngIf="userForm.get('password')?.hasError('pattern')">
                     Password must haven at least 12 characters, one uppercase letter, one lowercase letter, one digit, and one special symbol.
                   </div> -->
-                  <input type="text" class="form-control" id="password" placeholder="Enter Password"
+                  <input type="text" 
+ autocomplete="off "class="form-control" id="password" placeholder="Enter Password"
                   formControlName="password"  [type]="showPassword ? 'text' : 'password'"  (paste)="preventPaste($event)" maxlength="16"  >
               
                 <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">

@@ -2983,9 +2983,13 @@ $(function(){
     Text.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
         @property tpl 
-        @default <input type="text">
+        @default <input type="text" 
+
+>
         **/         
-        tpl: '<input type="text">',
+        tpl: '<input type="text" 
+
+>',
         /**
         Placeholder attribute of input. Shown when input is empty.
 
@@ -4567,9 +4571,13 @@ $(function(){
     Constructor.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
         @property tpl 
-        @default <input type="text">
+        @default <input type="text" 
+
+>
         **/         
-        tpl:'<input type="text">',
+        tpl:'<input type="text" 
+
+>',
         /**
         @property inputclass 
         @default null
@@ -6405,7 +6413,9 @@ $(function(){
 
 /**
 Bootstrap datefield input - modification for inline mode.
-Shows normal <input type="text"> and binds popup datepicker.  
+Shows normal <input type="text" 
+
+> and binds popup datepicker.  
 Automatically shown in inline mode.
 
 @class datefield
@@ -6465,7 +6475,9 @@ Automatically shown in inline mode.
         /**
         @property tpl 
         **/         
-        tpl:'<div class="input-append date"><input type="text"/><span class="add-on"><i class="icon-th"></i></span></div>',
+        tpl:'<div class="input-append date"><input type="text" 
+
+/><span class="add-on"><i class="icon-th"></i></span></div>',
         /**
         @property inputclass 
         @default 'input-small'
@@ -6730,7 +6742,9 @@ $(function(){
 }(window.jQuery));
 /**
 Bootstrap datetimefield input - datetime input for inline mode.
-Shows normal <input type="text"> and binds popup datetimepicker.  
+Shows normal <input type="text" 
+
+> and binds popup datetimepicker.  
 Automatically shown in inline mode.
 
 @class datetimefield
@@ -6788,7 +6802,9 @@ Automatically shown in inline mode.
         /**
         @property tpl 
         **/         
-        tpl:'<div class="input-append date"><input type="text"/><span class="add-on"><i class="icon-th"></i></span></div>',
+        tpl:'<div class="input-append date"><input type="text" 
+
+/><span class="add-on"><i class="icon-th"></i></span></div>',
         /**
         @property inputclass 
         @default 'input-medium'

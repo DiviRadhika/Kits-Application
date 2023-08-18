@@ -61,7 +61,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Code</label>
-                      <input type="text" class="form-control" id="SiteCode" placeholder="Enter Site Code"
+                      <input type="text" 
+
+
+class="form-control" id="SiteCode" placeholder="Enter Site Code"
                         formControlName="site_data_code" maxlength="10"
                         [class.is-invalid]="shouldShowRequired('site_data_code') && siteForm.get('site_data_code')?.touched">
 
@@ -75,7 +78,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Name</label>
-                      <input type="text" class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
+                      <input type="text" 
+
+
+class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
                         formControlName="site_data_name"
                         [class.is-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('site_data_name')" class="invalid-feedback">
@@ -88,7 +94,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal Site Name</label>
-                      <input type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
+                      <input type="text" 
+
+
+class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                         formControlName="legal_site_data_name" maxlength="100"
                         [class.is-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_site_data_name')" class="invalid-feedback">
@@ -104,7 +113,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>User Name</label>
-                      <input type="text" class="form-control" id="First Name" placeholder="Enter Name"
+                      <input type="text" 
+
+
+class="form-control" id="First Name" placeholder="Enter Name"
                         formControlName="first_name"
                         [class.is-invalid]="shouldShowRequired('first_name') && siteForm.get('first_name')?.touched">
 
@@ -121,7 +133,10 @@
                       <label>Email Id</label>
 
 
-                      <input type="text" class="form-control" id="email" placeholder="Enter Email"
+                      <input type="text" 
+
+
+class="form-control" id="email" placeholder="Enter Email"
                         formControlName="uemail">
                       <div *ngIf="shouldShowRequired('uemail')" class="text-danger">
                         Email is required.
@@ -164,7 +179,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 1</label>
-                      <input type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
+                      <input type="text" 
+
+
+class="form-control" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1" maxlength="80"
                         [class.is-invalid]="shouldShowRequired('address_1') && siteForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
@@ -176,7 +194,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 2(optional)"
+                      <input type="text" 
+
+
+class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                         formControlName="address_2" maxlength="80">
                     </div>
                   </div>
@@ -203,7 +224,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
-                      <input type="text" maxlength="40" class="form-control" id="Region" placeholder="Enter Region/ State"
+                      <input type="text" 
+
+
+maxlength="40" class="form-control" id="Region" placeholder="Enter Region/ State"
                         formControlName="region"
                         [class.is-invalid]="shouldShowRequired('region') && siteForm.get('region')?.touched">
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
@@ -215,7 +239,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
-                      <input type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
+                      <input type="text" 
+
+
+class="form-control" maxlength="40" id="District" placeholder="Enter District"
                         formControlName="district">
 
                     </div>
@@ -240,7 +267,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" class="form-control"     maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
+                      <input type="text" 
+
+
+class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -266,14 +296,20 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" class="form-control" maxlength="20" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
+                      <input type="text" 
+
+
+class="form-control" maxlength="20" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
                         formControlName="office_telephone">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
+                      <input type="text" 
+
+
+class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
 
                     </div>
@@ -282,7 +318,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                              <input type="text" maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
+                              <input type="text" 
+
+
+maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
 
                     </div>
                   </div>
@@ -293,7 +332,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
+                      <input type="text" 
+
+
+class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
                         formControlName="website">
 
                     </div>
@@ -302,7 +344,10 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Email Id</label>
-                      <input type="text" class="form-control" maxlength="60" id="email" placeholder="Enter Email"
+                      <input type="text" 
+
+
+class="form-control" maxlength="60" id="email" placeholder="Enter Email"
                         formControlName="email">
                     </div>
                   </div>
@@ -352,21 +397,33 @@
                               </th>
 
                               <th scope="row">
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " maxlength="60" formControlName="email">
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone"
                                   placeholder="Enter Mobile Number" maxlength="20" (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                               <td>
@@ -428,21 +485,33 @@
                               </th>
 
                               <th scope="row">
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " formControlName="email" maxlength="60" >
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                                <input type="text" 
+
+
+class="form-control" id="Office Telephone"
                                   placeholder="Enter Mobile Number" maxlength="20" (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                             
