@@ -12,6 +12,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration.component.css']
 })
 export class KitPreprationComponent implements OnInit {
+  date: Date | undefined;
 
 
   protocolIdDetails: any;
@@ -512,6 +513,7 @@ export class KitPreprationComponent implements OnInit {
 
     })
   }
+  
 
 
 

@@ -110,7 +110,31 @@ export class UserCreateComponent implements OnInit {
             this.userForm.controls['sId'].setValue(this.getUserData.site_id)
         
            }
-           else if(this.getUserData.role === 'Central Lab'){
+           else if(this.getUserData.role === 'Central Lab-Preparation'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+           }
+           else if(this.getUserData.role === 'Central Lab-Verification'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+           }
+           else if(this.getUserData.role === 'Central Lab-Distribution'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+           }
+           else if(this.getUserData.role === 'Central Lab-Acknowledgement'){
+            this.sponsor = false
+            this.site = false
+            this.userForm.controls['sId'].clearValidators()
+            this.userForm.controls['sId'].updateValueAndValidity()
+           }
+           else if(this.getUserData.role === 'Central Lab-Reports'){
             this.sponsor = false
             this.site = false
             this.userForm.controls['sId'].clearValidators()

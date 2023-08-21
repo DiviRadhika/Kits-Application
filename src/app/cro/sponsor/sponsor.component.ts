@@ -314,13 +314,13 @@ export class SponsorComponent implements OnInit {
     let numericValue = inputValue.replace(/\D/g, '');
 
     if(phone ==='mobile'){
-    if (numericValue.length > 12) {
-        numericValue = numericValue.slice(0, 12);
+    if (numericValue.length > 20) {
+        numericValue = numericValue.slice(0, 20);
     }
   }
   else{
-    if (numericValue.length > 16) {
-      numericValue = numericValue.slice(0, 16);
+    if (numericValue.length > 20) {
+      numericValue = numericValue.slice(0, 20);
   }
   }
     

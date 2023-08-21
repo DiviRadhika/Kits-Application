@@ -165,19 +165,21 @@ placeholder="Expiry Date"
                                                                         class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <ng-container *ngIf="!skDetails|| skDetails[i]?.prepration === 'In Progress'; else inputField">
-                                                                        <select formControlName="prepration" class="form-select form-control">
-                                                                            <option *ngFor="let data of preprationData">{{ data }}</option>
-                                                                        </select>
+                                                                    <ng-container
+                                                                        *ngIf="!skDetails|| skDetails[i]?.prepration === 'Completed'; else inputField">
+                                                                       
+                                                                        <input type="text" autocomplete="off"
+                                                                        formControlName="prepration"
+                                                                        [disabled]="true" class="form-control" />
                                                                     </ng-container>
                                                                     <ng-template #inputField>
-                                                                        <input type="text" 
-
-
-formControlName="prepration" [disabled]="true" class="form-control" />
+                                                                        <select formControlName="prepration"
+                                                                            class="form-select form-control">
+                                                                            <option *ngFor="let data of preprationData">
+                                                                                {{ data }}</option>
+                                                                        </select>
                                                                     </ng-template>
                                                                 </td>
-                                                            
 
                                                                 <td width="20%">
                                                                     <button type="button"
@@ -268,13 +270,33 @@ placeholder="LabKitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" 
 
-
-placeholder="Expiry Date"
+                                                                    <input type="text" placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
-                                                                        class="form-control" />
-                                                                </td>
+                                                                        class="form-control" /> 
+                                                                    </td>
+
+                                                                        <!-- <div class="card flex justify-content-center">
+                                                                        </div> -->
+                                                                        <!-- <p-calendar [(ngModel)]="date"></p-calendar> -->
+                                                                        <td width="25%">
+                                                                            <ng-container
+                                                                                *ngIf="!vkDetails|| vkDetails[i][j]?.prepration === 'Completed'; else inputField">
+                                                                              
+                                                                                <input type="text" autocomplete="off"
+                                                                                formControlName="prepration"  placeholder="Preparation"
+                                                                                [disabled]="true" class="form-control" />
+                                                                            </ng-container>
+                                                                            <ng-template #inputField>
+                                                                                <select formControlName="prepration"
+                                                                                class="form-select form-control">
+                                                                                <option *ngFor="let data of preprationData">
+                                                                                    {{ data }}</option>
+                                                                            </select>
+                                                                               
+                                                                            </ng-template>
+                                                                        </td>
+                                                                        
                                                            
                                                                 <td width="25%">
                                                                     <ng-container *ngIf="!vkDetails|| vkDetails[i][j]?.prepration === 'In Progress'; else inputField">
@@ -351,10 +373,11 @@ formControlName="prepration" [disabled]="true"  class="form-control"  />
         </div>
         <!-- End Page-content -->
 
-       <footer class="footer" style="position: fixed;">
+ 
+        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">© Roboxa</div>
+                    <div class="col-sm-6">{{ getCurrentYear() }} © Roboxa</div>
                 </div>
             </div>
         </footer>

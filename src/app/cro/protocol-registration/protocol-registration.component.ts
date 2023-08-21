@@ -39,6 +39,8 @@ export class ProtocolRegistrationComponent {
 
 
   selectedOption: any;
+  varientValues: any[] = []
+  valueVariant: any;
   // MaterialList: FormArray = new FormArray([])
   constructor(private protocolService: ProtocolService,
     private route: Router, private fb: FormBuilder,
@@ -70,7 +72,7 @@ export class ProtocolRegistrationComponent {
     global_sample_size: new FormControl("", [Validators.required]),
     screens: new FormControl("", [Validators.required]),
     total_visits: new FormControl("", [Validators.required]),
-    // selected_vkit_count:new FormControl("", [Validators.required]),
+    kit_variant_count: new FormControl("", [Validators.required]),
     selected_skit_count: new FormControl("", [Validators.required]),
     labTestValue: new FormControl("", [Validators.required]),
     specialInstructions: new FormControl(""),
@@ -123,7 +125,7 @@ export class ProtocolRegistrationComponent {
 
 
     this.ScreenMaterialKitForm = this.formBuilder.group({
-      kitVarient:new FormControl("", [Validators.required]),
+      kitVarient: new FormControl("", [Validators.required]),
       materialList: this.formBuilder.array([this.addScreenmKitData()])
 
     })
@@ -136,25 +138,25 @@ export class ProtocolRegistrationComponent {
 
   }
 
-  avantCheck(event:any){
-  
-    if(event.target.checked==true){
-     this.protocolForm.controls['avant_sample_size'].setValue(this.protocolForm.controls['global_sample_size'].value)
-     this.protocolForm.controls['avant_sample_size'].disable()
+  avantCheck(event: any) {
+
+    if (event.target.checked == true) {
+      this.protocolForm.controls['avant_sample_size'].setValue(this.protocolForm.controls['global_sample_size'].value)
+      this.protocolForm.controls['avant_sample_size'].disable()
     }
-    else{
-  
+    else {
+
       this.protocolForm.controls['avant_sample_size'].setValue('')
       this.protocolForm.controls['avant_sample_size'].enable()
     }
   }
-  getsize(){
-  
-    if(this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value){
+  getsize() {
+
+    if (this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value) {
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
-    
+
     }
-    else{
+    else {
 
     }
   }
@@ -232,12 +234,13 @@ export class ProtocolRegistrationComponent {
   get materialList(): FormArray {
     return this.VisitKitMatForm.get('materialList') as FormArray;
   }
-  visits(value: any) {
-   
-    this.valueVisit =  this.protocolForm.controls['total_visits'].value;
-   
+  variantCount() {
 
-    // Clear the existing cards
+    this.valueVariant = this.protocolForm.controls['kit_variant_count'].value;
+    this.varientValues = []
+  }
+  visits(value: any) {
+    this.valueVisit = this.protocolForm.controls['total_visits'].value;
     this.cards = [];
 
     for (let i = 1; i <= this.valueVisit; i++) {
@@ -248,7 +251,7 @@ export class ProtocolRegistrationComponent {
   disableScroll() {
     document.body.style.overflow = 'hidden';
   }
- 
+
   enableScroll() {
     document.body.style.overflow = 'auto';
   }
@@ -257,7 +260,7 @@ export class ProtocolRegistrationComponent {
     //this.ScreenKitForm.get('labTestsList').push(this.addScreenKitData());
     const control1 = this.ScreenMaterialKitForm.get('materialList') as FormArray;
     control1.push(this.addScreenmKitData());
-  
+
   }
   addScreenKitData() {
     return this.formBuilder.group({
@@ -318,7 +321,7 @@ export class ProtocolRegistrationComponent {
 
   }
 
-  
+
   crosData(crosList: any) {
     crosList.forEach((cros: any) => {
       this.crosList.push(cros);
@@ -340,35 +343,35 @@ export class ProtocolRegistrationComponent {
 
 
   SubmitData() {
-   
- 
+
+
     const errorMessages = [];
     const errorMessagesalter = [];
-    const formData: { selectedLabTests: any[], alternate_names:any,  visits: any[] }[] = [];
+    const formData: { selectedLabTests: any[], alternate_names: any, visits: any[] }[] = [];
 
     // Iterate over the cards and access their form values
     for (const [index, card] of this.cards.entries()) {
       const cardForm = card.form;
-   
+
       const rowsArray = cardForm.get('visits') as FormArray;
       const cardData = {
         kit_varient: cardForm.value.kitVarient,
         selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
-        alternate_names:this.alternatenames[this.cards.indexOf(card)] ,
+        alternate_names: this.alternatenames[this.cards.indexOf(card)],
         visits: [] as any[]
 
       };
-  
 
-   
+
+
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
 
-      }else if(cardData.alternate_names.length === 0){
+      } else if (cardData.alternate_names.length === 0) {
         errorMessagesalter.push(`Please give Alternate Week Name in All visits`);
       }
-       else {
-      
+      else {
+
       }
       for (const row of rowsArray.controls) {
         const rowForm = row as FormGroup;
@@ -381,83 +384,83 @@ export class ProtocolRegistrationComponent {
       const combinedErrorMessage = errorMessages.join('\n');
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests in All visits' });
     }
-    else if(errorMessagesalter.length > 0) {
+    else if (errorMessagesalter.length > 0) {
       const combinedErrorMessage = errorMessagesalter.join('\n');
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please give Alternate Week Name in All visits' });
     }
-    else if(this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value){
+    else if (this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value) {
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
-    
-    }
-    else if(this.kitCountval === ''){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Visit Kit Count' });
-      
-    }
- 
-  
-   else{
 
-    if (this.protocolForm.invalid) {
-      if (this.protocolForm.controls['labTestValue'].value === undefined || this.protocolForm.controls['labTestValue'].value === '' ||
-        this.protocolForm.controls['labTestValue'].value === null) {
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests In Screening' });
+    }
+    else if (this.kitCountval === '') {
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Visit Kit Count' });
+
+    }
+
+
+    else {
+
+      if (this.protocolForm.invalid) {
+        if (this.protocolForm.controls['labTestValue'].value === undefined || this.protocolForm.controls['labTestValue'].value === '' ||
+          this.protocolForm.controls['labTestValue'].value === null) {
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests In Screening' });
+        }
+        else {
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
+        } Object.keys(this.protocolForm.controls).forEach((key) => {
+          this.protocolForm.get(key)?.markAsTouched();
+        });
+
       }
       else {
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
-      } Object.keys(this.protocolForm.controls).forEach((key) => {
-        this.protocolForm.get(key)?.markAsTouched();
-      });
-
-    }
-    else {
-      const data = {
-        "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
-        "protocol_name": this.protocolForm.controls['selected_protocol_name'].value,
-        "sponsor_id": this.protocolForm.controls['selected_sponsor_id'].value,
-        "cro_id": this.protocolForm.controls['cro_study_id'].value,
-        "no_of_visits": Number(this.protocolForm.controls['total_visits'].value),
-        "no_of_screens": Number(this.protocolForm.controls['screens'].value),
-        "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
-        "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
-        "special_instructions":this.protocolForm.controls['specialInstructions'].value,
-        "screening_kit_details": [
-          {
-            "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
-            "lab_test_ids": this.multipleTestsId,
-            "meterial_details": this.ScreenMaterialKitForm.value.materialList,
-            "kit_varient": this.ScreenMaterialKitForm.value.kitVarient
+        const data = {
+          "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
+          "protocol_name": this.protocolForm.controls['selected_protocol_name'].value,
+          "sponsor_id": this.protocolForm.controls['selected_sponsor_id'].value,
+          "cro_id": this.protocolForm.controls['cro_study_id'].value,
+          "no_of_visits": Number(this.protocolForm.controls['total_visits'].value),
+          "no_of_screens": Number(this.protocolForm.controls['screens'].value),
+          "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
+          "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
+          "special_instructions": this.protocolForm.controls['specialInstructions'].value,
+          "screening_kit_details": [
+            {
+              "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
+              "lab_test_ids": this.multipleTestsId,
+              "meterial_details": this.ScreenMaterialKitForm.value.materialList,
+              "kit_varient": this.ScreenMaterialKitForm.value.kitVarient
 
 
-          }
-        ],
-        "visit_kit_details": [
-          {
-            "visit_kit_count": Number(this.kitCountval),
-            "meterial_details": formData
-          }
-        ]
+            }
+          ],
+          "visit_kit_details": [
+            {
+              "visit_kit_count": Number(this.kitCountval),
+              "meterial_details": formData
+            }
+          ]
 
-      }
-
-
-
-
-      this.protocolService.postProtocol(data).subscribe(
-        (data:any) => {
-          this.route.navigate(['home/cro/protocolGrid'])
-          setTimeout(() => {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created successfully' });
-
-          }, 1000);
-
-          // this.route.navigate(['/home/cro/protocolView'])
-        },
-        (err:any)=>{
-          this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
         }
+
+
+
+
+        this.protocolService.postProtocol(data).subscribe(
+          (data: any) => {
+            this.route.navigate(['home/cro/protocolGrid'])
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created successfully' });
+
+            }, 1000);
+
+            // this.route.navigate(['/home/cro/protocolView'])
+          },
+          (err: any) => {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+          }
         );
+      }
     }
-  }
   }
   image_url: any;
 
@@ -480,7 +483,10 @@ export class ProtocolRegistrationComponent {
     this.selectedValue = evt.target.value;
     // Find the selected item based on the selectedValue
     const selectedItem = this.labMatTestsList.find(item => item.meterial_id === this.selectedValue);
+
     if (selectedItem) {
+      const selectedName = selectedItem.name;
+      console.log(selectedName)
       const selectedSize = selectedItem.size;
       const selectedImageString = selectedItem.image;
       // Clear and update the 'size' control in the FormArray
@@ -493,6 +499,7 @@ export class ProtocolRegistrationComponent {
         sizeControl.setValue(selectedSize[0]);
       }
       this.ScreenMaterialKitForm.controls.materialList.controls[index].get('frozen_status').setValue(false);
+      // this.ScreenMaterialKitForm.controls.materialList.controls[index].get('material_name').setValue(selectedName);
       // Set the 'image' control value
       const img = new Image();
       img.src = 'data:image/jpeg;base64,' + selectedImageString;
@@ -542,48 +549,79 @@ export class ProtocolRegistrationComponent {
     const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
     const rowsArray = new FormArray([]);
     const cardForm = this.fb.group({
-      kitVarient :new FormControl(""),
+      kitVarient: new FormControl(""),
       visits: rowsArray
     });
     this.cards.push({ form: cardForm });
     this.selectedLabTests.push([]);
     this.alternatenames.push([])
   }
+
+  getVariant(val: any, tab: any) {
+    console.log(this.valueVariant);
+  
+    const existingIndex = this.varientValues.findIndex((variant: any) => variant.row === tab);
+    
+    // Check if the entered value already exists in any row (case-insensitive)
+    const valueExists = this.varientValues.some((variant: any) => variant.value.toLowerCase() === val.target.value.toLowerCase());
+  
+    if (!valueExists) {
+      if (existingIndex !== -1) {
+        // Update the existing value if the row is found
+        this.varientValues[existingIndex].value = val.target.value;
+      } else if (this.varientValues.length <= this.valueVariant - 1 && val.target.value.trim() !== '') {
+        // Push the new value into the 'varientValues' array if not empty
+        this.varientValues.push({ row: tab, value: val.target.value });
+      } else {
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Not Allowed, adding more than specified Variant Count' });
+        this.errorRows.add(tab);
+        this.cards[tab].form.controls['kitVarient'].reset();
+      }
+      console.log(this.varientValues);
+    } else if (existingIndex !== -1) {
+      // Remove the duplicate value if it's found in a different row
+      this.varientValues.splice(existingIndex, 1);
+      this.errorRows.delete(tab);
+      console.log(this.varientValues);
+    }
+    
+    // If the value is empty, remove the row from varientValues
+    if (val.target.value.trim() === '') {
+      const indexToRemove = this.varientValues.findIndex((variant: any) => variant.row === tab);
+      if (indexToRemove !== -1) {
+        this.varientValues.splice(indexToRemove, 1);
+        this.errorRows.delete(tab);
+      }
+    }
+  }
+  
+  
+
+  errorRows: Set<any> = new Set(); // Set to track rows with errors
+
+  shouldShowErrorMessage(tab: any): boolean {
+    return this.errorRows.has(tab);
+  }
   onMeterialIdChange(event: any, cardIndex: number, rowIndex: number) {
     const selectedValue = event.target.value;
     const cardForm = this.cards[cardIndex].form;
-
     // Find the selected option in the labMatTestsList
     this.selectedOption = this.labMatTestsList.find((option) => option.meterial_id === selectedValue);
-    
-
     if (this.selectedOption) {
       const rowFormArray = this.getRows(cardIndex);
-
-
       const rowFormGroup = rowFormArray?.at(rowIndex) as FormGroup;
-
       if (rowFormGroup) {
         const quantityControl = rowFormGroup.get('quantity');
         const imageControl = rowFormGroup.get('image');
-
-  
-
-        if (quantityControl) {
+       if (quantityControl) {
           quantityControl.setValue(this.selectedOption.name);
         }
         if (imageControl) {
           imageControl.setValue(this.selectedOption.image);
         }
-       
-
       }
-
       rowFormGroup.get('image')?.setValue('data:image/jpeg;base64,' + this.selectedOption.image);
       rowFormGroup.get('size')?.setValue('');
-
-
-
     }
   }
   getSizesv(cardIndex: number, rowIndex: number): any {
@@ -617,7 +655,7 @@ export class ProtocolRegistrationComponent {
   }
   // selectedLabTests: any[] = [];
   createRow(): FormGroup {
-    
+
     return this.fb.group({
       meterial_id: ['', Validators.required],
       size: ['', Validators.required],
@@ -636,31 +674,31 @@ export class ProtocolRegistrationComponent {
     return card.form.get('visits') as FormArray;
   }
 
-ValidateVisits(input:any){
-  let inputValue = input.value.trim();
-  //Remove non-numeric charecters
-  let numericValue = inputValue.replace(/\D/g,'');
-  
+  ValidateVisits(input: any) {
+    let inputValue = input.value.trim();
+    //Remove non-numeric charecters
+    let numericValue = inputValue.replace(/\D/g, '');
+
     if (numericValue.length > 5) {
       numericValue = numericValue.slice(0, 5);
+    }
+
+    input.value = numericValue;
+
   }
+  ValidateScreening(input: any) {
+    let inputValue = input.value.trim();
+    //Remove non-numeric charecters
+    let numericValue = inputValue.replace(/\D/g, '');
 
-  input.value = numericValue;
-
-}  
-ValidateScreening(input:any){
-  let inputValue = input.value.trim();
-  //Remove non-numeric charecters
-  let numericValue = inputValue.replace(/\D/g,'');
-  
     if (numericValue.length > 5) {
       numericValue = numericValue.slice(0, 5);
+    }
+
+    input.value = numericValue;
+
   }
 
-  input.value = numericValue;
-
-}  
- 
 
 
 
@@ -668,7 +706,7 @@ ValidateScreening(input:any){
 
 
 
- 
- 
+
+
 
 }

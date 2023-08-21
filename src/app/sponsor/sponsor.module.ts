@@ -9,12 +9,13 @@ import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-
+import { SponserstudySortPipe } from './sponsor-study.sort';
 
 @NgModule({
   declarations: [
     ProtocalComponent,
-    SponsorStudyComponent
+    SponsorStudyComponent,
+    SponserstudySortPipe
   ],
   imports: [
     CommonModule,
@@ -23,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     TabViewModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+
+    
   ]
 })
 export class SponsorModule { }

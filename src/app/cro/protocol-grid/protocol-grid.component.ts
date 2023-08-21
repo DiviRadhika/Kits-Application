@@ -16,6 +16,28 @@ export class ProtocolGridComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText= ''
+  sortDirection: number = 1; // 1 for ascending, -1 for descending
+  sortedColumn: string = '';
+  sort(Column: string) {
+    if (this.sortedColumn === Column)
+    {
+      this.sortDirection *= -1;
+    }
+    else(this.sortedColumn = Column)
+    {
+      this.sortDirection *= 1;
+    }   
+  } 
+  compareValues(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+ 
 
   constructor(private route: Router, private protocol: ProtocolService) { }
 

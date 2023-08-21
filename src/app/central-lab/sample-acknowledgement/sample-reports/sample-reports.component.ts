@@ -65,6 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
   styleUrls: ['./sample-reports.component.css']
 })
 export class SampleReportsComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
   uploadedFiles: Array<File | null> = [];
   fileURLs: Array<string | null> = [];
   protocolIdDetails: any;

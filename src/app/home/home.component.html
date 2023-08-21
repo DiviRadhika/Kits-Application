@@ -17,6 +17,8 @@
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
     <!-- Begin page -->
+    <p-toast style = "margin-left:20%"></p-toast>
+
     <div id="layout-wrapper">
 
 
@@ -54,7 +56,7 @@
                     <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
                             <input type="text" 
- autocomplete="off"class="form-control" placeholder="Search...">
+ class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
                     </form>
@@ -77,7 +79,7 @@
                                 <div class="form-group m-0">
                                     <div class="input-group">
                                         <input type="text" 
- autocomplete="off"class="form-control" placeholder="Search ..."
+ class="form-control" placeholder="Search ..."
                                             aria-label="Recipient's username">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="submit"><i
@@ -174,14 +176,13 @@
         <div>
             <form [formGroup]="updatepasswordForm">
                 <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword">
-                    <p-toast style = "margin-left:20%"></p-toast>
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label>
                         <input type="text" 
- autocomplete="off"*ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
+ *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
                         <input type="text" 
- autocomplete="off"*ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
+ *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
 
                     </div>
@@ -192,15 +193,26 @@
                     </div>
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label>
-                        <input class="right" type="text" class="text-center mb-3" id="" formControlName="otp"
+                        <input style="text-align: center;"  type="text" class="text-center mb-3"  (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp"
                             class="form-control" placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
                             class="text-danger text-center">
                             OTP is required
                         </div>
-                        <label>Enter New Password</label>
-                        <input type="password" class="text-center mb-3" maxlength="16" id="" formControlName="password"
-                            placeholder="Enter New Password">
+                        <label for="password" *ngIf="passwordvisible"
+        class="password-label form-group has-top-label w-100">
+        <span>Password</span>
+        <input class="form-control" id="password"
+            [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
+            placeholder="Password">
+        <button type="button" class="eye-button" tabindex="-1"
+            (click)="showPassword = !showPassword">
+            <i *ngIf="showPassword" class="fa fa-eye"
+                aria-hidden="true"></i>
+            <i *ngIf="!showPassword" class="fa fa-eye-slash"
+                aria-hidden="true"></i>
+        </button>
+      </label>
 
                         <div>
                             <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('required')"

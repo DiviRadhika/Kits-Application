@@ -203,12 +203,12 @@ export class CROcreateComponent implements OnInit {
     let numericValue = inputValue.replace(/\D/g, '');
 
     if(phone ==='mobile'){
-    if (numericValue.length > 12) {
+    if (numericValue.length > 20) {
         numericValue = numericValue.slice(0, 12);
     }
   }
   else{
-    if (numericValue.length > 16) {
+    if (numericValue.length > 20) {
       numericValue = numericValue.slice(0, 16);
   }
   }

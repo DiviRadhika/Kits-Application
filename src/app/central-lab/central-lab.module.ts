@@ -19,7 +19,8 @@ import { PreprationGridComponent } from './prepration-grid/prepration-grid.compo
 import { KitPreprationEditComponent } from './kit-prepration-edit/kit-prepration-edit.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogModule } from 'primeng/dialog';
-
+import { CentralSortPipe } from './centralsort';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [
     KitPreprationComponent,
@@ -29,7 +30,8 @@ import { DialogModule } from 'primeng/dialog';
   
     SampleReportsComponent,
         PreprationGridComponent,
-        KitPreprationEditComponent
+        KitPreprationEditComponent,
+        CentralSortPipe
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,7 @@ import { DialogModule } from 'primeng/dialog';
     TabViewModule,
     AccordionModule,
     ToastModule, NgxPaginationModule,
-    DialogModule
+    DialogModule,CalendarModule
   ]
 })
 export class CentralLabModule { }

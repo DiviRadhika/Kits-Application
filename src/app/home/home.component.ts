@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   addprofile: boolean = false
   updatepassword: boolean = false
   passwordvisible:boolean = false;
+  showPassword: boolean = false;
+
   @ViewChild('myModal') myModal: any;
  
 
@@ -52,6 +54,9 @@ export class HomeComponent implements OnInit {
     
   
   });
+  preventPaste(event: ClipboardEvent): void {
+    event.preventDefault();
+  }
   confirm2() {
     this.confirmationService.confirm({
         message: 'Are you sure Do you want to logout?',
@@ -336,6 +341,7 @@ export class HomeComponent implements OnInit {
 
   reset(){
     this.passwordvisible=true
+
  const obj ={
   email: sessionStorage.getItem('email'),
   password: this.updatepasswordForm.controls['password'].value,
@@ -389,6 +395,19 @@ export class HomeComponent implements OnInit {
     this.updatepassword=true
     this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
   }
+  validateOTP(input: any, OTP: any) {
+    let inputValue = input.value.trim();
+    
+    // Remove non-numeric characters
+    let numericValue = inputValue.replace(/\D/g, '');
+
+    if(OTP ==='otp'){
+    if (numericValue.length > 6) {
+        numericValue = numericValue.slice(0, 6);
+    }
+  }
+  input.value = numericValue;
+}
   clear(){
     
     sessionStorage.clear()

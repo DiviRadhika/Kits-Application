@@ -17,10 +17,31 @@ export class UserGridComponent implements OnInit {
   totalCount = 0
   pageSize = 10;
   p = 1;
-  constructor(private admin: AdminService, private route: Router) {
+  sortedColumn: string = '';
+  sortDirection: number = 1; // 1 for ascending, -1 for descending
+  sort(column: string) {
+    if (this.sortedColumn === column) {
+      this.sortDirection *= -1;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+  }
+  compareValues(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+  constructor(private admin: AdminService, private route: Router ) {
     this.getUser()
 
   }
+  
+  
 
   ngOnInit(): void {
   }

@@ -13,6 +13,10 @@ import 'bootstrap';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
   enableFields: boolean = false;
   showPassword: boolean = false;
   showPasswordc: boolean = false;
@@ -232,6 +236,19 @@ export class LoginComponent implements OnInit {
     }
 
   }
+  validateOTP(input: any, OTP: any) {
+    let inputValue = input.value.trim();
+    
+    // Remove non-numeric characters
+    let numericValue = inputValue.replace(/\D/g, '');
+
+    if(OTP ==='otp'){
+    if (numericValue.length > 6) {
+        numericValue = numericValue.slice(0, 6);
+    }
+  }
+  input.value = numericValue;
+}
 
   otp() {
     this.messageService.clear();

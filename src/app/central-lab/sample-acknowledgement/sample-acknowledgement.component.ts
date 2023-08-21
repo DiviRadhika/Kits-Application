@@ -11,6 +11,10 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sample-acknowledgement.component.css']
 })
 export class SampleAcknowledgementComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
   // uploadedFiles: Array<File | null> = [];
   uploadedFiles: Array<File>[] = [];
   uploadedFilesv: Array<File>[][] = [];

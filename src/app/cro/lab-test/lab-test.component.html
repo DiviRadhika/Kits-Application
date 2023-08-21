@@ -64,7 +64,7 @@
 
                       <div class="col-sm-12 col-md-6">
                         <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                            <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchTextm"
+                            <input  type="text" class="form-control" [(ngModel)]="searchTextm"
                               placeholder="Search " (keyup)="applyFilterm(searchTextm)" />
                           </label></div>
                       </div>
@@ -88,16 +88,16 @@
                             <tr role="row">
 
                               <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending">
+                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending" (click)="('name')" >
                                 Material
                               </th>
-                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                style="width: 282.2px;" aria-label="Size: activate to sort column ascending">
+                              <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                style="width: 282.2px;" aria-label="Size: activate to sort column ascending" >
                                 Size</th>
-                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                 style="width: 282.2px;" aria-label="Image: activate to sort column ascending">
                                 Image</th>
-                              <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                              <th width="40" tabindex="0" aria-controls="datatable" rowspan="1"
                                 colspan="1" style="width: 150.2px;"
                                 aria-label="Actions: activate to sort column ascending">Actions</th>
                             </tr>
@@ -106,7 +106,7 @@
 
                           <tbody>
                             <tr class="odd"
-                              *ngFor="let labData of materials  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountmaterial }; let i=index">
+                              *ngFor="let labData of materials | sort:sortedColumn:sortDirection  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountmaterial }; let i=index">
                               <!-- <td class="sorting_1 dtr-control">{{labData.lab_test}}</td> -->
                               <td style="color:blue;cursor: pointer" (click)="edit(labData.meterial_id, 'view')">
                                 {{labData.name}}</td>
@@ -222,7 +222,7 @@ class="form-control" formControlName="lab_test" id="lab test"
 
                           <div class="col-sm-12 col-md-6">
                             <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                                <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                                <input  type="text" class="form-control" [(ngModel)]="searchText"
                                   placeholder="Search " (keyup)="applyFilter(searchText)" />
                               </label></div>
                           </div>
@@ -248,10 +248,10 @@ class="form-control" formControlName="lab_test" id="lab test"
                                   <th width="15%">Lab Test Id</th>
                                   <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
                                     colspan="1" style="width: 243.2px;" aria-sort="ascending"
-                                    aria-label="Lab Test: activate to sort column descending">Lab Test</th>
+                                    aria-label="Lab Test: activate to sort column descending"(click)="sort('name')" >Lab Test</th>
                                   <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
                                     colspan="1" style="width: 243.2px;" aria-sort="ascending"
-                                    aria-label="Lab Test: activate to sort column descending">Classification</th>
+                                    aria-label="Lab Test: activate to sort column descending"(click)="sort('classfication')"  >Classification</th>
                                   <th width="20%">Delete</th>
 
                                 </tr>
@@ -262,7 +262,7 @@ class="form-control" formControlName="lab_test" id="lab test"
                               <tbody>
 
                                 <tr class="odd"
-                                  *ngFor="let labData of LabDetails  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                                  *ngFor="let labData of LabDetails| sort:sortedColumn:sortDirection  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                                   <!-- <td>
                               {{i+1}}
                               

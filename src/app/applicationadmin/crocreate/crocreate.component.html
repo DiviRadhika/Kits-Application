@@ -116,6 +116,8 @@ class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
                       <label>Address 1</label>
                       <input type="text" 
 
+                      
+
 
 class="form-control" maxlength="80" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1"
@@ -163,10 +165,7 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
-                      <input type="text" 
-
-
-class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
+                      <input type="text" class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
                         formControlName="region"
                         [class.is-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
@@ -202,10 +201,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
+                      <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >

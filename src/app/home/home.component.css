@@ -111,6 +111,14 @@ label {
    
   display: inline-block;
 }
+.eye-button {
+  background: none;
+  border: none;
+  position: absolute;
+  bottom: 130px;
+  right: 25px;
+}
+
 /* .view{
   width: 30%;
 	height: 40% 

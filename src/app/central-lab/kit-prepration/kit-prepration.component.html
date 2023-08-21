@@ -255,12 +255,17 @@ placeholder="LabKitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
+                                                                        <p-calendar [(ngModel)]="date" formControlName="expiryDate" ></p-calendar>
+<!--                                                                     
+                                                                    
                                                                     <input type="text" 
 
 
-placeholder="Expiry Date"
+
                                                                         formControlName="expiryDate"
-                                                                        class="form-control" />
+                                                                        class="form-control" /> -->
+                                                                        <!-- <input type="text" placeholder="Expiry Date" id="dateInput" formControlName="expiryDate"> -->
+                                                                  
                                                                 </td>
                                                                 <td width="25%">
                                                                     <select formControlName="prepration"
@@ -336,7 +341,7 @@ placeholder="Expiry Date"
        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">© Roboxa</div>
+                    <div class="col-sm-6">  © Roboxa</div>
                 </div>
             </div>
         </footer>

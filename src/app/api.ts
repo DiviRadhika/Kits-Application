@@ -1,10 +1,7 @@
-export const api = "http://34.100.239.252:5001/api";
-export const api2 = "http://34.100.239.252:5001/api";
+export const api = "http://35.244.51.230:5001/api";
+export const api2 = "http://35.244.51.230:5001/api";
 export const country = 'https://trial.mobiscroll.com/content/countries.json'
-export const apin = "http://34.100.239.252:5001/api"
-
-
-
+export const apin = "http://35.244.51.230:5001/api"
 export const endPointsUser = {
     // Endpoints for UserCreate
     getcros: `${apin}/cros`,

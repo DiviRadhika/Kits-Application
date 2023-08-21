@@ -10,13 +10,16 @@ import { ApplicationadminRoutingModule } from './applicationadmin-routing.module
 import { NgxPaginationModule } from 'ngx-pagination';
 import {ToastModule} from 'primeng/toast';
 import {ChartModule} from 'primeng/chart';
+import { AdminSortPipe } from './adminsort.pipe';
 
 @NgModule({
   declarations: [
     CROcreateComponent,
     UserCreateComponent,
     CroGridComponent,
-    UserGridComponent
+    UserGridComponent,
+    AdminSortPipe
+    
   ],
   imports: [
     CommonModule,

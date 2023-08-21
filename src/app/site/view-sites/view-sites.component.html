@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-12">
           <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>CRA</h4>
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Sample Collection</h4>
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
@@ -38,7 +38,7 @@
 
                     <div class="col-sm-12 col-md-6">
                       <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                          <input  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
                     </div>
@@ -54,9 +54,9 @@
                           <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 243.2px;" aria-sort="ascending"
-                              aria-label="Code: activate to sort column descending">Study Code</th>
+                              aria-label="Code: activate to sort column descending" (click)="sort('user_protocol_id')" >Study Code</th>
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Study Name</th>
+                              style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')"  >Study Name</th>
 
                             <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
@@ -68,7 +68,7 @@
                         <tbody>
 
                           <tr class="odd"
-                            *ngFor="let protocolData of uniqueCombinedArray  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                            *ngFor="let protocolData of uniqueCombinedArray |sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control">{{protocolData.user_protocol_id}}</td>
 

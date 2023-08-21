@@ -28,6 +28,9 @@ import { EditProtocolComponent } from './edit-protocol/edit-protocol.component';
 import {CalendarModule} from 'primeng/calendar';
 import { LabTestCreateComponent } from './lab-test-create/lab-test-create.component';
 import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.component';
+import { CroSortPipe } from './crosort';
+
+
 @NgModule({
   declarations: [
     SponsorComponent,
@@ -43,7 +46,11 @@ import { LabCreateGridComponent } from './lab-create-grid/lab-create-grid.compon
     ProtocolGridComponent,
     EditProtocolComponent,
     LabTestCreateComponent,
-    LabCreateGridComponent
+    LabCreateGridComponent,
+     CroSortPipe
+    
+    
+    
   ],
   imports: [
 

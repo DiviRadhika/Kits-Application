@@ -10,6 +10,10 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration-edit.component.css']
 })
 export class KitPreprationEditComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];
@@ -18,7 +22,7 @@ export class KitPreprationEditComponent implements OnInit {
   scount: any;
   vcount: any;
   displayValues: boolean = false;
-
+  date: Date | undefined;
   visitRecords: Array<any> = [];
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
@@ -358,7 +362,7 @@ export class KitPreprationEditComponent implements OnInit {
     // Access the values of the selected row
     const kitId = selectedRow.get('kitId').value;
     const ckitId = selectedRow.get('ckitId').value;
-    const expirydate = selectedRow.get('expirydate').value;
+    const expirydate = selectedRow.get('expiryDate').value;
 
     const printSection = document.getElementById('printSection');
     if (printSection) {
@@ -418,7 +422,7 @@ export class KitPreprationEditComponent implements OnInit {
           <p><strong>Expiry Date :</strong> ${expirydate}</p>
           <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
           <p><strong>ProtocolId:</strong> ${this.protocolIdDetails.protocol_id}</p>
-          <p><strong>Type:</strong> Screening</p>
+          <p><strong>Type:</strong> Visit</p>
           <div class=ok>
           <h4>Material</h4>
           <table class="material-table">

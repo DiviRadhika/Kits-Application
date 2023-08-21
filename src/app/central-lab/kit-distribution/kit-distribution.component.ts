@@ -11,7 +11,9 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-distribution.component.css']
 })
 export class KitDistributionComponent implements OnInit {
-  
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];

@@ -16,8 +16,30 @@ export class SponsorGridComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText = ''
+  sortedColumn: string = '';
+  sortDirection: number = 1; // 1 for ascending, -1 for descending
+  sort(column: string) {
+    if (this.sortedColumn === column) {
+      this.sortDirection *= -1;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+  }
+  compareValues(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   constructor(private route:Router, 
     private _cro:CrosService, private messageService: MessageService) { }
+
+
 
   ngOnInit(): void {
     this.getSponsorDetails()

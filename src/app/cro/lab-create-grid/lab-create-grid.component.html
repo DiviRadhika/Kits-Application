@@ -46,7 +46,7 @@
 
                     <div class="col-sm-12 col-md-6">
                       <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                          <input  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
                     </div>
@@ -71,13 +71,13 @@
                         <tr role="row">
                           <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             style="width: 243.2px;" aria-sort="ascending"
-                            aria-label="Code: activate to sort column descending">Code</th>
+                            aria-label="Code: activate to sort column descending" (click)="sort('cro_code')" > Code</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 335.2px;" aria-label="Name: activate to sort column ascending">Name</th>
+                            style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('cro_name')">Name</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending">Legal
+                            style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" >Legal
                             Name</th>
-                          <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                          <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
                         </tr>
                       </thead>
@@ -86,7 +86,7 @@
                       <tbody>
 
                         <tr class="odd"
-                          *ngFor="let croData of croDetails  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                          *ngFor="let croData of croDetails| sort:sortedColumn:sortDirection  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                           <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(croData.cro_id, 'view')">{{croData.cro_code}}</td>
                           <td>{{croData.cro_name}}</td>
                           <td>{{croData.legal_cro_name}}</td>

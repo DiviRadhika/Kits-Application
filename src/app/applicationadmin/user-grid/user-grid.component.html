@@ -46,7 +46,7 @@
 
                     <div class="col-sm-12 col-md-6">
                       <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                          <input autocomplete="off" type="text" class="form-control" [(ngModel)]="searchText"
+                          <input  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
                     </div>
@@ -68,24 +68,41 @@
                           <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 266.2px;" aria-sort="ascending"
-                              aria-label="Name: activate to sort column descending">Name</th>
+                              aria-label="Name: activate to sort column descending" (click)="sort('first_name')">Name</th>
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending">Email</th>
+                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 230.2px;" aria-label="Role: activate to sort column ascending">Role</th>
+                              style="width: 230.2px;" aria-label="Role: activate to sort column ascending" (click)="sort('role')">Role</th>
                             <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
                         </thead>
-
+                        <!-- <thead>
+                          <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              style="width: 266.2px;" aria-sort="ascending" 
+                              aria-label="Name: activate to sort column descending" (click)="sort('first_name')">Name</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              style="width: 230.2px;" aria-label="Role: activate to sort column ascending" (click)="sort('role')">Role</th>
+sortpipe                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                              colspan="1" style="width: 150.2px;"
+                              aria-label="Actions: activate to sort column ascending">Actions</th>
+                          </tr>
+                        </thead> -->
+                        
 
                         <tbody>
-                          <tr class="odd"
+                          <tr class="odd" *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                            <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
+                             
+                          <!-- <tr class="odd"
                             *ngFor="let user of userDetails  | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
-                            <!-- <th>{{(page-1) * pageSize + i+1}}</th> -->
-                            <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
+                           
+                            <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;"> -->
                               {{user.first_name}}&nbsp;{{user.last_name}}
                             </td>
                           

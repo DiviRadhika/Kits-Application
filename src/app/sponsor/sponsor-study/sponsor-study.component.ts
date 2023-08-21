@@ -20,6 +20,25 @@ export class SponsorStudyComponent implements OnInit {
   email: string | null;
   ID: any;
   uniqueCombinedArray: any[] = [];
+  sortedColumn: string = '';
+  sortDirection: number = 1; // 1 for ascending, -1 for descending
+  sort(column: string) {
+    if (this.sortedColumn === column) {
+      this.sortDirection *= -1;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+  }
+  compareValues(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   constructor(private route: Router, private protocol: ProtocolService, private croService: CrosService) { 
     this.email =sessionStorage.getItem('email')
@@ -51,27 +70,29 @@ export class SponsorStudyComponent implements OnInit {
         console.log(data);
         
         this.uniqueCombinedArray =data
-      });
+        this.allprotocolDetails = data
+            });
    
       
     }
     
     // getUniqueObjects function remains the same as mentioned in the previous response
+  // getUniqueObjects function remains the same as mentioned in the previous response
   applyFilter(filterValue: string) {
-      filterValue = filterValue.trim(); // Remove whitespace
-      filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-      if(filterValue === '') {
-      this.protocolDetails = this.allprotocolDetails;
-    }
-    else {
-      this.protocolDetails = this.allprotocolDetails.filter(
-        (siteData: any) =>
-          (siteData.protocol_id && siteData.protocol_id.toLowerCase().includes(filterValue)) ||
-          (siteData.protocol_name && siteData.protocol_name.toLowerCase().includes(filterValue)) ||
-          (siteData.email && siteData.email.toLowerCase().includes(filterValue))
-      );
-    }
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    if(filterValue === '') {
+    this.uniqueCombinedArray = this.allprotocolDetails;
   }
+  else {
+    this.uniqueCombinedArray = this.allprotocolDetails.filter(
+      (siteData: any) =>
+        (siteData.protocol_id && siteData.protocol_id.toLowerCase().includes(filterValue)) ||
+        (siteData.protocol_name && siteData.protocol_name.toLowerCase().includes(filterValue)) ||
+        (siteData.email && siteData.email.toLowerCase().includes(filterValue))
+    );
+  }
+}
   pageChange(event: number) {
     this.page = event;
     // this.getProtocolDetails()

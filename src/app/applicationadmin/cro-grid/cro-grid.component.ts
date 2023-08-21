@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { MessageService } from 'primeng/api';
+import { Pipe, PipeTransform } from '@angular/core';
+
 
 @Component({
   selector: 'app-cro-grid',
@@ -16,6 +18,25 @@ export class CroGridComponent implements OnInit {
   p = 1;
   searchText: any
   allcroDetails: any;
+  sortedColumn: string = '';
+  sortDirection: number = 1; // 1 for ascending, -1 for descending
+  sort(column: string) {
+    if (this.sortedColumn === column) {
+      this.sortDirection *= -1;
+    } else {
+      this.sortedColumn = column;
+      this.sortDirection = 1;
+    }
+  }
+  compareValues(a: any, b: any) {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
   constructor(private route: Router,
     private admin: AdminService,
     private messageService: MessageService) { }

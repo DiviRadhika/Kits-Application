@@ -9,12 +9,14 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { ViewSitesComponent } from './view-sites/view-sites.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ViewsitesSortPipe } from './view-sites.sort';
 
 
 @NgModule({
   declarations: [
     SampleCollectionComponent,
-    ViewSitesComponent
+    ViewSitesComponent,
+    ViewsitesSortPipe
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CardModule,
     ToastModule,
     NgxPaginationModule,
+
   ]
 })
 export class SiteModule { }

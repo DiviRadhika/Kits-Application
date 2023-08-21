@@ -24,6 +24,8 @@ import { DialogModule } from 'primeng/dialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { InstructionsAppDirective } from './instructions-app.directive';
 import { InputRestrictionDirective } from './input-restriction.directive';
+import { SortPipe } from './sort.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,30 +35,30 @@ import { InputRestrictionDirective } from './input-restriction.directive';
     HeaderComponent,
     FooterComponent,
     InstructionsAppDirective,
-    InputRestrictionDirective,
-    
+    InputRestrictionDirective
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CROModule,
+    
     SponsorModule,
     // CentralLabModule,
     // SiteModule,
     ReactiveFormsModule,
-    ApplicationadminModule,
+
     FormsModule,
     NgxPaginationModule,
     HttpClientModule,
     ToastModule,
     DialogModule,
     ConfirmDialogModule
+    
  
 
   ],
   // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService, ConfirmationService,SortPipe],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }
