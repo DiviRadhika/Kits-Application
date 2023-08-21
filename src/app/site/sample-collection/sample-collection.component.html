@@ -53,7 +53,7 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" 
+                                    <input autocomplete="off" type="text" 
 
 
 placeholder="Study Name" formControlName="protocol_name"
@@ -109,7 +109,7 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="kitId"
@@ -117,7 +117,7 @@ placeholder="kitId"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="LabKitId"
@@ -125,7 +125,7 @@ placeholder="kitId"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="Expiration Date"
@@ -168,7 +168,7 @@ placeholder="kitId"
                                                             let i = index
                                                           ">
                                                           <td width="25%">
-                                                            <input type="text" 
+                                                            <input autocomplete="off" type="text" 
 
 
 placeholder="Patient Id"  formControlName="patientId"
@@ -188,7 +188,7 @@ placeholder="Patient Id"  formControlName="patientId"
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Date"  
@@ -239,7 +239,7 @@ placeholder="Date"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="kitId"
@@ -247,7 +247,7 @@ placeholder="kitId"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="LabKitId"
@@ -255,7 +255,7 @@ placeholder="kitId"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="Expiration Date"
@@ -290,7 +290,7 @@ placeholder="kitId"
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                             [formGroupName]="j">
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Patient Id"  formControlName="patientId"
@@ -308,7 +308,7 @@ placeholder="Patient Id"  formControlName="patientId"
                                                                             </td>
                                                                            
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Date"  

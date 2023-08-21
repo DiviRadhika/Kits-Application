@@ -47,7 +47,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>CRO Code</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="CROCode" maxlength="10" placeholder="Enter CRO Code"
@@ -66,7 +66,7 @@ class="form-control" id="CROCode" maxlength="10" placeholder="Enter CRO Code"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>CRO Name</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
@@ -84,7 +84,7 @@ class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal CRO Name</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
@@ -114,7 +114,7 @@ class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 1</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
                       
 
@@ -131,7 +131,7 @@ class="form-control" maxlength="80" id="Address 1" placeholder="Enter Address 1"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(optional)"
@@ -165,7 +165,7 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
-                      <input type="text" class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
+                      <input autocomplete="off" type="text" class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
                         formControlName="region"
                         [class.is-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
@@ -176,7 +176,7 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="40" id="District" placeholder="Enter District"
@@ -188,7 +188,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>City</label>
-                      <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
+                      <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
@@ -201,7 +201,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
+                      <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
@@ -228,7 +228,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="20" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
@@ -238,7 +238,7 @@ class="form-control" maxlength="20" (input)="validateMobileNumber($event.target,
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
@@ -250,7 +250,7 @@ class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                              <input type="text" 
+                              <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="20" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
@@ -263,7 +263,7 @@ class="form-control" maxlength="20" id="mobile_no" placeholder="Enter Mobile Num
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Email Id</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
@@ -274,7 +274,7 @@ class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="60" id="Address" placeholder="Enter Website"

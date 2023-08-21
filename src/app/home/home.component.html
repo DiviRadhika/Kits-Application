@@ -55,7 +55,7 @@
                     <!-- App Search-->
                     <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
-                            <input type="text" 
+                            <input autocomplete="off" type="text" 
  class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
@@ -78,7 +78,7 @@
                             <form class="p-3">
                                 <div class="form-group m-0">
                                     <div class="input-group">
-                                        <input type="text" 
+                                        <input autocomplete="off" type="text" 
  class="form-control" placeholder="Search ..."
                                             aria-label="Recipient's username">
                                         <div class="input-group-append">
@@ -178,10 +178,10 @@
                 <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword">
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label>
-                        <input type="text" 
+                        <input autocomplete="off" type="text" 
  *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
-                        <input type="text" 
+                        <input autocomplete="off" type="text" 
  *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
 
@@ -193,7 +193,7 @@
                     </div>
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label>
-                        <input style="text-align: center;"  type="text" class="text-center mb-3"  (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp"
+                        <input autocomplete="off" style="text-align: center;"  type="text" class="text-center mb-3"  (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp"
                             class="form-control" placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
                             class="text-danger text-center">
@@ -202,7 +202,7 @@
                         <label for="password" *ngIf="passwordvisible"
         class="password-label form-group has-top-label w-100">
         <span>Password</span>
-        <input class="form-control" id="password"
+        <input autocomplete="off" class="form-control" id="password"
             [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
             placeholder="Password">
         <button type="button" class="eye-button" tabindex="-1"

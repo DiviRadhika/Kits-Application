@@ -21,8 +21,8 @@ export class SponsorComponent implements OnInit {
   autoCode = '';
   contactForm: any
   public sponsorForm: FormGroup = new FormGroup({
-    sp_auto_code: new FormControl(''),
-    sponsor_code: new FormControl("", [Validators.required,Validators.minLength(5)]),
+    existing_sponsor_code: new FormControl('',[Validators.required,Validators.minLength(5)]),
+    sponsor_code: new FormControl(""),
     sponsor_name: new FormControl("", [Validators.required]),
     legal_sponsor_name: new FormControl("", [Validators.required]),
     address_1: new FormControl("", [Validators.required]),
@@ -71,7 +71,7 @@ export class SponsorComponent implements OnInit {
           console.log(data.country)
           this.sponsorForm.controls['country'].setValue(data.country)
           this.sponsorForm.controls['country'].setValue(data.country)
-          this.sponsorForm.controls['sponsor_code'].disable()
+          this.sponsorForm.controls['existing_sponsor_code'].disable()
           // this.sponsorForm.controls['sponsor_name'].disable()
           // this.sponsorForm.controls['legal_sponsor_name'].disable()
           this.sponsorForm.controls['email'].disable()
@@ -167,8 +167,8 @@ export class SponsorComponent implements OnInit {
       (data: any) => {
         this.sponsorDetails = data.length + 1
         this.autoCode = 'SP00' + this.sponsorDetails
-        this.sponsorForm.controls['sp_auto_code'].setValue(this.autoCode)
-        this.sponsorForm.controls['sp_auto_code'].disable()
+        this.sponsorForm.controls['sponsor_code'].setValue(this.autoCode)
+        this.sponsorForm.controls['sponsor_code'].disable()
       },
       (err: any) => {
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
@@ -217,8 +217,8 @@ export class SponsorComponent implements OnInit {
 
     else {
       const obj: any = {
-        "sponsor_code": this.sponsorForm.controls['sp_auto_code'].value,
-        "existing_sponsor_code": this.sponsorForm.controls['sponsor_code'].value,
+        "sponsor_code": this.sponsorForm.controls['sponsor_code'].value,
+        "existing_sponsor_code": this.sponsorForm.controls['existing_sponsor_code'].value,
         "sponsor_name": this.sponsorForm.controls['sponsor_name'].value,
         "legal_sponsor_name": this.sponsorForm.controls['legal_sponsor_name'].value,
         "address_1": this.sponsorForm.controls['address_1'].value,

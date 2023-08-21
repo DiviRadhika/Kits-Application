@@ -33,7 +33,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponor Study ID</label>
-                    <input type="text" autocomplete="off" formControlName="selected_protocol_id" class="form-control"
+                    <input autocomplete="off" type="text" autocomplete="off" formControlName="selected_protocol_id" class="form-control"
                       id="" placeholder="Enter Study ID"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
@@ -43,7 +43,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Study Title</label>
-                    <input type="text" autocomplete="off" formControlName="selected_protocol_name" class="form-control"
+                    <input autocomplete="off" type="text" autocomplete="off" formControlName="selected_protocol_name" class="form-control"
                       id="" placeholder="Enter Study Title"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
@@ -51,7 +51,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
-                    <input type="text" autocomplete="off" formControlName="cro_study_id" class="form-control" id=""
+                    <input autocomplete="off" type="text" autocomplete="off" formControlName="cro_study_id" class="form-control" id=""
                       placeholder="Enter CRO Study ID">
 
                   </div>
@@ -73,7 +73,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Global Sample Size</label>
-                    <input type="number" formControlName="global_sample_size" class="form-control" id="" placeholder="Global Sample Size" 
+                    <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" id="" placeholder="Global Sample Size" 
                       [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
@@ -84,7 +84,7 @@
                       type="checkbox" value="checked" id="debugInfo" />
                     &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
 
-                    <input type="number" formControlName="avant_sample_size" (blur)="getsize()" class="form-control"
+                    <input autocomplete="off" type="number" formControlName="avant_sample_size" (blur)="getsize()" class="form-control"
                       id="" placeholder="Avant Sante Sample Size "
                       [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
@@ -92,7 +92,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
-                    <input type="text" autocomplete="off" maxlength="5" formControlName="total_visits"
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="total_visits"
                       (input)="ValidateVisits($event.target)" placeholder="Total No.of Visits" (blur)="visits($event)" class="form-control"
                       [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
@@ -101,7 +101,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
-                    <input type="text" autocomplete="off" maxlength="5" formControlName="No.of Screens"
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                       (input)="ValidateScreening($event.target)" class="form-control" id="" placeholder="No.of Screens"
                       [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
@@ -109,7 +109,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
-                    <input type="text" autocomplete="off" maxlength="5" (input)="ValidateScreening($event.target)"
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5" (input)="ValidateScreening($event.target)"
                       formControlName="selected_skit_count" class="form-control" id="" placeholder="Screen Kit Count"
                       [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Kit Variant Count</label>
-                    <input type="text" autocomplete="off" maxlength="5" formControlName="kit_variant_count"
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="kit_variant_count"
                       (blur)="variantCount()" class="form-control" id="" placeholder="Kit Variant Count"
                       [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
                   </div>
@@ -145,7 +145,7 @@
                     <div class="col-ml-1 ml-1"></div>
                     <div class="col-md-3 mb-3" style="margin-top: -7px" [formGroup]="ScreenMaterialKitForm">
                       <label for="formrow-firstname-input" class="form-label">Kit Varient</label>
-                      <input type="text" autocomplete="off" maxlength="5" class="form-control" placeholder="Kit Varient"
+                      <input autocomplete="off" type="text" autocomplete="off" maxlength="5" class="form-control" placeholder="Kit Varient"
                         formControlName="kitVarient" value="" />
                     </div>
                     <div class="col-md-3 mb-3">
@@ -244,10 +244,10 @@
 
                             </td>
                             <td>
-                              <input type="number" formControlName="quantity" class="form-control" value="" />
+                              <input autocomplete="off" type="number" formControlName="quantity" class="form-control" value="" />
                             </td>
                             <td>
-                              <input class="form-check-input" formControlName="frozen_status" type="checkbox"
+                              <input autocomplete="off" class="form-check-input" formControlName="frozen_status" type="checkbox"
                                 value="checked" id="debugInfo" />
                             </td>
                             <td>
@@ -307,20 +307,20 @@
 
                 <div class="col-md-3 mb-3">
                   <label for="formrow-firstname-input" class="form-label">Alternate Week Name</label>
-                  <input type="text" autocomplete="off" class="form-control" placeholder="Alternate Week Name"
+                  <input autocomplete="off" type="text" autocomplete="off" class="form-control" placeholder="Alternate Week Name"
                     [(ngModel)]="alternatenames[i]" value="" />
                 </div>
                 <div class="col-md-3 mb-3" [formGroup]="card.form">
                  
                   <label for="formrow-firstname-input" class="form-label">Kit Variant</label>
-                  <input type="text" autocomplete="off" formControlName="kitVarient" (blur)="getVariant($event, i)" class="form-control" placeholder="Kit Variant" />
+                  <input autocomplete="off" type="text" autocomplete="off" formControlName="kitVarient" (blur)="getVariant($event, i)" class="form-control" placeholder="Kit Variant" />
                  
-                  <!-- <input type="text" autocomplete="off" (blur)="getVariant(value)" class="form-control" placeholder="Kit Varient"
+                  <!-- <input autocomplete="off" type="text" autocomplete="off" (blur)="getVariant(value)" class="form-control" placeholder="Kit Varient"
                   value=""  /> -->
                 </div>
                 <div class="col-md-3 mb-3">
                   <label for="formrow-firstname-input" class="form-label">Kit Count</label>
-                  <input type="text" autocomplete="off" [(ngModel)]="kitCountval" class="form-control"
+                  <input autocomplete="off" type="text" autocomplete="off" [(ngModel)]="kitCountval" class="form-control"
                     placeholder="Enter Kit Count" />
                 </div>
 
@@ -410,10 +410,10 @@
 
                           </td>
                           <td>
-                            <input type="number" formControlName="quantity" class="form-control" value="" />
+                            <input autocomplete="off" type="number" formControlName="quantity" class="form-control" value="" />
                           </td>
                           <td>
-                            <input class="form-check-input" formControlName="frozen_status" type="checkbox"
+                            <input autocomplete="off" class="form-check-input" formControlName="frozen_status" type="checkbox"
                               value="checked" id="debugInfo" />
                           </td>
                           <td>

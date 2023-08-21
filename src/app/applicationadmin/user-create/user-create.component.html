@@ -51,7 +51,7 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label>User First Name</label>
-                    <input type="text" 
+                    <input autocomplete="off" type="text" 
  class="form-control" id="first_name" placeholder="Enter First Name"
                       formControlName="first_name">
                     <div *ngIf="shouldShowRequired('first_name')" class="text-danger">
@@ -63,7 +63,7 @@
                 <div class="col-md-3">
                   <label>User Last Name</label>
                   <div class="form-group">
-                    <input type="text" 
+                    <input autocomplete="off" type="text" 
 
 
 class="form-control" id="last_name" placeholder="Enter Last Name"
@@ -76,7 +76,7 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                     <label>Email Id</label>
 
 
-                    <input type="text" 
+                    <input autocomplete="off" type="text" 
  class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">
                     <div *ngIf="shouldShowRequired('email')" class="text-danger">
@@ -91,11 +91,11 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                 
                 <div class="col-md-3">
                   <label>Password</label>
-                  <!-- <input type="password" id="password" formControlName="password">
+                  <!-- <input autocomplete="off" type="password" id="password" formControlName="password">
                   <div *ngIf="userForm.get('password')?.hasError('pattern')">
                     Password must haven at least 12 characters, one uppercase letter, one lowercase letter, one digit, and one special symbol.
                   </div> -->
-                  <input type="text" 
+                  <input autocomplete="off" type="text" 
  autocomplete="off "class="form-control" id="password" placeholder="Enter Password"
                   formControlName="password"  [type]="showPassword ? 'text' : 'password'"  (paste)="preventPaste($event)" maxlength="16"  >
               

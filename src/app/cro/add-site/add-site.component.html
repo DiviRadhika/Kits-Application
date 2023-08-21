@@ -61,7 +61,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Code</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="SiteCode" placeholder="Enter Site Code"
@@ -78,7 +78,7 @@ class="form-control" id="SiteCode" placeholder="Enter Site Code"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Name</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
@@ -94,7 +94,7 @@ class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal Site Name</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
@@ -113,7 +113,7 @@ class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>User Name</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="First Name" placeholder="Enter Name"
@@ -133,7 +133,7 @@ class="form-control" id="First Name" placeholder="Enter Name"
                       <label>Email Id</label>
 
 
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="email" placeholder="Enter Email"
@@ -149,7 +149,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Enter Password"
+                      <input autocomplete="off" type="password" class="form-control" id="password" placeholder="Enter Password"
                         formControlName="password">
                       <div *ngIf="shouldShowRequired('password')" class="text-danger">
                         Password is required.
@@ -179,7 +179,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 1</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Address 1" placeholder="Enter Address 1"
@@ -194,7 +194,7 @@ class="form-control" id="Address 1" placeholder="Enter Address 1"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Address" placeholder="Enter Address 2(optional)"
@@ -224,7 +224,7 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Region/State</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 maxlength="40" class="form-control" id="Region" placeholder="Enter Region/ State"
@@ -239,7 +239,7 @@ maxlength="40" class="form-control" id="Region" placeholder="Enter Region/ State
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="40" id="District" placeholder="Enter District"
@@ -250,7 +250,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>City</label>
-                      <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
+                      <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
@@ -267,7 +267,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip Code"
@@ -296,7 +296,7 @@ class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="20" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
@@ -306,7 +306,7 @@ class="form-control" maxlength="20" (input)="validateMobileNumber($event.target,
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
@@ -318,7 +318,7 @@ class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extensio
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                              <input type="text" 
+                              <input autocomplete="off" type="text" 
 
 
 maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
@@ -332,7 +332,7 @@ maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Nu
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
@@ -344,7 +344,7 @@ class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Email Id</label>
-                      <input type="text" 
+                      <input autocomplete="off" type="text" 
 
 
 class="form-control" maxlength="60" id="email" placeholder="Enter Email"
@@ -397,7 +397,7 @@ class="form-control" maxlength="60" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone" placeholder="Enter Name "
@@ -405,7 +405,7 @@ class="form-control" id="Office Telephone" placeholder="Enter Name "
                               </th>
 
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone" placeholder="Enter Name "
@@ -413,14 +413,14 @@ class="form-control" id="Office Telephone" placeholder="Enter Name "
 
                               </td>
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " maxlength="60" formControlName="email">
                               </td>
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone"
@@ -485,7 +485,7 @@ class="form-control" id="Office Telephone"
                               </th>
 
                               <th scope="row">
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone" placeholder="Enter Name "
@@ -493,7 +493,7 @@ class="form-control" id="Office Telephone" placeholder="Enter Name "
                               </th>
 
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone" placeholder="Enter Name "
@@ -501,14 +501,14 @@ class="form-control" id="Office Telephone" placeholder="Enter Name "
 
                               </td>
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " formControlName="email" maxlength="60" >
                               </td>
                               <td>
-                                <input type="text" 
+                                <input autocomplete="off" type="text" 
 
 
 class="form-control" id="Office Telephone"

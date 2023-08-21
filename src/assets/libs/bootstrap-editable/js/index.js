@@ -2983,7 +2983,7 @@ $(function(){
     Text.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
         @property tpl 
-        @default <input type="text" 
+        @default <input autocomplete="off" type="text" 
 
 >
         **/         
@@ -3904,7 +3904,7 @@ $(function(){
     Constructor.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
         @property tpl 
-        @default <input type="hidden">
+        @default <input autocomplete="off" type="hidden">
         **/
         tpl:'<input type="hidden">',
         /**
@@ -4571,7 +4571,7 @@ $(function(){
     Constructor.defaults = $.extend({}, $.fn.editabletypes.abstractinput.defaults, {
         /**
         @property tpl 
-        @default <input type="text" 
+        @default <input autocomplete="off" type="text" 
 
 >
         **/         
@@ -6413,7 +6413,7 @@ $(function(){
 
 /**
 Bootstrap datefield input - modification for inline mode.
-Shows normal <input type="text" 
+Shows normal <input autocomplete="off" type="text" 
 
 > and binds popup datepicker.  
 Automatically shown in inline mode.
@@ -6742,7 +6742,7 @@ $(function(){
 }(window.jQuery));
 /**
 Bootstrap datetimefield input - datetime input for inline mode.
-Shows normal <input type="text" 
+Shows normal <input autocomplete="off" type="text" 
 
 > and binds popup datetimepicker.  
 Automatically shown in inline mode.

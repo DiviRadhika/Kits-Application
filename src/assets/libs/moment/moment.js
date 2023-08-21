@@ -4586,15 +4586,15 @@
 
     // currently HTML5 input type only supports 24-hour formats
     hooks.HTML5_FMT = {
-        DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm',             // <input type="datetime-local" />
-        DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss',  // <input type="datetime-local" step="1" />
-        DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS',   // <input type="datetime-local" step="0.001" />
-        DATE: 'YYYY-MM-DD',                             // <input type="date" />
-        TIME: 'HH:mm',                                  // <input type="time" />
-        TIME_SECONDS: 'HH:mm:ss',                       // <input type="time" step="1" />
-        TIME_MS: 'HH:mm:ss.SSS',                        // <input type="time" step="0.001" />
-        WEEK: 'GGGG-[W]WW',                             // <input type="week" />
-        MONTH: 'YYYY-MM'                                // <input type="month" />
+        DATETIME_LOCAL: 'YYYY-MM-DDTHH:mm',             // <input autocomplete="off" type="datetime-local" />
+        DATETIME_LOCAL_SECONDS: 'YYYY-MM-DDTHH:mm:ss',  // <input autocomplete="off" type="datetime-local" step="1" />
+        DATETIME_LOCAL_MS: 'YYYY-MM-DDTHH:mm:ss.SSS',   // <input autocomplete="off" type="datetime-local" step="0.001" />
+        DATE: 'YYYY-MM-DD',                             // <input autocomplete="off" type="date" />
+        TIME: 'HH:mm',                                  // <input autocomplete="off" type="time" />
+        TIME_SECONDS: 'HH:mm:ss',                       // <input autocomplete="off" type="time" step="1" />
+        TIME_MS: 'HH:mm:ss.SSS',                        // <input autocomplete="off" type="time" step="0.001" />
+        WEEK: 'GGGG-[W]WW',                             // <input autocomplete="off" type="week" />
+        MONTH: 'YYYY-MM'                                // <input autocomplete="off" type="month" />
     };
 
     return hooks;

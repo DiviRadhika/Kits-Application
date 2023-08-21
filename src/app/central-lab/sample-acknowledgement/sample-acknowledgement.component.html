@@ -49,7 +49,7 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" 
+                                    <input autocomplete="off" type="text" 
 
 
 placeholder="Study Name" formControlName="protocol_name"
@@ -99,7 +99,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                     <tbody>
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="32%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="kitId"
@@ -108,7 +108,7 @@ placeholder="kitId"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 [disabled]="true"
@@ -117,7 +117,7 @@ placeholder="kitId"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Site Id"
@@ -126,7 +126,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 [disabled]="true"
@@ -135,7 +135,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="expiryDate"
@@ -144,7 +144,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="collection"
@@ -163,13 +163,13 @@ placeholder="Site Id"
                                                             <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                                 <p-dialog header="Upload Multiple PDF's"
                                                                     [(visible)]="display" [modal]="true">
-                                                                    <!-- <input type="text" 
+                                                                    <!-- <input autocomplete="off" type="text" 
 
 
                                                                    
                                                                     placeholder="Fi" value=''
                                                                     class="form-control" /> -->
-                                                                    <input type="file" id="imageUpload{{indexs}}"
+                                                                    <input autocomplete="off" type="file" id="imageUpload{{indexs}}"
                                                                         (change)="_uploadFile($event, indexs)"
                                                                         accept="application/pdf" multiple>
                                                                     <button type="submit"
@@ -328,7 +328,7 @@ placeholder="Site Id"
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     formControlName="remarks"
@@ -337,7 +337,7 @@ placeholder="Site Id"
                                                                             </td>
                                                                             <td width="15%">
 
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Remarks"
@@ -392,7 +392,7 @@ placeholder="Remarks"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="kitId"
@@ -401,7 +401,7 @@ placeholder="kitId"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 [disabled]="true"
@@ -410,7 +410,7 @@ placeholder="kitId"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Site Id"
@@ -419,7 +419,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 [disabled]="true"
@@ -428,7 +428,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     placeholder="expiryDate"
@@ -437,7 +437,7 @@ placeholder="Site Id"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 [disabled]="true"
@@ -457,7 +457,7 @@ placeholder="Site Id"
                                                         <div class="form-group">
                                                             <p-dialog header="Upload Multiple PDF's"
                                                                 [(visible)]="displayv" [modal]="true">
-                                                                <input type="file" id="imageUpload{{indexs}}"
+                                                                <input autocomplete="off" type="file" id="imageUpload{{indexs}}"
                                                                     (change)="uploadFilev($event, tabi, indexv)"
                                                                     accept="application/pdf" multiple>
                                                                 <button type="submit"
@@ -626,7 +626,7 @@ placeholder="Site Id"
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
                                                                                     formControlName="remarks"
@@ -635,7 +635,7 @@ placeholder="Site Id"
                                                                             </td>
                                                                             <td width="20%">
 
-                                                                                <input type="text" 
+                                                                                <input autocomplete="off" type="text" 
 
 
 placeholder="Remarks"

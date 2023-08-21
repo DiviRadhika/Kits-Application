@@ -58,7 +58,7 @@
                                     <div class="form-group">
 
                                         <label>Material</label>
-                                        <input type="text" 
+                                        <input autocomplete="off" type="text" 
 
 
 class="form-control" id="material" formControlName="material"
@@ -87,7 +87,7 @@ class="form-control" id="material" formControlName="material"
                                             (click)="fileInput.click()">Upload Image</button>
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
-                                                <input type="file" accept=".jpg,.png" class="form-control"
+                                                <input autocomplete="off" type="file" accept=".jpg,.png" class="form-control"
                                                     formControlName="image" #fileInput
                                                     (change)="uploadFile($event, false)" id="image"
                                                     placeholder="Select Image">

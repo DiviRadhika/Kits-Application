@@ -64,7 +64,7 @@
 
                       <div class="col-sm-12 col-md-6">
                         <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                            <input  type="text" class="form-control" [(ngModel)]="searchTextm"
+                            <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchTextm"
                               placeholder="Search " (keyup)="applyFilterm(searchTextm)" />
                           </label></div>
                       </div>
@@ -179,7 +179,7 @@
                           <div class="col-md-3">
                             <div class="form-group">
                               <label>Lab Test</label>
-                              <input type="text" 
+                              <input autocomplete="off" type="text" 
 
 
 class="form-control" formControlName="lab_test" id="lab test"
@@ -222,7 +222,7 @@ class="form-control" formControlName="lab_test" id="lab test"
 
                           <div class="col-sm-12 col-md-6">
                             <div id="datatable_filter" class="dataTables_filter"><label>Search:
-                                <input  type="text" class="form-control" [(ngModel)]="searchText"
+                                <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                                   placeholder="Search " (keyup)="applyFilter(searchText)" />
                               </label></div>
                           </div>
