@@ -26,20 +26,20 @@ export class ProtocolService {
     getProtocolId(id: any): Observable<any> {
         return this.http.get(endPointsUser.getProtocolId + id)
       }
-      postPrepration(data:any):Observable<any>{
-        return this.http.post(endPointsUser.postPrepration, data)
+      postPreparation(data:any):Observable<any>{
+        return this.http.post(endPointsUser.postPreparation, data)
     }
-    getPrepration(){
-        return this.http.get(endPointsUser.getPrepration)
+    getPreparation(){
+        return this.http.get(endPointsUser.getPreparation)
     }
-    getPreprationBySId(id1: any){
-        return this.http.get(endPointsUser.getPrepration+ '/'+ id1)
+    getPreparationBySId(id1: any){
+        return this.http.get(endPointsUser.getPreparation+ '/'+ id1)
     }
-    getPreprationBySponsor(id1: any){
+    getPreparationBySponsor(id1: any){
         return this.http.get(endPointsUser.croProtocols+ '/'+ id1)
     }
-    getPreprationById(id: any): Observable<any> {
-        return this.http.get(endPointsUser.getPreprationById + id)
+    getPreparationById(id: any): Observable<any> {
+        return this.http.get(endPointsUser.getPreparationById + id)
     }
     sampleack(id: any,id1: any): Observable<any> {
         return this.http.get(endPointsUser.sampleack + id + '/'+ id1)
@@ -47,8 +47,8 @@ export class ProtocolService {
     sampleackput(data:any): Observable<any> {
         return this.http.put(endPointsUser.sampleackput,data )
     }
-    updatePreprationById(data: any): Observable<any> {
-        return this.http.put(endPointsUser.postPrepration, data)
+    updatePreparationById(data: any): Observable<any> {
+        return this.http.put(endPointsUser.postPreparation, data)
     }
     
    

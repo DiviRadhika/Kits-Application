@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KitPreprationEditComponent } from './kit-Prepration-edit.component';
+import { KitPreprationEditComponent } from './kit-prepration-edit.component';
 
 describe('KitPreprationEditComponent', () => {
   let component: KitPreprationEditComponent;

@@ -51,9 +51,9 @@ export const endPointsUser = {
     getProtocolId: `${apin}/cro_protocol/`,
 
     // Endpoints for Preparatiion
-    getPrepration: `${apin}/clab_kit_Preprations`,
-    postPrepration: `${apin}/clab_kit_Prepration`,
-    getPreprationById: `${apin}/clab_kit_Prepration/`,
+    getPreparation: `${apin}/clab_kit_preparations`,
+    postPreparation: `${apin}/clab_kit_preparation`,
+    getPreparationById: `${apin}/clab_kit_preparation/`,
     sampleack: `${apin}/sample_ack/`,
     sampleackput: `${apin}/sample_ack`,
 
