@@ -93,6 +93,7 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                           </tr>
                         </thead> -->
                         
+                        
 
                         <tbody>
                           <tr class="odd" *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
@@ -125,6 +126,13 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                             </button> -->
                             </td>
                           </tr>
+                          <tr>
+                            <td colspan="12" *ngIf="userDetails.length === 0"
+                                style="text-align: center; font-size: 0.8rem;">
+                                No Data Found
+                            </td>
+                        </tr>
+  
                         </tbody>
                       </table>
                       <pagination-controls id="userPagination" (pageChange)="pageChange($event)"

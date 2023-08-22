@@ -136,6 +136,13 @@
                                   </svg></button>
                               </td>
                             </tr>
+                            <tr>
+                              <td colspan="12" *ngIf="materials.length === 0"
+                                  style="text-align: center; font-size: 0.8rem;">
+                                  No Data Found
+                              </td>
+                          </tr>
+  
                           </tbody>
                         </table>
                       </div>
@@ -290,6 +297,14 @@ class="form-control" formControlName="lab_test" id="lab test"
                                   </td>
 
                                 </tr>
+                                <tr>
+                                  <td colspan="12" *ngIf="LabDetails.length === 0"
+                                      style="text-align: center; font-size: 0.8rem;">
+                                      No Data Found
+                                  </td>
+                              </tr>
+      
+      
                               </tbody>
                             </table>
                             <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
@@ -322,3 +337,13 @@ class="form-control" formControlName="lab_test" id="lab test"
     </div>
   </div>
 </div>
+
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>

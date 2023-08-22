@@ -4,9 +4,9 @@ import { MessageService } from 'primeng/api';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
 @Component({
-  selector: 'app-prepration-grid',
-  templateUrl: './prepration-grid.component.html',
-  styleUrls: ['./prepration-grid.component.css']
+  selector: 'app-Prepration-grid',
+  templateUrl: './Prepration-grid.component.html',
+  styleUrls: ['./Prepration-grid.component.css']
 })
 export class PreprationGridComponent implements OnInit {
   protocolDetails: any[]= [];
@@ -54,9 +54,9 @@ export class PreprationGridComponent implements OnInit {
   // }
   edit(id:string){
   
-    this.protocol.getPreparationById(id).subscribe((protocolsData) => {
+    this.protocol.getPreprationById(id).subscribe((protocolsData) => {
   }),
-  this.protocol.getPreparationById(id).subscribe(
+  this.protocol.getPreprationById(id).subscribe(
     (data: any) => {
       this.route.navigate(['/home/centralLab/kitPrepration',id, 'edit'])
     },

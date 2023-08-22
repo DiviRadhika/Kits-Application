@@ -67,7 +67,7 @@ export class ViewSitesComponent implements OnInit {
       console.log(this.ID);
       
   
-      this.protocol.getPreparationBySId(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+      this.protocol.getPreprationBySId(sessionStorage.getItem('siteId')).subscribe((data: any) => {
         console.log(data);
         
         const uniqueScreeningData = this.getUniqueObjects(data.screening_data, 'user_protocol_id');

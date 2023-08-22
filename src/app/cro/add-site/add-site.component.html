@@ -448,7 +448,7 @@ class="form-control" id="Office Telephone"
               </div>
               <div *ngIf="isEdit" class="row">
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button style="margin-right: -17px" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                  <button style="margin-right: -17px; font-size: 12px;" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
                 </div>
                
                 <!-- <div class="col-3 mt-auto mb-2 ">
@@ -529,7 +529,9 @@ class="form-control" id="Office Telephone"
 
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="margin: 2px; font-size: 12px;"  *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
@@ -539,3 +541,13 @@ class="form-control" id="Office Telephone"
     </div>
   </div>
 </div>
+
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>

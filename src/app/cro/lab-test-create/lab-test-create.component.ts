@@ -127,6 +127,10 @@ export class LabTestCreateComponent implements OnInit {
     const control = this.labTestCreateForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
+reset(){
+  this.labTestCreateForm.reset();
+}
+
 
   submit() {
     if (this.labTestCreateForm.controls['mobile_telephone'].value === '' || this.labTestCreateForm.controls['mobile_telephone'].value === null) {

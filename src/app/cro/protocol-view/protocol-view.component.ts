@@ -37,7 +37,7 @@ export class ProtocolViewComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['InProgress', 'Completed']
+  PreprationData = ['InProgress', 'Completed']
 
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -64,7 +64,7 @@ export class ProtocolViewComponent implements OnInit {
   materials: any;
   selectedValuev: any;
   selectedOption: any;
-  public preparationForm: FormGroup = new FormGroup({
+  public PreprationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
   });
@@ -95,8 +95,8 @@ export class ProtocolViewComponent implements OnInit {
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+      this.PreprationForm.controls['protocol_name'].disable()
+      this.PreprationForm.controls['protocol_name'].setValue(this.protoName)
       this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids

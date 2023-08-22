@@ -233,7 +233,7 @@ ____________________________________________________
 			var points = datapoints.points;
 			var ps = datapoints.pointsize;
 			
-			// preparation get length (x_{k+1} - x_k) and slope s=(p_{k+1} - p_k) / (x_{k+1} - x_k) of the segments
+			// Prepration get length (x_{k+1} - x_k) and slope s=(p_{k+1} - p_k) / (x_{k+1} - x_k) of the segments
 			var segmentLengths = [];
 			var segmentSlopes = [];
 

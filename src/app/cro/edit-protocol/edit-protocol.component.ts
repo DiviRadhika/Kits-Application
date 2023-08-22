@@ -49,7 +49,7 @@ export class EditProtocolComponent implements OnInit {
   selectedOption: any;
   id: any;
   protoName: any;
-  preparationForm: any;
+  PreprationForm: any;
  
 
   // MaterialList: FormArray = new FormArray([])

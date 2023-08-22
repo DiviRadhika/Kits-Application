@@ -308,7 +308,9 @@ class="form-control" id="Address"
                             </form>
                         </div>
                         <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                            <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+                            <button *ngIf="!isEdit" style="margin: 2px;" (click)="reset()" class="btn btn-primary">Reset</button>
+
+                            <button *ngIf="!view" style="margin: 2px;" (click)="submit()" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -316,3 +318,14 @@ class="form-control" id="Address"
         </div>
     </div>
 </div>
+
+<footer class="footer" style="position: fixed;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        </div>
+      </div>
+    </div>
+  </footer>
+  

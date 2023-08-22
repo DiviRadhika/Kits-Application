@@ -66,7 +66,7 @@ export class SponsorStudyComponent implements OnInit {
       console.log(this.ID);
       
   
-      this.protocol.getPreparationBySponsor(sessionStorage.getItem('sponsorId')).subscribe((data: any) => {
+      this.protocol.getPreprationBySponsor(sessionStorage.getItem('sponsorId')).subscribe((data: any) => {
         console.log(data);
         
         this.uniqueCombinedArray =data

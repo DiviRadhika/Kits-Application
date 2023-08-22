@@ -190,6 +190,10 @@ export class AddSiteComponent {
   removeSite(j: number) {
     this.investigatorForm.get('investigator').removeAt(j);
   }
+ reset(){
+  this.siteForm.reset()
+ }
+
   submit() {
     console.log(this.investigatorForm.value);
 

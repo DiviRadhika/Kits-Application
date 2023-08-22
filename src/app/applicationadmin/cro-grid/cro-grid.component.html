@@ -81,6 +81,7 @@
                             style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
                         </tr>
                       </thead>
+                      
 
 
                       <tbody>
@@ -107,6 +108,13 @@
                           </svg></button>
                           </td>
                         </tr>
+                        <tr>
+                          <td colspan="12" *ngIf="croDetails.length === 0"
+                              style="text-align: center; font-size: 0.8rem;">
+                              No Data Found
+                          </td>
+                      </tr>
+
 
                       </tbody>
                     </table>

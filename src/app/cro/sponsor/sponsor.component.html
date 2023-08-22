@@ -367,6 +367,7 @@
 
 
 
+
                                 <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
                               </td>
                             </tr>
@@ -403,6 +404,12 @@
 
                             </tr>
                           </thead>
+                          <tr>
+                            <td colspan="12"
+                                style="text-align: center; font-size: 0.8rem;">
+                                No Data Found
+                            </td>
+                        </tr>
                           <tbody>
                             <tr [formGroupName]="i"
                               *ngFor="let contact of editcontactsForm.get('editcontacts').controls; let i = index;">
@@ -417,11 +424,11 @@
 
                               </td>
                               <td>
-                                <input autocomplete="off" type="text" class="form-control" maxlength="40" id="Office Telephone"
+                                <input autocomplete="off" type="text" maxlength="100" class="form-control" maxlength="40" id="Office Telephone"
                                   placeholder="Enter Email Id " formControlName="email">
                               </td>
                               <td>
-                                <input autocomplete="off" type="text" class="form-control" id="Designation" placeholder="Enter Designation"
+                                <input autocomplete="off" type="text" maxlength="100" class="form-control" id="Designation" placeholder="Enter Designation"
                                   formControlName="designation">
                               </td>
                               <td>
@@ -449,7 +456,9 @@
 
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button style="font-size: 11px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="font-size: 11px; margin: 2px;"  *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="font-size: 11px; margin: 2px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
@@ -461,3 +470,13 @@
     </div>
   </div>
 </div>
+
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>

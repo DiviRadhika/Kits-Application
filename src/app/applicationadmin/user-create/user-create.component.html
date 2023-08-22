@@ -177,10 +177,13 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                    
                   </div>
                 </div>
+
             
 
               <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                <button *ngIf="!view" type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+                <button  style="margin:2px" *ngIf="!isEdit" type="reset" (click)="reset()" class="btn btn-primary">Reset</button>
+
+                <button style="margin:2px" *ngIf="!view" type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
               </div>
             </div>
 

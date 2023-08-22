@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreprationGridComponent } from './prepration-grid.component';
+import { PreprationGridComponent } from './Prepration-grid.component';
 
 describe('PreprationGridComponent', () => {
   let component: PreprationGridComponent;

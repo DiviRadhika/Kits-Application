@@ -287,7 +287,9 @@ class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
               </form>
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button  style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="margin: 2px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
@@ -295,3 +297,12 @@ class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
     </div>
   </div>
 </div>
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>

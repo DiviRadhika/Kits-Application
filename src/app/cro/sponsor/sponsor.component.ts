@@ -192,7 +192,9 @@ export class SponsorComponent implements OnInit {
     const control = this.sponsorForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
-
+reset(){
+  this.sponsorForm.reset()
+}
 
 
   submit() {

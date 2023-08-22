@@ -173,7 +173,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },  
+            { label: 'Kit Preparation', link: '/home/centralLab/kitPreprationGrid' },  
                { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
                { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
             { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
@@ -184,10 +184,10 @@ export class HomeComponent implements OnInit {
         // Other menu items for admin role...
       ];
     }
-    else if(this.role === 'Central Lab-Preparation'){
+    else if(this.role === 'Central Lab-Prepration'){
       this.menuItems = [
         { label: 'Dashboards', link: '/home/cro/dashboards' },
-        { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },
+        { label: 'Kit Prepration', link: '/home/centralLab/kitPreprationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Verification'){

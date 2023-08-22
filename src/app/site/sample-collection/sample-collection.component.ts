@@ -69,7 +69,7 @@ export class SampleCollectionComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['Not Verified', 'Verified']
+  PreprationData = ['Not Verified', 'Verified']
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -98,7 +98,7 @@ export class SampleCollectionComponent implements OnInit {
   selectedValuev: any;
   selectedOption: any;
 
-  public preparationForm: FormGroup = new FormGroup({
+  public PreprationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
   });
@@ -125,7 +125,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
     
-    this.protocolService.getPreparation().subscribe((protocols) => {
+    this.protocolService.getPrepration().subscribe((protocols) => {
       console.log(protocols);
 
       this.ProtoData(protocols);
@@ -146,7 +146,7 @@ export class SampleCollectionComponent implements OnInit {
     this.scount = ''
     this.protocolService.getProtocolId(id).subscribe((protocols) => {
       this.uuid = id;
-      this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
+      this.protocolService.getPreprationById(id).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
@@ -158,8 +158,8 @@ export class SampleCollectionComponent implements OnInit {
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+      this.PreprationForm.controls['protocol_name'].disable()
+      this.PreprationForm.controls['protocol_name'].setValue(this.protoName)
       this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
       this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
@@ -371,7 +371,7 @@ export class SampleCollectionComponent implements OnInit {
 
     console.log(data);
 
-    this.protocolService.updatePreparationById(data).subscribe(
+    this.protocolService.updatePreprationById(data).subscribe(
       (data: any) => {
         setTimeout(() => {
           this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Collection Updated successfully' });

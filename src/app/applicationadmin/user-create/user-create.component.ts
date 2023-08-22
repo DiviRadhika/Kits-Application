@@ -33,7 +33,7 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
+  options: string[] = ['Admin','CRO','Sponsor','CRA', 'Central Lab-Prepration', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
@@ -110,7 +110,7 @@ export class UserCreateComponent implements OnInit {
             this.userForm.controls['sId'].setValue(this.getUserData.site_id)
         
            }
-           else if(this.getUserData.role === 'Central Lab-Preparation'){
+           else if(this.getUserData.role === 'Central Lab-Prepration'){
             this.sponsor = false
             this.site = false
             this.userForm.controls['sId'].clearValidators()
@@ -215,7 +215,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
-   else if(this.idValue === 'Central Lab-Preparation'){
+   else if(this.idValue === 'Central Lab-Prepration'){
     this.sponsor = false
     this.site = false
     this.userForm.controls['sId'].clearValidators()
@@ -267,6 +267,9 @@ export class UserCreateComponent implements OnInit {
       (err:any)=>{
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message}); }
     )
+  }
+  reset(){
+    this.userForm.reset() 
   }
   
   submit(): void {

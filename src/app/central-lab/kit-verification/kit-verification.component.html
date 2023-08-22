@@ -30,7 +30,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="preparationForm">
+                        <form [formGroup]="PreprationForm">
                             <div class="row">
                                 <div id="printSection">
                               
@@ -165,8 +165,8 @@ placeholder="kitId"
                                                                                 <input autocomplete="off" type="text" 
 
 
-                                                                                    placeholder="Preparation"
-                                                                                    value={{item.prepration}}
+                                                                                    placeholder="Prepration"
+                                                                                    value={{item.Prepration}}
                                                                                     class="form-control"  [disabled]="true" />
                                                                             </td>
 
@@ -215,7 +215,7 @@ placeholder="kitId"
                                                                             <select formControlName="status"
                                                                                 class="form-select form-control">
                                                                                 <option
-                                                                                    *ngFor="let data of preprationData">
+                                                                                    *ngFor="let data of PreprationData">
                                                                                     {{ data }}
                                                                                 </option>
                                                                             </select>
@@ -309,8 +309,8 @@ placeholder="LabKitId"
                                                                             <input autocomplete="off" type="text" 
 
 
-placeholder="Preparation"
-                                                                                value={{item.prepration}} readonly  [disabled]="true"
+placeholder="Prepration"
+                                                                                value={{item.Prepration}} readonly  [disabled]="true"
                                                                                 class="form-control" />
                                                                         </td>
 
@@ -355,7 +355,7 @@ placeholder="Preparation"
                                                                             <select formControlName="status"
                                                                                 class="form-select form-control">
                                                                                 <option
-                                                                                    *ngFor="let data of preprationData">
+                                                                                    *ngFor="let data of PreprationData">
                                                                                     {{ data }}
                                                                                 </option>
                                                                             </select>

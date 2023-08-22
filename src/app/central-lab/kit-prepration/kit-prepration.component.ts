@@ -550,7 +550,7 @@ export class KitPreprationComponent implements OnInit {
 
     console.log(data);
 
-    this.protocolService.postPreparation(data).subscribe(
+    this.protocolService.postPrepration(data).subscribe(
 
       (data: any) => {
         setTimeout(() => {

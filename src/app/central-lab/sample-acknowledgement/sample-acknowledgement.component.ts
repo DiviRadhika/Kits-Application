@@ -108,7 +108,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   selectedValuev: any;
   selectedOption: any;
 
-  public preparationForm: FormGroup = new FormGroup({
+  public PreprationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
     specialInstructions: new FormControl("", [Validators.required]),
@@ -119,7 +119,7 @@ export class SampleAcknowledgementComponent implements OnInit {
       this.sponsersData(sites);
 
     });
-    this.protocolService.getPreparation().subscribe((protocols) => {
+    this.protocolService.getPrepration().subscribe((protocols) => {
       console.log(protocols);
 
       this.ProtoData(protocols);
@@ -155,7 +155,7 @@ export class SampleAcknowledgementComponent implements OnInit {
     this.scount = ''
     this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
       this.uuid = id.target.value;
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+      this.protocolService.getPreprationById(id.target.value).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
@@ -167,10 +167,10 @@ export class SampleAcknowledgementComponent implements OnInit {
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      this.preparationForm.controls['specialInstructions'].disable()
-      this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
+      this.PreprationForm.controls['protocol_name'].disable()
+      this.PreprationForm.controls['protocol_name'].setValue(this.protoName)
+      this.PreprationForm.controls['specialInstructions'].disable()
+      this.PreprationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
      
       this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
       this.sMatDetails = protocols.screening_kit_details[0].meterial_details
@@ -408,7 +408,7 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
 
     // console.log(data);
 
-    this.protocolService.updatePreparationById(data).subscribe(
+    this.protocolService.updatePreprationById(data).subscribe(
       (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
       },
