@@ -53,13 +53,13 @@
                     </button>
 
                     <!-- App Search-->
-                    <form class="app-search d-none d-lg-block">
+                    <!-- <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
                             <input autocomplete="off" type="text" 
  class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
-                    </form>
+                    </form> -->
 
 
                 </div>
@@ -118,9 +118,18 @@
                                                 d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                         </svg>
                                         View Profile</span></a> -->
+                                        <a (click)="profile($event)" class="dropdown-item text-danger" data-bs-toggle="model" data-target="#myModal" ><i
+                                        class="fas fa-square-plus font-size-16  text-danger"></i> <span
+                                        key="t-logout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        </svg>
+                                        View Profile</span></a>
+
                                 <a (click)="update()" class="dropdown-item text-danger"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                        class="bi bi-arrow-clockwise" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                                         <path
@@ -130,7 +139,7 @@
                                     >
                                      <i
                                          class="bx bx-power-off font-size-16 align-middle me-1 text-danger" ></i>
-                                          <span style="cursor: pointer;"
+                                          <span style="cursor: pointer; margin-bottom: 20%;" 
                                          key="t-logout">Logout</span></a>
      
                                                             </div>

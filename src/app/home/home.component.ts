@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
-            { label: 'Dashboards', link: '/home/cro/dashboards' },
+            { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'CRO', link: '/home/admin/croGrid' },
             { label: 'User', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
@@ -137,7 +137,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
-            { label: 'Dashboards', link: '/home/cro/dashboards' },
+            { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/Sponsor/sponsorStudies' },
         
           // ]
@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit {
           // expanded: false,
           // subItems: [
          
-            { label: 'Dashboards', link: '/home/cro/dashboards' },
+            { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'LabTest', link: '/home/cro/labTestGrid' },
@@ -186,31 +186,31 @@ export class HomeComponent implements OnInit {
     }
     else if(this.role === 'Central Lab-Prepration'){
       this.menuItems = [
-        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'Kit Prepration', link: '/home/centralLab/kitPreprationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Verification'){
       this.menuItems = [
-        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
       ];
     }
     else if(this.role === 'Central Lab-Distribution'){
       this.menuItems = [
-        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
       ];
     }
     else if(this.role === 'Central Lab-Acknowledgement'){
       this.menuItems = [
-        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
       ];
     }
     else if(this.role === 'Central Lab-Reports'){
       this.menuItems = [
-        { label: 'Dashboards', link: '/home/cro/dashboards' },
+        { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
       ];
     }
@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            { label: 'Dashboards', link: '/home/cro/dashboards' },
+            { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sample Collection', link: '/home/site/viewCRA' }
             // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]
@@ -292,15 +292,16 @@ export class HomeComponent implements OnInit {
   first_name:any;
   last_name:any;
   email:any;
-  profile(){
-    this.addprofile= true;
+  profile(event:Event){
+    event.preventDefault();
+    if (!this.addprofile) { // Only allow if addprofile is false
+      this.addprofile = true;
 
       this.first_name= sessionStorage.getItem('firstName')
-     console.log(this.first_name)
       this.last_name= sessionStorage.getItem('lastName')
       this.email = sessionStorage.getItem('email')
       this.role = sessionStorage.getItem('role')
-    
+    }
   }
   emailvaluef:any
   set() {

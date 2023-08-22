@@ -54,7 +54,7 @@
           <div class="container">
 
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">Site Form</h6>
+              <h5 style="color: rgb(250, 39, 39);">Site Basic Details</h5>
               <hr>
               <form [formGroup]="siteForm">
                 <div class="row">
@@ -309,7 +309,7 @@ class="form-control" maxlength="20" (input)="validateMobileNumber($event.target,
                       <input autocomplete="off" type="text" 
 
 
-class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
+class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"  (input)="validateMobileNumber($event.target, 'office')"
                         formControlName="extension">
 
                     </div>

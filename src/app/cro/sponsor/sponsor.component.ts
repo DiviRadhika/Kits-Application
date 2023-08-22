@@ -105,6 +105,11 @@ export class SponsorComponent implements OnInit {
 
     this.getSponsorDetails()
   }
+removesponseredit(j:number){
+  this.editcontactsForm.get('editcontacts').removeAt(j);
+}
+
+
   removeSponsor(j: number) {
     this.contactForm.get('contacts').removeAt(j);
   }

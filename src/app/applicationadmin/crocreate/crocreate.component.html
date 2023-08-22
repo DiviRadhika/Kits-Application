@@ -238,10 +238,7 @@ class="form-control" maxlength="20" (input)="validateMobileNumber($event.target,
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input autocomplete="off" type="text" 
-
-
-class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
+                      <input autocomplete="off" type="text" (input)="validateMobileNumber($event.target, 'office')" class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
                         formControlName="extension">
 
                     </div>

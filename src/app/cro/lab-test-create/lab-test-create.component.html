@@ -259,10 +259,10 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Extension</label>
-                                        <input autocomplete="off" type="text" 
+                                        <input autocomplete="off" type="text" (input)="validateMobileNumber($event.target, 'office')" 
 
 
-class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
+class="form-control"  maxlength="10" id="Extension" placeholder="Enter Extension"
                                           formControlName="extension">
                   
                                       </div>
@@ -284,10 +284,7 @@ class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formContro
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Email Id</label>
-                                            <input autocomplete="off" type="text" 
-
-
-class="form-control" id="Address 1"
+                                            <input autocomplete="off" type="text" maxlength="100"  class="form-control" id="Address 1"
                                                 placeholder="Enter Email" formControlName="email">
 
                                         </div>
@@ -295,10 +292,7 @@ class="form-control" id="Address 1"
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Website</label>
-                                            <input autocomplete="off" type="text" 
-
-
-class="form-control" id="Address"
+                                            <input autocomplete="off" type="text" maxlength="100" class="form-control" id="Address"
                                                 placeholder="Enter Website" formControlName="website">
 
                                         </div>
