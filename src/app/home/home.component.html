@@ -53,13 +53,13 @@
                     </button>
 
                     <!-- App Search-->
-                    <form class="app-search d-none d-lg-block">
+                    <!-- <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
                             <input type="text" 
  class="form-control" placeholder="Search...">
                             <span class="bx bx-search-alt"></span>
                         </div>
-                    </form>
+                    </form> -->
 
 
                 </div>
@@ -118,6 +118,17 @@
                                                 d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                         </svg>
                                         View Profile</span></a> -->
+                                        <a (click)="profile()" class="dropdown-item text-danger" data-bs-toggle="model" data-target="#myModal" ><i
+                                            class="fas fa-square-plus font-size-16  text-danger"></i> <span
+                                            key="t-logout"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                            </svg>
+                                            View Profile</span></a>
+    
+
+
                                 <a (click)="update()" class="dropdown-item text-danger"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-arrow-clockwise" viewBox="0 0 16 16">

@@ -62,11 +62,11 @@
                   
                 </div>
                   
-                <div class="row">
+                <div class="row" class="table-responsive text-nowrap" >
                   <div class="col-sm-12">
-                    <table id="datatable"
+                    <table id="datatable" class="table table-striped"
                       class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline" role="grid"
-                      aria-describedby="datatable_info" style="width: 1182px;">
+                      aria-describedby="datatable_info" style="width: 82px;">
                       <thead>
                         <tr role="row">
                           <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
@@ -74,11 +74,11 @@
                             aria-label="Code: activate to sort column descending" (click)="sort('cro_code')" >Code</th>
                           <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('email')">Name</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" >Legal
+                          <th tabindex="0" class="sorting" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 28.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" >Legal
                             Name</th>
-                          <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                          <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 15.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
                         </tr>
                       </thead>
 
@@ -107,7 +107,12 @@
                           </svg></button>
                           </td>
                         </tr>
-
+                        <tr>
+                          <td colspan="12" *ngIf="croDetails.length === 0"
+                              style="text-align: center; font-size: 0.8rem;">
+                              No Data Found
+                          </td>
+                      </tr>
                       </tbody>
                     </table>
                   </div>

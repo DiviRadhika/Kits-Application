@@ -268,6 +268,9 @@ export class UserCreateComponent implements OnInit {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message}); }
     )
   }
+  reset(){
+    this.userForm.reset()
+  }
   
   submit(): void {
   

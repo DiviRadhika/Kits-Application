@@ -10,6 +10,10 @@ import { ProtocolService } from '../protocol-registration/protocol-registration.
   styleUrls: ['./site.component.css']
 })
 export class SiteComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+ 
   siteDetails: any[]= [];
   uniqueCombinedArray: any[]= [];
   allSiteDetails: any[] = [];

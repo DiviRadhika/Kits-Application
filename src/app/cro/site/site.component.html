@@ -103,9 +103,9 @@
                 </p-dialog>
 
 
-                  <div class="row">
+                  <div class="row" class="table-responsive text-nowrap">
                     <div class="col-sm-12">
-                      <table id="datatable"
+                      <table id="datatable" class="table table-striped"
                         class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                         role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                         <thead>
@@ -119,7 +119,7 @@
                               style="width: 282.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')" >
                               Email</th>
                             
-                            <th width="15%" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                            <th width="15%" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
@@ -158,6 +158,12 @@
                             </button> -->
                             </td>
                           </tr>
+                          <tr>
+                            <td colspan="12" *ngIf="siteDetails.length === 0"
+                                style="text-align: center; font-size: 0.8rem;">
+                                No Data Found
+                            </td>
+                        </tr>
 
                         </tbody>
                       </table>
@@ -182,13 +188,16 @@
   <!-- End Page-content -->
 
 
- <footer class="footer" style="position: fixed;">
+  <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        <div class="row">
+            <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
         </div>
-      </div>
     </div>
   </footer>
-</div>
+  <!-- end main content-->
+  
+  <!-- END layout-wrapper -->
+  
+  <!-- Right bar overlay-->
+  <div class="rightbar-overlay"></div>

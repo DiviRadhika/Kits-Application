@@ -58,7 +58,7 @@
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')"  >Study Name</th>
 
-                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                            <th width="40"  tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
@@ -90,6 +90,12 @@
                                 </button> -->
                             </td>
                           </tr>
+                          <tr>
+                            <td colspan="12" *ngIf="uniqueCombinedArray.length === 0"
+                                style="text-align: center; font-size: 0.8rem;">
+                                No Data Found
+                            </td>
+                        </tr>
 
                         </tbody>
                       </table>

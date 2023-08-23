@@ -54,11 +54,8 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Lab Code</label>
-                                            <input type="text" 
-
-
-class="form-control" id="LabtestCode"
+                                            <label>*Lab Code</label>
+                                            <input type="text" class="form-control" id="LabtestCode"
                                                 placeholder="Enter Lab Test Code" formControlName="cro_code"
                                                 [class.is-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
 
@@ -74,11 +71,8 @@ class="form-control" id="LabtestCode"
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Lab Name</label>
-                                            <input type="text" 
-
-
-class="form-control" id="LabTestName"
+                                            <label>*Lab Name</label>
+                                            <input type="text" class="form-control" id="LabTestName"
                                                 placeholder="Enter Lab Test Name" formControlName="cro_name"
                                                 [class.is-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
@@ -93,11 +87,8 @@ class="form-control" id="LabTestName"
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Legal Lab Name</label>
-                                            <input type="text" 
-
-
-class="form-control" id="LegalLabTestName"
+                                            <label>*Legal Lab Name</label>
+                                            <input type="text" class="form-control" id="LegalLabTestName"
                                                 placeholder="Enter legal Lab Test name"
                                                 formControlName="legal_cro_name"
                                                 [class.is-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
@@ -128,7 +119,7 @@ class="form-control" id="LegalLabTestName"
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Address 1</label>
+                                            <label>*Address 1</label>
                                             <input type="text" 
 
 
@@ -153,7 +144,7 @@ class="form-control" id="Address"
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Country</label>
+                                            <label>*Country</label>
                                             <select formControlName="country" class="form-select"
                                                 aria-label="Default select example">
                                                 <option selected value="">Select Country</option>
@@ -179,7 +170,7 @@ class="form-control" id="Address"
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Region/State</label>
+                                            <label>*Region/State</label>
                                             <input type="text" 
 
 
@@ -204,7 +195,7 @@ class="form-control" id="District"
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>City</label>
+                                            <label>*City</label>
                                             <input type=" text" class="form-control" id="City" placeholder="Enter City"
                                                 formControlName="city"
                                                 [class.is-invalid]="shouldShowRequired('city') && labTestCreateForm.get('city')?.touched">
@@ -218,11 +209,11 @@ class="form-control" id="District"
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Zip Code</label>
+                                            <label>*Zip Code</label>
                                             <input type="text" 
 
 
-class="form-control" id="Zip Code"
+class="form-control" id="Zip Code" (input)="validateMobileNumber($event.target, 'office')"
                                                 placeholder="Enter Zip Code" formControlName="zip_code"
                                                 [class.is-invalid]="shouldShowRequired('zip_code') && labTestCreateForm.get('zip_code')?.touched">
                                             <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -259,10 +250,7 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Extension</label>
-                                        <input type="text" 
-
-
-class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
+                                        <input type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
                                           formControlName="extension">
                   
                                       </div>
@@ -271,11 +259,7 @@ class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Mobile Number</label>
-                                                <input type="text" 
-
-
-class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
-                  
+                                                <input type="text"class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">                
                                       </div>
                                     </div>
                                   </div>
@@ -284,10 +268,7 @@ class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formContro
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Email Id</label>
-                                            <input type="text" 
-
-
-class="form-control" id="Address 1"
+                                            <input type="text" class="form-control" id="Address 1"
                                                 placeholder="Enter Email" formControlName="email">
 
                                         </div>
@@ -295,10 +276,7 @@ class="form-control" id="Address 1"
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Website</label>
-                                            <input type="text" 
-
-
-class="form-control" id="Address"
+                                            <input type="text" class="form-control" id="Address"
                                                 placeholder="Enter Website" formControlName="website">
 
                                         </div>
@@ -316,3 +294,13 @@ class="form-control" id="Address"
         </div>
     </div>
 </div>
+
+<footer class="footer" style="position: fixed;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        </div>
+      </div>
+    </div>
+  </footer>

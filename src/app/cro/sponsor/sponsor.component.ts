@@ -13,6 +13,10 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sponsor.component.css']
 })
 export class SponsorComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+ 
   public isEdit: boolean = false;
   public id: any = '';
   myData: { text: any; value: any; }[] = [];
@@ -105,6 +109,10 @@ export class SponsorComponent implements OnInit {
 
     this.getSponsorDetails()
   }
+removeeditsponser(j: number) {
+  this.editcontactsForm.get('editcontacts').removeAt(j);
+}
+
   removeSponsor(j: number) {
     this.contactForm.get('contacts').removeAt(j);
   }
@@ -192,7 +200,9 @@ export class SponsorComponent implements OnInit {
     const control = this.sponsorForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
-
+  reset(){
+    this.sponsorForm.reset()
+  }
 
 
   submit() {
@@ -206,7 +216,19 @@ export class SponsorComponent implements OnInit {
       this.mobile = this.sponsorForm.controls['mobile_telephone'].value.toString()
     }
 
-    if (this.sponsorForm.invalid) {
+   
+    if (this.sponsorForm.controls['email'].invalid) {
+
+      Object.keys(this.sponsorForm.controls).forEach(key => {
+        this.sponsorForm.get(key)?.markAsTouched();
+      });
+    
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Email' });
+    } else if (!this.sponsorForm.controls['email'].hasError('email')) {
+      // If email is valid (matches email pattern), show a success toast message
+      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Email is valid!' });
+    }
+     else if (this.sponsorForm.invalid) {
       // Mark all form controls as touched to trigger validation
       Object.keys(this.sponsorForm.controls).forEach(key => {
         this.sponsorForm.get(key)?.markAsTouched();
@@ -214,7 +236,6 @@ export class SponsorComponent implements OnInit {
 
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
     }
-
     else {
       const obj: any = {
         "sponsor_code": this.sponsorForm.controls['sp_auto_code'].value,

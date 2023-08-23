@@ -32,7 +32,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponor Study ID</label>
+                    <label for="formrow-firstname-input" class="form-label">*Sponor Study ID</label>
                     <input type="text" autocomplete="off" formControlName="selected_protocol_id" class="form-control"
                       id="" placeholder="Enter Study ID"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Study Title</label>
+                    <label for="formrow-firstname-input" class="form-label">*Study Title</label>
                     <input type="text" autocomplete="off" formControlName="selected_protocol_name" class="form-control"
                       id="" placeholder="Enter Study Title"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
+                    <label for="formrow-firstname-input" class="form-label">*Sponsor ID / Name</label>
                     <select maxlength="100" formControlName="selected_sponsor_id" class="form-select form-control"
                       [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
                       <option selected value="">Select Sponsor ID</option>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
+                    <label for="formrow-firstname-input" class="form-label">*Total No.of Visits</label>
                     <input type="text" autocomplete="off" maxlength="5" formControlName="total_visits"
                       (input)="ValidateVisits($event.target)" placeholder="Total No.of Visits" (blur)="visits($event)" class="form-control"
                       [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
@@ -108,7 +108,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
+                    <label for="formrow-firstname-input" class="form-label">*Screen Kit Count</label>
                     <input type="text" autocomplete="off" maxlength="5" (input)="ValidateScreening($event.target)"
                       formControlName="selected_skit_count" class="form-control" id="" placeholder="Screen Kit Count"
                       [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-md-2 mb-3" style="margin-left: -11%;">
                       <br>
-                      <button style="margin-left: 7%;" type="button" (click)="onMaterialKitAdd()"
+                     <button style="margin-left: 7%;" type="button" (click)="onMaterialKitAdd()"
                         class="btn btn-primary  waves-light r-blue">Add Material</button>
                     </div>
 
@@ -474,24 +474,13 @@
     <!-- container-fluid -->
   </div>
   <!-- End Page-content -->
-
   <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6">© Roboxa</div>
+        <div class="col-sm-6">
+          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        </div>
       </div>
     </div>
   </footer>
-
 </div>
-<!-- end main content-->
-<!-- </div> -->
-<!-- END layout-wrapper -->
-
-
-
-<!-- Tab Content -->
-
-
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>

@@ -54,13 +54,13 @@
           <div class="container">
 
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">Site Form</h6>
+              <h5 style="color: rgb(250, 39, 39);">Site Basic Details</h5>
               <hr>
               <form [formGroup]="siteForm">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Site Code</label>
+                      <label>*Site Code</label>
                       <input type="text" 
 
 
@@ -77,7 +77,7 @@ class="form-control" id="SiteCode" placeholder="Enter Site Code"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Site Name</label>
+                      <label>*Site Name</label>
                       <input type="text" 
 
 
@@ -93,7 +93,7 @@ class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Legal Site Name</label>
+                      <label>*Legal Site Name</label>
                       <input type="text" 
 
 
@@ -178,7 +178,7 @@ class="form-control" id="email" placeholder="Enter Email"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Address 1</label>
+                      <label>*Address 1</label>
                       <input type="text" 
 
 
@@ -203,7 +203,7 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Country</label>
+                      <label>*Country</label>
                       <select formControlName="country" class="form-select" aria-label="Default select example">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
@@ -223,7 +223,7 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Region/State</label>
+                      <label>*Region/State</label>
                       <input type="text" 
 
 
@@ -249,7 +249,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>City</label>
+                      <label>*City</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
@@ -266,12 +266,12 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Zip Code</label>
+                      <label>*Zip Code</label>
                       <input type="text" 
 
 
 class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code"
+                        formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is Required.
@@ -306,7 +306,7 @@ class="form-control" maxlength="20" (input)="validateMobileNumber($event.target,
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" 
+                      <input type="text"  (input)="validateMobileNumber($event.target, 'office')"
 
 
 class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
@@ -335,7 +335,7 @@ maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Nu
                       <input type="text" 
 
 
-class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
+class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
                         formControlName="website">
 
                     </div>
@@ -347,7 +347,7 @@ class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
                       <input type="text" 
 
 
-class="form-control" maxlength="60" id="email" placeholder="Enter Email"
+class="form-control" maxlength="100" id="email" placeholder="Enter Email"
                         formControlName="email">
                     </div>
                   </div>
@@ -427,7 +427,7 @@ class="form-control" id="Office Telephone"
                                   placeholder="Enter Mobile Number" maxlength="20" (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                               <td>
-                                <button type="button" (click)="removeSite(i)"
+                                <button type="button" (click)="removeSite(i)" style="background-color: red;"
                                   class="btn btn-danger">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
@@ -529,8 +529,11 @@ class="form-control" id="Office Telephone"
 
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="margin: 2px; font-size: 12px;"  *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
+ 
           </div>
         </div>
 
@@ -539,3 +542,16 @@ class="form-control" id="Office Telephone"
     </div>
   </div>
 </div>
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+      </div>
+  </div>
+</footer>
+<!-- end main content-->
+
+<!-- END layout-wrapper -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>

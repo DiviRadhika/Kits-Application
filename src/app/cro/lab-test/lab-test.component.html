@@ -79,9 +79,9 @@
 
                     </div>
 
-                    <div class="row">
+                    <div class="row" class="table-responsive text-nowrap">
                       <div class="col-sm-12">
-                        <table id="datatable"
+                        <table id="datatable" class="table table-striped"
                           class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                           role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                           <thead>
@@ -136,6 +136,12 @@
                                   </svg></button>
                               </td>
                             </tr>
+                            <tr>
+                              <td colspan="12" *ngIf="materials.length === 0"
+                                  style="text-align: center; font-size: 0.8rem;">
+                                  No Data Found
+                              </td>
+                          </tr>
                           </tbody>
                         </table>
                       </div>
@@ -178,7 +184,7 @@
                         <div class="row">
                           <div class="col-md-3">
                             <div class="form-group">
-                              <label>Lab Test</label>
+                              <label>*Lab Test</label>
                               <input type="text" 
 
 
@@ -189,7 +195,7 @@ class="form-control" formControlName="lab_test" id="lab test"
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
-                              <label>Classification</label>
+                              <label>*Classification</label>
 
                               <select formControlName="classification" class="form-select form-control">
                                 <option *ngFor="let data of classifications">
@@ -237,10 +243,10 @@ class="form-control" formControlName="lab_test" id="lab test"
                         </div>
 
 
-                        <div class="row">
+                        <div class="row" class="table-responsive text-nowrap">
                           <!-- <div class="col-sm-3"></div> -->
                           <div class="col-sm-12">
-                            <table id="labdatatable"
+                            <table id="labdatatable"  class="table table-striped"
                               class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                               role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                               <thead>
@@ -290,6 +296,13 @@ class="form-control" formControlName="lab_test" id="lab test"
                                   </td>
 
                                 </tr>
+                                <tr>
+                                  <td colspan="12" *ngIf="LabDetails.length === 0"
+                                      style="text-align: center; font-size: 0.8rem;">
+                                      No Data Found
+                                  </td>
+                              </tr>
+
                               </tbody>
                             </table>
                             <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
@@ -322,3 +335,12 @@ class="form-control" formControlName="lab_test" id="lab test"
     </div>
   </div>
 </div>
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>

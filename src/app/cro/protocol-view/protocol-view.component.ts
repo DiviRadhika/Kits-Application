@@ -10,6 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./protocol-view.component.css']
 })
 export class ProtocolViewComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+ 
 
   protocolIdDetails: any;
   screenDetails: Array<any> = [];

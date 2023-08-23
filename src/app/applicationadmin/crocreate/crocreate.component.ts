@@ -126,6 +126,9 @@ export class CROcreateComponent implements OnInit {
     const control = this.CroForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
+  reset(){
+    this.CroForm.reset()
+  }
 
   submit() {
     if (this.CroForm.controls['mobile_telephone'].value === '' || this.CroForm.controls['mobile_telephone'].value === null) {

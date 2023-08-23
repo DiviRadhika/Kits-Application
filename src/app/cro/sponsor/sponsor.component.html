@@ -50,17 +50,14 @@
           <div class="container">
 
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">Sponsor Form</h6>
+              <h5 style="color: rgb(250, 39, 39);">Sponsor Basic Details</h5>
               <hr>
               <form [formGroup]="sponsorForm">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Sponsor Code</label>
-                      <input type="text" 
-
-
-class="form-control" id="SponsorCode" placeholder="Enter Sponsor Code"
+                      <label>*Sponsor Code</label>
+                      <input type="text" class="form-control" id="SponsorCode" placeholder="Enter Sponsor Code"
                         formControlName="sp_auto_code">
 
 
@@ -68,11 +65,8 @@ class="form-control" id="SponsorCode" placeholder="Enter Sponsor Code"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Reference Sponsor Code</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="10" id="SponsorCode" placeholder="Enter Sponsor Code"
+                      <label>*Reference Sponsor Code</label>
+                      <input type="text" class="form-control" maxlength="10" id="SponsorCode" placeholder="Enter Sponsor Code"
                         formControlName="sponsor_code"
                         [class.is-invalid]="shouldShowRequired('sponsor_code') && sponsorForm.get('sponsor_code')?.touched">
 
@@ -87,7 +81,7 @@ class="form-control" maxlength="10" id="SponsorCode" placeholder="Enter Sponsor 
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Sponsor Name</label>
+                      <label>*Sponsor Name</label>
                       <input type="text" 
 
 
@@ -107,7 +101,7 @@ class="form-control" maxlength="100" id="SponsorName" placeholder="Enter Sponsor
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Legal Sponsor Name</label>
+                      <label>*Legal Sponsor Name</label>
                       <input type="text" 
 
 
@@ -137,7 +131,7 @@ class="form-control" maxlength="100" id="LegalSponsorName"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Address 1</label>
+                      <label>*Address 1</label>
                       <input type="text" 
 
 
@@ -165,7 +159,7 @@ class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(op
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Country</label>
+                      <label>*Country</label>
                       <select formControlName="country" maxlength="40" class="form-select" aria-label="Default select example">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
@@ -181,7 +175,7 @@ class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(op
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Region/State</label>
+                      <label>*Region/State</label>
                       <input type="text" 
 
 
@@ -207,7 +201,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>City</label>
+                      <label>*City</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && sponsorForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
@@ -221,12 +215,12 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Zip Code</label>
+                      <label>*Zip Code</label>
                       <input type="text" 
 
 
 class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code"
+                        formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
                         [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is required
@@ -286,7 +280,7 @@ class="form-control" appInputRestriction="mobileNum" id="mobile_no" placeholder=
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Primary Representative Email Id</label>
+                      <label>*Primary Representative Email Id</label>
                       <input type="text" 
 
 
@@ -440,6 +434,7 @@ class="form-control" id="Designation" placeholder="Enter Designation"
                           <th>Email Id</th>
                          <th>Designation</th>
                           <th>Mobile Phone</th>
+                          <th>Delete</th>
 
 
                         </tr>
@@ -480,6 +475,22 @@ class="form-control" id="Designation" placeholder="Enter Designation"
                             <input type="number" class="form-control" maxlength="20" id="Office Telephone"
                               placeholder="Enter Mobile Number" type="number" (input)="validateMobileNumber($event.target, 'mobile')"  formControlName="contact">
                           </td>
+                          <td>
+                            <button type="button" style="background-color: red;"  (click)="removeeditsponser(i)" class="btn btn-danger">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                <path
+                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                              </svg>
+                            </button>
+
+
+
+
+                            <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
+                          </td>
 
                           <!-- <td>
                             <button type="button" (click)="removeMatScreenKit(j)"
@@ -500,7 +511,9 @@ class="form-control" id="Designation" placeholder="Enter Designation"
           
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button style="font-size: 11px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="font-size: 11px; margin: 2px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
@@ -512,3 +525,16 @@ class="form-control" id="Designation" placeholder="Enter Designation"
     </div>
   </div>
 </div>
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+      </div>
+  </div>
+</footer>
+<!-- end main content-->
+
+<!-- END layout-wrapper -->
+
+<!-- Right bar overlay-->
+<div class="rightbar-overlay"></div>

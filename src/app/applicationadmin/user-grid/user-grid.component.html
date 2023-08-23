@@ -59,9 +59,9 @@
                       Add Users</button>
                   
                 </div>
-                  <div class="row">
+                  <div class="row" class="table-responsive text-nowrap" >
                     <div class="col-sm-12">
-                      <table id="datatable"
+                      <table id="datatable" class="table table-striped"
                         class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                         role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                         <thead>
@@ -73,7 +73,7 @@
                               style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                               style="width: 230.2px;" aria-label="Role: activate to sort column ascending" (click)="sort('role')">Role</th>
-                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
+                            <th width="40" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
                           </tr>
@@ -125,6 +125,13 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                             </button> -->
                             </td>
                           </tr>
+                          <tr>
+                            <td colspan="12" *ngIf="userDetails.length === 0"
+                                style="text-align: center; font-size: 0.8rem;">
+                                No Data Found
+                            </td>
+                        </tr>
+
                         </tbody>
                       </table>
                       <pagination-controls id="userPagination" (pageChange)="pageChange($event)"

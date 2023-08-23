@@ -40,13 +40,13 @@
           <div class="container">
 
             <div class="card-body">
-              <h6 style="color: rgb(250, 39, 39);">CRO Form</h6>
+              <h5 style="color: rgb(250, 39, 39);">CRO Basic Details</h5>
               <hr>
               <form [formGroup]="CroForm" >
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>CRO Code</label>
+                      <label>*CRO Code</label>
                       <input type="text" 
 
 
@@ -65,8 +65,9 @@ class="form-control" id="CROCode" maxlength="10" placeholder="Enter CRO Code"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>CRO Name</label>
-                      <input type="text" 
+                      <label>*CRO Name</label>
+                      <input type="text"  
+
 
 
 class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
@@ -83,9 +84,8 @@ class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Legal CRO Name</label>
-                      <input type="text" 
-
+                      <label>*Legal CRO Name</label>
+                      <input type="text"
 
 class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
                         formControlName="legal_cro_name" maxlength="100"
@@ -113,7 +113,7 @@ class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Address 1</label>
+                      <label>*Address 1</label>
                       <input type="text" 
 
                       
@@ -140,7 +140,7 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Country</label>
+                      <label>*Country</label>
                       <select  formControlName="country" class="form-select" aria-label="Default select example">
                         <option  selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
@@ -164,7 +164,7 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Region/State</label>
+                      <label>*Region/State</label>
                       <input type="text" class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
                         formControlName="region"
                         [class.is-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
@@ -187,7 +187,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>City</label>
+                      <label>*City</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
@@ -200,9 +200,9 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Zip Code</label>
+                      <label>*Zip Code</label>
                       <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code"
+                        formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
                         [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
                         Zipcode is required.
@@ -287,7 +287,9 @@ class="form-control" maxlength="60" id="Address" placeholder="Enter Website"
               </form>
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="margin: 2px;"  *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>

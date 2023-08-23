@@ -97,6 +97,9 @@ export class LabCreateComponent {
     const control = this.labForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
+  reset(){
+    this.labForm.reset()
+  }
   submit() {
     console.log(this.bas2);
 
