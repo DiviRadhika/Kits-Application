@@ -195,36 +195,63 @@ class CroProtocol(Resource):
                     meterial_data = MeterialModel.get_by_id(meterial["meterial_id"])
                     if meterial_data:
                         meterial["meterial_name"] = meterial_data.name
-
                 screening_item_json = {
-                    "lab_test_ids": item["lab_test_ids"],
-                    "meterial_details": item["meterial_details"],
                     "protocol_id": cro_protocol_id,
-                    # "visit_no": item['visit_no'],
-                    "screening_kit_count": item["screening_kit_count"],
-                    "kit_varient": item["kit_varient"],
                 }
+
+                if 'meterial_details' in item:
+                    screening_item_json["meterial_details"] = item["meterial_details"]
+                if 'screening_kit_count' in item:
+                    screening_item_json['screening_kit_count'] = item["screening_kit_count"]
+                if 'lab_test_ids' in item:
+                    screening_item_json['lab_test_ids'] = item["lab_test_ids"]
+
                 screening_kit_data = screening_kit_details_schema.load(
                     screening_item_json
                 )
                 screening_kit_data.save_to_db()
             # loop over visit_kit_details and prepare visit_item_json and then load to visit_kit_details and save_to_db
             visit_kit_details = request_json["visit_kit_details"]
-            for item in visit_kit_details:
-                meterial_details = item["meterial_details"]
-                for meterial in meterial_details:
-                    meterial_data = MeterialModel.get_by_id(meterial['meterial_id'])
-                    if meterial_data:
-                        meterial['meterial_name'] = meterial_data.name
+            variants_json = request_json['variants']
+            total_visits = []
+            #import pdb; pdb.set_trace()
+            for variant_json in variants_json:
+                total_visits.extend(variant_json['visits'])
+            total_visits = sorted(total_visits)
 
+            for item in visit_kit_details:
+                meterial_details = []
+                for total_visit in total_visits:
+                    for variant_json in variants_json:
+                        if total_visit in variant_json['visits']:
+                            mdetails = {}
+                            if 'selectedLabTests' in variant_json:
+                                mdetails['selectedLabTests'] = variant_json['selectedLabTests']
+                            if 'variant' in variant_json:
+                                mdetails['kit_variant'] = variant_json['variant']
+                            if 'materials' in variant_json:
+                                mdetails['visits'] = variant_json['materials']
+                            
+                            rowCollectedData = []
+                            if 'rowCollectedData' in variant_json:
+                                rowCollectedData =  variant_json['rowCollectedData']
+                            
+                            for rowData in rowCollectedData:
+                                if total_visit == rowData['selectedVisit']:
+                                    mdetails['alternate_names'] = rowData['name']
+                            meterial_details.append(mdetails)
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
-                    "visit_kit_count": item["visit_kit_count"],
+                    #"visit_kit_count": item["visit_kit_count"],
                     # "lab_test_ids": item["lab_test_ids"],
                     # "visit_no": item['visit_no'],
-                    "meterial_details": item["meterial_details"],
-                    "kit_varient": item["kit_varient"],
+                    "meterial_details": meterial_details,
+                    #"kit_varient": item["kit_varient"],
                 }
+               
+                if 'visit_kit_count' in item:
+                    visit_item_json['visit_kit_count'] =  item["visit_kit_count"]
+                
                 visit_kit_data = visit_kit_details_schema.load(visit_item_json)
                 visit_kit_data.save_to_db()
         except (Exception, exc.SQLAlchemyError) as e:
