@@ -16,10 +16,27 @@ body {
     background: none;
     border: none;
     position: absolute;
-    top: 20px;
+    top: 23px;
     right: 10px;
 	height: 20pt;
 }
+.eye-button2 {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+	height: 22pt;
+}
+.eye-button3 {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+	height: 22pt;
+}
+
   label {
 	display: block;
   } 
@@ -57,4 +74,8 @@ body {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	
   }
-
+  
+	.transaction-detailModal .modal-content {
+		overflow-y: auto;
+	}
+	

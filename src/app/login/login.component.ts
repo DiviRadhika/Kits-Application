@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
-
+  forgotPassword:boolean = false;
   enableFields: boolean = false;
   showPassword: boolean = false;
   showPasswordc: boolean = false;
@@ -111,6 +111,7 @@ export class LoginComponent implements OnInit {
       const obj = {
         email: this.emailvaluef,
         password: this.forgetForm.controls['confirmPassword'].value,
+        is_forgot:true,
         otp:  Number(this.forgetForm.controls['otp'].value)
       }
   

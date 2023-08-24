@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
@@ -10,10 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./protocol-view.component.css']
 })
 export class ProtocolViewComponent implements OnInit {
-  getCurrentYear(): number {
-    return new Date().getFullYear();
-  }
- 
 
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
@@ -28,6 +25,8 @@ export class ProtocolViewComponent implements OnInit {
   visitRecordsRow: Array<any> = [];
   tets: Array<any> = [];
   sponsor: boolean = false;
+  screeningFullData: any;
+  screeningVariant: any;
   constructor(private route: Router,
     private protocolService: ProtocolService,
     private _activatedRoute: ActivatedRoute,
@@ -80,10 +79,10 @@ export class ProtocolViewComponent implements OnInit {
         this.isEdit = true;
         this.id = data.id;
         this.getprotocolDetails(this.id)
-        if(data.type === 'sponsor'){
+        if (data.type === 'sponsor') {
           this.sponsor = true;
         }
-        else{
+        else {
           this.sponsor = false;
         }
       }
@@ -101,14 +100,18 @@ export class ProtocolViewComponent implements OnInit {
       this.protoName = this.protocolIdDetails.protocol_name
       this.preparationForm.controls['protocol_name'].disable()
       this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+        this.screenDetails = this.screeningFullData.selectedLabTests
+        this.sMatDetails = this.screeningFullData.visits;
+        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+      } else {
+      }
+
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      // console.log(this.visitDetails);
-      console.log(this.vMatDetails, 'details');
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      console.log(this.vcount, 'details');
       this.visitTabs = []
       this.visitRecords = []
       this.visitRecordsRow = []
@@ -122,8 +125,8 @@ export class ProtocolViewComponent implements OnInit {
 
         });
       });
-  
-   
+
+
     });
 
 
@@ -134,37 +137,3 @@ export class ProtocolViewComponent implements OnInit {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

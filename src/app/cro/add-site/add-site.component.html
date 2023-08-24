@@ -60,7 +60,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Site Code</label>
+                     <label>Site Code</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 
@@ -77,7 +77,7 @@ class="form-control" id="SiteCode" placeholder="Enter Site Code"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Site Name</label>
+                     <label>Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 
@@ -93,7 +93,7 @@ class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Legal Site Name</label>
+                     <label>Legal Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 
@@ -178,7 +178,7 @@ class="form-control" id="email" placeholder="Enter Email"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Address 1</label>
+                     <label>Address 1</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 
@@ -203,7 +203,7 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Country</label>
+                     <label>Country</label><label style="color: red;margin-left: 4px;" >*</label>
                       <select formControlName="country" class="form-select" aria-label="Default select example">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
@@ -223,7 +223,7 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Region/State</label>
+                     <label>Region/State</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 
@@ -249,7 +249,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*City</label>
+                     <label>City</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
@@ -266,7 +266,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>*Zip Code</label>
+                     <label>Zip Code</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" 
 
 

@@ -178,13 +178,13 @@
                   <div class="container">
 
                     <div class="card-body" *ngIf="labFormval">
-                      <h6 style="color: rgb(250, 39, 39);">LabTest Form</h6>
+                      <h5 style="color: rgb(250, 39, 39);">LabTest Basic Details</h5>
                       <hr>
                       <form [formGroup]="labForm">
                         <div class="row">
                           <div class="col-md-3">
                             <div class="form-group">
-                              <label>*Lab Test</label>
+                             <label>Lab Test <label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                               <input type="text" 
 
 
@@ -195,7 +195,7 @@ class="form-control" formControlName="lab_test" id="lab test"
                           </div>
                           <div class="col-md-3">
                             <div class="form-group">
-                              <label>*Classification</label>
+                             <label>Classification<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
 
                               <select formControlName="classification" class="form-select form-control">
                                 <option *ngFor="let data of classifications">

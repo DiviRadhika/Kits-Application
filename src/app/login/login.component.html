@@ -13,7 +13,7 @@
     <div class="p-2">
       <form [formGroup]="loginForm" class="form-horizontal" action="index.html">
         <div class="mb-3">
-          <label for="username" class="form-label">UserName</label>
+          <label style="display: inline;">UserName<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
           <input *ngIf="!enableFields" type="text" formControlName="username" class="form-control" id="username"
             placeholder="Enter User Name">
           <input *ngIf="enableFields" type="text" [attr.disabled]="true" class="form-control" formControlName="username"
@@ -21,14 +21,14 @@
 
         </div>
         <div class="mb-3" *ngIf="enableFields">
-          <label for="username" class="form-label">Enter OTP</label>
+          <label for="username" class="form-label">Enter OTP<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
           <input type="text" formControlName="otp" maxlength="6"class="form-control text-center mb-3" (input)="validateOTP($event.target, 'otp')" id="" placeholder="OTP">
         </div>
      
         <div class="mb-3" *ngIf="enableFields">
           <label for="password" *ngIf="enableFields"
         class="password-label form-group has-top-label w-100">
-        <span>Password</span>
+        <span>Password<label style="color: red; display: inline;margin-left: 4px;">*</label></span>
         <input class="form-control" id="password"
             [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
             placeholder="Password">
@@ -73,9 +73,14 @@
 <body forgt-bg>
   
 <p-toast></p-toast>
-  <form [formGroup]="forgetForm">
+  <form [formGroup]="forgetForm" >
     <div class="modal fade transaction-detailModal" tabindex="-1" role="dialog"
-      aria-labelledby="transaction-detailModalLabel" aria-hidden="true">
+    aria-labelledby="transaction-detailModalLabel" aria-hidden="true" data-bs-backdrop="static">
+   <!-- Add the "data-bs-backdrop" attribute with value "static" to disable clicking outside to close -->
+
+   <!-- ... rest of your modal content ... -->
+
+
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -86,7 +91,7 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="mb-3 text-center" class="enter">
-                <label  style="padding-bottom: 20px;">Enter Your Registered Username/Email Id</label>
+                <label  style="padding-bottom: 20px;">Enter Your Registered Username/Email Id<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                 <input  type="text" formControlName="email1" class="form-control text-center mb-3" id=""
                   placeholder="Enter Username/Mail id">
                   <!-- <input *ngIf="disableFields" type="text" [attr.disabled]="true" class="form-control"
@@ -96,7 +101,7 @@
                 <button style="margin-left: 35%;"*ngIf="!disableFields" (click)="set()" class="btn btn-primary w-md">Verify</button>
               </div>
               <div class="mb-3" class="password" *ngIf="disableFields">
-                <label for="username" class="form-label">Enter OTP Sent To Your Email</label>
+                <label for="username" class="form-label">Enter OTP Sent To Your Email<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                 <input type="text" 
                 (input)="validateOTP($event.target, 'otp')"
 
@@ -108,11 +113,11 @@ formControlName="otp" class="form-control text-center mb-3" id=""
               <div class="mb-3" *ngIf="disableFields">
                 <label for="password" *ngIf="disableFields"
               class="password-label form-group has-top-label w-100">
-              <span>Enter New Password</span>
+              <span>Enter New Password <label style="color: red; display: inline;margin-left: 4px;">*</label></span>
               <input class="form-control" id="password"
                   [type]="showPassword ? 'text' : 'password'"  formControlName="npassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
                   placeholder=" New Password">
-              <button type="button" class="eye-button" tabindex="-1"
+              <button type="button" class="eye-button2" tabindex="-1"
                   (click)="showPassword = !showPassword">
                   <i *ngIf="showPassword" class="fa fa-eye"
                       aria-hidden="true"></i>
@@ -171,11 +176,11 @@ formControlName="otp" class="form-control text-center mb-3" id=""
               <div class="mb-3" *ngIf="disableFields">
                 <label for="password" *ngIf="disableFields"
               class="password-label form-group has-top-label w-100">
-              <span>Enter Confirm Password</span>
+              <span>Enter Confirm Password <label style="color: red; display: inline;margin-left: 4px;">*</label></span>
               <input class="form-control" id="password" 
                   [type]="showPasswordc ? 'text' : 'password'"  formControlName="confirmPassword" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
                   placeholder=" Confirm Password">
-              <button type="button" class="eye-button" tabindex="-1"
+              <button type="button" class="eye-button3" tabindex="-1"
                   (click)="showPasswordc = !showPasswordc">
                   <i *ngIf="showPasswordc" class="fa fa-eye"
                       aria-hidden="true"></i>

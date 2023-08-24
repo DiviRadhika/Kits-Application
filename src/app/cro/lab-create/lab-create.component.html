@@ -48,7 +48,7 @@
                 <div class="container">
 
                     <div class="card-body">
-                        <h6 style="color: rgb(250, 39, 39);">Material Form</h6>
+                        <h5 style="color: rgb(250, 39, 39);">Material Basic Details</h5>
                         <hr>
                         <form [formGroup]="labForm">
                             <div class="row">
@@ -57,7 +57,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
 
-                                        <label>*Material</label>
+                                       <label>Material<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                         <input type="text" 
 
 
@@ -71,7 +71,7 @@ class="form-control" id="material" formControlName="material"
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>*Size (click on Enter after adding Size)</label><br>
+                                       <label>Size (click on Enter after adding Size)<label style="color: red; display: inline;margin-left: 4px;">*</label></label><br>
                                         <p-chips formControlName="size" placeholder="size"
                                             [class.is-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched"></p-chips>
                                         <div *ngIf="shouldShowRequired('size')" class="invalid-feedback">

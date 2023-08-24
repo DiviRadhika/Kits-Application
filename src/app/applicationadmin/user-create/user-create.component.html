@@ -50,7 +50,7 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>*User First Name</label>
+                   <label>User First Name</label><label style="color: red;margin-left: 4px;" >*</label>
                     <input type="text" 
  class="form-control" id="first_name" placeholder="Enter First Name"
                       formControlName="first_name">
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="col-md-3">
-                  <label>User Last Name</label>
+                  <label>User Last Name</label><label style="color: red;margin-left: 4px;" >*</label>
                   <div class="form-group">
                     <input type="text" 
 
@@ -73,7 +73,7 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
 
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>*Email Id</label>
+                   <label>Email Id</label><label style="color: red;margin-left: 4px;" >*</label>
 
 
                     <input type="text" 
@@ -90,7 +90,7 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                
                 
                 <div class="col-md-3">
-                  <label>*Password</label>
+                 <label>Password</label><label style="color: red;margin-left: 4px;" >*</label>
                   <!-- <input type="password" id="password" formControlName="password">
                   <div *ngIf="userForm.get('password')?.hasError('pattern')">
                     Password must haven at least 12 characters, one uppercase letter, one lowercase letter, one digit, and one special symbol.
@@ -119,7 +119,7 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
 
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label>*Role</label>
+                   <label>Role</label><label style="color: red;margin-left: 4px;" >*</label>
                    
                     <select formControlName="role"  (change)="roleChange($event)" class="form-select" aria-label="Default select example"
                     class="form-select form-control"
@@ -157,7 +157,7 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                 </div>
                 <div *ngIf="site" class="col-md-3">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">*Site Name</label>
+                    <label for="formrow-firstname-input" class="form-label">Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
                     <select formControlName="sId" class="form-select form-control"
                       [class.is-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
                       <option  selected value="">Select Site Name</option>

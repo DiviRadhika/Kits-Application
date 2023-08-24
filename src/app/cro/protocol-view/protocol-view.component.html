@@ -66,7 +66,7 @@
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
 
-
+                                            <h3>  {{screeningVariant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Screen Kit Count : {{scount}}
                                                 </h5>
@@ -75,7 +75,7 @@
                                                     <div class="col-md-3 mt-2 mb-3">
                                                         <h6 style="color: black"> <b>&nbsp;&nbsp;Selected Lab Tests</b>
                                                         </h6>
-
+                                                     
                                                         <h6 style="color: black"
                                                             *ngFor="let item of screenDetails  let k = index">
                                                             &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
@@ -92,13 +92,15 @@
 
                                                 <div class="row card-group">
                                                     <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
+                                                     
+                                            
                                                         <p-card [styleClass]="'custom-card'"
                                                             [style]="{width: '200px', height:'300px'}"
                                                             styleClass="p-card-shadow">
                                                             <ng-template pTemplate="header">
                                                                 <img style="width:199px; height: 147px;"  src="{{item.image}}" />
                                                             </ng-template>
-                                                            {{item.meterial_id}} <br>
+                                                            {{ item.material_name || item.meterial_id }} <br>
                                                             size: {{item.size}}<br>
                                                             Qunatity: {{item.quantity}}<br>
 
@@ -114,11 +116,13 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel *ngFor="let item of vMatDetails let k = index"
-                                            header="{{item.alternate_names}}">  
+                                            header="{{item.alternate_names}}">
+                                            <h3>{{item.kit_variant}}</h3>  
                                                 <h5>Selected Lab Tests</h5>
                                                 <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
                                                     <p>{{items}}</p>
                                                 </div>
+                                            
                                                 <br>
                                         
 
@@ -126,12 +130,13 @@
                                                 <div class="row card-group">
                                                     <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
                                                     <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
+                                                      
                                                         <p-card [style]="{width: '200px', height:'300px'}"
                                                             styleClass="p-card-shadow">
                                                             <ng-template pTemplate="header">
-                                                                <img style="width:199px; height: 147px;"  src="{{items.image}}" />
+                                                                <img style="width:199px; height: 140px;"  src="{{items.image}}" />
                                                             </ng-template>
-                                                            {{items.meterial_id}} <br>
+                                                            {{ items.material_name || items.meterial_id }} <br>
                                                             size: {{items.size}}<br>
                                                             Qunatity: {{items.quantity}}<br>
 
@@ -182,7 +187,7 @@
        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+                    <div class="col-sm-6">© Roboxa</div>
                 </div>
             </div>
         </footer>

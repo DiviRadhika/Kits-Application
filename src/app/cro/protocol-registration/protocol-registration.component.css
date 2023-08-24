@@ -10,7 +10,9 @@
 	color: #03aced !important;
 }
 
-
+.hidden-column {
+	display: none;
+  }
 
 .r-darkblue {
 	background: #064ea2 !important;

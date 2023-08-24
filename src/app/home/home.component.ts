@@ -174,8 +174,8 @@ export class HomeComponent implements OnInit {
           // expanded: false,
           // subItems: [
             { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },  
-               { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-               { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
             { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
             { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
             
@@ -309,7 +309,6 @@ export class HomeComponent implements OnInit {
     const obj = {
       username: this.emailvaluef,
       clear_session: 'false',
-      is_forgot:'true',
       password: '',
       otp: ''
 
@@ -434,5 +433,6 @@ export class HomeComponent implements OnInit {
         this.isSidebarShrunk = !this.isSidebarShrunk;
       });
     }
+    
   }
 }
