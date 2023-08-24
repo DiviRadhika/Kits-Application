@@ -28,7 +28,7 @@
                 </div>
                 <!-- end page title -->
                 <p-toast></p-toast>
-        
+
                 <div class="card">
                     <div class="card-body">
                         <form [formGroup]="preparationForm">
@@ -49,10 +49,7 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" 
-
-
-placeholder="Study Name" formControlName="protocol_name"
+                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
                                         class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
@@ -80,6 +77,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                         <br>
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
+                                                <h3> {{screeningVariant}}</h3>
                                                 <div class="row">
                                                     <div class="col-md-8" style="margin-left:-2%">
                                                         <div class="form-group">
@@ -99,54 +97,38 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                     <tbody>
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="32%">
-                                                                                <input type="text" 
-
-
-placeholder="kitId"
+                                                                                <input type="text" placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-[disabled]="true"
+                                                                                <input type="text" [disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="Site Id"
+                                                                                <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-[disabled]="true"
+                                                                                <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="expiryDate"
                                                                                     [disabled]="true"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="collection"
                                                                                     [disabled]="true"
                                                                                     value={{item.collection}}
@@ -214,7 +196,7 @@ placeholder="Site Id"
                                                                                     <td>
                                                                                         {{ file.name }}
                                                                                     </td>
-                                                                                    
+
                                                                                     <td>
                                                                                         <button
                                                                                             (click)="viewPdf(indexs, fileIndex)"
@@ -283,37 +265,46 @@ placeholder="Site Id"
                                                               .controls;
                                                             let i = index
                                                         
-                                                          ">       <td width="20%">
-                                                                                
-                                                            <ng-container *ngIf="uploadedFiles[i]">
-                                                                <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                style="width: 40px; height: 40px" (click)="openUploadDialog(i)">  <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="16" height="16"
-                                                                            fill="currentColor"
-                                                                            class="bi bi-eye"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                                                            <path
-                                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                                                        </svg>
-                                                              </button>                                                                                </ng-container>
-                                                            <ng-container *ngIf="!uploadedFiles[i]">
-                                                                <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                style="width: 40px; height: 40px" (click)="openUploadDialog(i)"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-upload"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                                <path
-                                                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                                                            </svg>
-                                                              </button>  
-                                                                                                                                           </ng-container>
-                                                          </td>
-                            
+                                                          ">
+                                                                            <td width="20%">
+
+                                                                                <ng-container *ngIf="uploadedFiles[i]">
+                                                                                    <button class="text-center"
+                                                                                        type="button"
+                                                                                        class="md btn btn-warning r-blue"
+                                                                                        style="width: 40px; height: 40px"
+                                                                                        (click)="openUploadDialog(i)">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            width="16" height="16"
+                                                                                            fill="currentColor"
+                                                                                            class="bi bi-eye"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path
+                                                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                            <path
+                                                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                        </svg>
+                                                                                    </button> </ng-container>
+                                                                                <ng-container *ngIf="!uploadedFiles[i]">
+                                                                                    <button class="text-center"
+                                                                                        type="button"
+                                                                                        class="md btn btn-warning r-blue"
+                                                                                        style="width: 40px; height: 40px"
+                                                                                        (click)="openUploadDialog(i)">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            width="16" height="16"
+                                                                                            fill="currentColor"
+                                                                                            class="bi bi-upload"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path
+                                                                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                                                            <path
+                                                                                                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </ng-container>
+                                                                            </td>
+
 
 
                                                                             <td>
@@ -328,19 +319,14 @@ placeholder="Site Id"
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     formControlName="remarks"
                                                                                     placeholder="Remarks" value=''
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="15%">
 
-                                                                                <input type="text" 
-
-
-placeholder="Remarks"
+                                                                                <input type="text" placeholder="Remarks"
                                                                                     value={{date}}
                                                                                     class="form-control" />
 
@@ -365,7 +351,7 @@ placeholder="Remarks"
                                                 header="{{item.alternate_names}}">
 
 
-
+                                                <h3> {{item.kit_variant}}</h3>
 
                                                 <div class="row">
                                                     <div class="col-md-8">
@@ -392,55 +378,38 @@ placeholder="Remarks"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="kitId"
+                                                                                <input type="text" placeholder="kitId"
                                                                                     [disabled]="true"
                                                                                     class="form-control"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-[disabled]="true"
+                                                                                <input type="text" [disabled]="true"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="Site Id"
+                                                                                <input type="text" placeholder="Site Id"
                                                                                     [disabled]="true"
                                                                                     value={{item.site_id}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-[disabled]="true"
+                                                                                <input type="text" [disabled]="true"
                                                                                     placeholder="patient Id"
                                                                                     value={{item.patientId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="expiryDate"
                                                                                     [disabled]="true"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-[disabled]="true"
+                                                                                <input type="text" [disabled]="true"
                                                                                     placeholder="collection"
                                                                                     value={{item.collection}}
                                                                                     class="form-control" />
@@ -493,9 +462,9 @@ placeholder="Site Id"
                                                                     <tbody>
 
                                                                         <ng-container
-                                                                        *ngIf="uploadedFilesv[i]?.[indexv] && uploadedFilesv[i][indexv].length > 0">
+                                                                            *ngIf="uploadedFilesv[i]?.[indexv] && uploadedFilesv[i][indexv].length > 0">
                                                                             <tr
-                                                                            *ngFor="let file of uploadedFilesv[i][indexv]; let fileIndex = index">
+                                                                                *ngFor="let file of uploadedFilesv[i][indexv]; let fileIndex = index">
                                                                                 <td>
                                                                                     {{ file.name }}
                                                                                 </td>
@@ -565,37 +534,47 @@ placeholder="Site Id"
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                             [formGroupName]="j">
                                                                             <td width="20%">
-                                                                                <ng-container *ngIf="!uploadedFilesv[i]?.[j]">
-                                                                                    <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                                    style="width: 40px; height: 40px" (click)="openUploadDialogv(i,j)"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="16" height="16"
-                                                                                    fill="currentColor"
-                                                                                    class="bi bi-upload"
-                                                                                    viewBox="0 0 16 16">
-                                                                                    <path
-                                                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                                                    <path
-                                                                                        d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                                                                                </svg>
-                                                                                  </button>  
-                                                                                                                                                               </ng-container>
-                                                                            
-                                                                                <ng-container *ngIf="uploadedFilesv[i]?.[j]">
-                                                                                    <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                                                                                    style="width: 40px; height: 40px" (click)="openUploadDialogv(i,j)">  <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                width="16" height="16"
-                                                                                                fill="currentColor"
-                                                                                                class="bi bi-eye"
-                                                                                                viewBox="0 0 16 16">
-                                                                                                <path
-                                                                                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                                                                                <path
-                                                                                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                                                                            </svg>
-                                                                                  </button>                                                                                </ng-container>
-                                                                                </td>
-                                                                          
-                                                                          
+                                                                                <ng-container
+                                                                                    *ngIf="!uploadedFilesv[i]?.[j]">
+                                                                                    <button class="text-center"
+                                                                                        type="button"
+                                                                                        class="md btn btn-warning r-blue"
+                                                                                        style="width: 40px; height: 40px"
+                                                                                        (click)="openUploadDialogv(i,j)">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            width="16" height="16"
+                                                                                            fill="currentColor"
+                                                                                            class="bi bi-upload"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path
+                                                                                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                                                            <path
+                                                                                                d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                                                                        </svg>
+                                                                                    </button>
+                                                                                </ng-container>
+
+                                                                                <ng-container
+                                                                                    *ngIf="uploadedFilesv[i]?.[j]">
+                                                                                    <button class="text-center"
+                                                                                        type="button"
+                                                                                        class="md btn btn-warning r-blue"
+                                                                                        style="width: 40px; height: 40px"
+                                                                                        (click)="openUploadDialogv(i,j)">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                            width="16" height="16"
+                                                                                            fill="currentColor"
+                                                                                            class="bi bi-eye"
+                                                                                            viewBox="0 0 16 16">
+                                                                                            <path
+                                                                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                                                            <path
+                                                                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                                                        </svg>
+                                                                                    </button> </ng-container>
+                                                                            </td>
+
+
                                                                             <!-- <td>
 
                                                                                 <button style="margin-left: -8%;"
@@ -614,8 +593,8 @@ placeholder="Site Id"
                                                                                 </button>
                                                                                 </td> -->
 
-                                                                       
-                                                                              <td>
+
+                                                                            <td>
                                                                                 <select class="form-select form-control"
                                                                                     formControlName="acknowledgement">
                                                                                     <option
@@ -626,19 +605,14 @@ placeholder="Site Id"
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     formControlName="remarks"
                                                                                     placeholder="Remarks" value=''
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="20%">
 
-                                                                                <input type="text" 
-
-
-placeholder="Remarks"
+                                                                                <input type="text" placeholder="Remarks"
                                                                                     value={{date}}
                                                                                     class="form-control" />
 

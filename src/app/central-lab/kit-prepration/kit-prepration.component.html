@@ -10,7 +10,8 @@
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
-                        <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <div style="padding:1px"
+                            class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
                                 <i class="bx bxs-dashboard"></i> Kit Prepration
                             </h4>
@@ -21,10 +22,11 @@
                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
                                     <li class="breadcrumb-item">
-                                        <a routerLink="/home/centralLab/kitPreparationGrid" class="waves-effect">Kit Prepration</a>
+                                        <a routerLink="/home/centralLab/kitPreparationGrid" class="waves-effect">Kit
+                                            Prepration</a>
                                     </li>
                                     <li class="breadcrumb-item active">Kit Prepration Add</li>
-                                
+
                                 </ol>
                             </div>
                         </div>
@@ -39,13 +41,13 @@
                                 <div id="printSection">
 
                                 </div>
-                               
+
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input maxlength="100"  type="text" placeholder="Study Name" formControlName="protocol_name"
-                                        class="form-control" value="" />
+                                    <input maxlength="100" type="text" placeholder="Study Name"
+                                        formControlName="protocol_name" class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
                                     <div class="mb-3">
@@ -71,6 +73,7 @@
                                     <div class="tab-pane active" role="tabpanel">
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
+                                                <h3> {{screeningVariant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Screen Kit Count : {{scount}}
                                                 </h5>
@@ -101,7 +104,7 @@
                                                                 <img style="width:199px; height: 147px;"
                                                                     src="{{item.image}}" />
                                                             </ng-template>
-                                                            {{item.meterial_id}} <br>
+                                                            {{ item.material_name || item.meterial_id }} <br>
                                                             size: {{item.size}}<br>
                                                             Qunatity: {{item.quantity}}<br>
 
@@ -132,31 +135,22 @@
                                                     let i = index
                                                   ">
                                                                 <td width="30%">
-                                                                    <input type="text" 
-
-
-placeholder="kitId"
+                                                                    <input type="text" placeholder="kitId"
                                                                         formControlName="kitId" class="form-control"
                                                                         value="" [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" 
-
-
-placeholder="LabKitId"
+                                                                    <input type="text" placeholder="LabKitId"
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" 
-
-
-placeholder="Expiry Date"
+                                                                    <input type="text" placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
-                                                             
+
                                                                 <td width="30%">
-                                                                
+
                                                                     <select formControlName="prepration"
                                                                         class="form-select form-control">
                                                                         <!-- <option  selected value="">Select Study ID</option> -->
@@ -183,8 +177,8 @@ placeholder="Expiry Date"
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
                                                 header="{{item.alternate_names}}">
-                                             
 
+                                                <h3> {{item.kit_variant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Visit Kit Count : {{vcount}}
                                                 </h5>
@@ -207,7 +201,7 @@ placeholder="Expiry Date"
                                                                     <img style="width:199px; height: 147px;"
                                                                         src="{{items.image}}" />
                                                                 </ng-template>
-                                                                {{items.meterial_id}} <br>
+                                                                 {{ items.material_name || items.meterial_id }} <br>
                                                                 size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
 
@@ -226,7 +220,7 @@ placeholder="Expiry Date"
                                                                 <th>Central Lab KitId</th>
                                                                 <th>Expiry Date</th>
                                                                 <th>Prepration</th>
-                                                               
+
 
                                                                 <th>Print Label</th>
 
@@ -239,33 +233,23 @@ placeholder="Expiry Date"
                                                             <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                 [formGroupName]="j">
                                                                 <td width="25%">
-                                                                    <input type="text" 
-
-
-placeholder="kitId"
+                                                                    <input type="text" placeholder="kitId"
                                                                         formControlName="kitId" [disabled]="true"
                                                                         readonly [value]="getLabKitId(i, j)"
                                                                         class="form-control" value="" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" 
-
-
-placeholder="LabKitId" value=""
+                                                                    <input type="text" placeholder="LabKitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                        <p-calendar [(ngModel)]="date" formControlName="expiryDate" ></p-calendar>
-<!--                                                                     
-                                                                    
-                                                                    <input type="text" 
+                                                                    <!-- <p-calendar [(ngModel)]="date"
+                                                                        formControlName="expiryDate"></p-calendar> -->
+           
+                                                                        <input type="text" placeholder="Expiry Date" value=""
+                                                                        formControlName="ckitId" class="form-control" />
+                                                                    <!-- <input type="text" placeholder="Expiry Date" id="dateInput" formControlName="expiryDate"> -->
 
-
-
-                                                                        formControlName="expiryDate"
-                                                                        class="form-control" /> -->
-                                                                        <!-- <input type="text" placeholder="Expiry Date" id="dateInput" formControlName="expiryDate"> -->
-                                                                  
                                                                 </td>
                                                                 <td width="25%">
                                                                     <select formControlName="prepration"
@@ -275,9 +259,9 @@ placeholder="LabKitId" value=""
                                                                         </option>
                                                                     </select>
                                                                 </td>
-                                                             
 
-                                                                <td  width="20%">
+
+                                                                <td width="20%">
                                                                     <button type="button" (click)="printLabelm(i, j)"
                                                                         class="btn btn-primary  r-darkblue pull-Right">
                                                                         Print
@@ -338,10 +322,10 @@ placeholder="LabKitId" value=""
         </div>
         <!-- End Page-content -->
 
-       <footer class="footer" style="position: fixed;">
+        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">  © Roboxa</div>
+                    <div class="col-sm-6"> © Roboxa</div>
                 </div>
             </div>
         </footer>

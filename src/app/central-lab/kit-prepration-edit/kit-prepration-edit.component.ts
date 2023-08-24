@@ -10,6 +10,8 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration-edit.component.css']
 })
 export class KitPreprationEditComponent implements OnInit {
+  screeningFullData: any;
+  screeningVariant: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -251,10 +253,22 @@ export class KitPreprationEditComponent implements OnInit {
       this.preparationForm.controls['specialInstructions'].disable()
       this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
      
-      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      // this.scount = protocols.screening_kit_details[0].screening_kit_count
+      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+        this.screenDetails = this.screeningFullData.selectedLabTests
+        this.sMatDetails = this.screeningFullData.visits;
+        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+      } else {
+      }
+
+      this.vcount = protocols.visit_kit_details[0].visit_kit_count
+      // this.scount = protocols.visit_kit_details[0].visit_kit_count
       this.scount = protocols.screening_kit_details[0].screening_kit_count
    
      

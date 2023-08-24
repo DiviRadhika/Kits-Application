@@ -41,6 +41,8 @@ export class SampleCollectionComponent implements OnInit {
   ID: any;
   date: string;
   id: any;
+  screeningFullData: any;
+  screeningVariant: any;
 
 
 
@@ -147,26 +149,37 @@ export class SampleCollectionComponent implements OnInit {
     this.protocolService.getProtocolId(id).subscribe((protocols) => {
       this.uuid = id;
       this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
-        console.log(protocolsData);
+      
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
-        console.log(this.vkDetails);
+      
 
 
       });
-      console.log(protocols);
+
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
       this.preparationForm.controls['protocol_name'].disable()
       this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      // this.scount = protocols.screening_kit_details[0].screening_kit_count
+      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
+      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+        this.screenDetails = this.screeningFullData.selectedLabTests
+        this.sMatDetails = this.screeningFullData.visits;
+        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+      } else {
+      }
+
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      console.log(this.vMatDetails, 'details');
+      // this.scount = protocols.visit_kit_details[0].visit_kit_count
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
 
       this.tets = []
 
@@ -329,11 +342,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
     for (let i = 0; i < this.vkDetails.length; i++) {
-      // for (let j = 0; i < this.vkDetails[i].length; j++) {
-      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
-
-      // this.vkDetails[j].push({"verification_status": 'val'})
-      console.log(this.vMatDetails[i].visitsList.value[i].status);
+    
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {

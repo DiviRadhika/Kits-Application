@@ -11,6 +11,8 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-verification.component.css']
 })
 export class KitVerificationComponent implements OnInit {
+  screeningFullData: any;
+  screeningVariant: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -133,13 +135,24 @@ export class KitVerificationComponent implements OnInit {
       this.preparationForm.controls['protocol_name'].setValue(this.protoName)
       this.preparationForm.controls['specialInstructions'].disable()
       this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
-      this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
+      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+      // this.scount = protocols.screening_kit_details[0].screening_kit_count
+      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
+      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+        this.screenDetails = this.screeningFullData.selectedLabTests
+        this.sMatDetails = this.screeningFullData.visits;
+        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+      } else {
+      }
+
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      console.log(this.vMatDetails, 'details');
+      // this.scount = protocols.visit_kit_details[0].visit_kit_count
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
 
       this.tets = []
 
@@ -328,7 +341,7 @@ export class KitVerificationComponent implements OnInit {
       // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
 
       // this.vkDetails[j].push({"verification_status": 'val'})
-      console.log(this.vMatDetails[i].visitsList.value[i].status);
+      // console.log(this.vMatDetails[i].visitsList.value[i].status);
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {

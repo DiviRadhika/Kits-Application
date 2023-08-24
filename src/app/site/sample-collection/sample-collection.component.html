@@ -17,12 +17,14 @@
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                                    <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards"
+                                            class="waves-effect">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a routerLink="/home/site/viewCRA" class="waves-effect">Study</a></li>
-                            
-                                    <li  class="breadcrumb-item active">Site : {{this.ID}}</li>
-                                  </ol>
+                                    <li class="breadcrumb-item"><a routerLink="/home/site/viewCRA"
+                                            class="waves-effect">Study</a></li>
+
+                                    <li class="breadcrumb-item active">Site : {{this.ID}}</li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -78,14 +80,15 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
+                                                <h3> {{screeningVariant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Screen Kit Count : {{scount}}
                                                 </h5>
                                                 <br>
-                                               
 
 
-                                             
+
+
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -98,7 +101,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             <th>KitId</th>
                                                                             <th>Central Lab KitId</th>
                                                                             <th>Expiration Date</th>
-                                                                         
+
 
 
                                                                         </tr>
@@ -109,33 +112,29 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="kitId"
-                                                                                    class="form-control"    [disabled]="true"
+                                                                                <input type="text" placeholder="kitId"
+                                                                                    class="form-control"
+                                                                                    [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="LabKitId"
-                                                                                    [disabled]="true"  value={{item.ckitId}}
+                                                                                    [disabled]="true"
+                                                                                    value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
-                                                                                    class="form-control"  [disabled]="true" />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
-                                                                         
-                                                                      
 
-                                                                            
+
+
+
 
                                                                         </tr>
                                                                     </tbody>
@@ -153,10 +152,10 @@ placeholder="kitId"
 
 
                                                                             <th>Patient Id</th>
-                                                                         <th>Sample Collection</th>
+                                                                            <th>Sample Collection</th>
                                                                             <th>Collection Date</th>
-                                                                         
- 
+
+
                                                                         </tr>
                                                                     </thead>
 
@@ -167,20 +166,17 @@ placeholder="kitId"
                                                               .controls;
                                                             let i = index
                                                           ">
-                                                          <td width="25%">
-                                                            <input type="text" 
-
-
-placeholder="Patient Id"  formControlName="patientId"
-                                                                class="form-control"
-                                                                value="" />
-                                                        </td>
+                                                                            <td width="25%">
+                                                                                <input type="text"
+                                                                                    placeholder="Patient Id"
+                                                                                    formControlName="patientId"
+                                                                                    class="form-control" value="" />
+                                                                            </td>
 
                                                                             <td>
                                                                                 <select class="form-select form-control"
                                                                                     formControlName="collection">
                                                                                     <option
-                                                                                   
                                                                                         *ngFor="let data of statusData">
                                                                                         {{ data }}
                                                                                     </option>
@@ -188,14 +184,11 @@ placeholder="Patient Id"  formControlName="patientId"
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="Date"  
+                                                                                <input type="text" placeholder="Date"
                                                                                     class="form-control"
                                                                                     value={{date}} />
                                                                             </td>
-                                     
+
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -213,7 +206,9 @@ placeholder="Date"
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
                                                 header="Visit {{i+1}}">
 
-                                             
+
+                                                <h3> {{item.kit_variant}}</h3>
+
 
 
                                                 <div class="row">
@@ -229,7 +224,7 @@ placeholder="Date"
                                                                             <th>KitId</th>
                                                                             <th>Central Lab KitId</th>
                                                                             <th>Expiration Date</th>
-                                                  
+
 
                                                                         </tr>
                                                                     </thead>
@@ -239,28 +234,24 @@ placeholder="Date"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="kitId"
-                                                                                    class="form-control"    [disabled]="true"
+                                                                                <input type="text" placeholder="kitId"
+                                                                                    class="form-control"
+                                                                                    [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="LabKitId"
-                                                                                    [disabled]="true"   value={{item.ckitId}}
+                                                                                    [disabled]="true"
+                                                                                    value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text" 
-
-
+                                                                                <input type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
-                                                                                    class="form-control"  [disabled]="true" />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                         </tr>
                                                                     </tbody>
@@ -268,7 +259,7 @@ placeholder="kitId"
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="table-responsive"
@@ -290,32 +281,28 @@ placeholder="kitId"
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                             [formGroupName]="j">
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="Patient Id"  formControlName="patientId"
-                                                                                    class="form-control"
-                                                                                    value="" />
+                                                                                <input type="text"
+                                                                                    placeholder="Patient Id"
+                                                                                    formControlName="patientId"
+                                                                                    class="form-control" value="" />
                                                                             </td>
-                    
+
                                                                             <td width="25%">
                                                                                 <select formControlName="collection"
                                                                                     class="form-select form-control">
-                                                                                    <option *ngFor="let data of statusData">
+                                                                                    <option
+                                                                                        *ngFor="let data of statusData">
                                                                                         {{ data }}
                                                                                     </option>
                                                                                 </select>
                                                                             </td>
-                                                                           
+
                                                                             <td width="25%">
-                                                                                <input type="text" 
-
-
-placeholder="Date"  
+                                                                                <input type="text" placeholder="Date"
                                                                                     class="form-control"
                                                                                     value={{date}} />
                                                                             </td>
-                                       
+
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -324,7 +311,7 @@ placeholder="Date"
                                                     </div>
                                                 </div>
                                             </p-tabPanel>
-<br>
+                                            <br>
 
                                             <div class="col-md-12 mb-3" align="right">
                                                 <div class="mb-2 text-right" width="100%">
@@ -372,7 +359,7 @@ placeholder="Date"
         </div>
         <!-- End Page-content -->
 
-       <footer class="footer" style="position: fixed;">
+        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">© Roboxa</div>
