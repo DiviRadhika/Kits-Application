@@ -197,6 +197,7 @@ class CroProtocol(Resource):
                         meterial["meterial_name"] = meterial_data.name
                 screening_item_json = {
                     "protocol_id": cro_protocol_id,
+                    "lab_test_ids": [],
                 }
 
                 if 'meterial_details' in item:
