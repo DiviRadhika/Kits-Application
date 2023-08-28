@@ -20,6 +20,8 @@ export class SponsorStudyComponent implements OnInit {
   email: string | null;
   ID: any;
   uniqueCombinedArray: any[] = [];
+  isAscendingSort: boolean = true;
+
   sortedColumn: string = '';
   sortDirection: number = 1; // 1 for ascending, -1 for descending
   sort(column: string) {
@@ -48,7 +50,10 @@ export class SponsorStudyComponent implements OnInit {
    this.study()
  
     }
-
+    toggleSorting() {
+      this.isAscendingSort = !this.isAscendingSort;
+      // Implement your sorting logic here based on the current sorting state.
+    }
   siteCreate(){
       this.route.navigate(['/home/cro/protocol'])
     }

@@ -194,6 +194,10 @@ export class AddSiteComponent {
   removeSite(j: number) {
     this.investigatorForm.get('investigator').removeAt(j);
   }
+  removeeditSite(j: number) {
+    this.investigatorForm.get('investigatoredit').removeAt(j);
+  }
+  
   
   reset(){
     this.siteForm.reset()

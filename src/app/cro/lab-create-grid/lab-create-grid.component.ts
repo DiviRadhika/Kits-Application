@@ -14,6 +14,8 @@ export class LabCreateGridComponent implements OnInit {
   page = 1;
   totalCount = 0
   pageSize = 10;
+  isAscendingSort: boolean = true;
+
   p = 1;
   searchText: any
   allcroDetails: any;
@@ -75,6 +77,10 @@ export class LabCreateGridComponent implements OnInit {
   edit(id: string, val: string) {
     console.log(id, val)
     this.route.navigate(['/home/cro/updatecLabTest', id, val])
+  }
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
   }
   getCRoDetails() {
     this.cro.getlabs().subscribe(

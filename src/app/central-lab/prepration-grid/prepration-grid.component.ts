@@ -11,6 +11,8 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 export class PreprationGridComponent implements OnInit {
   protocolDetails: any[]= [];
   allprotocolDetails: any[] = [];
+isAscendingSort: boolean = true;
+
   page = 1;
   totalCount = 0
   pageSize = 10;
@@ -72,6 +74,12 @@ export class PreprationGridComponent implements OnInit {
   // pCreate(){
   //   this.route.navigate(['/home/centralLab/kitPrepration', id])
   // }
+  // In your component.ts
+toggleSorting() {
+  this.isAscendingSort = !this.isAscendingSort;
+  // Implement your sorting logic here based on the current sorting state.
+}
+
   getProtocolDetails(){
    this.protocol.getProtocol().subscribe((data:any)=>{
       console.log(data)

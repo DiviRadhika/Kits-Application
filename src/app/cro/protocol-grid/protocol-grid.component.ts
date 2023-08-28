@@ -11,6 +11,8 @@ export class ProtocolGridComponent implements OnInit {
 
   protocolDetails: any[]= [];
   allprotocolDetails: any[] = [];
+  isAscendingSort: boolean = true;
+
   page = 1;
   totalCount = 0
   pageSize = 10;
@@ -44,7 +46,10 @@ export class ProtocolGridComponent implements OnInit {
   ngOnInit(): void {
   this.getProtocolDetails();
   }
-
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
   siteCreate(){
     this.route.navigate(['/home/cro/protocol'])
   }
@@ -53,6 +58,7 @@ export class ProtocolGridComponent implements OnInit {
     
     this.route.navigate(['/home/cro/protocolView',id, 'protocol'])
   }
+  
   edit(id:string){
     this.route.navigate(['/home/cro/protocolUpdate',id])
   }

@@ -223,12 +223,9 @@ removeeditsponser(j: number) {
         this.sponsorForm.get(key)?.markAsTouched();
       });
     
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Email' });
-    } else if (!this.sponsorForm.controls['email'].hasError('email')) {
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Email' });}
       // If email is valid (matches email pattern), show a success toast message
-      this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Email is valid!' });
-    }
-     else if (this.sponsorForm.invalid) {
+     else if(this.sponsorForm.invalid) {
       // Mark all form controls as touched to trigger validation
       Object.keys(this.sponsorForm.controls).forEach(key => {
         this.sponsorForm.get(key)?.markAsTouched();

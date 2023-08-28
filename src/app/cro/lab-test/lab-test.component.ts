@@ -49,6 +49,8 @@ export class LabTestComponent implements OnInit {
     classification: new FormControl("")
   })
   labFormval: boolean = false;
+  isAscendingSort: boolean = true;
+
   disableAdd: boolean = true
   totalCountmaterial = 0;
   classifications = ['classification1', 'classification2'];
@@ -62,6 +64,10 @@ export class LabTestComponent implements OnInit {
   showLab() {
     this.lab = true
     this.material = false
+  }
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
   }
   showMat() {
     this.lab = false

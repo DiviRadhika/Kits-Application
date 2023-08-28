@@ -17,6 +17,8 @@ export class CroGridComponent implements OnInit {
   pageSize = 10;
   p = 1;
   searchText: any
+  isAscendingSort: boolean = true;
+
   allcroDetails: any;
   sortedColumn: string = '';
   sortDirection: number = 1; // 1 for ascending, -1 for descending
@@ -69,6 +71,11 @@ export class CroGridComponent implements OnInit {
   croCreate() {
     this.route.navigate(['/home/admin/croCreate'])
   }
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  
   edit(id: string, val: string) {
     this.route.navigate(['/home/admin/croUpdate', id, val])
   }

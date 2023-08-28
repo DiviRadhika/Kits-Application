@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class UserGridComponent implements OnInit {
   public getUserData: any;
   userDetails: any[] = [];
+  isAscendingSort: boolean = true;
+
   searchText = ''
   allUserData: any;
   page = 1;
@@ -65,6 +67,10 @@ export class UserGridComponent implements OnInit {
   pageChange(event: number) {
    this.page = event;
     this.getUser()
+  }
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
   }
   addUser() {
     this.route.navigate(['/home/admin/userCreate'])

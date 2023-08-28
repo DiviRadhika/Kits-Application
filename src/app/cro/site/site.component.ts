@@ -17,6 +17,8 @@ export class SiteComponent implements OnInit {
   siteDetails: any[]= [];
   uniqueCombinedArray: any[]= [];
   allSiteDetails: any[] = [];
+  isAscendingSort: boolean = true;
+
   page = 1;
   totalCount = 0
   pageSize = 10;
@@ -53,7 +55,10 @@ export class SiteComponent implements OnInit {
   ngOnInit(): void {
   this.getSitedetails();
   }
-
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
   siteCreate(){
     this.route.navigate(['/home/cro/addSite'])
   }

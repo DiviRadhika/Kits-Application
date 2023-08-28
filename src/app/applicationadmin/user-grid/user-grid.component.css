@@ -7,4 +7,21 @@
   }
   #datatable thead th {
     padding: 5px; /* Adjust the value to decrease the space inside each header cell */
+    height: 10px;
+
   }
+  .sort-icons i {
+    font-size: 15px; /* Adjust this value for icon size */
+    opacity: 0.5; /* Adjust this value to control icon opacity */
+    transition: opacity 0.3s;
+}
+
+.sort-icons i.active {
+    opacity: 2;
+    color: blue;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}

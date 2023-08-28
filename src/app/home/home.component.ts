@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit {
     email:new FormControl ("",[Validators.required]),
     otp:new FormControl("",[Validators.required]),
     // oldpassword: new FormControl("", [Validators.required]),
-    password: new FormControl("", [Validators.required, Validators.minLength(8)]),
+    passwordp: new FormControl("", [Validators.required, Validators.minLength(8)]),
+    passwordu: new FormControl("",[Validators.required, Validators.minLength(8)] )
     // confirmPassword: new FormControl("", [Validators.required]),
     
     

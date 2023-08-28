@@ -69,16 +69,31 @@
                       aria-describedby="datatable_info" style="width: 82px;">
                       <thead>
                         <tr role="row">
-                          <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                          <th  tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             style="width: 243.2px;" aria-sort="ascending"
-                            aria-label="Code: activate to sort column descending" (click)="sort('cro_code')" >Code</th>
-                          <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('email')">Name</th>
-                          <th tabindex="0" class="sorting" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 28.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" >Legal
-                            Name</th>
+                            aria-label="Code: activate to sort column descending" (click)="sort('cro_code')" (click)="toggleSorting()">Code
+                            <span style="float: right;" class="sort-icons">
+                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                          </span>
+                      </th>
+                          <th  tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('email')" (click)="toggleSorting()">Name
+                            <span style="float: right;" class="sort-icons">
+                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                          </span>
+                      </th>
+                          <th tabindex="0"  aria-controls="datatable" rowspan="1" colspan="1"
+                            style="width: 289.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" (click)="toggleSorting()" >Legal
+                            Name
+                            <span style="float: right;" class="sort-icons">
+                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                          </span>
+                      </th>
                           <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 15.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                            style="width: 159.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
                         </tr>
                       </thead>
 

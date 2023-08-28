@@ -87,9 +87,12 @@
                           <thead>
                             <tr role="row">
 
-                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending" (click)="('name')" >
-                                Material
+                              <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"  (click)="toggleSorting()"
+                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending"  (click)="sort('name')" >
+                                Material<span style="float: right;" class="sort-icons">
+                                  <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                  <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                              </span>
                               </th>
                               <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                 style="width: 282.2px;" aria-label="Size: activate to sort column ascending" >
@@ -252,12 +255,20 @@ class="form-control" formControlName="lab_test" id="lab test"
                               <thead>
                                 <tr role="row">
                                   <th width="15%">Lab Test Id</th>
-                                  <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
-                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"
-                                    aria-label="Lab Test: activate to sort column descending"(click)="sort('name')" >Lab Test</th>
-                                  <th width="40%" class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1"
-                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"
-                                    aria-label="Lab Test: activate to sort column descending"(click)="sort('classfication')"  >Classification</th>
+                                  <th width="40%"  tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"  (click)="toggleSorting()"
+                                    (click)="sort('name')" >Lab Test
+                                    <span style="float: right;" class="sort-icons">
+                                      <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                      <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                                  </span></th>
+                                  <th width="40%" tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"  (click)="toggleSorting()"
+                                    aria-label="Lab Test: activate to sort column descending"(click)="sort('classfication')"  >Classification
+                                    <span style="float: right;" class="sort-icons">
+                                      <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                      <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                                  </span></th>
                                   <th width="20%">Delete</th>
 
                                 </tr>

@@ -6,13 +6,13 @@
         <!-- start page title -->
         <div class="row">
           <div class="col-12">
-            <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
-              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Kit Preparation Study</h4>
+            <div style="padding:1px"  class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"> <i class="bx bxs-dashboard"></i> Kit Preparation</h4>
   
               <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                   <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                  <li class="breadcrumb-item"><a>Kit Preparation Study</a></li>
+                  <li class="breadcrumb-item"><a>Kit Preparation</a></li>
                   <!-- <li class="breadcrumb-item active">Add CRO</li> -->
                 </ol>
               </div>
@@ -64,12 +64,24 @@
                           role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                           <thead>
                             <tr role="row">
-                              <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting()"
                                 style="width: 243.2px;" aria-sort="ascending"
                                 aria-label="Code: activate to sort column descending" (click)="sort('protocol_id')"
-                                >Code</th>
-                              <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                                style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')" >Name</th>
+                                
+                                >Code
+                                <span style="float: right;" class="sort-icons">
+                                  <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                  <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                              </span>
+                           </th>
+                              <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting()"
+                                style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')" >Name
+                                <span style="float: right;" class="sort-icons">
+                                  <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                  <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                              </span>
+                          
+                              </th>
   
                               <th width="40"  tabindex="0" aria-controls="datatable" rowspan="1"
                                 colspan="1" style="width: 150.2px;"

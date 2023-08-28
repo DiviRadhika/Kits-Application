@@ -12,6 +12,8 @@ export class SponsorGridComponent implements OnInit {
   sponsorDetails: any[]= [];
   allsponsorDetails: any;
   page = 1;
+  isAscendingSort: boolean = true;
+
   totalCount = 0
   pageSize = 10;
   p = 1;
@@ -43,6 +45,10 @@ export class SponsorGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSponsorDetails()
+  }
+  toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
   }
   sponsorCreate(){
     this.route.navigate(['/home/cro/csponsor'])

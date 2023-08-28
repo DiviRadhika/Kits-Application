@@ -13,7 +13,7 @@
     <div class="p-2">
       <form [formGroup]="loginForm" class="form-horizontal" action="index.html">
         <div class="mb-3">
-          <label style="display: inline;">UserName<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
+          <label style="display: inline;">User Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
           <input *ngIf="!enableFields" type="text" formControlName="username" class="form-control" id="username"
             placeholder="Enter User Name">
           <input *ngIf="enableFields" type="text" [attr.disabled]="true" class="form-control" formControlName="username"
