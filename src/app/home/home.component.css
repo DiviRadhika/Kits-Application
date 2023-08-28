@@ -103,9 +103,9 @@ input[type=password] {
   
 }
 .view{
-  text-align: center;
   color: #59c3da;
-  margin-left: 4%;
+  margin-left: 22px;
+  margin-top: -2px;
 }
 label {
    
@@ -114,9 +114,11 @@ label {
 .eye-button {
   background: none;
   border: none;
-  position: absolute;
-  bottom: 130px;
-  right: 25px;
+  right: 30px;
+  bottom: 100px;
+  top: 200px;
+  float: right;
+  margin-top: -47px;
 }
 
 /* .view{

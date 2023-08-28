@@ -187,7 +187,7 @@ export class HomeComponent implements OnInit {
     else if(this.role === 'Central Lab-Preparation'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Kit Prepration', link: '/home/centralLab/kitPreparationGrid' },
+        { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Verification'){
@@ -294,14 +294,14 @@ export class HomeComponent implements OnInit {
   email:any;
   profile(){
     this.addprofile= true;
-    const obj ={
 
-    first_name:sessionStorage.getItem('firstName'),
-      last_name : sessionStorage.getItem('lastName'),
-      email :sessionStorage.getItem('email'),
-      role :sessionStorage.getItem('role')}
+      this.first_name = sessionStorage.getItem('firstName'),
+      this.last_name = sessionStorage.getItem('lastName'),
+      this. email = sessionStorage.getItem('email'),
+      this. role =sessionStorage.getItem('role')
+    }
     
-  }
+  
   emailvaluef:any
   set() {
     this.passwordvisible=true

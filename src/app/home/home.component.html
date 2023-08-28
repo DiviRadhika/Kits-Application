@@ -154,9 +154,9 @@
             <!-- <p-toast></p-toast> -->
 
         </header>
-        <p-confirmDialog [style]="{width: '30vw', height:'18vw'}"  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [style]="{width: '40vw', height:'30vw'}"  rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
-        <p-button style="font-size: 10px;" (click)="confirm2()" icon="pi pi-times" label="Delete"></p-button>
+        <p-button style="font-size: 10px;" (click)="confirm2()" label="Delete"></p-button>
         <p-dialog [class.overlay]="profile" [(visible)]="profile" *ngIf="addprofile">
             <div class="view" style="width: 200px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
@@ -168,17 +168,10 @@
             </div>
             <br>
 
-            <div style="text-align: center">
-                <label>Firstname:&nbsp;&nbsp;{{first_name}}</label>
-            </div>
-            <div style="text-align: center">
-                <label>Lastname:&nbsp;&nbsp;{{last_name}}</label>
-            </div>
-
-            <div style="text-align: center">
-                <label>Email:&nbsp;&nbsp;{{email}}</label>
-            </div>
-            <div style="text-align: center">
+            <div style="margin-left:20px">
+                <label>Firstname:&nbsp;&nbsp;{{first_name}}</label><br>
+                <label>Lastname:&nbsp;&nbsp;{{last_name}}</label><br>
+                <label>Email:&nbsp;&nbsp;{{email}}</label><br>
                 <label>Role:&nbsp;&nbsp;{{role}}</label>
             </div>
             <br>
@@ -187,7 +180,7 @@
         </p-dialog>
         <div>
             <form [formGroup]="updatepasswordForm">
-                <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword">
+                <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword" style="position: fixed;">
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label><label style="color: red;margin-left: 4px;" >*</label>
                         <input type="text" 
@@ -213,19 +206,51 @@
                         </div>
                         <label for="password" *ngIf="passwordvisible"
         class="password-label form-group has-top-label w-100">
-        <span>Password</span><label style="color: red;margin-left: 4px;" >*</label>
+        <span>Previous Password</span><label style="color: red;margin-left: 4px;" >*</label>
         <input class="form-control" id="password"
             [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
-            placeholder="Password">
-        <button type="button" class="eye-button" tabindex="-1"
+            placeholder="Password"
+            >
+            <button type="button" class="eye-button" tabindex="-1"
             (click)="showPassword = !showPassword">
             <i *ngIf="showPassword" class="fa fa-eye"
                 aria-hidden="true"></i>
             <i *ngIf="!showPassword" class="fa fa-eye-slash"
                 aria-hidden="true"></i>
         </button>
+     
       </label>
+                        <div>
+                            <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('required')"
+                                class="text-danger text-center">
+                                Password is required
+                            </div>
+                            <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('minlength')"
+                                class="text-danger">
+                                Password should contain a minimum of 8 characters
+                            </div>
+                        </div>
+                        <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('pattern')"
+                            class="text-danger">
+                            Password should include at least one lowercase letter, one uppercase letter, one digit, and
+                            one
+                            special character
+                        </div>
+                        <label style="margin-top:-50px ;" for="password" *ngIf="passwordvisible"
+                        class="password-label form-group has-top-label w-100">
+                        <span style="margin-bottom:45px ;" >Update Password</span><label style="color: red;margin-left: 4px; margin-bottom:45px ;" >*</label><br>
+                        <input style="margin-top:-50px ;" class="form-control" id="password"
+            [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
+            placeholder="Password">
+            <button type="button" class="eye-button" tabindex="-1"
+            (click)="showPassword = !showPassword">
+            <i *ngIf="showPassword" class="fa fa-eye"
+                aria-hidden="true"></i>
+            <i *ngIf="!showPassword" class="fa fa-eye-slash"
+                aria-hidden="true"></i>
+        </button>
 
+                        </label>
                         <div>
                             <div *ngIf="updatepasswordForm.get('password')?.touched && updatepasswordForm.get('password')?.hasError('required')"
                                 class="text-danger text-center">
@@ -243,6 +268,7 @@
                             special character
                         </div>
                     </div>
+     
                     <hr>
                     <div *ngIf="passwordvisible" class="reset" class=" mb-3 text-center modal-footer">
                         <button #myModal style="margin-right: 36%;" type="submit" data-bs-dismiss="modal"

@@ -107,6 +107,7 @@ export class KitPreprationEditComponent implements OnInit {
     protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
     specialInstructions: new FormControl("", [Validators.required]),
+    ckitId: new FormControl("", [Validators.required]),
   });
   ngOnInit() {
 

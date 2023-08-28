@@ -25,6 +25,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { InstructionsAppDirective } from './instructions-app.directive';
 import { InputRestrictionDirective } from './input-restriction.directive';
 import { SortPipe } from './sort.service';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { SortPipe } from './sort.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    
+    CalendarModule,
     SponsorModule,
     // CentralLabModule,
     // SiteModule,
