@@ -57,7 +57,8 @@ update_user = login_ns.model(
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
         "otp": fields.Integer(title="otp", required=True),
-        "is_forgot": fields.Boolean(title="is_forgot", default=True),
+        "prev_password": fields.Integer(title="prev_password"),
+        "otp": fields.Integer(title="otp", required=True),
     },
 )
 
@@ -249,8 +250,10 @@ class UserRegister(Resource):
             user_data = UserModel.find_by_email(user_json["email"])
             if not user_data:
                 return {"message": "invalid email, user not found"}, 500
-            if 'is_forgot' not in user_json and user_data.user_otp != user_json["otp"]:
+            if user_data.user_otp != user_json["otp"]:
                 return {"message": "invalid OTP"}, 500
+            if 'prev_password' in user_json and user_json['prev_password'] != user_data.password:
+                return {"message": "invalid old password"}, 500
             if user_data.status != "active":
                 return {"message": "user not activated"}, 500
             user_data.password = user_json["password"]
