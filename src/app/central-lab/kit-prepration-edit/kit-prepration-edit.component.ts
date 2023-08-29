@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { UtilsService } from '../utils.service';
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class KitPreprationEditComponent implements OnInit {
   vMatDetails: Array<any> = [];
   scount: any;
   vcount: any;
+  loading = false;
   displayValues: boolean = false;
   date: Date | undefined;
   visitRecords: Array<any> = [];
@@ -46,7 +48,9 @@ export class KitPreprationEditComponent implements OnInit {
 
   constructor(private protocolService: ProtocolService,
    private messageService: MessageService, private formBuilder: FormBuilder, private _activatedRoute:ActivatedRoute,
-   private router: Router) {
+   private router: Router,
+   private utilsService: UtilsService,
+   ) {
     // this.visitKitFormGroup = this.formBuilder.group({
     //   ckitId: [''],
     //   kitId: [''],
@@ -557,6 +561,7 @@ export class KitPreprationEditComponent implements OnInit {
     console.log(this.skDetails);
     // this.loading = true
     // let payload = this.ScreenKitForm.getRawValue();
+    // payload['alternate_names'] = this.utilsService.sentenceCase(payload['alternate_names']);
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
