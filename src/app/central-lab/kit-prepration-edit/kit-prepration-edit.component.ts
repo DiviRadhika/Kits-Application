@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -554,6 +555,8 @@ export class KitPreprationEditComponent implements OnInit {
 
   SubmitData() {
     console.log(this.skDetails);
+    // this.loading = true
+    // let payload = this.ScreenKitForm.getRawValue();
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {

@@ -32,7 +32,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponor Study ID</label>
+                    <label for="formrow-firstname-input" class="form-label">Sponor Study ID<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" formControlName="selected_protocol_id"
                       class="form-control" id="" placeholder="Enter Study ID"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Study Title</label>
+                    <label for="formrow-firstname-input" class="form-label">Study Title<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" formControlName="selected_protocol_name"
                       class="form-control" id="" placeholder="Enter Study Title"
                       [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
+                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label style="color: red;margin-left: 4px;" >*</label></label>
                     <select maxlength="100" formControlName="selected_sponsor_id" class="form-select form-control"
                       [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
                       <option selected value="">Select Sponsor ID</option>
@@ -72,7 +72,7 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Global Sample Size</label>
+                    <label for="formrow-firstname-input" class="form-label">Global Sample Size<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control"
                       id="" placeholder="Global Sample Size"
                       [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count</label>
+                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" formControlName="kit_variant_count"
                       (blur)="variantCount()" class="form-control" id="" placeholder="Kit Variant Count"
                       [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
+                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="ValidateVisits($event.target)"
                       placeholder="Total No.of Visits" (blur)="visits($event)" class="form-control"
@@ -110,7 +110,7 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
+                    <label for="formrow-firstname-input" class="form-label">No.of Screens<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                       (input)="ValidateScreening($event.target)" class="form-control" id="" placeholder="No.of Screens"
                       [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
@@ -118,7 +118,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
+                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       (input)="ValidateScreening($event.target)" formControlName="selected_skit_count"
                       class="form-control" id="" placeholder="Screen Kit Count"
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count</label>
+                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       (input)="ValidateScreening($event.target)" formControlName="selected_visit_count"
                       class="form-control" id="" placeholder="Visit Kit Count"
@@ -367,7 +367,7 @@
             <div class="col-md-12 mb-3" align="right">
               <div class="mb-2 text-right" width="100%">
                 <button type="button" class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                  style="width: 150px; height: 40px" (click)="SubmitData()">
+                  style="width: 100px; height: 40px" (click)="SubmitData()">
                   <i class="bx bx-hdd label-icon"></i> Submit
                 </button>
               </div>

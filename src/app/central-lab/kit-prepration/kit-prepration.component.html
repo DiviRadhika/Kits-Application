@@ -13,7 +13,7 @@
                         <div style="padding:1px"
                             class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Kit Preparyation
+                                <i class="bx bxs-dashboard"></i> Kit Preparpation
                             </h4>
 
                             <div class="page-title-right">
@@ -140,11 +140,11 @@
                                                                         value="" [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId"
+                                                                    <input type="text" placeholder="Lab KitId"
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="Expiry Date"
+                                                                    <input type="date" placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
@@ -239,14 +239,14 @@
                                                                         class="form-control" value="" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId" value=""
+                                                                    <input type="text" placeholder="Lab KitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
                                                                     <p-calendar [(ngModel)]="date"
                                                                         formControlName="expiryDate"></p-calendar>
            
-                                                                        <input type="text" placeholder="Expiry Date" value=""
+                                                                        <input type="date" placeholder="Expiry Date" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                     <!-- <input type="text" placeholder="Expiry Date" id="dateInput" formControlName="expiryDate"> -->
 
@@ -280,7 +280,7 @@
                                                 <div class="mb-2 text-right" width="100%">
                                                     <button type="button"
                                                         class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                        style="width: 150px; height: 40px" (click)="SubmitData()">
+                                                        style="width: 100px; height: 40px" (click)="SubmitData()">
                                                         <i class="bx bx-hdd label-icon"></i> Submit
                                                     </button>
                                                 </div>

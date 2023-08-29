@@ -238,13 +238,13 @@
                                 class="password-label form-group has-top-label w-100">
                                 <span>Update Password</span><label style="color: red;margin-left: 4px;">*</label><br>
                                 <input style=" display: flex;" class="form-control" id="passwordu"
-                                    [type]="showPassword ? 'text' : 'password'" formControlName="passwordu"
+                                    [type]="showPassword1 ? 'text' : 'password'" formControlName="passwordu"
                                     (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3"
                                     id="" placeholder="Update Password">
-                                <button type="button" class="eye-button" tabindex="-1"
-                                    (click)="showPassword = !showPassword">
-                                    <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
-                                    <i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true"></i>
+                                <button type="button" class="eye-button1" tabindex="-1"
+                                    (click)="showPassword1 = !showPassword1">
+                                    <i *ngIf="showPassword1" class="fa fa-eye" aria-hidden="true"></i>
+                                    <i *ngIf="!showPassword1" class="fa fa-eye-slash" aria-hidden="true"></i>
                                 </button>
 
                             </label>

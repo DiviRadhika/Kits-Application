@@ -150,7 +150,7 @@
                                                                         value="" [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId"
+                                                                    <input type="text" placeholder="Lab KitId"
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
@@ -190,7 +190,7 @@
 
                                             </p-tabPanel>
 
-                                            <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
+                                            <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index" 
                                                 header="{{item.alternate_names}}">
 
                                                 <h3> {{item.kit_variant}}</h3>
@@ -254,12 +254,12 @@
                                                                         class="form-control" value="" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="LabKitId" value=""
+                                                                    <input type="text" placeholder="Lab KitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
 
-                                                                    <input type="text" placeholder="Expiry Date"
+                                                                    <input type="date" placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
@@ -307,7 +307,7 @@
                                                 <div class="mb-2 text-right" width="100%">
                                                     <button type="button"
                                                         class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                        style="width: 150px; height: 40px" (click)="SubmitData()">
+                                                        style="width: 100px; height: 40px" (click)="SubmitData()">
                                                         <i class="bx bx-hdd label-icon"></i> Submit
                                                     </button>
                                                 </div>

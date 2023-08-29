@@ -120,6 +120,15 @@ label {
   float: right;
   margin-top: -47px;
 }
+.eye-button1 {
+  background: none;
+  border: none;
+  right: 30px;
+  bottom: 100px;
+  top: 200px;
+  float: right;
+  margin-top: -47px;
+}
 
 /* .view{
   width: 30%;

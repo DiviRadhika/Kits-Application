@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   updatepassword: boolean = false
   passwordvisible:boolean = false;
   showPassword: boolean = false;
+  showPassword1: boolean = false;
 
   @ViewChild('myModal') myModal: any;
  
@@ -342,19 +343,19 @@ export class HomeComponent implements OnInit {
 
   reset(){
     this.passwordvisible=true
-
  const obj ={
   email: sessionStorage.getItem('email'),
-  password: this.updatepasswordForm.controls['password'].value,
-  otp:this.updatepasswordForm.controls['otp'].value,
-  is_forgot: false
-  
+  password: this.updatepasswordForm.controls['passwordu'].value,
+  otp: Number(this.updatepasswordForm.controls['otp'].value),
+  prev_password:this.updatepasswordForm.controls['passwordp'].value 
+  // is_forgot: false
+ 
  }
  
 
     // alert('Profile created Successfully')
     //           this.route.navigate(['/login'])
-              if (this.updatepasswordForm.controls['password'].value === '' || this.updatepasswordForm.controls['password'].value === undefined) {
+              if (this.updatepasswordForm.controls['passwordp'].value === '' || this.updatepasswordForm.controls['passwordp'].value === undefined) {
                 // alert('Please Enter Password')
                 this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Please Enter Password'});
               }

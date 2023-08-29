@@ -163,6 +163,7 @@ export class AddSiteComponent {
     const investigators = this.investigatorFormedit.get('investigatoredit') as FormArray;
     investigators.push(this.investigatorCreate());
   }
+
   emailDomainValidator(control: FormControl): ValidationErrors | null {
     const email = control.value;
     if (email && email.indexOf('@') !== -1) {
@@ -195,7 +196,7 @@ export class AddSiteComponent {
     this.investigatorForm.get('investigator').removeAt(j);
   }
   removeeditSite(j: number) {
-    this.investigatorForm.get('investigatoredit').removeAt(j);
+    this.investigatorFormedit.get('investigatoredit').removeAt(j);
   }
   
   

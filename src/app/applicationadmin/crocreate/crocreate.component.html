@@ -87,7 +87,7 @@ class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
                       <label>Legal CRO Name </label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text"
 
-class="form-control" id="LegalCROName" placeholder="Enter legal CRO name"
+class="form-control" id="LegalCROName" placeholder="Enter Legal CRO Name"
                         formControlName="legal_cro_name" maxlength="100"
                         [class.is-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_cro_name')" class="invalid-feedback">
@@ -294,3 +294,14 @@ class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
     </div>
   </div>
 </div>
+
+
+<footer class="footer" style="position: fixed;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      </div>
+    </div>
+  </div>
+</footer>
