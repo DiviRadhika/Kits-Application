@@ -296,8 +296,7 @@ export class HomeComponent implements OnInit {
   email:any;
   profile(){
     this.addprofile= true;
-
-      this.first_name = sessionStorage.getItem('firstName'),
+    this.first_name = sessionStorage.getItem('firstName'),
       this.last_name = sessionStorage.getItem('lastName'),
       this. email = sessionStorage.getItem('email'),
       this. role =sessionStorage.getItem('role')
@@ -344,6 +343,7 @@ export class HomeComponent implements OnInit {
   reset(){
     this.passwordvisible=true
  const obj ={
+
   email: sessionStorage.getItem('email'),
   password: this.updatepasswordForm.controls['passwordu'].value,
   otp: Number(this.updatepasswordForm.controls['otp'].value),

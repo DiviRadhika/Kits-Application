@@ -16,6 +16,10 @@ export class LabTestCreateComponent implements OnInit {
   classifications = [];
   public isEdit: boolean = false;
   public id: any = '';
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
   getcroData: any;
   mobile: any;
   view: boolean = false;
@@ -129,6 +133,10 @@ export class LabTestCreateComponent implements OnInit {
   }
 
   submit() {
+    this.labTestCreateForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['cro_name'].value));
+    this.labTestCreateForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['legal_cro_name'].value));
+
+
     if (this.labTestCreateForm.controls['mobile_telephone'].value === '' || this.labTestCreateForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

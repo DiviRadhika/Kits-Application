@@ -22,7 +22,10 @@ export class LabCreateComponent {
   imageChanged: boolean = true;
   fieldDisplay: boolean = true
   view: boolean= false;
-
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
   constructor(
     private _cro: CrosService,
     private _activatedRoute: ActivatedRoute,
@@ -102,6 +105,7 @@ export class LabCreateComponent {
   }
   submit() {
     console.log(this.bas2);
+    this.labForm.controls['material'].setValue(this.capitalizeFirstLetter(this.labForm.controls['material'].value));
 
     if (this.labForm.invalid) {
       // Mark all form controls as touched to trigger validation
@@ -167,4 +171,25 @@ export class LabCreateComponent {
       console.log(this.labForm.value);
     }
   }
+
+validateMobileNumber(input: any, phone: any) {
+  let inputValue = input.value.trim();
+  
+  // Remove non-numeric characters
+  let numericValue = inputValue.replace(/\D/g, '');
+
+  if(phone ==='mobile'){
+  if (numericValue.length > 5) {
+      numericValue = numericValue.slice(0, 5);
+  }
+}
+else{
+  if (numericValue.length > 5) {
+    numericValue = numericValue.slice(0, 5);
+}
+}
+  
+  input.value = numericValue;
+
+}
 }

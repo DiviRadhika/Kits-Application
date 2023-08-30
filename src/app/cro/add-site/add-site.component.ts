@@ -14,7 +14,10 @@ export class AddSiteComponent {
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
- 
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
   investigate = ['Principal Investigator', 'Sub-Investigator', 'Study Coordinator']
   public isEdit: boolean = false;
   public id: any = '';
@@ -206,6 +209,9 @@ export class AddSiteComponent {
 
   submit() {
     console.log(this.investigatorForm.value);
+    this.siteForm.controls['site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['site_data_name'].value));
+    this.siteForm.controls['legal_site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['legal_site_data_name'].value));
+
 
     if (this.siteForm.controls['mobile_telephone'].value === '' ||  this.siteForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''

@@ -975,18 +975,38 @@ export class ProtocolRegistrationComponent {
     input.value = numericValue;
 
   }
-  ValidateScreening(input: any) {
+  // ValidateScreening(input: any) {
+  //   let inputValue = input.value.trim();
+  //   //Remove non-numeric charecters
+  //   let numericValue = inputValue.replace(/\D/g, '');
+
+  //   if (numericValue.length > 5) {
+  //     numericValue = numericValue.slice(0, 5);
+  //   }
+
+  //   input.value = numericValue;
+
+  // }
+  validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
-    //Remove non-numeric charecters
+    
+    // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
+    if(phone ==='mobile'){
+    if (numericValue.length > 5) {
+        numericValue = numericValue.slice(0, 5);
+    }
+  }
+  else{
     if (numericValue.length > 5) {
       numericValue = numericValue.slice(0, 5);
-    }
-
-    input.value = numericValue;
-
   }
+  }
+    
+    input.value = numericValue;
+  
+}
 
 
 

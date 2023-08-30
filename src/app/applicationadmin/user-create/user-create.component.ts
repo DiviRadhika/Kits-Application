@@ -45,6 +45,14 @@ export class UserCreateComponent implements OnInit {
   idValue: any;
   view: boolean = false;
   // passwordControl!: FormControl<any>;
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
+  
+  
+  
+  
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -273,6 +281,8 @@ export class UserCreateComponent implements OnInit {
   }
   
   submit(): void {
+    this.userForm.controls['first_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['first_name'].value));
+    this.userForm.controls['last_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['last_name'].value));
   
    
     const emailvalue = this.userForm.controls['email'].value.toLowerCase();

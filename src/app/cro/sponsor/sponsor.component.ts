@@ -16,6 +16,10 @@ export class SponsorComponent implements OnInit {
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
  
   public isEdit: boolean = false;
   public id: any = '';
@@ -206,7 +210,8 @@ removeeditsponser(j: number) {
 
 
   submit() {
-    
+    this.sponsorForm.controls['sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['sponsor_name'].value));
+    this.sponsorForm.controls['legal_sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['legal_sponsor_name'].value));
     // Assign the trimmed contacts to the notifier_details property of the obj object
    
     if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {

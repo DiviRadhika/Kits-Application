@@ -21,6 +21,10 @@ export class LabTestComponent implements OnInit {
   searchText = '';
   searchTextm = '';
   lab: boolean = true;
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
   material: boolean = false;
   sortDirection: number = 1; // 1 for ascending, -1 for descending
   sortedColumn: string = '';
@@ -53,7 +57,7 @@ export class LabTestComponent implements OnInit {
 
   disableAdd: boolean = true
   totalCountmaterial = 0;
-  classifications = ['classification1', 'classification2'];
+  classifications = ['Classification 1', 'Classification 2'];
   constructor(private route: Router, private _cro: CrosService,
     private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
@@ -158,7 +162,7 @@ export class LabTestComponent implements OnInit {
     }
   }
   submit() {
-
+    this.labForm.controls['lab_test'].setValue(this.capitalizeFirstLetter(this.labForm.controls['lab_test'].value));
     if (this.labForm.invalid) {
       // Mark all form controls as touched to trigger validation
       Object.keys(this.labForm.controls).forEach(key => {

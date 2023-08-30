@@ -55,7 +55,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                            <label>Lab Code<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                            <input type="text" class="form-control" id="LabtestCode"
+                                            <input type="text" class="form-control" id="LabtestCode" maxlength="100"
                                                 placeholder="Enter Lab Test Code" formControlName="cro_code"
                                                 [class.is-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
 
@@ -89,7 +89,7 @@
                                         <div class="form-group">
                                            <label>Legal Lab Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                             <input type="text" class="form-control" id="LegalLabTestName"
-                                                placeholder="Enter legal Lab Test name"
+                                                placeholder="Enter Legal Lab Test Name"
                                                 formControlName="legal_cro_name"
                                                 [class.is-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('legal_cro_name')"
@@ -250,7 +250,7 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Extension</label>
-                                        <input type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension"
+                                        <input type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension" (input)="validateMobileNumber($event.target, 'office')"
                                           formControlName="extension">
                   
                                       </div>

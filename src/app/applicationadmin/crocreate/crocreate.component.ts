@@ -90,6 +90,10 @@ export class CROcreateComponent implements OnInit {
     //   Validators.pattern('[0-9]{10}')
     // ]),
   });
+  private capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  
 
   emailDomainValidator(control: FormControl): ValidationErrors | null {
     const email = control.value;
@@ -131,6 +135,10 @@ export class CROcreateComponent implements OnInit {
   }
 
   submit() {
+      // Capitalize the first letter of cro_name and legal_cro_name
+  this.CroForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.CroForm.controls['cro_name'].value));
+  this.CroForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.CroForm.controls['legal_cro_name'].value));
+
     if (this.CroForm.controls['mobile_telephone'].value === '' || this.CroForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

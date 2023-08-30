@@ -88,7 +88,7 @@
                             <tr role="row">
 
                               <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"  (click)="toggleSorting()"
-                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending"  (click)="sort('name')" >
+                                style="width: 335.2px;" aria-label="Material: activate to sort column ascending"  (click)="sort('name')"F >
                                 Material<span style="float: right;" class="sort-icons">
                                   <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
                                   <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
@@ -188,10 +188,7 @@
                           <div class="col-md-3">
                             <div class="form-group">
                              <label>Lab Test <label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                              <input type="text" 
-
-
-class="form-control" formControlName="lab_test" id="lab test"
+                              <input type="text" class="form-control" formControlName="lab_test" id="lab test"
                                 placeholder="Enter Lab Test">
 
                             </div>
@@ -199,7 +196,6 @@ class="form-control" formControlName="lab_test" id="lab test"
                           <div class="col-md-3">
                             <div class="form-group">
                              <label>Classification<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-
                               <select formControlName="classification" class="form-select form-control">
                                 <option *ngFor="let data of classifications">
                                   {{ data }}

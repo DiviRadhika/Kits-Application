@@ -81,7 +81,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  statusData = ['Pending ', 'Recieved']
+  statusData = ['Pending ', 'Received']
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
