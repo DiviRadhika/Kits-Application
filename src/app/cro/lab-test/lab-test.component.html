@@ -259,11 +259,11 @@
                                       <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
                                   </span></th>
                                   <th width="40%" tabindex="0" aria-controls="datatable" rowspan="1"
-                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"  (click)="toggleSorting()"
+                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"  (click)="toggleSorting1()"
                                     aria-label="Lab Test: activate to sort column descending"(click)="sort('classfication')"  >Classification
                                     <span style="float: right;" class="sort-icons">
-                                      <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
-                                      <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                                      <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort1}"></i>
+                                      <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort1}"></i>
                                   </span></th>
                                   <th width="20%">Delete</th>
 
@@ -344,10 +344,8 @@
 </div>
 <footer class="footer" style="position: fixed;">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      <div class="row">
+          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
       </div>
-    </div>
   </div>
 </footer>

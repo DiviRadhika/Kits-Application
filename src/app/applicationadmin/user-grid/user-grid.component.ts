@@ -12,6 +12,8 @@ export class UserGridComponent implements OnInit {
   public getUserData: any;
   userDetails: any[] = [];
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+  isAscendingSort2: boolean = true;
 
   searchText = ''
   allUserData: any;
@@ -72,6 +74,15 @@ export class UserGridComponent implements OnInit {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }
+  toggleSorting1() {
+    this.isAscendingSort1 = !this.isAscendingSort1;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting2() {
+    this.isAscendingSort2 = !this.isAscendingSort2;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  
   addUser() {
     this.route.navigate(['/home/admin/userCreate'])
   }

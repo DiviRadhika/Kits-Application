@@ -10,11 +10,16 @@ import { CrosService } from '../cros.service';
   styleUrls: ['./lab-create-grid.component.css']
 })
 export class LabCreateGridComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   croDetails: any[] = []
   page = 1;
   totalCount = 0
   pageSize = 10;
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+  isAscendingSort2: boolean = true;
 
   p = 1;
   searchText: any
@@ -79,6 +84,14 @@ export class LabCreateGridComponent implements OnInit {
     this.route.navigate(['/home/cro/updatecLabTest', id, val])
   }
   toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting1() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting2() {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }

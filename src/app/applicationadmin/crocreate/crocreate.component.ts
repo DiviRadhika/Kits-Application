@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { takeLast } from 'rxjs';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-crocreate',
@@ -18,9 +20,13 @@ export class CROcreateComponent implements OnInit {
   getcroData: any;
   mobile: any;
   view: boolean = false;
+  countries: any;
+  states: any;
+  districtEnable: boolean | undefined;
+  stateenable: boolean | undefined;
   constructor(private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService, private dataService:DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -106,11 +112,37 @@ export class CROcreateComponent implements OnInit {
     return null; // Return null for valid email format
   }
 
+  getStatesObservable$ = null;
   ngOnInit(): void {
    
+    this.countries = this.dataService.getCountries();
+    this.CroForm.get('country')?.valueChanges.subscribe(country => {
 
+      this.getStatesForCountry(country);
+      this.stateenable = true
+
+    });
+    this.CroForm.get('region')?.valueChanges.subscribe(country => {
+
+      // this.getStatesForCountry(country);
+      this.districtEnable = true
+    });
+  }getStatesForCountry(country:any){
+    const payload = {
+      country: country
+    }
+   
+    const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
+    getStatesObservable$.subscribe((res: any) => {
+      console.log(res)
+      if(res && res.body && res.body.states) {
+        console.log(res.body.states)
+        this.states = this.dataService.getStates(res.body.states);
+        // this.addToStatesList(res.body.states, country);
+      }
+      
+    });
   }
-
 
   shouldShowRequired(controlName: string): boolean {
     const control = this.CroForm.get(controlName);

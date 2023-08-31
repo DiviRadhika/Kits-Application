@@ -11,6 +11,9 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./protocol-registration.component.css']
 })
 export class ProtocolRegistrationComponent {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   selectedOptions: { [rowIndex: number]: string[] } = {};
   selectedLabTests: any[] = [];
   alternatenames: any[] = [];

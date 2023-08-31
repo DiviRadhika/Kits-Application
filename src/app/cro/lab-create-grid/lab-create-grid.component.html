@@ -76,18 +76,18 @@
                               <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
                               <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
                           </span></th>
-                          <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting()"
+                          <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting1()"
                             style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('cro_name')">Name
                             <span style="float: right;" class="sort-icons">
-                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
-                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort1}"></i>
+                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort1}"></i>
                           </span></th>
-                          <th  tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting()"
+                          <th  tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSorting2()"
                             style="width: 282.2px;" aria-label="Legal Name: activate to sort column ascending" (click)="sort('legal_cro_name')" >Legal
                             Name
                             <span style="float: right;" class="sort-icons">
-                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
-                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                              <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort2}"></i>
+                              <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort2}"></i>
                           </span></th>
                           <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                             style="width: 150.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
@@ -145,14 +145,11 @@
 </div>
 <!-- End Page-content -->
 
-
 <footer class="footer" style="position: fixed;">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+      <div class="row">
+          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
       </div>
-    </div>
   </div>
 </footer>
 </div>

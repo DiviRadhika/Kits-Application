@@ -12,6 +12,9 @@ import { ProtocolService } from '../protocol-registration/protocol-registration.
   styleUrls: ['./edit-protocol.component.css']
 })
 export class EditProtocolComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolIdDetails: any;
   screenDetails: Array<any> = [];
   sMatDetails: Array<any> = [];

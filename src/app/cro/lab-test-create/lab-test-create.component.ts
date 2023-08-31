@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from '../cros.service';
+import { takeLast } from 'rxjs';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-lab-test-create',
@@ -12,6 +14,13 @@ import { CrosService } from '../cros.service';
   styleUrls: ['./lab-test-create.component.css']
 })
 export class LabTestCreateComponent implements OnInit {
+  countries: any
+  stateenable: boolean | undefined;
+  districtEnable: boolean | undefined;
+  states:any
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   myData: any;
   classifications = [];
   public isEdit: boolean = false;
@@ -25,7 +34,7 @@ export class LabTestCreateComponent implements OnInit {
   view: boolean = false;
   constructor(private cro: CrosService, private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService, private dataService :DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -109,9 +118,35 @@ export class LabTestCreateComponent implements OnInit {
 
   ngOnInit(): void {
    
+   
+    this.countries = this.dataService.getCountries();
+    this.labTestCreateForm.get('country')?.valueChanges.subscribe(country => {
+
+      this.getStatesForCountry(country);
+      this.stateenable = true
+    });
+    this.labTestCreateForm.get('region')?.valueChanges.subscribe(country => {
+
+      // this.getStatesForCountry(country);
+      this.districtEnable = true
+    });
+  }
+  getStatesForCountry(country:any){
+    const payload = {
+      country: country
+    }
+   
+    const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
+    getStatesObservable$.subscribe((res: any) => {
+      console.log(res)
+      if(res && res.body && res.body.states) {
+        this.states = this.dataService.getStates(res.body.states);
+        // this.addToStatesList(res.body.states, country);
+      }
+      
+    });
 
   }
-
 
   shouldShowRequired(controlName: string): boolean {
     const control = this.labTestCreateForm.get(controlName);

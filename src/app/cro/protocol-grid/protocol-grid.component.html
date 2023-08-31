@@ -80,11 +80,11 @@
                                 <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
                                 <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
                             </span></th>
-                            <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"  (click)="toggleSorting()"
+                            <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"  (click)="toggleSorting1()"
                               style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')">Name
                               <span style="float: right;" class="sort-icons">
-                                <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
-                                <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                                <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort1}"></i>
+                                <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort1}"></i>
                             </span></th>
 
                             <th width="40" tabindex="0" aria-controls="datatable" rowspan="1"
@@ -152,14 +152,11 @@
   </div>
   <!-- End Page-content -->
 
-
- <footer class="footer" style="position: fixed;">
+  <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        <div class="row">
+            <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
         </div>
-      </div>
     </div>
-  </footer>
+</footer>
 </div>

@@ -9,10 +9,15 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sponsor-grid.component.css']
 })
 export class SponsorGridComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   sponsorDetails: any[]= [];
   allsponsorDetails: any;
   page = 1;
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+  isAscendingSort2: boolean = true;
 
   totalCount = 0
   pageSize = 10;
@@ -48,6 +53,14 @@ export class SponsorGridComponent implements OnInit {
   }
   toggleSorting() {
     this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting1() {
+    this.isAscendingSort1 = !this.isAscendingSort1;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting2() {
+    this.isAscendingSort2 = !this.isAscendingSort2;
     // Implement your sorting logic here based on the current sorting state.
   }
   sponsorCreate(){

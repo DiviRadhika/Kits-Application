@@ -253,7 +253,7 @@ placeholder="Status"
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names}}">  
+                                                header="{{item.alternate_names | titlecase}}">  
                                                
                                                 <h3> {{item.kit_variant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">

@@ -8,10 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./protocol-grid.component.css']
 })
 export class ProtocolGridComponent implements OnInit {
-
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolDetails: any[]= [];
   allprotocolDetails: any[] = [];
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
 
   page = 1;
   totalCount = 0
@@ -47,6 +50,10 @@ export class ProtocolGridComponent implements OnInit {
   this.getProtocolDetails();
   }
   toggleSorting() {
+    this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting1() {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }

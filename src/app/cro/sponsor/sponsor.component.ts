@@ -6,13 +6,18 @@ import { SponsorService } from 'src/app/sponsor/sponsor.service';
 import { CrosService } from '../cros.service';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { MessageService } from 'primeng/api';
-
+import { takeLast } from 'rxjs';
+import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-sponsor',
   templateUrl: './sponsor.component.html',
   styleUrls: ['./sponsor.component.css']
 })
 export class SponsorComponent implements OnInit {
+  states: any;
+  stateenable: boolean | undefined;
+  countries: any;
+  districtEnable: boolean | undefined;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -60,7 +65,8 @@ export class SponsorComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private admin: AdminService,
     private messageService: MessageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dataService:DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
 
@@ -108,6 +114,42 @@ export class SponsorComponent implements OnInit {
     this.editcontactsForm = this.formBuilder.group({
       editcontacts: this.formBuilder.array([]),
     });
+
+    
+    this.countries = this.dataService.getCountries();
+    this.sponsorForm.get('country')?.valueChanges.subscribe((country: any) => {
+
+      this.getStatesForCountry(country);
+      this.stateenable = true
+
+    });
+    this.sponsorForm.get('region')?.valueChanges.subscribe((country: any) => {
+
+      // this.getStatesForCountry(country);
+      this.districtEnable = true
+    })
+  }
+  getStatesForCountry(country:any){
+    const payload = {
+      country: country
+    }
+    const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
+    getStatesObservable$.subscribe((res: any) => {
+      console.log(res)
+      if(res && res.body && res.body.states) {
+        this.states = this.dataService.getStates(res.body.states);
+        // this.addToStatesList(res.body.states, country);
+      }
+      
+    });
+
+  
+
+
+
+
+
+
 
 
 

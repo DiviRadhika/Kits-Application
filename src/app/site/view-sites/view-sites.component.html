@@ -13,7 +13,7 @@
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item">Study</li>
+                <li class="breadcrumb-item">Sample Collection</li>
         
               </ol>
             
@@ -52,11 +52,19 @@
                         role="grid" aria-describedby="datatable_info" style="width: 1182px;">
                         <thead>
                           <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 243.2px;" aria-sort="ascending"
-                              aria-label="Code: activate to sort column descending" (click)="sort('user_protocol_id')" >Study Code</th>
-                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')"  >Study Name</th>
+                            <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                              style="width: 243.2px;" aria-sort="ascending"  (click)="toggleSorting()"
+                              aria-label="Code: activate to sort column descending" (click)="sort('user_protocol_id')" >Study Code
+                              <span style="float: right;" class="sort-icons">
+                                <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort}"></i>
+                                <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
+                            </span></th>
+                            <th  tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"  (click)="toggleSorting1()"
+                              style="width: 335.2px;" aria-label="Name: activate to sort column ascending" (click)="sort('protocol_name')"  >Study Name
+                              <span style="float: right;" class="sort-icons">
+                                <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort1}"></i>
+                                <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort1}"></i>
+                            </span></th>
 
                             <th width="40"  tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
@@ -120,13 +128,11 @@
   <!-- End Page-content -->
 
 
- <footer class="footer" style="position: fixed;">
+  <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        <div class="row">
+            <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
         </div>
-      </div>
     </div>
-  </footer>
+</footer>
 </div>

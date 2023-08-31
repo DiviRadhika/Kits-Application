@@ -9,10 +9,16 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./view-sites.component.css']
 })
 export class ViewSitesComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolDetails: any[] = [];
   allprotocolDetails: any[] = [];
   page = 1;
   totalCount = 0
+  isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+
   pageSize = 10;
   p = 1;
   searchText = ''
@@ -47,7 +53,15 @@ export class ViewSitesComponent implements OnInit {
    this.study()
  
     }
+    toggleSorting() {
+      this.isAscendingSort = !this.isAscendingSort;
 
+      // Implement your sorting logic here based on the current sorting state.
+    }
+    toggleSorting1() {
+
+      this.isAscendingSort1 = !this.isAscendingSort1;
+    }
   siteCreate(){
       this.route.navigate(['/home/cro/protocol'])
     }

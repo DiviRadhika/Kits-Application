@@ -145,12 +145,12 @@ class="form-control" id="Address"
                                     <div class="col-md-4">
                                         <div class="form-group">
                                            <label>Country<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                            <select formControlName="country" class="form-select"
-                                                aria-label="Default select example">
-                                                <option selected value="">Select Country</option>
-                                                <option *ngFor="let option of myData" [value]="option.value">{{
-                                                    option.text }}</option>
-                                            </select>
+                                           <select formControlName="country" maxlength="40" class="form-select"
+                                           aria-label="Default select example">
+                                           <option selected value="">Select Country</option>
+                                           <option *ngFor="let c of countries" [value]="c.name">
+                                             {{c.name}}</option>
+                                         </select>
 
                                             <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
                                                 Country is required.
@@ -168,21 +168,22 @@ class="form-control" id="Address"
                                 <br>
                                 <div class="row">
 
-                                    <div class="col-md-4">
+                                    <div *ngIf="stateenable" class="col-md-4">
                                         <div class="form-group">
                                            <label>Region/State<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                            <input type="text" 
-
-
-class="form-control" id="Region"
-                                                placeholder="Enter Region/ State" formControlName="region"
-                                                [class.is-invalid]="shouldShowRequired('region') && labTestCreateForm.get('region')?.touched">
+                                           <select formControlName="region" maxlength="40" class="form-select"
+                                           aria-label="Default select example">
+                                           <option selected value="">Select State</option>
+                                           <option *ngFor="let s of states" [value]="s.name">
+                                             {{s.name}}
+                                           </option>
+                                         </select>
                                             <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
                                                 Region is required.
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div *ngIf="districtEnable"  class="col-md-4">
                                         <div class="form-group">
                                             <label>District</label>
                                             <input type="text" 
@@ -193,7 +194,7 @@ class="form-control" id="District"
 
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div *ngIf="districtEnable"  class="col-md-4">
                                         <div class="form-group">
                                            <label>City<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                             <input type=" text" class="form-control" id="City" placeholder="Enter City"
@@ -294,13 +295,10 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
         </div>
     </div>
 </div>
-
 <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        <div class="row">
+            <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
         </div>
-      </div>
     </div>
-  </footer>
+</footer>

@@ -160,10 +160,12 @@ class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(op
                   <div class="col-md-4">
                     <div class="form-group">
                      <label>Country</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <select formControlName="country" maxlength="40" class="form-select" aria-label="Default select example">
-                        <option selected value="">Select Country</option>
-                        <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
-                      </select>
+                     <select formControlName="country" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select Country</option>
+                      <option *ngFor="let c of countries" [value]="c.name">
+                        {{c.name}}</option>
+                    </select>
 
                       <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
                         Country is required.
@@ -173,33 +175,31 @@ class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(op
                 </div>
                 <br>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div *ngIf="stateenable" class="col-md-4">
                     <div class="form-group">
-                     <label>Region/State</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="40" id="Region" placeholder="Enter Region/ State"
-                        formControlName="region"
-                        [class.is-invalid]="shouldShowRequired('region') && sponsorForm.get('region')?.touched">
+                      <label>Region/State</label><label style="color: red;margin-left: 4px;">*</label>
+                      <select formControlName="region" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select State</option>
+                      <option *ngFor="let s of states" [value]="s.name">
+                        {{s.name}}
+                      </option>
+                    </select>
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
                         Region is required.
                       </div>
                     </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div *ngIf="districtEnable"  class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="40" id="District" placeholder="Enter District"
+                      <input type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
                         formControlName="district">
 
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div *ngIf="districtEnable"  class="col-md-4">
                     <div class="form-group">
                      <label>City</label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
@@ -434,7 +434,7 @@ class="form-control" id="Designation" placeholder="Enter Designation"
                           <th>Email Id</th>
                          <th>Designation</th>
                           <th>Mobile Phone</th>
-                          <th>Delete</th>
+                          <th *ngIf="!view">Delete</th>
 
 
                         </tr>
@@ -476,7 +476,7 @@ class="form-control" id="Designation" placeholder="Enter Designation"
                               placeholder="Enter Mobile Number" type="number" (input)="validateMobileNumber($event.target, 'mobile')"  formControlName="contact">
                           </td>
                           <td>
-                            <button type="button" style="background-color: red;"  (click)="removeeditsponser(i)" class="btn btn-danger">
+                            <button *ngIf="!view" type="button" style="background-color: red;"  (click)="removeeditsponser(i)" class="btn btn-danger">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path

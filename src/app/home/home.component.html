@@ -137,7 +137,7 @@
                                         d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                                     <path
                                         d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-                                </svg> <span key="t-logout" style="cursor: pointer;">Update Password</span></a>
+                                </svg> &nbsp;<span key="t-logout" style="cursor: pointer;">Update Password</span></a>
                             <a (click)="updaten()" class="dropdown-item text-danger">
                                 <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
                                 <span style="cursor: pointer;" key="t-logout">Logout</span></a>
@@ -155,7 +155,7 @@
             rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-button style="font-size: 10px;" (click)="confirm2()" label="Delete"></p-button>
-        <p-dialog [class.overlay]="profile" [(visible)]="profile" *ngIf="addprofile">
+        <p-dialog [class.overlay]="addprofile" [(visible)]="addprofile" *ngIf="addprofile">
             <div class="view" style="width: 200px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
                     class="bi bi-person-check-fill" viewBox="0 0 15 15">

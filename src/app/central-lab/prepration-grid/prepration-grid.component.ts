@@ -9,9 +9,13 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./prepration-grid.component.css']
 })
 export class PreprationGridComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolDetails: any[]= [];
   allprotocolDetails: any[] = [];
 isAscendingSort: boolean = true;
+isAscendingSort1: boolean = true;
 
   page = 1;
   totalCount = 0
@@ -77,6 +81,10 @@ isAscendingSort: boolean = true;
   // In your component.ts
 toggleSorting() {
   this.isAscendingSort = !this.isAscendingSort;
+  // Implement your sorting logic here based on the current sorting state.
+}
+toggleSorting1() {
+  this.isAscendingSort1 = !this.isAscendingSort1;
   // Implement your sorting logic here based on the current sorting state.
 }
 

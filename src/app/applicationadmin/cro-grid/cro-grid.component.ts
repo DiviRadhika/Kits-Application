@@ -11,6 +11,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   styleUrls: ['./cro-grid.component.css']
 })
 export class CroGridComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   croDetails: any[] = []
   page = 1;
   totalCount = 0
@@ -18,6 +21,9 @@ export class CroGridComponent implements OnInit {
   p = 1;
   searchText: any
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+  isAscendingSort2: boolean = true;
+
 
   allcroDetails: any;
   sortedColumn: string = '';
@@ -75,6 +81,14 @@ export class CroGridComponent implements OnInit {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }
+  toggleSorting2(){
+    this.isAscendingSort2 = !this.isAscendingSort2;
+  }
+  toggleSorting1(){
+    this.isAscendingSort1 = !this.isAscendingSort1;
+  }
+
+
   
   edit(id: string, val: string) {
     this.route.navigate(['/home/admin/croUpdate', id, val])

@@ -18,6 +18,8 @@ export class SiteComponent implements OnInit {
   uniqueCombinedArray: any[]= [];
   allSiteDetails: any[] = [];
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
+  isAscendingSort2: boolean = true;
 
   page = 1;
   totalCount = 0
@@ -57,6 +59,14 @@ export class SiteComponent implements OnInit {
   }
   toggleSorting() {
     this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting1() {
+    this.isAscendingSort1 = !this.isAscendingSort1;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting2() {
+    this.isAscendingSort2 = !this.isAscendingSort2;
     // Implement your sorting logic here based on the current sorting state.
   }
   siteCreate(){

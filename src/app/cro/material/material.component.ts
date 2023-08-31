@@ -9,6 +9,9 @@ import { AdminService } from 'src/app/applicationadmin/admin.service';
   styleUrls: ['./material.component.css']
 })
 export class MaterialComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   date1: any
   enableFields: boolean = false;
   disablefields: boolean = false;

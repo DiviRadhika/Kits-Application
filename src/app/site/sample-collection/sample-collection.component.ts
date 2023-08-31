@@ -12,6 +12,9 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sample-collection.component.css']
 })
 export class SampleCollectionComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
 
   statusData = ['Pending', 'Collected']
   protocolIdDetails: any;

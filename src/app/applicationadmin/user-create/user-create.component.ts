@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
 import { MessageService } from 'primeng/api';
+import { DataService } from 'src/app/data.service';
+import { takeLast } from 'rxjs';
 // import { AdminService } from '../admin.service';
 
 @Component({
@@ -44,6 +46,8 @@ export class UserCreateComponent implements OnInit {
   siteDetails: any;
   idValue: any;
   view: boolean = false;
+  countries: { key: number; name: string; }[] | undefined;
+  states: { key: any; name: any; }[] | undefined;
   // passwordControl!: FormControl<any>;
   private capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -51,7 +55,7 @@ export class UserCreateComponent implements OnInit {
   
   
   
-  
+
   
 
   constructor(
@@ -60,12 +64,20 @@ export class UserCreateComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private _cro: CrosService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dataService:DataService
   ) {
 
   }
+  getStatesObservable$ = null;
 
   ngOnInit(): void {
+    this.countries = this.dataService.getCountries();
+    this.userForm.get('country')?.valueChanges.subscribe(country => {
+
+      this.getStatesForCountry(country);
+    });
+ 
     this.status = [{
       'label' : 'Active',  'id': 'active'
     },
@@ -237,6 +249,22 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
+
+  }
+  getStatesForCountry(country:any){
+    const payload = {
+      country: country
+    }
+   
+    const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
+    getStatesObservable$.subscribe((res: any) => {
+      console.log(res)
+      if(res && res.body && res.body.states) {
+        this.states = this.dataService.getStates(res.body.states);
+        // this.addToStatesList(res.body.states, country);
+      }
+      
+    });
 
   }
   getSitedetails(){

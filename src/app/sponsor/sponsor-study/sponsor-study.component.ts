@@ -10,6 +10,9 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sponsor-study.component.css']
 })
 export class SponsorStudyComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   protocolDetails: any[] = [];
   allprotocolDetails: any[] = [];
   page = 1;
@@ -21,6 +24,7 @@ export class SponsorStudyComponent implements OnInit {
   ID: any;
   uniqueCombinedArray: any[] = [];
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
 
   sortedColumn: string = '';
   sortDirection: number = 1; // 1 for ascending, -1 for descending
@@ -52,6 +56,10 @@ export class SponsorStudyComponent implements OnInit {
     }
     toggleSorting() {
       this.isAscendingSort = !this.isAscendingSort;
+      // Implement your sorting logic here based on the current sorting state.
+    }
+    toggleSorting1() {
+      this.isAscendingSort1 = !this.isAscendingSort1;
       // Implement your sorting logic here based on the current sorting state.
     }
   siteCreate(){

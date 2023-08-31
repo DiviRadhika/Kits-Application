@@ -141,10 +141,12 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Country </label><label style="color: red;margin-left: 4px;" >*</label>
-                      <select  formControlName="country" class="form-select" aria-label="Default select example">
-                        <option  selected value="">Select Country</option>
-                        <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
-                      </select >
+                      <select formControlName="country" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select Country</option>
+                      <option *ngFor="let c of countries" [value]="c.name">
+                        {{c.name}}</option>
+                    </select>
                     
                       <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
                         Country is required.     
@@ -162,18 +164,21 @@ class="form-control" id="Address" maxlength="80" placeholder="Enter Address 2(op
                 <br>
                 <div class="row">
                   
-                  <div class="col-md-4">
-                    <div class="form-group">
+                  <div *ngIf="stateenable" class="col-md-4">                    <div class="form-group">
                       <label>Region/State </label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" class="form-control" id="Region" maxlength="40" placeholder="Enter Region/ State"
-                        formControlName="region"
-                        [class.is-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
+                      <select formControlName="region" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select State</option>
+                      <option *ngFor="let s of states" [value]="s.name">
+                        {{s.name}}
+                      </option>
+                    </select>
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
                         Region is required.
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div *ngIf="districtEnable" class="col-md-4">
                     <div class="form-group">
                       <label>District</label>
                       <input type="text" 
@@ -185,8 +190,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
+                  <div *ngIf="districtEnable" class="col-md-4">                    <div class="form-group">
                       <label>City </label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
@@ -196,9 +200,8 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                     </div>
                   </div>
                </div>
-               <br>
-               <div class="row">
-                  <div class="col-md-4">
+               <div class="row" style="display: flex; margin-top: 13px;">
+                <div class="col-md-4">
                     <div class="form-group">
                       <label>Zip Code </label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"

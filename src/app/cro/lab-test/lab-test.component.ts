@@ -10,6 +10,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrls: ['./lab-test.component.css']
 })
 export class LabTestComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   LabDetails: any[] = [];
   allLabDetails: any;
   materials: any[] = [];
@@ -54,6 +57,7 @@ export class LabTestComponent implements OnInit {
   })
   labFormval: boolean = false;
   isAscendingSort: boolean = true;
+  isAscendingSort1: boolean = true;
 
   disableAdd: boolean = true
   totalCountmaterial = 0;
@@ -71,6 +75,10 @@ export class LabTestComponent implements OnInit {
   }
   toggleSorting() {
     this.isAscendingSort = !this.isAscendingSort;
+    // Implement your sorting logic here based on the current sorting state.
+  }
+  toggleSorting1() {
+    this.isAscendingSort1 = !this.isAscendingSort1;
     // Implement your sorting logic here based on the current sorting state.
   }
   showMat() {

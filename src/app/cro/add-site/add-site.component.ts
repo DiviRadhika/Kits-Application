@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormControl, Validators, ValidationErrors, Form
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { MessageService } from 'primeng/api';
+import { takeLast } from 'rxjs';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-add-site',
@@ -11,6 +13,10 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./add-site.component.css']
 })
 export class AddSiteComponent {
+  countries: any;
+  states: any;
+  stateenable: boolean | undefined;
+  districtEnable: boolean | undefined;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -34,7 +40,8 @@ export class AddSiteComponent {
     private _activatedRoute: ActivatedRoute, private admin: AdminService,
     private fb: FormBuilder, private router: Router,
     private messageService: MessageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dataService:DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -111,7 +118,37 @@ export class AddSiteComponent {
    coordinator_email: new FormControl(''),
 
   });
+  getStatesObservable$ = null;
+  ngOnInit(): void {
+   
+    this.countries = this.dataService.getCountries();
+    this.siteForm.get('country')?.valueChanges.subscribe(country => {
 
+      this.getStatesForCountry(country);
+      this.stateenable = true
+    });
+    this.siteForm.get('region')?.valueChanges.subscribe(country => {
+
+      // this.getStatesForCountry(country);
+      this.districtEnable = true
+    });
+  }
+  getStatesForCountry(country:any){
+    const payload = {
+      country: country
+    }
+   
+    const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
+    getStatesObservable$.subscribe((res: any) => {
+      console.log(res)
+      if(res && res.body && res.body.states) {
+        this.states = this.dataService.getStates(res.body.states);
+        // this.addToStatesList(res.body.states, country);
+      }
+      
+    });
+
+  }
   get contactControls() {
     return (this.investigatorForm.get('investigator') as FormArray).controls;
   }

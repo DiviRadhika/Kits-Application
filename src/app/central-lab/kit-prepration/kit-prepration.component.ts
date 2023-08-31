@@ -12,6 +12,9 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./kit-prepration.component.css']
 })
 export class KitPreprationComponent implements OnInit {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   date: Date | undefined;
 
 
@@ -62,12 +65,12 @@ export class KitPreprationComponent implements OnInit {
         this.getprotocolDetails(this.id)
 
       }
-      if (data.mode === 'add') {
+      // if (data.mode === 'add') {
 
-      }
-      else {
-        router.navigate(['/home/centralLab/kitpreprationedit', this.id])
-      }
+      // }
+      // else {
+      //   router.navigate(['/home/centralLab/kitpreprationedit', this.id])
+      // }
     });
 
 

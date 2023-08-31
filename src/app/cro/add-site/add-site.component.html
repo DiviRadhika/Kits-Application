@@ -22,23 +22,23 @@
                 </li>
 
                 <li class="breadcrumb-item"><a routerLink="/home/cro/siteGrid" class="waves-effect">Site</a></li>
-              
-                  <li *ngIf="!isEdit" class="breadcrumb-item active"> Add Site</li>
-                  <li *ngIf="isEdit" class="breadcrumb-item active">Edit Site</li>
-              
+
+                <li *ngIf="!isEdit" class="breadcrumb-item active"> Add Site</li>
+                <li *ngIf="isEdit" class="breadcrumb-item active">Edit Site</li>
+
                 <!-- <li *ngIf="view" class="breadcrumb-item active">View Site</li> -->
               </ol>
             </div>
-            
+
             <div *ngIf="view" class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
 
                 <li class="breadcrumb-item"><a routerLink="/home/cro/siteGrid" class="waves-effect">Site</a></li>
-              
-                
-              
+
+
+
                 <li *ngIf="view" class="breadcrumb-item active">View Site</li>
               </ol>
             </div>
@@ -60,11 +60,8 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Site Code</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control" id="SiteCode" placeholder="Enter Site Code"
+                      <label>Site Code</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type="text" class="form-control" id="SiteCode" placeholder="Enter Site Code"
                         formControlName="site_data_code" maxlength="10"
                         [class.is-invalid]="shouldShowRequired('site_data_code') && siteForm.get('site_data_code')?.touched">
 
@@ -77,12 +74,9 @@ class="form-control" id="SiteCode" placeholder="Enter Site Code"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
-                        formControlName="site_data_name"
+                      <label>Site Name</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type="text" class="form-control" maxlength="100" id="SiteName"
+                        placeholder="Enter Site Name" formControlName="site_data_name"
                         [class.is-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('site_data_name')" class="invalid-feedback">
                         Site Name is required.
@@ -93,11 +87,8 @@ class="form-control" maxlength="100" id="SiteName" placeholder="Enter Site Name"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Legal Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
+                      <label>Legal Site Name</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                         formControlName="legal_site_data_name" maxlength="100"
                         [class.is-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_site_data_name')" class="invalid-feedback">
@@ -178,11 +169,8 @@ class="form-control" id="email" placeholder="Enter Email"
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Address 1</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control" id="Address 1" placeholder="Enter Address 1"
+                      <label>Address 1</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1" maxlength="80"
                         [class.is-invalid]="shouldShowRequired('address_1') && siteForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
@@ -194,21 +182,19 @@ class="form-control" id="Address 1" placeholder="Enter Address 1"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" 
-
-
-class="form-control" id="Address" placeholder="Enter Address 2(optional)"
+                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                         formControlName="address_2" maxlength="80">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Country</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <select formControlName="country" class="form-select" aria-label="Default select example">
-                        <option selected value="">Select Country</option>
-                        <option *ngFor="let option of myData" [value]="option.value">{{ option.text }}</option>
-                      </select>
-
+                      <label>Country</label><label style="color: red;margin-left: 4px;">*</label>
+                      <select formControlName="country" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select Country</option>
+                      <option *ngFor="let c of countries" [value]="c.name">
+                        {{c.name}}</option>
+                    </select>
                       <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
                         Country is required.
                       </div>
@@ -221,36 +207,35 @@ class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                 <br>
 
                 <div class="row">
-                  <div class="col-md-4">
+                  <div *ngIf="stateenable" class="col-md-4">
                     <div class="form-group">
-                     <label>Region/State</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-maxlength="40" class="form-control" id="Region" placeholder="Enter Region/ State"
-                        formControlName="region"
-                        [class.is-invalid]="shouldShowRequired('region') && siteForm.get('region')?.touched">
+                      <label>Region/State</label><label style="color: red;margin-left: 4px;">*</label>
+                      <select formControlName="region" maxlength="40" class="form-select"
+                      aria-label="Default select example">
+                      <option selected value="">Select State</option>
+                      <option *ngFor="let s of states" [value]="s.name">
+                        {{s.name}}
+                      </option>
+                    </select>
                       <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
                         Region is required.
                       </div>
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="form-group">
+                  <div *ngIf="districtEnable" class="col-md-4">    
+                       <div class="form-group">
                       <label>District</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="40" id="District" placeholder="Enter District"
+                      <input type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
                         formControlName="district">
 
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                     <label>City</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
+                  <div *ngIf="districtEnable" class="col-md-4">
+                      <div class="form-group">
+                      <label>City</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City"
+                        formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
@@ -258,19 +243,11 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                     </div>
                   </div>
                 </div>
-                <br>
-                <div class="row">
-
-
-
-
+                <div class="row" style="display: flex; margin-top: 13px;">
                   <div class="col-md-4">
                     <div class="form-group">
-                     <label>Zip Code</label><label style="color: red;margin-left: 4px;" >*</label>
-                      <input type="text" 
-
-
-class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip Code"
+                      <label>ZipCode</label><label style="color: red;margin-left: 4px;">*</label>
+                      <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -296,32 +273,26 @@ class="form-control"     maxlength="12"    id="Zip Code" placeholder="Enter Zip 
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="20" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
-                        formControlName="office_telephone">
+                      <input type="text" class="form-control" maxlength="20"
+                        (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone"
+                        placeholder="Enter Office Telephone" formControlName="office_telephone">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text"  (input)="validateMobileNumber($event.target, 'office')"
-
-
-class="form-control"   maxlength="10" id="Extension" placeholder="Enter Extension"
-                        formControlName="extension">
+                      <input type="text" (input)="validateMobileNumber($event.target, 'office')" class="form-control"
+                        maxlength="10" id="Extension" placeholder="Enter Extension" formControlName="extension">
 
                     </div>
                   </div>
-               
+
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                              <input type="text" 
-
-
-maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">
+                      <input type="text" maxlength="20" class="form-control" id="mobile_no"
+                        placeholder="Enter Mobile Number" formControlName="mobile_telephone"
+                        (input)="validateMobileNumber($event.target, 'mobile')">
 
                     </div>
                   </div>
@@ -332,10 +303,7 @@ maxlength="20" class="form-control"  id="mobile_no" placeholder="Enter Mobile Nu
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
+                      <input type="text" class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
                         formControlName="website">
 
                     </div>
@@ -344,10 +312,7 @@ class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Email Id</label>
-                      <input type="text" 
-
-
-class="form-control" maxlength="100" id="email" placeholder="Enter Email"
+                      <input type="text" class="form-control" maxlength="100" id="email" placeholder="Enter Email"
                         formControlName="email">
                     </div>
                   </div>
@@ -364,12 +329,13 @@ class="form-control" maxlength="100" id="email" placeholder="Enter Email"
 
               <div *ngIf="!isEdit" class="row">
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button style="margin-right: -17px" (click)="addInvestigators()" class="btn btn-primary">Add CRA</button>
+                  <button style="margin-right: -17px" (click)="addInvestigators()" class="btn btn-primary">Add
+                    CRA</button>
                 </div>
-               
+
                 <div class="col-md-8 mb-3"></div>
 
-                <div  *ngIf="table" class="col-md-12 mb-3">
+                <div *ngIf="table" class="col-md-12 mb-3">
                   <form [formGroup]="investigatorForm">
                     <div formArrayName="investigator">
                       <div class="table-responsive">
@@ -397,43 +363,35 @@ class="form-control" maxlength="100" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone"
+                                <input type="text" class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " maxlength="60" formControlName="email">
                               </td>
                               <td>
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone"
-                                  placeholder="Enter Mobile Number" maxlength="20" (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Mobile Number" maxlength="20"
+                                  (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                               <td>
                                 <button type="button" (click)="removeSite(i)" style="background-color: red;"
                                   class="btn btn-danger">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                    <path
+                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                                   </svg>
-                                  </button>
+                                </button>
                                 <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
                               </td>
                             </tr>
@@ -447,18 +405,21 @@ class="form-control" id="Office Telephone"
                 </div>
               </div>
               <div *ngIf="isEdit" class="row">
+
+
+
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button style="margin-right: -17px" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                  <button *ngIf="!view" style="margin-right: -17px" (click)="addInvestigatorse()"
+                    class="btn btn-primary">Add CRA</button>
                 </div>
-               
+
                 <!-- <div class="col-3 mt-auto mb-2 ">
 
                   <button *ngIf="!view" (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
                 </div> -->
                 <div class="col-md-8 mb-3"></div>
 
-                <div *ngIf ="tableE"
-                Eclass="col-md-12 mb-3">
+                <div *ngIf="tableE" Eclass="col-md-12 mb-3">
                   <form [formGroup]="investigatorFormedit">
                     <div formArrayName="investigatoredit">
                       <div class="table-responsive">
@@ -470,7 +431,7 @@ class="form-control" id="Office Telephone"
                               <th>Last Name</th>
                               <th>Email Id</th>
                               <th>Mobile Phone</th>
-                              <th>Delete</th>
+                              <th *ngIf="!view">Delete</th>
 
 
                             </tr>
@@ -486,43 +447,38 @@ class="form-control" id="Office Telephone"
                               </th>
 
                               <th scope="row">
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone" placeholder="Enter Name "
+                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" 
-
-
-class="form-control" id="Office Telephone"
-                                  placeholder="Enter Email Id " formControlName="email" maxlength="60" >
+                                <input type="text" class="form-control" id="Office Telephone"
+                                  placeholder="Enter Email Id " formControlName="email" maxlength="60">
                               </td>
                               <td>
                                 <input type="text" class="form-control" id="Office Telephone"
-                                  placeholder="Enter Mobile Number" maxlength="20" (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
+                                  placeholder="Enter Mobile Number" maxlength="20"
+                                  (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
-                              <td>
+                              <td *ngIf="!view">
                                 <button type="button" (click)="removeeditSite(i)" style="background-color: red;"
                                   class="btn btn-danger">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                    <path
+                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                                   </svg>
-                                  </button>
+                                </button>
                                 <!-- <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i> -->
                               </td>
-                            
+
                             </tr>
 
 
@@ -539,22 +495,23 @@ class="form-control" id="Office Telephone"
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
               <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
 
-              <button style="margin: 2px; font-size: 12px;"  *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+              <button style="margin: 2px; font-size: 12px;" *ngIf="!view" (click)="submit()"
+                class="btn btn-primary">Submit</button>
             </div>
- 
+
           </div>
         </div>
 
-       
+
       </form>
     </div>
   </div>
 </div>
 <footer class="footer" style="position: fixed;">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
-      </div>
+    <div class="row">
+      <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+    </div>
   </div>
 </footer>
 <!-- end main content-->

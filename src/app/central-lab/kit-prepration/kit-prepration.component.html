@@ -176,7 +176,7 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names}}">
+                                                header="{{item.alternate_names | titlecase}}">
 
                                                 <h3> {{item.kit_variant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
@@ -192,7 +192,10 @@
                                                         <p>{{items}}</p>
                                                     </div>
                                                     <br>
-
+                                                    <h5 class="mb-sm-0 font-size-18">
+                                                        Materials
+                                                    </h5>
+                                                    <hr />
                                                     <div class="row card-group">
                                                         <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
                                                             <p-card [style]="{width: '200px', height:'300px'}"
@@ -325,7 +328,7 @@
         <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6"> © Roboxa</div>
+                    <div class="col-sm-6">{{ getCurrentYear()}} © Roboxa</div>
                 </div>
             </div>
         </footer>
