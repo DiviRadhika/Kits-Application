@@ -54,7 +54,7 @@ export class ProtocolGridComponent implements OnInit {
     // Implement your sorting logic here based on the current sorting state.
   }
   toggleSorting1() {
-    this.isAscendingSort = !this.isAscendingSort;
+    this.isAscendingSort1 = !this.isAscendingSort1;
     // Implement your sorting logic here based on the current sorting state.
   }
   siteCreate(){

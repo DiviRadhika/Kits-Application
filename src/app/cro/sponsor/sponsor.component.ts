@@ -103,17 +103,7 @@ export class SponsorComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.admin.country().subscribe((resp: any) => {
-      this.myData = resp;
-
-    });
-    this.contactForm = this.formBuilder.group({
-      contacts: this.formBuilder.array([])
-    });
-
-    this.editcontactsForm = this.formBuilder.group({
-      editcontacts: this.formBuilder.array([]),
-    });
+   
 
     
     this.countries = this.dataService.getCountries();
@@ -128,6 +118,15 @@ export class SponsorComponent implements OnInit {
       // this.getStatesForCountry(country);
       this.districtEnable = true
     })
+   
+    this.contactForm = this.formBuilder.group({
+      contacts: this.formBuilder.array([])
+    });
+
+    this.editcontactsForm = this.formBuilder.group({
+      editcontacts: this.formBuilder.array([]),
+    });
+    this.getSponsorDetails()
   }
   getStatesForCountry(country:any){
     const payload = {
@@ -142,18 +141,7 @@ export class SponsorComponent implements OnInit {
       }
       
     });
-
-  
-
-
-
-
-
-
-
-
-
-    this.getSponsorDetails()
+    
   }
 removeeditsponser(j: number) {
   this.editcontactsForm.get('editcontacts').removeAt(j);

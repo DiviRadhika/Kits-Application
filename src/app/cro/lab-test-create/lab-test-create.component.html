@@ -211,10 +211,7 @@ class="form-control" id="District"
                                     <div class="col-md-4">
                                         <div class="form-group">
                                            <label>Zip Code<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                            <input type="text" 
-
-
-class="form-control" id="Zip Code" (input)="validateMobileNumber($event.target, 'office')"
+                                            <input type="text" class="form-control" id="Zip Code" maxlength="12"
                                                 placeholder="Enter Zip Code" formControlName="zip_code"
                                                 [class.is-invalid]="shouldShowRequired('zip_code') && labTestCreateForm.get('zip_code')?.touched">
                                             <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">

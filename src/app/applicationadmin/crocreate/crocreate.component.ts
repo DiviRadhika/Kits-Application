@@ -52,14 +52,7 @@ export class CROcreateComponent implements OnInit {
 
       }
     });
-    this.admin.country().subscribe((resp: any) => {
-      const countries = [];
-      for (let i = 0; i < resp.length; ++i) {
-          const country = resp[i];
-          countries.push({ text: country.text, value: country.value });
-      }
-      this.myData = countries;
-  });
+  
   }
 
   public CroForm: FormGroup = new FormGroup({

@@ -25,6 +25,11 @@ export class CroGridComponent implements OnInit {
   isAscendingSort2: boolean = true;
 
 
+
+  isMenuOpen: boolean = false;
+
+
+
   allcroDetails: any;
   sortedColumn: string = '';
   sortDirection: number = 1; // 1 for ascending, -1 for descending
@@ -81,13 +86,18 @@ export class CroGridComponent implements OnInit {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }
-  toggleSorting2(){
-    this.isAscendingSort2 = !this.isAscendingSort2;
-  }
   toggleSorting1(){
     this.isAscendingSort1 = !this.isAscendingSort1;
   }
 
+  toggleSorting2(){
+    this.isAscendingSort2 = !this.isAscendingSort2;
+  }
+  
+
+
+
+  
 
   
   edit(id: string, val: string) {

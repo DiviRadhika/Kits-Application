@@ -1,10 +1,11 @@
-export const api = "http://35.244.51.230:5001/api";
-export const api2 = "http://35.244.51.230:5001/api";
-export const country = 'https://trial.mobiscroll.com/content/countries.json'
-export const apin = "http://35.244.51.230:5001/api";
-const apiUrl = "http://35.244.51.230:5001/api" as any;
-// Now TypeScript will not raise an error when accessing apiUrl.api
-apiUrl:'http://122.175.43.71:5000/api'
+
+// export const apin = "http://35.244.51.230:5001/api";
+
+// export const apin = "http://35.244.51.230:5001/api";
+export const apin = "http://122.175.43.71:5001/api"
+
+
+
 export const state ='http://122.175.43.71:5000/api'
 
 export const endPointsUser = {

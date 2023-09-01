@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { api, apin } from './api';
+import { apin } from './api';
 import { state }  from './api';
 @Injectable({ providedIn: 'root' })
 export class DataService {

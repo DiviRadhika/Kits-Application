@@ -220,7 +220,7 @@ class="form-control" maxlength="80" id="Address" placeholder="Enter Address 2(op
 
 
 class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
+                        formControlName="zip_code" 
                         [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is required

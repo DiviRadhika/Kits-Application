@@ -205,7 +205,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                     <div class="form-group">
                       <label>Zip Code </label><label style="color: red;margin-left: 4px;" >*</label>
                       <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
-                        formControlName="zip_code" (input)="validateMobileNumber($event.target, 'office')"
+                        formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
                         Zipcode is required.
