@@ -121,6 +121,7 @@ export class KitVerificationComponent implements OnInit {
       this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
 
         this.skDetails = protocolsData.data.screening_kit_details
+        console.log(this.skDetails.length)
         this.vkDetails = protocolsData.data.visit_kit_details
         console.log(this.vkDetails);
         console.log(protocolsData)
@@ -266,6 +267,7 @@ export class KitVerificationComponent implements OnInit {
     this.protocolService.getPreparationById(this.uuid).subscribe((protocolsData) => {
       console.log(protocolsData);
       this.skDetails = protocolsData.data.screening_kit_details;
+     
       this.vkDetails = protocolsData.data.visit_kit_details;
       console.log(this.vkDetails);
 

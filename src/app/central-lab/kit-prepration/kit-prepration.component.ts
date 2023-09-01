@@ -276,8 +276,8 @@ export class KitPreprationComponent implements OnInit {
       }
 
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      this.scount = protocols.visit_kit_details[0].visit_kit_count
-      // this.scount = protocols.screening_kit_details[0].screening_kit_count
+      // this.scount = protocols.visit_kit_details[0].visit_kit_count
+      this.scount = protocols.screening_kit_details[0].screening_kit_count
       this.visitRecords = []
       this.visitRecordsRow = []
       this.tets = []
@@ -564,7 +564,8 @@ export class KitPreprationComponent implements OnInit {
 
     }
     // sessionStorage.setItem('vmdet', JSON.stringify(data));
-
+    console.log(this.ScreenKitForm.value.screenKitList);
+    console.log(this.ScreenKitForm.value.screenKitList.length);
     console.log(data);
 
     this.protocolService.postPreparation(data).subscribe(

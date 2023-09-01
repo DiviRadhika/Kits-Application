@@ -305,20 +305,20 @@ export class KitPreprationEditComponent implements OnInit {
             // visitKitListArray.at(j).get('kitId')?.patchValue(this.getLabKitId(i, j));
             const kitIdControl = visitKitListArray.at(j).get('kitId');
             if (kitIdControl) {
-                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
                 kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
                
             }
          
             const ckitIdControl = visitKitListArray.at(j).get('ckitId');
             if (ckitIdControl) {
-                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                const vkDetailForRowAndTab = this.vkDetails[i][j]; 
                 ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
                
             }
             const expirydControl = visitKitListArray.at(j).get('expiryDate');
             if (expirydControl) {
-                const vkDetailForRowAndTab = this.vkDetails[i][j]; // Assuming vkDetails is an array of arrays
+                const vkDetailForRowAndTab = this.vkDetails[i][j]; 
                 expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
             }
             const prepControl = visitKitListArray.at(j).get('prepration');
@@ -590,15 +590,20 @@ export class KitPreprationEditComponent implements OnInit {
       })
 
     }
+  
+
     this.skDetails.forEach((protocol: any, index: any) => {
-
-      // this.vMatDetails.forEach((data:any,index: any)=>{
-        // protocol.verification_status = false
-      protocol.ckitId = this.ScreenKitForm.value.screenKitList[index].ckitId
-
-      protocol.prepration = this.ScreenKitForm.value.screenKitList[index].prepration
-       protocol.expiryDate = this.ScreenKitForm.value.screenKitList[index].expiryDate
-    })
+      const screenKitListItem = this.ScreenKitForm.value.screenKitList[index];
+    
+      if (screenKitListItem) {
+        protocol.ckitId = screenKitListItem.ckitId;
+        protocol.prepration = screenKitListItem.prepration;
+        protocol.expiryDate = screenKitListItem.expiryDate;
+      } else {
+      
+      }
+    });
+    console.log(this.skDetails, this.skDetails.length)
 
     const data = {
       "protocol_id": this.id,
