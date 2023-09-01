@@ -155,8 +155,8 @@
             rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-button style="font-size: 10px;" (click)="confirm2()" label="Delete"></p-button>
-        <p-dialog [class.overlay]="addprofile" [(visible)]="addprofile" *ngIf="addprofile">
-            <div class="view" style="width: 200px;">
+        <p-dialog  [style]="{width: '30vw', height:'30vw'}"  [class.overlay]="addprofile" [(visible)]="addprofile" *ngIf="addprofile">
+            <div class="view" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
                     class="bi bi-person-check-fill" viewBox="0 0 15 15">
                     <path fill-rule="evenodd"
@@ -181,7 +181,7 @@
                 <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword" style="position: fixed;">
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label><label style="color: red;margin-left: 4px;">*</label>
-                        <input type="text" *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
+                        <input type="text"  *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
                         <input type="text" *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
@@ -194,7 +194,7 @@
                     </div>
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label><label style="color: red;margin-left: 4px;">*</label>
-                        <input style="text-align: center;" type="text" class="text-center mb-3"
+                        <input style="text-align: center;" type="text" class="text-center mb-3" autocomplete="off"
                             (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp" class="form-control"
                             placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
@@ -205,7 +205,7 @@
                             <label for="password" *ngIf="passwordvisible"
                                 class="password-label form-group has-top-label w-100">
                                 <span>Previous Password</span><label style="color: red;margin-left: 4px;">*</label>
-                                <input class="form-control" id="password" [type]="showPassword ? 'text' : 'password'"
+                                <input class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" autocomplete="off"
                                     formControlName="passwordp" (paste)="preventPaste($event)" maxlength="16"
                                     class="form-control text-center mb-3" id="" placeholder="Previous Password">
                                 <button type="button" class="eye-button" tabindex="-1"

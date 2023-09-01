@@ -368,7 +368,8 @@ export class HomeComponent implements OnInit {
                 this.admin.reset(obj).subscribe(
                   (data: any) => {
                     this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Reset Successfully'});
-          
+                    this.updatepasswordForm.reset();
+
                     console.log(data);
                     this.updatepassword = false
                     this.passwordvisible=false

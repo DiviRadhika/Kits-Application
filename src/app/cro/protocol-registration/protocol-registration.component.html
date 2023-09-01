@@ -74,19 +74,19 @@
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Global Sample Size<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" maxlength="5" (input)="validateMobileNumber($event.target, 'office')"
-                      id="" placeholder="Global Sample Size"
+                      id="" placeholder="Enter Global Sample Size"
                       [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
-                    (&nbsp;<input class="form-check-input" maxlength="5" (change)="avantCheck($event)" formControlName="avantc" (input)="validateMobileNumber($event.target, 'office')"
+                    (&nbsp;<input class="form-check-input"  placeholder="Enter Avant Sante Sample Size " maxlength="5" (change)="avantCheck($event)" formControlName="avantc" (input)="validateMobileNumber($event.target, 'office')"
                       type="checkbox" value="checked" id="debugInfo" />
                     &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
 
                     <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size" (blur)="getsize()"
-                      class="form-control" id="" placeholder="Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
+                      class="form-control" id="" placeholder="Enter Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
                       [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
                 </div>
@@ -94,7 +94,7 @@
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" maxlength="5" type="number" autocomplete="off" formControlName="kit_variant_count"  (input)="validateMobileNumber($event.target, 'office')"
-                      (blur)="variantCount()" class="form-control" id="" placeholder="Kit Variant Count"
+                      (blur)="variantCount()" class="form-control" id="" placeholder="Enter Kit Variant Count"
                       [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                     <label for="formrow-firstname-input" class="form-label">Total No.of Visits<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
-                      placeholder="Total No.of Visits" (blur)="visits($event)" class="form-control"
+                      placeholder="Enter Total No.of Visits" (blur)="visits($event)" class="form-control"
                       [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">No.of Screens<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
-                    (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="No.of Screens"
+                    (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
                       [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
@@ -121,7 +121,7 @@
                     <label for="formrow-firstname-input" class="form-label">Screen Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
-                      class="form-control" id="" placeholder="Screen Kit Count"
+                      class="form-control" id="" placeholder="Enter Screen Kit Count"
                       [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
@@ -130,7 +130,7 @@
                     <label for="formrow-firstname-input" class="form-label">Visit Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')"formControlName="selected_visit_count"
-                      class="form-control" id="" placeholder="Visit Kit Count"
+                      class="form-control" id="" placeholder="Enter Visit Kit Count"
                       [class.is-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
                   </div>
                 </div>
@@ -334,7 +334,7 @@
                         ">
 
                         <td>
-                          <input autocomplete="off" type="text" placeholder="Variant" formControlName="variant"
+                          <input autocomplete="off" type="text" placeholder="Enter Variant" formControlName="variant"
                             class="form-control" value="" [disabled]="true" readonly />
 
                         </td>

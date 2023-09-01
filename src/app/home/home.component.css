@@ -106,6 +106,7 @@ input[type=password] {
   color: #59c3da;
   margin-left: 22px;
   margin-top: -2px;
+  width: 50px;
 }
 label {
    

@@ -65,12 +65,12 @@ export class KitPreprationComponent implements OnInit {
         this.getprotocolDetails(this.id)
 
       }
-      // if (data.mode === 'add') {
+      if (data.mode === 'add') {
 
-      // }
-      // else {
-      //   router.navigate(['/home/centralLab/kitpreprationedit', this.id])
-      // }
+      }
+      else {
+        router.navigate(['/home/centralLab/kitpreprationedit', this.id])
+      }
     });
 
 
