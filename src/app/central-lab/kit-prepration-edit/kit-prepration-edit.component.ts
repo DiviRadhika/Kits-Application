@@ -558,7 +558,7 @@ export class KitPreprationEditComponent implements OnInit {
   }
 
   SubmitData() {
-    console.log(this.skDetails);
+    // console.log(this.skDetails);
     // this.loading = true
     // let payload = this.ScreenKitForm.getRawValue();
     // payload['alternate_names'] = this.utilsService.sentenceCase(payload['alternate_names']);
@@ -595,6 +595,7 @@ export class KitPreprationEditComponent implements OnInit {
       // this.vMatDetails.forEach((data:any,index: any)=>{
         // protocol.verification_status = false
       protocol.ckitId = this.ScreenKitForm.value.screenKitList[index].ckitId
+
       protocol.prepration = this.ScreenKitForm.value.screenKitList[index].prepration
        protocol.expiryDate = this.ScreenKitForm.value.screenKitList[index].expiryDate
     })

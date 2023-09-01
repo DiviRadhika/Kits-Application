@@ -1,8 +1,8 @@
 
 // export const apin = "http://35.244.51.230:5001/api";
 
-// export const apin = "http://35.244.51.230:5001/api";
-export const apin = "http://122.175.43.71:5001/api"
+export const apin = "http://35.244.51.230:5001/api";
+// export const apin = "http://122.175.43.71:5001/api"
 
 
 
