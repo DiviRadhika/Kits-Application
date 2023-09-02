@@ -43,7 +43,7 @@ export class KitVerificationComponent implements OnInit {
 
 
 
-  constructor(private protocolService: ProtocolService, 
+  constructor(private protocolService: ProtocolService,
     private formBuilder: FormBuilder,
     private messageService: MessageService) {
 
@@ -60,7 +60,9 @@ export class KitVerificationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['Not Verified', 'Verified']
+  preprationData = [{ name: 'Not Verified', value: 'Not Verified' },
+  { name: 'Verified', value: 'Verified' },
+  ]
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -98,8 +100,8 @@ export class KitVerificationComponent implements OnInit {
 
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
-      
-    this.details = protocols
+
+      this.details = protocols
 
       this.ProtoData(protocols);
     });
@@ -121,87 +123,92 @@ export class KitVerificationComponent implements OnInit {
       this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
 
         this.skDetails = protocolsData.data.screening_kit_details
-        console.log(this.skDetails.length)
+        console.log(this.skDetails)
         this.vkDetails = protocolsData.data.visit_kit_details
         console.log(this.vkDetails);
         console.log(protocolsData)
 
 
-      });
-    
-      this.displayValues = true;
-      this.protocolIdDetails = protocols.protocol
-      this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      this.preparationForm.controls['specialInstructions'].disable()
-      this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
-      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      // this.scount = protocols.screening_kit_details[0].screening_kit_count
-      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
-        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
-        this.screenDetails = this.screeningFullData.selectedLabTests
-        this.sMatDetails = this.screeningFullData.visits;
-        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
-        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
-      } else {
-      }
 
-      this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      // this.scount = protocols.visit_kit_details[0].visit_kit_count
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
-
-      this.tets = []
-
-      this.vMatDetails.forEach((tabs: any) => {
-        tabs.visitKitFormGroup = this.formBuilder.group({
-
-          visitKitList: this.formBuilder.array([]),
-        });
-        const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-        for (let i = 1; i <= this.vcount; i++) {
-          visitKitListArray.push(this.createVisitKitGroup());
-          console.log(tabs.visitKitFormGroup[i]);
+        this.displayValues = true;
+        this.protocolIdDetails = protocols.protocol
+        this.protoName = this.protocolIdDetails.protocol_name
+        this.preparationForm.controls['protocol_name'].disable()
+        this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+        this.preparationForm.controls['specialInstructions'].disable()
+        this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
+        // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+        // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+        // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+        // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+        // this.scount = protocols.screening_kit_details[0].screening_kit_count
+        // this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+          this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+          this.screenDetails = this.screeningFullData.selectedLabTests
+          this.sMatDetails = this.screeningFullData.visits;
+          this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+          this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+        } else {
         }
-        tabs.visitsList = visitKitListArray
-        for (let i = 0; i < this.vMatDetails.length; i++) {
-          const tabs = this.vMatDetails[i];
+
+        this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        // this.scount = protocols.visit_kit_details[0].visit_kit_count
+        this.scount = protocols.screening_kit_details[0].screening_kit_count
+
+        this.tets = []
+
+        this.vMatDetails.forEach((tabs: any) => {
           tabs.visitKitFormGroup = this.formBuilder.group({
+
             visitKitList: this.formBuilder.array([]),
           });
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-
-          for (let j = 0; j < this.vcount; j++) {
+          for (let i = 1; i <= this.vcount; i++) {
             visitKitListArray.push(this.createVisitKitGroup());
+            console.log(tabs.visitKitFormGroup[i]);
+          }
+          tabs.visitsList = visitKitListArray
+          for (let i = 0; i < this.vMatDetails.length; i++) {
+            const tabs = this.vMatDetails[i];
+            tabs.visitKitFormGroup = this.formBuilder.group({
+              visitKitList: this.formBuilder.array([]),
+            });
+            const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
+
+            for (let j = 0; j < this.vcount; j++) {
+              visitKitListArray.push(this.createVisitKitGroup());
+
+              const statusControl = visitKitListArray.at(j).get('status');
+              if (statusControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                statusControl.patchValue(vkDetailForRowAndTab.verification_status);
+
+              }
 
 
+            }
 
-
+            tabs.visitsList = visitKitListArray;
+            this.tets.push(tabs.selectedLabTests);
           }
 
-          tabs.visitsList = visitKitListArray;
-          this.tets.push(tabs.selectedLabTests);
+          this.tets.push(tabs.selectedLabTests)
+        });
+
+        for (let i = 1; i <= this.scount; i++) {
+          this.adjustScreenKitRows(this.scount, this.skDetails);
         }
 
-        this.tets.push(tabs.selectedLabTests)
-      });
+      }, (err: any) => {
 
-      for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount);
+        this.displayValues = false
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
       }
+      );
 
-    }, (err: any) => {
-
-      this.displayValues = false
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
-
-    }
-    );
-
+    });
 
 
   }
@@ -227,7 +234,7 @@ export class KitVerificationComponent implements OnInit {
   }
 
 
-  adjustScreenKitRows(count: number) {
+  adjustScreenKitRows(count: number, skDetails: any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -240,12 +247,19 @@ export class KitVerificationComponent implements OnInit {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+
+        if (i < skDetails.length) {
+          console.log(skDetails[i].verification_status)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
+
+
+        }
       }
     }
 
 
-  }
 
+  }
 
   addScreenKit(record: any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
@@ -267,7 +281,7 @@ export class KitVerificationComponent implements OnInit {
     this.protocolService.getPreparationById(this.uuid).subscribe((protocolsData) => {
       console.log(protocolsData);
       this.skDetails = protocolsData.data.screening_kit_details;
-     
+      
       this.vkDetails = protocolsData.data.visit_kit_details;
       console.log(this.vkDetails);
 
@@ -318,7 +332,7 @@ export class KitVerificationComponent implements OnInit {
   ProtoData(Protocols: any) {
     Protocols.data.forEach((protocol: any) => {
       console.log(protocol);
-      
+
       this.protocols.push(protocol);
 
     });
@@ -363,7 +377,7 @@ export class KitVerificationComponent implements OnInit {
     this.skDetails.forEach((protocol: any, index: any) => {
 
       // this.vMatDetails.forEach((data:any,index: any)=>{
-        // protocol.verification_status = false
+      // protocol.verification_status = false
       protocol.verification_status = this.ScreenKitForm.value.screenKitList[index].status
     })
 
@@ -384,12 +398,12 @@ export class KitVerificationComponent implements OnInit {
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Verification Updated successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Verification Updated successfully' });
       },
       (err: any) => {
-       
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
-        
+
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
       }
     );
 

@@ -61,7 +61,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Code</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type="text" class="form-control" id="SiteCode" placeholder="Enter Site Code"
+                    <input autocomplete="off" type="text" class="form-control" id="SiteCode" placeholder="Enter Site Code"
                         formControlName="site_data_code" maxlength="10"
                         [class.is-invalid]="shouldShowRequired('site_data_code') && siteForm.get('site_data_code')?.touched">
 
@@ -75,7 +75,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Site Name</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type="text" class="form-control" maxlength="100" id="SiteName"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="SiteName"
                         placeholder="Enter Site Name" formControlName="site_data_name"
                         [class.is-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('site_data_name')" class="invalid-feedback">
@@ -88,7 +88,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal Site Name</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
+                    <input autocomplete="off" type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                         formControlName="legal_site_data_name" maxlength="100"
                         [class.is-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_site_data_name')" class="invalid-feedback">
@@ -104,7 +104,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>User Name</label>
-                      <input type="text" 
+                    <input autocomplete="off" type="text" 
 
 
 class="form-control" id="First Name" placeholder="Enter Name"
@@ -124,7 +124,7 @@ class="form-control" id="First Name" placeholder="Enter Name"
                       <label>Email Id</label>
 
 
-                      <input type="text" 
+                    <input autocomplete="off" type="text" 
 
 
 class="form-control" id="email" placeholder="Enter Email"
@@ -140,7 +140,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Enter Password"
+                    <input autocomplete="off" type="password" class="form-control" id="password" placeholder="Enter Password"
                         formControlName="password">
                       <div *ngIf="shouldShowRequired('password')" class="text-danger">
                         Password is required.
@@ -170,7 +170,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 1</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
+                    <input autocomplete="off" type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1" maxlength="80"
                         [class.is-invalid]="shouldShowRequired('address_1') && siteForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
@@ -182,7 +182,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Address 2</label>
-                      <input type="text" class="form-control" id="Address" placeholder="Enter Address 2(optional)"
+                    <input autocomplete="off" type="text" class="form-control" id="Address" placeholder="Enter Address 2(optional)"
                         formControlName="address_2" maxlength="80">
                     </div>
                   </div>
@@ -226,7 +226,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div *ngIf="districtEnable" class="col-md-4">    
                        <div class="form-group">
                       <label>District</label>
-                      <input type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="40" id="District" placeholder="Enter District"
                         formControlName="district">
 
                     </div>
@@ -234,7 +234,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div *ngIf="districtEnable" class="col-md-4">
                       <div class="form-group">
                       <label>City</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City"
+                    <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City"
                         formControlName="city"
                         [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
@@ -247,7 +247,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>ZipCode</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                         [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
@@ -273,7 +273,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Office Telephone</label>
-                      <input type="text" class="form-control" maxlength="20"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="20"
                         (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone"
                         placeholder="Enter Office Telephone" formControlName="office_telephone">
                     </div>
@@ -281,7 +281,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Extension</label>
-                      <input type="text" (input)="validateMobileNumber($event.target, 'office')" class="form-control"
+                    <input autocomplete="off" type="text" (input)="validateMobileNumber($event.target, 'office')" class="form-control"
                         maxlength="10" id="Extension" placeholder="Enter Extension" formControlName="extension">
 
                     </div>
@@ -290,7 +290,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Mobile Number</label>
-                      <input type="text" maxlength="20" class="form-control" id="mobile_no"
+                    <input autocomplete="off" type="text" maxlength="20" class="form-control" id="mobile_no"
                         placeholder="Enter Mobile Number" formControlName="mobile_telephone"
                         (input)="validateMobileNumber($event.target, 'mobile')">
 
@@ -303,7 +303,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
-                      <input type="text" class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="Address" placeholder="Enter Website"
                         formControlName="website">
 
                     </div>
@@ -312,7 +312,7 @@ class="form-control" id="email" placeholder="Enter Email"
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Email Id</label>
-                      <input type="text" class="form-control" maxlength="100" id="email" placeholder="Enter Email"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="email" placeholder="Enter Email"
                         formControlName="email">
                     </div>
                   </div>
@@ -363,21 +363,21 @@ class="form-control" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " maxlength="60" formControlName="email">
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone"
                                   placeholder="Enter Mobile Number" maxlength="20"
                                   (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
@@ -447,21 +447,21 @@ class="form-control" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone"
                                   placeholder="Enter Email Id " formControlName="email" maxlength="60">
                               </td>
                               <td>
-                                <input type="text" class="form-control" id="Office Telephone"
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone"
                                   placeholder="Enter Mobile Number" maxlength="20"
                                   (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>

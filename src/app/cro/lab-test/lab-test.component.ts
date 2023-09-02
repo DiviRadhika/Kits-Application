@@ -61,6 +61,7 @@ export class LabTestComponent implements OnInit {
 
   disableAdd: boolean = true
   totalCountmaterial = 0;
+  selectedIndex = 0;
   classifications = ['Classification 1', 'Classification 2'];
   constructor(private route: Router, private _cro: CrosService,
     private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -68,6 +69,23 @@ export class LabTestComponent implements OnInit {
   ngOnInit(): void {
     this.labDetailsData();
     this.meterialsData()
+    if (sessionStorage.getItem('tab') === 'yes') {
+      this.yes();
+    }
+    else {
+      this.selectedIndex = 0;
+      sessionStorage.setItem('tab', '');
+    }
+
+  }
+  yes() {
+    if (this.selectedIndex === 0) {
+
+      this.selectedIndex = this.selectedIndex + 1;
+      this.meterialsData()
+    }
+
+    sessionStorage.setItem('tab', '');
   }
   showLab() {
     this.lab = true

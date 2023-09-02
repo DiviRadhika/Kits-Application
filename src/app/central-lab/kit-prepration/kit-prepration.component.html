@@ -46,7 +46,7 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input maxlength="100" type="text" placeholder="Study Name"
+                                  <input autocomplete="off" maxlength="100" type="text" placeholder="Study Name"
                                         formControlName="protocol_name" class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
@@ -135,16 +135,16 @@
                                                     let i = index
                                                   ">
                                                                 <td width="30%">
-                                                                    <input type="text" placeholder="kitId"
+                                                                  <input autocomplete="off" type="text" placeholder="kitId"
                                                                         formControlName="kitId" class="form-control"
                                                                         value="" [disabled]="true" readonly />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="Lab KitId"
+                                                                  <input autocomplete="off" type="text" placeholder="Lab KitId"
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="date" placeholder="Expiry Date"
+                                                                  <input autocomplete="off" type="date" placeholder="Expiry Date"
                                                                         formControlName="expiryDate"
                                                                         class="form-control" />
                                                                 </td>
@@ -236,20 +236,20 @@
                                                             <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                 [formGroupName]="j">
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="kitId"
+                                                                  <input autocomplete="off" type="text" placeholder="kitId"
                                                                         formControlName="kitId" [disabled]="true"
                                                                         readonly [value]="getLabKitId(i, j)"
                                                                         class="form-control" value="" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <input type="text" placeholder="Lab KitId" value=""
+                                                                  <input autocomplete="off" type="text" placeholder="Lab KitId" value=""
                                                                         formControlName="ckitId" class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
                                                                     <!-- <p-calendar [(ngModel)]="date"
                                                                         formControlName="expiryDate"></p-calendar> -->
            
-                                                                        <input type="date" placeholder="Expiry Date" value=""
+                                                                      <input autocomplete="off" type="date" placeholder="Expiry Date" value=""
                                                                         formControlName="expiryDate" class="form-control" />
                                                                     <!-- <input type="text" placeholder="Expiry Date" id="dateInput" formControlName="expiryDate"> -->
 

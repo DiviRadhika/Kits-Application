@@ -79,7 +79,10 @@ export class KitPreprationEditComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['In Progress', 'Completed']
+  // preprationData = ['In Progress', 'Completed']
+  preprationData = [{name:'In Progress',value:'In Progress'},
+  {name:'Completed',value:'Completed'},
+   ]
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -507,6 +510,7 @@ export class KitPreprationEditComponent implements OnInit {
 
         // this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001'+(i+1))
         if (i < skDetails.length) {
+        
           this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
           this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
           this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
@@ -603,7 +607,7 @@ export class KitPreprationEditComponent implements OnInit {
       
       }
     });
-    console.log(this.skDetails, this.skDetails.length)
+  
 
     const data = {
       "protocol_id": this.id,

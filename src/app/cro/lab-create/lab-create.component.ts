@@ -103,6 +103,9 @@ export class LabCreateComponent {
   reset(){
     this.labForm.reset()
   }
+  tabchange(){
+    sessionStorage.setItem('tab', 'yes');  
+  }
   submit() {
     console.log(this.bas2);
     this.labForm.controls['material'].setValue(this.capitalizeFirstLetter(this.labForm.controls['material'].value));
@@ -141,6 +144,7 @@ export class LabCreateComponent {
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Updated successfully' });
 
             }, 1000);
+            sessionStorage.setItem('tab', 'yes');
             this.route.navigate(['/home/cro/labTestGrid'])
           },
           (err: any) => {
@@ -159,8 +163,9 @@ export class LabCreateComponent {
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Created successfully' });
 
             }, 1000);
-
+            sessionStorage.setItem('tab', 'yes');
             this.route.navigate(['/home/cro/labTestGrid'])
+           
           },
           (err: any) => {
             this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });

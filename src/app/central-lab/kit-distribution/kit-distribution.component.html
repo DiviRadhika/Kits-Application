@@ -10,7 +10,8 @@
                 <!-- start page title -->
                 <div class="row">
                     <div class="col-12">
-                        <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <div style="padding:1px"
+                            class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
                                 <i class="bx bxs-dashboard"></i> Kit Distribution
                             </h4>
@@ -18,7 +19,7 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item">
-                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+                                        <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
                                     <li class="breadcrumb-item active">Kit Distribution</li>
                                 </ol>
@@ -33,7 +34,7 @@
                         <form [formGroup]="preparationForm">
                             <div class="row">
                                 <div id="printSection">
-                                
+
                                 </div>
                                 <div class="col-md-4 mb-3">
 
@@ -41,7 +42,7 @@
                                     <label for="formrow-firstname-input" class="form-label">Study ID</label>
                                     <select formControlName="protocolId" (change)="getprotocolDetails($event)"
                                         class="form-select form-control">
-                                        <option  selected value="">Select Study ID</option>
+                                        <option selected value="">Select Study ID</option>
                                         <option *ngFor="let data of protocols" [value]="data.protocol_id">
                                             {{ data.user_protocol_id }}
                                         </option>
@@ -51,11 +52,8 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input autocomplete="off" type="text" 
-
-
-placeholder="Study Name" formControlName="protocol_name"
-                                        class="form-control" value="" />
+                                    <input autocomplete="off" type="text" placeholder="Study Name"
+                                        formControlName="protocol_name" class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
                                     <div class="mb-3">
@@ -77,8 +75,8 @@ placeholder="Study Name" formControlName="protocol_name"
                                 <h4 class="r-blue-text">Kit Details</h4>
                             </div>
                             <div class="col-md-12 mb-3" style="margin-top:-5%">
-                            
-                          
+
+
                                 <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
                                     <div class="tab-pane active" role="tabpanel">
 
@@ -114,7 +112,8 @@ placeholder="Study Name" formControlName="protocol_name"
                                                             [style]="{width: '200px', height:'300px'}"
                                                             styleClass="p-card-shadow">
                                                             <ng-template pTemplate="header">
-                                                                <img style="width:199px; height: 147px;"  src="{{item.image}}" />
+                                                                <img style="width:199px; height: 147px;"
+                                                                    src="{{item.image}}" />
                                                             </ng-template>
                                                             {{ item.material_name || item.meterial_id }} <br>
                                                             size: {{item.size}}<br>
@@ -149,47 +148,42 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="20%">
-                                                                                <input autocomplete="off" type="text" 
-
-
-placeholder="kitId"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="kitId"
                                                                                     class="form-control"
-                                                                                    value="{{item.kitId}}"[disabled]="true"  />
+                                                                                    value="{{item.kitId}}"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="20%">
-                                                                                <input autocomplete="off" type="text" 
-
-
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Lab KitId"
                                                                                     value={{item.ckitId}}
-                                                                                    class="form-control" [disabled]="true" />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}}
-                                                                                    class="form-control" [disabled]="true" />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
-placeholder="Status"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Status"
                                                                                     value={{item.verification_status}}
-                                                                                    class="form-control" [disabled]="true" />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
-                                                                                      
-                                                                        <td width="40%">
-                                                                            <input autocomplete="off" type="text" 
 
+                                                                            <td width="40%">
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Expiration Date"
+                                                                                    value={{item.expiryDate}}
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
+                                                                            </td>
 
-                                                                                placeholder="Expiration Date"
-                                                                                value={{item.expiryDate}}
-                                                                                class="form-control"  [disabled]="true" />
-                                                                        </td>
-                                                                        
 
 
 
@@ -253,8 +247,8 @@ placeholder="Status"
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names | titlecase}}">  
-                                               
+                                                header="{{item.alternate_names | titlecase}}">
+
                                                 <h3> {{item.kit_variant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
                                                     Visit Kit Count : {{vcount}}
@@ -274,9 +268,10 @@ placeholder="Status"
                                                             <p-card [style]="{width: '200px', height:'300px'}"
                                                                 styleClass="p-card-shadow">
                                                                 <ng-template pTemplate="header">
-                                                                    <img style="width:199px; height: 147px;" src="{{items.image}}" />
+                                                                    <img style="width:199px; height: 147px;"
+                                                                        src="{{items.image}}" />
                                                                 </ng-template>
-                                                                 {{ items.material_name || items.meterial_id }}  <br>
+                                                                {{ items.material_name || items.meterial_id }} <br>
                                                                 size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
 
@@ -313,50 +308,45 @@ placeholder="Status"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
-placeholder="kitId"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="kitId"
                                                                                     class="form-control"
-                                                                                    value="{{item.kitId}}" [disabled]="true"  />
+                                                                                    value="{{item.kitId}}"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}}
-                                                                                    class="form-control" [disabled]="true"  />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}}
-                                                                                    class="form-control" [disabled]="true"  />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input autocomplete="off" type="text" 
-
-
-placeholder="Status"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Status"
                                                                                     value={{item.verification_status}}
-                                                                                    class="form-control" [disabled]="true"  />
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
                                                                             </td>
-                                                                            
-                                                                        <td width="25%">
-                                                                            <input autocomplete="off" type="text" 
+
+                                                                            <td width="25%">
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Expiration Date"
+                                                                                    value={{item.expiryDate}}
+                                                                                    class="form-control"
+                                                                                    [disabled]="true" />
+                                                                            </td>
 
 
-                                                                                placeholder="Expiration Date"
-                                                                                value={{item.expiryDate}}
-                                                                                class="form-control"  [disabled]="true" />
-                                                                        </td>
 
 
-
-                                                                         
 
 
                                                                         </tr>
@@ -365,7 +355,7 @@ placeholder="Status"
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <div class="table-responsive"
@@ -413,7 +403,7 @@ placeholder="Status"
                                                     </div>
                                                 </div>
                                             </p-tabPanel>
-<br>
+                                            <br>
 
                                             <div class="col-md-12 mb-3" align="right">
                                                 <div class="mb-2 text-right" width="100%">
@@ -461,7 +451,7 @@ placeholder="Status"
         </div>
         <!-- End Page-content -->
 
-       <footer class="footer" style="position: fixed;">
+        <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">{{ getCurrentYear()}} © Roboxa</div>

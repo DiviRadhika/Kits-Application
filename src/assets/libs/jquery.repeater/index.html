@@ -16,22 +16,22 @@
     <form action="echo.php" class="repeater" enctype="multipart/form-data">
       <div data-repeater-list="group-a">
         <div data-repeater-item>
-          <input name="untyped-input" value="A"/>
+        <input autocomplete="off" name="untyped-input" value="A"/>
     
-          <input type="text" 
+        <input autocomplete="off" type="text" 
 
 
 name="text-input" value="A"/>
     
-          <input type="date" name="date-input"/>
+        <input autocomplete="off" type="date" name="date-input"/>
     
           <textarea name="textarea-input">A</textarea>
     
-          <input type="radio" name="radio-input" value="A" checked/>
-          <input type="radio" name="radio-input" value="B"/>
+        <input autocomplete="off" type="radio" name="radio-input" value="A" checked/>
+        <input autocomplete="off" type="radio" name="radio-input" value="B"/>
     
-          <input type="checkbox" name="checkbox-input" value="A" checked/>
-          <input type="checkbox" name="checkbox-input" value="B"/>
+        <input autocomplete="off" type="checkbox" name="checkbox-input" value="A" checked/>
+        <input autocomplete="off" type="checkbox" name="checkbox-input" value="B"/>
     
           <select name="select-input">
             <option value="A" selected>A</option>
@@ -43,25 +43,25 @@ name="text-input" value="A"/>
             <option value="B" selected>B</option>
           </select>
     
-          <input data-repeater-delete type="button" value="Delete"/>
+        <input autocomplete="off" data-repeater-delete type="button" value="Delete"/>
         </div>
         <div data-repeater-item>
-          <input name="untyped-input" value="A"/>
+        <input autocomplete="off" name="untyped-input" value="A"/>
     
-          <input type="text" 
+        <input autocomplete="off" type="text" 
 
 
 name="text-input" value="B"/>
     
-          <input type="date" name="date-input"/>
+        <input autocomplete="off" type="date" name="date-input"/>
     
           <textarea name="textarea-input">B</textarea>
     
-          <input type="radio" name="radio-input" value="A" />
-          <input type="radio" name="radio-input" value="B" checked/>
+        <input autocomplete="off" type="radio" name="radio-input" value="A" />
+        <input autocomplete="off" type="radio" name="radio-input" value="B" checked/>
     
-          <input type="checkbox" name="checkbox-input" value="A"/>
-          <input type="checkbox" name="checkbox-input" value="B" checked/>
+        <input autocomplete="off" type="checkbox" name="checkbox-input" value="A"/>
+        <input autocomplete="off" type="checkbox" name="checkbox-input" value="B" checked/>
     
           <select name="select-input">
             <option value="A">A</option>
@@ -73,36 +73,36 @@ name="text-input" value="B"/>
             <option value="B" selected>B</option>
           </select>
     
-          <input data-repeater-delete type="button" value="Delete"/>
+        <input autocomplete="off" data-repeater-delete type="button" value="Delete"/>
         </div>
       </div>
-      <input data-repeater-create type="button" value="Add"/>
+    <input autocomplete="off" data-repeater-create type="button" value="Add"/>
     </form>
     
     <h2>Nested</h2>
     <form action="echo.php" class="outer-repeater">
       <div data-repeater-list="outer-group" class="outer">
         <div data-repeater-item class="outer">
-          <input type="text" 
+        <input autocomplete="off" type="text" 
 
 
 name="text-input" value="A" class="outer"/>
-          <input data-repeater-delete type="button" value="Delete" class="outer"/>
+        <input autocomplete="off" data-repeater-delete type="button" value="Delete" class="outer"/>
           <div class="inner-repeater">
             <div data-repeater-list="inner-group" class="inner">
               <div data-repeater-item class="inner">
-                <input type="text" 
+              <input autocomplete="off" type="text" 
 
 
 name="inner-text-input" value="B" class="inner"/>
-                <input data-repeater-delete type="button" value="Delete" class="inner"/>
+              <input autocomplete="off" data-repeater-delete type="button" value="Delete" class="inner"/>
               </div>
             </div>
-            <input data-repeater-create type="button" value="Add" class="inner"/>
+          <input autocomplete="off" data-repeater-create type="button" value="Add" class="inner"/>
           </div>
         </div>
       </div>
-      <input data-repeater-create type="button" value="Add" class="outer"/>
+    <input autocomplete="off" data-repeater-create type="button" value="Add" class="outer"/>
     </form>
     
     <script src="jquery-1.11.1.js"></script>

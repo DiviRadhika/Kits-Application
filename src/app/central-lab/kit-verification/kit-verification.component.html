@@ -52,8 +52,8 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" placeholder="Study Name" formControlName="protocol_name"
-                                        class="form-control" value="" />
+                                    <input autocomplete="off" type="text" placeholder="Study Name"
+                                        formControlName="protocol_name" class="form-control" value="" />
                                 </div>
                                 <div *ngIf="displayValues" class="col-md-12">
                                     <div class="mb-3">
@@ -145,20 +145,21 @@
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="kitId"
                                                                                     class="form-control"
                                                                                     [disabled]="true"
                                                                                     value={{item.kitId}} />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Lab KitId"
                                                                                     value={{item.ckitId}}
                                                                                     [disabled]="true"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}}
                                                                                     class="form-control"
@@ -166,7 +167,7 @@
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control"
@@ -207,12 +208,16 @@
 
                                                                             <td width="25%">
                                                                                 <select formControlName="status"
-                                                                                    class="form-select form-control">
+                                                                                    maxlength="40" class="form-select"
+                                                                                    aria-label="Default select example">
+
                                                                                     <option
-                                                                                        *ngFor="let data of preprationData">
-                                                                                        {{ data }}
+                                                                                        *ngFor="let s of preprationData"
+                                                                                        [value]="s.name">
+                                                                                        {{s.name}}
                                                                                     </option>
                                                                                 </select>
+
                                                                             </td>
 
                                                                         </tr>
@@ -251,7 +256,7 @@
                                                                     <img style="width:199px; height: 147px;"
                                                                         src="{{items.image}}" />
                                                                 </ng-template>
-                                                                 {{ items.material_name || items.meterial_id }}  <br>
+                                                                {{ items.material_name || items.meterial_id }} <br>
                                                                 size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
 
@@ -285,20 +290,21 @@
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="kitId"
                                                                                     class="form-control" readonly
                                                                                     [disabled]="true"
                                                                                     value={{item.kitId}} />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="LabKitId"
                                                                                     value={{item.ckitId}} readonly
                                                                                     [disabled]="true"
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Preparation"
                                                                                     value={{item.prepration}} readonly
                                                                                     [disabled]="true"
@@ -306,7 +312,7 @@
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                                <input autocomplete="off" type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control"
@@ -345,9 +351,10 @@
                                                                                 <select formControlName="status"
                                                                                     class="form-select form-control">
                                                                                     <option
-                                                                                        *ngFor="let data of preprationData">
-                                                                                        {{ data }}
-                                                                                    </option>
+                                                                                    *ngFor="let s of preprationData"
+                                                                                    [value]="s.name">
+                                                                                    {{s.name}}
+                                                                                </option>
                                                                                 </select>
                                                                             </td>
 

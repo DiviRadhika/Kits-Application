@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
-                                        class="waves-effect">Material</a></li>
+                                      (click)="tabchange()"  class="waves-effect">Material</a></li>
                                 <li *ngIf="!isEdit" class="breadcrumb-item active">Add Material</li>
                                 <li *ngIf="isEdit" class="breadcrumb-item active">Edit Material</li>
                             </ol>
@@ -58,7 +58,7 @@
                                     <div class="form-group">
 
                                        <label>Material<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                        <input type="text" class="form-control" id="material" formControlName="material"
+                                      <input autocomplete="off" type="text" class="form-control" id="material" formControlName="material"
                                             placeholder=" Enter Material"
                                             [class.is-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
                                         <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">
@@ -84,7 +84,7 @@
                                             (click)="fileInput.click()">Upload Image</button>
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
-                                                <input type="file" accept=".jpg,.png" class="form-control"
+                                              <input autocomplete="off" type="file" accept=".jpg,.png" class="form-control"
                                                     formControlName="image" #fileInput
                                                     (change)="uploadFile($event, false)" id="image"
                                                     placeholder="Select Image">

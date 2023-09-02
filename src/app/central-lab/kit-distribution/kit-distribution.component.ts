@@ -125,7 +125,7 @@ export class KitDistributionComponent implements OnInit {
         console.log(this.vkDetails);
 
 
-      });
+    
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
@@ -176,7 +176,12 @@ export class KitDistributionComponent implements OnInit {
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
          
-           
+            const siteControl = visitKitListArray.at(j).get('siteId');
+            if (siteControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                siteControl.patchValue(vkDetailForRowAndTab.site_id);
+               
+            }
            
 
           }
@@ -189,7 +194,7 @@ export class KitDistributionComponent implements OnInit {
       });
 
       for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount);
+        this.adjustScreenKitRows(this.scount, this.skDetails);
       }
     }, (err: any) => {
 
@@ -198,7 +203,7 @@ export class KitDistributionComponent implements OnInit {
 
     }
     );
-
+  });
   }
 
 
@@ -313,7 +318,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
   }
 
-  adjustScreenKitRows(count: number) {
+  adjustScreenKitRows(count: number, skDetails:any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -326,6 +331,12 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+        if (i < skDetails.length) {
+       
+          this.ScreenKitForm.get('screenKitList').controls[i].get('siteId').patchValue(skDetails[i].site_id);
+        
+       
+        }
       }
     }
 

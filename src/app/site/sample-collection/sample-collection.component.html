@@ -55,7 +55,7 @@
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input type="text" 
+                                  <input autocomplete="off" type="text" 
 
 
 placeholder="Study Name" formControlName="protocol_name"
@@ -112,20 +112,20 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let item of skDetails">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                              <input autocomplete="off" type="text" placeholder="kitId"
                                                                                     class="form-control"
                                                                                     [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="LabKitId"
                                                                                     [disabled]="true"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control"
@@ -167,7 +167,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                             let i = index
                                                           ">
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="Patient Id"
                                                                                     formControlName="patientId"
                                                                                     class="form-control" value="" />
@@ -184,7 +184,7 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Date"
+                                                                              <input autocomplete="off" type="text" placeholder="Date"
                                                                                     class="form-control"
                                                                                     value={{date}} />
                                                                             </td>
@@ -234,20 +234,20 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="kitId"
+                                                                              <input autocomplete="off" type="text" placeholder="kitId"
                                                                                     class="form-control"
                                                                                     [disabled]="true"
                                                                                     value="{{item.kitId}}" />
                                                                             </td>
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="LabKitId"
                                                                                     [disabled]="true"
                                                                                     value={{item.ckitId}}
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td width="40%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="Expiration Date"
                                                                                     value={{item.expiryDate}}
                                                                                     class="form-control"
@@ -281,7 +281,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                             [formGroupName]="j">
                                                                             <td width="25%">
-                                                                                <input type="text"
+                                                                              <input autocomplete="off" type="text"
                                                                                     placeholder="Patient Id"
                                                                                     formControlName="patientId"
                                                                                     class="form-control" value="" />
@@ -298,7 +298,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <input type="text" placeholder="Date"
+                                                                              <input autocomplete="off" type="text" placeholder="Date"
                                                                                     class="form-control"
                                                                                     value={{date}} />
                                                                             </td>
