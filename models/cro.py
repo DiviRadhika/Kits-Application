@@ -37,6 +37,10 @@ class CroModel(db.Model):
     def get_by_id(cls, id):
         return cls.query.filter_by(cro_id=id).first()
 
+    @classmethod
+    def get_by_code(cls, cro_code):
+        return cls.query.filter_by(cro_code=cro_code).first()
+   
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

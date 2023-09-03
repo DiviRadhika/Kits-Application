@@ -266,4 +266,7 @@ dashboard_ns.add_resource(Dashboard, "")
 
 if __name__ == "__main__":
     excel.init_excel(app)
-    app.run(port=5001, debug=True, host="0.0.0.0")
+    if os.environ.get("ENVIRONMENT") == "dev":
+        app.run(port=5001, debug=True, host="0.0.0.0")
+    elif os.environ.get("ENVIRONMENT") == "testing":
+        app.run(port=5002, debug=True, host="0.0.0.0")

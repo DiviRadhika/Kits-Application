@@ -4,11 +4,24 @@ services:
   dev-kits-api:
     container_name: dev-kits-api
     profiles:
-      - dev
+      - kits-be
     build: .
-    image: kits-api
+    image: dev-kits-api
     ports:
     - "5001:5001"
+    env_file:
+      - .env
+    volumes:
+      - ./:/home/app
+ 
+  testing-kits-api:
+    container_name: testing-kits-api
+    profiles:
+      - testing
+    build: .
+    image: testing-kits-api
+    ports:
+    - "5002:5002"
     env_file:
       - .env
     volumes:

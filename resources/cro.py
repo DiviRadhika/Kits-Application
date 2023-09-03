@@ -81,6 +81,9 @@ class Cro(Resource):
     @cro_ns.doc("Create a cro")
     def post(self):
         cro_json = request.get_json()
+        cro_data = CroModel.get_by_code(cro_json['cro_code'])
+        if cro_data:
+            return {"error": "already exisits with this code"}, 500
         try:
             cro_data = cro_schema.load(cro_json)
             cro_data.save_to_db()

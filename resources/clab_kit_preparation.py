@@ -209,7 +209,7 @@ class ClabKitPreparation(Resource):
         screening_pdf_visited = False
         visit_pdf_visited = False
 
-        #import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
 
         for pdf_details in screeing_pdf_details:
             for inner_index in range(0, len(request_json["screening_kit_details"])):

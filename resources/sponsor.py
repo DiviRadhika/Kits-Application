@@ -102,6 +102,9 @@ class Sponser(Resource):
     @sponsor_ns.doc("Create a sponser")
     def post(self):
         sponsor_json = request.get_json()
+        sponsor_data = SponsorModel.get_by_code(sponsor_json['sponsor_code'])
+        if sponsor_data:
+            return {"message": "sponsor data already exisits"}, 500
         try:
             sponser_data = sponsor_schema.load(sponsor_json)
             sponser_data.save_to_db()

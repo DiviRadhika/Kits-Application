@@ -42,7 +42,11 @@ class SponsorModel(db.Model):
     @classmethod
     def find_by_id(cls, id):
         return cls.query.filter_by(sponsor_id=id).first()
-
+    
+    @classmethod
+    def get_by_code(cls, sponsor_code):
+        return cls.query.filter_by(sponsor_code=sponsor_code).first()
+    
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

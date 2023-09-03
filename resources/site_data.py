@@ -106,6 +106,12 @@ class Sitedata(Resource):
     # @jwt_required(fresh=True)
     def post(self):
         site_data_json = request.get_json()
+        if 'site_data_code' in site_data_json:
+            site_data = SiteDataModel.get_by_site_code(site_data_json['site_data_code'])
+            if site_data:
+                return {"error": "site data already exists"}, 500
+        else:
+            return {"error": "site_data_code is required"}, 500
         try:
             site_data_data = site_data_schema.load(site_data_json)
             site_data_data.save_to_db()

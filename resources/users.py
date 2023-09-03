@@ -57,7 +57,7 @@ update_user = login_ns.model(
         "email": fields.String(title="Email", required=True),
         "password": fields.String(title="Password", required=True),
         "otp": fields.Integer(title="otp", required=True),
-        "prev_password": fields.Integer(title="prev_password"),
+        "prev_password": fields.String(title="prev_password"),
         "otp": fields.Integer(title="otp", required=True),
     },
 )
