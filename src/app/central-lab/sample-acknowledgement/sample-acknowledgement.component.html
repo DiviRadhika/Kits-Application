@@ -308,13 +308,15 @@
 
 
                                                                             <td>
-                                                                                <select class="form-select form-control"
-                                                                                    formControlName="acknowledgement">
-                                                                                    <option
-                                                                                        *ngFor="let data of statusData">
-                                                                                        {{ data }}
-                                                                                    </option>
-                                                                                </select>
+                                                                                <select formControlName="acknowledgement"
+                                                                                class="form-select form-control">
+                                                                                <option
+                                                                                *ngFor="let s of preprationData"
+                                                                                [value]="s.name">
+                                                                                {{s.name}}
+                                                                            </option>
+                                                                            </select>
+                                                                           
 
                                                                             </td>
 
@@ -595,13 +597,14 @@
 
 
                                                                             <td>
-                                                                                <select class="form-select form-control"
-                                                                                    formControlName="acknowledgement">
-                                                                                    <option
-                                                                                        *ngFor="let data of statusData">
-                                                                                        {{ data }}
-                                                                                    </option>
-                                                                                </select>
+                                                                                <select formControlName="acknowledgement"
+                                                                                class="form-select form-control">
+                                                                                <option
+                                                                                *ngFor="let s of preprationData"
+                                                                                [value]="s.name">
+                                                                                {{s.name}}
+                                                                            </option>
+                                                                            </select>
 
                                                                             </td>
                                                                             <td width="25%">

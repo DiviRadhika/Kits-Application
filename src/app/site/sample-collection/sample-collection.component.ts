@@ -74,7 +74,12 @@ export class SampleCollectionComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['Not Verified', 'Verified']
+  // preprationData = ['Not Verified', 'Verified']
+
+  preprationData = [{ name: 'Not Verified', value: 'Not Verified' },
+  { name: 'Verified', value: 'Verified' },
+  ]
+
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -155,11 +160,7 @@ export class SampleCollectionComponent implements OnInit {
       
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
-      
-
-
-      });
-
+     
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
       this.protoName = this.protocolIdDetails.protocol_name
@@ -209,6 +210,25 @@ export class SampleCollectionComponent implements OnInit {
 
 
 
+            const patientControl = visitKitListArray.at(j).get('patientId');
+            if (patientControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              patientControl.patchValue(vkDetailForRowAndTab.patientId);
+
+            }
+            const collectionControl = visitKitListArray.at(j).get('collection');
+            if (collectionControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              collectionControl.patchValue(vkDetailForRowAndTab.collection);
+
+            }
+            const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
+            if (collectionDateControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
+
+            }
+
 
           }
 
@@ -220,11 +240,12 @@ export class SampleCollectionComponent implements OnInit {
       });
 
       for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount);
+        this.adjustScreenKitRows(this.scount, this.skDetails);
       }
 
     });
 
+  });
 
 
   }
@@ -244,7 +265,8 @@ export class SampleCollectionComponent implements OnInit {
     return this.formBuilder.group({
 
       patientId: [''],
-      collection: ['Pending']
+      collection: ['Pending'],
+      collectionDate:['']
 
 
 
@@ -254,7 +276,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
 
-  adjustScreenKitRows(count: number) {
+  adjustScreenKitRows(count: number, skDetails:any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -267,6 +289,19 @@ export class SampleCollectionComponent implements OnInit {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+         if (i < skDetails.length) {
+          
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
+          if(skDetails[i].collection === undefined || skDetails[i].collection === null ||skDetails[i].collection === ''){
+            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
+             }
+             else{
+              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+         
+             }
+          this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
+
+        }
       }
     }
 
@@ -295,7 +330,8 @@ export class SampleCollectionComponent implements OnInit {
 
     return this.formBuilder.group({
       patientId: [''],
-      collection: ['Pendig']
+      collection: ['Pendig'],
+      collectionDate:['']
 
 
 
@@ -353,7 +389,7 @@ export class SampleCollectionComponent implements OnInit {
           console.log(this.vMatDetails[j].visitsList.value[index].status);
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
-          // protocol.site_id= this.ID
+          protocol.collectionDate= this.vMatDetails[i].visitsList.value[index].collectionDate
 
         }
 
@@ -365,6 +401,7 @@ export class SampleCollectionComponent implements OnInit {
       // protocol.site_id = this.ID
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
+      protocol.collectionDate= this.ScreenKitForm.value.screenKitList[index].collectionDate
     })
 
 

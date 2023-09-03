@@ -60,7 +60,7 @@
                     <div class="form-group">
                       <label>Sponsor Code</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" id="SponsorCode"
-                        placeholder="Enter Sponsor Code" formControlName="sp_auto_code">
+                        placeholder="Enter Sponsor Code" formControlName="sponsor_code">
 
 
                     </div>
@@ -69,10 +69,10 @@
                     <div class="form-group">
                       <label>Reference Sponsor Code</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="10" id="SponsorCode"
-                        placeholder="Enter Sponsor Code" formControlName="sponsor_code"
-                        [class.is-invalid]="shouldShowRequired('sponsor_code') && sponsorForm.get('sponsor_code')?.touched">
+                        placeholder="Enter Sponsor Code" formControlName="existing_sponsor_code"
+                        [class.is-invalid]="shouldShowRequired('existing_sponsor_code') && sponsorForm.get('existing_sponsor_code')?.touched">
 
-                      <div *ngIf="shouldShowRequired('sponsor_code')" class="invalid-feedback">
+                      <div *ngIf="shouldShowRequired('existing_sponsor_code')" class="invalid-feedback">
                         Sponsor Code is required.
                       </div>
                       <!-- <div *ngIf="shouldShowLengthError('sponsor_code')" class="invalid-feedback">

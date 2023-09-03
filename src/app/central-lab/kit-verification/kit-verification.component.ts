@@ -182,7 +182,13 @@ export class KitVerificationComponent implements OnInit {
               const statusControl = visitKitListArray.at(j).get('status');
               if (statusControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
-                statusControl.patchValue(vkDetailForRowAndTab.verification_status);
+                if(vkDetailForRowAndTab.verification_status)
+                if(vkDetailForRowAndTab.verification_status === undefined || vkDetailForRowAndTab.verification_status === null ||vkDetailForRowAndTab.verification_status === ''){
+                statusControl.patchValue(this.preprationData[0].value);
+                }
+                else{
+                  statusControl.patchValue(vkDetailForRowAndTab.verification_status);
+                }
 
               }
 
@@ -249,8 +255,14 @@ export class KitVerificationComponent implements OnInit {
         this.onScreenKitAdd(i);
 
         if (i < skDetails.length) {
-          console.log(skDetails[i].verification_status)
-          this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
+          if(skDetails[i].verification_status === undefined || skDetails[i].verification_status === null ||skDetails[i].verification_status === ''){
+            this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(this.preprationData[0].value);
+             }
+             else{
+              this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
+         
+             }
+          // this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
 
 
         }

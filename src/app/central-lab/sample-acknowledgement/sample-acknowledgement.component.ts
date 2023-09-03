@@ -82,6 +82,9 @@ export class SampleAcknowledgementComponent implements OnInit {
   public base64textString: string = '';
   public bas2: string = '';
   statusData = ['Pending ', 'Received']
+  preprationData = [{ name: 'Pending', value: 'Pending' },
+  { name: 'Received', value: 'Received' },
+  ]
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -164,7 +167,7 @@ export class SampleAcknowledgementComponent implements OnInit {
         console.log(this.vkDetails);
 
 
-      });
+   
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
@@ -218,6 +221,24 @@ export class SampleAcknowledgementComponent implements OnInit {
 
           for (let j = 0; j < this.vcount; j++) {
             visitKitListArray.push(this.createVisitKitGroup());
+            const ackControl = visitKitListArray.at(j).get('acknowledgement');
+            if (ackControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              if(vkDetailForRowAndTab.acknowledgement)
+              if(vkDetailForRowAndTab.acknowledgement === undefined || vkDetailForRowAndTab.acknowledgement === null ||vkDetailForRowAndTab.verification_status === ''){
+                ackControl.patchValue(this.preprationData[0].value);
+              }
+              else{
+                ackControl.patchValue(vkDetailForRowAndTab.acknowledgement);
+              }
+              const remarksControl = visitKitListArray.at(j).get('remarks');
+              if (remarksControl) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j]; 
+                  remarksControl.patchValue(vkDetailForRowAndTab.remarks);
+              }
+
+            }
+
 
           }
 
@@ -229,7 +250,7 @@ export class SampleAcknowledgementComponent implements OnInit {
       });
 
       for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount);
+        this.adjustScreenKitRows(this.scount, this.skDetails);
       }
 
     }, (err: any) => {
@@ -239,6 +260,7 @@ export class SampleAcknowledgementComponent implements OnInit {
 
     }
     );
+  });
 
   }
   openUploadDialog(rowIndex: number): void {
@@ -276,7 +298,7 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
   }
 
 
-  adjustScreenKitRows(count: number) {
+  adjustScreenKitRows(count: number, skDetails:any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -289,6 +311,15 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+        // if(skDetails[i].verification_status === undefined || skDetails[i].verification_status === null ||skDetails[i].verification_status === ''){
+        //   this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(this.preprationData[0].value);
+        //    }
+        //    else{
+           
+        //    }
+           this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
+           this.ScreenKitForm.get('screenKitList').controls[i].get('remarks').patchValue(skDetails[i].remarks);
+       
       }
     }
 
@@ -398,29 +429,15 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
         // this.pdfValuesfullv
       ],
 
-      "screening_kit_details": [
+      "screening_kit_details": 
         this.skDetails,
 
-      ],
-      "visit_kit_details": [
+      
+      "visit_kit_details": 
         this.vkDetails,
 
-      ]
+      
     }
-
-    console.log(data);
-
-
-    // const data = {
-    //   "protocol_id": this.uuid,
-    //   "screening_kit_details": this.skDetails,
-    //   "visit_kit_details": this.vkDetails
-
-
-    // }
-
-
-    // console.log(data);
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
