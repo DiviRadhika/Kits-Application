@@ -8,6 +8,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 // import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 // (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { ActivatedRoute } from '@angular/router';
 
 async function downloadStringAsPDF() {
   const stringToDownload = 'This is the string to be downloaded as a PDF';
@@ -70,7 +71,7 @@ export class SampleReportsComponent implements OnInit {
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
-
+  id :any;
   uploadedFiles: Array<File | null> = [];
   fileURLs: Array<string | null> = [];
   protocolIdDetails: any;
@@ -105,7 +106,7 @@ export class SampleReportsComponent implements OnInit {
   pdfValuesviewv:Array<any> = [];
 
 
-  constructor(private protocolService: ProtocolService, private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService,private _activatedRoute:ActivatedRoute ,private adminService: AdminService, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
 
 
@@ -167,13 +168,21 @@ export class SampleReportsComponent implements OnInit {
     });
 
 
-
     this.ScreenKitForm = this.formBuilder.group({
 
       screenKitList: this.formBuilder.array([])
     });
 
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
 
+        this.id = data.id;
+       
+        this.getprotocolDetails(this.id)
+
+      }
+     
+    });
 
   }
   // download(){
@@ -255,9 +264,9 @@ export class SampleReportsComponent implements OnInit {
 
   getprotocolDetails(id: any) {
     this.scount = ''
-    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
-      this.uuid = id.target.value;
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+    this.protocolService.getProtocolId(this.id ).subscribe((protocols) => {
+      this.uuid =this.id ;
+      this.protocolService.getPreparationById(this.id ).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details

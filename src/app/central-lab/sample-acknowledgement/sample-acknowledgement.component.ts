@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -16,6 +17,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
+  id: any;
 
   // uploadedFiles: Array<File | null> = [];
   uploadedFiles: Array<File>[] = [];
@@ -53,7 +55,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   displayv: boolean = false;
   tabi: number= 0;
   indexv: number = 0;
-  constructor(private protocolService: ProtocolService, private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService,private _activatedRoute:ActivatedRoute,  private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -136,12 +138,22 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
 
+   
     this.ScreenKitForm = this.formBuilder.group({
 
       screenKitList: this.formBuilder.array([])
     });
 
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
 
+        this.id = data.id;
+       
+        this.getprotocolDetails(this.id)
+
+      }
+     
+    });
 
   }
   disableScroll() {
@@ -162,9 +174,9 @@ export class SampleAcknowledgementComponent implements OnInit {
   }
   getprotocolDetails(id: any) {
     this.scount = ''
-    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
-      this.uuid = id.target.value;
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+    this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
+      this.uuid = this.id;
+      this.protocolService.getPreparationById(this.id).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details

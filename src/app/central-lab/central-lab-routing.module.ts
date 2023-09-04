@@ -8,16 +8,20 @@ import { KitDistributionComponent } from './kit-distribution/kit-distribution.co
 import { SampleReportsComponent } from './sample-acknowledgement/sample-reports/sample-reports.component';
 import { PreprationGridComponent } from './prepration-grid/prepration-grid.component';
 import { KitPreprationEditComponent } from './kit-prepration-edit/kit-prepration-edit.component';
+import { VerificationGridComponent } from './verification-grid/verification-grid.component';
 
 const routes: Routes = [
   {path:'kitPrepration/:id/:mode', component:KitPreprationComponent},
-  {path:'kitVerification', component:KitVerificationComponent},
-  {path:'kitDistribution', component:KitDistributionComponent},
-  {path:'sampleAcknowledgement', component:SampleAcknowledgementComponent},
-  {path:'sampleReports', component:SampleReportsComponent},
+  {path:'kitVerification/:id', component:KitVerificationComponent},
+  {path:'kitDistribution/:id', component:KitDistributionComponent},
+  {path:'sampleAcknowledgement/:id', component:SampleAcknowledgementComponent},
+  {path:'sampleReports/:id', component:SampleReportsComponent},
   {path:'kitPreparationGrid', component:PreprationGridComponent},
   {path:'kitpreprationedit/:id', component:KitPreprationEditComponent},
-  
+  {path:'kitvarificationGrid', component:VerificationGridComponent},
+  {path:'kitDistributionGrid', component:VerificationGridComponent},
+  {path:'kitAcknowledgementGrid', component:VerificationGridComponent},
+  {path:'kitReportGrid', component:VerificationGridComponent}, 
 
 
 ];

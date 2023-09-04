@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogModule } from 'primeng/dialog';
 import { CentralSortPipe } from './centralsort';
 import { CalendarModule } from 'primeng/calendar';
+import { VerificationGridComponent } from './verification-grid/verification-grid.component';
 @NgModule({
   declarations: [
     KitPreprationComponent,
@@ -32,7 +33,8 @@ import { CalendarModule } from 'primeng/calendar';
     SampleReportsComponent,
         PreprationGridComponent,
         KitPreprationEditComponent,
-        CentralSortPipe
+        CentralSortPipe,
+        VerificationGridComponent
   ],
   imports: [
     CommonModule,

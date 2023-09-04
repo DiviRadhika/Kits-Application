@@ -21,7 +21,12 @@
                                     <li class="breadcrumb-item">
                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Sample Reports</li>
+                                    <li class="breadcrumb-item">
+                                        <a routerLink="/home/centralLab/kitReportGrid" class="waves-effect">
+                                            Sample Reports   </a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Sample Reports Edit</li>
+
                                 </ol>
                             </div>
                         </div>
@@ -34,19 +39,6 @@
                         <form [formGroup]="preparationForm">
                             <div class="row">
                                 <div id="printSection">
-
-                                </div>
-                                <div class="col-md-4 mb-3">
-
-
-                                    <label for="formrow-firstname-input" class="form-label">Study ID</label>
-                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
-                                        class="form-select form-control">
-                                        <option value="" disabled selected>Select Study Id</option>
-                                        <option *ngFor="let data of protocols" [value]="data.protocol_id">
-                                            {{ data.user_protocol_id }}
-                                        </option>
-                                    </select>
 
                                 </div>
 

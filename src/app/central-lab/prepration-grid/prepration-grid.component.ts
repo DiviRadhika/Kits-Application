@@ -61,6 +61,7 @@ isAscendingSort1: boolean = true;
   edit(id:string){
   
     this.protocol.getPreparationById(id).subscribe((protocolsData) => {
+    
   }),
   this.protocol.getPreparationById(id).subscribe(
     (data: any) => {

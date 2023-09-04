@@ -176,11 +176,17 @@ export class HomeComponent implements OnInit {
           // expanded: false,
           // subItems: [
             { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },  
-            { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
-            { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
-            { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
-            { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
+            { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
+            { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
+            { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
+            { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
+      
             
+ 
+
+
+
+
           // ]
         // },
         // Other menu items for admin role...

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -13,6 +14,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 export class KitDistributionComponent implements OnInit {
   screeningFullData: any;
   screeningVariant: any;
+  id: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -42,7 +44,7 @@ export class KitDistributionComponent implements OnInit {
 
 
 
-  constructor(private protocolService: ProtocolService,
+  constructor(private protocolService: ProtocolService, private _activatedRoute:ActivatedRoute,
     private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
  
 
@@ -111,14 +113,23 @@ export class KitDistributionComponent implements OnInit {
       screenKitList: this.formBuilder.array([])
     });
 
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
 
+        this.id = data.id;
+       
+        this.getprotocolDetails(this.id)
+
+      }
+     
+    });
 
   }
   getprotocolDetails(id: any) {
     this.scount = ''
-    this.protocolService.getProtocolId(id.target.value).subscribe((protocols) => {
-      this.uuid = id.target.value;
-      this.protocolService.getPreparationById(id.target.value).subscribe((protocolsData) => {
+    this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
+      this.uuid = this.id;
+      this.protocolService.getPreparationById(this.id).subscribe((protocolsData) => {
         console.log(protocolsData);
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
