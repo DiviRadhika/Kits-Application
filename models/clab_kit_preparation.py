@@ -15,9 +15,13 @@ class ClabKitPreparationModel(db.Model):
     visit_kit_details = db.Column(JSONB)
 
     @classmethod
+    def find_all_with_entities(cls):
+        return cls.query.with_entities(ClabKitPreparationModel.id, ClabKitPreparationModel.protocol_id, ClabKitPreparationModel.protocol_name).all()
+
+    @classmethod
     def find_all(cls):
         return cls.query.all()
-
+    
     @classmethod
     def get_by_id(cls, id):
         return cls.query.filter_by(protocol_id=id).first()

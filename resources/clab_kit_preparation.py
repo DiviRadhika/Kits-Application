@@ -77,7 +77,7 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
 class ClabKitPreparationList(Resource):
     @clab_kit_preparations_ns.doc("Get all the CLab Kit Preparations")
     def get(resource):
-        kits = ClabKitPreparationModel.find_all()
+        kits = ClabKitPreparationModel.find_all_with_entities()
         if len(kits) == 0:
             return {"data": [], "message": ""}
         response = {"data": []}
@@ -209,49 +209,35 @@ class ClabKitPreparation(Resource):
         screening_pdf_visited = False
         visit_pdf_visited = False
 
-        import pdb; pdb.set_trace()
-
         for pdf_details in screeing_pdf_details:
-            for inner_index in range(0, len(request_json["screening_kit_details"])):
-                visit_wise_data = screening_kit_details[inner_index]
-                for row_index in range(0, len(visit_wise_data)):
-                    for inner_pdf_details in pdf_details:
-                        if inner_pdf_details["row"] == row_index:
-                            screening_pdf_visited = True
-                            screening_kit_details[inner_index][row_index][
-                                "pdf"
-                            ] = inner_pdf_details["pdf"]
+            for inner_pdf_details in pdf_details:
+                for row_index in range(0, len(screening_kit_details)):
+                    if inner_pdf_details["row"] == row_index:
+                        screening_pdf_visited = True
+                        screening_kit_details[row_index]["pdf"] = inner_pdf_details["pdf"]
+
 
         visit_kit_details = request_json["visit_kit_details"]
+        #import pdb; pdb.set_trace()
         for pdf_details in visit_pdf_details:
-            for inner_index in range(
-                0, len(visit_kit_details)
-            ):  # outside index not useful
-                total_visit_details = visit_kit_details[inner_index]
-                for visit_index in range(
-                    0, len(total_visit_details)
-                ):  # total visits details visit-0, visit-1 ...etc
-                    visit_wise_data = total_visit_details[visit_index]  # visit-0
-                    for row_index in range(
-                        0, len(visit_wise_data)
-                    ):  # total rows of visit wise
-                        row_wise_data = visit_wise_data[row_index]  # row data
-                        for inner_pdf_details in pdf_details:
-                            if (
-                                inner_pdf_details["visit"] == visit_index
-                                and inner_pdf_details["row"] == row_index
-                            ):
-                                visit_pdf_visited = True
-                                visit_kit_details[inner_index][visit_index][row_index][
-                                    "pdf"
-                                ] = inner_pdf_details["pdf"]
+            for pdf_detail in pdf_details:
+                for visit_index in range(0, len(visit_kit_details)):  # outside index not useful
+                    total_visit_details = visit_kit_details[visit_index]  # visit_index -> 0 
+                    for row_index in range(0, len(total_visit_details)):  # total visits details visit-0, visit-1 ...etc
+                        row_wise_data = total_visit_details[row_index]  # visit-0
+                        if (
+                            pdf_detail["visit"] == visit_index
+                            and pdf_detail["row"] == row_index
+                        ):
+                            visit_pdf_visited = True
+                            visit_kit_details[visit_index][row_index]["pdf"] = pdf_detail["pdf"]
 
-        if visit_pdf_visited == True:
+        '''if visit_pdf_visited == True:
             request_json["visit_kit_details"] = request_json["visit_kit_details"][0]
         if screening_pdf_visited == True:
             request_json["screening_kit_details"] = request_json[
                 "screening_kit_details"
-            ][0]
+            ][0]'''
 
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:

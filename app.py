@@ -98,6 +98,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
     os.environ.get("DB_DATABASE"),
 )
 
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_size': 20,
+    'pool_recycle': 120,
+    'pool_pre_ping': True,
+     'connect_args': {
+        'connect_timeout': 1000
+    }
+}
+
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -257,6 +266,7 @@ login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
+#users_ns.add_resource(GetAllStatesFromGivenCountries, "/states")
 users_ns.add_resource(UserList, "/<string:user_id>")
 meterial_ns.add_resource(Meterial, "")
 meterials_ns.add_resource(MeterialsList, "")
