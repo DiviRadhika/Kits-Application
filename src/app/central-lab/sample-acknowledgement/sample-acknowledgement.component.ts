@@ -112,6 +112,10 @@ export class SampleAcknowledgementComponent implements OnInit {
   materials: any;
   selectedValuev: any;
   selectedOption: any;
+  displayds: boolean = false;
+  pdfValuesview:Array<any> = [];
+  displaydsv: boolean = false;
+  pdfValuesviewv:Array<any> = [];
 
   public preparationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
@@ -311,13 +315,13 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
-        // if(skDetails[i].verification_status === undefined || skDetails[i].verification_status === null ||skDetails[i].verification_status === ''){
-        //   this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(this.preprationData[0].value);
-        //    }
-        //    else{
-           
-        //    }
-           this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
+        if(skDetails[i].acknowledgement === undefined || skDetails[i].acknowledgement === null ||skDetails[i].acknowledgement === ''){
+          this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(this.preprationData[0].value);
+           }
+           else{
+            this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
+           }
+
            this.ScreenKitForm.get('screenKitList').controls[i].get('remarks').patchValue(skDetails[i].remarks);
        
       }
@@ -339,6 +343,50 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
     control1.push(this.addScreenKitData(rec));
 
   }
+
+  openDialogv(value: any){
+    this.displaydsv = true;
+    this.pdfValuesviewv = value;
+    console.log(this.pdfValuesviewv)
+  }
+
+
+ 
+  openDialog(value: any){
+    this.displayds = true;
+    this.pdfValuesview = value;
+  }
+
+  Downloadd(id: any, name: string) {
+    console.log(id)
+
+    this.base64String = id
+    if(this.base64String == ''){
+      this.base64String  = 'NOt Uploaded Any PDF'
+    }
+
+    // Convert the base64 string to a Uint8Array
+    const binaryArray = Uint8Array.from(atob(this.base64String), c => c.charCodeAt(0));
+
+    // Create a Blob from the binary data
+    const blob = new Blob([binaryArray], { type: 'application/pdf' });
+
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element and set its attributes
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Clean up by revoking the URL
+    URL.revokeObjectURL(url);
+
+  }
+
 
 
 
@@ -416,7 +464,39 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       // protocol.pdf =  this.pdfValues[index].pdf
 
     })
-   
+    console.log(this.skDetails)
+   console.log(this.pdfValues)
+ 
+
+
+  //  for (let rowIndex = 0; rowIndex < this.skDetails.length; rowIndex++) {
+  //    const rowArray = this.skDetails[rowIndex];
+
+  //    for (let innerIndex = 0; innerIndex < rowArray.length; innerIndex++) {
+  //      const innerObject = rowArray[innerIndex];
+
+  //      const matchingSC = sc.find((scObj: any) =>
+  //        scObj.variant === innerObject.variant
+  //      );
+
+  //      if (matchingSC) {
+  //        if (!matchingSC.rowCollectedData) {
+  //          matchingSC.rowCollectedData = [];
+  //        }
+  //        matchingSC.rowCollectedData.push(innerObject);
+  //      }
+  //    }
+  //  }
+   for (let index = 0; index < this.pdfValues.length; index++) {
+    if (index < this.skDetails.length) {
+      console.log(this.pdfValues[index].row ,this.skDetails[index])
+      if (this.pdfValues[index].row === index) {
+      alert('k')
+    }
+      // this.pdfValues[index]. = this.skDetails[index].selectedLabTests;
+      // this.pdfValues[index].materials = this.skDetails[index].visits;
+    }
+  }
     const data = {
       "protocol_id": this.uuid,
       "protocol_name": this.protoName,
@@ -439,16 +519,16 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       
     }
 
-    this.protocolService.updatePreparationById(data).subscribe(
-      (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
-      },
-      (err: any) => {
+    // this.protocolService.updatePreparationById(data).subscribe(
+    //   (data: any) => {
+    //     this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
+    //   },
+    //   (err: any) => {
 
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+    //     this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
 
-      }
-    );
+    //   }
+    // );
 
   }
   fileSelected(fileInput: any, rowIndex: number): void {
