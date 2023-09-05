@@ -710,6 +710,7 @@ export class ProtocolRegistrationComponent {
           "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
           "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
           "special_instructions": this.protocolForm.controls['specialInstructions'].value,
+          "kit_variant_count":this.protocolForm.controls['kit_variant_count'].value,
           "screening_kit_details": [
             {
               "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),

@@ -32,6 +32,129 @@
                         </div>
                     </div>
                 </div>
+                 <form [formGroup]="protocolForm">
+          <div class="card">
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input"  class="form-label">Sponsor Study ID</label>
+                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_id"
+                      class="form-control" id="" placeholder="Enter Study ID"
+                      [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
+
+                  </div>
+
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Study Title</label>
+                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_name"
+                      class="form-control" id="" placeholder="Enter Study Title"
+                      [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
+                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
+                      class="form-control" id="" placeholder="Enter CRO Study ID">
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
+                    <select maxlength="100" formControlName="selected_sponsor_id" class="form-select form-control"
+                      [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
+                      <option selected value="">Select Sponsor ID</option>
+                      <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
+                        {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
+                      </option>
+                    </select>
+                  </div>
+                </div> -->
+
+
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Global Sample Size</label>
+                    <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" maxlength="5" (input)="validateMobileNumber($event.target, 'office')"
+                      id="" placeholder="Enter Global Sample Size"
+                      [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
+                    <!-- (&nbsp;<input class="form-check-input"  placeholder="Enter Avant Sante Sample Size " maxlength="5"  formControlName="avantc" (input)="validateMobileNumber($event.target, 'office')"
+                      type="checkbox" value="checked" id="debugInfo" />
+                    &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>) -->
+
+                    <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size" 
+                      class="form-control" id="" placeholder="Enter Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
+                      [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count</label>
+                    <input autocomplete="off" maxlength="5" type="number" autocomplete="off" formControlName="kit_variant_count"  (input)="validateMobileNumber($event.target, 'office')"
+                      class="form-control" id="" placeholder="Enter Kit Variant Count"
+                      [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits</label>
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
+                      formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
+                      placeholder="Enter Total No.of Visits"  class="form-control"
+                      [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
+                    (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
+                      [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count</label>
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
+                    (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
+                      class="form-control" id="" placeholder="Enter Screen Kit Count"
+                      [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count</label>
+                    <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
+                    (input)="validateMobileNumber($event.target, 'office')"formControlName="selected_visit_count"
+                      class="form-control" id="" placeholder="Enter Visit Kit Count"
+                      [class.is-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <label for="formrow-firstname-input" class="form-label">Special Instructions</label>
+                    <textarea class="form-control" rows="3" cols="5" formControlName="specialInstructions"
+                      id="comment"></textarea>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </form>
                 <p-toast></p-toast>
 
                 <!-- end page title -->

@@ -61,6 +61,22 @@ export class ProtocolViewComponent implements OnInit {
   visit: boolean = false;
   sitesForm: any;
 
+  public protocolForm: FormGroup = new FormGroup({
+    selected_protocol_id: new FormControl("", [Validators.required]),
+    selected_protocol_name: new FormControl("", [Validators.required]),
+    selected_sponsor_id: new FormControl("", [Validators.required]),
+    cro_study_id: new FormControl(""),
+    avant_sample_size: new FormControl(""),
+    global_sample_size: new FormControl("", [Validators.required]),
+    screens: new FormControl("", [Validators.required]),
+    total_visits: new FormControl("", [Validators.required]),
+    kit_variant_count: new FormControl("", [Validators.required]),
+    selected_skit_count: new FormControl("", [Validators.required]),
+    // labTestValue: new FormControl("", [Validators.required]),
+    specialInstructions: new FormControl(""),
+    avantc: new FormControl(false),
+    selected_visit_count: new FormControl("", [Validators.required]),
+  })
   customerFormGroup: any;
   listItems: string[] = [];
   protoId: any
@@ -101,9 +117,25 @@ export class ProtocolViewComponent implements OnInit {
       console.log(protocols);
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
+      console.log(this.protocolIdDetails.cro_id)
+
+      
+      selected_sponsor_id: new FormControl("", [Validators.required]),
+    
+  
       this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+      this.protocolForm.controls['selected_protocol_id'].setValue(this.protocolIdDetails.protocol_id)
+      this.protocolForm.controls['selected_protocol_name'].setValue(this.protoName)
+      this.protocolForm.controls['cro_study_id'].setValue(this.protocolIdDetails.cro_id)
+      this.protocolForm.controls['avant_sample_size'].setValue(this.protocolIdDetails.avant_sample_size)
+      this.protocolForm.controls['global_sample_size'].setValue(this.protocolIdDetails.global_sample_size)
+      this.protocolForm.controls['screens'].setValue(this.protocolIdDetails.no_of_screens)
+      this.protocolForm.controls['total_visits'].setValue(this.protocolIdDetails.no_of_visits)
+      this.protocolForm.controls['kit_variant_count'].setValue(this.protocolIdDetails.kit_variant_count)
+     
+      this.protocolForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
+    this.protocolForm.disable()
+    
       if (protocols.visit_kit_details[0].meterial_details.length > 0) {
         this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
         this.screenDetails = this.screeningFullData.selectedLabTests
@@ -114,7 +146,9 @@ export class ProtocolViewComponent implements OnInit {
       }
 
       this.vcount = protocols.visit_kit_details[0].visit_kit_count
+      this.protocolForm.controls['selected_visit_count'].setValue(this.vcount)
       this.scount = protocols.screening_kit_details[0].screening_kit_count
+      this.protocolForm.controls['selected_skit_count'].setValue(this.scount)
       console.log(this.vcount, 'details');
       this.visitTabs = []
       this.visitRecords = []
@@ -135,7 +169,32 @@ export class ProtocolViewComponent implements OnInit {
 
 
   }
+  shouldShowRequired(controlName: string): boolean {
+    const control = this.protocolForm.get(controlName);
+    return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
 
+
+  validateMobileNumber(input: any, phone: any) {
+    let inputValue = input.value.trim();
+    
+    // Remove non-numeric characters
+    let numericValue = inputValue.replace(/\D/g, '');
+
+    if(phone ==='mobile'){
+    if (numericValue.length > 5) {
+        numericValue = numericValue.slice(0, 5);
+    }
+  }
+  else{
+    if (numericValue.length > 5) {
+      numericValue = numericValue.slice(0, 5);
+  }
+  }
+    
+    input.value = numericValue;
+  
+}
 
 
 
