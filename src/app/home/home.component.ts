@@ -201,25 +201,25 @@ export class HomeComponent implements OnInit {
     else if(this.role === 'Central Lab-Verification'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Kit Verification', link: '/home/centralLab/kitVerification' },
+        { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Distribution'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Kit Distribution', link: '/home/centralLab/kitDistribution' },
+        { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Acknowledgement'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Sample Acknowledgement', link: '/home/centralLab/sampleAcknowledgement' },
+        { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
       ];
     }
     else if(this.role === 'Central Lab-Reports'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Sample Reports', link: '/home/centralLab/sampleReports' },
+        { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
       ];
     }
     else if(this.role === 'CRA'){

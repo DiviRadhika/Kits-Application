@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -45,8 +45,8 @@ export class KitDistributionComponent implements OnInit {
 
 
   constructor(private protocolService: ProtocolService, private _activatedRoute:ActivatedRoute,
-    private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
- 
+    private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder   ,private router: Router) {
+   
 
 
   };
@@ -464,6 +464,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
     
       (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Distribution Updated successfully' });
+        this.router.navigate(['/home/centralLab/kitDistributionGrid'])  
       },
       (err: any) => {
        

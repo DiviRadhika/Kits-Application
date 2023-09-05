@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -55,7 +55,8 @@ export class SampleAcknowledgementComponent implements OnInit {
   displayv: boolean = false;
   tabi: number= 0;
   indexv: number = 0;
-  constructor(private protocolService: ProtocolService,private _activatedRoute:ActivatedRoute,  private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
+  constructor(private protocolService: ProtocolService,private _activatedRoute:ActivatedRoute,  private messageService: MessageService, 
+    private croService: CrosService, private formBuilder: FormBuilder, private router: Router) {
     sessionStorage.getItem('email')
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -327,6 +328,10 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+        //   this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+        //   this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+        //   this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
         if(skDetails[i].acknowledgement === undefined || skDetails[i].acknowledgement === null ||skDetails[i].acknowledgement === ''){
           this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(this.preprationData[0].value);
            }
@@ -499,16 +504,16 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
   //      }
   //    }
   //  }
-   for (let index = 0; index < this.pdfValues.length; index++) {
-    if (index < this.skDetails.length) {
-      console.log(this.pdfValues[index].row ,this.skDetails[index])
-      if (this.pdfValues[index].row === index) {
-      alert('k')
-    }
-      // this.pdfValues[index]. = this.skDetails[index].selectedLabTests;
-      // this.pdfValues[index].materials = this.skDetails[index].visits;
-    }
-  }
+  //  for (let index = 0; index < this.pdfValues.length; index++) {
+  //   if (index < this.skDetails.length) {
+  //     console.log(this.pdfValues[index].row ,this.skDetails[index])
+  //     if (this.pdfValues[index].row === index) {
+  //     alert('k')
+  //   }
+  //     // this.pdfValues[index]. = this.skDetails[index].selectedLabTests;
+  //     // this.pdfValues[index].materials = this.skDetails[index].visits;
+  //   }
+  // }
     const data = {
       "protocol_id": this.uuid,
       "protocol_name": this.protoName,
@@ -531,16 +536,17 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       
     }
 
-    // this.protocolService.updatePreparationById(data).subscribe(
-    //   (data: any) => {
-    //     this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
-    //   },
-    //   (err: any) => {
+    this.protocolService.updatePreparationById(data).subscribe(
+      (data: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
+        this.router.navigate(['/home/centralLab/kitAcknowledgementGrid'])
+      },
+      (err: any) => {
 
-    //     this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
-
-    //   }
-    // );
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+        
+      }
+    );
 
   }
   fileSelected(fileInput: any, rowIndex: number): void {

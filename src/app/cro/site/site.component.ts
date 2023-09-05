@@ -83,6 +83,21 @@ export class SiteComponent implements OnInit {
     })
 
   }
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   if (filterValue === '') {
+  //     this.siteDetails = this.allSiteDetails;
+  //   }
+  //   else {
+  //     this.siteDetails = this.allSiteDetails.filter(
+  //       (siteData: any) =>
+  //         (siteData.site_data_code && siteData.site_data_code.toLowerCase().includes(filterValue)) ||
+  //         (siteData.site_data_name && siteData.site_data_name.toLowerCase().includes(filterValue)) ||
+  //         (siteData.email && siteData.email.toLowerCase().includes(filterValue))
+  //     );
+  //   }
+  // }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
@@ -91,14 +106,14 @@ export class SiteComponent implements OnInit {
     }
     else {
       this.siteDetails = this.allSiteDetails.filter(
-        (siteData: any) =>
-          (siteData.site_data_code && siteData.site_data_code.toLowerCase().includes(filterValue)) ||
-          (siteData.site_data_name && siteData.site_data_name.toLowerCase().includes(filterValue)) ||
-          (siteData.email && siteData.email.toLowerCase().includes(filterValue))
+        (cro: any) =>
+          (cro.site_data_code && cro.site_data_code.toLowerCase().includes(filterValue)) ||
+          (cro.site_data_name && cro.site_data_name.toLowerCase().includes(filterValue)) ||
+          (cro.email && cro.email.toLowerCase().includes(filterValue))
       );
     }
-  }
 
+  }
 
 
 study(id: any) {

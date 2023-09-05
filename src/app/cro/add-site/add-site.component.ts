@@ -316,7 +316,7 @@ export class AddSiteComponent {
               this.router.navigate(['/home/cro/siteGrid'])
             },
             (err: any) => {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
 
 
             }

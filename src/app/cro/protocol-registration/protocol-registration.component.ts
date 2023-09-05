@@ -395,13 +395,15 @@ export class ProtocolRegistrationComponent {
   }
   variantCount() {
     this.visible = true
+    this.protocolForm.controls['total_visits'].setValue('')
     this.cards = [];
     this.valueVariant = this.protocolForm.controls['kit_variant_count'].value;
     for (let i = 1; i <= this.valueVariant; i++) {
       this.addCard();
     }
-
+  
     this.varientValues = []
+    this.variantsTab = false
   }
   generateVisitOptions(value: number, rowIndex: number): void {
     const selectedValues = this.getSelectedValuesUpToRow(rowIndex);
@@ -426,21 +428,21 @@ export class ProtocolRegistrationComponent {
   visitcount: Array<any> = [];
   visits(value: any) {
     this.visitcount = []
-    this.variantsTab = true
-    this.valueVisit = this.protocolForm.controls['total_visits'].value;
-    // this.cards = [];
-    for (let i = 0; i <= this.valueVisit - 1; i++) {
-
-      this.visitcount.push({ value: 'visit' + (i + 1) });
-
+    if(value != null || value != undefined || value != ''){
+      this.variantsTab = true
+      this.valueVisit = this.protocolForm.controls['total_visits'].value;
+      // this.cards = [];
+      for (let i = 0; i <= this.valueVisit - 1; i++) {
+        this.visitcount.push({ value: 'visit' + (i + 1) });
+      }
+      for (let i = 0; i <= this.valueVariant; i++) {
+        this.adjustScreenKitRows(i)
+  
+  
+      }
     }
-    console.log(this.visitcount)
-    for (let i = 0; i <= this.valueVariant; i++) {
-      this.adjustScreenKitRows(i)
 
-
-    }
-
+   
   }
   onSelectChange(rowIndex: number, selectedValues: string[]): void {
     this.selectedOptions[rowIndex] = selectedValues;
@@ -728,7 +730,7 @@ export class ProtocolRegistrationComponent {
 
         }
 
-        console.log(data)
+ 
 
 
         this.protocolService.postProtocol(data).subscribe(
@@ -742,7 +744,9 @@ export class ProtocolRegistrationComponent {
             // this.route.navigate(['/home/cro/protocolView'])
           },
           (err: any) => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+            const message = err.error.message
+           
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: message });
           }
         );
       }

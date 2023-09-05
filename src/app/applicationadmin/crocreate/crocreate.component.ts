@@ -226,7 +226,8 @@ export class CROcreateComponent implements OnInit {
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+          
+            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.error});
           }
         )
       }

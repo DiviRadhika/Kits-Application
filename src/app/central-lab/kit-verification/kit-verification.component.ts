@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { CrosService } from 'src/app/cro/cros.service';
@@ -48,7 +48,7 @@ export class KitVerificationComponent implements OnInit {
   constructor(private protocolService: ProtocolService,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
-    private _activatedRoute: ActivatedRoute) {
+    private _activatedRoute: ActivatedRoute, private router: Router) {
 
 
 
@@ -221,6 +221,7 @@ export class KitVerificationComponent implements OnInit {
 
         this.displayValues = false
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+       
 
       }
       );
@@ -422,6 +423,7 @@ export class KitVerificationComponent implements OnInit {
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Verification Updated successfully' });
+        this.router.navigate(['/home/centralLab/kitvarificationGrid'])  
       },
       (err: any) => {
 

@@ -50,11 +50,11 @@ export class SampleCollectionComponent implements OnInit {
 
 
   constructor(private protocolService: ProtocolService, private activatedRoute: ActivatedRoute, private router: Router,
-     private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
+    private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
 
-    this.email =sessionStorage.getItem('email')
+    this.email = sessionStorage.getItem('email')
     console.log(this.email);
-    
+
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1; // Note: Month starts from 0, so add 1 to get the actual month
@@ -69,7 +69,7 @@ export class SampleCollectionComponent implements OnInit {
   protocolList: Array<any> = [];
   labTestsList: Array<any> = [];
   sites: Array<any> = [];
-  uniqueCombinedArray : Array<any> = [];
+  uniqueCombinedArray: Array<any> = [];
   files1: any;
   file2: any;
   public base64textString: string = '';
@@ -114,9 +114,9 @@ export class SampleCollectionComponent implements OnInit {
   });
   ngOnInit() {
     this.activatedRoute.params.subscribe((data: any) => {
-        this.id = data.id;  
-        this.getprotocolDetails(this.id)
-    
+      this.id = data.id;
+      this.getprotocolDetails(this.id)
+
     });
     // this.sponsersData()
     this.croService.getSites().subscribe((sites) => {
@@ -129,12 +129,12 @@ export class SampleCollectionComponent implements OnInit {
       console.log(data);
       this.ID = data.site_data_code
       console.log(this.ID);
-      
-      
+
+
     });
 
 
-    
+
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
 
@@ -157,95 +157,109 @@ export class SampleCollectionComponent implements OnInit {
     this.protocolService.getProtocolId(id).subscribe((protocols) => {
       this.uuid = id;
       this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
-      
+
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
-     
-      this.displayValues = true;
-      this.protocolIdDetails = protocols.protocol
-      this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      // this.scount = protocols.screening_kit_details[0].screening_kit_count
-      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
-        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
-        this.screenDetails = this.screeningFullData.selectedLabTests
-        this.sMatDetails = this.screeningFullData.visits;
-        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
-        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
-      } else {
-      }
 
-      this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      // this.scount = protocols.visit_kit_details[0].visit_kit_count
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
-
-      this.tets = []
-
-      this.vMatDetails.forEach((tabs: any) => {
-        tabs.visitKitFormGroup = this.formBuilder.group({
-
-          visitKitList: this.formBuilder.array([]),
-        });
-        const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-        for (let i = 1; i <= this.vcount; i++) {
-          visitKitListArray.push(this.createVisitKitGroup());
-          console.log(tabs.visitKitFormGroup[i]);
+        this.displayValues = true;
+        this.protocolIdDetails = protocols.protocol
+        this.protoName = this.protocolIdDetails.protocol_name
+        this.preparationForm.controls['protocol_name'].disable()
+        this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+        // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
+        // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
+        // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
+        // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
+        // this.scount = protocols.screening_kit_details[0].screening_kit_count
+        // this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+          this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+          this.screenDetails = this.screeningFullData.selectedLabTests
+          this.sMatDetails = this.screeningFullData.visits;
+          this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+          this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+        } else {
         }
-        tabs.visitsList = visitKitListArray
-        for (let i = 0; i < this.vMatDetails.length; i++) {
-          const tabs = this.vMatDetails[i];
+
+        this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        // this.scount = protocols.visit_kit_details[0].visit_kit_count
+        this.scount = protocols.screening_kit_details[0].screening_kit_count
+
+        this.tets = []
+
+        this.vMatDetails.forEach((tabs: any) => {
           tabs.visitKitFormGroup = this.formBuilder.group({
+
             visitKitList: this.formBuilder.array([]),
           });
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-
-          for (let j = 0; j < this.vcount; j++) {
+          for (let i = 1; i <= this.vcount; i++) {
             visitKitListArray.push(this.createVisitKitGroup());
-
-
-
-            const patientControl = visitKitListArray.at(j).get('patientId');
-            if (patientControl) {
-              const vkDetailForRowAndTab = this.vkDetails[i][j];
-              patientControl.patchValue(vkDetailForRowAndTab.patientId);
-
-            }
-            const collectionControl = visitKitListArray.at(j).get('collection');
-            if (collectionControl) {
-              const vkDetailForRowAndTab = this.vkDetails[i][j];
-              collectionControl.patchValue(vkDetailForRowAndTab.collection);
-
-            }
-            const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
-            if (collectionDateControl) {
-              const vkDetailForRowAndTab = this.vkDetails[i][j];
-              collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
-
-            }
-
-
+            console.log(tabs.visitKitFormGroup[i]);
           }
+          tabs.visitsList = visitKitListArray
+          for (let i = 0; i < this.vMatDetails.length; i++) {
+            const tabs = this.vMatDetails[i];
+            tabs.visitKitFormGroup = this.formBuilder.group({
+              visitKitList: this.formBuilder.array([]),
+            });
+            const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
 
-          tabs.visitsList = visitKitListArray;
-          this.tets.push(tabs.selectedLabTests);
+            for (let j = 0; j < this.vcount; j++) {
+              visitKitListArray.push(this.createVisitKitGroup());
+
+
+
+              const patientControl = visitKitListArray.at(j).get('patientId');
+              if (patientControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientControl.patchValue(vkDetailForRowAndTab.patientId);
+
+              }
+
+
+              // const collectionControl = visitKitListArray.at(j).get('collection');
+              // if (collectionControl) {
+              //   const vkDetailForRowAndTab = this.vkDetails[i][j];
+              //   if (vkDetailForRowAndTab.collection)
+              //     if (vkDetailForRowAndTab.collection === undefined || vkDetailForRowAndTab.collection === null || vkDetailForRowAndTab.collection === '') {
+              //       collectionControl.patchValue(this.preprationData[0].value);
+              //     }
+              //     else {
+              //       collectionControl.patchValue(vkDetailForRowAndTab.collection);
+              //     }
+              //   }
+
+                const collectionControl = visitKitListArray.at(j).get('collection');
+                if (collectionControl) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j];
+                  collectionControl.patchValue(vkDetailForRowAndTab.collection);
+
+                }
+                const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
+                if (collectionDateControl) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j];
+                  collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
+
+                }
+
+
+              }
+
+              tabs.visitsList = visitKitListArray;
+              this.tets.push(tabs.selectedLabTests);
+            }
+
+            this.tets.push(tabs.selectedLabTests)
+          });
+
+        for (let i = 1; i <= this.scount; i++) {
+          this.adjustScreenKitRows(this.scount, this.skDetails);
         }
 
-        this.tets.push(tabs.selectedLabTests)
       });
 
-      for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount, this.skDetails);
-      }
-
     });
-
-  });
 
 
   }
@@ -266,7 +280,7 @@ export class SampleCollectionComponent implements OnInit {
 
       patientId: [''],
       collection: ['Pending'],
-      collectionDate:['']
+      collectionDate: ['']
 
 
 
@@ -276,7 +290,7 @@ export class SampleCollectionComponent implements OnInit {
 
 
 
-  adjustScreenKitRows(count: number, skDetails:any) {
+  adjustScreenKitRows(count: number, skDetails: any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -289,16 +303,16 @@ export class SampleCollectionComponent implements OnInit {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
-         if (i < skDetails.length) {
-          
+        if (i < skDetails.length) {
+
           this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
-          if(skDetails[i].collection === undefined || skDetails[i].collection === null ||skDetails[i].collection === ''){
+          if (skDetails[i].collection === undefined || skDetails[i].collection === null || skDetails[i].collection === '') {
             this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
-             }
-             else{
-              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-         
-             }
+          }
+          else {
+            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+
+          }
           this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
 
         }
@@ -331,7 +345,7 @@ export class SampleCollectionComponent implements OnInit {
     return this.formBuilder.group({
       patientId: [''],
       collection: ['Pendig'],
-      collectionDate:['']
+      collectionDate: ['']
 
 
 
@@ -358,30 +372,30 @@ export class SampleCollectionComponent implements OnInit {
 
       this.sponsers.push(sponser);
       this.sponsers.forEach((res: any) => {
-        if(sponser.email == this.email){
-        console.log(sponser.email, this.email)
-        this.ID = sponser.site_data_code
-        
+        if (sponser.email == this.email) {
+          console.log(sponser.email, this.email)
+          this.ID = sponser.site_data_code
+
         }
       });
     });
 
-      console.log(this.sponsers)
+    console.log(this.sponsers)
 
-    }
+  }
 
   SubmitData() {
-      console.log(this.skDetails);
+    console.log(this.skDetails);
 
-      this.vmdetails = []
-    for(let i = 0; i< this.vMatDetails.length; i++) {
+    this.vmdetails = []
+    for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
 
 
     for (let i = 0; i < this.vkDetails.length; i++) {
-    
+
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
@@ -389,7 +403,7 @@ export class SampleCollectionComponent implements OnInit {
           console.log(this.vMatDetails[j].visitsList.value[index].status);
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
-          protocol.collectionDate= this.vMatDetails[i].visitsList.value[index].collectionDate
+          protocol.collectionDate = this.vMatDetails[i].visitsList.value[index].collectionDate
 
         }
 
@@ -401,7 +415,7 @@ export class SampleCollectionComponent implements OnInit {
       // protocol.site_id = this.ID
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
-      protocol.collectionDate= this.ScreenKitForm.value.screenKitList[index].collectionDate
+      protocol.collectionDate = this.ScreenKitForm.value.screenKitList[index].collectionDate
     })
 
 
@@ -423,17 +437,17 @@ export class SampleCollectionComponent implements OnInit {
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
         setTimeout(() => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Sample Collection Updated successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Collection Updated successfully' });
         }, 1000);
         this.router.navigate(['/home/site/viewCRA'])
 
-       
-        
+
+
       },
       (err: any) => {
-       
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail:err.errorr.message });
-        
+
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
       }
     );
   }

@@ -81,14 +81,15 @@ export class SponsorComponent implements OnInit {
           }
 
           this.setContactFormValues(this.contactDetails);
-          this.sponsorForm.patchValue(data);
-          console.log(data.country)
-          this.sponsorForm.controls['country'].setValue(data.country)
-          this.sponsorForm.controls['country'].setValue(data.country)
+        
+          // console.log(data.country)
+          // this.sponsorForm.controls['country'].setValue(data.country)
+          // this.sponsorForm.controls['country'].setValue(data.country)
           this.sponsorForm.controls['existing_sponsor_code'].disable()
           this.sponsorForm.controls['sponsor_code'].disable()
           // this.sponsorForm.controls['legal_sponsor_name'].disable()
           this.sponsorForm.controls['email'].disable()
+          this.sponsorForm.patchValue(data);
         });
 
       }
@@ -344,7 +345,8 @@ removeeditsponser(j: number) {
             this.route.navigate(['/home/cro/sponsorGrid'])
           },
           (err: any) => {
-            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+            
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
 
           }
         )
