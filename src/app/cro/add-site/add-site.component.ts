@@ -231,9 +231,13 @@ export class AddSiteComponent {
     this.investigatorFormedit.get('investigatoredit').removeAt(j);
   }
   
-  
   reset(){
+    if(this.isEdit === true){
+      window.location.reload()
+    }
+    else{
     this.siteForm.reset()
+    }
   }
 
   submit() {

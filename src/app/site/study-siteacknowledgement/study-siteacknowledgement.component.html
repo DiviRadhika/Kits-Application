@@ -1,429 +1,784 @@
+
+
+<!-- Begin page -->
+
 <div id="layout-wrapper">
+    <!-- ============================================================== -->
+
+    <!-- Start right Content here -->
 
     <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
+
     <div class="main-content" style="margin-top: -4%;">
+
         <div class="page-content">
+
             <div class="container-fluid">
+
                 <!-- start page title -->
+
                 <div class="row">
+
                     <div class="col-12">
-                        <div style="padding:1px"
-                            class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Kit Verification
+
+                                <i class="bx bxs-dashboard"></i> Acknowledgement By Site
+
                             </h4>
 
+ 
+
                             <div class="page-title-right">
+
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item">
-                                        <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+
+                                    <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards"
+
+                                            class="waves-effect">Dashboard</a>
+
                                     </li>
-                                    <li class="breadcrumb-item">
-                                        <a routerLink="/home/centralLab/kitvarificationGrid" class="waves-effect">Kit
-                                            Verification</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Kit Verification Edit</li>
+
+                                    <li class="breadcrumb-item"><a routerLink="/home/site/viewCRAAcknowledgement"
+
+                                            class="waves-effect">Study</a></li>
+
+ 
+
+                                    <li class="breadcrumb-item active">Acknowledgement By Site : {{this.ID}}</li>
+
                                 </ol>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
                 <!-- end page title -->
+
                 <p-toast></p-toast>
 
+ 
+
                 <div class="card">
+
                     <div class="card-body">
+
                         <form [formGroup]="preparationForm">
-                            <div class="row">
+
+                            <!-- <div class="row">
+
                                 <div id="printSection">
 
+                               
+
                                 </div>
-                              
+
+                                <div class="col-md-4 mb-3">
+
+ 
+
+ 
+
+                                    <label for="formrow-firstname-input" class="form-label">Study ID</label>
+
+                                    <select formControlName="protocolId" (change)="getprotocolDetails($event)"
+
+                                        class="form-select form-control">
+
+                                        <option  selected value="">Select Study ID</option>
+
+                                        <option *ngFor="let data of protocols" [value]="data.protocol_id">
+
+                                            {{ data.user_protocol_id }}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+ 
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
-                                    <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                    <input autocomplete="off" type="text" placeholder="Study Name"
-                                        formControlName="protocol_name" class="form-control" value="" />
-                                </div>
-                                <div *ngIf="displayValues" class="col-md-12">
-                                    <div class="mb-3">
-                                        <label for="formrow-firstname-input" class="form-label">Special
-                                            Instructions</label>
-                                        <textarea class="form-control" rows="3" cols="5"
-                                            formControlName="specialInstructions" id="comment"></textarea>
+ 
 
-                                    </div>
+                                    <label for="formrow-firstname-input" class="form-label">Study Name</label>
+
+                                  <input autocomplete="off" type="text"
+
+ 
+
+ 
+
+placeholder="Study Name" formControlName="protocol_name"
+
+                                        class="form-control" value="" />
+
                                 </div>
-                            </div>
+
+ 
+
+                            </div> -->
+
                         </form>
 
+ 
+
+ 
 
                         <hr class="mt-4 mb-4" />
 
+ 
+
                         <div class="row">
-                            <div *ngIf="displayValues" class="col-md-12 mb-3">
+
+                            <div class="col-md-12 mb-3">
+
                                 <h4 class="r-blue-text">Kit Details</h4>
+
                             </div>
-                            <div class="col-md-12 mb-3" style="margin-top:-5%">
+
+                            <div class="col-md-12 mb-3">
+
                                 <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
+
                                     <div class="tab-pane active" role="tabpanel">
+
+ 
 
                                         <br>
 
+ 
+
                                         <p-tabView>
+
                                             <p-tabPanel header="Screening">
+
                                                 <h3> {{screeningVariant}}</h3>
+
                                                 <h5 class="mb-sm-0 font-size-18">
+
                                                     Screen Kit Count : {{scount}}
+
                                                 </h5>
+
                                                 <br>
+
+ 
+
+ 
+
+ 
+
+ 
+
+                                                <br>
+
                                                 <div class="row">
-                                                    <div class="col-md-3 mt-2 mb-3">
-                                                        <h5> Selected Lab Test</h5>
 
-                                                        <h6 style="color: black"
-                                                            *ngFor="let item of screenDetails  let k = index">
-                                                            &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
-                                                    </div>
-                                                </div>
-                                                <br>
+                                                    <div class="col-md-6">
 
-
-                                                <h5 class="mb-sm-0 font-size-18">
-                                                    Materials
-                                                </h5>
-                                                <hr />
-                                                <div class="row card-group">
-                                                    <div class="col-md-3 mb-3" *ngFor="let item of sMatDetails">
-                                                        <p-card [styleClass]="'custom-card'"
-                                                            [style]="{width: '200px', height:'300px'}"
-                                                            styleClass="p-card-shadow">
-                                                            <ng-template pTemplate="header">
-                                                                <img style="width:199px; height: 147px;"
-                                                                    src="{{item.image}}" />
-                                                            </ng-template>
-                                                            Material:{{ item.material_name || item.meterial_id }} <br>
-                                                            Size: {{item.size}}<br>
-                                                            Qunatity: {{item.quantity}}<br>
-
-                                                        </p-card>
-                                                    </div>
-                                                </div>
-
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-9">
                                                         <div class="form-group">
 
-
+ 
 
                                                             <div class="table-responsive">
+
                                                                 <table class="table table-striped mb-0">
+
                                                                     <thead Style="background:#EEE">
+
                                                                         <tr>
+
                                                                             <th>KitId</th>
+
                                                                             <th>Central Lab KitId</th>
-                                                                            <th>Preparation</th>
 
                                                                             <th>Expiration Date</th>
 
+ 
+
+ 
+
+ 
+
                                                                         </tr>
+
                                                                     </thead>
+
+ 
 
                                                                     <tbody>
 
+ 
+
+ 
 
                                                                         <tr *ngFor="let item of skDetails">
+
                                                                             <td width="25%">
+
                                                                                 <input autocomplete="off" type="text"
+
                                                                                     placeholder="kitId"
+
                                                                                     class="form-control"
+
                                                                                     [disabled]="true"
-                                                                                    value={{item.kitId}} />
+
+                                                                                    value="{{item.kitId}}" />
+
                                                                             </td>
+
                                                                             <td width="25%">
+
                                                                                 <input autocomplete="off" type="text"
-                                                                                    placeholder="Lab KitId"
+
+                                                                                    placeholder="LabKitId"
+
+                                                                                    [disabled]="true"
+
                                                                                     value={{item.ckitId}}
-                                                                                    [disabled]="true"
+
                                                                                     class="form-control" />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Preparation"
-                                                                                    value={{item.prepration}}
-                                                                                    class="form-control"
-                                                                                    [disabled]="true" />
+
                                                                             </td>
 
-                                                                            <td width="25%">
+                                                                            <td width="40%">
+
                                                                                 <input autocomplete="off" type="text"
+
                                                                                     placeholder="Expiration Date"
+
                                                                                     value={{item.expiryDate}}
+
                                                                                     class="form-control"
+
                                                                                     [disabled]="true" />
+
                                                                             </td>
 
+ 
 
+ 
+
+ 
+
+ 
+
+ 
 
                                                                         </tr>
+
                                                                     </tbody>
+
                                                                 </table>
+
                                                             </div>
+
                                                         </div>
+
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-6">
+
                                                         <div class="form-group">
+
                                                             <div class="table-responsive" [formGroup]="ScreenKitForm">
+
                                                                 <table class="table table-striped mb-0"
+
                                                                     formArrayName="screenKitList">
+
                                                                     <thead Style="background:#EEE">
+
                                                                         <tr>
 
+ 
+
+ 
+
+                                                                           
 
                                                                             <th>Status</th>
 
+                                                                         
+
+                                                                            <th>Recieved Date</th>
+
+                                                                            <th>Remarks</th>
+
+ 
+
                                                                         </tr>
+
                                                                     </thead>
+
+ 
 
                                                                     <tbody>
 
+ 
+
                                                                         <tr [formGroupName]="i" *ngFor="
-                                                    let item of ScreenKitForm.get('screenKitList')
-                                                      .controls;
-                                                    let i = index
-                                                  ">
 
+                                                            let item of ScreenKitForm.get('screenKitList')
 
-                                                                            <td width="25%">
-                                                                                <select formControlName="status"
-                                                                                    maxlength="40" class="form-select"
-                                                                                    aria-label="Default select example">
+                                                              .controls;
+
+                                                            let i = index
+
+                                                          ">
+
+ 
+
+                                                                            <td>
+
+                                                                                <select formControlName="siteStatus"
+
+                                                                                    class="form-select form-control">
 
                                                                                     <option
+
                                                                                         *ngFor="let s of preprationData"
+
                                                                                         [value]="s.name">
+
                                                                                         {{s.name}}
+
                                                                                     </option>
+
                                                                                 </select>
+
+                                                                             
+
+ 
+
+                                                                            </td>
+
+                                             
+
+                                                                            <td width="25%">
+
+                                                                                <input autocomplete="off" type="date"
+
+                                                                                    placeholder="Date"
+
+                                                                                    class="form-control"
+
+                                                                                    formControlName="recievedDate"
+
+                                                                                    value="" />
+
+                                                                            </td>
+
+ 
+
+                                                                            <td width="25%">
+
+                                                                                <input autocomplete="off" type="text"
+
+                                                                                    placeholder="Remarks"
+
+                                                                                    formControlName="siteRemarks"
+
+                                                                                    class="form-control" value="" />
 
                                                                             </td>
 
                                                                         </tr>
+
                                                                     </tbody>
+
                                                                 </table>
+
                                                             </div>
+
                                                         </div>
+
                                                     </div>
+
                                                 </div>
 
+ 
 
+ 
+
+ 
+
+ 
+
+ 
 
                                             </p-tabPanel>
 
+ 
+
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names | titlecase}}">
+
+                                                header="Visit {{i+1}}">
+
+ 
+
+ 
+
                                                 <h3> {{item.kit_variant}}</h3>
-                                                <h5 class="mb-sm-0 font-size-18">
-                                                    Visit Kit Count : {{vcount}}
-                                                </h5>
-                                                <br>
-                                                <div>
-                                                    <h5>Selected Lab Tests </h5>
-                                                    <h6 class="col-md-6 mb-3"  style="color: black"
-                                                    *ngFor="let items of item.selectedLabTests  let k = index">
-                                                    &nbsp;{{k+1}}.&nbsp;{{ items }}</h6>
 
-                                                    <!-- <div class="col-md-6 mb-3"
-                                                        *ngFor="let items of item.selectedLabTests">
-                                                        <p>{{items}}</p>
-                                                    </div> -->
-                                                    <br>
+ 
 
-                                                    <div class="row card-group">
-                                                        <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
-                                                            <p-card [style]="{width: '200px', height:'300px'}"
-                                                                styleClass="p-card-shadow">
-                                                                <ng-template pTemplate="header">
-                                                                    <img style="width:199px; height: 147px;"
-                                                                        src="{{items.image}}" />
-                                                                </ng-template>
-                                                               Material:{{ items.material_name || items.meterial_id }} <br>
-                                                                Size: {{items.size}}<br>
-                                                                Qunatity: {{items.quantity}}<br>
+ 
 
-                                                            </p-card>
-                                                            <!-- </div> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
+ 
 
                                                 <div class="row">
-                                                    <div class="col-md-9">
+
+                                                    <div class="col-md-6">
+
                                                         <div class="form-group">
 
+ 
 
+ 
+
+ 
 
                                                             <div class="table-responsive">
+
                                                                 <table class="table table-striped mb-0">
+
                                                                     <thead Style="background:#EEE">
+
                                                                         <tr>
+
                                                                             <th>KitId</th>
+
                                                                             <th>Central Lab KitId</th>
-                                                                            <th>Preparation</th>
+
                                                                             <th>Expiration Date</th>
 
+ 
+
+ 
 
                                                                         </tr>
+
                                                                     </thead>
+
+ 
 
                                                                     <tbody>
 
+ 
+
+ 
 
                                                                         <tr *ngFor="let item of vkDetails[i]">
+
                                                                             <td width="25%">
+
                                                                                 <input autocomplete="off" type="text"
+
                                                                                     placeholder="kitId"
-                                                                                    class="form-control" readonly
+
+                                                                                    class="form-control"
+
                                                                                     [disabled]="true"
-                                                                                    value={{item.kitId}} />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="LabKitId"
-                                                                                    value={{item.ckitId}} readonly
-                                                                                    [disabled]="true"
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Preparation"
-                                                                                    value={{item.prepration}} readonly
-                                                                                    [disabled]="true"
-                                                                                    class="form-control" />
+
+                                                                                    value="{{item.kitId}}" />
+
                                                                             </td>
 
                                                                             <td width="25%">
+
                                                                                 <input autocomplete="off" type="text"
+
+                                                                                    placeholder="LabKitId"
+
+                                                                                    [disabled]="true"
+
+                                                                                    value={{item.ckitId}}
+
+                                                                                    class="form-control" />
+
+                                                                            </td>
+
+                                                                            <td width="40%">
+
+                                                                                <input autocomplete="off" type="text"
+
                                                                                     placeholder="Expiration Date"
+
                                                                                     value={{item.expiryDate}}
+
                                                                                     class="form-control"
+
                                                                                     [disabled]="true" />
+
                                                                             </td>
 
                                                                         </tr>
+
                                                                     </tbody>
+
                                                                 </table>
+
                                                             </div>
+
                                                         </div>
+
                                                     </div>
-                                                    <div class="col-md-3">
+
+ 
+
+                                                    <div class="col-md-6">
+
                                                         <div class="form-group">
+
                                                             <div class="table-responsive"
+
                                                                 [formGroup]="item.visitKitFormGroup">
+
                                                                 <table class="table table-striped mb-0"
+
                                                                     formArrayName="visitKitList">
+
                                                                     <thead Style="background:#EEE">
+
                                                                         <tr>
 
+ 
+
+                                                                           
+
+                                                                           
 
                                                                             <th>Status</th>
 
+                                                                         
+
+                                                                            <th>Recieved Date</th>
+
+                                                                            <th>Remarks</th>
+
                                                                         </tr>
+
                                                                     </thead>
+
+ 
 
                                                                     <tbody *ngIf="item.visitsList">
 
+ 
+
+ 
 
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
+
                                                                             [formGroupName]="j">
 
+                                                                            <td>
 
-                                                                            <td width="25%">
-                                                                                <select formControlName="status"
+                                                                                <select formControlName="siteStatus"
+
                                                                                     class="form-select form-control">
+
+                                                                                   
+
                                                                                     <option
-                                                                                    *ngFor="let s of preprationData"
-                                                                                    [value]="s.name">
-                                                                                    {{s.name}}
-                                                                                </option>
+
+                                                                                        *ngFor="let s of preprationData"
+
+                                                                                        [value]="s.name">
+
+                                                                                        {{s.name}}
+
+                                                                                    </option>
+
                                                                                 </select>
+
+                                                                             
+
+ 
+
                                                                             </td>
 
+                                             
+
+                                                                            <td width="25%">
+
+                                                                                <input autocomplete="off" type="date"
+
+                                                                                    placeholder="Date"
+
+                                                                                    class="form-control"
+
+                                                                                    formControlName="recievedDate"
+
+                                                                                    value={{date}} />
+
+                                                                            </td>
+
+ 
+
+                                                                            <td width="25%">
+
+                                                                                <input autocomplete="off" type="text"
+
+                                                                                    placeholder="Remarks"
+
+                                                                                    formControlName="siteRemarks"
+
+                                                                                    class="form-control" value="" />
+
+                                                                            </td>
+
+ 
 
                                                                         </tr>
+
                                                                     </tbody>
+
                                                                 </table>
+
                                                             </div>
 
                                                         </div>
+
                                                     </div>
+
                                                 </div>
+
                                             </p-tabPanel>
 
                                             <br>
+
+ 
+
                                             <div class="col-md-12 mb-3" align="right">
+
                                                 <div class="mb-2 text-right" width="100%">
+
                                                     <button type="button"
+
                                                         class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-                                                        style="width: 100px; height: 40px" (click)="SubmitData()">
+
+                                                        style="width: 150px; height: 40px" (click)="SubmitData()">
+
                                                         <i class="bx bx-hdd label-icon"></i> Submit
+
                                                     </button>
+
                                                 </div>
+
                                             </div>
 
+ 
+
+ 
 
                                         </p-tabView>
 
+ 
 
+ 
 
+ 
 
+ 
+
+ 
 
                                         <br>
+
                                         <br>
+
                                         <div class="row">
 
+ 
 
+ 
+
+ 
 
                                         </div>
 
+ 
+
+ 
 
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
 
+ 
+
+ 
 
                     </div>
 
+ 
+
                     <!-- end col -->
+
                 </div>
+
                 <!-- end row -->
+
             </div>
+
             <!-- HTML template -->
 
+ 
 
+ 
+
+ 
 
             <!-- container-fluid -->
+
         </div>
+
         <!-- End Page-content -->
 
+ 
+
         <footer class="footer" style="position: fixed;">
+
             <div class="container-fluid">
+
                 <div class="row">
+
                     <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+
                 </div>
+
             </div>
+
         </footer>
+
     </div>
+
     <!-- end main content-->
+
 </div>
+
+ 
 
 <!-- END layout-wrapper -->
 
+ 
+
 <!-- Right bar overlay-->
+
 <div class="rightbar-overlay"></div>

@@ -64,7 +64,7 @@ export class LabTestComponent implements OnInit {
   disableAdd: boolean = true
   totalCountmaterial = 0;
   selectedIndex = 0;
-  classifications = ['Classification 1', 'Classification 2'];
+  classifications = ['Select Classification','Classification 1', 'Classification 2'];
   constructor(private route: Router, private _cro: CrosService,
     private messageService: MessageService, private confirmationService: ConfirmationService) { }
 

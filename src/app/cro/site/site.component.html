@@ -92,9 +92,9 @@
                     </thead>
 
 
-                    <tbody>
+                    <tbody  >
 
-                      <tr class="odd"
+                      <tr class="odd" style="vertical-align: 12px;"   
                         *ngFor="let siteData of uniqueCombinedArray  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                         
@@ -148,7 +148,7 @@
 
                         <tbody>
 
-                          <tr class="odd"
+                          <tr class="odd" style="vertical-align: middle;"
                             *ngFor="let siteData of siteDetails| sort:sortedColumn:sortDirection  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(siteData.site_id, 'view')">{{siteData.site_data_code}}</td>

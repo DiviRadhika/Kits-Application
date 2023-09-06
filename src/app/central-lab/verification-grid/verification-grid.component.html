@@ -82,7 +82,7 @@
             
                                     <tbody>
             
-                                      <tr class="odd"
+                                      <tr class="odd" style="  vertical-align: middle;"   
                                         *ngFor="let protocolData of protocolDetails  | sort:sortedColumn:sortDirection|paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
             
                                         <td class="sorting_1 dtr-control"  (click)="edit(protocolData.protocol_id)"  style="color:blue;cursor: pointer">
@@ -122,3 +122,13 @@
                                     *ngIf="protocolDetails && protocolDetails.length"></pagination-controls>
                                 </div>
                               </div>
+
+
+                              
+        <footer class="footer" style="position: fixed;">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+              </div>
+          </div>
+      </footer>

@@ -107,7 +107,7 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                         
 
                         <tbody>
-                          <tr class="odd" *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                          <tr class="odd" style="  vertical-align: middle;"    *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                             <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
                              
                           <!-- <tr class="odd"

@@ -9,6 +9,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./view-sites.component.css']
 })
 export class ViewSitesComponent implements OnInit {
+  heading: string='';
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -51,6 +52,18 @@ export class ViewSitesComponent implements OnInit {
 
   ngOnInit(): void {
    this.study()
+   if (this.route.url === '/home/site/viewCRA') {
+
+    this.heading = 'Sample Acknowledgement'
+
+  }
+
+  else if (this.route.url === '/home/site/viewCRAAcknowledgement') {
+    this.heading = 'Acknowledgement By Site'
+
+  }
+
+
  
     }
     toggleSorting() {
@@ -70,10 +83,15 @@ export class ViewSitesComponent implements OnInit {
 
       this.route.navigate(['/home/cro/protocolView', id])
     }
-  edit(id: string){
-    console.log(id);
-    
-      this.route.navigate(['/home/site/sampleCollection', id])
+    edit(id: string) {
+
+      if (this.route.url === '/home/site/viewCRA') {
+        this.route.navigate(['/home/site/sampleCollection', id])
+      } 
+      else if (this.route.url === '/home/site/viewCRAAcknowledgement') {
+        this.route.navigate(['/home/site/studySiteAcknowledgement', id])
+     }
+  
     }
 
 

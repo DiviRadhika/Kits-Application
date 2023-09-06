@@ -203,7 +203,11 @@ export class KitVerificationComponent implements OnInit {
 
               }
 
-
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              const formControl = visitKitListArray.at(j);
+              if (vkDetailForRowAndTab.site_id) {
+               formControl.disable()
+              }
             }
 
             tabs.visitsList = visitKitListArray;
@@ -275,7 +279,12 @@ export class KitVerificationComponent implements OnInit {
          
              }
           // this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
+          if (i < skDetails.length) {
+            if (skDetails[i].site_id) {
+              this.ScreenKitForm.get('screenKitList').controls[i].get('status').disable()
+            }
 
+          }
 
         }
       }
@@ -369,8 +378,10 @@ export class KitVerificationComponent implements OnInit {
   SubmitData() {
     console.log(this.skDetails);
 
+    this.ScreenKitForm.get('screenKitList').enable()
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
+
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
@@ -387,6 +398,7 @@ export class KitVerificationComponent implements OnInit {
         for (let j = 0; j < this.vMatDetails.length; j++) {
           // this.vMatDetails.forEach((data:any,index: any)=>{
           console.log(this.vMatDetails[j].visitsList.value[index].status);
+          this.vMatDetails[i].visitsList.enable()
           protocol.verification_status = this.vMatDetails[i].visitsList.value[index].status
           // protocol.verification_status = false
         }

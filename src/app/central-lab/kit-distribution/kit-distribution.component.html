@@ -108,8 +108,8 @@
                                                                 <img style="width:199px; height: 147px;"
                                                                     src="{{item.image}}" />
                                                             </ng-template>
-                                                            {{ item.material_name || item.meterial_id }} <br>
-                                                            size: {{item.size}}<br>
+                                                           Material:{{ item.material_name || item.meterial_id }} <br>
+                                                            Size: {{item.size}}<br>
                                                             Qunatity: {{item.quantity}}<br>
 
                                                         </p-card>
@@ -127,7 +127,7 @@
                                                                         <tr>
                                                                             <th>KitId</th>
                                                                             <th>Central Lab KitId</th>
-                                                                            <th>Prepration</th>
+                                                                            <th>Preparation</th>
                                                                             <th>Status</th>
                                                                             <th>Expiration Date</th>
 
@@ -188,10 +188,10 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            <div class="table-responsive" [formGroup]="ScreenKitForm">
-                                                                <table class="table table-striped mb-0"
+                                                            <div class="table-responsive"  style="margin-top: 20px;" [formGroup]="ScreenKitForm">
+                                                                <table class="table table-striped mb-0"  
                                                                     formArrayName="screenKitList">
-                                                                    <thead Style="background:#EEE">
+                                                                    <thead Style="background:#EEE; ">
                                                                         <tr>
                                                                             <th>Site Id</th>
                                                                             <th>Print</th>
@@ -199,7 +199,7 @@
                                                                     </thead>
                                                                     <tbody>
 
-                                                                        <tr [formGroupName]="i" *ngFor="
+                                                                        <tr [formGroupName]="i"  *ngFor="
                                                             let item of ScreenKitForm.get('screenKitList')
                                                               .controls;
                                                             let i = index
@@ -249,11 +249,14 @@
                                                 <br>
                                                 <div>
                                                     <h5>Selected Lab Tests</h5>
+                                                    <h6 class="col-md-6 mb-3"  style="color: black"
+                                                    *ngFor="let items of item.selectedLabTests  let k = index">
+                                                    &nbsp;{{k+1}}.&nbsp;{{ items }}</h6>
 
-                                                    <div class="col-md-6 mb-3"
+                                                    <!-- <div class="col-md-6 mb-3"
                                                         *ngFor="let items of item.selectedLabTests">
                                                         <p>{{items}}</p>
-                                                    </div>
+                                                    </div> -->
                                                     <br>
 
                                                     <div class="row card-group">
@@ -264,8 +267,8 @@
                                                                     <img style="width:199px; height: 147px;"
                                                                         src="{{items.image}}" />
                                                                 </ng-template>
-                                                                {{ items.material_name || items.meterial_id }} <br>
-                                                                size: {{items.size}}<br>
+                                                                Material:{{ items.material_name || items.meterial_id }} <br>
+                                                                Size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
 
                                                             </p-card>
@@ -288,7 +291,7 @@
                                                                         <tr>
                                                                             <th>KitId</th>
                                                                             <th>Central Lab KitId</th>
-                                                                            <th>Prepration</th>
+                                                                            <th>Preparation</th>
 
                                                                             <th>Status</th>
                                                                             <th>Expiration Date</th>

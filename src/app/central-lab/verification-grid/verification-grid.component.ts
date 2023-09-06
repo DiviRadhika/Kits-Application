@@ -20,6 +20,9 @@ export class VerificationGridComponent implements OnInit {
   totalCount = 0
   pageSize = 10;
   heading :any
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
  constructor(private route: Router, private protocol: ProtocolService, private messageService: MessageService  ) { }
 
   ngOnInit(): void {

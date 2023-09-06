@@ -133,6 +133,8 @@ export class ProtocolViewComponent implements OnInit {
       this.protocolForm.controls['total_visits'].setValue(this.protocolIdDetails.no_of_visits)
       this.protocolForm.controls['kit_variant_count'].setValue(this.protocolIdDetails.kit_variant_count)
      
+
+      this.protocolForm.controls['selected_sponsor_id'].setValue(this.protocolIdDetails.sponsor_name)  
       this.protocolForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
     this.protocolForm.disable()
     

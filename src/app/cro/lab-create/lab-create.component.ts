@@ -3,6 +3,8 @@ import { CrosService } from '../cros.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-lab-create',
@@ -30,7 +32,8 @@ export class LabCreateComponent {
     private _cro: CrosService,
     private _activatedRoute: ActivatedRoute,
     private _formbuilder: FormBuilder, private route: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
 
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
@@ -91,6 +94,27 @@ export class LabCreateComponent {
     this.editImage = false
     console.log(this.bas2);
   }
+  confirm2(id: any, name: any) {
+    this.confirmationService.confirm({
+    
+        message: `Are you sure you want to Change Image '${name}'?`,
+        header: 'Change Confirmation',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.enable()
+        },
+        reject: (type: any) => {
+            // switch(type) {
+            //     case ConfirmEventType.REJECT:
+            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            //     break;
+            //     case ConfirmEventType.CANCEL:
+            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            //     break;
+            // }
+        }
+    });
+}
   enable() {
     this.editImage = false
     this.fieldDisplay = true
@@ -101,7 +125,12 @@ export class LabCreateComponent {
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
   reset(){
+    if(this.isEdit === true){
+      window.location.reload()
+    }
+    else{
     this.labForm.reset()
+    }
   }
   tabchange(){
     sessionStorage.setItem('tab', 'yes');  

@@ -97,7 +97,7 @@
 
                       <tbody>
 
-                        <tr class="odd"
+                        <tr class="odd" style="vertical-align: middle;"
                           *ngFor="let croData of croDetails| sort:sortedColumn:sortDirection  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                           <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(croData.cro_id, 'view')">{{croData.cro_code}}</td>
                           <td>{{croData.cro_name}}</td>

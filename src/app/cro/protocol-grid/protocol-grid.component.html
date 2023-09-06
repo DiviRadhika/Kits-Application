@@ -7,12 +7,12 @@
       <div class="row">
         <div class="col-12">
           <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Study</h4>
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Study Summary</h4>
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-                <li class="breadcrumb-item"><a>Study</a></li>
+                <li class="breadcrumb-item"><a>Study Summary</a></li>
                 <!-- <li class="breadcrumb-item active">Add CRO</li> -->
               </ol>
             </div>
@@ -96,7 +96,7 @@
 
                         <tbody>
 
-                          <tr class="odd"
+                          <tr class="odd" style="vertical-align: middle;"   
                             *ngFor="let protocolData of protocolDetails|sort:sortedColumn:sortDirection  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control" (click)="view(protocolData.id)" style="color:blue;cursor: pointer">

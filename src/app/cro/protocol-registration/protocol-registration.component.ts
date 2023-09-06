@@ -11,6 +11,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./protocol-registration.component.css']
 })
 export class ProtocolRegistrationComponent {
+  sponsorName: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -580,7 +581,13 @@ export class ProtocolRegistrationComponent {
     const control = this.protocolForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
+  sponsorname(){
+    this.croService.getSponsorById(this.protocolForm.controls['selected_sponsor_id'].value).subscribe((data: any) => {
+      console.log(data)
+      this.sponsorName = data.sponsor_name
+    });
 
+  }
 
 
   SubmitData() {
@@ -700,6 +707,7 @@ export class ProtocolRegistrationComponent {
             sc[index].materials = formData[index].visits;
           }
         }
+        
         const data = {
           "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
           "protocol_name": this.protocolForm.controls['selected_protocol_name'].value,
@@ -710,7 +718,8 @@ export class ProtocolRegistrationComponent {
           "global_sample_size": Number(this.protocolForm.controls['global_sample_size'].value),
           "avant_sample_size": Number(this.protocolForm.controls['avant_sample_size'].value),
           "special_instructions": this.protocolForm.controls['specialInstructions'].value,
-          "kit_variant_count":this.protocolForm.controls['kit_variant_count'].value,
+          "kit_variant_count": Number(this.protocolForm.controls['kit_variant_count'].value),
+          "sponsor_name": this.sponsorName,
           "screening_kit_details": [
             {
               "screening_kit_count": Number(this.protocolForm.controls['selected_skit_count'].value),
@@ -730,6 +739,7 @@ export class ProtocolRegistrationComponent {
           "variants": sc
 
         }
+        
 
  
 

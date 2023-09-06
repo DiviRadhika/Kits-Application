@@ -21,10 +21,10 @@
                                         <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                     </li>
                                     <li *ngIf="sponsor" class="breadcrumb-item">
-                                        <a routerLink="/home/Sponsor/sponsorStudies" class="waves-effect">Study</a>
+                                        <a routerLink="/home/Sponsor/sponsorStudies" class="waves-effect">Study Summary</a>
                                     </li>
                                     <li *ngIf="!sponsor" class="breadcrumb-item">
-                                        <a routerLink="/home/cro/protocolGrid" class="waves-effect">Study</a>
+                                        <a routerLink="/home/cro/protocolGrid" class="waves-effect">Study Summary</a>
                                     </li>
                                     <li class="breadcrumb-item active">Study View</li>
                                 </ol>
@@ -63,18 +63,21 @@
 
                   </div>
                 </div>
-                <!-- <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
-                    <select maxlength="100" formControlName="selected_sponsor_id" class="form-select form-control"
-                      [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
-                      <option selected value="">Select Sponsor ID</option>
-                      <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
-                        {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
-                      </option>
-                    </select>
-                  </div>
-                </div> -->
+
+                <div class="col-md-4">
+                
+                                  <div class="mb-3">
+                
+                                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name</label>
+                
+                                    <input autocomplete="off" type="text"  placeholder="Sponsor Name"  maxlength="100" autocomplete="off" formControlName="selected_sponsor_id"
+                
+                                      class="form-control" id="" placeholder="CRO Study ID">
+                
+                
+                                  </div>
+                
+                                </div>
 
 
                 <div class="col-md-4">
@@ -190,16 +193,16 @@
                                             <p-tabPanel header="Screening">
 
                                             <h3>  {{screeningVariant}}</h3>
-                                                <h5 class="mb-sm-0 font-size-18">
+                                                <!-- <h5 class="mb-sm-0 font-size-18">
                                                     Screen Kit Count : {{scount}}
-                                                </h5>
-                                                <br>
+                                                </h5> -->
+                                                
                                                 <div class="row">
                                                     <div class="col-md-3 mt-2 mb-3">
-                                                        <h6 style="color: black"> <b>&nbsp;&nbsp;Selected Lab Tests</b>
-                                                        </h6>
+                                                      <h5>Selected Lab Tests</h5>
+                                                    
                                                      
-                                                        <h6 style="color: black"
+                                                        <h6 
                                                             *ngFor="let item of screenDetails  let k = index">
                                                             &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
                                                     </div>
@@ -221,8 +224,8 @@
                                                             <ng-template pTemplate="header">
                                                                 <img style="width:199px; height: 147px;"  src="{{item.image}}" />
                                                             </ng-template>
-                                                            {{ item.material_name || item.meterial_id }} <br>
-                                                            size: {{item.size}}<br>
+                                                           Material: {{ item.material_name || item.meterial_id }} <br>
+                                                            Size: {{item.size}}<br>
                                                             Qunatity: {{item.quantity}}<br>
 
                                                         </p-card>
@@ -240,13 +243,16 @@
                                             header="{{item.alternate_names | titlecase}}">
                                             <h3>{{item.kit_variant}}</h3>  
                                                 <h5>Selected Lab Tests</h5>
-                                                <div class="col-md-6 mb-3" *ngFor="let items of item.selectedLabTests">
-                                                    <p>{{items}}</p>
-                                                </div>
+                                                <h6 
+                                                *ngFor="let items of item.selectedLabTests  let k = index">
+                                                &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ items }}</h6>
+                                              
                                             
                                                 <br>
                                         
-
+                                                <h5 class="mb-sm-0 font-size-18">
+                                                  Materials
+                                              </h5>
 
                                                 <div class="row card-group">
                                                     <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
@@ -257,8 +263,8 @@
                                                             <ng-template pTemplate="header">
                                                                 <img style="width:199px; height: 140px;"  src="{{items.image}}" />
                                                             </ng-template>
-                                                            {{ items.material_name || items.meterial_id }} <br>
-                                                            size: {{items.size}}<br>
+                                                           Material: {{ items.material_name || items.meterial_id }} <br>
+                                                            Size: {{items.size}}<br>
                                                             Qunatity: {{items.quantity}}<br>
 
                                                         </p-card>

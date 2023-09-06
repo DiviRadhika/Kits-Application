@@ -23,7 +23,7 @@
                                     </li>
                                     <li class="breadcrumb-item">
                                         <a routerLink="/home/centralLab/kitPreparationGrid" class="waves-effect">Kit
-                                            Prepration</a>
+                                            Preparation</a>
                                     </li>
                                     <li class="breadcrumb-item active">Kit Preparation Edit</li>
                                 </ol>
@@ -114,8 +114,8 @@
                                                                 <img style="width:199px; height: 147px;"
                                                                     src="{{item.image}}" />
                                                             </ng-template>
-                                                            {{ item.material_name || item.meterial_id }} <br>
-                                                            size: {{item.size}}<br>
+                                                            Material:{{ item.material_name || item.meterial_id }} <br>
+                                                            Size: {{item.size}}<br>
                                                             Qunatity: {{item.quantity}}<br>
 
                                                         </p-card>
@@ -209,27 +209,30 @@
                                                 <br>
                                                 <div>
                                                     <h5>Selected Lab Tests</h5>
+                                                    <h6 class="col-md-6 mb-3"  style="color: black"
+                                                    *ngFor="let items of item.selectedLabTests  let k = index">
+                                                    &nbsp;{{k+1}}.&nbsp;{{ items }}</h6>
 
-                                                    <div class="col-md-6 mb-3"
-                                                        *ngFor="let items of item.selectedLabTests">
+                                                    <!-- <div class="col-md-6 mb-3"  
+                                                        *ngFor="let items of item.selectedLabTests ">
 
                                                         <p>{{items}}</p>
-                                                    </div>
+                                                    </div> -->
                                                     <br>
                                                     <h5 class="mb-sm-0 font-size-18">
                                                         Materials
                                                     </h5>
                                                     <hr />
                                                     <div class="row card-group">
-                                                        <div class="col-md-3 mb-3" *ngFor="let items of item.visits">
+                                                        <div class="col-md-3 mb-3" *ngFor="let items of item.visits ">
                                                             <p-card [style]="{width: '200px', height:'300px'}"
                                                                 styleClass="p-card-shadow">
                                                                 <ng-template pTemplate="header">
                                                                     <img style="width:199px; height: 147px;"
                                                                         src="{{items.image}}" />
                                                                 </ng-template>
-                                                                 {{ items.material_name || items.meterial_id }}  <br>
-                                                                size: {{items.size}}<br>
+                                                                 Material:{{ items.material_name || items.meterial_id }}  <br>
+                                                                Size: {{items.size}}<br>
                                                                 Qunatity: {{items.quantity}}<br>
 
                                                             </p-card>
@@ -246,7 +249,7 @@
                                                                 <th>KitId</th>
                                                                 <th>Central Lab KitId</th>
                                                                 <th>Expiry Date</th>
-                                                                <th>Prepration</th>
+                                                                <th>Preparation</th>
 
 
                                                                 <th>Print Label</th>

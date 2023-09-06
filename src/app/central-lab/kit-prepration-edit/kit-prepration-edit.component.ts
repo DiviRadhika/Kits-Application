@@ -205,7 +205,7 @@ export class KitPreprationEditComponent implements OnInit {
                 <table class="material-table">
                   <thead>
                     <tr>
-                      <th>Material ID</th>
+                      <th>Material Name</th>
                       <th>Size</th>
                       <th>Quantity</th>
                     </tr>
@@ -215,7 +215,7 @@ export class KitPreprationEditComponent implements OnInit {
             .map(
               (item) => `
                           <tr>
-                            <td>${item.meterial_id}</td>
+                            <td>${item.material_namep}</td>
                             <td>${item.size}</td>
                             <td>${item.quantity}</td>
                           </tr>
@@ -331,6 +331,14 @@ export class KitPreprationEditComponent implements OnInit {
                 prepControl.patchValue(vkDetailForRowAndTab.prepration);
                
             }
+            const vkDetailForRowAndTab = this.vkDetails[i][j];
+              const formControl = visitKitListArray.at(j);
+              if (vkDetailForRowAndTab.verification_status === 'Verified') {
+
+ 
+
+                formControl.disable()
+              }
            
           }
           tabs.visitsList = visitKitListArray;
@@ -451,7 +459,7 @@ export class KitPreprationEditComponent implements OnInit {
           <table class="material-table">
                   <thead>
                     <tr>
-                      <th>Material ID</th>
+                      <th>Material Name</th>
                       <th>Size</th>
                       <th>Quantity</th>
                     </tr>
@@ -461,7 +469,7 @@ export class KitPreprationEditComponent implements OnInit {
             .map(
               (item: any) => `
               <tr>
-              <td>${item.meterial_id}</td>
+              <td>${item.material_name}</td>
               <td>${item.size}</td>
               <td>${item.quantity}</td>
             </tr>
@@ -517,7 +525,18 @@ export class KitPreprationEditComponent implements OnInit {
           this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
         
         }
-       
+        if (i < skDetails.length) {
+
+          if (skDetails[i].verification_status) {
+            if (skDetails[i].verification_status === 'Verified') {
+              this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').disable()
+
+            }
+          }
+        }
 
       }
     }
@@ -562,33 +581,23 @@ export class KitPreprationEditComponent implements OnInit {
   }
 
   SubmitData() {
-    // console.log(this.skDetails);
-    // this.loading = true
-    // let payload = this.ScreenKitForm.getRawValue();
-    // payload['alternate_names'] = this.utilsService.sentenceCase(payload['alternate_names']);
+    this.ScreenKitForm.get('screenKitList').enable()
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
-
-
     for (let i = 0; i < this.vkDetails.length; i++) {
-      // for (let j = 0; i < this.vkDetails[i].length; j++) {
-      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
-
-      // this.vkDetails[j].push({"verification_status": 'val'})
      
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
-          // this.vMatDetails.forEach((data:any,index: any)=>{
-
+          this.vMatDetails[i].visitsList.enable()
           protocol.ckitId = this.vMatDetails[i].visitsList.value[index].ckitId
           protocol.prepration = this.vMatDetails[i].visitsList.value[index].prepration
           protocol.expiryDate = this.vMatDetails[i].visitsList.value[index].expiryDate
-          // protocol.verification_status = false
+       
         }
 
       })

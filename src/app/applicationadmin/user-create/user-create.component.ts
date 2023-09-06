@@ -304,9 +304,15 @@ export class UserCreateComponent implements OnInit {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message}); }
     )
   }
-  reset(){
-    this.userForm.reset()
+  
+reset(){
+  if(this.isEdit === true){
+    window.location.reload()
   }
+  else{
+  this.userForm.reset()
+  }
+}
   
   submit(): void {
     this.userForm.controls['first_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['first_name'].value));

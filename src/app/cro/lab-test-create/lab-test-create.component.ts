@@ -159,7 +159,14 @@ export class LabTestCreateComponent implements OnInit {
     const control = this.labTestCreateForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
-
+  reset(){
+    if(this.isEdit === true){
+      window.location.reload()
+    }
+    else{
+    this.labTestCreateForm.reset()
+    }
+  }
   submit() {
     this.labTestCreateForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['cro_name'].value));
     this.labTestCreateForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['legal_cro_name'].value));

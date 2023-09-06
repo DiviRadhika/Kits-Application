@@ -100,7 +100,7 @@
                         <tbody>
 
 
-                          <tr class="odd"
+                          <tr class="odd"  style="vertical-align: middle;"   
                             *ngFor="let sponsorData of sponsorDetails | sort:sortedColumn:sortDirection | paginate: { id: 'sponsorPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                             <td class="sorting_1 dtr-control"style="color:blue;cursor: pointer"(click)="edit(sponsorData.sponsor_id, 'view')">{{sponsorData.sponsor_code}}</td>
 

@@ -10,13 +10,15 @@ import { ToastModule } from 'primeng/toast';
 import { ViewSitesComponent } from './view-sites/view-sites.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewsitesSortPipe } from './view-sites.sort';
+import { StudySiteacknowledgementComponent } from './study-siteacknowledgement/study-siteacknowledgement.component';
 
 
 @NgModule({
   declarations: [
     SampleCollectionComponent,
     ViewSitesComponent,
-    ViewsitesSortPipe
+    ViewsitesSortPipe,
+    StudySiteacknowledgementComponent
   ],
   imports: [
     CommonModule,

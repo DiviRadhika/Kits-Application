@@ -240,9 +240,13 @@ removeeditsponser(j: number) {
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
   reset(){
+    if(this.isEdit === true){
+      window.location.reload()
+    }
+    else{
     this.sponsorForm.reset()
+    }
   }
-
 
   submit() {
     this.sponsorForm.controls['sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['sponsor_name'].value));

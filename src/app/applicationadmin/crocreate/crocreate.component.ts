@@ -156,9 +156,14 @@ export class CROcreateComponent implements OnInit {
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
   reset(){
-    this.CroForm.reset()
-  }
 
+    if(this.isEdit === true){
+      window.location.reload()
+    }
+    else{
+    this.CroForm.reset()
+    }
+  }
   submit() {
       // Capitalize the first letter of cro_name and legal_cro_name
   this.CroForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.CroForm.controls['cro_name'].value));

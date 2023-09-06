@@ -287,7 +287,7 @@ class="form-control" maxlength="60" id="Address 1" placeholder="Enter Email"
               </form>
             </div>
             <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-              <button style="margin: 2px;" *ngIf="!isEdit" (click)="reset()" class="btn btn-primary">Reset</button>
+              <button style="margin: 2px;"  *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
 
               <button style="margin: 2px;"  *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
             </div>

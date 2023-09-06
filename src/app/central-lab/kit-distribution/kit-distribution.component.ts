@@ -193,6 +193,17 @@ export class KitDistributionComponent implements OnInit {
                 siteControl.patchValue(vkDetailForRowAndTab.site_id);
                
             }
+            const vkDetailForRowAndTab = this.vkDetails[i][j];
+
+            const formControl = visitKitListArray.at(j);
+
+            if (vkDetailForRowAndTab.collection === 'Collected') {
+
+
+
+              formControl.disable()
+
+            }
            
 
           }
@@ -348,6 +359,19 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
         
        
         }
+        if (i < skDetails.length) {
+
+          if (skDetails[i].collection) {
+
+            if (skDetails[i].collection === 'Collected') {
+
+              this.ScreenKitForm.get('screenKitList').controls[i].get('siteId').disable()
+
+            }
+
+          }
+
+        }
       }
     }
 
@@ -412,9 +436,11 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
   SubmitData() {
     console.log(this.skDetails);
+this.ScreenKitForm.get('screenKitList').enable()
 
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {
+this.vMatDetails[i].visitsList.enable()
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
