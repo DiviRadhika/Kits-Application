@@ -80,14 +80,17 @@ cro_protocol = cro_protocols_ns.model(
         "protocol_id": fields.String(required=True),
         "protocol_name": fields.String(required=True),
         "sponsor_id": fields.String(required=True),
+        "sponsor_name": fields.String(),
         "cro_id": fields.String(required=True),
         "no_of_visits": fields.Integer(required=True),
         "special_instructions": fields.String(),
         "no_of_screens": fields.Integer(required=True),
         "global_sample_size": fields.Integer(required=True),
         "avant_sample_size": fields.Integer(required=True),
+        "kit_variant_count": fields.Integer(),
         "screening_kit_details": fields.List(fields.Nested(screening_kit_details)),
         "visit_kit_details": fields.List(fields.Nested(visit_kit_details)),
+
     },
 )
 
@@ -184,7 +187,15 @@ class CroProtocol(Resource):
             "no_of_visits": request_json["no_of_visits"],
             "special_instructions": request_json["special_instructions"],
             "no_of_screens": request_json["no_of_screens"],
+            "global_sample_size": request_json["global_sample_size"],
+            "avant_sample_size": request_json["avant_sample_size"],
         }
+
+        if 'sponsor_name' in request_json:
+            cro_protocol_json['sponsor_name']  = request_json['sponsor_name']
+        if 'kit_variant_count' in request_json:
+            cro_protocol_json['kit_variant_count'] = request_json['kit_variant_count']
+
         try:
             cro_protocol_data = cro_protocol_schema.load(cro_protocol_json)
             cro_protocol_id = cro_protocol_data.save_to_db()

@@ -3,7 +3,7 @@ import uuid
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import ARRAY
-
+from datetime import datetime
 
 class ClabKitPreparationModel(db.Model):
     __tablename__ = "clab_kit_preparation"
@@ -13,14 +13,18 @@ class ClabKitPreparationModel(db.Model):
     screening_kit_details = db.Column(JSONB)
     protocol_name = db.Column(db.String)
     visit_kit_details = db.Column(JSONB)
+    created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
 
     @classmethod
     def find_all_with_entities(cls):
-        return cls.query.with_entities(ClabKitPreparationModel.id, ClabKitPreparationModel.protocol_id, ClabKitPreparationModel.protocol_name).all()
+        sort_order = getattr(ClabKitPreparationModel, "created_on").desc()
+        return cls.query.with_entities(ClabKitPreparationModel.id, ClabKitPreparationModel.protocol_id, ClabKitPreparationModel.protocol_name).order_by(sort_order).all()
+
 
     @classmethod
     def find_all(cls):
-        return cls.query.all()
+        sort_order = getattr(ClabKitPreparationModel, "created_on").desc()
+        return cls.query.order_by(sort_order).all()
     
     @classmethod
     def get_by_id(cls, id):

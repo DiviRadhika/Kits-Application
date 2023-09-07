@@ -203,22 +203,20 @@ class ClabKitPreparation(Resource):
         if "screening_pdf_details" in request_json:
             del request_json["screening_pdf_details"]
 
-        # import pdb; pdb.set_trace()
-
         screening_kit_details = request_json["screening_kit_details"]
-        screening_pdf_visited = False
-        visit_pdf_visited = False
 
         for pdf_details in screeing_pdf_details:
             for inner_pdf_details in pdf_details:
                 for row_index in range(0, len(screening_kit_details)):
                     if inner_pdf_details["row"] == row_index:
-                        screening_pdf_visited = True
+                       #if 'pdf' not in screening_kit_detaiils:
+                       #     screening_kit_details[row_index]["pdf"] = []
+
+                        #screening_kit_details[row_index]["pdf"].append(inner_pdf_details["pdf"])
                         screening_kit_details[row_index]["pdf"] = inner_pdf_details["pdf"]
 
 
         visit_kit_details = request_json["visit_kit_details"]
-        #import pdb; pdb.set_trace()
         for pdf_details in visit_pdf_details:
             for pdf_detail in pdf_details:
                 for visit_index in range(0, len(visit_kit_details)):  # outside index not useful
@@ -229,15 +227,11 @@ class ClabKitPreparation(Resource):
                             pdf_detail["visit"] == visit_index
                             and pdf_detail["row"] == row_index
                         ):
-                            visit_pdf_visited = True
-                            visit_kit_details[visit_index][row_index]["pdf"] = pdf_detail["pdf"]
+                            #if 'pdf' not in visit_kit_details[visit_index][row_index]:
+                            #    visit_kit_details[visit_index][row_index]["pdf"] = []
 
-        '''if visit_pdf_visited == True:
-            request_json["visit_kit_details"] = request_json["visit_kit_details"][0]
-        if screening_pdf_visited == True:
-            request_json["screening_kit_details"] = request_json[
-                "screening_kit_details"
-            ][0]'''
+                            #visit_kit_details[visit_index][row_index]["pdf"].append(pdf_detail["pdf"])
+                            visit_kit_details[visit_index][row_index]["pdf"] = pdf_detail["pdf"]
 
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:

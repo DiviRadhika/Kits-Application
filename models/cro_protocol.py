@@ -13,12 +13,14 @@ class CroProtocolModel(db.Model):
     # sponsor_id = db.Column(UUID(as_uuid=True), db.ForeignKey("sponsor.sponsor_id"))
     # cro_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cro.cro_id"))
     sponsor_id = db.Column(db.String)
+    sponsor_name = db.Column(db.String)
     cro_id = db.Column(db.String)
     no_of_visits = db.Column(db.Integer)
     no_of_screens = db.Column(db.Integer)
     special_instructions = db.Column(db.String)
     global_sample_size = db.Column(db.Integer)
     avant_sample_size = db.Column(db.Integer)
+    kit_variant_count = db.Column(db.Integer)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey("users.user_id"))
     created_by = db.Column(db.String)
     created_on = db.Column(db.DateTime(timezone=False), default=datetime.now(tz=None))
@@ -27,7 +29,8 @@ class CroProtocolModel(db.Model):
 
     @classmethod
     def find_all(cls):
-        return cls.query.all()
+        sort_order = getattr(CroProtocolModel, "created_on").desc()
+        return cls.query.order_by(sort_order).all()
 
     @classmethod
     def get_by_protocol_id(cls, protocol_id):

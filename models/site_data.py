@@ -32,7 +32,8 @@ class SiteDataModel(db.Model):
 
     @classmethod
     def find_all(cls):
-        return cls.query.all()
+        sort_order = getattr(SiteDataModel, "created_on").desc()
+        return cls.query.order_by(sort_order).all()
 
     @classmethod
     def get_by_id(cls, id):
