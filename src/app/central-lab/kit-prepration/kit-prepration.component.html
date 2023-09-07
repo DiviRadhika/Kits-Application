@@ -13,7 +13,7 @@
                         <div style="padding:1px"
                             class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">
-                                <i class="bx bxs-dashboard"></i> Kit Preparpation
+                                <i class="bx bxs-dashboard"></i> Kit Preparation
                             </h4>
 
                             <div class="page-title-right">
@@ -120,7 +120,7 @@
                                                                 <th>KitId</th>
                                                                 <th>Central Lab KitId</th>
                                                                 <th>Expiry Date</th>
-                                                                <th>Prepration</th>
+                                                                <th>Preparation</th>
 
                                                                 <th>Print Label</th>
 
@@ -149,15 +149,16 @@
                                                                         class="form-control" />
                                                                 </td>
 
-                                                                <td width="30%">
-
-                                                                    <select formControlName="prepration"
-                                                                        class="form-select form-control">
-                                                                        <!-- <option  selected value="">Select Study ID</option> -->
-                                                                        <option *ngFor="let data of preprationData">
-                                                                            {{ data }}
-                                                                        </option>
-                                                                    </select>
+                                                                <td width="25%">
+                                                                    <select formControlName="prepration" (change)="checkPreparation($event, i)"
+                                                                    class="form-select form-control">
+                                                                    <option
+                                                                    *ngFor="let s of preprationData"
+                                                                    [value]="s.name">
+                                                                    {{s.name}}
+                                                                </option>
+                                                                </select>
+                                        
                                                                 </td>
 
                                                                 <td width="20%">
@@ -222,7 +223,7 @@
                                                                 <th>KitId</th>
                                                                 <th>Central Lab KitId</th>
                                                                 <th>Expiry Date</th>
-                                                                <th>Prepration</th>
+                                                                <th>Preparation</th>
 
 
                                                                 <th>Print Label</th>
@@ -255,12 +256,15 @@
 
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <select formControlName="prepration"
-                                                                        class="form-select form-control">
-                                                                        <option *ngFor="let data of preprationData">
-                                                                            {{ data }}
-                                                                        </option>
-                                                                    </select>
+                                                                    <select formControlName="prepration" (change)="checkPreparationv(i, j)"
+                                                                    class="form-select form-control">
+                                                                    <option
+                                                                    *ngFor="let s of preprationData"
+                                                                    [value]="s.name">
+                                                                    {{s.name}}
+                                                                </option>
+                                                                </select>
+                                        
                                                                 </td>
 
 

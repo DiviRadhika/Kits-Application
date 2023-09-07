@@ -748,7 +748,7 @@ export class ProtocolRegistrationComponent {
           (data: any) => {
             this.route.navigate(['home/cro/protocolGrid'])
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created Successfully' });
 
             }, 1000);
 

@@ -208,6 +208,35 @@ export class KitVerificationComponent implements OnInit {
               if (vkDetailForRowAndTab.site_id) {
                formControl.disable()
               }
+              const kitIdControl = visitKitListArray.at(j).get('kitId');
+              if (kitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
+                kitIdControl.disable()
+              }
+  
+              const ckitIdControl = visitKitListArray.at(j).get('ckitId');
+              if (ckitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
+                ckitIdControl.disable()
+  
+              }
+  
+              const expirydControl = visitKitListArray.at(j).get('expiryDate');
+              if (expirydControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
+                expirydControl.disable()
+              }
+               
+            const prepControl = visitKitListArray.at(j).get('prepration');
+            if (prepControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              prepControl.patchValue(vkDetailForRowAndTab.prepration);
+              prepControl.disable()
+            }
+        
             }
 
             tabs.visitsList = visitKitListArray;
@@ -248,7 +277,10 @@ export class KitVerificationComponent implements OnInit {
   createVisitKitGroup() {
 
     return this.formBuilder.group({
-
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+      expiryDate:[''],
       status: ['Not Verified']
 
     });
@@ -283,7 +315,16 @@ export class KitVerificationComponent implements OnInit {
             if (skDetails[i].site_id) {
               this.ScreenKitForm.get('screenKitList').controls[i].get('status').disable()
             }
+            this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
 
+          this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').disable()
+         
           }
 
         }
@@ -354,7 +395,11 @@ export class KitVerificationComponent implements OnInit {
 
     return this.formBuilder.group({
 
-      status: ['Not Verified']
+      status: ['Not Verified'],
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+      expiryDate:['']
 
     });
   }
@@ -388,19 +433,13 @@ export class KitVerificationComponent implements OnInit {
 
 
     for (let i = 0; i < this.vkDetails.length; i++) {
-      // for (let j = 0; i < this.vkDetails[i].length; j++) {
-      // console.log(this.vkDetails[i], this.vMatDetails[j].visitsList.value[j].status);
-
-      // this.vkDetails[j].push({"verification_status": 'val'})
-      // console.log(this.vMatDetails[i].visitsList.value[i].status);
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
-          // this.vMatDetails.forEach((data:any,index: any)=>{
-          console.log(this.vMatDetails[j].visitsList.value[index].status);
+         
           this.vMatDetails[i].visitsList.enable()
           protocol.verification_status = this.vMatDetails[i].visitsList.value[index].status
-          // protocol.verification_status = false
+          
         }
 
       })
@@ -434,7 +473,7 @@ export class KitVerificationComponent implements OnInit {
 
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Verification Updated successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Verification Updated Successfully' });
         this.router.navigate(['/home/centralLab/kitvarificationGrid'])  
       },
       (err: any) => {

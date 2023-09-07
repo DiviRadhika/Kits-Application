@@ -159,7 +159,7 @@
                                                                         class="form-control" />
                                                                 </td>
                                                                 <td width="25%">
-                                                                    <select formControlName="prepration"
+                                                                    <select formControlName="prepration" (change)="checkPreparation($event, i)"
                                                                     class="form-select form-control">
                                                                     <option
                                                                     *ngFor="let s of preprationData"
@@ -283,7 +283,7 @@
                                                                         </div> -->
                                                                 <!-- <p-calendar [(ngModel)]="date"></p-calendar> -->
                                                                 <td width="25%">
-                                                                    <select formControlName="prepration"
+                                                                    <select formControlName="prepration"  (change)="checkPreparationv(i, j)"
                                                                     class="form-select form-control">
                                                                     <option
                                                                     *ngFor="let s of preprationData"

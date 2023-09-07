@@ -63,7 +63,7 @@
                       <label>Site Code</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" id="SiteCode" placeholder="Enter Site Code"
                         formControlName="site_data_code" maxlength="10"
-                        [class.is-invalid]="shouldShowRequired('site_data_code') && siteForm.get('site_data_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('site_data_code') && siteForm.get('site_data_code')?.touched">
 
                       <div *ngIf="shouldShowRequired('site_data_code')" class="invalid-feedback">
                         Site Code is required.
@@ -77,7 +77,7 @@
                       <label>Site Name</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" maxlength="100" id="SiteName"
                         placeholder="Enter Site Name" formControlName="site_data_name"
-                        [class.is-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('site_data_name')" class="invalid-feedback">
                         Site Name is required.
                       </div>
@@ -90,7 +90,7 @@
                       <label>Legal Site Name</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                         formControlName="legal_site_data_name" maxlength="100"
-                        [class.is-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_site_data_name')" class="invalid-feedback">
                         Legal Site Name is required.
                       </div>
@@ -109,7 +109,7 @@
 
 class="form-control" id="First Name" placeholder="Enter Name"
                         formControlName="first_name"
-                        [class.is-invalid]="shouldShowRequired('first_name') && siteForm.get('first_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('first_name') && siteForm.get('first_name')?.touched">
 
                       <div *ngIf="shouldShowRequired('first_name')" class="invalid-feedback">
                         First Name is required.
@@ -172,7 +172,7 @@ class="form-control" id="email" placeholder="Enter Email"
                       <label>Address 1</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1" maxlength="80"
-                        [class.is-invalid]="shouldShowRequired('address_1') && siteForm.get('address_1')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('address_1') && siteForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
                         Adress is required.
                       </div>
@@ -236,7 +236,7 @@ class="form-control" id="email" placeholder="Enter Email"
                       <label>City</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City"
                         formControlName="city"
-                        [class.is-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('city') && siteForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
                       </div>
@@ -249,7 +249,7 @@ class="form-control" id="email" placeholder="Enter Email"
                       <label>ZipCode</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
-                        [class.is-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is Required.
                       </div>

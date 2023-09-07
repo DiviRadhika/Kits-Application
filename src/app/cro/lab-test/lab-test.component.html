@@ -136,22 +136,15 @@
                                 </thead>
   
   
-                                <tbody style="font-size: 14px;   text-align: left;                                ">
+                                <tbody style="font-size: 14px;   text-align: left; ">
   
-                                  <tr class="odd" style="  vertical-align: middle;                               "
+                                  <tr class="odd" style="  vertical-align: middle; "
                                     *ngFor="let labData of LabDetails| sort:sortedColumn:sortDirection  | paginate: { id: 'LabDetailsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
-                                    <!-- <td>
-                                {{i+1}}
-                                
-                               </td> -->
+                            
                                     <td class="sorting_1 dtr-control">{{i+1}}</td>
                                     <td class="sorting_1 dtr-control">{{labData.name}}</td>
                                     <td class="sorting_1 dtr-control">{{labData.classfication}}</td>
-                                    <!-- <td>
-                                      <button type="button" (click)="deletelab(labData.lab_id)"
-                                        class="btn btn-danger ml-3 mt-2">Delete</button>
-  
-                                    </td> -->
+                      
                                     <td>
                                       <button type="button" style="background-color: red;"  (click)="confirm2(labData.lab_id, labData.name)" 
                                         class="btn btn-danger ml-3 mt-2">
@@ -272,11 +265,11 @@
                                   aria-label="Actions: activate to sort column ascending">Actions</th>
                               </tr>
                             </thead>
-  
+                           
   
                             <tbody  style="font-size: 14px;   text-align: left; ">
                               <tr class="odd" style="vertical-align: middle;"
-                                *ngFor="let labData of materials | sort:sortedColumn:sortDirection  | paginate: { id: 'materialsPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountmaterial }; let i=index">
+                                *ngFor="let labData of materials | sort:sortedColumn:sortDirection  | paginate: { id: 'materialsPagination', itemsPerPage: pageSizeM, currentPage: pageM, totalItems: totalCountmaterial }; let i=index">
                                 <!-- <td class="sorting_1 dtr-control">{{labData.lab_test}}</td> -->
                                 <td style="color:blue;cursor: pointer" (click)="edit(labData.meterial_id, 'view')">
                                   {{labData.name}}</td>

@@ -14,10 +14,10 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 export class SampleAcknowledgementComponent implements OnInit {
   screeningFullData: any;
   screeningVariant: any;
+  id: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
-  id: any;
 
   // uploadedFiles: Array<File | null> = [];
   uploadedFiles: Array<File>[] = [];
@@ -45,7 +45,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   skDetails: any[] = [];
   vkDetails: any;
   value: any;
-  sponsers: Array<any> = [];  pdfValuesfull: Array<any> = [];  pdfValuesfullv: Array<any> = [];
+  sponsers: Array<any> = []; pdfValuesfull: Array<any> = []; pdfValuesfullv: Array<any> = [];
   pdfValues: Array<any> = [];
   pdfValuesv: Array<any> = [];
   date: string;
@@ -53,10 +53,10 @@ export class SampleAcknowledgementComponent implements OnInit {
   display: boolean = false;
   indexs: number = 0;
   displayv: boolean = false;
-  tabi: number= 0;
+  tabi: number = 0;
   indexv: number = 0;
-  constructor(private protocolService: ProtocolService,private _activatedRoute:ActivatedRoute,  private messageService: MessageService, 
-    private croService: CrosService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private protocolService: ProtocolService, private messageService: MessageService,
+    private _activatedRoute: ActivatedRoute, private router:Router, private croService: CrosService, private formBuilder: FormBuilder) {
     sessionStorage.getItem('email')
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -70,6 +70,8 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   };
+  pdfHide: boolean = false
+
   resultsfull: any[] = [];
   resultsfullv: any[][] = [];
   resultsv: any[][] = [];
@@ -116,9 +118,9 @@ export class SampleAcknowledgementComponent implements OnInit {
   selectedValuev: any;
   selectedOption: any;
   displayds: boolean = false;
-  pdfValuesview:Array<any> = [];
+  pdfValuesview: Array<any> = [];
   displaydsv: boolean = false;
-  pdfValuesviewv:Array<any> = [];
+  pdfValuesviewv: Array<any> = [];
 
   public preparationForm: FormGroup = new FormGroup({
     protocolId: new FormControl("", [Validators.required]),
@@ -131,6 +133,17 @@ export class SampleAcknowledgementComponent implements OnInit {
       this.sponsersData(sites);
 
     });
+    this._activatedRoute.params.subscribe((data: any) => {
+      if (data.id) {
+
+        this.id = data.id;
+
+        this.getprotocolDetails(this.id)
+
+      }
+
+    });
+
     this.protocolService.getPreparation().subscribe((protocols) => {
       console.log(protocols);
 
@@ -139,22 +152,12 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
 
-   
     this.ScreenKitForm = this.formBuilder.group({
 
       screenKitList: this.formBuilder.array([])
     });
 
-    this._activatedRoute.params.subscribe((data: any) => {
-      if (data.id) {
 
-        this.id = data.id;
-       
-        this.getprotocolDetails(this.id)
-
-      }
-     
-    });
 
   }
   disableScroll() {
@@ -162,12 +165,12 @@ export class SampleAcknowledgementComponent implements OnInit {
   }
   dialog() {
     this.display = true
-    
+
   }
-  uploadv(){
-    this.displayv = false 
+  uploadv() {
+    this.displayv = false
   }
-  upload(){
+  upload() {
     this.display = false
   }
   enableScroll() {
@@ -184,121 +187,171 @@ export class SampleAcknowledgementComponent implements OnInit {
         console.log(this.vkDetails);
 
 
-   
-      console.log(protocols);
-      this.displayValues = true;
-      this.protocolIdDetails = protocols.protocol
-      this.protoName = this.protocolIdDetails.protocol_name
-      this.preparationForm.controls['protocol_name'].disable()
-      this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-      this.preparationForm.controls['specialInstructions'].disable()
-      this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
-     
-      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      // this.scount = protocols.screening_kit_details[0].screening_kit_count
-      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      // console.log(this.vMatDetails, 'details');
-      if (protocols.visit_kit_details[0].meterial_details.length > 0) {
-        this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
-        this.screenDetails = this.screeningFullData.selectedLabTests
-        this.sMatDetails = this.screeningFullData.visits;
-        this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
-        this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
-      } else {
-      }
 
-      this.vcount = protocols.visit_kit_details[0].visit_kit_count
-      // this.scount = protocols.visit_kit_details[0].visit_kit_count
-      this.scount = protocols.screening_kit_details[0].screening_kit_count
+        console.log(protocols);
+        this.displayValues = true;
+        this.protocolIdDetails = protocols.protocol
+        this.protoName = this.protocolIdDetails.protocol_name
+        this.preparationForm.controls['protocol_name'].disable()
+        this.preparationForm.controls['protocol_name'].setValue(this.protoName)
+        this.preparationForm.controls['specialInstructions'].disable()
+        this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
 
-      this.tets = []
-
-      this.vMatDetails.forEach((tabs: any) => {
-        tabs.visitKitFormGroup = this.formBuilder.group({
-
-          visitKitList: this.formBuilder.array([]),
-        });
-        const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-        for (let i = 1; i <= this.vcount; i++) {
-          visitKitListArray.push(this.createVisitKitGroup());
-          console.log(tabs.visitKitFormGroup[i]);
+        if (protocols.visit_kit_details[0].meterial_details.length > 0) {
+          this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
+          this.screenDetails = this.screeningFullData.selectedLabTests
+          this.sMatDetails = this.screeningFullData.visits;
+          this.vMatDetails = protocols.visit_kit_details[0].meterial_details.slice(1);
+          this.screeningVariant = protocols.visit_kit_details[0].meterial_details[0].kit_variant
+        } else {
         }
-        tabs.visitsList = visitKitListArray
-        for (let i = 0; i < this.vMatDetails.length; i++) {
-          const tabs = this.vMatDetails[i];
 
+        this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        // this.scount = protocols.visit_kit_details[0].visit_kit_count
+        this.scount = protocols.screening_kit_details[0].screening_kit_count
 
+        this.tets = []
+
+        this.vMatDetails.forEach((tabs: any) => {
           tabs.visitKitFormGroup = this.formBuilder.group({
+
             visitKitList: this.formBuilder.array([]),
           });
           const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-
-          for (let j = 0; j < this.vcount; j++) {
+          for (let i = 1; i <= this.vcount; i++) {
             visitKitListArray.push(this.createVisitKitGroup());
-            const ackControl = visitKitListArray.at(j).get('acknowledgement');
-            if (ackControl) {
+            console.log(tabs.visitKitFormGroup[i]);
+          }
+          tabs.visitsList = visitKitListArray
+          for (let i = 0; i < this.vMatDetails.length; i++) {
+            const tabs = this.vMatDetails[i];
+
+
+            tabs.visitKitFormGroup = this.formBuilder.group({
+              visitKitList: this.formBuilder.array([]),
+            });
+            const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
+
+            for (let j = 0; j < this.vcount; j++) {
+              visitKitListArray.push(this.createVisitKitGroup());
               const vkDetailForRowAndTab = this.vkDetails[i][j];
-              if(vkDetailForRowAndTab.acknowledgement)
-              if(vkDetailForRowAndTab.acknowledgement === undefined || vkDetailForRowAndTab.acknowledgement === null ||vkDetailForRowAndTab.verification_status === ''){
-                ackControl.patchValue(this.preprationData[0].value);
+              const formControl = visitKitListArray.at(j);
+              formControl.disable()
+              const kitIdControl = visitKitListArray.at(j).get('kitId');
+              if (kitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
+
               }
-              else{
-                ackControl.patchValue(vkDetailForRowAndTab.acknowledgement);
+
+              const ckitIdControl = visitKitListArray.at(j).get('ckitId');
+              if (ckitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
+                
+
               }
-              const remarksControl = visitKitListArray.at(j).get('remarks');
-              if (remarksControl) {
-                  const vkDetailForRowAndTab = this.vkDetails[i][j]; 
+
+              const expirydControl = visitKitListArray.at(j).get('expiryDate');
+              if (expirydControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
+              }
+              const acknowledgementDate = visitKitListArray.at(j).get('acknowledgementDate');
+              if (acknowledgementDate) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                acknowledgementDate.patchValue(vkDetailForRowAndTab.acknowledgementDate);
+                acknowledgementDate.enable();
+              }
+
+
+            
+              const prepControl = visitKitListArray.at(j).get('site_id');
+              if (prepControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+
+                prepControl.patchValue(vkDetailForRowAndTab.site_id);
+
+              }
+              const patientId = visitKitListArray.at(j).get('patientId');
+              if (patientId) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+
+                patientId.patchValue(vkDetailForRowAndTab.patientId);
+
+              }
+              const collection = visitKitListArray.at(j).get('collection');
+              if (collection) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+
+                collection.patchValue(vkDetailForRowAndTab.collection);
+
+              }
+
+
+              const ackControl = visitKitListArray.at(j).get('acknowledgement');
+              if (ackControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                if (vkDetailForRowAndTab.acknowledgement)
+                  if (vkDetailForRowAndTab.acknowledgement === undefined || vkDetailForRowAndTab.acknowledgement === null || vkDetailForRowAndTab.verification_status === '') {
+                    ackControl.patchValue(this.preprationData[0].value);
+                    ackControl.enable()
+                  }
+                  else {
+                    ackControl.patchValue(vkDetailForRowAndTab.acknowledgement);
+                    ackControl.enable()
+                  }
+                  ackControl.enable()
+                const remarksControl = visitKitListArray.at(j).get('remarks');
+                if (remarksControl) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j];
                   remarksControl.patchValue(vkDetailForRowAndTab.remarks);
+                  remarksControl.enable()
+                }
+
               }
 
             }
-
-
+            tabs.visitsList = visitKitListArray;
+            this.tets.push(tabs.selectedLabTests);
           }
 
-          tabs.visitsList = visitKitListArray;
-          this.tets.push(tabs.selectedLabTests);
+          this.tets.push(tabs.selectedLabTests)
+        });
+
+        for (let i = 1; i <= this.scount; i++) {
+          this.adjustScreenKitRows(this.scount, this.skDetails);
         }
 
-        this.tets.push(tabs.selectedLabTests)
-      });
+      }, (err: any) => {
 
-      for (let i = 1; i <= this.scount; i++) {
-        this.adjustScreenKitRows(this.scount, this.skDetails);
+        this.displayValues = false
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
+
       }
-
-    }, (err: any) => {
-
-      this.displayValues = false
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
-
-    }
-    );
-  });
+      );
+    });
 
   }
   openUploadDialog(rowIndex: number): void {
- 
-    this.display = true;
-   this.indexs = rowIndex
-}
 
-openUploadDialogv(tabIndex:number, rowIndex: number): void {
-  
-     this.displayv = true;
+    this.display = true;
+    this.indexs = rowIndex
+  }
+
+  openUploadDialogv(tabIndex: number, rowIndex: number): void {
+
+    this.displayv = true;
     this.tabi = tabIndex;
     this.indexv = rowIndex
- }
+  }
   getformGroup(i: any) {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
 
-  enable(){
-    this.display= true
+  enable() {
+    this.display = true
   }
 
 
@@ -307,7 +360,14 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
     return this.formBuilder.group({
       acknowledgement: ['Pending'],
       remarks: [''],
+      kitId: [''],
+      ckitId: [''],
+      expiryDate: [''],
 
+      patientId: [''],
+      site_id: [''],
+      collection: [''],
+      acknowledgementDate: ['']
 
 
     });
@@ -315,7 +375,7 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
   }
 
 
-  adjustScreenKitRows(count: number, skDetails:any) {
+  adjustScreenKitRows(count: number, skDetails: any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
 
@@ -328,19 +388,31 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
-        // this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
-        //   this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
-        //   this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
-        //   this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
-        if(skDetails[i].acknowledgement === undefined || skDetails[i].acknowledgement === null ||skDetails[i].acknowledgement === ''){
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('site_id').patchValue(skDetails[i].site_id);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
+        // this.ScreenKitForm.get('screenKitList').controls[i].get('pdf').patchValue(skDetails[i].pdf);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+        if (skDetails[i].acknowledgement === undefined || skDetails[i].acknowledgement === null || skDetails[i].acknowledgement === '') {
           this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(this.preprationData[0].value);
-           }
-           else{
-            this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
-           }
+        }
+        else {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
+        }
 
-           this.ScreenKitForm.get('screenKitList').controls[i].get('remarks').patchValue(skDetails[i].remarks);
-       
+        this.ScreenKitForm.get('screenKitList').controls[i].get('remarks').patchValue(skDetails[i].remarks);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgementDate').patchValue(skDetails[i].acknowledgementDate);
+
+        if (i < skDetails.length) {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('site_id').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('collection').disable()
+        }
       }
     }
 
@@ -361,15 +433,15 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
 
   }
 
-  openDialogv(value: any){
+  openDialogv(value: any) {
     this.displaydsv = true;
     this.pdfValuesviewv = value;
     console.log(this.pdfValuesviewv)
   }
 
 
- 
-  openDialog(value: any){
+
+  openDialog(value: any) {
     this.displayds = true;
     this.pdfValuesview = value;
   }
@@ -378,8 +450,8 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
     console.log(id)
 
     this.base64String = id
-    if(this.base64String == ''){
-      this.base64String  = 'NOt Uploaded Any PDF'
+    if (this.base64String == '') {
+      this.base64String = 'NOt Uploaded Any PDF'
     }
 
     // Convert the base64 string to a Uint8Array
@@ -407,13 +479,19 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
 
 
 
-
   addScreenKitData(record: string) {
 
 
     return this.formBuilder.group({
+      kitId: [''],
+      ckitId: [''],
+      expiryDate: [''],
       acknowledgement: ['Pending'],
       remarks: [''],
+      patientId: [''],
+      site_id: [''],
+      collection: [''],
+      acknowledgementDate: ['']
 
     });
   }
@@ -466,7 +544,7 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
 
           protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
           protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
-
+          protocol.acknowledgementDate = this.vMatDetails[i].visitsList.value[index].acknowledgementDate
 
         }
 
@@ -477,43 +555,50 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
     this.skDetails.forEach((protocol: any, index: any) => {
 
       protocol.acknowledgement = this.ScreenKitForm.value.screenKitList[index].acknowledgement
-      protocol.remarks = this.ScreenKitForm.value.screenKitList[index].remarks
+      protocol.remarks = this.ScreenKitForm.value.screenKitList[index].remarks,
+        protocol.acknowledgementDate = this.ScreenKitForm.value.screenKitList[index].acknowledgementDate
       // protocol.pdf =  this.pdfValues[index].pdf
 
     })
-    console.log(this.skDetails)
-   console.log(this.pdfValues)
- 
 
 
-  //  for (let rowIndex = 0; rowIndex < this.skDetails.length; rowIndex++) {
-  //    const rowArray = this.skDetails[rowIndex];
+    // console.log(this.pdfValuesv);
+    // console.log(this.vkDetails);
 
-  //    for (let innerIndex = 0; innerIndex < rowArray.length; innerIndex++) {
-  //      const innerObject = rowArray[innerIndex];
+    // for (let index = 0; index < this.pdfValues.length; index++) {
+    //   if (index < this.skDetails.length) {
+    //     console.log(this.pdfValues[index].row, this.skDetails[index]);
+    //     if (this.pdfValues[index].row === index) {
+    //       if (this.skDetails[index].pdf && this.skDetails[index].pdf[index] !== undefined) {
+    //         this.pdfValues[index].pdf = this.pdfValues[index].pdf.concat(this.skDetails[index].pdf);
+    //       }
+    //     }
+    //     console.log(this.pdfValues);
+    //   }
+    // }
 
-  //      const matchingSC = sc.find((scObj: any) =>
-  //        scObj.variant === innerObject.variant
-  //      );
 
-  //      if (matchingSC) {
-  //        if (!matchingSC.rowCollectedData) {
-  //          matchingSC.rowCollectedData = [];
-  //        }
-  //        matchingSC.rowCollectedData.push(innerObject);
-  //      }
-  //    }
-  //  }
-  //  for (let index = 0; index < this.pdfValues.length; index++) {
-  //   if (index < this.skDetails.length) {
-  //     console.log(this.pdfValues[index].row ,this.skDetails[index])
-  //     if (this.pdfValues[index].row === index) {
-  //     alert('k')
-  //   }
-  //     // this.pdfValues[index]. = this.skDetails[index].selectedLabTests;
-  //     // this.pdfValues[index].materials = this.skDetails[index].visits;
-  //   }
-  // }
+    // for (let index = 0; index < this.pdfValuesv.length; index++) {
+    //   if (index < this.vkDetails.length) {
+    //     const innerArray = this.vkDetails[index];
+
+    //     // Check if 'visit' property matches the outer index
+    //     if (this.pdfValuesv[index].visit === index && innerArray && Array.isArray(innerArray)) {
+    //       // Assuming innerArray contains the desired row
+    //       const rowValue = innerArray[this.pdfValuesv[index].row];
+
+    //       if (rowValue && rowValue.pdf) {
+    //         console.log('Mapping PDF for visit:', index, 'and row:', this.pdfValuesv[index].row);
+    //         this.pdfValuesv[index].pdf = this.pdfValuesv[index].pdf.concat(rowValue.pdf);
+    //       }
+    //     }
+    //   }
+    // }
+
+
+
+
+
     const data = {
       "protocol_id": this.uuid,
       "protocol_name": this.protoName,
@@ -526,25 +611,26 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
         // this.pdfValuesfullv
       ],
 
-      "screening_kit_details": 
+      "screening_kit_details":
         this.skDetails,
 
-      
-      "visit_kit_details": 
+
+      "visit_kit_details":
         this.vkDetails,
 
-      
+
     }
 
+   
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated successfully' });
         this.router.navigate(['/home/centralLab/kitAcknowledgementGrid'])
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Acknowledgement Updated Successfully' });
       },
       (err: any) => {
 
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
-        
+
       }
     );
 
@@ -617,18 +703,18 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
   //     if (!this.uploadedFiles[rowIndex]) {
   //       this.uploadedFiles[rowIndex] = []; // Initialize if not exists
   //     }
-  
+
   //     for (let i = 0; i < files.length; i++) {
   //       this.uploadedFiles[rowIndex].push(files[i]); // Store the uploaded file
   //     }
   //   }
-   
-  // }
-  
 
-  
-  
-  
+  // }
+
+
+
+
+
   uploadFile(evt: any, rowIndex: any) {
     let uploadedFiles = [];
     this.files1 = evt.target.files;
@@ -644,12 +730,12 @@ openUploadDialogv(tabIndex:number, rowIndex: number): void {
       if (!this.uploadedFiles[rowIndex]) {
         this.uploadedFiles[rowIndex] = []; // Initialize if not exists
       }
-  
+
       for (let i = 0; i < files.length; i++) {
         this.uploadedFiles[rowIndex].push(files[i]); // Store the uploaded file
       }
     }
-console.log(  this.uploadedFiles)
+    console.log(this.uploadedFiles)
     const file = this.files1[0];
     this.file2 = this.files1[0].name;
     const fileSize = this.files1[0].size;
@@ -706,22 +792,22 @@ console.log(  this.uploadedFiles)
   }
   _uploadFile(evt: any, rowIndex: any) {
     const files: FileList = evt.target.files;
-  
+
     if (files && files.length > 0) {
       if (!this.uploadedFiles[rowIndex]) {
         this.uploadedFiles[rowIndex] = [];
       }
-  
+
       const pdfList = this.pdfValues.find(item => item.row === rowIndex);
-  
+
       if (!pdfList) {
         // Create a list for the row if it doesn't exist
         this.pdfValues.push({ row: rowIndex, pdf: [] });
       }
-  
+
       for (let i = 0; i < files.length; i++) {
         this.uploadedFiles[rowIndex].push(files[i]);
-  
+
         const reader = new FileReader();
         reader.onload = (readerEvt: any) => {
           const binaryString = readerEvt.target.result;
@@ -729,7 +815,7 @@ console.log(  this.uploadedFiles)
           const pdfName = files[i].name;
           // Find the pdfList for the current row
           const pdfList = this.pdfValues.find(item => item.row === rowIndex);
-  
+
           if (pdfList) {
             // Push the base64-encoded PDF into the pdfList for the current row
             pdfList.pdf.push({ content: base64, name: pdfName });
@@ -744,33 +830,33 @@ console.log(  this.uploadedFiles)
 
   uploadFilev(evt: any, tabindex: any, rowIndex: any) {
     const files: FileList = evt.target.files;
-  
+
     if (files && files.length > 0) {
       if (!this.uploadedFilesv[tabindex]) {
         this.uploadedFilesv[tabindex] = [];
       }
-  
+
       if (!this.uploadedFilesv[tabindex][rowIndex]) {
         this.uploadedFilesv[tabindex][rowIndex] = [];
       }
-  
+
       const pdfList = this.pdfValuesv.find(item => item.visit === tabindex && item.row === rowIndex);
-  
+
       if (!pdfList) {
         // Create a pdfList for the tab and row if it doesn't exist
         this.pdfValuesv.push({ visit: tabindex, row: rowIndex, pdf: [] });
       }
-  
+
       for (let i = 0; i < files.length; i++) {
         this.uploadedFilesv[tabindex][rowIndex].push(files[i]);
-  
+
         const reader = new FileReader();
         reader.onload = (readerEvt: any) => {
           const binaryString = readerEvt.target.result;
           const base64 = btoa(binaryString);
           const pdfName = files[i].name;
           const pdfList = this.pdfValuesv.find(item => item.visit === tabindex && item.row === rowIndex);
-  
+
           if (pdfList) {
             // Push the base64-encoded PDF into the pdfList for the tab and row
             // pdfList.pdf.push(base64);
@@ -809,7 +895,7 @@ console.log(  this.uploadedFiles)
   //         const base64 = btoa(binaryString);
   //         this.pdfValues.push({ row: rowIndex, pdf: base64 });
   //         console.log(this.pdfValues);
-          
+
   //       };
   //       reader.readAsBinaryString(files[i]);
   //     }
@@ -817,20 +903,20 @@ console.log(  this.uploadedFiles)
   // }
   deleteFile(rowIndex: number, fileIndex: number) {
     this.uploadedFiles[rowIndex].splice(fileIndex, 1);
-   
-}
-deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
-  this.uploadedFiles[rowIndex].splice(fileIndex, 1);
- 
-}
+
+  }
+  deleteFilev(tabIndex: number, rowIndex: number, fileIndex: number) {
+    this.uploadedFiles[rowIndex].splice(fileIndex, 1);
+
+  }
   viewPdf(rowIndex: number, fileIndex: number) {
     const fileToView = this.uploadedFiles[rowIndex][fileIndex];
     const url = URL.createObjectURL(fileToView);
-  
+
     // Open the PDF in a new window
     window.open(url, '_blank');
   }
-  
+
 
 
 
@@ -869,14 +955,14 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
 
     const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
 
-  // Ensure the results array has the necessary dimensions
-  if (!this.resultsvfull[readerEvt]) {
-    this.resultsvfull[readerEvt] = [];
-  }
+    // Ensure the results array has the necessary dimensions
+    if (!this.resultsvfull[readerEvt]) {
+      this.resultsvfull[readerEvt] = [];
+    }
 
-  // Store the uploaded result in the resultsv array
-  // this.resultsv[readerEvt][rowindex] = uploadedResult;
-  this.resultsvfull[readerEvt][rowindex]  = this.bas2;
+    // Store the uploaded result in the resultsv array
+    // this.resultsv[readerEvt][rowindex] = uploadedResult;
+    this.resultsvfull[readerEvt][rowindex] = this.bas2;
 
 
 
@@ -898,7 +984,7 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
   viewFilev(tabindex: number, rowIndex: number, fileIndex: number) {
     const fileToView = this.uploadedFilesv[tabindex][rowIndex][fileIndex];
     const url = URL.createObjectURL(fileToView);
-  
+
     // Open the PDF in a new window
     window.open(url, '_blank');
   }
@@ -908,11 +994,6 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
       this.uploadedFilesv[tabindex][rowIndex].splice(fileIndex, 1);
     }
   }
-
-  
-  
-
-  
 
 
   _handleReaderLoadedv(readerEvt: any, rowindex: any, id: any) {
@@ -928,14 +1009,14 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
 
     const uploadedResult = 'Result for tab ' + readerEvt + ', row ' + rowindex;
 
-  // Ensure the results array has the necessary dimensions
-  if (!this.resultsv[readerEvt]) {
-    this.resultsv[readerEvt] = [];
-  }
+    // Ensure the results array has the necessary dimensions
+    if (!this.resultsv[readerEvt]) {
+      this.resultsv[readerEvt] = [];
+    }
 
-  // Store the uploaded result in the resultsv array
-  // this.resultsv[readerEvt][rowindex] = uploadedResult;
-  this.resultsv[readerEvt][rowindex]  = this.bas2;
+    // Store the uploaded result in the resultsv array
+    // this.resultsv[readerEvt][rowindex] = uploadedResult;
+    this.resultsv[readerEvt][rowindex] = this.bas2;
 
 
 
@@ -958,8 +1039,8 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
   Download(id: any) {
 
     this.base64String = id
-    if(this.base64String == ''){
-      this.base64String  = 'NOt Uploaded Any PDF'
+    if (this.base64String == '') {
+      this.base64String = 'NOt Uploaded Any PDF'
     }
 
     // Convert the base64 string to a Uint8Array
@@ -984,7 +1065,7 @@ deleteFilev(tabIndex:number,rowIndex: number, fileIndex: number) {
     URL.revokeObjectURL(url);
 
   }
- 
+
 
 
 }

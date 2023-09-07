@@ -18,8 +18,10 @@ export class LabTestComponent implements OnInit {
   materials: any[] = [];
   allmaterials: any;
   page = 1;
+  pageM =1;
   totalCount = 0
   pageSize = 10;
+  pageSizeM = 10;
   p = 1;
   searchText = '';
   searchTextm = '';
@@ -211,7 +213,7 @@ export class LabTestComponent implements OnInit {
       }
       this._cro.createTestDetails(data).subscribe(
         (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results created successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results Created Successfully' });
           this.labForm.reset()
           if (this.route.url === '/home/cro/labTestGrid') {
             this.route.navigate(['/home/cro/labTestGrid'])

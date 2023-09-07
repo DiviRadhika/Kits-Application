@@ -536,7 +536,7 @@ export class SampleReportsComponent implements OnInit {
 
   //   this.protocolService.updatePreparationById(data).subscribe(
   //     (data: any) => {
-  //       alert('Sample Acknowledgement Updated successfully');
+  //       alert('Sample Acknowledgement Updated Successfully');
   //     },
   //     (err: any) => {
   //       alert(err.errorr.message)

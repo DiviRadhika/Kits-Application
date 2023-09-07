@@ -205,8 +205,43 @@ export class KitDistributionComponent implements OnInit {
 
             }
            
+            const kitIdControl = visitKitListArray.at(j).get('kitId');
+            if (kitIdControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
+              kitIdControl.disable()
+            }
 
+            const ckitIdControl = visitKitListArray.at(j).get('ckitId');
+            if (ckitIdControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
+              ckitIdControl.disable()
+
+            }
+
+            const expirydControl = visitKitListArray.at(j).get('expiryDate');
+            if (expirydControl) {
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
+              expirydControl.disable()
+            }
+             
+          const prepControl = visitKitListArray.at(j).get('prepration');
+          if (prepControl) {
+            const vkDetailForRowAndTab = this.vkDetails[i][j];
+            prepControl.patchValue(vkDetailForRowAndTab.prepration);
+            prepControl.disable()
           }
+          const statusControl = visitKitListArray.at(j).get('status');
+          if (statusControl) {
+            const vkDetailForRowAndTab = this.vkDetails[i][j];
+            statusControl.patchValue(vkDetailForRowAndTab.verification_status);
+            statusControl.disable()
+          }
+          }
+         
+        
 
           tabs.visitsList = visitKitListArray;
           this.tets.push(tabs.selectedLabTests);
@@ -241,8 +276,12 @@ export class KitDistributionComponent implements OnInit {
   createVisitKitGroup() {
   
     return this.formBuilder.group({
-    
-      siteId: ['']
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+      siteId: [''],
+      status: [''],
+      expiryDate:['']
       
 
     });
@@ -370,6 +409,16 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
             }
 
           }
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('status').patchValue(skDetails[i].verification_status);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').patchValue(skDetails[i].prepration);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('prepration').disable()
+          this.ScreenKitForm.get('screenKitList').controls[i].get('status').disable()
 
         }
       }
@@ -399,8 +448,12 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
 
 
     return this.formBuilder.group({
-      siteId: ['']
-      
+      siteId: [''],
+      ckitId: [''],
+      kitId: [''],
+      prepration: [''],
+      status: [''],
+      expiryDate:['']
     
 
     });
@@ -489,7 +542,7 @@ this.vMatDetails[i].visitsList.enable()
     this.protocolService.updatePreparationById(data).subscribe(
     
       (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Distribution Updated successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail:'Kit Distribution Updated Successfully' });
         this.router.navigate(['/home/centralLab/kitDistributionGrid'])  
       },
       (err: any) => {

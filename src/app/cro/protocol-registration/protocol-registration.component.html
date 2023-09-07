@@ -37,7 +37,7 @@
                     <label for="formrow-firstname-input"  class="form-label">Sponsor Study ID<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_id"
                       class="form-control" id="" placeholder="Enter Study ID"
-                      [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
                   </div>
 
@@ -47,7 +47,7 @@
                     <label for="formrow-firstname-input" class="form-label">Study Title<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_name"
                       class="form-control" id="" placeholder="Enter Study Title"
-                      [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -64,7 +64,7 @@
                   
 
                     <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()" class="form-select form-control"         
-                      [class.is-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
                       <option selected value="">Select Sponsor ID</option>
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
                         {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
@@ -79,7 +79,7 @@
                     <label for="formrow-firstname-input" class="form-label">Global Sample Size<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" maxlength="5" (input)="validateMobileNumber($event.target, 'office')"
                       id="" placeholder="Enter Global Sample Size"
-                      [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -91,7 +91,7 @@
 
                     <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size" (blur)="getsize()"
                       class="form-control" id="" placeholder="Enter Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
-                      [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -99,7 +99,7 @@
                     <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" maxlength="5" type="number" autocomplete="off" formControlName="kit_variant_count"  (input)="validateMobileNumber($event.target, 'office')"
                       (blur)="variantCount()" class="form-control" id="" placeholder="Enter Kit Variant Count"
-                      [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -108,7 +108,7 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
                       placeholder="Enter Total No.of Visits" (blur)="visits($event)" class="form-control"
-                      [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
 
@@ -117,7 +117,7 @@
                     <label for="formrow-firstname-input" class="form-label">No.of Screens<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                     (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
-                      [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -126,7 +126,8 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
                       class="form-control" id="" placeholder="Enter Screen Kit Count"
-                      [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched"
+                      >
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -135,7 +136,7 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')"formControlName="selected_visit_count"
                       class="form-control" id="" placeholder="Enter Visit Kit Count"
-                      [class.is-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
                   </div>
                 </div>
 
@@ -205,7 +206,7 @@
 
                 <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
                 <div class="col-md-3 mt-2 mb-3">
-                  <h6 style="color: black" *ngIf="testDisplayv"> <b>&nbsp;&nbsp;Selected Lab Tests</b> </h6>
+                  <h5  *ngIf="testDisplayv"> &nbsp;&nbsp;Selected Lab Tests </h5>
                   <h6 style="color: black" *ngFor="let labTest of selectedLabTests[i]  let k = index">
                     &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ labTest }}</h6>
                 </div>
@@ -324,7 +325,6 @@
                         <th>Variants</th>
                         <th>Assign Visits</th>
                         <th>Assign Week Names</th>
-
 
                       </tr>
                     </thead>

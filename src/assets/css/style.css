@@ -5,7 +5,10 @@
 .r-red-text {
 	color: #ff414b !important;
 }
-
+.custom-invalid {
+	border: 1px solid red; /* Example: Add your desired styling for invalid state */
+	/* Add any other styles you want for the invalid state */
+  }
 
 .r-blue-text {
 	color: #03aced !important;

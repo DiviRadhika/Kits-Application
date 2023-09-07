@@ -360,7 +360,7 @@ export class HomeComponent implements OnInit {
  }
  
 
-    // alert('Profile created Successfully')
+    // alert('Profile Created Successfully')
     //           this.route.navigate(['/login'])
               if (this.updatepasswordForm.controls['passwordp'].value === '' || this.updatepasswordForm.controls['passwordp'].value === undefined) {
                 // alert('Please Enter Password')

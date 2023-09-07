@@ -23,7 +23,7 @@
                                     <li class="breadcrumb-item"><a routerLink="/home/site/viewCRA"
                                             class="waves-effect">Study</a></li>
 
-                                    <li class="breadcrumb-item active">Site : {{this.ID}}</li>
+                                    <li class="breadcrumb-item active">Site : {{name}}</li>
                                 </ol>
                             </div>
                         </div>
@@ -35,11 +35,11 @@
                 <div class="card">
                     <div class="card-body">
                         <form [formGroup]="preparationForm">
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div id="printSection">
-                                
+
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <!-- <div class="col-md-4 mb-3">
 
 
                                     <label for="formrow-firstname-input" class="form-label">Study ID</label>
@@ -50,19 +50,24 @@
                                             {{ data.user_protocol_id }}
                                         </option>
                                     </select>
-                                </div>
+                                </div> -->
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
-                                  <input autocomplete="off" type="text" 
-
-
-placeholder="Study Name" formControlName="protocol_name"
-                                        class="form-control" value="" />
+                                    <input autocomplete="off" type="text" placeholder="Study Name"
+                                        formControlName="protocol_name" class="form-control" value="" />
                                 </div>
+                                <div *ngIf="displayValues" class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="formrow-firstname-input" class="form-label">Special
+                                            Instructions</label>
+                                        <textarea class="form-control" rows="3" cols="5"
+                                            formControlName="specialInstructions" id="comment"></textarea>
 
-                            </div> -->
+                                    </div>
+                                </div>
+                            </div>
                         </form>
 
 
@@ -86,195 +91,106 @@ placeholder="Study Name" formControlName="protocol_name"
                                                 </h5>
                                                 <br>
 
-
-
-
-                                                <br>
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
+                                                    <div class="table-responsive" [formGroup]="ScreenKitForm">
+                                                        <table class="table table-striped mb-0"
+                                                            formArrayName="screenKitList">
+                                                            <thead Style="background:#EEE">
+                                                                <tr>
+                                                                    <th>KitId</th>
+                                                                    <th>Central Lab KitId</th>
+                                                                    <th>Expiration Date</th>
 
-                                                            <div class="table-responsive">
-                                                                <table class="table table-striped mb-0">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
-                                                                            <th>KitId</th>
-                                                                            <th>Central Lab KitId</th>
-                                                                            <th>Expiration Date</th>
-
-
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
+                                                                    <th>Patient Id</th>
+                                                                    <th>Sample Collection</th>
+                                                                    <th>Collection Date</th>
 
 
-                                                                        <tr *ngFor="let item of skDetails">
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="kitId"
-                                                                                    class="form-control"
-                                                                                    [disabled]="true"
-                                                                                    value="{{item.kitId}}" />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="LabKitId"
-                                                                                    [disabled]="true"
-                                                                                    value={{item.ckitId}}
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td width="40%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Expiration Date"
-                                                                                    value={{item.expiryDate}}
-                                                                                    class="form-control"
-                                                                                    [disabled]="true" />
-                                                                            </td>
+                                                                </tr>
+                                                            </thead>
 
+                                                            <tbody>
 
-
-
-
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <div class="table-responsive" [formGroup]="ScreenKitForm">
-                                                                <table class="table table-striped mb-0"
-                                                                    formArrayName="screenKitList">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
-
-
-                                                                            <th>Patient Id</th>
-                                                                            <th>Sample Collection</th>
-                                                                            <th>Collection Date</th>
-
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-
-                                                                        <tr [formGroupName]="i" *ngFor="
+                                                                <tr [formGroupName]="i" *ngFor="
                                                             let item of ScreenKitForm.get('screenKitList')
                                                               .controls;
                                                             let i = index
                                                           ">
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Patient Id"
-                                                                                    formControlName="patientId"
-                                                                                    class="form-control" value="" />
-                                                                            </td>
+                                                                    <td>
+                                                                        <input autocomplete="off" type="text"
+                                                                        formControlName="kitId"
+                                                                            placeholder="kitId" class="form-control"
+                                                                            [disabled]="true" value="{{item.kitId}}" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input autocomplete="off" type="text"
+                                                                            placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
+                                                                            value={{item.ckitId}}
+                                                                            class="form-control" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <input autocomplete="off" type="text"
+                                                                            placeholder="Expiration Date"
+                                                                            value={{item.expiryDate}}  formControlName="expiryDate"
+                                                                            class="form-control" [disabled]="true" />
+                                                                    </td>
+                                                                    <td >
+                                                                        <input autocomplete="off" type="text"
+                                                                            placeholder="Patient Id"
+                                                                            formControlName="patientId"
+                                                                            class="form-control" value="" />
+                                                                    </td>
 
-                                                                            <td>
-                                                                                <select formControlName="collection"
-                                                                                    class="form-select form-control">
-                                                                                    <option
-                                                                                        *ngFor="let s of preprationData"
-                                                                                        [value]="s.name">
-                                                                                        {{s.name}}
-                                                                                    </option>
-                                                                                </select>
-                                                                              
+                                                                    <td>
+                                                                        <select formControlName="collection" (change)="checkCollection($event, i)"
+                                                                            class="form-select form-control">
+                                                                            <option *ngFor="let s of preprationData"
+                                                                                [value]="s.name">
+                                                                                {{s.name}}
+                                                                            </option>
+                                                                        </select>
 
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="date"
-                                                                                    placeholder="Date"
-                                                                                    class="form-control"
-                                                                                    formControlName="collectionDate"
-                                                                                    value={{date}} />
-                                                                            </td>
 
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
+                                                                    </td>
+                                                                    <td >
+                                                                        <input autocomplete="off" type="date"
+                                                                            placeholder="Date" class="form-control"
+                                                                            formControlName="collectionDate"
+                                                                            value={{date}} />
+                                                                    </td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
-
-
-
-
-
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="Visit {{i+1}}">
+                                            header="{{item.alternate_names | titlecase}}">
 
 
                                                 <h3> {{item.kit_variant}}</h3>
 
+                                                <h5 class="mb-sm-0 font-size-18">
 
+                                                    Visit Kit Count : {{vcount}}
+
+                                                </h5>
+ 
+                                                <br>
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-
-
-
-                                                            <div class="table-responsive">
-                                                                <table class="table table-striped mb-0">
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
-                                                                            <th>KitId</th>
-                                                                            <th>Central Lab KitId</th>
-                                                                            <th>Expiration Date</th>
-
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-
-
-                                                                        <tr *ngFor="let item of vkDetails[i]">
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="kitId"
-                                                                                    class="form-control"
-                                                                                    [disabled]="true"
-                                                                                    value="{{item.kitId}}" />
-                                                                            </td>
-                                                                            <td width="25%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="LabKitId"
-                                                                                    [disabled]="true"
-                                                                                    value={{item.ckitId}}
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td width="40%">
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Expiration Date"
-                                                                                    value={{item.expiryDate}}
-                                                                                    class="form-control"
-                                                                                    [disabled]="true" />
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
+                                                  
                                                             <div class="table-responsive"
                                                                 [formGroup]="item.visitKitFormGroup">
                                                                 <table class="table table-striped mb-0"
                                                                     formArrayName="visitKitList">
                                                                     <thead Style="background:#EEE">
                                                                         <tr>
-
+                                                                            <th>KitId</th>
+                                                                            <th>Central Lab KitId</th>
+                                                                            <th>Expiration Date</th>
                                                                             <th>Patient Id</th>
                                                                             <th>Sample Collection</th>
                                                                             <th>Collection Date</th>
@@ -286,26 +202,44 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                         <tr *ngFor="let control of item.visitsList.controls; let j = index"
                                                                             [formGroupName]="j">
-                                                                            <td width="25%">
+                                                                            <td>
+                                                                                <input autocomplete="off" type="text"
+                                                                                formControlName="kitId"
+                                                                                    placeholder="kitId" class="form-control"
+                                                                                    [disabled]="true" value="{{item.kitId}}" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
+                                                                                    value={{item.ckitId}}
+                                                                                    class="form-control" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Expiration Date"
+                                                                                    value={{item.expiryDate}}  formControlName="expiryDate"
+                                                                                    class="form-control" [disabled]="true" />
+                                                                            </td>
+                                                                            <td>
                                                                                 <input autocomplete="off" type="text"
                                                                                     placeholder="Patient Id"
                                                                                     formControlName="patientId"
                                                                                     class="form-control" value="" />
                                                                             </td>
 
-                                                                            <td width="25%">
-                                                                                <select formControlName="collection"
-                                                                                class="form-select form-control">
-                                                                                <option
-                                                                                    *ngFor="let s of preprationData"
-                                                                                    [value]="s.name">
-                                                                                    {{s.name}}
-                                                                                </option>
-                                                                            </select>
-                                                                            
+                                                                            <td>
+                                                                                <select formControlName="collection" (change)="checkPreparationv(i, j)"
+                                                                                    class="form-select form-control">
+                                                                                    <option
+                                                                                        *ngFor="let s of preprationData"
+                                                                                        [value]="s.name">
+                                                                                        {{s.name}}
+                                                                                    </option>
+                                                                                </select>
+
                                                                             </td>
 
-                                                                            <td width="25%">
+                                                                            <td>
                                                                                 <input autocomplete="off" type="date"
                                                                                     placeholder="Date"
                                                                                     formControlName="collectionDate"
@@ -318,8 +252,8 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                 </table>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                  
+                                           
                                             </p-tabPanel>
                                             <br>
 

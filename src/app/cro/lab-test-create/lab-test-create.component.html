@@ -57,7 +57,7 @@
                                            <label>Lab Code<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="LabtestCode" maxlength="100"
                                                 placeholder="Enter Lab Test Code" formControlName="cro_code"
-                                                [class.is-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
 
                                             <div *ngIf="shouldShowRequired('cro_code')" class="invalid-feedback">
                                                 Lab Test Code is required.
@@ -74,7 +74,7 @@
                                            <label>Lab Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="LabTestName"
                                                 placeholder="Enter Lab Test Name" formControlName="cro_name"
-                                                [class.is-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
                                                 Lab Test Name is required.
                                             </div>
@@ -91,7 +91,7 @@
                                           <input autocomplete="off" type="text" class="form-control" id="LegalLabTestName"
                                                 placeholder="Enter Legal Lab Test Name"
                                                 formControlName="legal_cro_name"
-                                                [class.is-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('legal_cro_name')"
                                                 class="invalid-feedback">
                                                 Legal Lab Test Name is required.
@@ -125,7 +125,7 @@
 
 class="form-control" id="Address 1"
                                                 placeholder="Enter Address 1" formControlName="address_1"
-                                                [class.is-invalid]="shouldShowRequired('address_1') && labTestCreateForm.get('address_1')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('address_1') && labTestCreateForm.get('address_1')?.touched">
                                             <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
                                                 Adress is required.
                                             </div>
@@ -199,7 +199,7 @@ class="form-control" id="District"
                                            <label>City<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type=" text" class="form-control" id="City" placeholder="Enter City"
                                                 formControlName="city"
-                                                [class.is-invalid]="shouldShowRequired('city') && labTestCreateForm.get('city')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('city') && labTestCreateForm.get('city')?.touched">
                                             <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                                                 City is required.
                                             </div>
@@ -213,7 +213,7 @@ class="form-control" id="District"
                                            <label>Zip Code<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="Zip Code" maxlength="12"
                                                 placeholder="Enter Zip Code" formControlName="zip_code"
-                                                [class.is-invalid]="shouldShowRequired('zip_code') && labTestCreateForm.get('zip_code')?.touched">
+                                                 [class.custom-invalid]="shouldShowRequired('zip_code') && labTestCreateForm.get('zip_code')?.touched">
                                             <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                                                 Zipcode is required.
                                             </div>

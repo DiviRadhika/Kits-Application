@@ -70,7 +70,7 @@
                       <label>Reference Sponsor Code</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="10" id="SponsorCode"
                         placeholder="Enter Sponsor Code" formControlName="existing_sponsor_code"
-                        [class.is-invalid]="shouldShowRequired('existing_sponsor_code') && sponsorForm.get('existing_sponsor_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('existing_sponsor_code') && sponsorForm.get('existing_sponsor_code')?.touched">
 
                       <div *ngIf="shouldShowRequired('existing_sponsor_code')" class="invalid-feedback">
                         Sponsor Code is required.
@@ -86,7 +86,7 @@
                       <label>Sponsor Name</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="SponsorName"
                         placeholder="Enter Sponsor Name" formControlName="sponsor_name"
-                        [class.is-invalid]="shouldShowRequired('sponsor_name') && sponsorForm.get('sponsor_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('sponsor_name') && sponsorForm.get('sponsor_name')?.touched">
                       <div *ngIf="shouldShowRequired('sponsor_name')" class="invalid-feedback">
                         Sponsor Name is required.
                       </div>
@@ -103,7 +103,7 @@
                       <label>Legal Sponsor Name</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="LegalSponsorName"
                         placeholder="Enter legal sponsor name" formControlName="legal_sponsor_name"
-                        [class.is-invalid]="shouldShowRequired('legal_sponsor_name') && sponsorForm.get('legal_sponsor_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('legal_sponsor_name') && sponsorForm.get('legal_sponsor_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_sponsor_name')" class="invalid-feedback">
                         Legal Sponsor Name is required.
                       </div>
@@ -131,7 +131,7 @@
                       <input autocomplete="off" type="text" class="form-control" maxlength="80"
                         appInputRestriction="mobileNum" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1"
-                        [class.is-invalid]="shouldShowRequired('address_1') && sponsorForm.get('address_1')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('address_1') && sponsorForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
                         Adress is required.
                       </div>
@@ -195,7 +195,7 @@
                       <label>City</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City"
                         placeholder="Enter City" formControlName="city"
-                        [class.is-invalid]="shouldShowRequired('city') && sponsorForm.get('city')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('city') && sponsorForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
                       </div>
@@ -210,7 +210,7 @@
                       <label>Zip Code</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code"
                         placeholder="Enter Zip Code" formControlName="zip_code"
-                        [class.is-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('zip_code') && sponsorForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback">
                         Zipcode is required
                       </div>

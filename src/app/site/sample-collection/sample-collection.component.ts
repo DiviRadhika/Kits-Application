@@ -12,6 +12,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./sample-collection.component.css']
 })
 export class SampleCollectionComponent implements OnInit {
+  name: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -76,8 +77,8 @@ export class SampleCollectionComponent implements OnInit {
   public bas2: string = '';
   // preprationData = ['Not Verified', 'Verified']
 
-  preprationData = [{ name: 'Not Verified', value: 'Not Verified' },
-  { name: 'Verified', value: 'Verified' },
+  preprationData = [{ name: 'Not Collected', value: 'Not Collected' },
+  { name: 'Collected', value: 'Collected' },
   ]
 
   kitIdv: any = ''
@@ -109,8 +110,8 @@ export class SampleCollectionComponent implements OnInit {
   selectedOption: any;
 
   public preparationForm: FormGroup = new FormGroup({
-    protocolId: new FormControl("", [Validators.required]),
     protocol_name: new FormControl("", [Validators.required]),
+    specialInstructions:new FormControl("", [Validators.required])
   });
   ngOnInit() {
     this.activatedRoute.params.subscribe((data: any) => {
@@ -129,7 +130,9 @@ export class SampleCollectionComponent implements OnInit {
       console.log(data);
       this.ID = data.site_data_code
       console.log(this.ID);
-
+    
+      this.name =data.site_data_name
+      console.log(this.name)
 
     });
 
@@ -165,13 +168,9 @@ export class SampleCollectionComponent implements OnInit {
         this.protocolIdDetails = protocols.protocol
         this.protoName = this.protocolIdDetails.protocol_name
         this.preparationForm.controls['protocol_name'].disable()
+        this.preparationForm.controls['special_instructions'].disable()
         this.preparationForm.controls['protocol_name'].setValue(this.protoName)
-        // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-        // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-        // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-        // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-        // this.scount = protocols.screening_kit_details[0].screening_kit_count
-        // this.vcount = protocols.visit_kit_details[0].visit_kit_count
+        this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
         if (protocols.visit_kit_details[0].meterial_details.length > 0) {
           this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
           this.screenDetails = this.screeningFullData.selectedLabTests
@@ -208,47 +207,61 @@ export class SampleCollectionComponent implements OnInit {
             for (let j = 0; j < this.vcount; j++) {
               visitKitListArray.push(this.createVisitKitGroup());
 
+              const vkDetailForRowAndTab = this.vkDetails[i][j];
+              const formControl = visitKitListArray.at(j);
+             
+              if(vkDetailForRowAndTab.acknowledgement === 'Received'){
+                formControl.disable()
+              }
+              const kitIdControl = visitKitListArray.at(j).get('kitId');
+              if (kitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                kitIdControl.patchValue(vkDetailForRowAndTab.kitId);
+                kitIdControl.disable()
+              }
 
+              const ckitIdControl = visitKitListArray.at(j).get('ckitId');
+              if (ckitIdControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                ckitIdControl.patchValue(vkDetailForRowAndTab.ckitId);
+                ckitIdControl.disable()
 
+              }
+
+              const expirydControl = visitKitListArray.at(j).get('expiryDate');
+              if (expirydControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                expirydControl.patchValue(vkDetailForRowAndTab.expiryDate);
+                expirydControl.disable()
+              }
               const patientControl = visitKitListArray.at(j).get('patientId');
               if (patientControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
                 patientControl.patchValue(vkDetailForRowAndTab.patientId);
 
               }
-
-
-              // const collectionControl = visitKitListArray.at(j).get('collection');
-              // if (collectionControl) {
-              //   const vkDetailForRowAndTab = this.vkDetails[i][j];
-              //   if (vkDetailForRowAndTab.collection)
-              //     if (vkDetailForRowAndTab.collection === undefined || vkDetailForRowAndTab.collection === null || vkDetailForRowAndTab.collection === '') {
-              //       collectionControl.patchValue(this.preprationData[0].value);
-              //     }
-              //     else {
-              //       collectionControl.patchValue(vkDetailForRowAndTab.collection);
-              //     }
-              //   }
-
-                const collectionControl = visitKitListArray.at(j).get('collection');
-                if (collectionControl) {
-                  const vkDetailForRowAndTab = this.vkDetails[i][j];
-                  collectionControl.patchValue(vkDetailForRowAndTab.collection);
-
+            
+              const collectionControl = visitKitListArray.at(j).get('collection');
+              if (collectionControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                if(vkDetailForRowAndTab.collection){
+                collectionControl.patchValue(vkDetailForRowAndTab.collection);
                 }
+                else if(vkDetailForRowAndTab.collection === undefined || vkDetailForRowAndTab.collection === null ||vkDetailForRowAndTab.collection === ''){
+                  collectionControl.patchValue(this.preprationData[0].value);
+                }
+               
+              }
+
+
+             
                 const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
                 if (collectionDateControl) {
                   const vkDetailForRowAndTab = this.vkDetails[i][j];
                   collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
 
                 }
-                const vkDetailForRowAndTab = this.vkDetails[i][j];
-                const formControl = visitKitListArray.at(j);
-                console.log(vkDetailForRowAndTab.acknowledgement)
-                if(vkDetailForRowAndTab.acknowledgement === 'Received'){
-                  formControl.disable()
-  
-                }
+               
 
 
               }
@@ -271,7 +284,39 @@ export class SampleCollectionComponent implements OnInit {
 
   }
 
+  checkCollection(selectedValue: any, rowIndex: number) {
+   
+    const kitIdControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientId');
+  
+    const expiryDateControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collectionDate');
+    const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collection');
+    if (selectedValue.target.value === 'Collected') {
+      if (!kitIdControl.value) {
+        alert('Please provide Patient Id before selecting "Collected".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+      else if(!expiryDateControl.value){
+        alert('Please provide Collection Date before selecting "Collected".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+    }
+  }
+  checkPreparationv(cardIndex: number, rowIndex: number) {
+    const item = this.vMatDetails[cardIndex];
+    const expiryDateControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('collectionDate');
+    const ckitIdControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('patientId');
+    const preprationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('collection');
 
+    if (preprationControl.value === 'Collected' && (!ckitIdControl.value)) {
+      alert('Please provide Patient Id before selecting "Collected".');
+      
+      preprationControl.patchValue(this.preprationData[0].value)
+    }
+    else if (preprationControl.value === 'Collected' && (!expiryDateControl.value)){
+      alert('Please provide Collection Date  before selecting "Collected".');
+      preprationControl.patchValue(this.preprationData[0].value)
+    }
+  }
 
   getformGroup(i: any) {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
@@ -284,7 +329,9 @@ export class SampleCollectionComponent implements OnInit {
   createVisitKitGroup() {
 
     return this.formBuilder.group({
-
+      kitId: [''],
+      ckitId: [''],
+      expiryDate: [''],
       patientId: [''],
       collection: ['Pending'],
       collectionDate: ['']
@@ -311,46 +358,38 @@ export class SampleCollectionComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         if (i < skDetails.length) {
-
+          this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
           this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
-          if (skDetails[i].collection === undefined || skDetails[i].collection === null || skDetails[i].collection === '') {
-            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
-          }
-          else {
-            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-
-          }
-          this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
-
+            if(skDetails[i].collection){
+              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+            }
+            else if(skDetails[i].collectio === undefined || skDetails[i].collectio === null ||skDetails[i].collectio === ''){
+              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+            }
         }
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+        this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+        this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
         if (i < skDetails.length) {
-
           if (skDetails[i].acknowledgement) {
-
             if (skDetails[i].acknowledgement === 'Received') {
               this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').disable()
               this.ScreenKitForm.get('screenKitList').controls[i].get('collection').disable()
               this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').disable()
             }
-
- 
-
           }
-
+        
         }
       }
     }
-
-
   }
-
-
   addScreenKit(record: any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
     console.log(this.ScreenKitForm.controls);
   }
-
-
   onScreenKitAdd(rec: any) {
 
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
@@ -362,9 +401,10 @@ export class SampleCollectionComponent implements OnInit {
 
 
   addScreenKitData(record: string) {
-
-
     return this.formBuilder.group({
+      kitId: [''],
+      ckitId: [''],
+      expiryDate: [''],
       patientId: [''],
       collection: ['Pendig'],
       collectionDate: ['']
@@ -374,29 +414,19 @@ export class SampleCollectionComponent implements OnInit {
     });
   }
 
-
-
-
   ProtoData(Protocols: any) {
     Protocols.data.forEach((protocol: any) => {
       this.protocols.push(protocol);
-
     });
-
-    console.log(this.protocols);
   }
-
-
   sponsersData(sponsers: any) {
-
     sponsers.forEach((sponser: any) => {
-
-
       this.sponsers.push(sponser);
       this.sponsers.forEach((res: any) => {
         if (sponser.email == this.email) {
-          console.log(sponser.email, this.email)
+          
           this.ID = sponser.site_data_code
+        
 
         }
       });
@@ -414,22 +444,15 @@ export class SampleCollectionComponent implements OnInit {
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
     }
-
-
     for (let i = 0; i < this.vkDetails.length; i++) {
-
-
       this.vkDetails[i].forEach((protocol: any, index: any) => {
         for (let j = 0; j < this.vMatDetails.length; j++) {
           this.vMatDetails[i].visitsList.enable()
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
           protocol.collectionDate = this.vMatDetails[i].visitsList.value[index].collectionDate
-
         }
-
       })
-
     }
 
     this.skDetails.forEach((protocol: any, index: any) => {
@@ -458,7 +481,7 @@ export class SampleCollectionComponent implements OnInit {
     this.protocolService.updatePreparationById(data).subscribe(
       (data: any) => {
         setTimeout(() => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Collection Updated successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sample Collection Updated Successfully' });
         }, 1000);
         this.router.navigate(['/home/site/viewCRA'])
 

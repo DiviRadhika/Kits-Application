@@ -54,7 +54,7 @@ export class ViewSitesComponent implements OnInit {
    this.study()
    if (this.route.url === '/home/site/viewCRA') {
 
-    this.heading = 'Sample Acknowledgement'
+    this.heading = 'Sample Collection'
 
   }
 

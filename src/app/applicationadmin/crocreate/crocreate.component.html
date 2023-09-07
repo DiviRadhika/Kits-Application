@@ -52,7 +52,7 @@
 
 class="form-control" id="CROCode" maxlength="10" placeholder="Enter CRO Code"
                         formControlName="cro_code"
-                        [class.is-invalid]="shouldShowRequired('cro_code') && CroForm.get('cro_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('cro_code') && CroForm.get('cro_code')?.touched">
 
                       <div *ngIf="shouldShowRequired('cro_code')" class="invalid-feedback">
                         CRO Code is required.
@@ -72,7 +72,7 @@ class="form-control" id="CROCode" maxlength="10" placeholder="Enter CRO Code"
 
 class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
                         formControlName="cro_name"
-                        [class.is-invalid]="shouldShowRequired('cro_name') && CroForm.get('cro_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('cro_name') && CroForm.get('cro_name')?.touched">
                       <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
                         CRO Name is required.
                       </div>
@@ -89,7 +89,7 @@ class="form-control" maxlength="100" id="CROName" placeholder="Enter CRO Name"
 
 class="form-control" id="LegalCROName" placeholder="Enter Legal CRO Name"
                         formControlName="legal_cro_name" maxlength="100"
-                        [class.is-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_cro_name')" class="invalid-feedback">
                         Legal CRO Name is required.
                       </div>
@@ -121,7 +121,7 @@ class="form-control" id="LegalCROName" placeholder="Enter Legal CRO Name"
 
 class="form-control" maxlength="80" id="Address 1" placeholder="Enter Address 1"
                         formControlName="address_1"
-                        [class.is-invalid]="shouldShowRequired('address_1') && CroForm.get('address_1')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('address_1') && CroForm.get('address_1')?.touched">
                       <div *ngIf="shouldShowRequired('address_1')" class="invalid-feedback">
                         Adress is required.
                       </div>
@@ -193,7 +193,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                   <div *ngIf="districtEnable" class="col-md-4">                    <div class="form-group">
                       <label>City </label><label style="color: red;margin-left: 4px;" >*</label>
                     <input autocomplete="off" type=" text" class="form-control" maxlength="40" id="City" placeholder="Enter City" formControlName="city"
-                        [class.is-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('city') && CroForm.get('city')?.touched">
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
                       </div>
@@ -206,7 +206,7 @@ class="form-control" maxlength="40" id="District" placeholder="Enter District"
                       <label>Zip Code </label><label style="color: red;margin-left: 4px;" >*</label>
                     <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
-                        [class.is-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
+                         [class.custom-invalid]="shouldShowRequired('zip_code') && CroForm.get('zip_code')?.touched">
                       <div *ngIf="shouldShowRequired('zip_code')" class="invalid-feedback" >
                         Zipcode is required.
                       </div>

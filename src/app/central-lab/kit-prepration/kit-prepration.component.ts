@@ -85,7 +85,9 @@ export class KitPreprationComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['In Progress', 'Completed']
+  preprationData = [{name:'In Progress',value:'In Progress'},
+  {name:'Completed',value:'Completed'},
+   ]
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -246,8 +248,39 @@ export class KitPreprationComponent implements OnInit {
     }
   }
 
+  checkPreparation(selectedValue: any, rowIndex: number) {
+    console.log(selectedValue.target.value)
+    const kitIdControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.ckitId');
+  
+    const expiryDateControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.expiryDate');
+    const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.prepration');
+    if (selectedValue.target.value === 'Completed') {
+      if (!kitIdControl.value) {
+        alert('Please provide Central Lab KitId before selecting "Completed".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+      else if(!expiryDateControl.value){
+        alert('Please provide Expiry Date before selecting "completed".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+    }
+  }
+  checkPreparationv(cardIndex: number, rowIndex: number) {
+    const item = this.vMatDetails[cardIndex];
+    const expiryDateControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('expiryDate');
+    const ckitIdControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('ckitId');
+    const preprationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('prepration');
 
-
+    if (preprationControl.value === 'Completed' && (!ckitIdControl.value)) {
+      alert('Please provide Central Lab KitId before selecting "Completed".');
+      
+      preprationControl.patchValue(this.preprationData[0].value)
+    }
+    else if (preprationControl.value === 'Completed' && (!expiryDateControl.value)){
+      alert('Please provide Expiry Date before selecting "Completed".');
+      preprationControl.patchValue(this.preprationData[0].value)
+    }
+  }
   getprotocolDetails(id: any) {
     this.scount = ''
     this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
@@ -572,7 +605,7 @@ export class KitPreprationComponent implements OnInit {
 
       (data: any) => {
         setTimeout(() => {
-          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Preparation Updated successfully' });
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Kit Preparation Updated Successfully' });
         }, 1000);
         this.router.navigate(['/home/centralLab/kitPreparationGrid'])
       },

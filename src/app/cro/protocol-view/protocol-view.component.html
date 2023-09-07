@@ -42,7 +42,7 @@
                     <label for="formrow-firstname-input"  class="form-label">Sponsor Study ID</label>
                     <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_id"
                       class="form-control" id="" placeholder="Enter Study ID"
-                      [class.is-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
                   </div>
 
@@ -52,7 +52,7 @@
                     <label for="formrow-firstname-input" class="form-label">Study Title</label>
                     <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_name"
                       class="form-control" id="" placeholder="Enter Study Title"
-                      [class.is-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -85,7 +85,7 @@
                     <label for="formrow-firstname-input" class="form-label">Global Sample Size</label>
                     <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" maxlength="5" (input)="validateMobileNumber($event.target, 'office')"
                       id="" placeholder="Enter Global Sample Size"
-                      [class.is-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -97,7 +97,7 @@
 
                     <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size" 
                       class="form-control" id="" placeholder="Enter Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
-                      [class.is-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -105,7 +105,7 @@
                     <label for="formrow-firstname-input" class="form-label">Kit Variant Count</label>
                     <input autocomplete="off" maxlength="5" type="number" autocomplete="off" formControlName="kit_variant_count"  (input)="validateMobileNumber($event.target, 'office')"
                       class="form-control" id="" placeholder="Enter Kit Variant Count"
-                      [class.is-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -114,7 +114,7 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
                       placeholder="Enter Total No.of Visits"  class="form-control"
-                      [class.is-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
 
@@ -123,7 +123,7 @@
                     <label for="formrow-firstname-input" class="form-label">No.of Screens</label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                     (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
-                      [class.is-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -132,7 +132,7 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
                       class="form-control" id="" placeholder="Enter Screen Kit Count"
-                      [class.is-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -141,7 +141,7 @@
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')"formControlName="selected_visit_count"
                       class="form-control" id="" placeholder="Enter Visit Kit Count"
-                      [class.is-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
+                       [class.custom-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
                   </div>
                 </div>
 
@@ -200,8 +200,6 @@
                                                 <div class="row">
                                                     <div class="col-md-3 mt-2 mb-3">
                                                       <h5>Selected Lab Tests</h5>
-                                                    
-                                                     
                                                         <h6 
                                                             *ngFor="let item of screenDetails  let k = index">
                                                             &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ item }}</h6>
@@ -238,22 +236,26 @@
 
 
                                             </p-tabPanel>
-
+                                          
                                             <p-tabPanel *ngFor="let item of vMatDetails let k = index"
                                             header="{{item.alternate_names | titlecase}}">
                                             <h3>{{item.kit_variant}}</h3>  
+                                            <div class="row">
+                                              <div class="col-md-3 mt-2 mb-3">
                                                 <h5>Selected Lab Tests</h5>
                                                 <h6 
                                                 *ngFor="let items of item.selectedLabTests  let k = index">
                                                 &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ items }}</h6>
-                                              
-                                            
+                                              </div>
+                                          </div>
+
                                                 <br>
                                         
                                                 <h5 class="mb-sm-0 font-size-18">
                                                   Materials
                                               </h5>
-
+                                              <hr />
+                                            
                                                 <div class="row card-group">
                                                     <!-- <div class="col-md-3 mb-3" *ngFor="let item of visitRecords"> -->
                                                     <div class="col-md-3 mb-3" *ngFor="let items of item.visits">

@@ -373,7 +373,7 @@ reset(){
 
            
           setTimeout(()=>{
-            this.messageService.add({severity:'success', summary:'Success Message', detail:'User Updated successfully'});
+            this.messageService.add({severity:'success', summary:'Success Message', detail:'User Updated Successfully'});
           },1000);
             
              this.router.navigate(['/home/admin/userGrid']);
@@ -391,7 +391,7 @@ reset(){
           (data: any) => {
    
             setTimeout(()=>{
-              this.messageService.add({severity:'success', summary:'Success Message', detail:'User Created successfully'});
+              this.messageService.add({severity:'success', summary:'Success Message', detail:'User Created Successfully'});
             },1000);
             this.router.navigate(['/home/admin/userGrid']);
             

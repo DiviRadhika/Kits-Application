@@ -170,7 +170,7 @@ export class LabCreateComponent {
         this._cro.updateMaterialDetails(this.id, data).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Updated successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Updated Successfully' });
 
             }, 1000);
             sessionStorage.setItem('tab', 'yes');
@@ -189,7 +189,7 @@ export class LabCreateComponent {
         this._cro.createMaterialDetails(data).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Created successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Created Successfully' });
 
             }, 1000);
             sessionStorage.setItem('tab', 'yes');
