@@ -58,7 +58,7 @@
                     placeholder="Enter First Name" formControlName="first_name"
                     [class.custom-invalid]="shouldShowRequired('first_name') && userForm.get('first_name')?.touched">
                   <div *ngIf="shouldShowRequired('first_name')" class="invalid-feedback">
-                  First Name is required.
+                  <!-- First Name is required. -->
                   </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                     placeholder="Enter Email" formControlName="email"
                     [class.custom-invalid]="shouldShowRequired('email') && userForm.get('email')?.touched">
                   <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
-                    Email is required.
+                    <!-- Email is required. -->
                   </div>
 <!-- 
                     <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
@@ -102,7 +102,7 @@
                   (paste)="preventPaste($event)" maxlength="16"
                   [class.custom-invalid]="shouldShowRequired('password') && userForm.get('password')?.touched">
                 <div *ngIf="shouldShowRequired('password')" class="invalid-feedback">
-                  password is required.
+                  <!-- password is required. -->
                 </div>
 
 
@@ -115,7 +115,7 @@
                     and one special character.
                   </div>
 
-                  <button type="button" class="eye-button" tabindex="-1" (click)="showPassword = !showPassword">
+                  <button type="button" class="eye-button" tabindex="-1"  style="color:#495057" (click)="showPassword = !showPassword">
                     <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
                     <i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true"></i>
                   </button>
@@ -141,7 +141,7 @@
                       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                     </select>
                     <div *ngIf="shouldShowRequired('role')" class="text-danger">
-                      Please Select Role.
+                      <!-- Please Select Role. -->
                     </div>
                   </div>
                 </div>

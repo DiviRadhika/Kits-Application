@@ -13,14 +13,14 @@
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
               
-                <li class="breadcrumb-item active">Lab Test</li>
+                <li class="breadcrumb-item active">{{breadcrumb}}</li>
               </ol>
             </div>
 
           </div>
         </div>
       </div>
-      <p-tabView  [(activeIndex)]="selectedIndex">
+      <p-tabView  [(activeIndex)]="selectedIndex" (onChange)="onTabChange($event)">
 
 
 

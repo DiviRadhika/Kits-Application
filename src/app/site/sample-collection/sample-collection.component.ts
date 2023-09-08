@@ -168,9 +168,10 @@ export class SampleCollectionComponent implements OnInit {
         this.protocolIdDetails = protocols.protocol
         this.protoName = this.protocolIdDetails.protocol_name
         this.preparationForm.controls['protocol_name'].disable()
-        this.preparationForm.controls['special_instructions'].disable()
+        // this.preparationForm.controls['special_instructions'].disable()
         this.preparationForm.controls['protocol_name'].setValue(this.protoName)
         this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
+         this.preparationForm.controls['specialInstructions'].disable()
         if (protocols.visit_kit_details[0].meterial_details.length > 0) {
           this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
           this.screenDetails = this.screeningFullData.selectedLabTests

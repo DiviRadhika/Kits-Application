@@ -10,6 +10,9 @@ import { ProtocolService } from '../protocol-registration/protocol-registration.
   styleUrls: ['./site.component.css']
 })
 export class SiteComponent implements OnInit {
+  isAscendingSorta: boolean = true;
+  isAscendingSortb: boolean = true;
+;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -30,6 +33,7 @@ export class SiteComponent implements OnInit {
   sortDirection: number = 1; // 1 for ascending, -1 for descending
   sortedColumn: string = '';
   sort(Column: string) {
+  
     if (this.sortedColumn === Column)
     {
       this.sortDirection *= -1;
@@ -57,11 +61,20 @@ export class SiteComponent implements OnInit {
   ngOnInit(): void {
   this.getSitedetails();
   }
+  toggleSortingb(){
+   
+    this.isAscendingSortb = !this.isAscendingSortb;
+  }
+  toggleSortinga(){
+  
+    this.isAscendingSorta = !this.isAscendingSorta;
+  }
   toggleSorting() {
     this.isAscendingSort = !this.isAscendingSort;
     // Implement your sorting logic here based on the current sorting state.
   }
   toggleSorting1() {
+    
     this.isAscendingSort1 = !this.isAscendingSort1;
     // Implement your sorting logic here based on the current sorting state.
   }

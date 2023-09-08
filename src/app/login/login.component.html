@@ -32,13 +32,13 @@
       <input autocomplete="off" class="form-control" id="password"
             [type]="showPassword ? 'text' : 'password'"  formControlName="password" (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3" id=""
             placeholder="Password">
-        <button type="button" class="eye-button" tabindex="-1"
-            (click)="showPassword = !showPassword">
-            <i *ngIf="showPassword" class="fa fa-eye"
-                aria-hidden="true"></i>
-            <i *ngIf="!showPassword" class="fa fa-eye-slash"
-                aria-hidden="true"></i>
-        </button>
+            <button type="button" class="eye-button" tabindex="-1"
+            (click)="showPassword = !showPassword"
+            style="color:#495057">
+        <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
+        <i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true"></i>
+    </button>
+    
       </label>
           
         </div>

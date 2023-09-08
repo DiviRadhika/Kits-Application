@@ -196,7 +196,7 @@
                               <input autocomplete="off" class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" 
                                     formControlName="passwordp" (paste)="preventPaste($event)" maxlength="16"
                                     class="form-control text-center mb-3" id="" placeholder="Previous Password">
-                                <button type="button" class="eye-button" tabindex="-1"
+                                <button type="button" class="eye-button" tabindex="-1"  style="color:#495057"
                                     (click)="showPassword = !showPassword">
                                     <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
                                     <i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true"></i>

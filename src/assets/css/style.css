@@ -6,7 +6,7 @@
 	color: #ff414b !important;
 }
 .custom-invalid {
-	border: 1px solid red; /* Example: Add your desired styling for invalid state */
+	border: 1px solid #ff414b; /* Example: Add your desired styling for invalid state */
 	/* Add any other styles you want for the invalid state */
   }
 

@@ -10,6 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styleUrls: ['./lab-test.component.css']
 })
 export class LabTestComponent implements OnInit {
+  breadcrumb: string = 'Lab Test';
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -111,6 +112,7 @@ export class LabTestComponent implements OnInit {
     this.lab = false
     this.material = true
   }
+  
   edit(id: any, val: any) {
     this.route.navigate(['/home/cro/updateLabTest', id, val])
   }
@@ -132,6 +134,17 @@ export class LabTestComponent implements OnInit {
       this.totalCount = this.LabDetails.length
     })
   }
+  onTabChange(event: any) {
+    // Handle tab change event here
+    console.log('Tab changed:', event.index); // You can access the selected tab index
+    if(event.index === 0){
+      this.breadcrumb = 'Lab Test'
+    }
+    else{
+      this.breadcrumb = 'Material'
+    }
+  }
+  
   meterialsData() {
     this._cro.meterials().subscribe((data: any) => {
       this.materials = data
