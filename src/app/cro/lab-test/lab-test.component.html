@@ -171,6 +171,17 @@
                               </table>
                               <pagination-controls id="LabDetailsPagination" (pageChange)="pageChange($event)"
                                 *ngIf="LabDetails && LabDetails.length"></pagination-controls>
+                                
+                                <div class="row">
+                                  <div class="col-md-10">
+                                   
+                                </div>
+                                <div class="col-md-2">
+                                  <p style="margin-top: -26%;"><b>Total Count:{{totalCount}}</b></p>
+                                </div>
+                                </div>
+
+
                             </div>
                           </div>
   
@@ -202,20 +213,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <!-- <div class="row" style="margin-right: -13%;">
-                    <div class="col-md-9"></div>
-                    <div class="col-md-2">
-                      <div class="pull-Right mb-2 text-right" width="100%">
-                        <button type="button" (click)="materialCreate()"
-                          class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
-                          data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
-                            class="bx bx-plus label-icon"></i>
-                          Add Material</button>
-                      </div>
-                    </div>
-                  </div> -->
-  
-                  <!-- <hr width="100%" class="mb-4"> -->
+                 
                   <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                     <div class="row">
   
@@ -311,6 +309,14 @@
                       </div>
                       <pagination-controls id="materialsPagination" (pageChange)="pageChangem($event)"
                         *ngIf="materials && materials.length"></pagination-controls>
+                        <div class="row">
+                          <div class="col-md-10">
+                           
+                        </div>
+                        <div class="col-md-2">
+                          <p style="margin-top: -26%;"><b>Total Count:{{totalCountmaterial}}</b></p>
+                        </div>
+                        </div>
                     </div>
                   </div>
                 </div>

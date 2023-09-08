@@ -91,31 +91,13 @@
                              >Actions</th>
                           </tr>
                         </thead>
-                        <!-- <thead>
-                          <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 266.2px;" aria-sort="ascending" 
-                              aria-label="Name: activate to sort column descending" (click)="sort('first_name')">Name</th>
-                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email</th>
-                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                              style="width: 230.2px;" aria-label="Role: activate to sort column ascending" (click)="sort('role')">Role</th>
-sortpipe                            <th width="40" class="sorting" tabindex="0" aria-controls="datatable" rowspan="1"
-                              colspan="1" style="width: 150.2px;"
-                              aria-label="Actions: activate to sort column ascending">Actions</th>
-                          </tr>
-                        </thead> -->
-                        
+                     
 
                         <tbody>
-                          <tr class="odd" style="  vertical-align: middle;"    *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                          <tr class="odd" style="  vertical-align: middle;"  *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                             <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
                              
-                          <!-- <tr class="odd"
-                            *ngFor="let user of userDetails  | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
-                           
-                            <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;"> -->
                               {{user.first_name}}&nbsp;{{user.last_name}}
                             </td>
                           
@@ -131,11 +113,7 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                               </svg></button>
-                              <!-- <button type="button" (click)="edit(user.user_id, 'view')"
-                              class="btn btn-success waves-effect edit-btn waves-light">
-                            
-                              View
-                            </button> -->
+                           
                             </td>
                           </tr>
                           <tr>
@@ -149,6 +127,14 @@ sortpipe                            <th width="40" class="sorting" tabindex="0" 
                       </table>
                       <pagination-controls id="userPagination" (pageChange)="pageChange($event)"
                         *ngIf="userDetails && userDetails.length"></pagination-controls>
+                        <div class="row">
+                          <div class="col-md-10">
+                           
+                        </div>
+                        <div class="col-md-2">
+                          <p style="margin-top: -26%;"><b>Total Count:{{totalCount}}</b></p>
+                        </div>
+                       
                     </div>
                   </div>
                 </div>

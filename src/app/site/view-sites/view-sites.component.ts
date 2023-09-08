@@ -118,6 +118,7 @@ export class ViewSitesComponent implements OnInit {
         const combinedArray = newScreeningObj.uniqueScreeningData.concat(newVisitObj.uniqueVisitData);
     
         this.uniqueCombinedArray = this.getUniqueObjects(combinedArray, 'user_protocol_id');
+        this.totalCount = this.uniqueCombinedArray.length
         this.allprotocolDetails = this.getUniqueObjects(combinedArray, 'user_protocol_id');
       });
       console.log( this.uniqueCombinedArray);

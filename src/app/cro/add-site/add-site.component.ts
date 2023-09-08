@@ -159,6 +159,7 @@ export class AddSiteComponent {
         email: [contact.email],
         contact: [contact.contact],
         role: [contact.role],
+        editable: [contact.editable]
         // name: [contact.name],
         // email: [contact.email],
       });
@@ -180,10 +181,23 @@ export class AddSiteComponent {
       first_name: [''],
       last_name: [''],
       email: [''],
-      contact: ['']
+      contact: [''],
+      editable: ['true']
   
     });
   }
+  investigatorCreatee() {
+    return this.formBuilder.group({
+      role: [''],
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+      contact: [''],
+      editable: ['']
+  
+    });
+  }
+  
   
   addInvestigators() {
     this.table = true
@@ -193,7 +207,7 @@ export class AddSiteComponent {
   addInvestigatorse(){
     this.tableE = true
     const investigators = this.investigatorFormedit.get('investigatoredit') as FormArray;
-    investigators.push(this.investigatorCreate());
+    investigators.push(this.investigatorCreatee());
   }
 
   emailDomainValidator(control: FormControl): ValidationErrors | null {
@@ -289,7 +303,17 @@ export class AddSiteComponent {
       }
       if (this.isEdit) {
         obj.site_id = this.id
-        obj.notifier_emails = this.investigatorFormedit.value.investigatoredit
+        const trimmedContactse = this.investigatorFormedit.value.investigatoredit.map((contact: any) => {
+          return {
+            ...contact,
+            email: contact.email.trim(),
+            editable: 'true'
+          };
+        });
+        obj.notifier_emails = trimmedContactse
+
+
+        
    
           this._cro.updateSiteDetails(obj).subscribe(
             (data: any) => {
@@ -305,7 +329,19 @@ export class AddSiteComponent {
           );
       }
       else {
-        obj.notifier_emails = this.investigatorForm.value.investigator
+     
+
+        const trimmedContacts = this.investigatorForm.value.investigator.map((contact: any) => {
+          return {
+            ...contact,
+            email: contact.email.trim()
+          };
+        });
+       
+        
+        obj.notifier_emails = trimmedContacts
+
+
         // obj.email = this.siteForm.controls['uemail'].value,
           // obj.status = 'active',
           // obj.password = this.siteForm.controls['password'].value,

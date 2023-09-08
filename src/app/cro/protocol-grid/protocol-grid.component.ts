@@ -77,6 +77,7 @@ export class ProtocolGridComponent implements OnInit {
       console.log(data)
       this.protocolDetails = data
       this.allprotocolDetails = data
+      this.totalCount= this.protocolDetails.length
     })
 
   }

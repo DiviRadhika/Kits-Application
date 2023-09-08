@@ -1,12 +1,11 @@
 
 
 
-export const apin = "http://192.168.1.163:5001/api";
+// export const apin = "http://192.168.1.163:5001/api";
 // export const apin = "http://122.175.43.71:5001/api"
+export const apin = window.location.host;
 
-
-
-export const state ='http://192.175.43.71:5000/api'
+export const state ='http://192.168.1.163:5000/api'
 
 export const endPointsUser = {
     // Endpoints for UserCreate

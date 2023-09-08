@@ -98,7 +98,14 @@
                           </tbody>
                         </table>
                         <pagination-controls id="sitePagination" (pageChange)="pageChange($event)"
-                          *ngIf="protocolDetails && protocolDetails.length"></pagination-controls>
+                          *ngIf="uniqueCombinedArray && uniqueCombinedArray.length"></pagination-controls>
+                          <div class="row">
+                            <div class="col-md-10">
+                             
+                          </div>
+                          <div class="col-md-2">
+                            <p style="margin-top: -26%;"><b>Total Count:{{totalCount}}</b></p>
+                          </div>
                       </div>
                     </div>
                   </div>

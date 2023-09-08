@@ -93,6 +93,7 @@ export class SiteComponent implements OnInit {
       console.log(data)
       this.siteDetails = data
       this.allSiteDetails = data
+      this.totalCount =  this.siteDetails.length
     })
 
   }

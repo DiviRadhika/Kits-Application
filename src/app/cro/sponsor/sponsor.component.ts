@@ -18,6 +18,7 @@ export class SponsorComponent implements OnInit {
   stateenable: boolean | undefined;
   countries: any;
   districtEnable: boolean | undefined;
+  edits: boolean= false;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -163,15 +164,15 @@ removeeditsponser(j: number) {
     }
 
     this.contactDetails.forEach((contact: any) => {
-      console.log(contact)
+   
       const editcontactsForm = this.formBuilder.group({
         first_name: [contact.first_name],
         last_name: [contact.last_name],
         email: [contact.email],
         contact: [contact.contact],
-        designation: [contact.designation]
-        // name: [contact.name],
-        // email: [contact.email],
+        designation: [contact.designation],
+        editable:[contact.editable]
+     
       });
 
       contactFormArray.push(editcontactsForm);
@@ -188,13 +189,25 @@ removeeditsponser(j: number) {
     return (this.contactForm.get('contacts') as FormArray).controls;
   }
 
+  createContacte() {
+    return this.formBuilder.group({
+      first_name: [''],
+      last_name: [''],
+      email: [''],
+      contact: [''],
+      designation: [''],
+      editable: ['']
+
+    });
+  }
   createContact() {
     return this.formBuilder.group({
       first_name: [''],
       last_name: [''],
       email: [''],
       contact: [''],
-      designation: ['']
+      designation: [''],
+      editable: ['true']
 
     });
   }
@@ -207,7 +220,8 @@ removeeditsponser(j: number) {
   addContacte() {
     this.tableE = true
     const contacts = this.editcontactsForm.get('editcontacts') as FormArray;
-    contacts.push(this.createContact());
+    contacts.push(this.createContacte());
+    this.edits = !this.edits;
   }
   getSponsorDetails() {
     this._cro.getsponsors().subscribe(
@@ -308,7 +322,8 @@ removeeditsponser(j: number) {
         const trimmedContactse = this.editcontactsForm.value.editcontacts.map((contact: any) => {
           return {
             ...contact,
-            email: contact.email.trim()
+            email: contact.email.trim(),
+            editable: 'true'
           };
         });
         obj.notifier_details = trimmedContactse
@@ -337,8 +352,7 @@ removeeditsponser(j: number) {
        
         
         obj.notifier_details = trimmedContacts
-        console.log(obj.notifier_details)
-        console.log(obj)
+      
        
         this._cro.CreateSponsorDetails(obj).subscribe(
 

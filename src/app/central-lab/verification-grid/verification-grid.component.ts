@@ -102,7 +102,7 @@ export class VerificationGridComponent implements OnInit {
     this.protocol.getPreparation().subscribe((data:any)=>{
        this.protocolDetails = data.data
        this.allprotocolDetails = data.data
-       console.log(this.protocolDetails)
+      this.totalCount =  this.protocolDetails.length
 
      })}
     toggleSorting() {

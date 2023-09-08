@@ -84,6 +84,8 @@ export class SponsorStudyComponent implements OnInit {
         
         this.uniqueCombinedArray =data
         this.allprotocolDetails = data
+        this.totalCount =  this.uniqueCombinedArray.length
+
             });
    
       

@@ -174,7 +174,7 @@ export class LabTestComponent implements OnInit {
     });
 }
   pageChangem(event: number) {
-    this.page = event;
+    this.pageM = event;
     this.meterialsData()
 
   }

@@ -75,7 +75,7 @@ export class SponsorGridComponent implements OnInit {
       (data:any)=>{
       this.sponsorDetails = data
       this.allsponsorDetails = data
-       console.log(data)
+       this.totalCount= this.sponsorDetails.length
       },
       (err:any)=>{
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
