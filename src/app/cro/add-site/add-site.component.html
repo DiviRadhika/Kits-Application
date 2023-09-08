@@ -246,7 +246,7 @@ class="form-control" id="email" placeholder="Enter Email"
                 <div class="row" style="display: flex; margin-top: 13px;">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>ZipCode</label><label style="color: red;margin-left: 4px;">*</label>
+                      <label>Zip Code</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" class="form-control" maxlength="12" id="Zip Code" placeholder="Enter Zip Code"
                         formControlName="zip_code"
                          [class.custom-invalid]="shouldShowRequired('zip_code') && siteForm.get('zip_code')?.touched">
@@ -382,7 +382,7 @@ class="form-control" id="email" placeholder="Enter Email"
                                   (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                               <td>
-                                <button type="button" (click)="removeSite(i)" style="background-color: red;"
+                                <button type="button" (click)="removeSite(i)" style="background-color: #ff414b;"
                                   class="btn btn-danger">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
@@ -466,7 +466,7 @@ class="form-control" id="email" placeholder="Enter Email"
                                   (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
                               <td *ngIf="!view">
-                                <button type="button" (click)="removeeditSite(i)" style="background-color: red;"
+                                <button type="button" (click)="removeeditSite(i)" style="background-color: #ff414b;"
                                   class="btn btn-danger">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">

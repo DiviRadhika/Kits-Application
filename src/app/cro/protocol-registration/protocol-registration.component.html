@@ -51,13 +51,22 @@
                   </div>
                 </div>
                 <div class="col-md-4">
+                 
+                  <div class="form-group">
+                    <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
+                    <input style="margin-top: 2.9;" autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
+                      class="form-control" id="" placeholder="Enter CRO Study ID">
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
                     <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
                       class="form-control" id="" placeholder="Enter CRO Study ID">
 
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label style="color: red;margin-left: 4px;" >*</label></label>
@@ -297,7 +306,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Visit Nmae</th>
+                        <th>Visit Name</th>
                         <th>Alternate Week Name</th>
                       </tr>
                     </thead>
@@ -343,10 +352,20 @@
 
                         </td>
                         <th scope="row">
-                          <p-multiSelect [options]="visitcount" formControlName="visits" defaultLabel="Select Visits"
+                          <div style="position: relative; overflow: visible;">
+                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)" [panelStyle]="{ maxHeight: '200px', overflow: 'auto', position: 'absolute', zIndex: '9999' }">
+                            </p-multiSelect>
+                          </div>
+                          <!-- <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)" [panelStyle]="{ maxHeight: '200px', overflow: 'auto' }">
+                          </p-multiSelect> -->
+                          <!-- <div style="width: 300px; overflow-x: auto;">
+                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%', height: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
+                            </p-multiSelect>
+                          </div> -->
+                          
+                          <!-- <p-multiSelect [options]="visitcount" [style]="{width: '100%', height: '100%'}" formControlName="visits" defaultLabel="Select Visits"
                             optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
-
-                          </p-multiSelect>
+                          </p-multiSelect> -->
                           <div class="error-message" *ngIf="hasDuplicateSelection(j)">
                             <!-- Error message will be displayed through the alert -->
                           </div>

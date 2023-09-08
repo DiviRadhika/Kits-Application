@@ -30,7 +30,7 @@ export class VerificationGridComponent implements OnInit {
     
   if(this.route.url === '/home/centralLab/kitvarificationGrid')
   {
-    this.heading = 'Kit Varification'
+    this.heading = 'Kit Verification'
     
   }
   else if(this.route.url === '/home/centralLab/kitDistributionGrid'){

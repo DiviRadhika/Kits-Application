@@ -48,6 +48,7 @@ export class UserCreateComponent implements OnInit {
   view: boolean = false;
   countries: { key: number; name: string; }[] | undefined;
   states: { key: any; name: any; }[] | undefined;
+  emailvalue: any;
   // passwordControl!: FormControl<any>;
   private capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -315,11 +316,26 @@ reset(){
 }
   
   submit(): void {
-    this.userForm.controls['first_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['first_name'].value));
-    this.userForm.controls['last_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['last_name'].value));
-  
+    
+    if(this.userForm.controls['first_name'].value ==='' ||this.userForm.controls['first_name'].value=== undefined ||this.userForm.controls['first_name'].value=== null ){
+      
+    }
+    else{
+      this.userForm.controls['first_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['first_name'].value));
    
-    const emailvalue = this.userForm.controls['email'].value.toLowerCase();
+    }
+    if(this.userForm.controls['last_name'].value ==='' ||this.userForm.controls['last_name'].value=== undefined ||this.userForm.controls['last_name'].value=== null ){
+    }
+    else{
+    this.userForm.controls['last_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['last_name'].value));
+    }
+    if(this.userForm.controls['email'].value ==='' ||this.userForm.controls['email'].value=== undefined ||this.userForm.controls['email'].value=== null ){
+      
+    }
+    else{
+       this.emailvalue = this.userForm.controls['email'].value.toLowerCase();
+    }
+   
 
     if (this.userForm.invalid) {
       Object.keys(this.userForm.controls).forEach((key) => {
@@ -332,7 +348,7 @@ reset(){
       const userObj: any = {
         first_name: this.userForm.controls['first_name'].value,
         last_name: this.userForm.controls['last_name'].value,
-        email: emailvalue,
+        email:  this.emailvalue,
         password: this.userForm.controls['password'].value,
         role: this.userForm.controls['role'].value,
         created_by:sessionStorage.getItem('userid')

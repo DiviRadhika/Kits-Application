@@ -61,7 +61,8 @@ export class UserGridComponent implements OnInit {
         (user: any) =>
           (user.first_name && user.first_name.toLowerCase().includes(filterValue)) ||
           (user.last_name && user.last_name.toLowerCase().includes(filterValue)) ||
-          (user.email && user.role.toLowerCase().includes(filterValue))
+          (user.role && user.role.toLowerCase().includes(filterValue)) ||
+          (user.email && user.email.toLowerCase().includes(filterValue))
       );
     }
 

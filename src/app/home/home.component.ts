@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
   confirm2() {
     this.confirmationService.confirm({
-        message: 'Are you sure Do you want to logout?',
+        message: 'Are you sure Do you want to Logout?',
         header: 'Logout Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {
@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit {
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
-            { label: 'LabTest', link: '/home/cro/labTestGrid' },
+            { label: 'Lab Test', link: '/home/cro/labTestGrid' },
             { label: 'Lab Creation', link: '/home/cro/labGrid' },
             { label: 'Study Summary', link: '/home/cro/protocolGrid' },
            

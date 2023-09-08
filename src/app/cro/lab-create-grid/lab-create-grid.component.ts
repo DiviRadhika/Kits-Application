@@ -80,7 +80,7 @@ export class LabCreateGridComponent implements OnInit {
     this.route.navigate(['/home/cro/createlabtest'])
   }
   edit(id: string, val: string) {
-    console.log(id, val)
+   
     this.route.navigate(['/home/cro/updatecLabTest', id, val])
   }
   toggleSorting() {

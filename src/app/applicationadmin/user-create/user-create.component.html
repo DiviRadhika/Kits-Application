@@ -4,7 +4,8 @@
       <!-- start page title -->
       <div class="row">
         <div class="col-12">
-          <div style="padding:1px" *ngIf="!view" class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <div style="padding:1px" *ngIf="!view"
+            class="page-title-box d-sm-flex align-items-center justify-content-between">
             <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add User</h4>
             <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit User</h4>
             <div class="page-title-right">
@@ -20,9 +21,10 @@
               </ol>
             </div>
           </div>
-          <div style="padding:1px"  *ngIf="view"class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4  class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View User</h4>
-          
+          <div style="padding:1px" *ngIf="view"
+            class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>View User</h4>
+
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item">
@@ -31,8 +33,8 @@
                 <li class="breadcrumb-item">
                   <a routerLink="/home/admin/userGrid" class="waves-effect">User</a>
                 </li>
-              
-                <li  class="breadcrumb-item active">View User</li>
+
+                <li class="breadcrumb-item active">View User</li>
               </ol>
             </div>
           </div>
@@ -46,83 +48,95 @@
             <hr>
 
             <p-toast></p-toast>
-            <form [formGroup]="userForm" >
+            <form [formGroup]="userForm">
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group">
-                   <label>User First Name</label><label style="color: red;margin-left: 4px;" >*</label>
-                  <input autocomplete="off" type="text" 
- class="form-control" id="first_name" placeholder="Enter First Name"
-                      formControlName="first_name">
-                    <div *ngIf="shouldShowRequired('first_name')" class="text-danger">
-                      First Name is required.
-                    </div>
+                    <label>User First Name</label><label style="color: red;margin-left: 4px;">*</label>
+
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="first_name"
+                    placeholder="Enter First Name" formControlName="first_name"
+                    [class.custom-invalid]="shouldShowRequired('first_name') && userForm.get('first_name')?.touched">
+                  <div *ngIf="shouldShowRequired('first_name')" class="invalid-feedback">
+                  First Name is required.
+                  </div>
                   </div>
                 </div>
 
                 <div class="col-md-3">
-                  <label>User Last Name</label><label style="color: red;margin-left: 4px;" >*</label>
+                  <label>User Last Name</label>
                   <div class="form-group">
-                  <input autocomplete="off" type="text" 
-
-
-class="form-control" id="last_name" placeholder="Enter Last Name"
-                      formControlName="last_name">
+                    <input autocomplete="off" type="text" class="form-control" id="last_name"
+                      placeholder="Enter Last Name" formControlName="last_name">
                   </div>
                 </div>
 
                 <div class="col-md-3">
                   <div class="form-group">
-                   <label>Email Id</label><label style="color: red;margin-left: 4px;" >*</label>
+                    <label>Email Id</label><label style="color: red;margin-left: 4px;">*</label>
 
-
-                  <input autocomplete="off" type="text" 
- class="form-control" id="email" placeholder="Enter Email"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="email"
+                    placeholder="Enter Email" formControlName="email"
+                    [class.custom-invalid]="shouldShowRequired('email') && userForm.get('email')?.touched">
+                  <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
+                    Email is required.
+                  </div>
+<!-- 
+                    <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">
                     <div *ngIf="shouldShowRequired('email')" class="text-danger">
                       Email is required.
-                    </div>
+                    </div> -->
                     <div *ngIf="userForm.get('email')?.hasError('pattern')" class="text-danger">
                       Please enter a valid email address.
                     </div>
                   </div>
                 </div>
-               
-                
-                <div class="col-md-3">
-                 <label>Password</label><label style="color: red;margin-left: 4px;" >*</label>
-                  <!-- <input type="password" id="password" formControlName="password">
-                  <div *ngIf="userForm.get('password')?.hasError('pattern')">
-                    Password must haven at least 12 characters, one uppercase letter, one lowercase letter, one digit, and one special symbol.
-                  </div> -->
-                <input autocomplete="off" type="text" class="form-control" id="password" placeholder="Enter Password"
-                  formControlName="password"  [type]="showPassword ? 'text' : 'password'"  (paste)="preventPaste($event)" maxlength="16"  >
-              
-                <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
-                    Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
-                </div>
-                
-                  <button type="button" class="eye-button" tabindex="-1"
-                      (click)="showPassword = !showPassword">
-                      <i *ngIf="showPassword" class="fa fa-eye"
-                          aria-hidden="true"></i>
-                      <i *ngIf="!showPassword" class="fa fa-eye-slash"
-                          aria-hidden="true"></i>
-                  </button>
-             
-          
-                  
 
+
+                <div class="col-md-3">
+                  <label>Password</label><label style="color: red;margin-left: 4px;">*</label>
+              
+                  <input autocomplete="off" type="text" class="form-control" id="password" placeholder="Enter Password"
+                  formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                  (paste)="preventPaste($event)" maxlength="16"
+                  [class.custom-invalid]="shouldShowRequired('password') && userForm.get('password')?.touched">
+                <div *ngIf="shouldShowRequired('password')" class="invalid-feedback">
+                  password is required.
+                </div>
+
+
+                  <!-- <input autocomplete="off" type="text" class="form-control" id="password" placeholder="Enter Password"
+                    formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                    (paste)="preventPaste($event)" maxlength="16">  -->
+
+                  <div *ngIf="userForm.get('password')?.hasError('pattern')" class="text-danger">
+                    Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit,
+                    and one special character.
                   </div>
 
+                  <button type="button" class="eye-button" tabindex="-1" (click)="showPassword = !showPassword">
+                    <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
+                    <i *ngIf="!showPassword" class="fa fa-eye-slash" aria-hidden="true"></i>
+                  </button>
+
+
+
+
+                </div>
+                </div>
+                <br>
+
+                <div class="row">
+             
 
                 <div class="col-md-3">
                   <div class="form-group">
-                   <label>Role</label><label style="color: red;margin-left: 4px;" >*</label>
-                   
-                    <select formControlName="role"  (change)="roleChange($event)" class="form-select" aria-label="Default select example"
-                    class="form-select form-control"
-                       [class.custom-invalid]="shouldShowRequired('role') && userForm.get('role')?.touched">
+                    <label>Role</label><label style="color: red;margin-left: 4px;">*</label>
+
+                    <select formControlName="role" (change)="roleChange($event)" class="form-select"
+                      aria-label="Default select example" class="form-select form-control"
+                      [class.custom-invalid]="shouldShowRequired('role') && userForm.get('role')?.touched">
                       <option disabled selected value="">Select Role</option>
                       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
                     </select>
@@ -146,8 +160,8 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponsor Name</label>
                     <select formControlName="sId" class="form-select form-control"
-                       [class.custom-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
-                      <option  selected value="">Select Sponsor Name</option>
+                      [class.custom-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
+                      <option selected value="">Select Sponsor Name</option>
                       <option *ngFor="let sponser of sponsorDetails" [value]="sponser.sponsor_id">
                         {{ sponser.sponsor_name }}
                       </option>
@@ -156,10 +170,11 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                 </div>
                 <div *ngIf="site" class="col-md-3">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Site Name</label><label style="color: red;margin-left: 4px;" >*</label>
+                    <label for="formrow-firstname-input" class="form-label">Site Name</label><label
+                      style="color: red;margin-left: 4px;">*</label>
                     <select formControlName="sId" class="form-select form-control"
-                       [class.custom-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
-                      <option  selected value="">Select Site Name</option>
+                      [class.custom-invalid]="shouldShowRequired('sId') && userForm.get('sId')?.touched">
+                      <option selected value="">Select Site Name</option>
                       <option *ngFor="let site of siteDetails" [value]="site.site_id">
                         {{ site.site_data_name }}
                       </option>
@@ -170,20 +185,21 @@ class="form-control" id="last_name" placeholder="Enter Last Name"
                   <div class="form-group">
                     <label>Status</label>
                     <select formControlName="status" class="form-select" aria-label="Default select example">
-                      <option  selected value="">Select Status</option>
+                      <option selected value="">Select Status</option>
                       <option *ngFor="let option of status" [value]="option.id">{{ option.label }}</option>
                     </select>
-                   
+
                   </div>
                 </div>
-            
 
-              <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
 
-                <button style="margin: 2px;" *ngIf="!view" type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
+
+                  <button style="margin: 2px;" *ngIf="!view" type="submit" (click)="submit()"
+                    class="btn btn-primary">Submit</button>
+                </div>
               </div>
-            </div>
 
             </form>
           </div>
