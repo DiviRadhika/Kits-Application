@@ -1046,7 +1046,7 @@ export class DataService {
     }
 
     getAllStatesAPI(payload: { country: any; }, headers?: any) {
-        return this.http.get(`${state}/locations/states?countries=${payload.country}`, { observe: 'response', headers });
+        return this.http.get(`${state}/location/states?countries=${payload.country}`, { observe: 'response', headers });
     }
 
 }
