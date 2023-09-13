@@ -19,9 +19,12 @@ from config import logger
 from schemas.users import UserSchema
 from models.site_data import SiteDataModel
 from models.sponsor import SponsorModel
+from countryinfo import CountryInfo
+
 
 
 login_ns = Namespace("login", description="login related operations")
+location_ns = Namespace("location", description="location related operations")
 user_ns = Namespace("user", description="user related operations")
 users_ns = Namespace("user_actions", description="user actions related operations")
 
@@ -377,3 +380,29 @@ class TokenRefresh(Resource):
             identity=current_user, fresh=True, additional_claims=additional_claims
         )
         return {"new_access_token": new_token}, 200
+
+
+class GetAllStatesFromGivenCountries(Resource):
+    @location_ns.doc("Get all states present in a given countries")
+    def get(self):
+        path = request.path
+        args = request.args
+        data = {"states": []}
+        if "countries" in args:
+            country_names = args["countries"].split(",")
+            for country_name in country_names:
+                country_info = CountryInfo(country_name.strip())
+                try:
+                    result = country_info.provinces()
+                    data["states"].extend(result)
+                except (Exception, exc.SQLAlchemyError) as e:
+                    logger.log(
+                        log_type="error",
+                        path=path,
+                        cursor="INPUT-ERROR",
+                        message=str(e),
+                        uniqueId="",
+                    )
+                    continue
+        data["states"].sort()
+        return jsonify(data)

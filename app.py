@@ -64,6 +64,8 @@ from resources.users import (
     UserRegister,
     UserList,
     users_ns,
+    location_ns,
+    GetAllStatesFromGivenCountries,
 )
 from models.users import UserModel
 from resources.clab_kit_preparation import (
@@ -204,6 +206,7 @@ api.add_namespace(login_ns)
 api.add_namespace(clab_kit_preparations_ns)
 api.add_namespace(clab_kit_preparation_ns)
 api.add_namespace(user_ns)
+api.add_namespace(location_ns)
 api.add_namespace(users_ns)
 api.add_namespace(meterials_ns)
 api.add_namespace(meterial_ns)
@@ -266,7 +269,7 @@ login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
 user_ns.add_resource(UserRegister, "/register")
-#users_ns.add_resource(GetAllStatesFromGivenCountries, "/states")
+location_ns.add_resource(GetAllStatesFromGivenCountries, "/states")
 users_ns.add_resource(UserList, "/<string:user_id>")
 meterial_ns.add_resource(Meterial, "")
 meterials_ns.add_resource(MeterialsList, "")
@@ -280,3 +283,5 @@ if __name__ == "__main__":
         app.run(port=5001, debug=True, host="0.0.0.0")
     elif os.environ.get("ENVIRONMENT") == "testing":
         app.run(port=5002, debug=True, host="0.0.0.0")
+    else:
+        app.run(port=5000, debug=True, host="0.0.0.0")
