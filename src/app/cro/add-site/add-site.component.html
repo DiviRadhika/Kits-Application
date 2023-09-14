@@ -190,7 +190,8 @@ class="form-control" id="email" placeholder="Enter Email"
                     <div class="form-group">
                       <label>Country</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="country" maxlength="40" class="form-select"
-                      aria-label="Default select example">
+                      aria-label="Default select example" formControlName="country"
+                      [class.custom-invalid]="shouldShowRequired('country') && siteForm.get('country')?.touched">
                       <option selected value="">Select Country</option>
                       <option *ngFor="let c of countries" [value]="c.name">
                         {{c.name}}</option>
@@ -211,7 +212,8 @@ class="form-control" id="email" placeholder="Enter Email"
                     <div class="form-group">
                       <label>Region/State</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="region" maxlength="40" class="form-select"
-                      aria-label="Default select example">
+                      aria-label="Default select example" formControlName="region"
+                      [class.custom-invalid]="shouldShowRequired('region') && siteForm.get('region')?.touched" >
                       <option selected value="">Select State</option>
                       <option *ngFor="let s of states" [value]="s.name">
                         {{s.name}}
@@ -289,11 +291,14 @@ class="form-control" id="email" placeholder="Enter Email"
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Mobile Number</label>
+                      <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" maxlength="20" class="form-control" id="mobile_no"
                         placeholder="Enter Mobile Number" formControlName="mobile_telephone"
-                        (input)="validateMobileNumber($event.target, 'mobile')">
-
+                        (input)="validateMobileNumber($event.target, 'mobile')" [class.custom-invalid]="shouldShowRequired('mobile_telephone') && siteForm.get('mobile_telephone')?.touched">
+                        <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
+                          Mobile Number is Required.
+                        </div>
+zzz
                     </div>
                   </div>
                 </div>

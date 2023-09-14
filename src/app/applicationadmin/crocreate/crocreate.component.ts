@@ -71,7 +71,7 @@ export class CROcreateComponent implements OnInit {
     extension: new FormControl(""),
     email: new FormControl(''),
     website:new FormControl(''),
-    mobile_telephone:new FormControl(''),
+    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
       // Validators.required,
       // Validators.email,
       // this.emailDomainValidator.bind(this)

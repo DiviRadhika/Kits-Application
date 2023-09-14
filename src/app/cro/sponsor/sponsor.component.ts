@@ -50,7 +50,7 @@ export class SponsorComponent implements OnInit {
     extension: new FormControl(""),
     email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
     website: new FormControl(''),
-    mobile_telephone: new FormControl(''),
+    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     oemails: new FormControl(''),
   });
   editcontactsForm: any

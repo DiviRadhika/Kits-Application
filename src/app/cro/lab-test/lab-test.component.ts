@@ -252,7 +252,7 @@ export class LabTestComponent implements OnInit {
     this._cro.deleteLab(id).subscribe(
       (data: any) => {
         console.log(data)
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test results Deleted successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Test Results Deleted Successfully' });
         this.labDetailsData()
       });
 

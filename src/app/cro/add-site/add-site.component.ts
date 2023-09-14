@@ -100,7 +100,7 @@ export class AddSiteComponent {
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
     website: new FormControl(''),
-    mobile_telephone: new FormControl(''),
+    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
    email:new FormControl(''),
    investigator_name: new FormControl(''),
    investigator_email: new FormControl(''),

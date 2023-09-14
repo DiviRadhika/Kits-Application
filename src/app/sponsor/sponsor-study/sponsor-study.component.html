@@ -11,6 +11,7 @@
 
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
+                
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">Sponsor</li>
@@ -80,7 +81,7 @@
 
                         <tbody>
 
-                          <tr class="odd"
+                          <tr class="odd" style="vertical-align: middle;" 
                             *ngFor="let protocolData of uniqueCombinedArray | sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control">{{protocolData.protocol_id}}</td>

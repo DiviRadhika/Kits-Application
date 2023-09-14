@@ -129,13 +129,14 @@
                     <div class="form-group">
                       <label>Country </label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="country" maxlength="40" class="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example" formControlName="country"
+                        [class.custom-invalid]="shouldShowRequired('country') && CroForm.get('country')?.touched">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let c of countries" [value]="c.name">
                           {{c.name}}</option>
                       </select>
 
-                      <div *ngIf="shouldShowRequired('country')" class="invalid-feedback">
+                      <div *ngIf="shouldShowRequired('country')&& CroForm.get('country')?.touched" class="invalid-feedback">
                         Country is required.
                       </div>
                     </div>
@@ -155,13 +156,14 @@
                     <div class="form-group">
                       <label>Region/State </label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="region" maxlength="40" class="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example" formControlName="region"
+                        [class.custom-invalid]="shouldShowRequired('region') && CroForm.get('region')?.touched">
                         <option selected value="">Select State</option>
                         <option *ngFor="let s of states" [value]="s.name">
                           {{s.name}}
                         </option>
                       </select>
-                      <div *ngIf="shouldShowRequired('region')" class="invalid-feedback">
+                      <div *ngIf="shouldShowRequired('region')&& CroForm.get('region')?.touched" class="invalid-feedback">
                         Region is required.
                       </div>
                     </div>
@@ -234,10 +236,14 @@
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Mobile Number</label>
+                      <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="20" id="mobile_no"
                         placeholder="Enter Mobile Number" formControlName="mobile_telephone"
-                        (input)="validateMobileNumber($event.target, 'mobile')">
+                        (input)="validateMobileNumber($event.target, 'mobile')"
+                        [class.custom-invalid]="shouldShowRequired('mobile_telephone') && CroForm.get('mobile_telephone')?.touched">
+                        <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
+                          Mobile Number is required.
+                        </div>
 
                     </div>
                   </div>

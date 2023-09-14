@@ -152,7 +152,8 @@
                     <div class="form-group">
                       <label>Country</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="country" maxlength="40" class="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example" formControlName="city"
+                        [class.custom-invalid]="shouldShowRequired('country') && sponsorForm.get('country')?.touched">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let c of countries" [value]="c.name">
                           {{c.name}}</option>
@@ -170,7 +171,8 @@
                     <div class="form-group">
                       <label>Region/State</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="region" maxlength="40" class="form-select"
-                        aria-label="Default select example">
+                        aria-label="Default select example" formControlName="region"
+                        [class.custom-invalid]="shouldShowRequired('region') && sponsorForm.get('region')?.touched">
                         <option selected value="">Select State</option>
                         <option *ngFor="let s of states" [value]="s.name">
                           {{s.name}}
@@ -252,10 +254,14 @@
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Mobile Number</label>
+                      <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" appInputRestriction="mobileNum"
                         id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone"
-                        (input)="validateMobileNumber($event.target, 'mobile')">
+                        (input)="validateMobileNumber($event.target, 'mobile')"
+                        [class.custom-invalid]="shouldShowRequired('mobile_telephone') && sponsorForm.get('mobile_telephone')?.touched">
+                        <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
+                          Mobile Number is required
+                        </div>
 
                     </div>
                   </div>

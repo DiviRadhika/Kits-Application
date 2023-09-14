@@ -146,7 +146,8 @@ class="form-control" id="Address"
                                         <div class="form-group">
                                            <label>Country<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                            <select formControlName="country" maxlength="40" class="form-select"
-                                           aria-label="Default select example">
+                                           aria-label="Default select example" formControlName="country"
+                                           [class.custom-invalid]="shouldShowRequired('country') && labTestCreateForm.get('country')?.touched">
                                            <option selected value="">Select Country</option>
                                            <option *ngFor="let c of countries" [value]="c.name">
                                              {{c.name}}</option>
@@ -172,7 +173,8 @@ class="form-control" id="Address"
                                         <div class="form-group">
                                            <label>Region/State<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                            <select formControlName="region" maxlength="40" class="form-select"
-                                           aria-label="Default select example">
+                                           aria-label="Default select example" formControlName="region"
+                                           [class.custom-invalid]="shouldShowRequired('region') && labTestCreateForm.get('region')?.touched">
                                            <option selected value="">Select State</option>
                                            <option *ngFor="let s of states" [value]="s.name">
                                              {{s.name}}
@@ -256,8 +258,11 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                  
                                     <div class="col-md-4">
                                       <div class="form-group">
-                                        <label>Mobile Number</label>
-                                              <input autocomplete="off" type="text"class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')">                
+                                        <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
+                                              <input autocomplete="off" type="text"class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')" [class.custom-invalid]="shouldShowRequired('mobile_telephone') && labTestCreateForm.get('mobile_telephone')?.touched">
+                                              <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
+                                                  Mobile Number is required.
+                                              </div>                
                                       </div>
                                     </div>
                                   </div>
