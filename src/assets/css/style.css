@@ -104,17 +104,17 @@ body[data-sidebar=dark] .mm-active {
 	color: #ff414b;
 }
 
-.edit-btn {
+/* .edit-btn {
 	background: #111;
 	border: #111 solid 1px;
 	color: #FFF;
-}
-
+} */
+/* 
 .edit-btn:hover {
 	background: #FFF;
 	border: #ff414b solid 1px;
 	color: #ff414b;
-}
+} */
 
 .delete-btn {
 	background: #FFF;

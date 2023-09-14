@@ -12,7 +12,7 @@ import { CrosService } from 'src/app/cro/cros.service';
 
 import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-registration.service';
 
- 
+
 
 @Component({
 
@@ -32,7 +32,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   }
 
- 
+
 
   statusData = ['Pending', 'Collected']
 
@@ -52,15 +52,15 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   displayValues: boolean = false;
 
- 
+
 
   tets: Array<any> = [];
 
- 
+
 
   tabs: any[] = [];
 
- 
+
 
   count = 2;
 
@@ -94,23 +94,23 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   screeningVariant: any;
 
- 
 
- 
 
- 
+
+
+
 
   constructor(private protocolService: ProtocolService, private activatedRoute: ActivatedRoute, private router: Router,
 
     private messageService: MessageService, private croService: CrosService, private formBuilder: FormBuilder) {
 
- 
+
 
     this.email = sessionStorage.getItem('email')
 
     console.log(this.email);
 
- 
+
 
     const currentDate = new Date();
 
@@ -120,13 +120,13 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     const day = currentDate.getDate();
 
- 
+
 
     this.date = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
 
- 
 
- 
+
+
 
   };
 
@@ -152,7 +152,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   // preprationData = ['Not Verified', 'Verified']
 
- 
+
 
   preprationData = [{ name: 'Not Received', value: 'Not Received' },
 
@@ -160,7 +160,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   ]
 
- 
+
 
   kitIdv: any = ''
 
@@ -216,7 +216,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   selectedOption: any;
 
- 
+
 
   public preparationForm: FormGroup = new FormGroup({
 
@@ -234,7 +234,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       this.getprotocolDetails(this.id)
 
- 
+
 
     });
 
@@ -242,15 +242,15 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     this.croService.getSites().subscribe((sites) => {
 
- 
+
 
       this.sponsersData(sites);
 
- 
+
 
     });
 
- 
+
 
     this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
 
@@ -260,51 +260,51 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       console.log(this.ID);
 
- 
 
- 
+
+
 
     });
 
- 
 
- 
 
- 
+
+
+
 
     this.protocolService.getPreparation().subscribe((protocols) => {
 
       console.log(protocols);
 
- 
+
 
       this.ProtoData(protocols);
 
     });
 
- 
 
- 
 
- 
+
+
+
 
     this.ScreenKitForm = this.formBuilder.group({
 
- 
+
 
       screenKitList: this.formBuilder.array([])
 
     });
 
- 
 
- 
 
- 
+
+
+
 
   }
 
- 
+
 
   getprotocolDetails(id: any) {
 
@@ -316,13 +316,13 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
 
- 
+
 
         this.skDetails = protocolsData.data.screening_kit_details
 
         this.vkDetails = protocolsData.data.visit_kit_details
 
- 
+
 
         this.displayValues = true;
 
@@ -351,7 +351,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
         }
 
- 
+
 
         this.vcount = protocols.visit_kit_details[0].visit_kit_count
 
@@ -359,17 +359,17 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
         this.scount = protocols.screening_kit_details[0].screening_kit_count
 
- 
+
 
         this.tets = []
 
- 
+
 
         this.vMatDetails.forEach((tabs: any) => {
 
           tabs.visitKitFormGroup = this.formBuilder.group({
 
- 
+
 
             visitKitList: this.formBuilder.array([]),
 
@@ -398,23 +398,27 @@ export class StudySiteacknowledgementComponent implements OnInit {
             });
 
             const visitKitListArray = tabs.visitKitFormGroup.get('visitKitList') as FormArray;
-        
+
 
             for (let j = 0; j < this.vcount; j++) {
 
               visitKitListArray.push(this.createVisitKitGroup());
 
+
+
               const collectionControl = visitKitListArray.at(j).get('siteStatus');
-
               if (collectionControl) {
-
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
-
+                if(vkDetailForRowAndTab.siteStatus){
                 collectionControl.patchValue(vkDetailForRowAndTab.siteStatus);
-
- 
-
+                }
+                else if(vkDetailForRowAndTab.siteStatus === undefined || vkDetailForRowAndTab.siteStatus === null ||vkDetailForRowAndTab.siteStatus === ''){
+                  collectionControl.patchValue(this.preprationData[0].value);
+                }
+               
               }
+
+
 
               const collectionDateControl = visitKitListArray.at(j).get('recievedDate');
 
@@ -424,7 +428,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
                 collectionDateControl.patchValue(vkDetailForRowAndTab.recievedDate);
 
- 
+
 
               }
 
@@ -436,7 +440,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
                 remarks.patchValue(vkDetailForRowAndTab.siteRemarks);
 
- 
+
 
               }
 
@@ -462,25 +466,25 @@ export class StudySiteacknowledgementComponent implements OnInit {
                 expirydControl.disable()
               }
 
- 
 
-              }
-
- 
-
-              tabs.visitsList = visitKitListArray;
-
-              this.tets.push(tabs.selectedLabTests);
 
             }
 
- 
 
-            this.tets.push(tabs.selectedLabTests)
 
-          });
+            tabs.visitsList = visitKitListArray;
 
- 
+            this.tets.push(tabs.selectedLabTests);
+
+          }
+
+
+
+          this.tets.push(tabs.selectedLabTests)
+
+          
+
+        });
 
         for (let i = 1; i <= this.scount; i++) {
 
@@ -488,25 +492,26 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
         }
 
- 
+
+
 
       });
 
- 
+
 
     });
 
- 
 
- 
+
+
 
   }
 
- 
 
- 
 
- 
+
+
+
 
   getformGroup(i: any) {
 
@@ -528,15 +533,15 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     });
 
- 
+
 
   }
 
- 
 
- 
 
- 
+
+
+
 
   adjustScreenKitRows(count: number, skDetails: any) {
 
@@ -544,7 +549,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     const currentRowCount = screenKitList.length;
 
- 
+
 
     if (count < currentRowCount) {
 
@@ -566,68 +571,68 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
         if (i < skDetails.length) {
 
- 
 
- 
 
-        this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(this.preprationData[0].value);
 
- 
 
-        if (i < skDetails.length) {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(this.preprationData[0].value);
 
-          this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(skDetails[i].siteStatus);
 
- 
 
-          this.ScreenKitForm.get('screenKitList').controls[i].get('siteRemarks').patchValue(skDetails[i].siteRemarks);
-
-     
-
-          if (skDetails[i].siteStatus === undefined || skDetails[i].siteStatus === null || skDetails[i].siteStatus === '') {
-
- 
-
-            this.ScreenKitForm.get('siteStatus').controls[i].get('siteStatus').patchValue(this.preprationData[0].value);
-
-          }
-
-          else {
+          if (i < skDetails.length) {
 
             this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(skDetails[i].siteStatus);
 
- 
+
+
+            this.ScreenKitForm.get('screenKitList').controls[i].get('siteRemarks').patchValue(skDetails[i].siteRemarks);
+
+
+
+            if (skDetails[i].siteStatus === undefined || skDetails[i].siteStatus === null || skDetails[i].siteStatus === '') {
+
+
+
+              this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(this.preprationData[0].value);
+
+            }
+
+            else {
+
+              this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(skDetails[i].siteStatus);
+
+
+
+            }
+
+            this.ScreenKitForm.get('screenKitList').controls[i].get('recievedDate').patchValue(skDetails[i].recievedDate);
+
+            this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+            this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
+            this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
+            this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
+            this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
+            this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
 
           }
 
-          this.ScreenKitForm.get('screenKitList').controls[i].get('recievedDate').patchValue(skDetails[i].recievedDate);
 
-          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
-          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
-          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
-          this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
-          this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').disable()
-          this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').disable()
 
         }
-
- 
 
       }
 
     }
 
-    }
 
- 
 
- 
+
 
   }
 
- 
 
- 
+
+
 
   addScreenKit(record: any) {
 
@@ -637,23 +642,23 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   }
 
- 
 
- 
+
+
 
   onScreenKitAdd(rec: any) {
 
- 
+
 
     const control1 = this.ScreenKitForm.get('screenKitList') as FormArray;
 
     control1.push(this.addScreenKitData(rec));
 
- 
+
 
   }
 
- 
+
 
   addScreenKitData(record: string) {
 
@@ -671,7 +676,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   }
 
- 
+
 
   ProtoData(Protocols: any) {
 
@@ -679,7 +684,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       this.protocols.push(protocol);
 
- 
+
 
     });
 
@@ -705,17 +710,17 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     });
 
- 
+
 
   }
 
- 
+
 
   SubmitData() {
 
     console.log(this.skDetails);
 
- 
+
 
     this.vmdetails = []
 
@@ -723,25 +728,25 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       this.vmdetails.push(this.vMatDetails[i].visitsList.value)
 
- 
+
 
     }
 
- 
 
- 
+
+
 
     for (let i = 0; i < this.vkDetails.length; i++) {
 
- 
 
- 
+
+
 
       this.vkDetails[i].forEach((protocol: any, index: any) => {
 
         for (let j = 0; j < this.vMatDetails.length; j++) {
 
-   
+
 
           protocol.siteStatus = this.vMatDetails[i].visitsList.value[index].siteStatus
 
@@ -749,23 +754,23 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
           protocol.siteRemarks = this.vMatDetails[i].visitsList.value[index].siteRemarks
 
- 
+
 
         }
 
- 
+
 
       })
 
- 
+
 
     }
 
- 
+
 
     this.skDetails.forEach((protocol: any, index: any) => {
 
-     
+
 
       protocol.siteStatus = this.ScreenKitForm.value.screenKitList[index].siteStatus
 
@@ -775,17 +780,17 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     })
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
+
 
     const data = {
 
@@ -795,17 +800,17 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
       "visit_kit_details": this.vkDetails
 
- 
 
- 
+
+
 
     }
 
- 
 
- 
 
- 
+
+
+
 
     this.protocolService.updatePreparationById(data).subscribe(
 
@@ -819,21 +824,21 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
         this.router.navigate(['/home/site/viewCRAAcknowledgement'])
 
- 
 
- 
 
- 
+
+
+
 
       },
 
       (err: any) => {
 
- 
+
 
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.errorr.message });
 
- 
+
 
       }
 
@@ -841,46 +846,45 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
   }
 
- 
 
- 
 
- 
 
- 
+
+
+
+
 
 }
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

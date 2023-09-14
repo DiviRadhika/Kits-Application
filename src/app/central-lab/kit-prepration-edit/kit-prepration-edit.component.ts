@@ -215,7 +215,8 @@ export class KitPreprationEditComponent implements OnInit {
             .map(
               (item) => `
                           <tr>
-                            <td>${item.material_namep}</td>
+                          <td>${item.material_name}</td>
+                          
                             <td>${item.size}</td>
                             <td>${item.quantity}</td>
                           </tr>

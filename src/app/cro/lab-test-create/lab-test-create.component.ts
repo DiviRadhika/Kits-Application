@@ -167,9 +167,26 @@ export class LabTestCreateComponent implements OnInit {
     this.labTestCreateForm.reset()
     }
   }
+  toTitleCase(str: string): string {
+    
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
   submit() {
-    this.labTestCreateForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['cro_name'].value));
-    this.labTestCreateForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['legal_cro_name'].value));
+
+    if(this.labTestCreateForm.controls['cro_name'].value){
+      this.labTestCreateForm.controls['cro_name'].setValue(this.toTitleCase(this.labTestCreateForm.controls['cro_name'].value));
+          }
+          if(this.labTestCreateForm.controls['legal_cro_name'].value){
+      this.labTestCreateForm.controls['legal_cro_name'].setValue(this.toTitleCase(this.labTestCreateForm.controls['legal_cro_name'].value));
+          }
+          if(this.labTestCreateForm.controls['address_1'].value){
+            this.labTestCreateForm.controls['address_1'].setValue(this.toTitleCase(this.labTestCreateForm.controls['address_1'].value));
+                }
+                if(this.labTestCreateForm.controls['address_2'].value){
+                  this.labTestCreateForm.controls['address_2'].setValue(this.toTitleCase(this.labTestCreateForm.controls['address_2'].value));
+                      }
+    // this.labTestCreateForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['cro_name'].value));
+    // this.labTestCreateForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.labTestCreateForm.controls['legal_cro_name'].value));
 
 
     if (this.labTestCreateForm.controls['mobile_telephone'].value === '' || this.labTestCreateForm.controls['mobile_telephone'].value === null) {

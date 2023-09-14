@@ -111,7 +111,7 @@ export class SampleCollectionComponent implements OnInit {
 
   public preparationForm: FormGroup = new FormGroup({
     protocol_name: new FormControl("", [Validators.required]),
-    specialInstructions:new FormControl("", [Validators.required])
+    specialInstructions: new FormControl("", [Validators.required])
   });
   ngOnInit() {
     this.activatedRoute.params.subscribe((data: any) => {
@@ -130,8 +130,8 @@ export class SampleCollectionComponent implements OnInit {
       console.log(data);
       this.ID = data.site_data_code
       console.log(this.ID);
-    
-      this.name =data.site_data_name
+
+      this.name = data.site_data_name
       console.log(this.name)
 
     });
@@ -171,7 +171,7 @@ export class SampleCollectionComponent implements OnInit {
         // this.preparationForm.controls['special_instructions'].disable()
         this.preparationForm.controls['protocol_name'].setValue(this.protoName)
         this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
-         this.preparationForm.controls['specialInstructions'].disable()
+        this.preparationForm.controls['specialInstructions'].disable()
         if (protocols.visit_kit_details[0].meterial_details.length > 0) {
           this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
           this.screenDetails = this.screeningFullData.selectedLabTests
@@ -210,8 +210,8 @@ export class SampleCollectionComponent implements OnInit {
 
               const vkDetailForRowAndTab = this.vkDetails[i][j];
               const formControl = visitKitListArray.at(j);
-             
-              if(vkDetailForRowAndTab.acknowledgement === 'Received'){
+
+              if (vkDetailForRowAndTab.acknowledgement === 'Received') {
                 formControl.disable()
               }
               const kitIdControl = visitKitListArray.at(j).get('kitId');
@@ -241,40 +241,41 @@ export class SampleCollectionComponent implements OnInit {
                 patientControl.patchValue(vkDetailForRowAndTab.patientId);
 
               }
-            
+
               const collectionControl = visitKitListArray.at(j).get('collection');
               if (collectionControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
-                if(vkDetailForRowAndTab.collection){
-                collectionControl.patchValue(vkDetailForRowAndTab.collection);
+                if (vkDetailForRowAndTab.collection) {
+                  collectionControl.patchValue(vkDetailForRowAndTab.collection);
                 }
-                else if(vkDetailForRowAndTab.collection === undefined || vkDetailForRowAndTab.collection === null ||vkDetailForRowAndTab.collection === ''){
+                else if (vkDetailForRowAndTab.collection === undefined || vkDetailForRowAndTab.collection === null || vkDetailForRowAndTab.collection === '') {
                   collectionControl.patchValue(this.preprationData[0].value);
                 }
-               
-              }
-
-
-             
-                const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
-                if (collectionDateControl) {
-                  const vkDetailForRowAndTab = this.vkDetails[i][j];
-                  collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
-
-                }
-               
-
 
               }
 
-              tabs.visitsList = visitKitListArray;
-              this.tets.push(tabs.selectedLabTests);
+
+
+              const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
+              if (collectionDateControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                collectionDateControl.patchValue(vkDetailForRowAndTab.collectionDate);
+
+              }
+
+
+
             }
 
-            this.tets.push(tabs.selectedLabTests)
-          });
+            tabs.visitsList = visitKitListArray;
+            this.tets.push(tabs.selectedLabTests);
+          }
+
+          this.tets.push(tabs.selectedLabTests)
+        });
 
         for (let i = 1; i <= this.scount; i++) {
+          // alert('kj')
           this.adjustScreenKitRows(this.scount, this.skDetails);
         }
 
@@ -286,9 +287,9 @@ export class SampleCollectionComponent implements OnInit {
   }
 
   checkCollection(selectedValue: any, rowIndex: number) {
-   
+
     const kitIdControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientId');
-  
+
     const expiryDateControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collectionDate');
     const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collection');
     if (selectedValue.target.value === 'Collected') {
@@ -296,7 +297,7 @@ export class SampleCollectionComponent implements OnInit {
         alert('Please provide Patient Id before selecting "Collected".');
         preprationControl.patchValue(this.preprationData[0].value);
       }
-      else if(!expiryDateControl.value){
+      else if (!expiryDateControl.value) {
         alert('Please provide Collection Date before selecting "Collected".');
         preprationControl.patchValue(this.preprationData[0].value);
       }
@@ -310,10 +311,10 @@ export class SampleCollectionComponent implements OnInit {
 
     if (preprationControl.value === 'Collected' && (!ckitIdControl.value)) {
       alert('Please provide Patient Id before selecting "Collected".');
-      
+
       preprationControl.patchValue(this.preprationData[0].value)
     }
-    else if (preprationControl.value === 'Collected' && (!expiryDateControl.value)){
+    else if (preprationControl.value === 'Collected' && (!expiryDateControl.value)) {
       alert('Please provide Collection Date  before selecting "Collected".');
       preprationControl.patchValue(this.preprationData[0].value)
     }
@@ -359,14 +360,26 @@ export class SampleCollectionComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         if (i < skDetails.length) {
-          this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
+          this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
           this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
-            if(skDetails[i].collection){
-              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-            }
-            else if(skDetails[i].collectio === undefined || skDetails[i].collectio === null ||skDetails[i].collectio === ''){
-              this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-            }
+
+
+
+          if (skDetails[i].collection === undefined || skDetails[i].collection === null || skDetails[i].collection === '') {
+
+
+
+            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
+
+          }
+
+          else {
+
+            this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
+
+
+
+          }
         }
         this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
         this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
@@ -382,7 +395,7 @@ export class SampleCollectionComponent implements OnInit {
               this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').disable()
             }
           }
-        
+
         }
       }
     }
@@ -425,9 +438,9 @@ export class SampleCollectionComponent implements OnInit {
       this.sponsers.push(sponser);
       this.sponsers.forEach((res: any) => {
         if (sponser.email == this.email) {
-          
+
           this.ID = sponser.site_data_code
-        
+
 
         }
       });
@@ -438,7 +451,7 @@ export class SampleCollectionComponent implements OnInit {
   }
 
   SubmitData() {
-   
+
     this.ScreenKitForm.get('screenKitList').enable()
     this.vmdetails = []
     for (let i = 0; i < this.vMatDetails.length; i++) {

@@ -164,11 +164,23 @@ export class CROcreateComponent implements OnInit {
     this.CroForm.reset()
     }
   }
+  toTitleCase(str: string): string {
+    
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
   submit() {
-      // Capitalize the first letter of cro_name and legal_cro_name
-  this.CroForm.controls['cro_name'].setValue(this.capitalizeFirstLetter(this.CroForm.controls['cro_name'].value));
-  this.CroForm.controls['legal_cro_name'].setValue(this.capitalizeFirstLetter(this.CroForm.controls['legal_cro_name'].value));
-
+      if(this.CroForm.controls['cro_name'].value){
+  this.CroForm.controls['cro_name'].setValue(this.toTitleCase(this.CroForm.controls['cro_name'].value));
+      }
+      if(this.CroForm.controls['legal_cro_name'].value){
+  this.CroForm.controls['legal_cro_name'].setValue(this.toTitleCase(this.CroForm.controls['legal_cro_name'].value));
+      }
+      if(this.CroForm.controls['address_1'].value){
+        this.CroForm.controls['address_1'].setValue(this.toTitleCase(this.CroForm.controls['address_1'].value));
+            }
+            if(this.CroForm.controls['address_2'].value){
+              this.CroForm.controls['address_2'].setValue(this.toTitleCase(this.CroForm.controls['address_2'].value));
+                  }
     if (this.CroForm.controls['mobile_telephone'].value === '' || this.CroForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

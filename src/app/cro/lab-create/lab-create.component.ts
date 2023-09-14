@@ -127,9 +127,14 @@ export class LabCreateComponent {
   reset(){
     if(this.isEdit === true){
       window.location.reload()
+     
     }
     else{
     this.labForm.reset()
+    this.labData.image = ''
+    const fileInput = document.getElementById('image') as HTMLInputElement;
+    fileInput.value = '';
+    this.imgDisplay = false
     }
   }
   tabchange(){

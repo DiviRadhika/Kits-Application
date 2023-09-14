@@ -261,12 +261,27 @@ removeeditsponser(j: number) {
     this.sponsorForm.reset()
     }
   }
-
+  toTitleCase(str: string): string {
+    
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
   submit() {
-    this.sponsorForm.controls['sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['sponsor_name'].value));
-    this.sponsorForm.controls['legal_sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['legal_sponsor_name'].value));
-    // Assign the trimmed contacts to the notifier_details property of the obj object
+    // this.sponsorForm.controls['sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['sponsor_name'].value));
+    // this.sponsorForm.controls['legal_sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['legal_sponsor_name'].value));
+    // // Assign the trimmed contacts to the notifier_details property of the obj object
    
+    if(this.sponsorForm.controls['sponsor_name'].value){
+      this.sponsorForm.controls['sponsor_name'].setValue(this.toTitleCase(this.sponsorForm.controls['sponsor_name'].value));
+          }
+          if(this.sponsorForm.controls['legal_sponsor_name'].value){
+      this.sponsorForm.controls['legal_sponsor_name'].setValue(this.toTitleCase(this.sponsorForm.controls['legal_sponsor_name'].value));
+          }
+          if(this.sponsorForm.controls['address_1'].value){
+            this.sponsorForm.controls['address_1'].setValue(this.toTitleCase(this.sponsorForm.controls['address_1'].value));
+                }
+                if(this.sponsorForm.controls['address_2'].value){
+                  this.sponsorForm.controls['address_2'].setValue(this.toTitleCase(this.sponsorForm.controls['address_2'].value));
+                      }
     if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

@@ -305,7 +305,10 @@ export class UserCreateComponent implements OnInit {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message}); }
     )
   }
-  
+  toTitleCase(str: string): string {
+    
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 reset(){
   if(this.isEdit === true){
     window.location.reload()
@@ -314,20 +317,21 @@ reset(){
   this.userForm.reset()
   }
 }
-  
+
   submit(): void {
-    
+  
+  
     if(this.userForm.controls['first_name'].value ==='' ||this.userForm.controls['first_name'].value=== undefined ||this.userForm.controls['first_name'].value=== null ){
       
     }
     else{
-      this.userForm.controls['first_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['first_name'].value));
+      this.userForm.controls['first_name'].setValue(this.toTitleCase(this.userForm.controls['first_name'].value));
    
     }
     if(this.userForm.controls['last_name'].value ==='' ||this.userForm.controls['last_name'].value=== undefined ||this.userForm.controls['last_name'].value=== null ){
     }
     else{
-    this.userForm.controls['last_name'].setValue(this.capitalizeFirstLetter(this.userForm.controls['last_name'].value));
+    this.userForm.controls['last_name'].setValue(this.toTitleCase(this.userForm.controls['last_name'].value));
     }
     if(this.userForm.controls['email'].value ==='' ||this.userForm.controls['email'].value=== undefined ||this.userForm.controls['email'].value=== null ){
       

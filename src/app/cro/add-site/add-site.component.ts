@@ -253,13 +253,27 @@ export class AddSiteComponent {
     this.siteForm.reset()
     }
   }
-
+  toTitleCase(str: string): string {
+    
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
   submit() {
-    console.log(this.investigatorForm.value);
-    this.siteForm.controls['site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['site_data_name'].value));
-    this.siteForm.controls['legal_site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['legal_site_data_name'].value));
+    
+    // this.siteForm.controls['site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['site_data_name'].value));
+    // this.siteForm.controls['legal_site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['legal_site_data_name'].value));
 
-
+    if(this.siteForm.controls['site_data_name'].value){
+      this.siteForm.controls['site_data_name'].setValue(this.toTitleCase(this.siteForm.controls['site_data_name'].value));
+          }
+          if(this.siteForm.controls['legal_site_data_name'].value){
+      this.siteForm.controls['legal_site_data_name'].setValue(this.toTitleCase(this.siteForm.controls['legal_site_data_name'].value));
+          }
+          if(this.siteForm.controls['address_1'].value){
+            this.siteForm.controls['address_1'].setValue(this.toTitleCase(this.siteForm.controls['address_1'].value));
+                }
+                if(this.siteForm.controls['address_2'].value){
+                  this.siteForm.controls['address_2'].setValue(this.toTitleCase(this.siteForm.controls['address_2'].value));
+                      }
     if (this.siteForm.controls['mobile_telephone'].value === '' ||  this.siteForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

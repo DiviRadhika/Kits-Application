@@ -133,6 +133,14 @@
                 </div>
                 <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
                   *ngIf="croDetails && croDetails.length"></pagination-controls>
+                  <div class="row">
+                    <div class="col-md-10">
+
+                    </div>
+                    <div class="col-md-2">
+                      <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>

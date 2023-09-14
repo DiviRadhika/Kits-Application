@@ -102,8 +102,9 @@
                                                                     <th>Expiration Date</th>
 
                                                                     <th>Patient Id</th>
-                                                                    <th>Sample Collection</th>
                                                                     <th>Collection Date</th>
+                                                                    <th>Sample Collection</th>
+                                                                    
 
 
                                                                 </tr>
@@ -140,6 +141,13 @@
                                                                             formControlName="patientId"
                                                                             class="form-control" value="" />
                                                                     </td>
+                                                                    <td>
+                                                                        <input autocomplete="off" type="date"
+                                                                            placeholder="Date"
+                                                                            formControlName="collectionDate"
+                                                                            class="form-control"
+                                                                            value={{date}} />
+                                                                    </td>
 
                                                                     <td>
                                                                         <select formControlName="collection" (change)="checkCollection($event, i)"
@@ -152,12 +160,7 @@
 
 
                                                                     </td>
-                                                                    <td >
-                                                                        <input autocomplete="off" type="date"
-                                                                            placeholder="Date" class="form-control"
-                                                                            formControlName="collectionDate"
-                                                                            value={{date}} />
-                                                                    </td>
+                              
 
                                                                 </tr>
                                                             </tbody>
@@ -192,8 +195,9 @@
                                                                             <th>Central Lab KitId</th>
                                                                             <th>Expiration Date</th>
                                                                             <th>Patient Id</th>
-                                                                            <th>Sample Collection</th>
                                                                             <th>Collection Date</th>
+                                                                            <th>Sample Collection</th>
+                                                                          
                                                                         </tr>
                                                                     </thead>
 
@@ -226,7 +230,13 @@
                                                                                     formControlName="patientId"
                                                                                     class="form-control" value="" />
                                                                             </td>
-
+                                                                            <td>
+                                                                                <input autocomplete="off" type="date"
+                                                                                    placeholder="Date"
+                                                                                    formControlName="collectionDate"
+                                                                                    class="form-control"
+                                                                                    value={{date}} />
+                                                                            </td>
                                                                             <td>
                                                                                 <select formControlName="collection" (change)="checkPreparationv(i, j)"
                                                                                     class="form-select form-control">
@@ -239,13 +249,7 @@
 
                                                                             </td>
 
-                                                                            <td>
-                                                                                <input autocomplete="off" type="date"
-                                                                                    placeholder="Date"
-                                                                                    formControlName="collectionDate"
-                                                                                    class="form-control"
-                                                                                    value={{date}} />
-                                                                            </td>
+                                                                           
 
                                                                         </tr>
                                                                     </tbody>
