@@ -92,10 +92,13 @@
               <div class="col-md-4"></div>
               <div class="mb-3 text-center" class="enter">
                 <label  style="padding-bottom: 20px;display: flex; margin-bottom: -24px; margin-top: 4px; ">Enter Your Registered User Name/Email Id<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-              <input autocomplete="off"  type="text" formControlName="email1" class="form-control text-center mb-3" id=""
+              <input autocomplete="off"  *ngIf="!disableFields" type="text" formControlName="email1" class="form-control text-center mb-3" id=""
                   placeholder="Enter User Name/Mail id">
-                  <!-- <input *ngIf="disableFields" type="text" [attr.disabled]="true" class="form-control"
-                        formControlName="email1" id="email1" placeholder="Enter Email"> -->
+                  <input *ngIf="disableFields" type="text" [attr.disabled]="true" class="form-control"
+                        formControlName="email1" id="email1" placeholder="Enter Email">
+
+
+                     
               </div>
               <div class=" mb-3 text-center modal-footer" class="reset">
                 <button style="margin-left: 35%;"*ngIf="!disableFields" (click)="set()" class="btn btn-primary w-md">Verify</button>

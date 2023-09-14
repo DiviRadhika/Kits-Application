@@ -131,10 +131,10 @@ export class LabCreateComponent {
     }
     else{
     this.labForm.reset()
-    this.labData.image = ''
-    const fileInput = document.getElementById('image') as HTMLInputElement;
-    fileInput.value = '';
-    this.imgDisplay = false
+    // this.labData.image = ''
+    // const fileInput = document.getElementById('image') as HTMLInputElement;
+    // fileInput.value = '';
+    // this.imgDisplay = false
     }
   }
   tabchange(){
