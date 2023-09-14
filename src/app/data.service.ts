@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apin } from './api';
-import { state }  from './api';
+
 @Injectable({ providedIn: 'root' })
 export class DataService {
 
@@ -1046,7 +1046,7 @@ export class DataService {
     }
 
     getAllStatesAPI(payload: { country: any; }, headers?: any) {
-        return this.http.get(`${state}/locations/states?countries=${payload.country}`, { observe: 'response', headers });
+        return this.http.get(`${apin}/location/states?countries=${payload.country}`, { observe: 'response', headers });
     }
 
 }
