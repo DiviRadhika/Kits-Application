@@ -1,15 +1,9 @@
-
-
-
 // export const apin = "http://192.168.1.163:5001/api";
 // // export const apin = "http://122.175.43.71:5001/api"
 
 // export const apin = window.location.protocol + '//' + window.location.hostname+':5001/api';
 
 export const apin = "http://34.100.227.119:5001/api";
-
- 
-
 
 
 export const endPointsUser = {
