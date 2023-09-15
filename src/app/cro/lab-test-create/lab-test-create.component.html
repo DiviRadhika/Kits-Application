@@ -75,13 +75,12 @@
                                           <input autocomplete="off" type="text" class="form-control" id="LabTestName"
                                                 placeholder="Enter Lab Test Name" formControlName="cro_name"
                                                  [class.custom-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
-                                            <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
-                                                Lab Test Name is required.
+                                            <div *ngIf="shouldShowRequired('cro_name')"class="text-danger">
                                             </div>
-                                            <div *ngIf="shouldShowLengthError('cro_name')"
-                                                class="invalid-feedback">
-                                                Lab Test Name should contain between 5 and 15 characters.
-                                            </div>
+                                            <div *ngIf="labTestCreateForm.get('cro_name')?.hasError('pattern')"
+                                            class="text-danger">
+                                            Lab Test Name Accepts Alphabets and spaces only.
+                                              </div>
                                         </div>
                                     </div>
 
@@ -93,15 +92,15 @@
                                                 formControlName="legal_cro_name"
                                                  [class.custom-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('legal_cro_name')"
-                                                class="invalid-feedback">
-                                                Legal Lab Test Name is required.
+                                                class="text-danger">
                                             </div>
-                                            <div *ngIf="shouldShowLengthError('legal_cro_name')"
-                                                class="invalid-feedback">
-                                                Legal Lab Test Name should contain between 5 and 15 characters.
-                                            </div>
+                                            <div *ngIf="labTestCreateForm.get('legal_cro_name')?.hasError('pattern')"
+                                            class="text-danger">
+                                                 Legal Lab Name Accepts Alphabets and spaces only.
+                                              </div>
                                         </div>
                                     </div>
+                                    
                                     <br>
                                    
                                 </div>

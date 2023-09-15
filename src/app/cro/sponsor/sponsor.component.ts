@@ -37,8 +37,8 @@ export class SponsorComponent implements OnInit {
   public sponsorForm: FormGroup = new FormGroup({
     sponsor_code: new FormControl(''),
     existing_sponsor_code: new FormControl("", [Validators.required,Validators.minLength(5)]),
-    sponsor_name: new FormControl("", [Validators.required]),
-    legal_sponsor_name: new FormControl("", [Validators.required]),
+    sponsor_name: new FormControl("", [Validators.required,Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    legal_sponsor_name: new FormControl("", [Validators.required,Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
     city: new FormControl("", [Validators.required]),
@@ -50,7 +50,7 @@ export class SponsorComponent implements OnInit {
     extension: new FormControl(""),
     email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)?$/)]),
     website: new FormControl(''),
-    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    mobile_telephone: new FormControl(''),
     oemails: new FormControl(''),
   });
   editcontactsForm: any

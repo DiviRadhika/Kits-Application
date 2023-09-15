@@ -20,8 +20,8 @@ export class UserCreateComponent implements OnInit {
 
   // readonly passwordPattern: RegExp = /^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#$%^&*()]).{8,}$/;
   userForm: FormGroup = new FormGroup({
-    first_name: new FormControl("", [Validators.required]),
-    last_name: new FormControl(),
+    first_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    last_name: new FormControl("",Validators.pattern(/^[A-Za-z ]+$/)),
     password: new FormControl('', [
       Validators.required, 
       Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
@@ -33,7 +33,7 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Sponsor','CRA', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
+  options: string[] = ['Admin','CRO','Sponsor','CRA','CRA Coordinator', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
@@ -129,6 +129,18 @@ export class UserCreateComponent implements OnInit {
             this.userForm.controls['sId'].setValue(this.getUserData.site_id)
         
            }
+           else if(this.getUserData.role === 'CRA Coordinator'){
+          
+
+
+            this.sponsor = false
+            this.site = true
+            this.getSitedetails()
+            this.userForm.controls['sId'].setValidators(Validators.required)
+            this.userForm.controls['sId'].updateValueAndValidity()
+            this.userForm.controls['sId'].setValue(this.getUserData.site_id)
+        
+           }
            else if(this.getUserData.role === 'Central Lab-Preparation'){
             this.sponsor = false
             this.site = false
@@ -207,6 +219,17 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
+   else if(this.idValue === 'CRA Coordinator' ){
+  
+    this.sponsor = false
+    this.site = true
+    this.getSitedetails()
+    this.userForm.controls['sId'].setValidators(Validators.required)
+    this.userForm.controls['sId'].updateValueAndValidity()
+
+   }
+   
+
    else if(this.idValue === 'Central Lab'){
     this.sponsor = false
     this.site = false
@@ -359,6 +382,10 @@ reset(){
         userObj.site_id = this.userForm.controls['sId'].value
         userObj.sponsor_id = ''
       }
+      else if(this.idValue === 'CRA Coordinator'){
+        userObj.site_id = this.userForm.controls['sId'].value
+        userObj.sponsor_id = ''
+      }
       else if(this.idValue === 'Sponsor'){
         userObj.sponsor_id = this.userForm.controls['sId'].value
         userObj.site_id = ''
@@ -378,6 +405,11 @@ reset(){
           userObj.site_id = this.userForm.controls['sId'].value
           userObj.sponsor_id = ''
         }
+        if(this.getUserData.role === 'CRA Coordinator'){
+          userObj.site_id = this.userForm.controls['sId'].value
+          userObj.sponsor_id = ''
+        }
+
         else if(this.getUserData.role === 'Sponsor' ){
           userObj.sponsor_id = this.userForm.controls['sId'].value
           userObj.site_id = ''
@@ -424,6 +456,24 @@ reset(){
         
       }
       // console.log(userObj)
+    }
+  }
+  validateAlpha(input: any, phone: any) {
+    let inputValue = input.value.trim();
+    
+    // Remove non-alphabetic characters
+    let alphabeticValue = inputValue.replace(/[^a-zA-Z]/g , '\s');
+
+    // Update the input field with the alphabetic value
+    input.value = alphabeticValue;
+
+    // Display an error message if non-alphabetic characters were removed
+    if (inputValue !== alphabeticValue) {
+      // this.messageService.add({severity:'error', summary:'', detail:'Take Alphabetic Values Only'});
+
+    
+        // You can also prevent form submission here if needed
+        // For example: input.form.submit() or return false;
     }
   }
 

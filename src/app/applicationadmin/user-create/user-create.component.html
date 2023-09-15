@@ -14,7 +14,7 @@
                   <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a routerLink="/home/admin/userGrid" class="waves-effect">User</a>
+                  <a routerLink="/home/admin/userGrid" class="waves-effect">Users</a>
                 </li>
                 <li *ngIf="!isEdit" class="breadcrumb-item active">Add User</li>
                 <li *ngIf="isEdit" class="breadcrumb-item active">Edit User</li>
@@ -31,7 +31,7 @@
                   <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a routerLink="/home/admin/userGrid" class="waves-effect">User</a>
+                  <a routerLink="/home/admin/userGrid" class="waves-effect">Users</a>
                 </li>
 
                 <li class="breadcrumb-item active">View User</li>
@@ -54,20 +54,30 @@
                   <div class="form-group">
                     <label>User First Name</label><label style="color: red;margin-left: 4px;">*</label>
 
-                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="first_name"
-                    placeholder="Enter First Name" formControlName="first_name"
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="first_name" 
+                    placeholder="Enter First Name"  pattern="[A-Za-z\s]+"  formControlName="first_name"
                     [class.custom-invalid]="shouldShowRequired('first_name') && userForm.get('first_name')?.touched">
                   <div *ngIf="shouldShowRequired('first_name')" class="invalid-feedback">
-                  <!-- First Name is required. -->
                   </div>
+                  
+                  <div *ngIf="userForm.get('first_name')?.hasError('pattern') && userForm.get('first_name')?.touched"
+                  class="invalid-feedback">
+                      First Name Accepts Alphabets and spaces only.
+                    </div>
                   </div>
                 </div>
 
                 <div class="col-md-3">
                   <label>User Last Name</label>
                   <div class="form-group">
-                    <input autocomplete="off" type="text" class="form-control" id="last_name"
+                    <input autocomplete="off" type="text" class="form-control" id="last_name" 
                       placeholder="Enter Last Name" formControlName="last_name">
+                    </div>
+
+                      <div *ngIf="userForm.get('last_name')?.hasError('pattern') && userForm.get('last_name')?.touched"
+                      class="invalid-feedback">
+                      Last Name should contain alphabets and spaces only.
+
                   </div>
                 </div>
 
@@ -81,6 +91,7 @@
                   <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
                     <!-- Email is required. -->
                   </div>
+
 <!-- 
                     <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">

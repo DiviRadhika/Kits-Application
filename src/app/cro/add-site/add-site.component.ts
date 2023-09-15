@@ -87,8 +87,8 @@ export class AddSiteComponent {
 
   public siteForm: FormGroup = new FormGroup({
     site_data_code: new FormControl("", [Validators.required]),
-    site_data_name: new FormControl("", [Validators.required]),
-    legal_site_data_name: new FormControl("", [Validators.required]),
+    site_data_name: new FormControl("",  [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    legal_site_data_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
   

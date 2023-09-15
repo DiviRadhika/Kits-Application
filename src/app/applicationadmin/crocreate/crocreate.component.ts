@@ -56,9 +56,10 @@ export class CROcreateComponent implements OnInit {
   }
 
   public CroForm: FormGroup = new FormGroup({
+    
     cro_code: new FormControl("", [Validators.required]),
-    cro_name: new FormControl("", [Validators.required]),
-    legal_cro_name: new FormControl("", [Validators.required]),
+    cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    legal_cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
    
@@ -90,6 +91,7 @@ export class CROcreateComponent implements OnInit {
     // ]),
   });
   private capitalizeFirstLetter(value: string): string {
+    
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
   
@@ -107,6 +109,7 @@ export class CROcreateComponent implements OnInit {
 
   getStatesObservable$ = null;
   ngOnInit(): void {
+    
    
     this.countries = this.dataService.getCountries();
     this.CroForm.get('country')?.valueChanges.subscribe(country => {

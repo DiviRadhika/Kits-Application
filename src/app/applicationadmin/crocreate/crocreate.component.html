@@ -70,29 +70,40 @@
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="CROName"
                         placeholder="Enter CRO Name" formControlName="cro_name"
                         [class.custom-invalid]="shouldShowRequired('cro_name') && CroForm.get('cro_name')?.touched">
-                      <div *ngIf="shouldShowRequired('cro_name')" class="invalid-feedback">
-                        CRO Name is required.
-                      </div>
+                        <div *ngIf="shouldShowRequired('cro_name')" class="text-danger">
+
+                        </div>
+                        <div *ngIf="CroForm.get('cro_name')?.hasError('pattern') && CroForm.get('cro_name')?.touched"
+                        class="text-danger">
+                                  First Name Accepts Alphabets and spaces only.
+                                       </div>
+
+                      <!-- <div *ngIf="shouldShowLengthError('cro_name')" class="invalid-feedback">
+                        CRO Name should contain between 5 and 1 characters.
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Legal CRO Name </label><label style="color: red;margin-left: 4px;">*</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="100" id="CROName"
+                        placeholder="Enter Legal CRO Name" formControlName="legal_cro_name"
+                        [class.custom-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
+                        <div *ngIf="shouldShowRequired('legal_cro_name')" class="text-danger">
+
+                        </div>
+                        <div *ngIf="CroForm.get('legal_cro_name')?.hasError('pattern') && CroForm.get('legal_cro_name')?.touched"
+                        class="text-danger">
+                                  First Name Accepts Alphabets and spaces only.
+                                       </div>
+
                       <!-- <div *ngIf="shouldShowLengthError('cro_name')" class="invalid-feedback">
                         CRO Name should contain between 5 and 1 characters.
                       </div> -->
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Legal CRO Name </label><label style="color: red;margin-left: 4px;">*</label>
-                      <input autocomplete="off" type="text" class="form-control" id="LegalCROName"
-                        placeholder="Enter Legal CRO Name" formControlName="legal_cro_name" maxlength="100"
-                        [class.custom-invalid]="shouldShowRequired('legal_cro_name') && CroForm.get('legal_cro_name')?.touched">
-                      <div *ngIf="shouldShowRequired('legal_cro_name')" class="invalid-feedback">
-                        Legal CRO Name is required.
-                      </div>
-                      <!-- <div *ngIf="shouldShowLengthError('legal_cro_name')" class="invalid-feedback">
-                        Legal CRO Name should contain between 5 and 15 characters.
-                      </div> -->
-                    </div>
-                  </div>
+                  
                 </div>
 
               </form>

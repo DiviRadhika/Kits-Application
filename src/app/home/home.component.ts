@@ -231,13 +231,29 @@ export class HomeComponent implements OnInit {
           // subItems: [
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sample Collection', link: '/home/site/viewCRA' },
- { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
+//  { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
             // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
           // ]
         // }
         // Other menu items for admin role...
       ];
     }
+    else if(this.role === 'CRA Coordinator'){
+      this.menuItems = [
+        // {
+          // label: 'CRA',
+          // icon: 'bx bxs-analyse',
+          // expanded: false,
+          // subItems: [
+            { label: 'Dashboard', link: '/home/cro/dashboards' },
+            { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
+            // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
+          // ]
+        // }
+        // Other menu items for admin role...
+      ];
+    }
+
     const navLinks = document.querySelectorAll('.nav-link');
     const collapses = document.querySelectorAll('.collapse');
 
