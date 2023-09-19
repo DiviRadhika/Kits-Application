@@ -87,9 +87,12 @@
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="SponsorName"
                         placeholder="Enter Sponsor Name" formControlName="sponsor_name"
                          [class.custom-invalid]="shouldShowRequired('sponsor_name') && sponsorForm.get('sponsor_name')?.touched">
-                      <div *ngIf="shouldShowRequired('sponsor_name')" class="invalid-feedback">
-                        Sponsor Name is required.
+                      <div *ngIf="shouldShowRequired('sponsor_name')" class="text-danger">
                       </div>
+                      <div *ngIf="sponsorForm.get('sponsor_name')?.hasError('pattern') "
+                        class="text-danger">
+                          Legal Site Name Accepts Alphabets and spaces only.
+                          </div>
                       <!-- <div *ngIf="shouldShowLengthError('sponsor_name')" class="invalid-feedback">
                         Sponsor Name should contain between 5 and 15 characters.
                       </div> -->
@@ -103,16 +106,17 @@
                       <label>Legal Sponsor Name</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="LegalSponsorName"
                         placeholder="Enter legal sponsor name" formControlName="legal_sponsor_name"
-                         [class.custom-invalid]="shouldShowRequired('legal_sponsor_name') && sponsorForm.get('legal_sponsor_name')?.touched">
-                      <div *ngIf="shouldShowRequired('legal_sponsor_name')" class="invalid-feedback">
-                        Legal Sponsor Name is required.
-                      </div>
-                      <div *ngIf="shouldShowLengthError('legal_sponsor_name')" class="invalid-feedback">
-                        Legal Sponsor Name should contain between 5 and 100 characters.
-                      </div>
+                        [class.custom-invalid]="shouldShowRequired('legal_site_data_name') && sponsorForm.get('legal_site_data_name')?.touched">
+                        <div *ngIf="shouldShowRequired('legal_sponsor_name')" class="text-danger">
+                        </div>
+                        <div *ngIf="sponsorForm.get('legal_sponsor_name')?.hasError('pattern') "
+                        class="text-danger">
+                          Legal Site Name Accepts Alphabets and spaces only.
+                          </div>
                     </div>
                   </div>
                 </div>
+
 
               </form>
             </div>
@@ -152,8 +156,7 @@
                     <div class="form-group">
                       <label>Country</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="country" maxlength="40" class="form-select"
-                        aria-label="Default select example" formControlName="city"
-                        [class.custom-invalid]="shouldShowRequired('country') && sponsorForm.get('country')?.touched">
+                        aria-label="Default select example">
                         <option selected value="">Select Country</option>
                         <option *ngFor="let c of countries" [value]="c.name">
                           {{c.name}}</option>
@@ -171,8 +174,7 @@
                     <div class="form-group">
                       <label>Region/State</label><label style="color: red;margin-left: 4px;">*</label>
                       <select formControlName="region" maxlength="40" class="form-select"
-                        aria-label="Default select example" formControlName="region"
-                        [class.custom-invalid]="shouldShowRequired('region') && sponsorForm.get('region')?.touched">
+                        aria-label="Default select example">
                         <option selected value="">Select State</option>
                         <option *ngFor="let s of states" [value]="s.name">
                           {{s.name}}
@@ -254,14 +256,10 @@
 
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
+                      <label>Mobile Number</label>
                       <input autocomplete="off" type="text" class="form-control" appInputRestriction="mobileNum"
                         id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone"
-                        (input)="validateMobileNumber($event.target, 'mobile')"
-                        [class.custom-invalid]="shouldShowRequired('mobile_telephone') && sponsorForm.get('mobile_telephone')?.touched">
-                        <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
-                          Mobile Number is required
-                        </div>
+                        (input)="validateMobileNumber($event.target, 'mobile')">
 
                     </div>
                   </div>
@@ -324,7 +322,7 @@
 
                 <div class="col-md-8 mb-3"></div>
 
-                <div *ngIf="table" class="col-md-12 mb-3">
+                <div *ngIf="contactForm.get('contacts').controls.length > 0" class="col-md-12 mb-3">
                   <form [formGroup]="contactForm">
                     <div formArrayName="contacts">
                       <div class="table-responsive">
@@ -402,7 +400,8 @@
 
                 <div class="col-md-8 mb-3"></div>
 
-                <div *ngIf=tableE class="col-md-12 mb-3">
+                <!-- <div *ngIf=tableE class="col-md-12 mb-3"> -->
+                  <div *ngIf="editcontactsForm.get('editcontacts').controls.length > 0" class="col-md-12 mb-3">
                   <form [formGroup]="editcontactsForm">
                     <div formArrayName="editcontacts">
                       <div class="table-responsive">

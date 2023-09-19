@@ -65,8 +65,8 @@ export class LabTestCreateComponent implements OnInit {
 
   public labTestCreateForm: FormGroup = new FormGroup({
     cro_code: new FormControl("", [Validators.required]),
-    cro_name: new FormControl("", [Validators.required]),
-    legal_cro_name: new FormControl("", [Validators.required]),
+    cro_name: new FormControl("",  [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    legal_cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
     classification: new FormControl(""),

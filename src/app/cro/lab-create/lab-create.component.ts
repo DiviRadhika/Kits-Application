@@ -131,10 +131,11 @@ export class LabCreateComponent {
     }
     else{
     this.labForm.reset()
-    // this.labData.image = ''
-    // const fileInput = document.getElementById('image') as HTMLInputElement;
-    // fileInput.value = '';
-    // this.imgDisplay = false
+    this.labForm.reset();
+    this.imgDisplay = false; // Hide the image display
+    this.editImage = false; // Set editImage to false to allow uploading a new image
+    this.bas2 = ''; // Clear the base64 image data
+    this.file2 = ''; // Clear the file name
     }
   }
   tabchange(){

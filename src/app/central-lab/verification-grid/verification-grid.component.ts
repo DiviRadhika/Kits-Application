@@ -39,7 +39,7 @@ export class VerificationGridComponent implements OnInit {
 
   }
   else if(this.route.url === '/home/centralLab/kitAcknowledgementGrid'){
-    this.heading = 'Sample Acknowlegement'
+    this.heading = 'Sample Acknowledgement'
 
   }
   else if(this.route.url === '/home/centralLab/kitReportGrid'){

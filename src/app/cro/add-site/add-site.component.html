@@ -78,9 +78,12 @@
                     <input autocomplete="off" type="text" class="form-control" maxlength="100" id="SiteName"
                         placeholder="Enter Site Name" formControlName="site_data_name"
                          [class.custom-invalid]="shouldShowRequired('site_data_name') && siteForm.get('site_data_name')?.touched">
-                      <div *ngIf="shouldShowRequired('site_data_name')" class="invalid-feedback">
-                        Site Name is required.
+                      <div *ngIf="shouldShowRequired('site_data_name')" class="text-danger">
                       </div>
+                      <div *ngIf="siteForm.get('site_data_name')?.hasError('pattern') "
+                      class="text-danger">
+                          Site Name Accepts Alphabets and spaces only.
+                        </div>
 
                     </div>
                   </div>
@@ -91,9 +94,12 @@
                     <input autocomplete="off" type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
                         formControlName="legal_site_data_name" maxlength="100"
                          [class.custom-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
-                      <div *ngIf="shouldShowRequired('legal_site_data_name')" class="invalid-feedback">
-                        Legal Site Name is required.
+                      <div *ngIf="shouldShowRequired('legal_site_data_name')" class="text-danger">
                       </div>
+                      <div *ngIf="siteForm.get('legal_site_data_name')?.hasError('pattern') "
+                      class="text-danger">
+                        Legal Site Name Accepts Alphabets and spaces only.
+                        </div>
 
                     </div>
                   </div>
@@ -298,7 +304,6 @@ class="form-control" id="email" placeholder="Enter Email"
                         <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
                           Mobile Number is Required.
                         </div>
-zzz
                     </div>
                   </div>
                 </div>
@@ -340,8 +345,8 @@ zzz
 
                 <div class="col-md-8 mb-3"></div>
 
-                <div *ngIf="table" class="col-md-12 mb-3">
-                  <form [formGroup]="investigatorForm">
+
+                <div *ngIf="investigatorForm.get('investigator').controls.length > 0" class="col-md-12 mb-3">                  <form [formGroup]="investigatorForm">
                     <div formArrayName="investigator">
                       <div class="table-responsive">
                         <table class="table table-striped mb-0">
@@ -424,8 +429,9 @@ zzz
                 </div> -->
                 <div class="col-md-8 mb-3"></div>
 
-                <div *ngIf="tableE" Eclass="col-md-12 mb-3">
-                  <form [formGroup]="investigatorFormedit">
+               
+
+                <div *ngIf="investigatorFormedit.get('investigatoredit').controls.length > 0" class="col-md-12 mb-3">                  <form [formGroup]="investigatorFormedit">
                     <div formArrayName="investigatoredit">
                       <div class="table-responsive">
                         <table class="table table-striped mb-0">
