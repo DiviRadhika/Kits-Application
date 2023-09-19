@@ -90,11 +90,14 @@
                     [class.custom-invalid]="shouldShowRequired('email') && userForm.get('email')?.touched">
                   <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
                     <!-- Email is required. -->
-                <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
+                  </div>
+
+<!--
+                    <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">
                     <div *ngIf="shouldShowRequired('email')" class="text-danger">
                       Email is required.
-                    </div>
+                    </div> -->
                     <div *ngIf="userForm.get('email')?.hasError('pattern')" class="text-danger">
                       Please enter a valid email address.
                     </div>
