@@ -8,9 +8,9 @@
                 <div class="col-12">
                     <div style="padding:1px" *ngIf="!view"
                         class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab 
+                        <h4 *ngIf="!isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Add Lab
                         </h4>
-                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab 
+                        <h4 *ngIf="isEdit" class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i>Edit Lab
                         </h4>
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -45,7 +45,7 @@
             <p-toast></p-toast>
             <form [formGroup]="labTestCreateForm">
                 <div class="card ml-2 mr-2 bg-white">
-                    <div class="container">
+                    <div class="container-fluid">
 
                         <div class="card-body">
                             <h5 style="color: rgb(250, 39, 39);">Lab Basic Details</h5>
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                   
+
                                 </div>
 
                             </form>
@@ -111,7 +111,7 @@
 
                     </div>
 
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="card-body">
                             <h6 style="color: rgb(250, 49, 49);">Address</h6>
                             <hr>
@@ -120,7 +120,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                            <label>Address 1<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
-                                          <input autocomplete="off" type="text" 
+                                          <input autocomplete="off" type="text"
 
 
 class="form-control" id="Address 1"
@@ -135,7 +135,7 @@ class="form-control" id="Address 1"
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Address 2</label>
-                                          <input autocomplete="off" type="text" 
+                                          <input autocomplete="off" type="text"
 
 
 class="form-control" id="Address"
@@ -188,7 +188,7 @@ class="form-control" id="Address"
                                     <div *ngIf="districtEnable"  class="col-md-4">
                                         <div class="form-group">
                                             <label>District</label>
-                                          <input autocomplete="off" type="text" 
+                                          <input autocomplete="off" type="text"
 
 
 class="form-control" id="District"
@@ -231,7 +231,7 @@ class="form-control" id="District"
 
                     </div>
 
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="card-body">
                             <h6 style="color: rgb(250, 49, 49);">Communication</h6>
                             <hr>
@@ -240,7 +240,7 @@ class="form-control" id="District"
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Office Telephone</label>
-                                      <input autocomplete="off" type="text" 
+                                      <input autocomplete="off" type="text"
 
 
 class="form-control" (input)="validateMobileNumber($event.target, 'office')" id="Office Telephone" placeholder="Enter Office Telephone"
@@ -252,17 +252,17 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                         <label>Extension</label>
                                       <input autocomplete="off" type="text" class="form-control"  maxlength="4" id="Extension" placeholder="Enter Extension" (input)="validateMobileNumber($event.target, 'office')"
                                           formControlName="extension">
-                  
+
                                       </div>
                                     </div>
-                                 
+
                                     <div class="col-md-4">
                                       <div class="form-group">
                                         <label>Mobile Number</label><label style="color: red;margin-left: 4px;">*</label>
                                               <input autocomplete="off" type="text"class="form-control" id="mobile_no" placeholder="Enter Mobile Number" formControlName="mobile_telephone" (input)="validateMobileNumber($event.target, 'mobile')" [class.custom-invalid]="shouldShowRequired('mobile_telephone') && labTestCreateForm.get('mobile_telephone')?.touched">
                                               <div *ngIf="shouldShowRequired('mobile_telephone')" class="invalid-feedback">
                                                   Mobile Number is required.
-                                              </div>                
+                                              </div>
                                       </div>
                                     </div>
                                   </div>

@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-             
+
                 <li class="breadcrumb-item active">CRO</li>
               </ol>
             </div>
@@ -46,7 +46,7 @@
                   <div class="col-sm-12 col-md-6">
 
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                      <div id="datatable_filter" class="dataTables_filter" style="text-align:left !important"><label>Search:
                         <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
@@ -55,18 +55,18 @@
 
 
 
-                  
-               
+
+
 
                   <div class="col-sm-12 col-md-6">
-                  
-                    <button style="margin-left: 72%; font-size: 11px;" type="button"   (click)="croCreate()"
-                      class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
+
+                    <button style=" font-size: 11px;" type="button"   (click)="croCreate()"
+                      class="btn btn-warning waves-effect btn-label waves-light r-red pull-right" data-bs-toggle="modal"
                       data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                       Add CRO</button>
-                  
+
                 </div>
-                  
+
                 <div class="row" class="table-responsive text-nowrap" >
                   <div class="col-sm-12">
                     <table id="datatable" class="table table-striped"
@@ -97,24 +97,24 @@
                               <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort2}"></i>
                           </span>
                       </th>
-                          <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                            style="width: 159.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
+                          <th width="40" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" class="text-center"
+                            style="width: 80.2px;" aria-label="Actions: activate to sort column ascending">Actions</th>
                         </tr>
                       </thead>
 
 
                       <tbody>
 
-                        <tr class="odd"  style="  vertical-align: middle;"    
+                        <tr class="odd"  style="  vertical-align: middle;"
                           *ngFor="let croData of croDetails  | sort:sortedColumn:sortDirection  | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                           <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="edit(croData.cro_id, 'view')">{{croData.cro_code}}</td>
                           <td>{{croData.cro_name}}</td>
                           <td>{{croData.legal_cro_name}}</td>
-                          <td>
+                          <td class="text-center">
                             <button type="button" (click)="edit(croData.cro_id, 'edit')"
                               class="btn btn-success waves-effect edit-btn waves-light">
-                              <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                              
+                              <i class="bx bx-edit-alt font-size-16 align-middle"></i>
+
                             </button>&nbsp;
                             <!-- <button type="button" (click)="edit(croData.cro_id, 'view')"
                             class="btn btn-success waves-effect edit-btn waves-light">
@@ -141,7 +141,7 @@
                   *ngIf="croDetails && croDetails.length"></pagination-controls>
                   <div class="row">
                     <div class="col-md-10">
-                     
+
                   </div>
                   <div class="col-md-2">
                  <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>

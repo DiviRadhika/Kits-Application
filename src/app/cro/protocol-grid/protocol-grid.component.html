@@ -12,8 +12,8 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-              
-                   
+
+
                 <li class="breadcrumb-item active">Study Summary</li>
                 <!-- <li class="breadcrumb-item active">Add CRO</li> -->
               </ol>
@@ -51,7 +51,7 @@
                   <div class="col-sm-12 col-md-6">
 
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                      <div id="datatable_filter" class="dataTables_filter" style="text-align:left !important"><label>Search:
                         <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
@@ -59,12 +59,12 @@
                   </div>
 
                   <div class="col-sm-12 col-md-6">
-                  
-                      <button style="margin-left: 72%; font-size: 11px;" type="button" (click)="pCreate()"
-                        class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
+
+                      <button  type="button" (click)="pCreate()"
+                        class="btn btn-warning waves-effect btn-label waves-light r-red pull-right" data-bs-toggle="modal"
                         data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                         Add Study</button>
-                    
+
                   </div>
 
 
@@ -98,7 +98,7 @@
 
                         <tbody>
 
-                          <tr class="odd" style="vertical-align: middle;"   
+                          <tr class="odd" style="vertical-align: middle;"
                             *ngFor="let protocolData of protocolDetails|sort:sortedColumn:sortDirection  | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control" (click)="view(protocolData.id)" style="color:blue;cursor: pointer">
@@ -110,7 +110,7 @@
 
                               <!-- <button type="button" (click)="view(protocolData.id)"
                                   class="btn btn-success waves-effect edit-btn waves-light">
-                                 
+
                                   View
                                 </button> -->
 
@@ -138,7 +138,7 @@
                         *ngIf="protocolDetails && protocolDetails.length"></pagination-controls>
                         <div class="row">
                           <div class="col-md-10">
-                           
+
                         </div>
                         <div class="col-md-2">
                        <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>

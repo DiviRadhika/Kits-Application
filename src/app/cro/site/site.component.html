@@ -36,7 +36,7 @@
                   <div class="col-sm-12 col-md-6">
 
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                      <div id="datatable_filter" class="dataTables_filter" style="text-align:left !important"><label>Search:
                         <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
@@ -44,19 +44,19 @@
                   </div>
 
                   <div class="col-sm-12 col-md-6">
-                  
-                    <button style="margin-left: 77%; font-size: 11px;" type="button" (click)="siteCreate()"
-                      class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
+
+                    <button   type="button" (click)="siteCreate()"
+                      class="btn btn-warning waves-effect btn-label waves-light r-red pull-right" data-bs-toggle="modal"
                       data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                       Add Site</button>
-                  
-                </div>
-                  
 
-                  
+                </div>
+
+
+
                   <p-dialog [class.overlay]="display" (onShow)="disableScroll()" (onHide)="enableScroll()"
                   header="Assosciated Study Id's" [(visible)]="display">
-                 
+
                     <table id="datatable"
                     class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
                     role="grid" aria-describedby="datatable_info" style="width: 1182px;">
@@ -68,29 +68,29 @@
                           <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSorta}"></i>
                           <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSorta}"></i>
                       </span></th>
-                       
+
                         <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" (click)="toggleSortingb()" (click)="sort('protocol_name')"
                           style="width: 335.2px;" aria-label="Name: activate to sort column ascending" >Study Name
                           <span style="float: right;" class="sort-icons">
                             <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSortb}"></i>
                             <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSortb}"></i>
                         </span></th>
-                       
+
                       </tr>
                     </thead>
 
 
                     <tbody  >
 
-                      <tr class="odd" style="vertical-align: 12px;"   
+                      <tr class="odd" style="vertical-align: 12px;"
                         *ngFor="let siteData of uniqueCombinedArray | sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page }; let i=index">
 
-                        
+
                         <td>{{siteData.user_protocol_id}}</td>
                         <td>{{siteData.protocol_name}}</td>
-                  
-                     
-                       
+
+
+
                       </tr>
 
                     </tbody>
@@ -126,7 +126,7 @@
                                 <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort2}"></i>
                                 <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort2}"></i>
                             </span></th>
-                            
+
                             <th width="15%" tabindex="0" aria-controls="datatable" rowspan="1"
                               colspan="1" style="width: 150.2px;"
                               aria-label="Actions: activate to sort column ascending">Actions</th>
@@ -143,7 +143,7 @@
 
                             <td>{{siteData.site_data_name}}</td>
                             <td>{{siteData.email}}</td>
-                         
+
                             <td>
                               <button type="button"  (click)="study(siteData.site_id)"
                               class="btn btn-success waves-effect edit-btn waves-light">
@@ -152,14 +152,14 @@
                             </button>&nbsp;
                               <button type="button" (click)="edit(siteData.site_id, 'edit')"
                                 class="btn btn-success waves-effect edit-btn waves-light">
-                                <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                               
+                                <i class="bx bx-edit-alt font-size-16 align-middle"></i>
+
                               </button>&nbsp;
                               <button style="margin-left: 5px;" (click)="edit(siteData.site_id, 'view')" class="btn btn-success waves-effect edit-btn waves-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                               </svg></button>
-                              <!-- <button type="button" 
+                              <!-- <button type="button"
                               class="btn btn-success waves-effect edit-btn waves-light">
                               <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
                               View
@@ -179,10 +179,10 @@
                         *ngIf="siteDetails && siteDetails.length"></pagination-controls>
                         <div class="row">
                           <div class="col-md-10">
-                           
+
                         </div>
                         <div class="col-md-2">
-                       <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
+                       <p style="margin-top: -20%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
                         </div>
                     </div>
                   </div>
@@ -211,8 +211,8 @@
     </div>
   </footer>
   <!-- end main content-->
-  
+
   <!-- END layout-wrapper -->
-  
+
   <!-- Right bar overlay-->
   <div class="rightbar-overlay"></div>

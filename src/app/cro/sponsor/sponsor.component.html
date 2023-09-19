@@ -49,7 +49,7 @@
       <!-- <p-tabPanel header="Sponsor"> -->
       <form [formGroup]="sponsorForm">
         <div class="card ml-2 mr-2 bg-white">
-          <div class="container">
+          <div class="container-fluid">
 
             <div class="card-body">
               <h5 style="color: rgb(250, 39, 39);">Sponsor Basic Details</h5>
@@ -119,7 +119,7 @@
 
           </div>
           <br>
-          <div class="container">
+          <div class="container-fluid">
             <div class="card-body">
               <h6 style="color: rgb(250, 49, 49);">Address</h6>
               <hr>
@@ -228,7 +228,7 @@
 
           </div>
           <br>
-          <div class="container">
+          <div class="container-fluid">
             <div class="card-body">
               <h6 style="color: rgb(250, 49, 49);">Communication</h6>
               <hr>
@@ -293,7 +293,7 @@
                   </div>
                 </div>
                 <br>
-                <!-- 
+                <!--
                 <div calss="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -310,7 +310,7 @@
             </div>
 
           </div>
-          <div class="container">
+          <div class="container-fluid">
             <div class="card-body">
               <!-- <h6 style="color: rgb(250, 49, 49);">Communication</h6> -->
               <hr>
@@ -445,7 +445,7 @@
                                   id="Office Telephone" placeholder="Enter Mobile Number" type="number"
                                   (input)="validateMobileNumber($event.target, 'mobile')" formControlName="contact">
                               </td>
-                            
+
                               <td *ngIf="!view">
                                 <button *ngIf="contact.get('editable').value !== 'true'" type="button" style="background-color: #ff414b;"
                                         (click)="removeeditsponser(i)" class="btn btn-danger">
@@ -462,7 +462,7 @@
                               <!-- <td>
                             <button type="button" (click)="removeMatScreenKit(j)"
                               class="btn btn-danger ml-3 mt-2">Delete</button>
-                           
+
                           </td>
                    -->
                             </tr>

@@ -42,7 +42,7 @@
       </div>
 
       <div class="card ml-2 mr-2 bg-white">
-        <div class="container">
+        <div class="container-fluid">
           <div class="card-body">
             <h5 style="color: rgb(250, 39, 39);">User Basic Details</h5>
             <hr>
@@ -81,7 +81,7 @@
                   <div *ngIf="shouldShowRequired('email')" class="invalid-feedback">
                     <!-- Email is required. -->
                   </div>
-<!-- 
+<!--
                     <input autocomplete="off" type="text" class="form-control" id="email" placeholder="Enter Email"
                       formControlName="email">
                     <div *ngIf="shouldShowRequired('email')" class="text-danger">
@@ -96,7 +96,7 @@
 
                 <div class="col-md-3">
                   <label>Password</label><label style="color: red;margin-left: 4px;">*</label>
-              
+
                   <input autocomplete="off" type="text" class="form-control" id="password" placeholder="Enter Password"
                   formControlName="password" [type]="showPassword ? 'text' : 'password'"
                   (paste)="preventPaste($event)" maxlength="16"
@@ -128,7 +128,7 @@
                 <br>
 
                 <div class="row">
-             
+
 
                 <div class="col-md-3">
                   <div class="form-group">

@@ -13,11 +13,11 @@
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                 </li>
-               
+
                 <li class="breadcrumb-item active">{{heading}}</li>
-        
+
               </ol>
-            
+
             </div>
 
           </div>
@@ -38,7 +38,7 @@
                   <div class="col-sm-12 col-md-6">
 
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                      <div id="datatable_filter" class="dataTables_filter" style="text-align:left !important"><label>Search:
                         <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
@@ -76,7 +76,7 @@
 
                         <tbody>
 
-                          <tr  class="odd" style="vertical-align: middle;" 
+                          <tr  class="odd" style="vertical-align: middle;"
                             *ngFor="let protocolData of uniqueCombinedArray |sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                             <td class="sorting_1 dtr-control">{{protocolData.user_protocol_id}}</td>
@@ -94,7 +94,7 @@
                               </button> -->
                               <!-- <button type="button" (click)="view(protocolData.id)"
                                   class="btn btn-success waves-effect edit-btn waves-light">
-                                 
+
                                   View
                                 </button> -->
                             </td>
@@ -112,7 +112,7 @@
                         *ngIf="uniqueCombinedArray && uniqueCombinedArray.length"></pagination-controls>
                         <div class="row">
                           <div class="col-md-10">
-  
+
                           </div>
                           <div class="col-md-2">
                          <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>

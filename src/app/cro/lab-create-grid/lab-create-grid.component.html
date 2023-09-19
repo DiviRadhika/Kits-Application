@@ -12,7 +12,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
-               
+
                 <li class="breadcrumb-item active">Lab Creation</li>
               </ol>
             </div>
@@ -46,23 +46,23 @@
                   <div class="col-sm-12 col-md-6">
 
                     <div class="col-sm-12 col-md-6">
-                      <div id="datatable_filter" class="dataTables_filter"><label>Search:
+                      <div id="datatable_filter" class="dataTables_filter" style="text-align:left !important"><label>Search:
                         <input autocomplete="off"  type="text" class="form-control" [(ngModel)]="searchText"
                             placeholder="Search " (keyup)="applyFilter(searchText)" />
                         </label></div>
                     </div>
                   </div>
-               
+
 
                   <div class="col-sm-12 col-md-6">
-                  
-                    <button style="margin-left: 72%; font-size: 11px;" type="button"   (click)="labCreate()"
-                      class="btn btn-warning waves-effect btn-label waves-light r-red " data-bs-toggle="modal"
+
+                    <button   type="button"   (click)="labCreate()"
+                      class="btn btn-warning waves-effect btn-label waves-light r-red pull-right" data-bs-toggle="modal"
                       data-bs-target=".transaction-detailModal"><i class="bx bx-plus label-icon"></i>
                       Add Lab</button>
-                  
+
                 </div>
-                  
+
                 <div class="row" class="table-responsive text-nowrap">
                   <div class="col-sm-12">
                     <table id="datatable" class="table table-striped"
@@ -106,8 +106,8 @@
                           <td>
                             <button type="button" (click)="edit(croData.lab_id, 'edit')"
                               class="btn btn-success waves-effect edit-btn waves-light">
-                              <i class="bx bx-edit-alt font-size-16 align-middle me-2"></i>
-                              
+                              <i class="bx bx-edit-alt font-size-16 align-middle "></i>
+
                             </button>&nbsp;
                             <!-- <button type="button" (click)="edit(croData.cro_id, 'view')"
                             class="btn btn-success waves-effect edit-btn waves-light">
