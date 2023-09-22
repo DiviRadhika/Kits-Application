@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
           // subItems: [
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'CRO', link: '/home/admin/croGrid' },
-            { label: 'User', link: '/home/admin/userGrid' },
+            { label: 'Users', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
           // ]
         
@@ -418,6 +418,15 @@ export class HomeComponent implements OnInit {
             }
  
   update(){
+    this.updatepasswordForm = new FormGroup({
+      passwordDetails: new FormControl("", [Validators.required]),
+      email:new FormControl ("",[Validators.required]),
+      otp:new FormControl("",[Validators.required]),
+      // oldpassword: new FormControl("", [Validators.required]),
+      passwordp: new FormControl("", [Validators.required, Validators.minLength(8)]),
+      passwordu: new FormControl("",[Validators.required, Validators.minLength(8)] )
+      // confirmPassword: new FormControl("", [Validators.required]),
+    });
     this.updatepassword=true
     this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
   }
