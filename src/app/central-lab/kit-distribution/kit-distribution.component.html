@@ -175,7 +175,7 @@
 
                                                                             <td>
                                                                                 <select class="form-select form-control"
-                                                                                    formControlName="siteId">
+                                                                                    formControlName="siteId" (change)="checkdistribution($event, i)">
                                                                                     <option
                                                                                         [value]="data.site_data_code"
                                                                                         *ngFor="let data of sponsers">
@@ -305,7 +305,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <select class="form-select form-control"
-                                                                                    formControlName="siteId">
+                                                                                    formControlName="siteId" (change)="checkdistributionv(i,j)">
                                                                                     <option
                                                                                         *ngFor="let data of sponsers"
                                                                                         [value]="data.site_data_code">
@@ -379,7 +379,7 @@
         <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">{{ getCurrentYear()}} © Roboxa</div>
+                    <div class="col-sm-6">{{ getCurrentYear()}} © ROBOXA</div>
                 </div>
             </div>
         </footer>

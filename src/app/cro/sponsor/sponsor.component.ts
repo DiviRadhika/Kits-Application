@@ -282,6 +282,16 @@ removeeditsponser(j: number) {
                 if(this.sponsorForm.controls['address_2'].value){
                   this.sponsorForm.controls['address_2'].setValue(this.toTitleCase(this.sponsorForm.controls['address_2'].value));
                       }
+                      if (this.sponsorForm.controls['city'].value) {
+
+                        this.sponsorForm.controls['city'].setValue(this.toTitleCase(this.sponsorForm.controls['city'].value));
+                  
+                      }
+                      if (this.sponsorForm.controls['district'].value) {
+                  
+                        this.sponsorForm.controls['district'].setValue(this.toTitleCase(this.sponsorForm.controls['district'].value));
+                  
+                      }
     if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }

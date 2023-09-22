@@ -60,7 +60,7 @@ export class KitDistributionComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  preprationData = ['Not Verified', 'Verified']
+  // preprationData = ['Not Verified', 'Verified']
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -269,7 +269,27 @@ export class KitDistributionComponent implements OnInit {
     return this.vMatDetails.at(i).visitKitFormGroup as FormGroup
 
   }
-
+    
+  checkdistribution(selectedValue: any, rowIndex: number) {
+    const siteControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.siteId');
+    const verificationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.status');
+    if (selectedValue.target.value) {
+     if(verificationControl.value === 'Not Verified'){
+        alert('You cannot assign site until and unless Kit verification is completed');
+        siteControl.setValue('');
+      }
+    }
+  }
+  checkdistributionv(cardIndex: number, rowIndex: number) {
+    const item = this.vMatDetails[cardIndex];
+    const verificationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('status');
+    const siteControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('siteId');
+   
+    if (siteControl.value && (verificationControl.value === 'Not Verified')) {
+      alert('You cannot assign site untilyyy and unless Kit verification is completed');  
+      siteControl.setValue('');
+    }
+  }
   
  
 

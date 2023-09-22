@@ -55,18 +55,18 @@ export class UserGridComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     if (filterValue === '') {
       this.userDetails = this.allUserData;
+    } else {
+      this.userDetails = this.allUserData.filter((user: any) => {
+        const fullName = (user.first_name + ' ' + user.last_name).toLowerCase();
+        return (
+          fullName.includes(filterValue) ||
+          user.role.toLowerCase().includes(filterValue) ||
+          user.email.toLowerCase().includes(filterValue)
+        );
+      });
     }
-    else {
-      this.userDetails = this.allUserData.filter(
-        (user: any) =>
-          (user.first_name && user.first_name.toLowerCase().includes(filterValue)) ||
-          (user.last_name && user.last_name.toLowerCase().includes(filterValue)) ||
-          (user.role && user.role.toLowerCase().includes(filterValue)) ||
-          (user.email && user.email.toLowerCase().includes(filterValue))
-      );
-    }
-
   }
+  
   pageChange(event: number) {
    this.page = event;
     this.getUser()

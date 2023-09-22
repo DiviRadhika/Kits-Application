@@ -84,7 +84,7 @@
                           <tr class="odd" style="vertical-align: middle;" 
                             *ngFor="let protocolData of uniqueCombinedArray | sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
-                            <td class="sorting_1 dtr-control">{{protocolData.protocol_id}}</td>
+                            <td class="sorting_1 dtr-control" style="color:blue;cursor: pointer" (click)="view(protocolData.id,'sponsor')">{{protocolData.protocol_id}}</td>
 
                             <td>{{protocolData.protocol_name}}</td>
 
@@ -137,7 +137,7 @@
     <footer class="footer" style="position: fixed;">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+          <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
         </div>
       </div>
     </footer>

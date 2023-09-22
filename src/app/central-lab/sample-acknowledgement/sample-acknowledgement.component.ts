@@ -86,7 +86,6 @@ export class SampleAcknowledgementComponent implements OnInit {
   file2: any;
   public base64textString: string = '';
   public bas2: string = '';
-  statusData = ['Pending ', 'Received']
   preprationData = [{ name: 'Pending', value: 'Pending' },
   { name: 'Received', value: 'Received' },
   ]
@@ -339,6 +338,8 @@ export class SampleAcknowledgementComponent implements OnInit {
     this.indexs = rowIndex
   }
 
+  
+
   openUploadDialogv(tabIndex: number, rowIndex: number): void {
 
     this.displayv = true;
@@ -354,7 +355,25 @@ export class SampleAcknowledgementComponent implements OnInit {
     this.display = true
   }
 
-
+  checkacknowledgement(selectedValue: any, rowIndex: number) {
+    const collectionControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collection');
+    const acknowledgementControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.acknowledgement');
+    if (selectedValue.target.value === 'Received') {
+     if(collectionControl.value === 'Not Collected'){  
+      alert('You cannot change acknowledgement to recieved until and unless Kit Sample is collected');  
+        acknowledgementControl.patchValue(this.preprationData[0].value);
+      }
+    }
+  }
+  checkacknowledgementv(cardIndex: number, rowIndex: number) {
+    const item = this.vMatDetails[cardIndex];
+    const collectionControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('collection');
+    const acknowledgementControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('acknowledgement');
+    if (acknowledgementControl.value === 'Received' && (collectionControl.value === 'Not Collected')) {
+      alert('You cannot change acknowledgement to recieved until and unless Kit Sample is collected');  
+      acknowledgementControl.patchValue(this.preprationData[0].value)
+    }
+  }
   createVisitKitGroup() {
 
     return this.formBuilder.group({

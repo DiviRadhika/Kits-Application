@@ -25,8 +25,8 @@ export class CROcreateComponent implements OnInit {
   districtEnable: boolean | undefined;
   stateenable: boolean | undefined;
   constructor(private admin: AdminService,
-    private _activatedRoute: ActivatedRoute, private router: Router, private http:HttpClient,
-    private messageService: MessageService, private dataService:DataService
+    private _activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
+    private messageService: MessageService, private dataService: DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
@@ -41,41 +41,41 @@ export class CROcreateComponent implements OnInit {
           // this.CroForm.controls['email'].disable()
 
         });
-        if(data.val == 'view'){
+        if (data.val == 'view') {
           this.view = true
           this.CroForm.disable()
-          
+
         }
-        else{
-       
+        else {
+
         }
 
       }
     });
-  
+
   }
 
   public CroForm: FormGroup = new FormGroup({
-    
+
     cro_code: new FormControl("", [Validators.required]),
     cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     legal_cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
-   
+
     city: new FormControl("", [Validators.required]),
-     district: new FormControl(""),
+    district: new FormControl(""),
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
     email: new FormControl(''),
-    website:new FormControl(''),
-    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-      // Validators.required,
-      // Validators.email,
-      // this.emailDomainValidator.bind(this)
+    website: new FormControl(''),
+    mobile_telephone: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    // Validators.required,
+    // Validators.email,
+    // this.emailDomainValidator.bind(this)
 
     // website: new FormControl('', [
     //   Validators.required,
@@ -91,10 +91,10 @@ export class CROcreateComponent implements OnInit {
     // ]),
   });
   private capitalizeFirstLetter(value: string): string {
-    
+
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
-  
+
 
   emailDomainValidator(control: FormControl): ValidationErrors | null {
     const email = control.value;
@@ -109,8 +109,8 @@ export class CROcreateComponent implements OnInit {
 
   getStatesObservable$ = null;
   ngOnInit(): void {
-    
-   
+
+
     this.countries = this.dataService.getCountries();
     this.CroForm.get('country')?.valueChanges.subscribe(country => {
 
@@ -123,20 +123,20 @@ export class CROcreateComponent implements OnInit {
       // this.getStatesForCountry(country);
       this.districtEnable = true
     });
-  }getStatesForCountry(country:any){
+  } getStatesForCountry(country: any) {
     const payload = {
       country: country
     }
-   
+
     const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
     getStatesObservable$.subscribe((res: any) => {
       console.log(res)
-      if(res && res.body && res.body.states) {
+      if (res && res.body && res.body.states) {
         console.log(res.body.states)
         this.states = this.dataService.getStates(res.body.states);
         // this.addToStatesList(res.body.states, country);
       }
-      
+
     });
   }
 
@@ -158,49 +158,59 @@ export class CROcreateComponent implements OnInit {
     const control = this.CroForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
-  reset(){
+  reset() {
 
-    if(this.isEdit === true){
+    if (this.isEdit === true) {
       window.location.reload()
     }
-    else{
-    this.CroForm.reset()
+    else {
+      this.CroForm.reset()
     }
   }
   toTitleCase(str: string): string {
-    
+
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   }
   submit() {
-      if(this.CroForm.controls['cro_name'].value){
-  this.CroForm.controls['cro_name'].setValue(this.toTitleCase(this.CroForm.controls['cro_name'].value));
-      }
-      if(this.CroForm.controls['legal_cro_name'].value){
-  this.CroForm.controls['legal_cro_name'].setValue(this.toTitleCase(this.CroForm.controls['legal_cro_name'].value));
-      }
-      if(this.CroForm.controls['address_1'].value){
-        this.CroForm.controls['address_1'].setValue(this.toTitleCase(this.CroForm.controls['address_1'].value));
-            }
-            if(this.CroForm.controls['address_2'].value){
-              this.CroForm.controls['address_2'].setValue(this.toTitleCase(this.CroForm.controls['address_2'].value));
-                  }
+    if (this.CroForm.controls['cro_name'].value) {
+      this.CroForm.controls['cro_name'].setValue(this.toTitleCase(this.CroForm.controls['cro_name'].value));
+    }
+    if (this.CroForm.controls['legal_cro_name'].value) {
+      this.CroForm.controls['legal_cro_name'].setValue(this.toTitleCase(this.CroForm.controls['legal_cro_name'].value));
+    }
+    if (this.CroForm.controls['city'].value) {
+
+      this.CroForm.controls['city'].setValue(this.toTitleCase(this.CroForm.controls['city'].value));
+
+    }
+    if (this.CroForm.controls['district'].value) {
+
+      this.CroForm.controls['district'].setValue(this.toTitleCase(this.CroForm.controls['district'].value));
+
+    }
+    if (this.CroForm.controls['address_1'].value) {
+      this.CroForm.controls['address_1'].setValue(this.toTitleCase(this.CroForm.controls['address_1'].value));
+    }
+    if (this.CroForm.controls['address_2'].value) {
+      this.CroForm.controls['address_2'].setValue(this.toTitleCase(this.CroForm.controls['address_2'].value));
+    }
     if (this.CroForm.controls['mobile_telephone'].value === '' || this.CroForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }
     else {
       this.mobile = this.CroForm.controls['mobile_telephone'].value.toString()
     }
-   
-    
-      if (this.CroForm.invalid) {
-        // Mark all form controls as touched to trigger validation
-        Object.keys(this.CroForm.controls).forEach(key => {
-          this.CroForm.get(key)?.markAsTouched();
-        });
-        this.messageService.add({severity:'error', summary:'Error Message', detail:'Please Fill All Mandatory Fields'});
-      
-        
-      }
+
+
+    if (this.CroForm.invalid) {
+      // Mark all form controls as touched to trigger validation
+      Object.keys(this.CroForm.controls).forEach(key => {
+        this.CroForm.get(key)?.markAsTouched();
+      });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
+
+
+    }
     else {
       const obj: any = {
         "cro_code": this.CroForm.controls['cro_code'].value,
@@ -208,7 +218,7 @@ export class CROcreateComponent implements OnInit {
         "legal_cro_name": this.CroForm.controls['legal_cro_name'].value,
         "address_1": this.CroForm.controls['address_1'].value,
         "address_2": this.CroForm.controls['address_2'].value,
-      
+
         "city": this.CroForm.controls['city'].value,
         "district": this.CroForm.controls['district'].value,
         "region": this.CroForm.controls['region'].value,
@@ -225,29 +235,29 @@ export class CROcreateComponent implements OnInit {
         this.admin.updateCroDetaild(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Updated Successfully'});
-             }, 1000);
-               
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'CRO Details Updated Successfully' });
+            }, 1000);
+
 
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
           }
         );
       }
       else {
         this.admin.CreateCroDetails(obj).subscribe(
           (data: any) => {
-         setTimeout(() => {
-          this.messageService.add({severity:'success', summary:'Success Message', detail:'CRO Details Created Successfully'});
-         }, 1000);
-           
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'CRO Details Created Successfully' });
+            }, 1000);
+
             this.router.navigate(['/home/admin/croGrid'])
           },
           (err: any) => {
-          
-            this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.error});
+
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
           }
         )
       }
@@ -255,23 +265,23 @@ export class CROcreateComponent implements OnInit {
   }
   validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
-    
+
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
-    if(phone ==='mobile'){
-    if (numericValue.length > 20) {
+    if (phone === 'mobile') {
+      if (numericValue.length > 20) {
         numericValue = numericValue.slice(0, 12);
+      }
     }
-  }
-  else{
-    if (numericValue.length > 20) {
-      numericValue = numericValue.slice(0, 16);
-  }
-  }
-    
+    else {
+      if (numericValue.length > 20) {
+        numericValue = numericValue.slice(0, 16);
+      }
+    }
+
     input.value = numericValue;
-  
-}
+
+  }
 
 }

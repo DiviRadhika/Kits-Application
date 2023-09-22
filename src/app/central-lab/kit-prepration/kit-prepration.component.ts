@@ -294,12 +294,6 @@ export class KitPreprationComponent implements OnInit {
       this.preparationForm.controls['specialInstructions'].disable()
       this.preparationForm.controls['specialInstructions'].setValue(this.protocolIdDetails.special_instructions)
 
-      // this.screenDetails = protocols.screening_kit_details[0].lab_test_ids
-      // this.sMatDetails = protocols.screening_kit_details[0].meterial_details
-      // this.visitDetails = protocols.visit_kit_details[0].lab_test_ids
-      // this.vMatDetails = protocols.visit_kit_details[0].meterial_details
-      // this.scount = protocols.screening_kit_details[0].screening_kit_count
-      // this.vcount = protocols.visit_kit_details[0].visit_kit_count
       if (protocols.visit_kit_details[0].meterial_details.length > 0) {
         this.screeningFullData = protocols.visit_kit_details[0].meterial_details[0]
         this.screenDetails = this.screeningFullData.selectedLabTests
@@ -516,7 +510,7 @@ export class KitPreprationComponent implements OnInit {
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
         // console.log(skDetails)
-        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK0001' + (i + 1))
+        this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(this.protocolIdDetails.protocol_id + 'SK001' + (i + 1))
         // if (i < skDetails.length) {
         // this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
         // this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);

@@ -172,7 +172,7 @@
                                                             formArrayName="screenKitList" style="width: 130%; ">
                                                             <thead Style="background:#EEE">
                                                                 <tr>
-                                                                    <th style="width: 120px;">KitId</th>
+                                                                    <th style="width: 140px;">KitId</th>
                                                                     <th style="width: 100px;">Central Lab KitId</th>
                                                                     <th style="width: 100px;">Site Id</th>
                                                                     <th style="width: 100px;">Patient Id</th>
@@ -286,8 +286,8 @@
 
                                                                     <td>
                                                                         <select formControlName="acknowledgement"
-                                                                            class="form-select form-control">
-                                                                            <option *ngFor="let s of preprationData"
+                                                                            class="form-select form-control" (change)="checkacknowledgement($event, i)">
+                                                                            <option *ngFor="let s of preprationData" 
                                                                                 [value]="s.name">
                                                                                 {{s.name}}
                                                                             </option>
@@ -494,7 +494,7 @@
                                                             <thead Style="background:#EEE">
                                                                 <tr>
 
-                                                                    <th style="width: 120px;">KitId</th>
+                                                                    <th style="width: 140px;">KitId</th>
                                                                     <th style="width: 100px;">Central Lab KitId</th>
                                                                     <th style="width: 100px;">Site Id</th>
                                                                     <th style="width: 100px;">Patient Id</th>
@@ -602,7 +602,7 @@
 
                                                                     <td>
                                                                         <select formControlName="acknowledgement"
-                                                                            class="form-select form-control">
+                                                                            class="form-select form-control" (change)="checkacknowledgementv(i, j)">
                                                                             <option *ngFor="let s of preprationData"
                                                                                 [value]="s.name">
                                                                                 {{s.name}}
@@ -673,7 +673,7 @@
         <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+                    <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
                 </div>
             </div>
         </footer>
