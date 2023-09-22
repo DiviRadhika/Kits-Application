@@ -122,7 +122,7 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">No.of Screens<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">No.of Screenings<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                     (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
                        [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">Screening Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                     (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
                       class="form-control" id="" placeholder="Enter Screen Kit Count"
@@ -250,7 +250,7 @@
                           </th>
                           <td>
                             <select formControlName="size" class="form-select form-control">
-                              <option selected value="">Select SiZe</option>
+                              <option selected value="">Select Size</option>
                               <option *ngFor="let size of getSizesv(i, j)" [value]="size">{{ size }}</option>
                             </select>
 
@@ -410,7 +410,7 @@
   <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+            <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
         </div>
     </div>
 </footer>

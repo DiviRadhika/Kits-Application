@@ -55,7 +55,7 @@
                     <label>User First Name</label><label style="color: red;margin-left: 4px;">*</label>
 
                     <input autocomplete="off" type="text" class="form-control" maxlength="100" id="first_name"
-                    placeholder="Enter First Name"  pattern="[A-Za-z\s]+"  formControlName="first_name"
+                    placeholder="Enter User First Name"  pattern="[A-Za-z\s]+"  formControlName="first_name"
                     [class.custom-invalid]="shouldShowRequired('first_name') && userForm.get('first_name')?.touched">
                   <div *ngIf="shouldShowRequired('first_name')" class="invalid-feedback">
                   </div>
@@ -71,7 +71,7 @@
                   <label>User Last Name</label>
                   <div class="form-group">
                     <input autocomplete="off" type="text" class="form-control" id="last_name"
-                      placeholder="Enter Last Name" formControlName="last_name">
+                      placeholder="Enter User Last Name" formControlName="last_name">
                     </div>
 
                       <div *ngIf="userForm.get('last_name')?.hasError('pattern') && userForm.get('last_name')?.touched"
@@ -226,7 +226,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6">
-        <script>document.write(new Date().getFullYear())</script>2023 © Roboxa
+        <script>document.write(new Date().getFullYear())</script>2023 © ROBOXA
       </div>
     </div>
   </div>

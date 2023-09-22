@@ -340,10 +340,7 @@ reset(){
 }
 
   submit(): void {
-  
-  
-    if(this.userForm.controls['first_name'].value ==='' ||this.userForm.controls['first_name'].value=== undefined ||this.userForm.controls['first_name'].value=== null ){
-      
+    if(this.userForm.controls['first_name'].value ==='' ||this.userForm.controls['first_name'].value=== undefined ||this.userForm.controls['first_name'].value=== null ){  
     }
     else{
       this.userForm.controls['first_name'].setValue(this.toTitleCase(this.userForm.controls['first_name'].value));
@@ -394,7 +391,7 @@ reset(){
         userObj.site_id  = ''
         userObj.sponsor_id  = ''
       }
-       
+     
         
         // 37e820d4-0098-4dd0-9c6b-a38db965062d
     
@@ -403,9 +400,10 @@ reset(){
         userObj.status = this.userForm.controls['status'].value
         if(this.getUserData.role === 'CRA'){
           userObj.site_id = this.userForm.controls['sId'].value
+        
           userObj.sponsor_id = ''
         }
-        if(this.getUserData.role === 'CRA Coordinator'){
+        else if(this.getUserData.role === 'CRA Coordinator'){
           userObj.site_id = this.userForm.controls['sId'].value
           userObj.sponsor_id = ''
         }
@@ -418,7 +416,8 @@ reset(){
           userObj.site_id  = ''
           userObj.sponsor_id  = ''
         }
-        this.adminService.getUserUpdate( this.id,userObj).subscribe(
+       
+        this.adminService.getUserUpdate(this.id,userObj).subscribe(
           (data: any) => {
 
            

@@ -12,6 +12,9 @@ import { ConfirmationService } from 'primeng/api';
   styleUrls: ['./lab-create.component.css']
 })
 export class LabCreateComponent {
+  getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
   public isEdit: boolean = false;
   public id: any = '';
   files1: any;

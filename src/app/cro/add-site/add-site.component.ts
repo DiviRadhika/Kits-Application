@@ -23,7 +23,7 @@ export class AddSiteComponent {
   private capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
-  
+
   investigate = ['Principal Investigator', 'Sub-Investigator', 'Study Coordinator']
   public isEdit: boolean = false;
   public id: any = '';
@@ -32,7 +32,7 @@ export class AddSiteComponent {
   mobile: any;
   investigatorForm: any;
   investigatorFormedit: any;
-  notifierEmails:[] = []
+  notifierEmails: [] = []
   view: boolean = false;
   table: boolean = false;
   tableE: boolean = false;
@@ -41,22 +41,22 @@ export class AddSiteComponent {
     private fb: FormBuilder, private router: Router,
     private messageService: MessageService,
     private formBuilder: FormBuilder,
-    private dataService:DataService
+    private dataService: DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
       if (data.id) {
 
 
-       
+
         this.isEdit = true;
         this.id = data.id;
         _cro.getSiteById(data.id).subscribe((data: any) => {
           this.siteForm.patchValue(data);
           this.notifierEmails = data.notifier_emails
-          if(this.notifierEmails.length > 0){
+          if (this.notifierEmails.length > 0) {
             this.tableE = true
           }
-          
+
           this.setContactFormValues(this.notifierEmails)
           this.getData = data
           this.siteForm.controls['site_data_code'].disable();
@@ -65,54 +65,54 @@ export class AddSiteComponent {
           // this.siteForm.controls['email'].disable();
         });
       }
-      if(data.val == 'view'){
+      if (data.val == 'view') {
         this.view = true
         this.siteForm.disable()
-        
+
       }
-      else{
-     
+      else {
+
       }
     });
-   
-    
+
+
     this.investigatorForm = this.formBuilder.group({
       investigator: this.formBuilder.array([])
     });
     this.investigatorFormedit = this.formBuilder.group({
       investigatoredit: this.formBuilder.array([])
     });
-    
+
   }
 
   public siteForm: FormGroup = new FormGroup({
     site_data_code: new FormControl("", [Validators.required]),
-    site_data_name: new FormControl("",  [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    site_data_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     legal_site_data_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
-  
+
     city: new FormControl("", [Validators.required]),
-     district: new FormControl(""),
+    district: new FormControl(""),
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
     website: new FormControl(''),
-    mobile_telephone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-   email:new FormControl(''),
-   investigator_name: new FormControl(''),
-   investigator_email: new FormControl(''),
-   sub_investigator_name: new FormControl(''),
-   sub_investigator_email: new FormControl(''),
-   coordinator_name: new FormControl(''),
-   coordinator_email: new FormControl(''),
+    mobile_telephone: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    email: new FormControl(''),
+    investigator_name: new FormControl(''),
+    investigator_email: new FormControl(''),
+    sub_investigator_name: new FormControl(''),
+    sub_investigator_email: new FormControl(''),
+    coordinator_name: new FormControl(''),
+    coordinator_email: new FormControl(''),
 
   });
   getStatesObservable$ = null;
   ngOnInit(): void {
-   
+
     this.countries = this.dataService.getCountries();
     this.siteForm.get('country')?.valueChanges.subscribe(country => {
 
@@ -125,19 +125,19 @@ export class AddSiteComponent {
       this.districtEnable = true
     });
   }
-  getStatesForCountry(country:any){
+  getStatesForCountry(country: any) {
     const payload = {
       country: country
     }
-   
+
     const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
     getStatesObservable$.subscribe((res: any) => {
       console.log(res)
-      if(res && res.body && res.body.states) {
+      if (res && res.body && res.body.states) {
         this.states = this.dataService.getStates(res.body.states);
         // this.addToStatesList(res.body.states, country);
       }
-      
+
     });
 
   }
@@ -146,12 +146,12 @@ export class AddSiteComponent {
   }
   setContactFormValues(contacts: any[]) {
     const contactFormArray = this.investigatorFormedit.get('investigatoredit') as FormArray;
-  
+
     while (contactFormArray.length) {
       contactFormArray.removeAt(0);
     }
-  
-    this.notifierEmails.forEach((contact:any) => {
+
+    this.notifierEmails.forEach((contact: any) => {
       console.log(contact)
       const editcontactsForm = this.formBuilder.group({
         first_name: [contact.first_name],
@@ -163,7 +163,7 @@ export class AddSiteComponent {
         // name: [contact.name],
         // email: [contact.email],
       });
-  
+
       contactFormArray.push(editcontactsForm);
     });
     if (this.view === true) {
@@ -174,7 +174,7 @@ export class AddSiteComponent {
 
       this.investigatorFormedit.disable();
     }
-  }  
+  }
   investigatorCreate() {
     return this.formBuilder.group({
       role: [''],
@@ -183,7 +183,7 @@ export class AddSiteComponent {
       email: [''],
       contact: [''],
       editable: ['true']
-  
+
     });
   }
   investigatorCreatee() {
@@ -194,17 +194,17 @@ export class AddSiteComponent {
       email: [''],
       contact: [''],
       editable: ['']
-  
+
     });
   }
-  
-  
+
+
   addInvestigators() {
     this.table = true
     const investigators = this.investigatorForm.get('investigator') as FormArray;
     investigators.push(this.investigatorCreate());
   }
-  addInvestigatorse(){
+  addInvestigatorse() {
     this.tableE = true
     const investigators = this.investigatorFormedit.get('investigatoredit') as FormArray;
     investigators.push(this.investigatorCreatee());
@@ -244,43 +244,53 @@ export class AddSiteComponent {
   removeeditSite(j: number) {
     this.investigatorFormedit.get('investigatoredit').removeAt(j);
   }
-  
-  reset(){
-    if(this.isEdit === true){
+
+  reset() {
+    if (this.isEdit === true) {
       window.location.reload()
     }
-    else{
-    this.siteForm.reset()
+    else {
+      this.siteForm.reset()
     }
   }
   toTitleCase(str: string): string {
-    
+
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   }
   submit() {
-    
+
     // this.siteForm.controls['site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['site_data_name'].value));
     // this.siteForm.controls['legal_site_data_name'].setValue(this.capitalizeFirstLetter(this.siteForm.controls['legal_site_data_name'].value));
 
-    if(this.siteForm.controls['site_data_name'].value){
+    if (this.siteForm.controls['site_data_name'].value) {
       this.siteForm.controls['site_data_name'].setValue(this.toTitleCase(this.siteForm.controls['site_data_name'].value));
-          }
-          if(this.siteForm.controls['legal_site_data_name'].value){
+    }
+    if (this.siteForm.controls['legal_site_data_name'].value) {
       this.siteForm.controls['legal_site_data_name'].setValue(this.toTitleCase(this.siteForm.controls['legal_site_data_name'].value));
-          }
-          if(this.siteForm.controls['address_1'].value){
-            this.siteForm.controls['address_1'].setValue(this.toTitleCase(this.siteForm.controls['address_1'].value));
-                }
-                if(this.siteForm.controls['address_2'].value){
-                  this.siteForm.controls['address_2'].setValue(this.toTitleCase(this.siteForm.controls['address_2'].value));
-                      }
-    if (this.siteForm.controls['mobile_telephone'].value === '' ||  this.siteForm.controls['mobile_telephone'].value === null) {
+    }
+    if (this.siteForm.controls['address_1'].value) {
+      this.siteForm.controls['address_1'].setValue(this.toTitleCase(this.siteForm.controls['address_1'].value));
+    }
+    if (this.siteForm.controls['address_2'].value) {
+      this.siteForm.controls['address_2'].setValue(this.toTitleCase(this.siteForm.controls['address_2'].value));
+    }
+    if (this.siteForm.controls['city'].value) {
+
+      this.siteForm.controls['city'].setValue(this.toTitleCase(this.siteForm.controls['city'].value));
+
+    }
+    if (this.siteForm.controls['district'].value) {
+
+      this.siteForm.controls['district'].setValue(this.toTitleCase(this.siteForm.controls['district'].value));
+
+    }
+    if (this.siteForm.controls['mobile_telephone'].value === '' || this.siteForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }
     else {
       this.mobile = this.siteForm.controls['mobile_telephone'].value.toString()
     }
-   
+
 
     if (this.siteForm.invalid) {
       // Mark all form controls as touched to trigger validation
@@ -298,7 +308,7 @@ export class AddSiteComponent {
         "legal_site_data_name": this.siteForm.controls['legal_site_data_name'].value,
         "address_1": this.siteForm.controls['address_1'].value,
         "address_2": this.siteForm.controls['address_2'].value,
-       
+
         "city": this.siteForm.controls['city'].value,
         "district": this.siteForm.controls['district'].value,
         "region": this.siteForm.controls['region'].value,
@@ -308,9 +318,9 @@ export class AddSiteComponent {
         "mobile_telephone": this.mobile,
         "extension": this.siteForm.controls['extension'].value,
         "website": this.siteForm.controls['website'].value,
-        "email"  :this.siteForm.controls['email'].value,
+        "email": this.siteForm.controls['email'].value,
         "user_id": sessionStorage.getItem('userid'),
-  
+
 
 
 
@@ -327,23 +337,23 @@ export class AddSiteComponent {
         obj.notifier_emails = trimmedContactse
 
 
-        
-   
-          this._cro.updateSiteDetails(obj).subscribe(
-            (data: any) => {
-              setTimeout(() => {
-                this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Updated Successfully' });
-              }, 1000);
 
-              this.router.navigate(['/home/cro/siteGrid'])
-            },
-            (err: any) => {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
-            }
-          );
+
+        this._cro.updateSiteDetails(obj).subscribe(
+          (data: any) => {
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Updated Successfully' });
+            }, 1000);
+
+            this.router.navigate(['/home/cro/siteGrid'])
+          },
+          (err: any) => {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
+          }
+        );
       }
       else {
-     
+
 
         const trimmedContacts = this.investigatorForm.value.investigator.map((contact: any) => {
           return {
@@ -351,48 +361,48 @@ export class AddSiteComponent {
             email: contact.email.trim()
           };
         });
-       
-        
+
+
         obj.notifier_emails = trimmedContacts
 
 
         // obj.email = this.siteForm.controls['uemail'].value,
-          // obj.status = 'active',
-          // obj.password = this.siteForm.controls['password'].value,
-          // obj.first_name = this.siteForm.controls['first_name'].value,
-          // obj.role = 'CRA',
-          this._cro.CreateSiteDetails(obj).subscribe(
-            (data: any) => {
-              setTimeout(() => {
-                this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Created Successfully' });
-              }, 1000);
+        // obj.status = 'active',
+        // obj.password = this.siteForm.controls['password'].value,
+        // obj.first_name = this.siteForm.controls['first_name'].value,
+        // obj.role = 'CRA',
+        this._cro.CreateSiteDetails(obj).subscribe(
+          (data: any) => {
+            setTimeout(() => {
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Created Successfully' });
+            }, 1000);
 
-              this.router.navigate(['/home/cro/siteGrid'])
-            },
-            (err: any) => {
-              this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
+            this.router.navigate(['/home/cro/siteGrid'])
+          },
+          (err: any) => {
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
 
 
-            }
-          )
+          }
+        )
       }
 
     }
   }
   validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
-    
+
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
-    if(phone ==='mobile'){
-    if (numericValue.length > 20) {
+    if (phone === 'mobile') {
+      if (numericValue.length > 20) {
         numericValue = numericValue.slice(0, 20);
+      }
     }
-  }
     input.value = numericValue;
-  
-}
+
+  }
 
 }
 

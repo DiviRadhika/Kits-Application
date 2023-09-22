@@ -126,9 +126,28 @@ export class KitVerificationComponent implements OnInit {
       }
      
     });
-
-
   }
+    
+  checkVerification(selectedValue: any, rowIndex: number) {
+    const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.prepration');
+    const verificationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.status');
+    if (selectedValue.target.value === 'Verified') {
+     if(preprationControl.value === 'In Progress'){
+        alert('You cannot change status to verified until and unless Kit Preparation is completed');
+        verificationControl.patchValue(this.preprationData[0].value);
+      }
+    }
+  }
+  checkVerificationv(cardIndex: number, rowIndex: number) {
+    const item = this.vMatDetails[cardIndex];
+    const verificationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('status');
+    const preprationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('prepration');
+    if (verificationControl.value === 'Verified' && (preprationControl.value === 'In Progress')) {
+      alert('You cannot change status to verified until and unless Kit Preparation is completed');  
+      verificationControl.patchValue(this.preprationData[0].value)
+    }
+  }
+
   getprotocolDetails(id:any) {
     this.scount = ''
     this.protocolService.getProtocolId(id).subscribe((protocols) => {

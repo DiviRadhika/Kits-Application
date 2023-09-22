@@ -169,7 +169,7 @@
 
 
                                                                             <td width="25%">
-                                                                                <select formControlName="status"
+                                                                                <select formControlName="status" (change)="checkVerification($event, i)"
                                                                                     maxlength="40" class="form-select"
                                                                                     aria-label="Default select example">
 
@@ -282,7 +282,7 @@
                                                                             </td>
 
                                                                             <td width="25%">
-                                                                                <select formControlName="status"
+                                                                                <select formControlName="status" (change)="checkVerificationv(i, j)"
                                                                                     class="form-select form-control">
                                                                                     <option
                                                                                     *ngFor="let s of preprationData"
@@ -352,7 +352,7 @@
         <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
+                    <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
                 </div>
             </div>
         </footer>

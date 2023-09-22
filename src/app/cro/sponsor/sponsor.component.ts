@@ -18,15 +18,15 @@ export class SponsorComponent implements OnInit {
   stateenable: boolean | undefined;
   countries: any;
   districtEnable: boolean | undefined;
-  edits: boolean= false;
+  edits: boolean = false;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
   private capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
-  
- 
+
+
   public isEdit: boolean = false;
   public id: any = '';
   myData: { text: any; value: any; }[] = [];
@@ -36,15 +36,15 @@ export class SponsorComponent implements OnInit {
   contactForm: any
   public sponsorForm: FormGroup = new FormGroup({
     sponsor_code: new FormControl(''),
-    existing_sponsor_code: new FormControl("", [Validators.required,Validators.minLength(5)]),
-    sponsor_name: new FormControl("", [Validators.required,Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
-    legal_sponsor_name: new FormControl("", [Validators.required,Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    existing_sponsor_code: new FormControl("", [Validators.required, Validators.minLength(5)]),
+    sponsor_name: new FormControl("", [Validators.required, Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
+    legal_sponsor_name: new FormControl("", [Validators.required, Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
     city: new FormControl("", [Validators.required]),
     district: new FormControl(""),
     region: new FormControl("", [Validators.required]),
-    zip_code: new FormControl("", [Validators.required,Validators.maxLength(12)]),
+    zip_code: new FormControl("", [Validators.required, Validators.maxLength(12)]),
     country: new FormControl("", [Validators.required]),
     office_telephone: new FormControl(""),
     extension: new FormControl(""),
@@ -67,7 +67,7 @@ export class SponsorComponent implements OnInit {
     private admin: AdminService,
     private messageService: MessageService,
     private formBuilder: FormBuilder,
-    private dataService:DataService
+    private dataService: DataService
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
 
@@ -77,12 +77,12 @@ export class SponsorComponent implements OnInit {
         _cro.getSponsorById(data.id).subscribe((data: any) => {
           this.contactDetails = data.notifier_details
           console.log(this.contactDetails.length);
-          if(this.contactDetails.length > 0){
+          if (this.contactDetails.length > 0) {
             this.tableE = true
           }
 
           this.setContactFormValues(this.contactDetails);
-        
+
           // console.log(data.country)
           // this.sponsorForm.controls['country'].setValue(data.country)
           // this.sponsorForm.controls['country'].setValue(data.country)
@@ -105,9 +105,9 @@ export class SponsorComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-   
 
-    
+
+
     this.countries = this.dataService.getCountries();
     this.sponsorForm.get('country')?.valueChanges.subscribe((country: any) => {
 
@@ -120,7 +120,7 @@ export class SponsorComponent implements OnInit {
       // this.getStatesForCountry(country);
       this.districtEnable = true
     })
-   
+
     this.contactForm = this.formBuilder.group({
       contacts: this.formBuilder.array([])
     });
@@ -128,30 +128,30 @@ export class SponsorComponent implements OnInit {
     this.editcontactsForm = this.formBuilder.group({
       editcontacts: this.formBuilder.array([]),
     });
-    if( this.isEdit === true){
+    if (this.isEdit === true) {
 
-    }else{
-    this.getSponsorDetails()
+    } else {
+      this.getSponsorDetails()
     }
   }
-  getStatesForCountry(country:any){
+  getStatesForCountry(country: any) {
     const payload = {
       country: country
     }
     const getStatesObservable$ = this.dataService.getAllStatesAPI(payload).pipe(takeLast(1));;
     getStatesObservable$.subscribe((res: any) => {
       console.log(res)
-      if(res && res.body && res.body.states) {
+      if (res && res.body && res.body.states) {
         this.states = this.dataService.getStates(res.body.states);
         // this.addToStatesList(res.body.states, country);
       }
-      
+
     });
-    
+
   }
-removeeditsponser(j: number) {
-  this.editcontactsForm.get('editcontacts').removeAt(j);
-}
+  removeeditsponser(j: number) {
+    this.editcontactsForm.get('editcontacts').removeAt(j);
+  }
 
   removeSponsor(j: number) {
     this.contactForm.get('contacts').removeAt(j);
@@ -164,15 +164,15 @@ removeeditsponser(j: number) {
     }
 
     this.contactDetails.forEach((contact: any) => {
-   
+
       const editcontactsForm = this.formBuilder.group({
         first_name: [contact.first_name],
         last_name: [contact.last_name],
         email: [contact.email],
         contact: [contact.contact],
         designation: [contact.designation],
-        editable:[contact.editable]
-     
+        editable: [contact.editable]
+
       });
 
       contactFormArray.push(editcontactsForm);
@@ -253,35 +253,45 @@ removeeditsponser(j: number) {
     const control = this.sponsorForm.get(controlName);
     return !!control?.hasError('pattern') && !!control?.value && (control?.dirty || control?.touched);
   }
-  reset(){
-    if(this.isEdit === true){
+  reset() {
+    if (this.isEdit === true) {
       window.location.reload()
     }
-    else{
-    this.sponsorForm.reset()
+    else {
+      this.sponsorForm.reset()
     }
   }
   toTitleCase(str: string): string {
-    
+
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   }
   submit() {
     // this.sponsorForm.controls['sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['sponsor_name'].value));
     // this.sponsorForm.controls['legal_sponsor_name'].setValue(this.capitalizeFirstLetter(this.sponsorForm.controls['legal_sponsor_name'].value));
     // // Assign the trimmed contacts to the notifier_details property of the obj object
-   
-    if(this.sponsorForm.controls['sponsor_name'].value){
+
+    if (this.sponsorForm.controls['sponsor_name'].value) {
       this.sponsorForm.controls['sponsor_name'].setValue(this.toTitleCase(this.sponsorForm.controls['sponsor_name'].value));
-          }
-          if(this.sponsorForm.controls['legal_sponsor_name'].value){
+    }
+    if (this.sponsorForm.controls['legal_sponsor_name'].value) {
       this.sponsorForm.controls['legal_sponsor_name'].setValue(this.toTitleCase(this.sponsorForm.controls['legal_sponsor_name'].value));
-          }
-          if(this.sponsorForm.controls['address_1'].value){
-            this.sponsorForm.controls['address_1'].setValue(this.toTitleCase(this.sponsorForm.controls['address_1'].value));
-                }
-                if(this.sponsorForm.controls['address_2'].value){
-                  this.sponsorForm.controls['address_2'].setValue(this.toTitleCase(this.sponsorForm.controls['address_2'].value));
-                      }
+    }
+    if (this.sponsorForm.controls['address_1'].value) {
+      this.sponsorForm.controls['address_1'].setValue(this.toTitleCase(this.sponsorForm.controls['address_1'].value));
+    }
+    if (this.sponsorForm.controls['address_2'].value) {
+      this.sponsorForm.controls['address_2'].setValue(this.toTitleCase(this.sponsorForm.controls['address_2'].value));
+    }
+    if (this.sponsorForm.controls['city'].value) {
+
+      this.sponsorForm.controls['city'].setValue(this.toTitleCase(this.sponsorForm.controls['city'].value));
+
+    }
+    if (this.sponsorForm.controls['district'].value) {
+
+      this.sponsorForm.controls['district'].setValue(this.toTitleCase(this.sponsorForm.controls['district'].value));
+
+    }
     if (this.sponsorForm.controls['mobile_telephone'].value === '' || this.sponsorForm.controls['mobile_telephone'].value === null) {
       this.mobile = ''
     }
@@ -289,16 +299,17 @@ removeeditsponser(j: number) {
       this.mobile = this.sponsorForm.controls['mobile_telephone'].value.toString()
     }
 
-   
+
     if (this.sponsorForm.controls['email'].invalid) {
 
       Object.keys(this.sponsorForm.controls).forEach(key => {
         this.sponsorForm.get(key)?.markAsTouched();
       });
-    
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Email' });}
-      // If email is valid (matches email pattern), show a success toast message
-     else if(this.sponsorForm.invalid) {
+
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Email' });
+    }
+    // If email is valid (matches email pattern), show a success toast message
+    else if (this.sponsorForm.invalid) {
       // Mark all form controls as touched to trigger validation
       Object.keys(this.sponsorForm.controls).forEach(key => {
         this.sponsorForm.get(key)?.markAsTouched();
@@ -357,18 +368,18 @@ removeeditsponser(j: number) {
         );
       }
       else {
-  
+
         const trimmedContacts = this.contactForm.value.contacts.map((contact: any) => {
           return {
             ...contact,
             email: contact.email.trim()
           };
         });
-       
-        
+
+
         obj.notifier_details = trimmedContacts
-      
-       
+
+
         this._cro.CreateSponsorDetails(obj).subscribe(
 
           (data: any) => {
@@ -378,7 +389,7 @@ removeeditsponser(j: number) {
             this.route.navigate(['/home/cro/sponsorGrid'])
           },
           (err: any) => {
-            
+
             this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.error });
 
           }
@@ -399,26 +410,26 @@ removeeditsponser(j: number) {
     return null; // Return null for valid email format
   }
 
-   validateMobileNumber(input: any, phone: any) {
+  validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
-    
+
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
-    if(phone ==='mobile'){
-    if (numericValue.length > 20) {
+    if (phone === 'mobile') {
+      if (numericValue.length > 20) {
         numericValue = numericValue.slice(0, 20);
+      }
     }
-  }
-  else{
-    if (numericValue.length > 20) {
-      numericValue = numericValue.slice(0, 20);
-  }
-  }
-    
+    else {
+      if (numericValue.length > 20) {
+        numericValue = numericValue.slice(0, 20);
+      }
+    }
+
     input.value = numericValue;
-  
-}
+
+  }
 
 
 

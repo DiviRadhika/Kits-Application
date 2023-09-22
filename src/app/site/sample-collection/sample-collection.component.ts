@@ -325,9 +325,6 @@ export class SampleCollectionComponent implements OnInit {
 
   }
 
-
-
-
   createVisitKitGroup() {
 
     return this.formBuilder.group({
