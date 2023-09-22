@@ -86,7 +86,7 @@
                                                         <button type="submit" (click)="upload()">Upload</button>
                                                         <br>
                                                         <table id="datatable"
-                                                            class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                            class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline font-size-11"
                                                             role="grid" aria-describedby="datatable_info"
                                                             style="width: 1182px;">
                                                             <thead>
@@ -168,7 +168,7 @@
 
 
                                                     <div class="table-responsive" [formGroup]="ScreenKitForm">
-                                                        <table class="table table-striped mb-0"
+                                                        <table class="table table-striped mb-0 font-size-11"
                                                             formArrayName="screenKitList" style="width: 130%; ">
                                                             <thead Style="background:#EEE">
                                                                 <tr>
@@ -187,7 +187,7 @@
                                                             <tbody>
                                                                 <tr [formGroupName]="i" *ngFor="
                                                             let item of ScreenKitForm.get('screenKitList')
-                                                              .controls; let i = index"> 
+                                                              .controls; let i = index">
                                                                     <td>
                                                                         <input type="text" placeholder="kitId"
                                                                             [disabled]="true" formControlName="kitId"
@@ -338,7 +338,7 @@
                                                     [modal]="true">
 
                                                     <table id="datatable"
-                                                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline font-size-11"
                                                         role="grid" aria-describedby="datatable_info"
                                                         style="width: 1182px;">
                                                         <thead>
@@ -408,7 +408,7 @@
                                                         <button type="submit" (click)="uploadv()">Upload</button>
                                                         <br>
                                                         <table id="datatable"
-                                                            class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                            class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline font-size-11"
                                                             role="grid" aria-describedby="datatable_info"
                                                             style="width: 1182px;">
                                                             <thead>
@@ -489,7 +489,7 @@
                                                     </p-dialog>
                                                     <div class="table-responsive" [formGroup]="item.visitKitFormGroup">
 
-                                                        <table class="table table-striped mb-0"
+                                                        <table class="table table-striped mb-0 font-size-11"
                                                             formArrayName="visitKitList" style="width: 130%; ">
                                                             <thead Style="background:#EEE">
                                                                 <tr>

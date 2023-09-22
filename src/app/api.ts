@@ -2,8 +2,8 @@
 // // export const apin = "http://122.175.43.71:5001/api"
 
 // export const apin = window.location.protocol + '//' + window.location.hostname+':5001/api';
+export const apin = "http://122.175.43.71:5001/api"
 
-export const apin = "http://34.100.227.119:5001/api";
 
 
 export const endPointsUser = {
@@ -18,7 +18,7 @@ export const endPointsUser = {
     getUserAddUpdate: `${apin}/user/register`,
     getUserUpdate: `${apin}/user_actions/`,
 
-    // Endpoints for  Login 
+    // Endpoints for  Login
     login: `${apin}/login`,
     sendotp: `${apin}/login/sendotp`,
     reset: `${apin}/user/register`,

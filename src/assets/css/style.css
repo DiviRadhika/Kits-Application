@@ -190,11 +190,22 @@ hr {
   }
 
   #datatable .edit-btn {
-	font-size: 12px; /* Adjust the value to reduce the font size and scale the button and its content */
-	line-height: 1; /* Set line-height to 1 to reduce any extra spacing inside the button */
-	padding: 5px 6px; /* Adjust the padding to control the button size */
-	/* width: 15px */
-  }
+    font-size: 12px; /* Adjust the value to reduce the font size and scale the button and its content */
+    line-height: 1; /* Set line-height to 1 to reduce any extra spacing inside the button */
+    padding: 5px 6px; /* Adjust the padding to control the button size */
+    /* width: 15px */
+    background: #20456a;
+      border: #20456a;
+    }
+
+    #datatable .edit-btn:hover {
+      font-size: 12px; /* Adjust the value to reduce the font size and scale the button and its content */
+      line-height: 1; /* Set line-height to 1 to reduce any extra spacing inside the button */
+      padding: 5px 6px; /* Adjust the padding to control the button size */
+      /* width: 15px */
+      background: #ff414b ;
+        border: #ff414b ;
+      }
 
   #datatable .edit-btn svg {
 	width: 14px; /* Adjust the value to reduce the width of the icon */

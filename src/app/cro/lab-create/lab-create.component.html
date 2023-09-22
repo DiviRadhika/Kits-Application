@@ -26,7 +26,7 @@
                     <div style="padding:1px" *ngIf="view" class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4  class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> View Material
                         </h4>
-                        
+
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
@@ -34,7 +34,7 @@
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
                                         class="waves-effect">Material</a></li>
                                 <li  class="breadcrumb-item active">View Material</li>
-                            
+
                             </ol>
                         </div>
 
@@ -45,7 +45,7 @@
             <br>
 
             <div class="card ml-2 mr-2 bg-white">
-                <div class="container">
+                <div class="container-fulid">
 
                     <div class="card-body">
                         <h5 style="color: rgb(250, 39, 39);">Material Basic Details</h5>
@@ -54,7 +54,7 @@
                             <div class="row">
 
 
-                                <div class="col-md-3">
+                                <div class="col-md-12 mb-2">
                                     <div class="form-group">
 
                                        <label>Material<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
@@ -66,18 +66,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-12  mb-2">
                                     <div class="form-group">
                                        <label>Size (click on Enter after adding Size)<label style="color: red; display: inline;margin-left: 4px;">*</label></label><br>
-                                        <p-chips formControlName="size" placeholder="size"
+                                        <p-chips formControlName="size" placeholder="size" class="form-control"
                                              [class.custom-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched"></p-chips>
-                                        <div *ngIf="shouldShowRequired('size')" class="invalid-feedback">
+                                        <div *ngIf="shouldShowRequired('size')"  class="invalid-feedback">
                                             Size is required.
                                         </div>
 
                                     </div>
                                 </div>
-                                <div *ngIf="fieldDisplay" class="col-md-2">
+                                <div *ngIf="fieldDisplay" class="col-md-4">
                                     <div class="form-group">
                                         <label>Upload Image</label><br>
                                         <button type="submit" class="btn btn-primary  r-darkblue pull-Right"
