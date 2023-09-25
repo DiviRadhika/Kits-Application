@@ -191,6 +191,10 @@
                       <label>District</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="40" id="District"
                         placeholder="Enter District" formControlName="district">
+                        <div *ngIf="sponsorForm.get('district')?.hasError('pattern') "
+                        class="text-danger">
+                          District Accepts Alphabets and spaces only.
+                          </div>
 
                     </div>
                   </div>
@@ -203,6 +207,10 @@
                       <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                         City is required.
                       </div>
+                      <div *ngIf="sponsorForm.get('city')?.hasError('pattern') "
+                      class="text-danger">
+                        City Accepts Alphabets and spaces only.
+                        </div>
                     </div>
                   </div>
                 </div>

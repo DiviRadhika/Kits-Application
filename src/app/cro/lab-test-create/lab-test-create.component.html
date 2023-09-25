@@ -192,6 +192,10 @@ class="form-control" id="Address"
 
 class="form-control" id="District"
                                                 placeholder="Enter District" formControlName="district">
+                                                <div *ngIf="labTestCreateForm.get('district')?.hasError('pattern')"
+                                            class="text-danger">
+                                                 District Accepts Alphabets and spaces only.
+                                              </div>
 
                                         </div>
                                     </div>
@@ -204,6 +208,10 @@ class="form-control" id="District"
                                             <div *ngIf="shouldShowRequired('city')" class="invalid-feedback">
                                                 City is required.
                                             </div>
+                                            <div *ngIf="labTestCreateForm.get('city')?.hasError('pattern')"
+                                            class="text-danger">
+                                            City Accepts Alphabets and spaces only.
+                                              </div>
                                         </div>
                                     </div>
                                 </div>

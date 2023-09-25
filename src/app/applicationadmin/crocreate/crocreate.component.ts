@@ -63,8 +63,8 @@ export class CROcreateComponent implements OnInit {
     address_1: new FormControl("", [Validators.required]),
     address_2: new FormControl(""),
 
-    city: new FormControl("", [Validators.required]),
-    district: new FormControl(""),
+    city: new FormControl("", [Validators.required,Validators.pattern(/^[A-Za-z ]+$/)]),
+    district: new FormControl("",Validators.pattern(/^[A-Za-z ]+$/)),
     region: new FormControl("", [Validators.required]),
     zip_code: new FormControl("", [Validators.required]),
     country: new FormControl("", [Validators.required]),
