@@ -142,6 +142,7 @@ export class LabCreateComponent {
     }
   }
   tabchange(){
+
     sessionStorage.setItem('tab', 'yes');  
   }
   submit() {

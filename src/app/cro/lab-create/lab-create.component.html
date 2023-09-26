@@ -32,7 +32,7 @@
                                 <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                 </li>
                                 <li class="breadcrumb-item"><a routerLink="/home/cro/labTestGrid"
-                                        class="waves-effect">Material</a></li>
+                                    (click)="tabchange()"    class="waves-effect">Material</a></li>
                                 <li  class="breadcrumb-item active">View Material</li>
 
                             </ol>
@@ -97,7 +97,7 @@
                                     <div class="form-group" *ngIf="view">
                                         <span  *ngIf="editImage" ><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + labData.image}}" />
-                                            &nbsp;&nbsp;&nbsp;<a *ngIf="!view" style="color:blue">Click here To Upload New
+                                            &nbsp;&nbsp;&nbsp;<a *ngIf="!view" style="color:blue;cursor: pointer">Click here To Upload New
                                                 image</a></span>
                                         <span *ngIf="imgDisplay"><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + bas2}}" /></span>
@@ -105,7 +105,7 @@
                                     <div class="form-group" *ngIf="!view">
                                         <span  *ngIf="editImage" (click)="confirm2(labData.image, labData.name)"><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + labData.image}}" />
-                                            &nbsp;&nbsp;&nbsp;<a *ngIf="!view" style="color:blue">Click here To Upload New
+                                            &nbsp;&nbsp;&nbsp;<a *ngIf="!view" style="color:blue;cursor: pointer">Click here To Upload New
                                                 image</a></span>
                                         <span *ngIf="imgDisplay"><img style="width:100px"
                                                 src="{{'data:image/jpg;base64,' + bas2}}" /></span>
