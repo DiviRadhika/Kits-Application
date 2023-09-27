@@ -255,7 +255,7 @@ export class LoginComponent implements OnInit {
     this.messageService.clear();
     this.emailvalue = this.loginForm.controls['username'].value.toLowerCase();
     if(this.emailvalue === '' || this.emailvalue === undefined || this.emailvalue === null){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name' });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name/Email' });
 
     }
     else{
