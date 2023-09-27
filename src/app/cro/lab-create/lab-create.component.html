@@ -59,7 +59,7 @@
 
                                        <label>Material<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                       <input autocomplete="off" type="text" class="form-control" id="material" formControlName="material"
-                                            placeholder=" Enter Material"
+                                            placeholder="Enter Material"
                                              [class.custom-invalid]="shouldShowRequired('material') && labForm.get('material')?.touched">
                                         <div *ngIf="shouldShowRequired('material')" class="invalid-feedback">
                                             Material is required.
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-md-12  mb-2">
                                     <div class="form-group">
-                                       <label>Size (click on Enter after adding Size)<label style="color: red; display: inline;margin-left: 4px;">*</label></label><br>
+                                       <label>Size (Click on Enter After Adding Size)<label style="color: red; display: inline;margin-left: 4px;">*</label></label><br>
                                         <p-chips formControlName="size" placeholder="size" class="form-control"
                                              [class.custom-invalid]="shouldShowRequired('size') && labForm.get('size')?.touched"></p-chips>
                                         <div *ngIf="shouldShowRequired('size')"  class="invalid-feedback">

@@ -69,7 +69,7 @@
                     <div class="form-group">
                       <label>Reference Sponsor Code</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="10" id="SponsorCode"
-                        placeholder="Enter Sponsor Code" formControlName="existing_sponsor_code"
+                        placeholder="Enter Reference Sponsor Code" formControlName="existing_sponsor_code"
                          [class.custom-invalid]="shouldShowRequired('existing_sponsor_code') && sponsorForm.get('existing_sponsor_code')?.touched">
 
                       <div *ngIf="shouldShowRequired('existing_sponsor_code')" class="invalid-feedback">
@@ -91,7 +91,7 @@
                       </div>
                       <div *ngIf="sponsorForm.get('sponsor_name')?.hasError('pattern') "
                         class="text-danger">
-                          Legal Site Name Accepts Alphabets and spaces only.
+                          Sponsor Name Accepts Alphabets and spaces only.
                           </div>
                       <!-- <div *ngIf="shouldShowLengthError('sponsor_name')" class="invalid-feedback">
                         Sponsor Name should contain between 5 and 15 characters.
@@ -105,13 +105,13 @@
                     <div class="form-group">
                       <label>Legal Sponsor Name</label><label style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="100" id="LegalSponsorName"
-                        placeholder="Enter legal sponsor name" formControlName="legal_sponsor_name"
+                        placeholder="Enter Legal Sponsor Name" formControlName="legal_sponsor_name"
                         [class.custom-invalid]="shouldShowRequired('legal_site_data_name') && sponsorForm.get('legal_site_data_name')?.touched">
                         <div *ngIf="shouldShowRequired('legal_sponsor_name')" class="text-danger">
                         </div>
                         <div *ngIf="sponsorForm.get('legal_sponsor_name')?.hasError('pattern') "
                         class="text-danger">
-                          Legal Site Name Accepts Alphabets and spaces only.
+                          Legal Sponsor Name Accepts Alphabets and spaces only.
                           </div>
                     </div>
                   </div>
@@ -146,7 +146,7 @@
                     <div class="form-group">
                       <label>Address 2</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="80" id="Address"
-                        placeholder="Enter Address 2(optional)" formControlName="address_2">
+                        placeholder="Enter Address 2(Optional)" formControlName="address_2">
                     </div>
                   </div>
 
@@ -279,7 +279,7 @@
                       <label>Primary Representative Email Id</label><label
                         style="color: red;margin-left: 4px;">*</label>
                       <input autocomplete="off" type="text" class="form-control" maxlength="60" id="Address 1"
-                        placeholder="Enter Email" formControlName="email">
+                        placeholder="Enter Primary Representative Email Id" formControlName="email">
                       <div *ngIf="shouldShowRequired('email')" class="text-danger">
                         Email is required.
                       </div>

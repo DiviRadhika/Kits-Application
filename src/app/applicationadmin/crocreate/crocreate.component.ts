@@ -250,7 +250,7 @@ export class CROcreateComponent implements OnInit {
         this.admin.CreateCroDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'CRO Details Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'CRO Details Added Successfully' });
             }, 1000);
 
             this.router.navigate(['/home/admin/croGrid'])

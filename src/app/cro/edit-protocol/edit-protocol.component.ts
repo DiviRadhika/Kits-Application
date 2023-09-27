@@ -472,7 +472,7 @@ export class EditProtocolComponent implements OnInit {
       this.protocolService.postProtocol(data).subscribe(
         (data:any) => {
           setTimeout(() => {
-            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created Successfully' });
+            this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Study Added Successfully' });
 
           }, 1000);
 

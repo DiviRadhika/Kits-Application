@@ -384,7 +384,7 @@ export class SponsorComponent implements OnInit {
 
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sponsor Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Sponsor Added Successfully' });
             }, 1000);
             this.route.navigate(['/home/cro/sponsorGrid'])
           },

@@ -199,7 +199,7 @@ export class LabCreateComponent {
         this._cro.createMaterialDetails(data).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Material Added Successfully' });
 
             }, 1000);
             sessionStorage.setItem('tab', 'yes');

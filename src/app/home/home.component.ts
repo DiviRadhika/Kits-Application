@@ -334,7 +334,7 @@ export class HomeComponent implements OnInit {
       username: this.emailvaluef,
       clear_session: 'false',
       password: '',
-      otp: ''
+      otp: Number(this.updatepasswordForm.controls['otp'].value),
 
     }
     this.admin.otp(obj).subscribe(
@@ -376,7 +376,7 @@ export class HomeComponent implements OnInit {
  }
 
 
-    // alert('Profile Created Successfully')
+    // alert('Profile Added Successfully')
     //           this.route.navigate(['/login'])
               if (this.updatepasswordForm.controls['passwordp'].value === '' || this.updatepasswordForm.controls['passwordp'].value === undefined) {
                 // alert('Please Enter Password')
@@ -418,6 +418,7 @@ export class HomeComponent implements OnInit {
             }
 
   update(){
+    this.passwordvisible=false
     this.updatepasswordForm = new FormGroup({
       passwordDetails: new FormControl("", [Validators.required]),
       email:new FormControl ("",[Validators.required]),

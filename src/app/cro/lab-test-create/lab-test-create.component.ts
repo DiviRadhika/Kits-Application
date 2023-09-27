@@ -246,7 +246,7 @@ export class LabTestCreateComponent implements OnInit {
         this.cro.CreateLabDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Lab Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Lab Added Successfully' });
             }, 1000);
 
             this.router.navigate(['/home/cro/labGrid'])

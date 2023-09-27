@@ -253,23 +253,23 @@ export class ProtocolRegistrationComponent {
       name: data.name,
       variant: data.variant
     }));
-  
+
     let allNamesNotEmpty = true; // Assume all names are not empty initially
-  
+
     for (let i = 0; i < selectedVisits.length; i++) {
       if (selectedVisits[i].name === '') {
-        alert('Please assign a name for ' +  selectedVisits[i].selectedVisit);
+        alert('Please assign a name for ' + selectedVisits[i].selectedVisit);
         allNamesNotEmpty = false; // Mark that at least one name is empty
         break; // Exit the loop if any name is empty
       }
     }
-  
+
     if (allNamesNotEmpty) {
       if (this.rowIndexToCollect !== undefined) {
         this.rowCollectedData[this.rowIndexToCollect] = selectedVisits;
         this.rowIndexToCollect = undefined; // Reset the row index
       }
-     
+
       this.display = false; // Only set this.display to false if all names are not empty
     }
 
@@ -402,7 +402,7 @@ export class ProtocolRegistrationComponent {
     for (let i = 1; i <= this.valueVariant; i++) {
       this.addCard();
     }
-  
+
     this.varientValues = []
     this.variantsTab = false
   }
@@ -429,7 +429,7 @@ export class ProtocolRegistrationComponent {
   visitcount: Array<any> = [];
   visits(value: any) {
     this.visitcount = []
-    if(value != null || value != undefined || value != ''){
+    if (value != null || value != undefined || value != '') {
       this.variantsTab = true
       this.valueVisit = this.protocolForm.controls['total_visits'].value;
       // this.cards = [];
@@ -438,12 +438,12 @@ export class ProtocolRegistrationComponent {
       }
       for (let i = 0; i <= this.valueVariant; i++) {
         this.adjustScreenKitRows(i)
-  
-  
+
+
       }
     }
 
-   
+
   }
   onSelectChange(rowIndex: number, selectedValues: string[]): void {
     this.selectedOptions[rowIndex] = selectedValues;
@@ -581,7 +581,7 @@ export class ProtocolRegistrationComponent {
     const control = this.protocolForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
   }
-  sponsorname(){
+  sponsorname() {
     this.croService.getSponsorById(this.protocolForm.controls['selected_sponsor_id'].value).subscribe((data: any) => {
       console.log(data)
       this.sponsorName = data.sponsor_name
@@ -589,10 +589,13 @@ export class ProtocolRegistrationComponent {
 
   }
 
+  toTitleCase(str: string): string {
 
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
   SubmitData() {
-   
- 
+
+
 
     const errorMessages = [];
     const errorMessagesalter = [];
@@ -666,7 +669,7 @@ export class ProtocolRegistrationComponent {
 
 
     else {
-  
+
       if (this.protocolForm.invalid) {
         // if (this.protocolForm.controls['labTestValue'].value === undefined || this.protocolForm.controls['labTestValue'].value === '' ||
         //   this.protocolForm.controls['labTestValue'].value === null) {
@@ -685,14 +688,14 @@ export class ProtocolRegistrationComponent {
 
         for (let rowIndex = 0; rowIndex < this.rowCollectedData.length; rowIndex++) {
           const rowArray = this.rowCollectedData[rowIndex];
-    
+
           for (let innerIndex = 0; innerIndex < rowArray.length; innerIndex++) {
             const innerObject = rowArray[innerIndex];
-    
+
             const matchingSC = sc.find((scObj: any) =>
               scObj.variant === innerObject.variant
             );
-    
+
             if (matchingSC) {
               if (!matchingSC.rowCollectedData) {
                 matchingSC.rowCollectedData = [];
@@ -707,7 +710,11 @@ export class ProtocolRegistrationComponent {
             sc[index].materials = formData[index].visits;
           }
         }
-        
+
+
+        if (this.protocolForm.controls['selected_protocol_name'].value) {
+          this.protocolForm.controls['selected_protocol_name'].setValue(this.toTitleCase(this.protocolForm.controls['selected_protocol_name'].value));
+        }
         const data = {
           "protocol_id": this.protocolForm.controls['selected_protocol_id'].value,
           "protocol_name": this.protocolForm.controls['selected_protocol_name'].value,
@@ -739,16 +746,16 @@ export class ProtocolRegistrationComponent {
           "variants": sc
 
         }
-        
 
- 
+
+
 
 
         this.protocolService.postProtocol(data).subscribe(
           (data: any) => {
             this.route.navigate(['home/cro/protocolGrid'])
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Study Added Successfully' });
 
             }, 1000);
 
@@ -756,7 +763,7 @@ export class ProtocolRegistrationComponent {
           },
           (err: any) => {
             const message = err.error.message
-           
+
             this.messageService.add({ severity: 'error', summary: 'Error Message', detail: message });
           }
         );
@@ -1007,24 +1014,24 @@ export class ProtocolRegistrationComponent {
   // }
   validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
-    
+
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
-    if(phone ==='mobile'){
-    if (numericValue.length > 5) {
+    if (phone === 'mobile') {
+      if (numericValue.length > 5) {
         numericValue = numericValue.slice(0, 5);
+      }
     }
-  }
-  else{
-    if (numericValue.length > 5) {
-      numericValue = numericValue.slice(0, 5);
-  }
-  }
-    
+    else {
+      if (numericValue.length > 5) {
+        numericValue = numericValue.slice(0, 5);
+      }
+    }
+
     input.value = numericValue;
-  
-}
+
+  }
 
 
 

@@ -364,7 +364,7 @@ reset(){
         this.userForm.get(key)?.markAsTouched();
 
       });
-      this.messageService.add({severity:'error', summary:'Error Message', detail:'Please Fill all Mandatory Fields'});
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'Please Fill All Mandatory Fields'});
   
     } else {
       const userObj: any = {
@@ -440,7 +440,7 @@ reset(){
           (data: any) => {
    
             setTimeout(()=>{
-              this.messageService.add({severity:'success', summary:'Success Message', detail:'User Created Successfully'});
+              this.messageService.add({severity:'success', summary:'Success Message', detail:'User Added Successfully'});
             },1000);
             this.router.navigate(['/home/admin/userGrid']);
             

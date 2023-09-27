@@ -149,12 +149,12 @@ export class LoginComponent implements OnInit {
       otp:  this.loginForm.controls['otp'].value
     }
     if(this.loginForm.controls['otp'].value === '' || this.loginForm.controls['otp'].value === undefined || this.loginForm.controls['otp'].value === null){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter OTP' });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter OTP' });
 
     }
     else{
       if(this.loginForm.controls['password'].value === '' || this.loginForm.controls['password'].value === undefined || this.loginForm.controls['password'].value === null){
-        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter Password' });
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Password' });
   
       }
       else{
@@ -196,7 +196,7 @@ export class LoginComponent implements OnInit {
   this.messageService.clear()
     this.emailvaluef = this.forgetForm.controls['email1'].value.toLowerCase();
     if(this.emailvaluef === '' || this.emailvaluef === undefined || this.emailvaluef === null){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name' });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter User Name' });
 
     }
     else{
@@ -255,7 +255,7 @@ export class LoginComponent implements OnInit {
     this.messageService.clear();
     this.emailvalue = this.loginForm.controls['username'].value.toLowerCase();
     if(this.emailvalue === '' || this.emailvalue === undefined || this.emailvalue === null){
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please enter User Name/Email' });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter User Name/Email' });
 
     }
     else{

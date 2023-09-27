@@ -130,10 +130,10 @@
                                                                             class="form-control" />
                                                                     </td>
                                                                     <td>
-                                                                        <input autocomplete="off" type="text"
-                                                                            placeholder="Expiration Date"
-                                                                            value={{item.expiryDate }}  formControlName="expiryDate"
-                                                                            class="form-control" [disabled]="true" />
+                                                                        <input type="date" [disabled]="true"
+                                                                            placeholder="Expiry Date"
+                                                                            formControlName="expiryDate" value=""
+                                                                            class="form-control" />
                                                                     </td>
                                                                     <td >
                                                                         <input autocomplete="off" type="text"
@@ -219,11 +219,12 @@
                                                                                     class="form-control" />
                                                                             </td>
                                                                             <td>
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="Expiration Date"
-                                                                                    value={{item.expiryDate}}  formControlName="expiryDate"
-                                                                                    class="form-control" [disabled]="true" />
+                                                                                <input type="date" [disabled]="true"
+                                                                                    placeholder="Expiry Date"
+                                                                                    formControlName="expiryDate" value=""
+                                                                                    class="form-control" />
                                                                             </td>
+                                                                           
                                                                             <td>
                                                                                 <input autocomplete="off" type="text"
                                                                                     placeholder="Patient Id"
@@ -310,7 +311,7 @@
         <footer class="footer" style="position: fixed;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
+                    <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
                 </div>
             </div>
         </footer>
@@ -322,3 +323,5 @@
 
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
+
+

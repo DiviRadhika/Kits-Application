@@ -374,7 +374,7 @@ export class AddSiteComponent {
         this._cro.CreateSiteDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Created Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Added Successfully' });
             }, 1000);
 
             this.router.navigate(['/home/cro/siteGrid'])
