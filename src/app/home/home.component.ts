@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   showPassword1: boolean = false;
 
   @ViewChild('myModal') myModal: any;
- 
+
 
   menuItems :any[] = [];
   profileval: boolean = false;
@@ -33,14 +33,14 @@ export class HomeComponent implements OnInit {
     });
     item.expanded = !item.expanded;
   }
-  
+
 
   constructor(private messageService:MessageService ,private admin: AdminService, private route: Router,
     private formBuilder: FormBuilder, private confirmationService: ConfirmationService, private router: Router) {
      this.isSidebarShrunk = false;
- 
- 
-     
+
+
+
    }
 
   public showSubheadings = false;
@@ -52,9 +52,9 @@ export class HomeComponent implements OnInit {
     passwordp: new FormControl("", [Validators.required, Validators.minLength(8)]),
     passwordu: new FormControl("",[Validators.required, Validators.minLength(8)] )
     // confirmPassword: new FormControl("", [Validators.required]),
-    
-    
-  
+
+
+
   });
   preventPaste(event: ClipboardEvent): void {
     event.preventDefault();
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
         }
     });
 }
-  role: any 
+  role: any
   adminRole: boolean = false;
   sponsorRole: boolean = false;
   isfullscreen = false;
@@ -87,9 +87,9 @@ export class HomeComponent implements OnInit {
   centralLab: boolean = false;
   siteRole: boolean = false;
   ngOnInit(): void {
-  
+
     this.role = sessionStorage.getItem('role')
-    this.fullName =  sessionStorage.getItem('fullName') 
+    this.fullName =  sessionStorage.getItem('fullName')
     if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [
         // {
@@ -97,13 +97,13 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
-            { label: 'Dashboard', link: '/home/cro/dashboards' },
+            { label: 'Dashboard', link: '/home/cro/dashboards'},
             { label: 'CRO', link: '/home/admin/croGrid' },
             { label: 'Users', link: '/home/admin/userGrid' },
             // { label: 'Dashboards', link: '/home/cro/material' }
           // ]
-        
-        
+
+
         // } ,
         // {
         //   label: 'CRO',
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
         //     { label: 'Study Summary', link: '/home/cro/protocolGrid' }
         //   ]
         // },
-       
+
         // {
         //   label: 'CRA',
         //   icon: 'bx bxs-analyse',
@@ -126,9 +126,9 @@ export class HomeComponent implements OnInit {
         //     { label: 'Sample Collection', link: '/home/site/sampleCollection' }
         //   ]
         // }
-        
-       
-     
+
+
+
         // Other menu items for admin role...
       ];
     }
@@ -141,10 +141,10 @@ export class HomeComponent implements OnInit {
           // subItems: [
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/Sponsor/sponsorStudies' },
-        
+
           // ]
         // },
-      
+
       ];
     }
     else if(this.role === 'CRO'){
@@ -154,18 +154,18 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-user-check',
           // expanded: false,
           // subItems: [
-         
+
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
             { label: 'Site', link: '/home/cro/siteGrid' },
             { label: 'Lab Test', link: '/home/cro/labTestGrid' },
             { label: 'Lab Creation', link: '/home/cro/labGrid' },
             { label: 'Study Summary', link: '/home/cro/protocolGrid' },
-           
-            
+
+
           // ]
         // },
-      
+
       ];
     }
     else if(this.role === 'Central Lab'){
@@ -175,14 +175,14 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },  
+            { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
             { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
             { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
             { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
             { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
-      
-            
- 
+
+
+
 
 
 
@@ -306,7 +306,7 @@ export class HomeComponent implements OnInit {
     }
 
 
-  
+
 
   }
 
@@ -324,8 +324,8 @@ export class HomeComponent implements OnInit {
       this. email = sessionStorage.getItem('email'),
       this. role =sessionStorage.getItem('role')
     }
-    
-  
+
+
   emailvaluef:any
   set() {
     this.passwordvisible=true
@@ -340,7 +340,7 @@ export class HomeComponent implements OnInit {
     this.admin.otp(obj).subscribe(
       (data: any) => {
         this.messageService.add({severity:'success', summary:'Success Message', detail:'OTP sent to your Email'});
-       
+
         // this.route.navigate(['/home'])
       },
       (err: any) => {
@@ -370,11 +370,11 @@ export class HomeComponent implements OnInit {
   email: sessionStorage.getItem('email'),
   password: this.updatepasswordForm.controls['passwordu'].value,
   otp: Number(this.updatepasswordForm.controls['otp'].value),
-  prev_password:this.updatepasswordForm.controls['passwordp'].value 
+  prev_password:this.updatepasswordForm.controls['passwordp'].value
   // is_forgot: false
- 
+
  }
- 
+
 
     // alert('Profile Created Successfully')
     //           this.route.navigate(['/login'])
@@ -387,7 +387,7 @@ export class HomeComponent implements OnInit {
               //   this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Error occurred while resetting password'});
               // }
               else {
-          
+
                 this.admin.reset(obj).subscribe(
                   (data: any) => {
                     this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Updated Successfully'});
@@ -397,7 +397,7 @@ export class HomeComponent implements OnInit {
                     this.updatepassword = false
                     this.passwordvisible=false
                     this.myModal.hide();
-                    
+
                   },
                   (err: any) => {
                     console.log(err); // Log the specific error message to the console
@@ -407,16 +407,16 @@ export class HomeComponent implements OnInit {
                   }
                 );
                 ;
-          
+
               }
-          
+
             }
             updaten(){
               // this.log=true
               this.confirm2()
               // this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
             }
- 
+
   update(){
     this.updatepasswordForm = new FormGroup({
       passwordDetails: new FormControl("", [Validators.required]),
@@ -432,7 +432,7 @@ export class HomeComponent implements OnInit {
   }
   validateOTP(input: any, OTP: any) {
     let inputValue = input.value.trim();
-    
+
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
@@ -444,7 +444,7 @@ export class HomeComponent implements OnInit {
   input.value = numericValue;
 }
   clear(){
-    
+
     sessionStorage.clear()
     this.router.navigate(['/login'])
   }
@@ -468,6 +468,6 @@ export class HomeComponent implements OnInit {
         this.isSidebarShrunk = !this.isSidebarShrunk;
       });
     }
-    
+
   }
 }

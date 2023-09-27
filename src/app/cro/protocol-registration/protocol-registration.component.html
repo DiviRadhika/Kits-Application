@@ -24,7 +24,7 @@
             </div>
           </div>
         </div>
-       
+
 
         <form [formGroup]="protocolForm">
           <div class="card">
@@ -50,7 +50,7 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                 
+
                   <div class="form-group">
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
                     <input style="margin-top: 2.9;" autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
@@ -69,9 +69,9 @@
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label style="color: red;margin-left: 4px;" >*</label></label>
-                  
 
-                    <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()" class="form-select form-control"         
+
+                    <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()" class="form-select form-control"
                        [class.custom-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
                       <option selected value="">Select Sponsor ID</option>
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
@@ -161,7 +161,7 @@
 
           </div>
         </form>
-        <div *ngIf="visible" style="margin-top:-5%">
+        <div *ngIf="visible" >
           <p-tabView>
 
 
@@ -188,20 +188,11 @@
                     <div class="row">
                       <div class="col-md-1 mb-3"></div>
                       <div class="col-md-8 mb-3">
-                        <p-multiSelect [options]="matList" [(ngModel)]="selectedLabTests[i]"
+                        <p-multiSelect [options]="matList" [(ngModel)]="selectedLabTests[i]" class="font-size-12"
                           defaultLabel="Select Lab Tests" optionLabel="name" optionValue="name"></p-multiSelect>
 
                       </div>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-
-                      <div class="col-md-3 mb-3">
+   <div class="col-md-3 mb-3">
                         <button style="margin-left:-27%" type="button" align="right" (click)="labValuesv()"
                           class="btn btn-primary r-blue">Add Lab Tests</button>
                       </div>
@@ -213,7 +204,7 @@
                 </div>
 
                 <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
-                <div class="col-md-3 mt-2 mb-3">
+                <div class="col-md-3 mt-2 mb-3 card">
                   <h5  *ngIf="testDisplayv"> &nbsp;&nbsp;Selected Lab Tests </h5>
                   <h6 style="color: black" *ngFor="let labTest of selectedLabTests[i]  let k = index">
                     &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ labTest }}</h6>
@@ -225,7 +216,7 @@
 
 
                   <div formArrayName="visits">
-                    <table class="table table-striped mb-0">
+                    <table class="table table-striped mb-0 font-size-12">
                       <thead Style="background:#EEE">
                         <tr>
                           <th>Material</th>
@@ -273,7 +264,7 @@
                           </td>
 
                           <td>
-                            <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-2">
+                            <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-0">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path
@@ -302,7 +293,7 @@
               <div class="col-md-12 mb-3">
                 <p-dialog header="Assign Week Name for '{{ variant }}'" [(visible)]="display" [modal]="true">
 
-                  <table class="table">
+                  <table class="table table-striped mb-0 font-size-12">
                     <thead>
                       <tr>
                         <th>Visit Name</th>
@@ -327,7 +318,7 @@
                 <div class="table-responsive" [formGroup]="ScreenMaterialKitForm">
 
 
-                  <table class="table table-striped mb-0" formArrayName="materialList">
+                  <table class="table table-striped mb-0 font-size-12" formArrayName="materialList">
                     <thead Style="background:#EEE">
                       <tr>
                         <th>Variants</th>
@@ -361,7 +352,7 @@
                             <p-multiSelect [options]="visitcount" [style]="{ width: '100%', height: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
                             </p-multiSelect>
                           </div> -->
-                          
+
                           <!-- <p-multiSelect [options]="visitcount" [style]="{width: '100%', height: '100%'}" formControlName="visits" defaultLabel="Select Visits"
                             optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
                           </p-multiSelect> -->

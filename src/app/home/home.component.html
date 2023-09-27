@@ -1,17 +1,4 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>KitsApplications</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-
-</head>
-
-<body>
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -36,12 +23,12 @@
                             </span>
                         </a>
 
-                        <a href="index.html" class="logo logo-light">
+                        <a  class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="assets/images/logo-icon-lite.png" alt="" height="35">
+                                <img style="margin-left: -60%" src="assets/images/logo-icon-lite.png" alt="" height="35">
                             </span>
                             <span class="logo-lg">
-                                <img src="assets/images/roboxa-logo-lite.png" alt="" height="35">
+                                <img style="margin-left: -60%" src="assets/images/roboxa-logo-lite.png" alt="" height="35">
                             </span>
                         </a>
                     </div>
@@ -155,10 +142,10 @@
             <br>
 
             <div style="margin-left:20px">
-                <label>First Name:&nbsp;&nbsp;{{first_name}}</label><br>
-                <label>Last Name:&nbsp;&nbsp;{{last_name}}</label><br>
-                <label>Email:&nbsp;&nbsp;{{email}}</label><br>
-                <label>Role:&nbsp;&nbsp;{{role}}</label>
+                <label>First Name :&nbsp;&nbsp;{{first_name}}</label><br>
+                <label>Last Name :&nbsp;&nbsp;{{last_name}}</label><br>
+                <label>Email :&nbsp;&nbsp;{{email}}</label><br>
+                <label>Role :&nbsp;&nbsp;{{role}}</label>
             </div>
             <br>
             <hr>
@@ -167,22 +154,24 @@
         <div>
             <form [formGroup]="updatepasswordForm">
                 <p-dialog [class.overlay]="updatepassword" [(visible)]="updatepassword" style="position: fixed;">
+                    <p-toast style="margin-left:80%"></p-toast>
+                    <h5 class="modal-title" style="margin-left: 36%;color:black" id="transaction-detailModalLabel">Update Password</h5>
                     <div class="mb-3 text-center" style="width: 400px;" class="enter">
                         <label> Email Id</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input autocomplete="off" type="text"  *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
+                      <input autocomplete="off" type="text"  style="margin-top:2%" *ngIf="!passwordvisible" [attr.disabled]="true" formControlName="email"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
-                      <input autocomplete="off" type="text" *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
+                      <input autocomplete="off" type="text" style="margin-top:2%" *ngIf="passwordvisible" formControlName="email" [attr.disabled]="true"
                             class="form-control text-center mb-3" id="" placeholder="Enter Username/Mail id">
 
                     </div>
 
-                    <div class=" mb-3 text-center modal-footer" style="padding-top: 10px;" class="reset">
+                    <div class=" mb-3 text-center modal-footer" class="reset">
                         <button style="margin-left: 35%;" *ngIf="!passwordvisible" (click)="set()"
                             class="btn btn-primary w-md">Send OTP</button>
                     </div>
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input autocomplete="off" style="text-align: center;margin-top: -2%;" type="text" class="text-center mb-3" 
+                      <input autocomplete="off" style="text-align: center;margin-top:2%" type="text" class="text-center mb-3"
                             (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp" class="form-control"
                             placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
@@ -193,7 +182,7 @@
                             <label for="password" *ngIf="passwordvisible"
                                 class="password-label form-group has-top-label w-100">
                                 <span>Previous Password</span><label style="color: red;margin-left: 4px;">*</label>
-                              <input autocomplete="off" style="margin-top: -2%;" class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" 
+                              <input autocomplete="off" style="margin-top:2%" class="form-control" id="password" [type]="showPassword ? 'text' : 'password'"
                                     formControlName="passwordp" (paste)="preventPaste($event)" maxlength="16"
                                     class="form-control text-center mb-3" id="" placeholder="Enter Previous Password">
                                 <button type="button" class="eye-button" tabindex="-1"  style="color:#495057a3"
@@ -226,7 +215,7 @@
                                 class="password-label form-group has-top-label w-100">
                                 
                                 <span>Update Password</span><label style="color: red;margin-left: 4px;">*</label><br>
-                              <input autocomplete="off"   style="margin-top: -2%; display: flex;" class="form-control" id="passwordu"
+                              <input autocomplete="off"   style="margin-top: 2%; display: flex;" class="form-control" id="passwordu"
                                     [type]="showPassword1 ? 'text' : 'password'" formControlName="passwordu"
                                     (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3"
                                     id="" placeholder="Enter Update Password">
@@ -246,7 +235,7 @@
                                 class="text-danger">
                                 Password should contain a minimum of 8 characters
                             </div>
-                      
+
                         <div style="margin-top: -24px" *ngIf="updatepasswordForm.get('passwordu')?.touched && updatepasswordForm.get('passwordu')?.hasError('pattern')"
                             class="text-danger">
                             Password should include at least one lowercase letter, one uppercase letter, one digit, and
@@ -268,7 +257,7 @@
         </div>
 
 
-        <!-- 
+        <!--
         <div *ngIf="role=='admin'" class="vertical-menu">
             <div data-simplebar class="h-100">
                 <div id="sidebar-menu">
@@ -300,7 +289,7 @@
                         <!-- Loop through menu items -->
                         <li *ngFor="let subItem of menuItems">
 
-                            <a [routerLink]="subItem.link" class="waves-effect">{{ subItem.label }}</a>
+                            <a [routerLink]="subItem.link" class="waves-effect ">{{ subItem.label }}</a>
 
                         </li>
                     </ul>
@@ -325,12 +314,3 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-
-</body>
-<!-- JAVASCRIPT -->
-<script>
-
-</script>
-
-
-</html>
