@@ -58,6 +58,7 @@ export class LabTestComponent implements OnInit {
     lab_test: new FormControl("", [Validators.required]),
     classification: new FormControl("")
   })
+  disableaddbtn: boolean = true
   labFormval: boolean = false;
   isAscendingSort: boolean = true;
   isAscendingSort1: boolean = true;
@@ -125,6 +126,7 @@ export class LabTestComponent implements OnInit {
     // this.route.navigate(['/home/cro/createlabtest'])
     this.labFormval = true
     this.disableAdd = false
+    this.disableaddbtn = false
 
   }
   labDetailsData() {
@@ -238,6 +240,7 @@ export class LabTestComponent implements OnInit {
           }
           this.labFormval = false
           this.disableAdd = true
+          this.disableaddbtn = true
         },
         (err: any) => {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });

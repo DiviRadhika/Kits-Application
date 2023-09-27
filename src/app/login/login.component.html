@@ -16,12 +16,12 @@
           <label style="display: inline;">User Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
         <input autocomplete="off" *ngIf="!enableFields" type="text" formControlName="username" class="form-control" id="username"
             placeholder="Enter User Name">
-        <input autocomplete="off" *ngIf="enableFields" type="text" [attr.disabled]="true" class="form-control" formControlName="username"
+        <input autocomplete="off" style="text-align: center;" *ngIf="enableFields" type="text" [attr.disabled]="true" class="form-control" formControlName="username"
             id="username" placeholder="Enter User Name">
 
         </div>
         <div class="mb-3" *ngIf="enableFields">
-          <label for="username" class="form-label"  style="display: flex; margin-bottom: -9px;  ">Enter OTP<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
+          <label for="username" class="form-label"  style="display: flex; margin-bottom: -9px;">Enter OTP<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
         <input autocomplete="off" type="text" formControlName="otp" maxlength="6"class="form-control text-center mb-3" (input)="validateOTP($event.target, 'otp')" id="" placeholder="OTP">
         </div>
      
@@ -53,7 +53,7 @@
         <div *ngIf="enableFields" class="mt-4 text-center">
           <a href="#" class="text-muted" data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
               class="mdi mdi-lock me-1"></i> Forgot your
-            password?</a>
+            password ?</a>
         </div>
       </form>
     </div>
@@ -93,8 +93,8 @@
               <div class="mb-3 text-center" class="enter">
                 <label  style="padding-bottom: 20px;display: flex; margin-bottom: -24px; margin-top: 4px; ">Enter Your Registered User Name/Email Id<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
               <input autocomplete="off"  *ngIf="!disableFields" type="text" formControlName="email1" class="form-control text-center mb-3" id=""
-                  placeholder="Enter User Name/Mail id">
-                  <input *ngIf="disableFields" type="text" [attr.disabled]="true" class="form-control"
+                  placeholder="Enter User Name/Email id">
+                  <input *ngIf="disableFields" style="text-align: center;" type="text" [attr.disabled]="true" class="form-control"
                         formControlName="email1" id="email1" placeholder="Enter Email">
 
 

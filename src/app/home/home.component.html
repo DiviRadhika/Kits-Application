@@ -155,8 +155,8 @@
             <br>
 
             <div style="margin-left:20px">
-                <label>Firstname:&nbsp;&nbsp;{{first_name}}</label><br>
-                <label>Lastname:&nbsp;&nbsp;{{last_name}}</label><br>
+                <label>First Name:&nbsp;&nbsp;{{first_name}}</label><br>
+                <label>Last Name:&nbsp;&nbsp;{{last_name}}</label><br>
                 <label>Email:&nbsp;&nbsp;{{email}}</label><br>
                 <label>Role:&nbsp;&nbsp;{{role}}</label>
             </div>
@@ -182,7 +182,7 @@
                     </div>
                     <div *ngIf="passwordvisible">
                         <label>Enter OTP</label><label style="color: red;margin-left: 4px;">*</label>
-                      <input autocomplete="off" style="text-align: center;" type="text" class="text-center mb-3" 
+                      <input autocomplete="off" style="text-align: center;margin-top: -2%;" type="text" class="text-center mb-3" 
                             (input)="validateOTP($event.target, 'otp')" id="" formControlName="otp" class="form-control"
                             placeholder="Enter OTP" maxlength="6">
                         <div *ngIf="updatepasswordForm.get('otp')?.touched && updatepasswordForm.get('otp')?.hasError('required')"
@@ -193,9 +193,9 @@
                             <label for="password" *ngIf="passwordvisible"
                                 class="password-label form-group has-top-label w-100">
                                 <span>Previous Password</span><label style="color: red;margin-left: 4px;">*</label>
-                              <input autocomplete="off" class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" 
+                              <input autocomplete="off" style="margin-top: -2%;" class="form-control" id="password" [type]="showPassword ? 'text' : 'password'" 
                                     formControlName="passwordp" (paste)="preventPaste($event)" maxlength="16"
-                                    class="form-control text-center mb-3" id="" placeholder="Previous Password">
+                                    class="form-control text-center mb-3" id="" placeholder="Enter Previous Password">
                                 <button type="button" class="eye-button" tabindex="-1"  style="color:#495057a3"
                                     (click)="showPassword = !showPassword">
                                     <i *ngIf="showPassword" class="fa fa-eye" aria-hidden="true"></i>
@@ -224,11 +224,12 @@
                         <div >
                             <label for="passwordu" *ngIf="passwordvisible"
                                 class="password-label form-group has-top-label w-100">
+                                
                                 <span>Update Password</span><label style="color: red;margin-left: 4px;">*</label><br>
-                              <input autocomplete="off" style=" display: flex;" class="form-control" id="passwordu"
+                              <input autocomplete="off"   style="margin-top: -2%; display: flex;" class="form-control" id="passwordu"
                                     [type]="showPassword1 ? 'text' : 'password'" formControlName="passwordu"
                                     (paste)="preventPaste($event)" maxlength="16" class="form-control text-center mb-3"
-                                    id="" placeholder="Update Password">
+                                    id="" placeholder="Enter Update Password">
                                 <button type="button" class="eye-button1" tabindex="-1"  style="color:#495057a3"
                                     (click)="showPassword1 = !showPassword1">
                                     <i *ngIf="showPassword1" class="fa fa-eye" aria-hidden="true"></i>

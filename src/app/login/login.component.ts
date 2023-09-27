@@ -55,10 +55,14 @@ export class LoginComponent implements OnInit {
   }
   reset() {
  
-
-    if (this.forgetForm.controls['npassword'].value === '' || this.forgetForm.controls['npassword'].value === undefined) {
+    if (this.forgetForm.controls['otp'].value === undefined || this.forgetForm.controls['otp'].value === '') {
+      // alert('Please Enter Confirm Password')
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter OTP' });
+      this.valid = false
+    }
+    else if (this.forgetForm.controls['npassword'].value === '' || this.forgetForm.controls['npassword'].value === undefined) {
       // alert('Please Enter Password')
-      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Password' });
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter New Password' });
       this.valid = false
     }
     else if (this.forgetForm.controls['confirmPassword'].value === undefined || this.forgetForm.controls['confirmPassword'].value === '') {
@@ -66,11 +70,7 @@ export class LoginComponent implements OnInit {
       this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Confirm Password' });
       this.valid = false
     }
-    else if (this.forgetForm.controls['otp'].value === undefined || this.forgetForm.controls['otp'].value === '') {
-      // alert('Please Enter Confirm Password')
-      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter OTP' });
-      this.valid = false
-    }
+    
     else {
       this.valid = true
       this.disableFields = true

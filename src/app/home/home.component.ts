@@ -390,7 +390,7 @@ export class HomeComponent implements OnInit {
           
                 this.admin.reset(obj).subscribe(
                   (data: any) => {
-                    this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Reset Successfully'});
+                    this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Updated Successfully'});
                     this.updatepasswordForm.reset();
 
                     console.log(data);
