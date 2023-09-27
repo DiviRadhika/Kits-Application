@@ -419,6 +419,7 @@ export class HomeComponent implements OnInit {
 
   update(){
     this.passwordvisible=false
+   
     this.updatepasswordForm = new FormGroup({
       passwordDetails: new FormControl("", [Validators.required]),
       email:new FormControl ("",[Validators.required]),
