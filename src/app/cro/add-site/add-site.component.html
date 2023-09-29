@@ -91,7 +91,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Legal Site Name</label><label style="color: red;margin-left: 4px;">*</label>
-                    <input autocomplete="off" type="text" class="form-control" id="LegalSiteName" placeholder="Enter legal Site name"
+                    <input autocomplete="off" type="text" class="form-control" id="LegalSiteName" placeholder="Enter Legal Site Name"
                         formControlName="legal_site_data_name" maxlength="100"
                          [class.custom-invalid]="shouldShowRequired('legal_site_data_name') && siteForm.get('legal_site_data_name')?.touched">
                       <div *ngIf="shouldShowRequired('legal_site_data_name')" class="text-danger">
@@ -317,7 +317,13 @@ class="form-control" id="email" placeholder="Enter Email"
                 </div>
                 <br>
                 <div class="row">
-
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Email Id</label>
+                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="email" placeholder="Enter Email Id"
+                        formControlName="email">
+                    </div>
+                  </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Website</label>
@@ -327,13 +333,7 @@ class="form-control" id="email" placeholder="Enter Email"
                     </div>
                   </div>
 
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label>Email Id</label>
-                    <input autocomplete="off" type="text" class="form-control" maxlength="100" id="email" placeholder="Enter Email"
-                        formControlName="email">
-                    </div>
-                  </div>
+                 
                 </div>
               </form>
             </div>
@@ -364,7 +364,7 @@ class="form-control" id="email" placeholder="Enter Email"
                               <th>First Name</th>
                               <th>Last Name</th>
                               <th>Email Id</th>
-                              <th>Mobile Phone</th>
+                              <th>Mobile Number</th>
                               <th>Delete</th>
 
 
@@ -381,12 +381,12 @@ class="form-control" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter First Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Last Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>
@@ -449,7 +449,7 @@ class="form-control" id="email" placeholder="Enter Email"
                               <th>First Name</th>
                               <th>Last Name</th>
                               <th>Email Id</th>
-                              <th>Mobile Phone</th>
+                              <th>Mobile Number</th>
                               <th *ngIf="!view">Delete</th>
 
 
@@ -466,12 +466,12 @@ class="form-control" id="email" placeholder="Enter Email"
                               </th>
 
                               <th scope="row">
-                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter First Name "
                                   formControlName="first_name" maxlength="100">
                               </th>
 
                               <td>
-                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Name "
+                              <input autocomplete="off" type="text" class="form-control" id="Office Telephone" placeholder="Enter Last Name "
                                   formControlName="last_name" maxlength="100">
 
                               </td>

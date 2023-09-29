@@ -341,7 +341,7 @@
                               <th>Last Name</th>
                               <th>Email Id</th>
                               <th>Designation</th>
-                              <th>Mobile Phone</th>
+                              <th>Mobile Number</th>
                               <th>Delete</th>
 
 
@@ -352,12 +352,12 @@
                               *ngFor="let contact of contactForm.get('contacts').controls; let i = index;">
                               <th scope="row">
                                 <input autocomplete="off" type="text" maxlength="100" class="form-control"
-                                  id="Office Telephone" placeholder="Enter Name " formControlName="first_name">
+                                  id="Office Telephone" placeholder="Enter First Name " formControlName="first_name">
                               </th>
 
                               <td>
                                 <input autocomplete="off" type="text" maxlength="100" class="form-control"
-                                  id="Office Telephone" placeholder="Enter Name " formControlName="last_name">
+                                  id="Office Telephone" placeholder="Enter Last Name " formControlName="last_name">
 
                               </td>
                               <td>
@@ -420,7 +420,7 @@
                               <th>Last Name</th>
                               <th>Email Id</th>
                               <th>Designation</th>
-                              <th>Mobile Phone</th>
+                              <th>Mobile Number</th>
                               <th *ngIf="!view">Delete</th>
 
 
@@ -431,12 +431,12 @@
                               *ngFor="let contact of editcontactsForm.get('editcontacts').controls; let i = index;">
                               <th scope="row">
                                 <input autocomplete="off" type="text" maxlength="100" class="form-control"
-                                  id="Office Telephone" placeholder="Enter Name " formControlName="first_name">
+                                  id="Office Telephone" placeholder="Enter First Name " formControlName="first_name">
                               </th>
 
                               <td>
                                 <input autocomplete="off" type="text" maxlength="100" class="form-control"
-                                  id="Office Telephone" placeholder="Enter Name " formControlName="last_name">
+                                  id="Office Telephone" placeholder="Enter Last Name " formControlName="last_name">
 
                               </td>
                               <td>

@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ProtocolRegistrationComponent {
   sponsorName: any;
+  buttonClickedFlags: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -401,6 +402,7 @@ export class ProtocolRegistrationComponent {
     this.valueVariant = this.protocolForm.controls['kit_variant_count'].value;
     for (let i = 1; i <= this.valueVariant; i++) {
       this.addCard();
+     
     }
 
     this.varientValues = []
@@ -851,9 +853,19 @@ export class ProtocolRegistrationComponent {
   }
 
   cards: { form: FormGroup }[] = [];
-
+  // addMaterialClicked(cardIndex: number) {
+  //   // Check if the button has already been clicked for this card
+  //   if (!this.buttonClickedFlags[cardIndex]) {
+  //     // Perform the action for the first click (e.g., disable button)
+  //     this.buttonClickedFlags[cardIndex] = true;
+  //     // Add your additional logic here
+  //   }
+  // }
 
   addCard() {
+    // this.cards.forEach(() => {
+    //   this.buttonClickedFlags.push(false);
+    // });
     const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
     const rowsArray = new FormArray([]);
     const cardForm = this.fb.group({
@@ -962,6 +974,7 @@ export class ProtocolRegistrationComponent {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.push(this.createRow());
   }
+
   deleteRow(cardIndex: number, rowIndex: number) {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.removeAt(rowIndex);

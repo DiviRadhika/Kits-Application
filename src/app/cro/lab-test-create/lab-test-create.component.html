@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                            <label>Lab Code<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="LabtestCode" maxlength="100"
-                                                placeholder="Enter Lab Test Code" formControlName="cro_code"
+                                                placeholder="Enter Lab Code" formControlName="cro_code"
                                                  [class.custom-invalid]="shouldShowRequired('cro_code') && labTestCreateForm.get('cro_code')?.touched">
 
                                             <div *ngIf="shouldShowRequired('cro_code')" class="invalid-feedback">
@@ -73,7 +73,7 @@
                                         <div class="form-group">
                                            <label>Lab Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="LabTestName"
-                                                placeholder="Enter Lab Test Name" formControlName="cro_name"
+                                                placeholder="Enter Lab Name" formControlName="cro_name"
                                                  [class.custom-invalid]="shouldShowRequired('cro_name') && labTestCreateForm.get('cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('cro_name')"class="text-danger">
                                             </div>
@@ -88,7 +88,7 @@
                                         <div class="form-group">
                                            <label>Legal Lab Name<label style="color: red; display: inline;margin-left: 4px;">*</label></label>
                                           <input autocomplete="off" type="text" class="form-control" id="LegalLabTestName"
-                                                placeholder="Enter Legal Lab Test Name"
+                                                placeholder="Enter Legal Lab Name"
                                                 formControlName="legal_cro_name"
                                                  [class.custom-invalid]="shouldShowRequired('legal_cro_name') && labTestCreateForm.get('legal_cro_name')?.touched">
                                             <div *ngIf="shouldShowRequired('legal_cro_name')"
@@ -279,7 +279,7 @@ class="form-control" (input)="validateMobileNumber($event.target, 'office')" id=
                                         <div class="form-group">
                                             <label>Email Id</label>
                                           <input autocomplete="off" type="text" class="form-control" id="Address 1"
-                                                placeholder="Enter Email" formControlName="email">
+                                                placeholder="Enter Email Id" formControlName="email">
 
                                         </div>
                                     </div>

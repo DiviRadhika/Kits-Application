@@ -100,7 +100,7 @@ export class LabCreateComponent {
   confirm2(id: any, name: any) {
     this.confirmationService.confirm({
     
-        message: `Are you sure you want to Change Image '${name}'?`,
+        message: `Are You Sure Do You Want To Change Image '${name}'?`,
         header: 'Change Confirmation',
         icon: 'pi pi-info-circle',
         accept: () => {

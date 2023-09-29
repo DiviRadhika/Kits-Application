@@ -286,7 +286,7 @@ export class KitDistributionComponent implements OnInit {
     const siteControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('siteId');
    
     if (siteControl.value && (verificationControl.value === 'Not Verified')) {
-      alert('You cannot assign site untilyyy and unless Kit verification is completed');  
+      alert('You cannot assign site until and unless Kit verification is completed');  
       siteControl.setValue('');
     }
   }

@@ -166,22 +166,25 @@
 
                                                     </p-dialog>
 
-
-                                                    <div class="table-responsive" [formGroup]="ScreenKitForm">
+                                                    <div class="table-responsive"  style="margin-top: 20px;" [formGroup]="ScreenKitForm">
+                                                        <table class="table table-striped mb-0"  
+                                                            formArrayName="screenKitList" style="width: 170%;">
+                                                            <thead Style="background:#EEE; ">
+                                                    <!-- <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                         <table class="table table-striped mb-0 font-size-11"
                                                             formArrayName="screenKitList" style="width: 130%; ">
-                                                            <thead Style="background:#EEE">
+                                                            <thead Style="background:#EEE"> -->
                                                                 <tr>
                                                                     <th style="width: 140px;">KitId</th>
-                                                                    <th style="width: 100px;">Central Lab KitId</th>
+                                                                    <th style="width: 130px;">Central Lab KitId</th>
                                                                     <th style="width: 100px;">Site Id</th>
                                                                     <th style="width: 100px;">Patient Id</th>
                                                                     <th style="width: 120px;">Expiration Date</th>
                                                                     <th style="width: 120px;">Collection</th>
-                                                                    <th style="width: 50px;">Upload PDF </th>
+                                                                    <th style="width: 100px;">Upload PDF </th>
                                                                     <th style="width: 100px;">Acknowledgement</th>
                                                                     <th style="width: 100px;">Add Remarks</th>
-                                                                    <th style="width: 80px;">Acknowledgement Date</th>
+                                                                    <th style="width: 130px;">Acknowledgement Date</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -489,29 +492,25 @@
                                                     </p-dialog>
                                                     <div class="table-responsive" [formGroup]="item.visitKitFormGroup">
 
-                                                        <table class="table table-striped mb-0 font-size-11"
-                                                            formArrayName="visitKitList" style="width: 130%; ">
+                                                        <table class="table table-striped mb-0"
+                                                            formArrayName="visitKitList" style="width: 170%;">
                                                             <thead Style="background:#EEE">
-                                                                <tr>
+                                                           
 
-                                                                    <th style="width: 140px;">KitId</th>
-                                                                    <th style="width: 100px;">Central Lab KitId</th>
-                                                                    <th style="width: 100px;">Site Id</th>
-                                                                    <th style="width: 100px;">Patient Id</th>
-                                                                    <th style="width: 120px;">Expiration Date</th>
-                                                                    <th style="width: 120px;">Collection</th>
+                                                                    <tr>
+                                                                        <th style="width: 140px;">KitId</th>
+                                                                        <th style="width: 130px;">Central Lab KitId</th>
+                                                                        <th style="width: 100px;">Site Id</th>
+                                                                        <th style="width: 100px;">Patient Id</th>
+                                                                        <th style="width: 120px;">Expiration Date</th>
+                                                                        <th style="width: 120px;">Collection</th>
+                                                                        <th style="width: 100px;">Upload PDF </th>
+                                                                        <th style="width: 100px;">Acknowledgement</th>
+                                                                        <th style="width: 100px;">Add Remarks</th>
+                                                                        <th style="width: 120px;">Acknowledgement Date</th>
+                                                                    </tr>
 
-                                                                    <th style="width: 50px;">Upload PDF
-
-                                                                    </th>
-                                                                    <th style="width: 100px;">Acknowledgement</th>
-
-                                                                    <th style="width: 100px;">Add Remarks</th>
-                                                                    <th style="width: 80px;">Acknowledgement Date</th>
-
-
-
-                                                                </tr>
+                                                               
                                                             </thead>
 
                                                             <tbody *ngIf="item.visitsList">

@@ -200,7 +200,16 @@ export class CROcreateComponent implements OnInit {
     else {
       this.mobile = this.CroForm.controls['mobile_telephone'].value.toString()
     }
+if(this.CroForm.controls['mobile_telephone'].value){
+    if (this.CroForm.controls['mobile_telephone'].invalid) {
 
+      Object.keys(this.CroForm.controls).forEach(key => {
+        this.CroForm.get(key)?.markAsTouched();
+      });
+
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Valid Mobile Number' });
+    }
+  }
 
     if (this.CroForm.invalid) {
       // Mark all form controls as touched to trigger validation

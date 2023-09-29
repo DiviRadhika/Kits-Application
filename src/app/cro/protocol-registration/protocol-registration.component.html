@@ -33,28 +33,32 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input"  class="form-label">Sponsor Study ID<label style="color: red;margin-left: 4px;" >*</label></label>
-                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_id"
-                      class="form-control" id="" placeholder="Enter Study ID"
-                       [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
+                    <label for="formrow-firstname-input" class="form-label">Sponsor Study ID<label
+                        style="color: red;margin-left: 4px;">*</label></label>
+                    <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
+                      formControlName="selected_protocol_id" class="form-control" id=""
+                      placeholder="Enter Sponsor Study ID"
+                      [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
                   </div>
 
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Study Title<label style="color: red;margin-left: 4px;" >*</label></label>
-                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="selected_protocol_name"
-                      class="form-control" id="" placeholder="Enter Study Title"
-                       [class.custom-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
+                    <label for="formrow-firstname-input" class="form-label">Study Title<label
+                        style="color: red;margin-left: 4px;">*</label></label>
+                    <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
+                      formControlName="selected_protocol_name" class="form-control" id=""
+                      placeholder="Enter Study Title"
+                      [class.custom-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
 
                   <div class="form-group">
                     <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
-                    <input style="margin-top: 2.9;" autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
-                      class="form-control" id="" placeholder="Enter CRO Study ID">
+                    <input style="margin-top: 2.9;" autocomplete="off" type="text" maxlength="100" autocomplete="off"
+                      formControlName="cro_study_id" class="form-control" id="" placeholder="Enter CRO Study ID">
 
                   </div>
                 </div>
@@ -68,12 +72,14 @@
                 </div> -->
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label
+                        style="color: red;margin-left: 4px;">*</label></label>
 
 
-                    <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()" class="form-select form-control"
-                       [class.custom-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
-                      <option selected value="">Select Sponsor ID</option>
+                    <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()"
+                      class="form-select form-control"
+                      [class.custom-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
+                      <option selected value="">Select Sponsor ID / Name</option>
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
                         {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
                       </option>
@@ -84,67 +90,78 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Global Sample Size<label style="color: red;margin-left: 4px;" >*</label></label>
-                    <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control" maxlength="5" (input)="validateMobileNumber($event.target, 'office')"
-                      id="" placeholder="Enter Global Sample Size"
-                       [class.custom-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
+                    <label for="formrow-firstname-input" class="form-label">Global Sample Size<label
+                        style="color: red;margin-left: 4px;">*</label></label>
+                    <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control"
+                      maxlength="5" (input)="validateMobileNumber($event.target, 'office')" id=""
+                      placeholder="Enter Global Sample Size"
+                      [class.custom-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
-                    (&nbsp;<input class="form-check-input"  placeholder="Enter Avant Sante Sample Size " maxlength="5" (change)="avantCheck($event)" formControlName="avantc" (input)="validateMobileNumber($event.target, 'office')"
-                      type="checkbox" value="checked" id="debugInfo" />
+                    (&nbsp;<input class="form-check-input" placeholder="Enter Avant Sante Sample Size " maxlength="5"
+                      (change)="avantCheck($event)" formControlName="avantc"
+                      (input)="validateMobileNumber($event.target, 'office')" type="checkbox" value="checked"
+                      id="debugInfo" />
                     &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
 
-                    <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size" (blur)="getsize()"
-                      class="form-control" id="" placeholder="Enter Avant Sante Sample Size " (input)="validateMobileNumber($event.target, 'office')"
-                       [class.custom-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
+                    <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size"
+                      (blur)="getsize()" class="form-control" id="" placeholder="Enter Avant Sante Sample Size "
+                      (input)="validateMobileNumber($event.target, 'office')"
+                      [class.custom-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label style="color: red;margin-left: 4px;" >*</label></label>
-                    <input autocomplete="off" maxlength="5" type="number" autocomplete="off" formControlName="kit_variant_count"  (input)="validateMobileNumber($event.target, 'office')"
+                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label
+                        style="color: red;margin-left: 4px;">*</label></label>
+                    <input autocomplete="off" maxlength="5" type="number" autocomplete="off"
+                      formControlName="kit_variant_count" (input)="validateMobileNumber($event.target, 'office')"
                       (blur)="variantCount()" class="form-control" id="" placeholder="Enter Kit Variant Count"
-                       [class.custom-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
+                      [class.custom-invalid]="shouldShowRequired('kit_variant_count') && protocolForm.get('kit_variant_count')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits<label
+                        style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
                       placeholder="Enter Total No.of Visits" (blur)="visits($event)" class="form-control"
-                       [class.custom-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
+                      [class.custom-invalid]="shouldShowRequired('total_visits') && protocolForm.get('total_visits')?.touched">
                   </div>
                 </div>
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">No.of Screenings<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">No.of Screenings<label
+                        style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
-                    (input)="validateMobileNumber($event.target, 'office')" class="form-control" id="" placeholder="Enter No.of Screens"
-                       [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
+                      (input)="validateMobileNumber($event.target, 'office')" class="form-control" id=""
+                      placeholder="Enter No.of Screenings"
+                      [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screening Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">Screening Kit Count<label
+                        style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
-                    (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
-                      class="form-control" id="" placeholder="Enter Screen Kit Count"
-                       [class.custom-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched"
-                      >
+                      (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
+                      class="form-control" id="" placeholder="Enter Screening Kit Count"
+                      [class.custom-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count<label style="color: red;margin-left: 4px;" >*</label></label>
+                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count<label
+                        style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
-                    (input)="validateMobileNumber($event.target, 'office')"formControlName="selected_visit_count"
+                      (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_visit_count"
                       class="form-control" id="" placeholder="Enter Visit Kit Count"
-                       [class.custom-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
+                      [class.custom-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
                   </div>
                 </div>
 
@@ -161,7 +178,7 @@
 
           </div>
         </form>
-        <div *ngIf="visible" >
+        <div *ngIf="visible">
           <p-tabView>
 
 
@@ -183,6 +200,13 @@
                     <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
                     </button>
                   </div>
+                  <!-- Modify the "Add Material" button to call the addMaterialClicked function -->
+                  <!-- <div class="col-md-2 mb-3" align="right" style="margin-left: -11%;">
+                    <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addMaterialClicked(i)"
+                      [disabled]="buttonClickedFlags[i]">Add Material
+                    </button>
+                  </div> -->
+
                   <p-dialog [class.overlay]="displayv" (onShow)="disableScroll()" (onHide)="enableScroll()"
                     header="Select Lab Tests" [(visible)]="displayv">
                     <div class="row">
@@ -192,7 +216,7 @@
                           defaultLabel="Select Lab Tests" optionLabel="name" optionValue="name"></p-multiSelect>
 
                       </div>
-   <div class="col-md-3 mb-3">
+                      <div class="col-md-3 mb-3">
                         <button style="margin-left:-27%" type="button" align="right" (click)="labValuesv()"
                           class="btn btn-primary r-blue">Add Lab Tests</button>
                       </div>
@@ -205,7 +229,7 @@
 
                 <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
                 <div class="col-md-3 mt-2 mb-3 card">
-                  <h5  *ngIf="testDisplayv"> &nbsp;&nbsp;Selected Lab Tests </h5>
+                  <h5 *ngIf="testDisplayv"> &nbsp;&nbsp;Selected Lab Tests </h5>
                   <h6 style="color: black" *ngFor="let labTest of selectedLabTests[i]  let k = index">
                     &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ labTest }}</h6>
                 </div>
@@ -225,6 +249,7 @@
 
                           <th>Frozen at Site</th>
                           <th>Image</th>
+                          <!-- <th>Add Row</th> -->
                           <th>Delete</th>
                         </tr>
                       </thead>
@@ -262,7 +287,16 @@
                             <img [src]="row.get('image')?.value" width="30" height="30" *ngIf="row.get('image')?.value"
                               alt="Material Image" />
                           </td>
+                          <!-- <td>
+                            <button type="button" (click)="addRow1(i)" class="btn btn-primary ml-3 mt-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-plus-circle-primary" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                              </svg></button>
 
+                          </td> -->
                           <td>
                             <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-0">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -274,6 +308,8 @@
                               </svg></button>
 
                           </td>
+
+
                       </tbody>
                     </table>
 
@@ -312,7 +348,8 @@
                       </tr>
                     </tbody>
                   </table>
-                  <button type="button" style="float: right;" class="btn btn-primary" (click)="collectDataAndClose()">Update Names</button>
+                  <button type="button" style="float: right;" class="btn btn-primary"
+                    (click)="collectDataAndClose()">Update Names</button>
                 </p-dialog>
 
                 <div class="table-responsive" [formGroup]="ScreenMaterialKitForm">
@@ -343,7 +380,10 @@
                         </td>
                         <th scope="row">
                           <div style="position: relative; overflow: visible;">
-                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)" [panelStyle]="{ maxHeight: '200px', overflow: 'auto', position: 'absolute', zIndex: '9999' }">
+                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits"
+                              defaultLabel="Select Visits" optionLabel="value" optionValue="value"
+                              (onPanelHide)="openUploadDialog(j)"
+                              [panelStyle]="{ maxHeight: '200px', overflow: 'auto', position: 'absolute', zIndex: '9999' }">
                             </p-multiSelect>
                           </div>
                           <!-- <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)" [panelStyle]="{ maxHeight: '200px', overflow: 'auto' }">
@@ -400,11 +440,11 @@
 
   <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
-        </div>
+      <div class="row">
+        <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
+      </div>
     </div>
-</footer>
+  </footer>
 
 </div>
 <!-- end main content-->
