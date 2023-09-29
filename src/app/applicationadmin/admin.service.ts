@@ -7,6 +7,8 @@ import { endPointsUser } from '../api';
 })
 export class AdminService {
   [x: string]: any;
+  private jsonUrl = 'assets/jsondata.json';
+
 headers = new HttpHeaders({
   // 'Content-Type': 'application/json',
   // 'Access-Control-Allow-Origin': '*'
@@ -19,6 +21,9 @@ headers = new HttpHeaders({
   // Services for cro
   getCro(): Observable<any> {
     return this._httpClient.get(endPointsUser.getcros);
+  }
+  getsite(): Observable<any> {
+    return this._httpClient.get(this.jsonUrl);
   }
   getCrobyId(id: any): Observable<any> {
     return this._httpClient.get(endPointsUser.getCroById + id)

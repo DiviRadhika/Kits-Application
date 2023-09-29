@@ -1,0 +1,228 @@
+
+
+<div class="main-content" style="margin-top: -4%;">
+
+    <div class="page-content">
+      <div class="container-fluid">
+  
+        <!-- start page title -->
+        <!-- <div class="row">
+          <div class="col-12">
+            <div style="padding:1px" class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18"><i class="bx bxs-user-check"></i> CRO</h4>
+  
+              <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
+  
+                  <li class="breadcrumb-item active">CRO</li>
+                </ol>
+              </div>
+  
+            </div>
+          </div>
+        </div> -->
+        <!-- end page title -->
+        <p-toast></p-toast>
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+             
+  
+                <!-- <hr width="100%" class="mb-4"> -->
+                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                  <div class="row">
+  
+  
+                    
+                    <div class="row">
+          
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Select CRA</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of classifications">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Site</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of site">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div><div class="col-md-2">
+                            <div class="form-group">
+                                <label>Study Id</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of Study">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Visit</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of visit">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Age</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of Age">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select 
+                                    class="form-select form-control">
+                                    <option *ngFor="let data of Gender">
+                                        {{ data }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+  
+  
+  
+  
+  
+                  
+  
+                  <div class="row" class="table-responsive text-nowrap" style="margin-top:5%" >
+                    <div class="col-sm-12">
+                        <table id="datatable" class="table table-striped"
+                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                        role="grid" aria-describedby="datatable_info" style="width: 82px;">
+                        <thead>
+                            <tr role="row">
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 243.2px;" aria-sort="ascending"
+                                    aria-label="Code: activate to sort column descending">
+                                    CRA
+
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 335.2px;"
+                                    aria-label="Name: activate to sort column ascending">Subject
+                                    ID
+
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 289.2px;"
+                                    aria-label="Legal Name: activate to sort column ascending">
+                                    Site
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 289.2px;"
+                                    aria-label="Legal Name: activate to sort column ascending">
+                                    Gender
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 289.2px;"
+                                    aria-label="Legal Name: activate to sort column ascending">
+                                    Age
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 289.2px;"
+                                    aria-label="Legal Name: activate to sort column ascending">
+                                    Last Visit
+                                </th>
+                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                    colspan="1" style="width: 289.2px;"
+                                    aria-label="Legal Name: activate to sort column ascending">
+                                    Last Visit Date
+                                </th>
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <tr class="odd" style="  vertical-align: middle;"
+                                *ngFor="let croData of croDetails | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+
+                                <td>{{croData.name}}</td>
+                                <td>{{croData.Subject}}</td>
+                                <td>{{croData.site}}</td>
+                                <td>{{croData.Gender}}</td>
+                                <td>{{croData.Age}}</td>
+                                <td>{{croData.Last_Visit}}</td>
+                                <td>{{croData.Last_Visit_Date}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="12" *ngIf="croDetails.length === 0"
+                                    style="text-align: center; font-size: 0.8rem;">
+                                    No Data Found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                  </div>
+                  <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
+                    *ngIf="croDetails && croDetails.length"></pagination-controls>
+                    <div class="row">
+                      <div class="col-md-10">
+  
+                    </div>
+                    <div class="col-md-2">
+                   <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- end col -->
+      </div> <!-- end row -->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+  
+  <footer class="footer" style="position: fixed;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">{{ getCurrentYear() }} © ROBOXA</div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  

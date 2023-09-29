@@ -230,6 +230,7 @@ export class HomeComponent implements OnInit {
           // expanded: false,
           // subItems: [
             { label: 'Dashboard', link: '/home/cro/dashboards' },
+            { label: 'siteDashboard', link: '/home/site/siteDashboard' },
             { label: 'Sample Collection', link: '/home/site/viewCRA' },
 //  { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
             // { label: 'Sample Collection', link: '/home/site/sampleCollection' }

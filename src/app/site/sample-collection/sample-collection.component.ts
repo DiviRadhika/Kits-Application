@@ -28,7 +28,7 @@ export class SampleCollectionComponent implements OnInit {
   scount: any;
   vcount: any;
   displayValues: boolean = false;
-
+  
   tets: Array<any> = [];
 
   tabs: any[] = [];
@@ -81,6 +81,9 @@ export class SampleCollectionComponent implements OnInit {
 
   preprationData = [{ name: 'Not Collected', value: 'Not Collected' },
   { name: 'Collected', value: 'Collected' },
+  ]
+  sexData = [{ name: 'Male', value: 'Male' },
+  { name: 'Female', value: 'Female' },
   ]
 
   kitIdv: any = ''
@@ -243,7 +246,24 @@ export class SampleCollectionComponent implements OnInit {
                 patientControl.patchValue(vkDetailForRowAndTab.patientId);
 
               }
+              const patientNameControl = visitKitListArray.at(j).get('patientName');
+              if (patientNameControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientNameControl.patchValue(vkDetailForRowAndTab.patientName);
 
+              }
+              const patientAgeControl = visitKitListArray.at(j).get('patientAge');
+              if (patientAgeControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientAgeControl.patchValue(vkDetailForRowAndTab.patientAge);
+
+              }
+              const patientSexControl = visitKitListArray.at(j).get('patientSex');
+              if (patientSexControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientSexControl.patchValue(vkDetailForRowAndTab.patientSex);
+
+              }
               const collectionControl = visitKitListArray.at(j).get('collection');
               if (collectionControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -255,9 +275,6 @@ export class SampleCollectionComponent implements OnInit {
                 }
 
               }
-
-
-
               const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
               if (collectionDateControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -337,8 +354,11 @@ export class SampleCollectionComponent implements OnInit {
       ckitId: [''],
       expiryDate: [''],
       patientId: [''],
-      collection: ['Pending'],
-      collectionDate: ['']
+      collection: [''],
+      collectionDate: [''],
+      patientName: [''],
+      patientSex: [''],
+      patientAge: [''],
 
 
 
@@ -364,23 +384,15 @@ export class SampleCollectionComponent implements OnInit {
         if (i < skDetails.length) {
           this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
           this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
-
-
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientName').patchValue(skDetails[i].patientName)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientAge').patchValue(skDetails[i].patientAge)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientSex').patchValue(skDetails[i].patientSex);
 
           if (skDetails[i].collection === undefined || skDetails[i].collection === null || skDetails[i].collection === '') {
-
-
-
             this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
-
           }
-
           else {
-
             this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-
-
-
           }
         }
         this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
@@ -422,7 +434,10 @@ export class SampleCollectionComponent implements OnInit {
       ckitId: [''],
       expiryDate: [''],
       patientId: [''],
-      collection: ['Pendig'],
+      patientName: [''],
+      patientSex: [''],
+      patientAge: [''],
+      collection: [''],
       collectionDate: ['']
 
 
@@ -467,6 +482,10 @@ export class SampleCollectionComponent implements OnInit {
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
           protocol.collectionDate = this.vMatDetails[i].visitsList.value[index].collectionDate
+          protocol.patientName = this.vMatDetails[i].visitsList.value[index].patientName
+          protocol.patientSex = this.vMatDetails[i].visitsList.value[index].patientSex
+          protocol.patientAge = this.vMatDetails[i].visitsList.value[index].patientAge
+    
         }
       })
     }
@@ -476,6 +495,10 @@ export class SampleCollectionComponent implements OnInit {
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
       protocol.collectionDate = this.ScreenKitForm.value.screenKitList[index].collectionDate
+      protocol.patientName = this.ScreenKitForm.value.screenKitList[index].patientName
+      protocol.patientSex = this.ScreenKitForm.value.screenKitList[index].patientSex
+      protocol.patientAge = this.ScreenKitForm.value.screenKitList[index].patientAge
+
     })
 
 
