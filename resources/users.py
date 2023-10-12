@@ -218,7 +218,7 @@ class UserRegister(Resource):
                 return {
                     "message": "invalid logged in person, plz logout and login again"
                 }, 500
-            if (user_json["role"].lower() == "cra" or user_json["role"].lower() == "cra coordinator") and user_json["site_id"] != "":
+            if (user_json["role"].lower() == "cra" or user_json["role"].lower() == "Site Coordinator") and user_json["site_id"] != "":
                 site_data = SiteDataModel.find_by_id(user_json["site_id"])
                 if not site_data:
                     return {"message": "invalid site id"}, 500
@@ -227,7 +227,7 @@ class UserRegister(Resource):
                 if not sponsor_data:
                     return {"message": "invalid sponsor id"}, 500
 
-            '''if (user_json["role"].lower() != "cra" or user_json["role"].lower() != "cra coordinator") and user_json["site_id"] != "":
+            '''if (user_json["role"].lower() != "cra" or user_json["role"].lower() != "Site Coordinator") and user_json["site_id"] != "":
                 return {
                     "message": "for {} role site_id should not present".format(
                         user_json["role"]
