@@ -33,7 +33,7 @@ export class UserCreateComponent implements OnInit {
     status: new FormControl(''),
   });
 
-  options: string[] = ['Admin','CRO','Sponsor','CRA','CRA Coordinator', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
+  options: string[] = ['Admin','CRO','Sponsor','CRA','Site Coordinator', 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution','Central Lab-Acknowledgement','Central Lab-Reports', ];
   id: any;
   getUserData: any;
   sponsorDetails: any[]= [];
@@ -129,7 +129,7 @@ export class UserCreateComponent implements OnInit {
             this.userForm.controls['sId'].setValue(this.getUserData.site_id)
         
            }
-           else if(this.getUserData.role === 'CRA Coordinator'){
+           else if(this.getUserData.role === 'Site Coordinator'){
           
 
 
@@ -219,7 +219,7 @@ export class UserCreateComponent implements OnInit {
     this.userForm.controls['sId'].updateValueAndValidity()
 
    }
-   else if(this.idValue === 'CRA Coordinator' ){
+   else if(this.idValue === 'Site Coordinator' ){
   
     this.sponsor = false
     this.site = true
@@ -379,7 +379,7 @@ reset(){
         userObj.site_id = this.userForm.controls['sId'].value
         userObj.sponsor_id = ''
       }
-      else if(this.idValue === 'CRA Coordinator'){
+      else if(this.idValue === 'Site Coordinator'){
         userObj.site_id = this.userForm.controls['sId'].value
         userObj.sponsor_id = ''
       }
@@ -403,7 +403,7 @@ reset(){
         
           userObj.sponsor_id = ''
         }
-        else if(this.getUserData.role === 'CRA Coordinator'){
+        else if(this.getUserData.role === 'Site Coordinator'){
           userObj.site_id = this.userForm.controls['sId'].value
           userObj.sponsor_id = ''
         }

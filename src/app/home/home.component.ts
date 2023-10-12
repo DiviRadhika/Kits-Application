@@ -238,7 +238,7 @@ export class HomeComponent implements OnInit {
         // Other menu items for admin role...
       ];
     }
-    else if(this.role === 'CRA Coordinator'){
+    else if(this.role === 'Site Coordinator'){
       this.menuItems = [
         // {
           // label: 'CRA',
