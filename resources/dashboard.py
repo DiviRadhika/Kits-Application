@@ -12,6 +12,7 @@ from models.cro_protocol import CroProtocolModel
 from models.clab_kit_preparation import ClabKitPreparationModel
 from models.visit_kit import VisitKitDetailsModel
 from models.screening_kit import ScreeningKitDetailsModel
+from flask_jwt_extended import jwt_required, current_user, get_jwt
 
 
 dashboard_ns = Namespace("dashboard", description="dashboard related operations")
@@ -19,7 +20,16 @@ dashboard_ns = Namespace("dashboard", description="dashboard related operations"
 
 class Dashboard(Resource):
     @dashboard_ns.doc("dashboard for user")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         response = {
             "no_of_protocols": 0,
             "no_of_sites": 0,

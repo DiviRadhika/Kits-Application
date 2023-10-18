@@ -172,9 +172,18 @@ class SendOTP(Resource):
         return {"message": "OTP sent successfully."}, 201
 
 
-class UserList(Resource):
+class UserList(Resource): 
     @users_ns.doc("get user by id")
+    @jwt_required(fresh=True)
     def get(self, user_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         user_data = UserModel.find_by_id(id=user_id)
         if not user_data:
             return {"message": "user data not found"}, 400
@@ -183,7 +192,16 @@ class UserList(Resource):
 
     @users_ns.expect(creation)
     @users_ns.doc("update a user")
+    @jwt_required(fresh=True)
     def put(self, user_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         user_json = request.json
         try:
             user_data = UserModel.find_by_email(user_json["email"])
@@ -202,12 +220,30 @@ class UserList(Resource):
 
 class UserRegister(Resource):
     @user_ns.doc("Get all the sponsers")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (user_list_schema.dump(UserModel.find_all()), 200)
 
     @user_ns.expect(creation)
     @user_ns.doc("User")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         user_json = request.json
         try:
             user_data = UserModel.find_by_email(user_json["email"])
@@ -250,7 +286,16 @@ class UserRegister(Resource):
 
     @user_ns.expect(update_user)
     @user_ns.doc("User")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         user_json = request.json
         try:
             user_data = UserModel.find_by_email(user_json["email"])

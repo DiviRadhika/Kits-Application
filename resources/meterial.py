@@ -49,14 +49,31 @@ meterial api  ...name, size, image  create, update , get
 
 class MeterialsList(Resource):
     @meterials_ns.doc("Get all the meterials")
-    # @jwt_required(fresh=True)
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (meterials_schema.dump(MeterialModel.find_all()), 200)
 
 
 class MeterialActionsById(Resource):
     @meterial_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, meterial_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         meterial_data = MeterialModel.get_by_id(meterial_id)
         if not meterial_data:
             return {"message": "meterial data not found"}, 400
@@ -65,7 +82,16 @@ class MeterialActionsById(Resource):
 
     @meterial_ns.doc("update meterial data by id")
     @meterial_ns.expect(meterial_test)
+    @jwt_required(fresh=True)
     def put(self, meterial_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             request_json = request.get_json()
             meterial_data = MeterialModel.get_by_id(meterial_id)
@@ -88,7 +114,16 @@ class MeterialActionsById(Resource):
 class Meterial(Resource):
     @meterial_ns.doc("create new meterial")
     @meterial_ns.expect(meterial_test)
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             request_json = request.get_json()
             meterial_data = meterial_schema.load(request_json)

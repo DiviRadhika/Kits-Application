@@ -3,7 +3,12 @@ from schemas.site_data import SiteDataSchema
 from flask import request
 from sqlalchemy import exc
 from models.site_data import SiteDataModel
-
+from models.users import UserModel
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt,
+    current_user,
+)
 from schemas.users import UserSchema
 
 
@@ -76,20 +81,46 @@ update_site_data = sites_data_ns.model(
 
 class SitedatasList(Resource):
     @sites_data_ns.doc("Get all the sites_data")
+    @jwt_required(fresh=True)
     def get(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (site_datas_list_schema.dump(SiteDataModel.find_all()), 200)
 
 
 class SiteActionsByEmail(Resource):
     @sites_data_ns.doc("Get all the sites_data")
+    @jwt_required(fresh=True)
     def get(self, email):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         return (site_datas_list_schema.dump(SiteDataModel.get_by_email(email)), 200)
 
 
 class SiteActionsById(Resource):
     @site_data_ns.doc("get by id")
-    # @jwt_required(fresh=True)
+    @jwt_required(fresh=True)
     def get(self, site_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         try:
             data = SiteDataModel.get_by_id(site_id)
             if not data:
@@ -103,8 +134,16 @@ class SiteActionsById(Resource):
 class Sitedata(Resource):
     @site_data_ns.expect(create_site_data)
     @site_data_ns.doc("Create a site_data")
-    # @jwt_required(fresh=True)
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         site_data_json = request.get_json()
         if 'site_data_code' in site_data_json:
             site_data = SiteDataModel.get_by_site_code(site_data_json['site_data_code'])
@@ -122,8 +161,16 @@ class Sitedata(Resource):
 
     @site_data_ns.expect(update_site_data)
     @site_data_ns.doc("Update a site_data")
-    # @jwt_required(fresh=True)
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         try:
             site_data = SiteDataModel.get_by_id(request_json["site_id"])

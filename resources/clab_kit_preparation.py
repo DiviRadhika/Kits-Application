@@ -5,6 +5,8 @@ from sqlalchemy import exc
 from models.clab_kit_preparation import ClabKitPreparationModel
 from models.cro_protocol import CroProtocolModel
 from models.site_data import SiteDataModel
+from models.users import UserModel
+from flask_jwt_extended import jwt_required, current_user, get_jwt
 
 
 clab_kit_preparation_ns = Namespace(
@@ -76,7 +78,16 @@ clab_kit_preparation = clab_kit_preparation_ns.model(
 
 class ClabKitPreparationList(Resource):
     @clab_kit_preparations_ns.doc("Get all the CLab Kit Preparations")
+    @jwt_required(fresh=True)
     def get(resource):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         kits = ClabKitPreparationModel.find_all_with_entities()
         if len(kits) == 0:
             return {"data": [], "message": ""}
@@ -96,7 +107,16 @@ class ClabKitPreparationList(Resource):
 
 class ClabKitProtocolActionsById(Resource):
     @clab_kit_preparations_ns.doc("get by id")
+    @jwt_required(fresh=True)
     def get(self, cro_protocol_id):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         cro_kit_data = ClabKitPreparationModel.get_by_id(cro_protocol_id)
         if not cro_kit_data:
             return {"message": "cro data not found"}, 400
@@ -112,7 +132,16 @@ class ClabKitProtocolActionsById(Resource):
 
 class GetProtocolsBySiteId(Resource):
     @clab_kit_preparations_ns.doc("get protocols by site id")
+    @jwt_required(fresh=True)
     def get(self, site_uuid):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         response = {
             "screening_data": [],
             "visit_data": [],
@@ -170,7 +199,16 @@ class GetProtocolsBySiteId(Resource):
 class ClabKitPreparation(Resource):
     @clab_kit_preparation_ns.expect(clab_kit_preparation)
     @clab_kit_preparation_ns.doc("Create a CLab Kit Preparation")
+    @jwt_required(fresh=True)
     def post(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         clab_kit_prep_json = request.get_json()
         kit_data = ClabKitPreparationModel.get_by_id(clab_kit_prep_json["protocol_id"])
         if kit_data:
@@ -189,7 +227,16 @@ class ClabKitPreparation(Resource):
 
     @clab_kit_preparation_ns.expect(clab_kit_preparation)
     @clab_kit_preparation_ns.doc("Update a CLab Kit Preparation")
+    @jwt_required(fresh=True)
     def put(self):
+        userId = current_user.user_id
+        user = UserModel.find_by_id(userId)
+        getjt = get_jwt()
+        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
+            return {
+                "message": "Not a valid Authorization token, logout and login again",
+                "error": "not_authorized",
+            }, 401
         request_json = request.get_json()
         kit_data = ClabKitPreparationModel.get_by_id(request_json["protocol_id"])
         if not kit_data:
