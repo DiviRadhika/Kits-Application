@@ -171,12 +171,12 @@ export class LoginComponent implements OnInit {
 
         this.admin.getUserbyId(data.user_id).subscribe((data: any) => {
           console.log(data);
-          sessionStorage.setItem('firstName', data.first_name)
-          sessionStorage.setItem('lastName', data.last_name)
-          sessionStorage.setItem('email', data.email)
-          sessionStorage.setItem('siteId', data.site_id)
-          sessionStorage.setItem('sponsorId', data.sponsor_id)
-          sessionStorage.setItem('fullName', data.first_name + ' '+data.last_name)
+          sessionStorage.setItem('firstName', data.body.first_name)
+          sessionStorage.setItem('lastName', data.body.last_name)
+          sessionStorage.setItem('email', data.body.email)
+          sessionStorage.setItem('siteId', data.body.site_id)
+          sessionStorage.setItem('sponsorId', data.body.sponsor_id)
+          sessionStorage.setItem('fullName', data.body.first_name + ' '+data.body.last_name)
           this.route.navigate(['/home/cro/dashboards'])
         });
         

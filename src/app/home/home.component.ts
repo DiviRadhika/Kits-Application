@@ -89,6 +89,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.role = sessionStorage.getItem('role')
+    
     this.fullName =  sessionStorage.getItem('fullName')
     if(this.role === 'Admin' ||this.role === 'admin' ){
       this.menuItems = [

@@ -7,18 +7,20 @@ import { endPointsUser } from '../api';
 })
 export class AdminService {
   [x: string]: any;
-headers = new HttpHeaders({
-  // 'Content-Type': 'application/json',
-  // 'Access-Control-Allow-Origin': '*'
-
-})
+  httpOptions = {
+    headers: new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Access-Control-Allow-Origin': '*',
+                 'Access-Control-Allow-Credentials': 'true'
+    })
+  }; 
   constructor(private _httpClient: HttpClient) {
    
    }
   //  ,{headers:this.headers}
   // Services for cro
-  getCro(): Observable<any> {
-    return this._httpClient.get(endPointsUser.getcros);
+  getCro(headers?:any): Observable<any> {
+    return this._httpClient.get(endPointsUser.getcros,{ observe: 'response', headers });
   }
   getCrobyId(id: any): Observable<any> {
     return this._httpClient.get(endPointsUser.getCroById + id)
@@ -34,8 +36,8 @@ headers = new HttpHeaders({
   getUser(): Observable<any> {
     return this._httpClient.get(endPointsUser.getUser)
   }
-  getUserbyId(id: any): Observable<any> {
-    return this._httpClient.get(endPointsUser.getUserById + id)
+  getUserbyId(id: any,headers?:any): Observable<any> {
+    return this._httpClient.get(endPointsUser.getUserById + id, { observe: 'response', headers })
   }
   createUser(data: string): Observable<any> {
     return this._httpClient.post(endPointsUser.getUserAddUpdate, data)
@@ -50,9 +52,11 @@ headers = new HttpHeaders({
   login(data: any): Observable<any> {
     return this._httpClient.post(endPointsUser.login, data)
   }
-  otp(data: any): Observable<any> {
-    return this._httpClient.post(endPointsUser.sendotp, data)
+  otp(data: any,headers?:any): Observable<any> {
+    return this._httpClient.post(endPointsUser.sendotp, data,{ observe: 'response', headers })
   }
+
+
   reset(data: any): Observable<any> {
     return this._httpClient.put(endPointsUser.reset, data)
   }

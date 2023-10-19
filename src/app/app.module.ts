@@ -58,8 +58,8 @@ import { CalendarModule } from 'primeng/calendar';
  
 
   ],
-  // {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}
-  providers: [MessageService, ConfirmationService,SortPipe],
+  
+  providers: [MessageService, ConfirmationService,SortPipe, {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }

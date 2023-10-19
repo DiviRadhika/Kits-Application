@@ -18,24 +18,24 @@ export class TokenInterceptorService {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-    
-    // req = req.clone({
-    //       withCredentials: true
-    //   });
-  
-    //   return next.handle(req);
-
-
-
-
     this.role = sessionStorage.getItem('role');
     if (this.role === null) {
-      sessionStorage.setItem('enablebtn', 'valid');
+    //  alert('k')
+    //  this.tokenizedReq = req.clone({
+       
+    //   setHeaders: {
+        
+    //     Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
+    //     // Access-Control-Allow-Origin: '*'
+    //   }
+    // });
+
+
       const tokenizedReq = req.clone({
-        withCredentials: true
-        // setHeaders : {
-        // Authorization : 'Bearer '
-        // }`
+       
+        setHeaders : {
+        Authorization : 'Bearer '
+        }
       });
       return next.handle(tokenizedReq)
         .pipe(
@@ -47,20 +47,7 @@ export class TokenInterceptorService {
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504 || err.status === 404) {
               } else if (err.status === 401) {
-            //     if(this.router.url === '/' || this.router.url === ''){
-
-            //     }
-            //     else{
-               
-            //     this.internalAppService.updateUserLoginDuration(sessionStorage.getItem('contactId')).subscribe((res: any) => {
-             
-            //       setTimeout(() => {
-            //         sessionStorage.clear();
-            //         this.router.navigate(['/']);
-            //       }, 300);
-
-            //     });
-            //   }
+           
               } else if (err.status === 200) {
               } else if (err.status === 0) {
               }
@@ -73,9 +60,8 @@ export class TokenInterceptorService {
         );
     }
     else {
-     
-console.log(sessionStorage.getItem('access_token'))
 
+  
       this.tokenizedReq = req.clone({
        
         setHeaders: {
@@ -99,34 +85,7 @@ console.log(sessionStorage.getItem('access_token'))
                 // this.router.navigate(['/pagenotfound']);
               } else if (err.status === 401) {
 
-                // if (sessionStorage.getItem('expireLink') === 'DMAAS') {
-
-                //   let headers: HttpHeaders = new HttpHeaders();
-                //   headers = headers.append('isRefreshToken', 'true');
-                //   this.internalAppService.refreshtoken({ headers }).subscribe((res: any) => {
-                //     this.newToken = res.token;
-                //     sessionStorage.setItem('jwtToken', this.newToken);
-                //   });
-                // }
-                // else {
-               
-                //   if(this.router.url === '/' || this.router.url === ''){
-
-                //   }
-                //   else{
-                //   this.internalAppService.updateUserLoginDuration(sessionStorage.getItem('contactId')).subscribe((res: any) => {
-
-                //     setTimeout(() => {
-                //       // sessionStorage.clear();
-                //       this.router.navigate(['/']);
-                //     }, 300);
-                //     this.router.navigate(['/']);
-                //   });
-                //   this.router.navigate(['/']);
-                // }
-                // }
-                // sessionStorage.clear();
-                // this.router.navigate(['/']);
+              
               }
               else if (err.status === 200) {
              

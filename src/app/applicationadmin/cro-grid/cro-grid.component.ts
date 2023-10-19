@@ -106,9 +106,9 @@ export class CroGridComponent implements OnInit {
   getCRoDetails() {
     this.admin.getCro().subscribe(
       (data: any) => {
-        this.croDetails = data
-        this.allcroDetails = data
-        console.log(data)
+        this.croDetails = data.body
+        this.allcroDetails = data.body
+        console.log(data.body)
         this.totalCount = this.croDetails.length
       },
       (err: any) => {
