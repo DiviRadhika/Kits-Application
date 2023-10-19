@@ -66,14 +66,6 @@ class ZlabsList(Resource):
     @zlabs_ns.doc("Get all the cros")
     @jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (lab_list_schema.dump(LabModel.find_all()), 200)
 
 
@@ -81,14 +73,6 @@ class ZlabActionsById(Resource):
     @zlab_ns.doc("get by id")
     @jwt_required(fresh=True)
     def get(self, lab_id):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         try:
             cro_data = LabModel.get_by_id(lab_id)
             if not cro_data:
@@ -104,14 +88,6 @@ class Zlab(Resource):
     @zlab_ns.doc("Create a cro")
     @jwt_required(fresh=True)
     def post(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         cro_json = request.get_json()
         try:
             cro_data = lab_schema.load(cro_json)
@@ -125,14 +101,6 @@ class Zlab(Resource):
     @zlab_ns.doc("Update a cro")
     @jwt_required(fresh=True)
     def put(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         request_json = request.get_json()
         try:
             cro_data = LabModel.get_by_id(request_json["cro_id"])

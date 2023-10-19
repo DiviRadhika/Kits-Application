@@ -50,14 +50,6 @@ class LabtestssList(Resource):
     @lab_tests_ns.doc("Get all the lab_tests")
     @jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (lab_tests_schema.dump(LabtestModel.find_all()), 200)
 
 
@@ -65,14 +57,6 @@ class LabActionsById(Resource):
     @lab_tests_ns.doc("delete lab test by id")
     @jwt_required(fresh=True)
     def delete(self, lab_test_id):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         try:
             lab_test_data = LabtestModel.get_by_id(lab_test_id)
             if lab_test_data:
@@ -93,14 +77,6 @@ class Labtest(Resource):
     @lab_test_ns.doc("Create a lab_test")
     @jwt_required(fresh=True)
     def post(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         lab_test_json = request.get_json()
         try:
             lab_test_data = lab_test_schema.load(lab_test_json)

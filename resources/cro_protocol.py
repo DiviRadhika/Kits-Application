@@ -99,14 +99,6 @@ class CrosProtocolsList(Resource):
     @cro_protocols_ns.doc("Get all the cros protocols")
     @jwt_required(fresh=True)
     def get(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (cro_list_protocols_schema.dump(CroProtocolModel.find_all()), 200)
 
 
@@ -114,14 +106,6 @@ class CroProtocolBySponsorId(Resource):
     @cro_protocols_ns.doc("get by sponsor id")
     @jwt_required(fresh=True)
     def get(self, sponsor_id):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         return (
             cro_list_protocols_schema.dump(
                 CroProtocolModel.get_by_sponsor_id(sponsor_id)
@@ -134,14 +118,6 @@ class CroProtocolActionsById(Resource):
     @cro_protocol_ns.doc("get by id")
     @jwt_required(fresh=True)
     def get(self, cro_protocol_id):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         try:
             cro_data = CroProtocolModel.get_by_id(cro_protocol_id)
             if not cro_data:
@@ -202,14 +178,6 @@ class CroProtocol(Resource):
     @cro_protocol_ns.doc("Create a cro_protocol")
     @jwt_required(fresh=True)
     def post(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         request_json = request.get_json()
         protocol_data = CroProtocolModel.get_by_protocol_id(request_json["protocol_id"])
         if protocol_data:

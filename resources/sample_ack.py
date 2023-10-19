@@ -59,14 +59,6 @@ class AckclabKitProtocolActionsById(Resource):
     @sample_ack_ns.doc("get by id")
     @jwt_required(fresh=True)
     def get(self, cro_protocol_id):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         cro_kit_data = ClabKitPreparationModel.get_by_id(cro_protocol_id)
         if not cro_kit_data:
             return {"message": "cro data not found"}, 400
@@ -85,14 +77,6 @@ class AckclabKitPreparation(Resource):
     @sample_ack_ns.doc("Update a sample ack")
     @jwt_required(fresh=True)
     def put(self):
-        userId = current_user.user_id
-        user = UserModel.find_by_id(userId)
-        getjt = get_jwt()
-        if float(getjt["signin_seconds"]) != user.last_logged_in.timestamp():
-            return {
-                "message": "Not a valid Authorization token, logout and login again",
-                "error": "not_authorized",
-            }, 401
         request_json = request.get_json()
         kit_data = ClabKitPreparationModel.get_by_id(request_json["protocol_id"])
         if not kit_data:
