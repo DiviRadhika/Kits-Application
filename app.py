@@ -88,7 +88,7 @@ from resources.dashboard import (
 )
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 bluePrint = Blueprint("api", __name__, url_prefix="/api")
 api = Api(bluePrint, doc="/doc", title="KITS APPLICATION")
 app.register_blueprint(bluePrint)
@@ -122,18 +122,18 @@ jwt = JWTManager(app)
 # migrate = Migrate(app, migrate_db)
 
 
-@jwt.token_in_blocklist_loader
-def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
-    jti = jwt_payload["jti"]
-    token = db.session.query(RefreshTokenModel.token_id).filter_by(token=jti).scalar()
-
-    return token is not None
+#@jwt.token_in_blocklist_loader
+#def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+#    jti = jwt_payload["jti"]
+#    token = db.session.query(RefreshTokenModel.token_id).filter_by(token=jti).scalar()
+#
+#    return token is not None
 
 
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header, jwt_data):
     identity = jwt_data["sub"]
-    return UserModel.find_by_id(user_id=identity)
+    return UserModel.find_by_id(identity)
     # return User.query.filter_by(id=identity).one_or_none()
 
 
@@ -189,6 +189,16 @@ def revoked_token_callback(jwt_headers, jwt_payload):
         401,
     )
 
+@app.after_request
+def after_request(response):
+    # header = response.headers
+    # header["Access-Control-Allow-Origin"] = "*"
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    #response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    response.headers.add("Access-Control-Allow-Headers", "*")
+    #response.headers.add("Access-Control-Allow-Methods", "POST,PUT,DELETE,GET")
+    response.headers.add("Access-Control-Allow-Methods", "*")
+    return response
 
 api.add_namespace(sponsors_ns)
 api.add_namespace(sponsor_ns)
@@ -214,7 +224,6 @@ api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
 
 
-# cors = flask_cors.CORS()
 @app.before_first_request
 def create_tables():
     db.init_app(app)
@@ -222,15 +231,6 @@ def create_tables():
     db.create_all()
     CreateDefaultUser()
 
-
-@app.after_request
-def after_request(response):
-    # header = response.headers
-    # header["Access-Control-Allow-Origin"] = "*"
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "POST,PUT,DELETE,GET")
-    return response
 
 
 sponsor_ns.add_resource(Sponser, "")
