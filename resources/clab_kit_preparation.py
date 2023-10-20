@@ -13,6 +13,10 @@ clab_kit_preparation_ns = Namespace(
     "clab_kit_preparation", description="clab_kit_preparation related operations"
 )
 
+kits_ns = Namespace(
+    "kits_ns", description="kits_ns related operations"
+)
+
 clab_kit_preparations_ns = Namespace(
     "clab_kit_preparations", description="clab_kit_preparation related operations"
 )
@@ -249,3 +253,35 @@ class ClabKitPreparation(Resource):
             print(e)
             return {"error": "failed to update kit details{}".format(str(e))}, 500
         return {"message": "kit details updated successfully"}, 201
+
+
+class KitsOperation():
+    @kits_ns.doc("get protocols by site id")
+    @jwt_required(fresh=True)
+    def get(self, protocol_id, site_uuid):
+        response = {
+            "screening_data": [],
+            "visit_data": [],
+        }
+        site_data = SiteDataModel.find_by_id(site_uuid)
+        if not site_data:
+            return {"message": "invalid site_id"}, 500
+        site_id = site_data.site_data_code
+        kits = ClabKitPreparationModel.get_by_id(protocol_id)
+        for kit in kits:
+            screening_kit_details = kit.screening_kit_details
+            visit_kit_details = kit.visit_kit_details
+
+            for screening_kit_data in screening_kit_details:
+                if "site_id" in screening_kit_data:
+                    if site_id == screening_kit_data["site_id"]:
+
+                        response["screening_data"].append(screening_kit_data)
+                    
+            for visits in visit_kit_details:
+                for visit_kit_data in visits:
+                    if "site_id" in visit_kit_data:
+                        if site_id == visit_kit_data["site_id"]:
+                            response["visit_data"].append(visit_kit_data)
+                            break
+        return response, 200

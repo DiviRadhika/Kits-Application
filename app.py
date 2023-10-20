@@ -71,10 +71,12 @@ from models.users import UserModel
 from resources.clab_kit_preparation import (
     clab_kit_preparation_ns,
     clab_kit_preparations_ns,
+    kits_ns,
     ClabKitPreparation,
     ClabKitPreparationList,
     ClabKitProtocolActionsById,
     GetProtocolsBySiteId,
+    KitsOperation,
 )
 from resources.sample_ack import (
     AckclabKitProtocolActionsById,
@@ -222,6 +224,8 @@ api.add_namespace(meterials_ns)
 api.add_namespace(meterial_ns)
 api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
+api.add_namespace(KitsOperation)
+
 
 
 @app.before_first_request
@@ -265,6 +269,7 @@ clab_kit_preparation_ns.add_resource(
     ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
 )
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
+kits_ns.add_resource(KitsOperation, "<string:protocol_id>/<string:site_uuid>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
