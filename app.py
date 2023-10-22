@@ -224,7 +224,7 @@ api.add_namespace(meterials_ns)
 api.add_namespace(meterial_ns)
 api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
-api.add_namespace(KitsOperation)
+api.add_namespace(kits_ns)
 
 
 
@@ -269,7 +269,7 @@ clab_kit_preparation_ns.add_resource(
     ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
 )
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
-kits_ns.add_resource(KitsOperation, "<string:protocol_id>/<string:site_uuid>")
+kits_ns.add_resource(KitsOperation, "/<string:site_uuid>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")

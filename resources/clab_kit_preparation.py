@@ -258,7 +258,7 @@ class ClabKitPreparation(Resource):
 class KitsOperation():
     @kits_ns.doc("get protocols by site id")
     @jwt_required(fresh=True)
-    def get(self, protocol_id, site_uuid):
+    def get(self, site_uuid):
         response = {
             "screening_data": [],
             "visit_data": [],
@@ -267,7 +267,7 @@ class KitsOperation():
         if not site_data:
             return {"message": "invalid site_id"}, 500
         site_id = site_data.site_data_code
-        kits = ClabKitPreparationModel.get_by_id(protocol_id)
+        kits = ClabKitPreparationModel.find_all()
         for kit in kits:
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
@@ -275,13 +275,13 @@ class KitsOperation():
             for screening_kit_data in screening_kit_details:
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
-
-                        response["screening_data"].append(screening_kit_data)
+                        d = dict((x, y) for x, y in screening_kit_data)
+                        response["screening_data"].append(d)
                     
             for visits in visit_kit_details:
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
-                            response["visit_data"].append(visit_kit_data)
-                            break
+                            d = dict((x, y) for x, y in visit_kit_data)
+                            response["visit_data"].append(d)
         return response, 200
