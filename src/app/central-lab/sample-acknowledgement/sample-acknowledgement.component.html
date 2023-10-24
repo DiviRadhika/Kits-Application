@@ -182,7 +182,9 @@
                                                                     <th style="width: 120px;">Expiration Date</th>
                                                                     <th style="width: 120px;">Collection</th>
                                                                     <th style="width: 100px;">Upload PDF </th>
+                                                                    <th style="width: 100px;">Requistion Number</th>
                                                                     <th style="width: 100px;">Acknowledgement</th>
+                                                                    <th style="width: 100px;">Kit status</th>
                                                                     <th style="width: 100px;">Add Remarks</th>
                                                                     <th style="width: 130px;">Acknowledgement Date</th>
                                                                 </tr>
@@ -284,7 +286,11 @@
                                                                             </button>
                                                                         </ng-container>
                                                                     </td>
-
+                                                                    <td>
+                                                                        <input type="text" formControlName="requistionNumber"
+                                                                            placeholder="Requistion Number" value=''
+                                                                            class="form-control" />
+                                                                    </td>
 
 
                                                                     <td>
@@ -296,6 +302,16 @@
                                                                             </option>
                                                                         </select>
 
+
+                                                                    </td>
+                                                                                       <td>
+                                                                        <select formControlName="kitStatus"
+                                                                            class="form-select form-control">
+                                                                            <option *ngFor="let s of kitCondition"
+                                                                                [value]="s.name">
+                                                                                {{s.name}}
+                                                                            </option>
+                                                                        </select>
 
                                                                     </td>
 
@@ -505,7 +521,9 @@
                                                                         <th style="width: 120px;">Expiration Date</th>
                                                                         <th style="width: 120px;">Collection</th>
                                                                         <th style="width: 100px;">Upload PDF </th>
+                                                                        <th style="width: 100px;">Requistion Number</th>
                                                                         <th style="width: 100px;">Acknowledgement</th>
+                                                                        <th style="width: 100px;">Kit Status</th>
                                                                         <th style="width: 100px;">Add Remarks</th>
                                                                         <th style="width: 120px;">Acknowledgement Date</th>
                                                                     </tr>
@@ -535,12 +553,7 @@
                                                                             [disabled]="true" formControlName="site_id"
                                                                             value="" class="form-control" />
                                                                     </td>
-                                                                    <!-- <td *ngIf="pdfHide">
-                                                                                <input type="text" placeholder="Site Id"
-                                                                                    [disabled]="true" formControlName="pdf"
-                                                                                    value=""
-                                                                                    class="form-control" />
-                                                                            </td> -->
+                                                                
                                                                     <td>
                                                                         <input type="text" [disabled]="true"
                                                                             placeholder="patient Id" value=""
@@ -594,11 +607,11 @@
                                                                                 </svg>
                                                                             </button> </ng-container>
                                                                     </td>
-
-
-
-
-
+                                                                    <td>
+                                                                        <input type="text" formControlName="requistionNumber"
+                                                                            placeholder="requistionNumber" value=''
+                                                                            class="form-control" />
+                                                                    </td>
                                                                     <td>
                                                                         <select formControlName="acknowledgement"
                                                                             class="form-select form-control" (change)="checkacknowledgementv(i, j)">
@@ -609,6 +622,17 @@
                                                                         </select>
 
                                                                     </td>
+                                                                    <td>
+                                                                        <select formControlName="kitStatus"
+                                                                            class="form-select form-control">
+                                                                            <option *ngFor="let s of kitCondition"
+                                                                                [value]="s.name">
+                                                                                {{s.name}}
+                                                                            </option>
+                                                                        </select>
+
+                                                                    </td>
+                                                                  
                                                                     <td>
                                                                         <input type="text" formControlName="remarks"
                                                                             placeholder="Remarks" value=''

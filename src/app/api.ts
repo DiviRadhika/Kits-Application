@@ -53,6 +53,7 @@ export const endPointsUser = {
     postProtocol: `${apin}/cro_protocol`,
     croProtocols: `${apin}/cro_protocols`,
     getProtocolId: `${apin}/cro_protocol/`,
+    kitsns:`${apin}/kits_ns/`,
 
     // Endpoints for Preparatiion
     getPreparation: `${apin}/clab_kit_preparations`,

@@ -53,75 +53,56 @@ export class ViewSitesComponent implements OnInit {
   ngOnInit(): void {
    this.study()
    if (this.route.url === '/home/site/viewCRA') {
-
     this.heading = 'Sample Collection'
-
   }
-
   else if (this.route.url === '/home/site/viewCRAAcknowledgement') {
     this.heading = 'Acknowledgement By Site'
-
-  }
-
-
- 
+  } 
+  else if (this.route.url === '/home/site/viewcraAcknowledgement') {
+    this.heading = 'Lab Reports'
+  } 
     }
     toggleSorting() {
       this.isAscendingSort = !this.isAscendingSort;
-
       // Implement your sorting logic here based on the current sorting state.
     }
     toggleSorting1() {
-
       this.isAscendingSort1 = !this.isAscendingSort1;
     }
   siteCreate(){
       this.route.navigate(['/home/cro/protocol'])
     }
   view(id: string){
-
-
       this.route.navigate(['/home/cro/protocolView', id])
     }
     edit(id: string) {
-
       if (this.route.url === '/home/site/viewCRA') {
         this.route.navigate(['/home/site/sampleCollection', id])
       } 
       else if (this.route.url === '/home/site/viewCRAAcknowledgement') {
         this.route.navigate(['/home/site/studySiteAcknowledgement', id])
      }
-  
+     else if (this.route.url === '/home/site/viewcraAcknowledgement') {
+      this.route.navigate(['/home/site/labReports'])
+   }
     }
-
-
     study() {
-     
-      
-  
       this.protocol.getPreparationBySId(sessionStorage.getItem('siteId')).subscribe((data: any) => {
-      
-        
         const uniqueScreeningData = this.getUniqueObjects(data.screening_data, 'user_protocol_id');
         const uniqueVisitData = this.getUniqueObjects(data.visit_data, 'user_protocol_id');
-    
         const newScreeningObj: { uniqueScreeningData: any[] } = { uniqueScreeningData: [] };
         const newVisitObj: { uniqueVisitData: any[] } = { uniqueVisitData: [] };
-    
         uniqueScreeningData.forEach((obj: any) => {
           newScreeningObj.uniqueScreeningData.push(obj);
         });
-    
         uniqueVisitData.forEach((obj: any) => {
           newVisitObj.uniqueVisitData.push(obj);
         });
         const combinedArray = newScreeningObj.uniqueScreeningData.concat(newVisitObj.uniqueVisitData);
-    
         this.uniqueCombinedArray = this.getUniqueObjects(combinedArray, 'user_protocol_id');
         this.totalCount = this.uniqueCombinedArray.length
         this.allprotocolDetails = this.getUniqueObjects(combinedArray, 'user_protocol_id');
       });
-      console.log( this.uniqueCombinedArray);
       
     }
     

@@ -9,6 +9,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./prepration-grid.component.css']
 })
 export class PreprationGridComponent implements OnInit {
+  data: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -59,21 +60,31 @@ isAscendingSort1: boolean = true;
   //   this.route.navigate(['/home/cro/kitPrepration',id, 'protocol'])
   // }
   edit(id:string){
-  
-    this.protocol.getPreparationById(id).subscribe((protocolsData) => {
-    
-  }),
+  this.data= ''
+ 
   this.protocol.getPreparationById(id).subscribe(
     (data: any) => {
-      this.route.navigate(['/home/centralLab/kitPrepration',id, 'edit'])
+      this.data = data
+      console.log(this.data)
+      // this.route.navigate(['/home/centralLab/kitPrepration', id, 'edit'])
     },
     (err: any) => {
-      console.log(err); 
-      this.route.navigate(['/home/centralLab/kitPrepration',id,'add'])
-     
+      console.log(err);
+      // this.route.navigate(['/home/centralLab/kitPrepration', id, 'add'])
     }
   );
-  
+  console.log(this.data)
+  setTimeout(() => {
+    if(this.data){
+      this.route.navigate(['/home/centralLab/kitPrepration', id, 'edit'])
+    }
+    else{
+      this.route.navigate(['/home/centralLab/kitPrepration', id, 'add'])
+    }
+  }, 1000);
+  console.log(this.data)
+ 
+
  
   }
   // pCreate(){

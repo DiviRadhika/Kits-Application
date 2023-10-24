@@ -19,6 +19,20 @@ export class AdminService {
    }
   //  ,{headers:this.headers}
   // Services for cro
+  private jsonUrl = 'assets/jsondata.json';
+  private jsonUrlr = 'assets/reports.json';
+  private inventoryr = 'assets/inventory.json';
+ getsite(): Observable<any> {
+  return this._httpClient.get(this.jsonUrl);
+}
+getReports(): Observable<any> {
+  return this._httpClient.get(this.jsonUrlr);
+}
+getInventory(): Observable<any> {
+  return this._httpClient.get(this.inventoryr);
+}
+
+
   getCro(headers?:any): Observable<any> {
     return this._httpClient.get(endPointsUser.getcros,{ observe: 'response', headers });
   }

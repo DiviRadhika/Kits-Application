@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -82,6 +81,9 @@ export class SampleCollectionComponent implements OnInit {
   preprationData = [{ name: 'Not Collected', value: 'Not Collected' },
   { name: 'Collected', value: 'Collected' },
   ]
+  sexData = [{ name: 'Male', value: 'Male' },
+  { name: 'Female', value: 'Female' },
+  ]
 
   kitIdv: any = ''
   /* nmModel Variables */
@@ -152,20 +154,27 @@ export class SampleCollectionComponent implements OnInit {
 
       screenKitList: this.formBuilder.array([])
     });
-
-
-
   }
 
+
+
   getprotocolDetails(id: any) {
+
+    
+
     this.scount = ''
+
     this.protocolService.getProtocolId(id).subscribe((protocols) => {
       this.uuid = id;
+      // this.protocolService.kitsns(id, sessionStorage.getItem('siteId')).subscribe((protocolsd) => {
+        // alert('k')
+            // this.skDetails = protocolsd.screening_data
       this.protocolService.getPreparationById(id).subscribe((protocolsData) => {
-
+        console.log(protocolsData, 'val')
         this.skDetails = protocolsData.data.screening_kit_details
         this.vkDetails = protocolsData.data.visit_kit_details
-
+       
+       
         this.displayValues = true;
         this.protocolIdDetails = protocols.protocol
         this.protoName = this.protocolIdDetails.protocol_name
@@ -230,6 +239,13 @@ export class SampleCollectionComponent implements OnInit {
                 ckitIdControl.disable()
 
               }
+              const siteControl = visitKitListArray.at(j).get('site_id');
+              if (siteControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                siteControl.patchValue(vkDetailForRowAndTab.site_id);
+                siteControl.disable()
+
+              }
 
               const expirydControl = visitKitListArray.at(j).get('expiryDate');
               if (expirydControl) {
@@ -243,7 +259,24 @@ export class SampleCollectionComponent implements OnInit {
                 patientControl.patchValue(vkDetailForRowAndTab.patientId);
 
               }
+              const patientNameControl = visitKitListArray.at(j).get('patientName');
+              if (patientNameControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientNameControl.patchValue(vkDetailForRowAndTab.patientName);
 
+              }
+              const patientAgeControl = visitKitListArray.at(j).get('patientAge');
+              if (patientAgeControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientAgeControl.patchValue(vkDetailForRowAndTab.patientAge);
+
+              }
+              const patientSexControl = visitKitListArray.at(j).get('patientSex');
+              if (patientSexControl) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                patientSexControl.patchValue(vkDetailForRowAndTab.patientSex);
+
+              }
               const collectionControl = visitKitListArray.at(j).get('collection');
               if (collectionControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -255,9 +288,6 @@ export class SampleCollectionComponent implements OnInit {
                 }
 
               }
-
-
-
               const collectionDateControl = visitKitListArray.at(j).get('collectionDate');
               if (collectionDateControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -276,12 +306,16 @@ export class SampleCollectionComponent implements OnInit {
           this.tets.push(tabs.selectedLabTests)
         });
 
+     
+
         for (let i = 1; i <= this.scount; i++) {
-          // alert('kj')
           this.adjustScreenKitRows(this.scount, this.skDetails);
+
         }
+       
 
       });
+    // });
 
     });
 
@@ -334,11 +368,15 @@ export class SampleCollectionComponent implements OnInit {
 
     return this.formBuilder.group({
       kitId: [''],
+      site_id: [''],
       ckitId: [''],
       expiryDate: [''],
       patientId: [''],
-      collection: ['Pending'],
-      collectionDate: ['']
+      collection: [''],
+      collectionDate: [''],
+      patientName: [''],
+      patientSex: [''],
+      patientAge: [''],
 
 
 
@@ -354,6 +392,7 @@ export class SampleCollectionComponent implements OnInit {
 
     if (count < currentRowCount) {
       // Remove excess rows
+      console.log(currentRowCount, count)
       for (let i = currentRowCount - 1; i >= count; i--) {
         screenKitList.removeAt(i);
       }
@@ -361,29 +400,35 @@ export class SampleCollectionComponent implements OnInit {
       // Add new rows
       for (let i = currentRowCount; i < count; i++) {
         this.onScreenKitAdd(i);
+
         if (i < skDetails.length) {
+        //     this.skDetails.forEach((res: any) => {
+         
+         
+        //   if (res.site_id === this.ID) {
+        //     alert('lk')
+        //     this.ScreenKitForm.get('screenKitList').controls[i].disable()
+            
+        //   }
+        //   else{
+        //     this.ScreenKitForm.get('screenKitList').controls[i].enable()
+        //   }
+        // });
           this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').patchValue(skDetails[i].collectionDate);
           this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').patchValue(skDetails[i].patientId);
-
-
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientName').patchValue(skDetails[i].patientName)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientAge').patchValue(skDetails[i].patientAge)
+          this.ScreenKitForm.get('screenKitList').controls[i].get('patientSex').patchValue(skDetails[i].patientSex);
 
           if (skDetails[i].collection === undefined || skDetails[i].collection === null || skDetails[i].collection === '') {
-
-
-
             this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(this.preprationData[0].value);
-
           }
-
           else {
-
             this.ScreenKitForm.get('screenKitList').controls[i].get('collection').patchValue(skDetails[i].collection);
-
-
-
           }
         }
         this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
+        this.ScreenKitForm.get('screenKitList').controls[i].get('site_id').patchValue(skDetails[i].site_id)
         this.ScreenKitForm.get('screenKitList').controls[i].get('ckitId').patchValue(skDetails[i].ckitId);
         this.ScreenKitForm.get('screenKitList').controls[i].get('expiryDate').patchValue(skDetails[i].expiryDate);
         this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').disable()
@@ -401,6 +446,7 @@ export class SampleCollectionComponent implements OnInit {
         }
       }
     }
+   
   }
   addScreenKit(record: any) {
     this.ScreenKitForm.get('screenKitList').push(this.addScreenKitData(record));
@@ -420,9 +466,13 @@ export class SampleCollectionComponent implements OnInit {
     return this.formBuilder.group({
       kitId: [''],
       ckitId: [''],
+      site_id: [''],
       expiryDate: [''],
       patientId: [''],
-      collection: ['Pendig'],
+      patientName: [''],
+      patientSex: [''],
+      patientAge: [''],
+      collection: [''],
       collectionDate: ['']
 
 
@@ -467,6 +517,10 @@ export class SampleCollectionComponent implements OnInit {
           protocol.patientId = this.vMatDetails[i].visitsList.value[index].patientId
           protocol.collection = this.vMatDetails[i].visitsList.value[index].collection
           protocol.collectionDate = this.vMatDetails[i].visitsList.value[index].collectionDate
+          protocol.patientName = this.vMatDetails[i].visitsList.value[index].patientName
+          protocol.patientSex = this.vMatDetails[i].visitsList.value[index].patientSex
+          protocol.patientAge = this.vMatDetails[i].visitsList.value[index].patientAge
+
         }
       })
     }
@@ -476,6 +530,10 @@ export class SampleCollectionComponent implements OnInit {
       protocol.patientId = this.ScreenKitForm.value.screenKitList[index].patientId
       protocol.collection = this.ScreenKitForm.value.screenKitList[index].collection
       protocol.collectionDate = this.ScreenKitForm.value.screenKitList[index].collectionDate
+      protocol.patientName = this.ScreenKitForm.value.screenKitList[index].patientName
+      protocol.patientSex = this.ScreenKitForm.value.screenKitList[index].patientSex
+      protocol.patientAge = this.ScreenKitForm.value.screenKitList[index].patientAge
+
     })
 
 

@@ -11,6 +11,8 @@ import { ViewSitesComponent } from './view-sites/view-sites.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewsitesSortPipe } from './view-sites.sort';
 import { StudySiteacknowledgementComponent } from './study-siteacknowledgement/study-siteacknowledgement.component';
+import { NewkitsComponent } from './newkits/newkits.component';
+import { KitsnewComponent } from './kitsnew/kitsnew.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { StudySiteacknowledgementComponent } from './study-siteacknowledgement/s
     SampleCollectionComponent,
     ViewSitesComponent,
     ViewsitesSortPipe,
-    StudySiteacknowledgementComponent
+    StudySiteacknowledgementComponent,
+    NewkitsComponent,
+    KitsnewComponent
   ],
   imports: [
     CommonModule,

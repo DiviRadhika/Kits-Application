@@ -94,35 +94,40 @@
                                                 <div class="row">
                                                     <div class="table-responsive" [formGroup]="ScreenKitForm">
                                                         <table class="table table-striped mb-0"
-                                                            formArrayName="screenKitList">
+                                                            formArrayName="screenKitList" style="width: 140%; ">
                                                             <thead Style="background:#EEE">
                                                                 <tr>
-                                                                    <th>KitId</th>
-                                                                    <th>Central Lab KitId</th>
-                                                                    <th>Expiration Date</th>
-
-                                                                    <th>Patient Id</th>
-                                                                    <th>Collection Date</th>
-                                                                    <th>Sample Collection</th>
-                                                                    
-
-
+                                                                    <th style="width: 130px;">KitId</th>
+                                                                 
+                                                                    <th style="width: 150px;">Central Lab KitId</th>
+                                                                    <th style="width: 100px;">Expiration Date</th>
+                                                                    <th style="width: 120px;">Patient Id</th>
+                                                                    <th style="width: 120px;">Patient Name</th>
+                                                                    <th style="width: 120px;">Patient Age</th>
+                                                                    <th style="width: 120px;">Patient Sex</th>
+                                                                    <th style="width: 120px;">Collection Date</th>
+                                                                    <th style="width: 140px;">Sample Collection</th>
                                                                 </tr>
                                                             </thead>
 
                                                             <tbody>
 
-                                                                <tr [formGroupName]="i" *ngFor="
+                                                                <ng-container *ngFor="let item of ScreenKitForm.get('screenKitList').controls; let i = index">
+                                                                    <tr [formGroupName]="i" *ngIf="item.get('site_id').value === this.ID">
+
+                                                                <!-- <tr [formGroupName]="i" *ngFor="
                                                             let item of ScreenKitForm.get('screenKitList')
                                                               .controls;
                                                             let i = index
-                                                          ">
+                                                          " > -->
                                                                     <td>
                                                                         <input autocomplete="off" type="text"
                                                                         formControlName="kitId"
                                                                             placeholder="kitId" class="form-control"
                                                                             [disabled]="true" value="{{item.kitId}}" />
                                                                     </td>
+                                                                 
+                                                                    
                                                                     <td>
                                                                         <input autocomplete="off" type="text"
                                                                             placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
@@ -140,6 +145,28 @@
                                                                             placeholder="Patient Id"
                                                                             formControlName="patientId"
                                                                             class="form-control" value="" />
+                                                                    </td>
+                                                                    <td >
+                                                                        <input autocomplete="off" type="text"
+                                                                            placeholder="Patient Name"
+                                                                            formControlName="patientName"
+                                                                            class="form-control" value="" />
+                                                                    </td>
+                                                                    <td >
+                                                                        <input autocomplete="off" type="text"
+                                                                            placeholder="Patient Age"
+                                                                            formControlName="patientAge"
+                                                                            class="form-control" value="" />
+                                                                    </td>
+                                                                    <td >
+                                                                        <select formControlName="patientSex" 
+                                                                        class="form-select form-control">
+                                                                        <option *ngFor="let s of sexData"
+                                                                            [value]="s.name">
+                                                                            {{s.name}}
+                                                                        </option>
+                                                                    </select>
+                                                                        
                                                                     </td>
                                                                     <td>
                                                                         <input autocomplete="off" type="date"
@@ -163,6 +190,7 @@
                               
 
                                                                 </tr>
+                                                                </ng-container>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -188,30 +216,33 @@
                                                             <div class="table-responsive"
                                                                 [formGroup]="item.visitKitFormGroup">
                                                                 <table class="table table-striped mb-0"
-                                                                    formArrayName="visitKitList">
-                                                                    <thead Style="background:#EEE">
+                                                                    formArrayName="visitKitList" style="width: 140%; ">
+                                                                    <thead Style="background:#EEE; ">
                                                                         <tr>
-                                                                            <th>KitId</th>
-                                                                            <th>Central Lab KitId</th>
-                                                                            <th>Expiration Date</th>
-                                                                            <th>Patient Id</th>
-                                                                            <th>Collection Date</th>
-                                                                            <th>Sample Collection</th>
+                                                                    <th style="width: 130px;">KitId</th>
+                                                                    <th style="width: 150px;">Central Lab KitId</th>
+                                                                    <th style="width: 100px;">Expiration Date</th>
+                                                                    <th style="width: 120px;">Patient Id</th>
+                                                                    <th style="width: 120px;">Patient Name</th>
+                                                                    <th style="width: 120px;">Patient Age</th>
+                                                                    <th style="width: 120px;">Patient Sex</th>
+                                                                    <th style="width: 120px;">Collection Date</th>
+                                                                    <th style="width: 140px;">Sample Collection</th>
                                                                           
                                                                         </tr>
                                                                     </thead>
 
+                                                                    
                                                                     <tbody *ngIf="item.visitsList">
-
-
-                                                                        <tr *ngFor="let control of item.visitsList.controls; let j = index"
-                                                                            [formGroupName]="j">
+                                                                        <ng-container *ngFor="let control of item.visitsList.controls; let j = index">
+                                                                           <tr [formGroupName]="j" *ngIf="control.get('site_id').value === this.ID">
                                                                             <td>
                                                                                 <input autocomplete="off" type="text"
                                                                                 formControlName="kitId"
                                                                                     placeholder="kitId" class="form-control"
                                                                                     [disabled]="true" value="{{item.kitId}}" />
                                                                             </td>
+                                                                      
                                                                             <td>
                                                                                 <input autocomplete="off" type="text"
                                                                                     placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
@@ -230,6 +261,29 @@
                                                                                     placeholder="Patient Id"
                                                                                     formControlName="patientId"
                                                                                     class="form-control" value="" />
+                                                                            </td>
+                                                                          
+                                                                            <td >
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Patient Name"
+                                                                                    formControlName="patientName"
+                                                                                    class="form-control" value="" />
+                                                                            </td>
+                                                                            <td >
+                                                                                <input autocomplete="off" type="text"
+                                                                                    placeholder="Patient Age"
+                                                                                    formControlName="patientAge"
+                                                                                    class="form-control" value="" />
+                                                                            </td>
+                                                                            <td >
+                                                                                <select formControlName="patientSex" 
+                                                                                class="form-select form-control">
+                                                                                <option *ngFor="let s of sexData"
+                                                                                    [value]="s.name">
+                                                                                    {{s.name}}
+                                                                                </option>
+                                                                            </select>
+                                                                                
                                                                             </td>
                                                                             <td>
                                                                                 <input autocomplete="off" type="date"
@@ -253,6 +307,7 @@
                                                                            
 
                                                                         </tr>
+                                                                    </ng-container>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -323,5 +378,6 @@
 
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
+
 
 

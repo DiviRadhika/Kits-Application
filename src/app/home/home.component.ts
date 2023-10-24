@@ -169,25 +169,19 @@ export class HomeComponent implements OnInit {
 
       ];
     }
-    else if(this.role === 'Central Lab'){
+    else if(this.role === 'Central Lab-Acknowledgement'){
       this.menuItems = [
         // {
           // label: 'Central Lab',
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
+            { label: 'Study Summary', link: '/home/cro/protocolGrid' },
             { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
             { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
             { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
             { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
             { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
-
-
-
-
-
-
-
           // ]
         // },
         // Other menu items for admin role...
@@ -211,12 +205,12 @@ export class HomeComponent implements OnInit {
         { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
       ];
     }
-    else if(this.role === 'Central Lab-Acknowledgement'){
-      this.menuItems = [
-        { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
-      ];
-    }
+    // else if(this.role === 'Central Lab-Acknowledgement'){
+    //   this.menuItems = [
+    //     { label: 'Dashboard', link: '/home/cro/dashboards' },
+    //     { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
+    //   ];
+    // }
     else if(this.role === 'Central Lab-Reports'){
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
@@ -247,8 +241,10 @@ export class HomeComponent implements OnInit {
           // expanded: false,
           // subItems: [
             { label: 'Dashboard', link: '/home/cro/dashboards' },
-            { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
-            // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
+            { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' },
+            { label: 'Lab Reports', link: '/home/site/viewcraAcknowledgement' },
+            { label: 'Study Subject', link: '/home/site/newkits' },
+            { label: 'Kit Inventory', link: '/home/site/inventory' }
           // ]
         // }
         // Other menu items for admin role...

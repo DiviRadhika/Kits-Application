@@ -89,6 +89,10 @@ export class SampleAcknowledgementComponent implements OnInit {
   preprationData = [{ name: 'Pending', value: 'Pending' },
   { name: 'Received', value: 'Received' },
   ]
+  kitCondition = [{ name: 'Good', value: 'Good' },
+  { name: 'Bad', value: 'Bad' }
+  
+  ]
   kitIdv: any = ''
   /* nmModel Variables */
   selected_protocol_id: any;
@@ -286,8 +290,23 @@ export class SampleAcknowledgementComponent implements OnInit {
                 collection.patchValue(vkDetailForRowAndTab.collection);
 
               }
-
-
+              const statusontrol = visitKitListArray.at(j).get('kitStatus');
+              if (statusontrol) {
+                const vkDetailForRowAndTab = this.vkDetails[i][j];
+                if (vkDetailForRowAndTab.kitStatus)
+                console.log('k')
+                  if (vkDetailForRowAndTab.kitStatus === undefined || vkDetailForRowAndTab.kitStatus === null || vkDetailForRowAndTab.kitStatus === '') {
+                    console.log('v', this.kitCondition[0].value)
+                    statusontrol.patchValue(this.kitCondition[0].value);
+                
+                    statusontrol.enable()
+                  }
+                  else {
+                    statusontrol.patchValue(vkDetailForRowAndTab.kitStatus);
+                    statusontrol.enable()
+                  }
+                  statusontrol.enable()
+                }
               const ackControl = visitKitListArray.at(j).get('acknowledgement');
               if (ackControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -301,16 +320,23 @@ export class SampleAcknowledgementComponent implements OnInit {
                     ackControl.enable()
                   }
                   ackControl.enable()
+                }
                 const remarksControl = visitKitListArray.at(j).get('remarks');
                 if (remarksControl) {
                   const vkDetailForRowAndTab = this.vkDetails[i][j];
                   remarksControl.patchValue(vkDetailForRowAndTab.remarks);
                   remarksControl.enable()
                 }
+                const requistionControl = visitKitListArray.at(j).get('requistionNumber');
+                if (requistionControl) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j];
+                  requistionControl.patchValue(vkDetailForRowAndTab.requistionNumber);
+                  requistionControl.enable()
+                }
 
               }
 
-            }
+            
             tabs.visitsList = visitKitListArray;
             this.tets.push(tabs.selectedLabTests);
           }
@@ -382,7 +408,8 @@ export class SampleAcknowledgementComponent implements OnInit {
       kitId: [''],
       ckitId: [''],
       expiryDate: [''],
-
+      requistionNumber: [''],
+      kitStatus:[''],
       patientId: [''],
       site_id: [''],
       collection: [''],
@@ -420,7 +447,14 @@ export class SampleAcknowledgementComponent implements OnInit {
         else {
           this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgement').patchValue(skDetails[i].acknowledgement);
         }
-
+        if (skDetails[i].kitStatus === undefined || skDetails[i].kitStatus === null || skDetails[i].kitStatus === '') {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitStatus').patchValue(this.kitCondition[0].value);
+        }
+        else {
+          this.ScreenKitForm.get('screenKitList').controls[i].get('kitStatus').patchValue(skDetails[i].kitStatus);
+        }
+        
+        this.ScreenKitForm.get('screenKitList').controls[i].get('requistionNumber').patchValue(skDetails[i].requistionNumber);
         this.ScreenKitForm.get('screenKitList').controls[i].get('remarks').patchValue(skDetails[i].remarks);
         this.ScreenKitForm.get('screenKitList').controls[i].get('acknowledgementDate').patchValue(skDetails[i].acknowledgementDate);
 
@@ -505,6 +539,8 @@ export class SampleAcknowledgementComponent implements OnInit {
       kitId: [''],
       ckitId: [''],
       expiryDate: [''],
+      requistionNumber: [''],
+      kitStatus:[''],
       acknowledgement: ['Pending'],
       remarks: [''],
       patientId: [''],
@@ -564,8 +600,10 @@ export class SampleAcknowledgementComponent implements OnInit {
           protocol.acknowledgement = this.vMatDetails[i].visitsList.value[index].acknowledgement
           protocol.remarks = this.vMatDetails[i].visitsList.value[index].remarks
           protocol.acknowledgementDate = this.vMatDetails[i].visitsList.value[index].acknowledgementDate
-
+          protocol.kitStatus = this.vMatDetails[i].visitsList.value[index].kitStatus
+          protocol.requistionNumber = this.vMatDetails[i].visitsList.value[index].requistionNumber
         }
+        
 
       })
 
@@ -576,6 +614,8 @@ export class SampleAcknowledgementComponent implements OnInit {
       protocol.acknowledgement = this.ScreenKitForm.value.screenKitList[index].acknowledgement
       protocol.remarks = this.ScreenKitForm.value.screenKitList[index].remarks,
         protocol.acknowledgementDate = this.ScreenKitForm.value.screenKitList[index].acknowledgementDate
+        protocol.kitStatus = this.ScreenKitForm.value.screenKitList[index].kitStatus
+        protocol.requistionNumber = this.ScreenKitForm.value.screenKitList[index].requistionNumber
       // protocol.pdf =  this.pdfValues[index].pdf
 
     })
@@ -930,6 +970,7 @@ export class SampleAcknowledgementComponent implements OnInit {
   }
   viewPdf(rowIndex: number, fileIndex: number) {
     const fileToView = this.uploadedFiles[rowIndex][fileIndex];
+    console.log(fileToView)
     const url = URL.createObjectURL(fileToView);
 
     // Open the PDF in a new window

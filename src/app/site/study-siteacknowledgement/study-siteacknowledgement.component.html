@@ -163,6 +163,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             <th  style="width: 120px;">Central Lab KitId</th>
                                                                             <th  style="width: 120px;">Expiration Date</th>
                                                                             <th  style="width: 120px;">Status</th>
+                                                                            <th  style="width: 120px;">Kit Status</th>
                                                                             <th  style="width: 120px;">Received Date</th>
                                                                             <th style="width: 120px;">Remarks</th>
                                                                         </tr>
@@ -175,15 +176,8 @@ placeholder="Study Name" formControlName="protocol_name"
 
  
 
-                                                                        <tr [formGroupName]="i" *ngFor="
-
-                                                            let item of ScreenKitForm.get('screenKitList')
-
-                                                              .controls;
-
-                                                            let i = index
-
-                                                          ">
+                                                                        <ng-container *ngFor="let item of ScreenKitForm.get('screenKitList').controls; let i = index">
+                                                                            <tr [formGroupName]="i" *ngIf="item.get('site_id').value === this.ID">
 
                                                           <td>
                                                             <input autocomplete="off" type="text"
@@ -206,29 +200,20 @@ placeholder="Study Name" formControlName="protocol_name"
 
 
                                                                             <td>
-
                                                                                 <select formControlName="siteStatus"
-
                                                                                     class="form-select form-control">
-
                                                                                     <option
 
-                                                                                        *ngFor="let s of preprationData"
-
-                                                                                        [value]="s.name">
-
-                                                                                        {{s.name}}
-
-                                                                                    </option>
+                                                                                        *ngFor="let s of preprationData" [value]="s.name">{{s.name}}</option>
 
                                                                                 </select>
-
-                                                                             
-
- 
-
                                                                             </td>
-
+                                                                            <td>
+                                                                                <select formControlName="skitStatus"
+                                                                                    class="form-select form-control">
+                                                                                    <option  *ngFor="let s of skitcondition" [value]="s.name">  {{s.name}}</option>
+                                                                                </select>
+                                                                            </td>
                                              
 
                                                                             <td >
@@ -260,6 +245,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             </td>
 
                                                                         </tr>
+                                                                        </ng-container>
 
                                                                     </tbody>
 
@@ -308,6 +294,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             <th  style="width: 120px;">Central Lab KitId</th>
                                                                             <th  style="width: 120px;">Expiration Date</th>
                                                                             <th  style="width: 120px;">Status</th>
+                                                                            <th  style="width: 120px;">Kit Status</th>
                                                                             <th  style="width: 120px;">Received Date</th>
                                                                             <th style="width: 120px;">Remarks</th>
                                                                         </tr>
@@ -315,9 +302,8 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                     <tbody *ngIf="item.visitsList">
 
-
-                                                                        <tr *ngFor="let control of item.visitsList.controls; let j = index"
-                                                                            [formGroupName]="j">
+                                                                        <ng-container *ngFor="let control of item.visitsList.controls; let j = index">
+                                                                            <tr [formGroupName]="j" *ngIf="control.get('site_id').value === this.ID">
                                                                             <td>
                                                                                 <input autocomplete="off" type="text"
                                                                                 formControlName="kitId"
@@ -336,65 +322,36 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                                     value={{item.expiryDate}}  formControlName="expiryDate"
                                                                                     class="form-control" [disabled]="true" />
                                                                             </td>
-                                                                                                                                             <td>
+                                                                            <td>
 
                                                                                 <select formControlName="siteStatus"
 
                                                                                     class="form-select form-control">
-
-                                                                                   
-
-                                                                                    <option
-
-                                                                                        *ngFor="let s of preprationData"
-
-                                                                                        [value]="s.name">
-
-                                                                                        {{s.name}}
-
-                                                                                    </option>
-
+                                                                                    <option  *ngFor="let s of preprationData" [value]="s.name">  {{s.name}}</option>
                                                                                 </select>
-
-                                                                             
-
- 
-
                                                                             </td>
-
-                                             
-
+                                                                            <td>
+                                                                                <select formControlName="skitStatus"
+                                                                                    class="form-select form-control">
+                                                                                    <option  *ngFor="let s of skitcondition" [value]="s.name">  {{s.name}}</option>
+                                                                                </select>
+                                                                            </td>
                                                                             <td >
-
                                                                                 <input autocomplete="off" type="date"
 
-                                                                                    placeholder="Date"
-
-                                                                                    class="form-control"
-
-                                                                                    formControlName="recievedDate"
-
-                                                                                    value={{date}} />
-
+                                                                                    placeholder="Date"  class="form-control" formControlName="recievedDate"   value={{date}} />
                                                                             </td>
 
- 
-
                                                                             <td >
-
                                                                                 <input autocomplete="off" type="text"
 
-                                                                                    placeholder="Remarks"
-
-                                                                                    formControlName="siteRemarks"
-
-                                                                                    class="form-control" value="" />
-
+                                                                                    placeholder="Remarks"  formControlName="siteRemarks"   class="form-control" value="" />
                                                                             </td>
 
  
 
                                                                         </tr>
+                                                                        </ng-container>
 
                                                                     </tbody>
 

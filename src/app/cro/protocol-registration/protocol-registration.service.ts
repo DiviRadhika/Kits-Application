@@ -26,6 +26,10 @@ export class ProtocolService {
     getProtocolId(id: any): Observable<any> {
         return this.http.get(endPointsUser.getProtocolId + id)
       }
+
+      kitsns(id: any, sid:any): Observable<any> {
+        return this.http.get(endPointsUser.kitsns + id+ '/'+sid)
+      }
       postPreparation(data:any):Observable<any>{
         return this.http.post(endPointsUser.postPreparation, data)
     }
