@@ -163,7 +163,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             <th  style="width: 120px;">Central Lab KitId</th>
                                                                             <th  style="width: 120px;">Expiration Date</th>
                                                                             <th  style="width: 120px;">Status</th>
-                                                                            <th  style="width: 120px;">Kit Status</th>
+                                                                            
                                                                             <th  style="width: 120px;">Received Date</th>
                                                                             <th style="width: 120px;">Remarks</th>
                                                                         </tr>
@@ -208,12 +208,7 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                                                 </select>
                                                                             </td>
-                                                                            <td>
-                                                                                <select formControlName="skitStatus"
-                                                                                    class="form-select form-control">
-                                                                                    <option  *ngFor="let s of skitcondition" [value]="s.name">  {{s.name}}</option>
-                                                                                </select>
-                                                                            </td>
+                                                                       
                                              
 
                                                                             <td >
@@ -294,7 +289,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                             <th  style="width: 120px;">Central Lab KitId</th>
                                                                             <th  style="width: 120px;">Expiration Date</th>
                                                                             <th  style="width: 120px;">Status</th>
-                                                                            <th  style="width: 120px;">Kit Status</th>
+                                                                            
                                                                             <th  style="width: 120px;">Received Date</th>
                                                                             <th style="width: 120px;">Remarks</th>
                                                                         </tr>
@@ -330,12 +325,7 @@ placeholder="Study Name" formControlName="protocol_name"
                                                                                     <option  *ngFor="let s of preprationData" [value]="s.name">  {{s.name}}</option>
                                                                                 </select>
                                                                             </td>
-                                                                            <td>
-                                                                                <select formControlName="skitStatus"
-                                                                                    class="form-select form-control">
-                                                                                    <option  *ngFor="let s of skitcondition" [value]="s.name">  {{s.name}}</option>
-                                                                                </select>
-                                                                            </td>
+                                                                      
                                                                             <td >
                                                                                 <input autocomplete="off" type="date"
 

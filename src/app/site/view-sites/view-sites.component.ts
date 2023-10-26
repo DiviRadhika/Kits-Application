@@ -61,6 +61,10 @@ export class ViewSitesComponent implements OnInit {
   else if (this.route.url === '/home/site/viewcraAcknowledgement') {
     this.heading = 'Lab Reports'
   } 
+  else if (this.route.url === '/home/site/viewSubject') {
+    this.heading = 'Study Subject'
+  } 
+ 
     }
     toggleSorting() {
       this.isAscendingSort = !this.isAscendingSort;
@@ -83,8 +87,11 @@ export class ViewSitesComponent implements OnInit {
         this.route.navigate(['/home/site/studySiteAcknowledgement', id])
      }
      else if (this.route.url === '/home/site/viewcraAcknowledgement') {
-      this.route.navigate(['/home/site/labReports'])
+      this.route.navigate(['/home/site/labReports', id])
    }
+   else if (this.route.url === '/home/site/viewSubject') {
+    this.route.navigate(['/home/site/newkits', id])
+  }
     }
     study() {
       this.protocol.getPreparationBySId(sessionStorage.getItem('siteId')).subscribe((data: any) => {

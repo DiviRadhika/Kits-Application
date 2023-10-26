@@ -10,8 +10,9 @@ const routes: Routes = [
   {path:'viewCRA', component:ViewSitesComponent},
   {path:'viewCRAAcknowledgement', component:ViewSitesComponent},
   {path:'viewcraAcknowledgement', component:ViewSitesComponent},
-  {path:'labReports', component:NewkitsComponent},
-  {path:'newkits', component:NewkitsComponent},
+  {path:'viewSubject', component:ViewSitesComponent},
+  {path:'labReports/:id', component:NewkitsComponent},
+  {path:'newkits/:id', component:NewkitsComponent},
   {path:'inventory', component:NewkitsComponent},
   {path:'studySiteAcknowledgement/:id', component:StudySiteacknowledgementComponent}
 ];

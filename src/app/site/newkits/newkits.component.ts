@@ -18,6 +18,11 @@ export class NewkitsComponent implements OnInit {
   inventory: boolean= false;
   inventoryData: any;
   totalCountI: any;
+  id: any;
+  
+  display: boolean = false;
+  pdfValuesview: any;
+  heading: string = '';
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -29,45 +34,52 @@ export class NewkitsComponent implements OnInit {
   Study = ['20001-002', '20001-001', '20001-007']
   visit = ['Visit1', 'Visit2', 'Visit3', 'Visit4','Visit5', 'Visit6']
   access = ['314321346', '254321346', '654321346','554321346']
-  croDetails: any[] = []
+  subjectDetails: any[] = []
   page = 1;
   totalCount = 0
   pageSize = 10;
   p = 1;
   searchText: any
   isMenuOpen: boolean = false;
-  allcroDetails: any;
+  reportsDetails: any;
  // 1 for ascending, -1 for descending
  
   constructor(private route: Router,
     private admin: AdminService,
+    private protocol:ProtocolService,
+    private activatedRoute: ActivatedRoute,
     private messageService: MessageService) { }
 
   
   pageChange(event: number) {
     this.page = event;
-    this.getCRoDetails()
+    this.getsubjectDetails()
   }
 
 
   ngOnInit(): void {
-    if (this.route.url === '/home/site/labReports') {
+    this.activatedRoute.params.subscribe((data: any) => {
+      this.id = data.id;
+     
+    });
+    if (this.route.url === '/home/site/labReports'+ '/'+this.id) {
+      this.heading  = 'Lab Reports'
       this.getReports()
       this.reports = true
       this.subject = false
       this.inventory = false
       this.classifications = ['Select Type','Lab Result', 'Cancellation'];
     } 
-    else if (this.route.url === '/home/site/newkits') {
-      
-      this.getCRoDetails();
+    else if (this.route.url === '/home/site/newkits'+ '/'+this.id) {
+      this.heading  = 'Study Subject'
+      this.getsubjectDetails();
       this.subject = true
       this.reports = false
       this.inventory = false
       this.classifications = ['Select CRA','Eliot', 'Ruffel'];
    }
    else if (this.route.url === '/home/site/inventory') {
-      
+    
     this.getInventory();
     this.subject = false
     this.reports = false
@@ -78,26 +90,48 @@ export class NewkitsComponent implements OnInit {
 
   }
  
+  openDialog(value: any){
+    this.display = true;
+    this.pdfValuesview = value;
+  }
+ 
   getReports(){
-    this.admin.getReports().subscribe(
+    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
       (data: any) => {
     
-        this.allcroDetails = data
+        this.reportsDetails = data.data
         console.log(data)
-        this.totalCountR = this.allcroDetails.length
+        this.totalCountR = this.reportsDetails.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     ) 
+    
+  }
+  getsubjectDetails() {
+
+    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
+      (data: any) => {
+        console.log(data)
+    
+        this.subjectDetails = data.data
+        console.log(data)
+        this.totalCountI = this.subjectDetails
+      },
+      (err: any) => {
+        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    ) 
+   
   }
   getInventory(){
-    this.admin.getInventory().subscribe(
+    this.protocol.kitsns(sessionStorage.getItem('siteId')).subscribe(
       (data: any) => {
     
-        this.inventoryData = data
+        this.inventoryData = data.data
         console.log(data)
-        this.totalCountI = this.inventoryData.length
+        this.totalCountI = this.inventoryData
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -105,7 +139,7 @@ export class NewkitsComponent implements OnInit {
     )  
   }
   base64String: any;
-  Download(id: any) {
+  Download(id: any, name: string) {
     console.log(id)
 
     this.base64String = id
@@ -125,7 +159,7 @@ export class NewkitsComponent implements OnInit {
     // Create a link element and set its attributes
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'file.pdf';
+    link.download = name;
 
     // Programmatically click the link to trigger the download
     link.click();
@@ -144,19 +178,7 @@ export class NewkitsComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  getCRoDetails() {
-    this.admin.getsite().subscribe(
-      (data: any) => {
-        this.croDetails = data
-        console.log(data)
-       
-        this.totalCount = this.croDetails.length
-      },
-      (err: any) => {
-        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-      }
-    )
-  }
+ 
 }
 
 

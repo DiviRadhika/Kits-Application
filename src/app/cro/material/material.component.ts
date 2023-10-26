@@ -9,11 +9,13 @@ import { AdminService } from 'src/app/applicationadmin/admin.service';
   styleUrls: ['./material.component.css']
 })
 export class MaterialComponent implements OnInit {
+  stackedData2: any
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
   date1: any
   enableFields: boolean = false;
+  crasiteenable: boolean = false;
   disablefields: boolean = false;
   disappearfields: boolean = false;
   appearfields: boolean = false;
@@ -42,6 +44,9 @@ export class MaterialComponent implements OnInit {
   dataCentralLabs: any;
   dataCro: any;
   dataCra: any
+  stackedData: any;
+
+  stackedOptions: any;
   dashboardsData: any;
   crocenable: boolean = false;
   cracenable: boolean = false;
@@ -62,16 +67,7 @@ export class MaterialComponent implements OnInit {
               backgroundColor: '#42A5F5',
               data: [65, 12]
           },
-          {
-              label: 'In Progress',
-              backgroundColor: '#FFA726',
-              data: [28, 14]
-          },
-          {
-            label: 'Pending',
-            backgroundColor: '#FFA726',
-            data: [28, 23]
-        }
+         
       ]
   };
   this.basicData2 = {
@@ -227,6 +223,76 @@ export class MaterialComponent implements OnInit {
         }
       ]
     };
+    this.stackedData = {
+      labels: ['P0001', 'P0002', 'P0003', 'P0004', 'P0005', 'P0006', 'P0007'],
+      datasets: [{
+          type: 'bar',
+          label: 'A',
+          backgroundColor: '#42A5F5',
+          data: [
+              50,
+              25,
+              12,
+              48,
+              90,
+              76,
+              42
+          ]
+      }, {
+          type: 'bar',
+          label: 'B',
+          backgroundColor: '#66BB6A',
+          data: [
+              21,
+              84,
+              24,
+              75,
+              37,
+              65,
+              34
+          ]
+      }, {
+          type: 'bar',
+          label: 'C',
+          backgroundColor: '#FFA726',
+          data: [
+              41,
+              52,
+              24,
+              74,
+              23,
+              21,
+              32
+          ]
+      }]
+  };
+  this.stackedData2 = {
+    labels: ['P0001'],
+    datasets: [{
+        type: 'bar',
+        label: 'A',
+        backgroundColor: '#42A5F5',
+        data: [
+            50,
+           
+        ]
+    }, {
+        type: 'bar',
+        label: 'B',
+        backgroundColor: '#66BB6A',
+        data: [
+            21,
+           
+        ]
+    }]
+};
+
+  this.stackedOptions= {
+    scales: {
+        x: { stacked: true },
+        y: { stacked: true }
+    }
+};
 
     this.dataSponsor = {
       labels: ['No.of Sponsors', 'No.of Protocols'],
@@ -263,6 +329,7 @@ export class MaterialComponent implements OnInit {
     this.sponserForm = this.fb.group({
       cardControls: this.fb.array([])
     })
+
   
 
 
@@ -275,6 +342,7 @@ export class MaterialComponent implements OnInit {
       this.appearfields = true;
       this.adminc = true;
       this.sponserfields = true;
+      this.crasiteenable = false;
 
 
     }
@@ -289,6 +357,7 @@ export class MaterialComponent implements OnInit {
       this.labcenable = false;
       this.adminc = false;
       this.sponserfields= true;
+      this.crasiteenable = false;
     }
     else if (this.role === 'CRO') {
       this.enableFields = false;
@@ -301,6 +370,7 @@ export class MaterialComponent implements OnInit {
       this.labcenable = false;
       this.adminc = false;
       this.sponserfields = false;
+      this.crasiteenable = false;
 
 
     }
@@ -315,6 +385,7 @@ export class MaterialComponent implements OnInit {
       this.labcenable = true;
       this.adminc = false;
       this.sponserfields = false;
+      this.crasiteenable = false;
 
 
     }
@@ -328,8 +399,21 @@ export class MaterialComponent implements OnInit {
       this.sponsorcenable = false;
       this.labcenable = false;
       this.sponserfields = false;
+      this.crasiteenable = false;
 
     }
+    // else if(this.role === 'Site Coordinator'){
+    //   this.enableFields = false;
+    //   this.disablefields = false;
+    //   this.disappearfields = false;
+    //   this.appearfields = false;
+    //   this.crocenable = false;
+    //   this.cracenable= false;
+    //   this.crasiteenable = true;
+    //   this.sponsorcenable = false;
+    //   this.labcenable = false;
+    //   this.sponserfields = false;
+    // }
 
   }
   dateselect(val: any){

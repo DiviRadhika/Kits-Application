@@ -243,7 +243,7 @@ export class HomeComponent implements OnInit {
             { label: 'Dashboard', link: '/home/cro/dashboards' },
             { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' },
             { label: 'Lab Reports', link: '/home/site/viewcraAcknowledgement' },
-            { label: 'Study Subject', link: '/home/site/newkits' },
+            { label: 'Study Subject', link: '/home/site/viewSubject' },
             { label: 'Kit Inventory', link: '/home/site/inventory' }
           // ]
         // }

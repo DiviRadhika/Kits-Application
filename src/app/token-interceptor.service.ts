@@ -20,17 +20,7 @@ export class TokenInterceptorService {
 
     this.role = sessionStorage.getItem('role');
     if (this.role === null) {
-    //  alert('k')
-    //  this.tokenizedReq = req.clone({
-       
-    //   setHeaders: {
-        
-    //     Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
-    //     // Access-Control-Allow-Origin: '*'
-    //   }
-    // });
-
-
+  
       const tokenizedReq = req.clone({
        
         setHeaders : {
@@ -44,9 +34,12 @@ export class TokenInterceptorService {
             }
           }),
           catchError((err: any) => {
+            console.log(err)
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504 || err.status === 404) {
               } else if (err.status === 401) {
+                sessionStorage.clear()
+                this.router.navigate(['/login'])
            
               } else if (err.status === 200) {
               } else if (err.status === 0) {
@@ -78,16 +71,28 @@ export class TokenInterceptorService {
             }
           }),
           catchError((err: any) => {
+            
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504) {
 
               } else if (err.status === 404) {
                 // this.router.navigate(['/pagenotfound']);
               } else if (err.status === 401) {
+             
+                // sessionStorage.clear()
+                // this.router.navigate(['/login'])
+
+              
+              }
+              else if (err.status === 0) {
+              
+                // sessionStorage.clear()
+                // this.router.navigate(['/login'])
 
               
               }
               else if (err.status === 200) {
+               
              
               } else if (err.status === 0) {
                

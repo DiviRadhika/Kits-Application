@@ -13,6 +13,7 @@ import { ViewsitesSortPipe } from './view-sites.sort';
 import { StudySiteacknowledgementComponent } from './study-siteacknowledgement/study-siteacknowledgement.component';
 import { NewkitsComponent } from './newkits/newkits.component';
 import { KitsnewComponent } from './kitsnew/kitsnew.component';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { KitsnewComponent } from './kitsnew/kitsnew.component';
     CardModule,
     ToastModule,
     NgxPaginationModule,
+    DialogModule
 
   ]
 })

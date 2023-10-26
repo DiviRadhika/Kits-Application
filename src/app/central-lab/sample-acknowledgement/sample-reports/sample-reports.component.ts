@@ -491,7 +491,7 @@ export class SampleReportsComponent implements OnInit {
   openDialogv(value: any){
     this.displayv = true;
     this.pdfValuesviewv = value;
-    console.log(this.pdfValuesviewv)
+    
   }
 
 

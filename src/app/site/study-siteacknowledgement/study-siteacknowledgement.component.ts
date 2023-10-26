@@ -69,18 +69,14 @@ export class StudySiteacknowledgementComponent implements OnInit {
   public bas2: string = '';
   // preprationData = ['Not Verified', 'Verified']
 
-  preprationData = [{ name: 'Not Received', value: 'Not Received' },
+  preprationData = [{ name: 'Not-Received', value: 'Not-Received' },
 
-  { name: 'Received', value: 'Received' },
+  { name: 'Received-Good', value: 'Received-Good' },
+  { name: 'Received-Damaged', value: 'Received-Damaged' },
 
   ]
 
-  skitcondition
-    = [{ name: 'Good in Condition', value: 'Good in Condition' },
-
-    { name: 'Bad in Condition', value: 'Bad in Condition' },
-
-    ]
+ 
 
   kitIdv: any = ''
   /* nmModel Variables */
@@ -224,16 +220,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
                 }
 
               }
-              const sstatusControl = visitKitListArray.at(j).get('skitStatus');
-              if (sstatusControl) {
-                const vkDetailForRowAndTab = this.vkDetails[i][j];
-                if (vkDetailForRowAndTab.skitStatus) {
-                  sstatusControl.patchValue(vkDetailForRowAndTab.skitStatus);
-                }
-                else if (vkDetailForRowAndTab.skitStatus === undefined || vkDetailForRowAndTab.skitStatus === null || vkDetailForRowAndTab.skitStatus === '') {
-                  sstatusControl.patchValue(this.skitcondition[0].value);
-                }
-              }
+            
               const collectionDateControl = visitKitListArray.at(j).get('recievedDate');
               if (collectionDateControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -309,7 +296,6 @@ export class StudySiteacknowledgementComponent implements OnInit {
       ckitId: [''],
       expiryDate: [''],
       siteRemarks: [''],
-      skitStatus: [''],
       recievedDate: [''],
       siteStatus: [''],
       site_id:['']
@@ -343,12 +329,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
             else {
               this.ScreenKitForm.get('screenKitList').controls[i].get('siteStatus').patchValue(skDetails[i].siteStatus);
             }
-            if (skDetails[i].skitStatus === undefined || skDetails[i].skitStatus === null || skDetails[i].skitStatus === '') {
-              this.ScreenKitForm.get('screenKitList').controls[i].get('skitStatus').patchValue(this.skitcondition[0].value);
-            }
-            else {
-              this.ScreenKitForm.get('screenKitList').controls[i].get('skitStatus').patchValue(skDetails[i].skitStatus);
-            }
+           
             this.ScreenKitForm.get('screenKitList').controls[i].get('site_id').patchValue(skDetails[i].site_id);
             this.ScreenKitForm.get('screenKitList').controls[i].get('recievedDate').patchValue(skDetails[i].recievedDate);
             this.ScreenKitForm.get('screenKitList').controls[i].get('kitId').patchValue(skDetails[i].kitId)
@@ -376,7 +357,6 @@ export class StudySiteacknowledgementComponent implements OnInit {
       ckitId: [''],
       expiryDate: [''],
       siteStatus: [''],
-      skitStatus: [''],
       siteRemarks: [''],
       recievedDate: [''],
       site_id: ['']
@@ -411,14 +391,12 @@ export class StudySiteacknowledgementComponent implements OnInit {
           protocol.siteStatus = this.vMatDetails[i].visitsList.value[index].siteStatus
           protocol.recievedDate = this.vMatDetails[i].visitsList.value[index].recievedDate
           protocol.siteRemarks = this.vMatDetails[i].visitsList.value[index].siteRemarks
-          protocol.skitStatus = this.vMatDetails[i].visitsList.value[index].skitStatus
         }
       })
     }
     this.skDetails.forEach((protocol: any, index: any) => {
       protocol.siteStatus = this.ScreenKitForm.value.screenKitList[index].siteStatus
       protocol.recievedDate = this.ScreenKitForm.value.screenKitList[index].recievedDate
-      protocol.skitStatus = this.ScreenKitForm.value.screenKitList[index].skitStatus
       protocol.siteRemarks = this.ScreenKitForm.value.screenKitList[index].siteRemarks
       
     })
