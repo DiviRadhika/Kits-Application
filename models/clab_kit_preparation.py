@@ -30,6 +30,10 @@ class ClabKitPreparationModel(db.Model):
     def get_by_id(cls, id):
         return cls.query.filter_by(protocol_id=id).first()
 
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(protocol_id=id).all()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

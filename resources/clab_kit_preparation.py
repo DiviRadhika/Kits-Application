@@ -17,6 +17,11 @@ kits_ns = Namespace(
     "kits_ns", description="kits_ns related operations"
 )
 
+
+kits_inventory_ns = Namespace(
+    "kits_inventory_ns", description="kits_inventory_ns related operations"
+)
+
 clab_kit_preparations_ns = Namespace(
     "clab_kit_preparations", description="clab_kit_preparation related operations"
 )
@@ -255,10 +260,10 @@ class ClabKitPreparation(Resource):
         return {"message": "kit details updated successfully"}, 201
 
 
-class KitsOperation():
+class KitsOperation(Resource):
     @kits_ns.doc("get protocols by site id")
     @jwt_required(fresh=True)
-    def get(self, site_uuid):
+    def get(self, protocol_id, site_uuid):
         response = {
             "screening_data": [],
             "visit_data": [],
@@ -267,7 +272,7 @@ class KitsOperation():
         if not site_data:
             return {"message": "invalid site_id"}, 500
         site_id = site_data.site_data_code
-        kits = ClabKitPreparationModel.find_all()
+        kits = ClabKitPreparationModel.find_by_id(protocol_id)
         for kit in kits:
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
@@ -275,13 +280,71 @@ class KitsOperation():
             for screening_kit_data in screening_kit_details:
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
-                        d = dict((x, y) for x, y in screening_kit_data)
-                        response["screening_data"].append(d)
+                        #d = dict((x, y) for x, y in screening_kit_data)
+                        response["screening_data"].append(screening_kit_data)
                     
             for visits in visit_kit_details:
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
-                            d = dict((x, y) for x, y in visit_kit_data)
-                            response["visit_data"].append(d)
+                            #d = dict((x, y) for x, y in visit_kit_data)
+                            response["visit_data"].append(visit_kit_data)
+        return response, 200
+
+class KitsInventoryOperation(Resource):
+    @kits_inventory_ns.doc("get protocols by site id")
+    @jwt_required(fresh=True)
+    def get(self, site_uuid):
+        response = {
+            "data": [],
+        }
+        site_data = SiteDataModel.find_by_id(site_uuid)
+        if not site_data:
+            return {"message": "invalid site_id"}, 500
+        site_id = site_data.site_data_code
+        kits = ClabKitPreparationModel.find_all()
+        for kit in kits:
+            cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
+            if not cro_data:
+                continue
+            obj = {
+              "protocol_id": str(cro_data.protocol_id),
+              "country": site_data.country,
+              "state": site_data.region,
+              "site": site_id,
+              "total_kits": 0,
+              "pending_kits": 0,
+              "shipped_kits": 0,
+              "received_kits": 0,
+              "onhand_kits": 0,
+              "adjust_kits": 0,
+              "last_shipped": 0,
+              "last_shipped_data": "",
+            }
+            
+            screening_kit_details = kit.screening_kit_details
+            visit_kit_details = kit.visit_kit_details
+
+            for screening_kit_data in screening_kit_details:
+                if "site_id" in screening_kit_data:
+                    if site_id == screening_kit_data["site_id"]:
+                        obj["shipped_kits"] = obj["shipped_kits"] + 1
+                        obj["total_kits"] = obj["total_kits"] + 1
+                        if 'siteStatus' in screening_kit_data and screening_kit_data['siteStatus'] == "Received":
+                            obj["received_kits"] = obj["received_kits"] + 1
+                            if 'patientId' not in screening_kit_data or screening_kit_data["patientId"] == "":
+                                obj["onhand_kits"] = obj["onhand_kits"] + 1
+
+                    
+            for visits in visit_kit_details:
+                for visit_kit_data in visits:
+                    if "site_id" in visit_kit_data:
+                        if site_id == visit_kit_data["site_id"]:
+                            obj["shipped_kits"] = obj["shipped_kits"] + 1
+                            obj["total_kits"] = obj["total_kits"] + 1
+                            if 'siteStatus' in screening_kit_data and screening_kit_data['siteStatus'] == "Received":
+                                obj["received_kits"] = obj["received_kits"] + 1
+                                if 'patientId' not in screening_kit_data or screening_kit_data["patientId"] == "":
+                                    obj["onhand_kits"] = obj["onhand_kits"] + 1
+            response["data"].append(obj)
         return response, 200

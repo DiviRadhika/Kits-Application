@@ -72,11 +72,13 @@ from resources.clab_kit_preparation import (
     clab_kit_preparation_ns,
     clab_kit_preparations_ns,
     kits_ns,
+    kits_inventory_ns,
     ClabKitPreparation,
     ClabKitPreparationList,
     ClabKitProtocolActionsById,
     GetProtocolsBySiteId,
     KitsOperation,
+    KitsInventoryOperation,
 )
 from resources.sample_ack import (
     AckclabKitProtocolActionsById,
@@ -88,6 +90,9 @@ from resources.dashboard import (
     dashboard_ns,
     Dashboard,
 )
+
+from models.refresh_token import RefreshTokenModel
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -117,19 +122,19 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=45)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(hours=24)
 app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
-app.config["SECRET_KEY"] = uuid.uuid4().hex
+#app.config["SECRET_KEY"] = uuid.uuid4().hex
 
 jwt = JWTManager(app)
 # migrate_db = SQLAlchemy(app)
 # migrate = Migrate(app, migrate_db)
 
 
-#@jwt.token_in_blocklist_loader
-#def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
-#    jti = jwt_payload["jti"]
-#    token = db.session.query(RefreshTokenModel.token_id).filter_by(token=jti).scalar()
-#
-#    return token is not None
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload: dict) -> bool:
+    jti = jwt_payload["jti"]
+    token = db.session.query(RefreshTokenModel.token_id).filter_by(token=jti).scalar()
+
+    return token is not None
 
 
 @jwt.user_lookup_loader
@@ -225,6 +230,7 @@ api.add_namespace(meterial_ns)
 api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
 api.add_namespace(kits_ns)
+api.add_namespace(kits_inventory_ns)
 
 
 
@@ -269,7 +275,8 @@ clab_kit_preparation_ns.add_resource(
     ClabKitProtocolActionsById, "/<string:cro_protocol_id>"
 )
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
-kits_ns.add_resource(KitsOperation, "/<string:site_uuid>")
+kits_ns.add_resource(KitsOperation, "/<string:protocol_id>/<string:site_uuid>")
+kits_inventory_ns.add_resource(KitsInventoryOperation, "/<string:site_uuid>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
