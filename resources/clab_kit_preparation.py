@@ -265,8 +265,7 @@ class KitsOperation(Resource):
     @jwt_required(fresh=True)
     def get(self, protocol_id, site_uuid):
         response = {
-            "screening_data": [],
-            "visit_data": [],
+            "data": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -277,19 +276,26 @@ class KitsOperation(Resource):
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
 
-            for screening_kit_data in screening_kit_details:
+            for index in range(len(screening_kit_details)):
+                screening_kit_data  = screening_kit_details[index]
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
                         #d = dict((x, y) for x, y in screening_kit_data)
-                        response["screening_data"].append(screening_kit_data)
+                        screening_kit_data["description"] = "screening-" + str(index)
+                        response["data"].append(screening_kit_data)
                     
-            for visits in visit_kit_details:
+            for index in range(len(visit_kit_details)):
+                visits = visit_kit_details[index]
+                visit_number = "visit-" +str(index)
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
                             #d = dict((x, y) for x, y in visit_kit_data)
-                            response["visit_data"].append(visit_kit_data)
+                            visit_kit_data["description"] = visit_number
+                            response["data"].append(visit_kit_data)
         return response, 200
+
+
 
 class KitsInventoryOperation(Resource):
     @kits_inventory_ns.doc("get protocols by site id")
@@ -307,44 +313,77 @@ class KitsInventoryOperation(Resource):
             cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
             if not cro_data:
                 continue
-            obj = {
-              "protocol_id": str(cro_data.protocol_id),
-              "country": site_data.country,
-              "state": site_data.region,
-              "site": site_id,
-              "total_kits": 0,
-              "pending_kits": 0,
-              "shipped_kits": 0,
-              "received_kits": 0,
-              "onhand_kits": 0,
-              "adjust_kits": 0,
-              "last_shipped": 0,
-              "last_shipped_data": "",
-            }
-            
+
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
-
+            obj = {
+                "protocol_id": str(cro_data.protocol_id),
+                "country": site_data.country,
+                "state": site_data.region,
+                "site": site_id,
+                "description": "screening",
+                "total_kits": 0,
+                "pending_kits": 0,
+                "shipped_kits": 0,
+                "received_kits": 0,
+                "onhand_kits": 0,
+                "adjust_kits": 0,
+                "last_shipped": 0,
+                "last_shipped_data": "",
+            }
             for screening_kit_data in screening_kit_details:
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
                         obj["shipped_kits"] = obj["shipped_kits"] + 1
                         obj["total_kits"] = obj["total_kits"] + 1
-                        if 'siteStatus' in screening_kit_data and screening_kit_data['siteStatus'] == "Received":
+                        if (
+                            "siteStatus" in screening_kit_data
+                            and screening_kit_data["siteStatus"] != "Not-Received"
+                        ):
                             obj["received_kits"] = obj["received_kits"] + 1
-                            if 'patientId' not in screening_kit_data or screening_kit_data["patientId"] == "":
+                            if (
+                                "patientId" not in screening_kit_data
+                                or screening_kit_data["patientId"] == ""
+                            ):
                                 obj["onhand_kits"] = obj["onhand_kits"] + 1
+                        else:
+                            obj["pending_kits"] = obj["pending_kits"] + 1
+            response["data"].append(obj)
 
-                    
-            for visits in visit_kit_details:
+            for index in range(len(visit_kit_details)):
+                obj = {
+                    "protocol_id": str(cro_data.protocol_id),
+                    "country": site_data.country,
+                    "state": site_data.region,
+                    "site": site_id,
+                    "description": "visit-" + str(index),
+                    "total_kits": 0,
+                    "pending_kits": 0,
+                    "shipped_kits": 0,
+                    "received_kits": 0,
+                    "onhand_kits": 0,
+                    "adjust_kits": 0,
+                    "last_shipped": 0,
+                    "last_shipped_data": "",
+                }
+                visits = visit_kit_details[index]
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
                             obj["shipped_kits"] = obj["shipped_kits"] + 1
                             obj["total_kits"] = obj["total_kits"] + 1
-                            if 'siteStatus' in screening_kit_data and screening_kit_data['siteStatus'] == "Received":
+                            if (
+                                "siteStatus" in visit_kit_data
+                                and visit_kit_data["siteStatus"] != "Not-Received"
+                            ):
                                 obj["received_kits"] = obj["received_kits"] + 1
-                                if 'patientId' not in screening_kit_data or screening_kit_data["patientId"] == "":
+                                if (
+                                    "patientId" not in visit_kit_data
+                                    or visit_kit_data["patientId"] == ""
+                                ):
                                     obj["onhand_kits"] = obj["onhand_kits"] + 1
-            response["data"].append(obj)
+                            else:
+                                obj["pending_kits"] = obj["pending_kits"] + 1
+                response["data"].append(obj)
         return response, 200
+
