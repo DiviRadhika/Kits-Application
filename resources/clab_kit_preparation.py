@@ -7,15 +7,16 @@ from models.cro_protocol import CroProtocolModel
 from models.site_data import SiteDataModel
 from models.users import UserModel
 from flask_jwt_extended import jwt_required, current_user, get_jwt
+from models.visit_kit import VisitKitDetailsModel
+from dateutil.parser import parse
+from datetime import datetime
 
 
 clab_kit_preparation_ns = Namespace(
     "clab_kit_preparation", description="clab_kit_preparation related operations"
 )
 
-kits_ns = Namespace(
-    "kits_ns", description="kits_ns related operations"
-)
+kits_ns = Namespace("kits_ns", description="kits_ns related operations")
 
 
 kits_inventory_ns = Namespace(
@@ -225,29 +226,38 @@ class ClabKitPreparation(Resource):
             for inner_pdf_details in pdf_details:
                 for row_index in range(0, len(screening_kit_details)):
                     if inner_pdf_details["row"] == row_index:
-                       #if 'pdf' not in screening_kit_detaiils:
-                       #     screening_kit_details[row_index]["pdf"] = []
+                        # if 'pdf' not in screening_kit_detaiils:
+                        #     screening_kit_details[row_index]["pdf"] = []
 
-                        #screening_kit_details[row_index]["pdf"].append(inner_pdf_details["pdf"])
-                        screening_kit_details[row_index]["pdf"] = inner_pdf_details["pdf"]
-
+                        # screening_kit_details[row_index]["pdf"].append(inner_pdf_details["pdf"])
+                        screening_kit_details[row_index]["pdf"] = inner_pdf_details[
+                            "pdf"
+                        ]
 
         visit_kit_details = request_json["visit_kit_details"]
         for pdf_details in visit_pdf_details:
             for pdf_detail in pdf_details:
-                for visit_index in range(0, len(visit_kit_details)):  # outside index not useful
-                    total_visit_details = visit_kit_details[visit_index]  # visit_index -> 0 
-                    for row_index in range(0, len(total_visit_details)):  # total visits details visit-0, visit-1 ...etc
+                for visit_index in range(
+                    0, len(visit_kit_details)
+                ):  # outside index not useful
+                    total_visit_details = visit_kit_details[
+                        visit_index
+                    ]  # visit_index -> 0
+                    for row_index in range(
+                        0, len(total_visit_details)
+                    ):  # total visits details visit-0, visit-1 ...etc
                         row_wise_data = total_visit_details[row_index]  # visit-0
                         if (
                             pdf_detail["visit"] == visit_index
                             and pdf_detail["row"] == row_index
                         ):
-                            #if 'pdf' not in visit_kit_details[visit_index][row_index]:
+                            # if 'pdf' not in visit_kit_details[visit_index][row_index]:
                             #    visit_kit_details[visit_index][row_index]["pdf"] = []
 
-                            #visit_kit_details[visit_index][row_index]["pdf"].append(pdf_detail["pdf"])
-                            visit_kit_details[visit_index][row_index]["pdf"] = pdf_detail["pdf"]
+                            # visit_kit_details[visit_index][row_index]["pdf"].append(pdf_detail["pdf"])
+                            visit_kit_details[visit_index][row_index][
+                                "pdf"
+                            ] = pdf_detail["pdf"]
 
         for key, value in request_json.items():
             if hasattr(kit_data, key) and value is not None:
@@ -277,32 +287,42 @@ class KitsOperation(Resource):
             visit_kit_details = kit.visit_kit_details
 
             for index in range(len(screening_kit_details)):
-                screening_kit_data  = screening_kit_details[index]
+                screening_kit_data = screening_kit_details[index]
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
-                        #d = dict((x, y) for x, y in screening_kit_data)
+                        # d = dict((x, y) for x, y in screening_kit_data)
                         screening_kit_data["description"] = "screening-" + str(index)
                         response["data"].append(screening_kit_data)
-                    
+
             for index in range(len(visit_kit_details)):
                 visits = visit_kit_details[index]
-                visit_number = "visit-" +str(index)
+                visit_number = "visit-" + str(index)
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
-                            #d = dict((x, y) for x, y in visit_kit_data)
+                            # d = dict((x, y) for x, y in visit_kit_data)
                             visit_kit_data["description"] = visit_number
                             response["data"].append(visit_kit_data)
         return response, 200
-
 
 
 class KitsInventoryOperation(Resource):
     @kits_inventory_ns.doc("get protocols by site id")
     @jwt_required(fresh=True)
     def get(self, site_uuid):
+        args = request.args
+        kit_type_filter = False
+        from_date_filter = False
+        to_date_filter = False
+        if "kit_type" in args:
+            kit_type_filter = True
+        if "from_date" in args:
+            from_date_filter = True
+        if "to_date" in args:
+            to_date_filter = True
         response = {
             "data": [],
+            "variants": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -312,6 +332,17 @@ class KitsInventoryOperation(Resource):
         for kit in kits:
             cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
             if not cro_data:
+                continue
+            visit_kit_details = VisitKitDetailsModel.get_by_protocol_id(cro_data.id)
+            meterial_details = visit_kit_data.meterial_details
+            for meterial_detail in meterial_details:
+                if (
+                    "kit_variant" in meterial_detail
+                    and meterial_detail["kit_variant"] != ""
+                ):
+                    response["variants"].append(meterial_detail["kit_variant"])
+
+            if kit_type_filter and args.get("kit_type") not in response["variants"]:
                 continue
 
             screening_kit_details = kit.screening_kit_details
@@ -331,6 +362,7 @@ class KitsInventoryOperation(Resource):
                 "last_shipped": 0,
                 "last_shipped_data": "",
             }
+            screening_kits_received_dates = []
             for screening_kit_data in screening_kit_details:
                 if "site_id" in screening_kit_data:
                     if site_id == screening_kit_data["site_id"]:
@@ -341,6 +373,10 @@ class KitsInventoryOperation(Resource):
                             and screening_kit_data["siteStatus"] != "Not-Received"
                         ):
                             obj["received_kits"] = obj["received_kits"] + 1
+                            if "recievedDate" in screening_kit_data:
+                                screening_kits_received_dates.append(
+                                    screening_kit_data["recievedDate"]
+                                )
                             if (
                                 "patientId" not in screening_kit_data
                                 or screening_kit_data["patientId"] == ""
@@ -348,6 +384,11 @@ class KitsInventoryOperation(Resource):
                                 obj["onhand_kits"] = obj["onhand_kits"] + 1
                         else:
                             obj["pending_kits"] = obj["pending_kits"] + 1
+            screening_kits_received_dates.sort(
+                key=lambda date: datetime.strptime(date, "%y-%m-%d"), reverse=True
+            )
+            if len(screening_kits_received_dates) > 0:
+                obj["last_shipped_date"] = screening_kits_received_dates[0]
             response["data"].append(obj)
 
             for index in range(len(visit_kit_details)):
@@ -366,6 +407,7 @@ class KitsInventoryOperation(Resource):
                     "last_shipped": 0,
                     "last_shipped_data": "",
                 }
+                visit_kit_received_dates = []
                 visits = visit_kit_details[index]
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
@@ -377,6 +419,10 @@ class KitsInventoryOperation(Resource):
                                 and visit_kit_data["siteStatus"] != "Not-Received"
                             ):
                                 obj["received_kits"] = obj["received_kits"] + 1
+                                if "recievedDate" in visit_kit_data:
+                                    visit_kit_received_dates.append(
+                                        visit_kit_data["recievedDate"]
+                                    )
                                 if (
                                     "patientId" not in visit_kit_data
                                     or visit_kit_data["patientId"] == ""
@@ -384,6 +430,10 @@ class KitsInventoryOperation(Resource):
                                     obj["onhand_kits"] = obj["onhand_kits"] + 1
                             else:
                                 obj["pending_kits"] = obj["pending_kits"] + 1
+                visit_kit_received_dates.sort(
+                    key=lambda date: datetime.strptime(date, "%y-%m-%d"), reverse=True
+                )
+                if len(visit_kit_received_dates) > 0:
+                    obj["last_shipped_date"] = visit_kit_received_dates[0]
                 response["data"].append(obj)
         return response, 200
-
