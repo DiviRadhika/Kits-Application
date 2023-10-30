@@ -104,7 +104,7 @@
                                                                     <th style="width: 120px;">Patient Id</th>
                                                                     <th style="width: 120px;">Patient Name</th>
                                                                     <th style="width: 120px;">Patient Age</th>
-                                                                    <th style="width: 120px;">Patient Sex</th>
+                                                                    <th style="width: 120px;">Patient Gender</th>
                                                                     <th style="width: 120px;">Collection Date</th>
                                                                     <th style="width: 140px;">Sample Collection</th>
                                                                 </tr>
@@ -225,7 +225,7 @@
                                                                     <th style="width: 120px;">Patient Id</th>
                                                                     <th style="width: 120px;">Patient Name</th>
                                                                     <th style="width: 120px;">Patient Age</th>
-                                                                    <th style="width: 120px;">Patient Sex</th>
+                                                                    <th style="width: 120px;">Patient Gender</th>
                                                                     <th style="width: 120px;">Collection Date</th>
                                                                     <th style="width: 140px;">Sample Collection</th>
                                                                           
@@ -293,7 +293,7 @@
                                                                                     value={{date}} />
                                                                             </td>
                                                                             <td>
-                                                                                <select formControlName="collection" (change)="checkPreparationv(i, j)"
+                                                                                <select formControlName="collection" (change)="checkCollectionv(i, j)"
                                                                                     class="form-select form-control">
                                                                                     <option
                                                                                         *ngFor="let s of preprationData"

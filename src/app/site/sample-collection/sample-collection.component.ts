@@ -325,12 +325,26 @@ export class SampleCollectionComponent implements OnInit {
   checkCollection(selectedValue: any, rowIndex: number) {
 
     const kitIdControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientId');
-
+    const nameControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientName')
+     const ageControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientAge')
+     const sexControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.patientSex')
     const expiryDateControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collectionDate');
     const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.collection');
     if (selectedValue.target.value === 'Collected') {
       if (!kitIdControl.value) {
         alert('Please provide Patient Id before selecting "Collected".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+      else if (!nameControl.value) {
+        alert('Please provide Patient Name before selecting "Collected".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+      else if (!ageControl.value) {
+        alert('Please provide Patient Age before selecting "Collected".');
+        preprationControl.patchValue(this.preprationData[0].value);
+      }
+      else if (!sexControl.value) {
+        alert('Please provide Patient Gender before selecting "Collected".');
         preprationControl.patchValue(this.preprationData[0].value);
       }
       else if (!expiryDateControl.value) {
@@ -339,10 +353,13 @@ export class SampleCollectionComponent implements OnInit {
       }
     }
   }
-  checkPreparationv(cardIndex: number, rowIndex: number) {
+  checkCollectionv(cardIndex: number, rowIndex: number) {
     const item = this.vMatDetails[cardIndex];
     const expiryDateControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('collectionDate');
     const ckitIdControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('patientId');
+    const nameControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('patientName');
+    const ageControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('patientAge');
+     const sexControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('patientSex');
     const preprationControl = item.visitKitFormGroup.get('visitKitList').at(rowIndex).get('collection');
 
     if (preprationControl.value === 'Collected' && (!ckitIdControl.value)) {
@@ -353,6 +370,17 @@ export class SampleCollectionComponent implements OnInit {
     else if (preprationControl.value === 'Collected' && (!expiryDateControl.value)) {
       alert('Please provide Collection Date  before selecting "Collected".');
       preprationControl.patchValue(this.preprationData[0].value)
+    } else if (!nameControl.value) {
+      alert('Please provide Patient Name before selecting "Collected".');
+      preprationControl.patchValue(this.preprationData[0].value);
+    }
+    else if (!ageControl.value) {
+      alert('Please provide Patient Age before selecting "Collected".');
+      preprationControl.patchValue(this.preprationData[0].value);
+    }
+    else if (!sexControl.value) {
+      alert('Please provide Patient Gender before selecting "Collected".');
+      preprationControl.patchValue(this.preprationData[0].value);
     }
   }
 

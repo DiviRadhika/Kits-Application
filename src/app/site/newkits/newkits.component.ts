@@ -25,6 +25,9 @@ export class NewkitsComponent implements OnInit {
   heading: string = '';
   craname: any = '';
   variants: any;
+  uniquePatientIds: any;
+  uniquePatientAge: any
+  uniquePatientIdsr: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -67,18 +70,18 @@ export class NewkitsComponent implements OnInit {
     private protocol:ProtocolService,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService) { }
-
-  
   pageChange(event: number) {
     this.page = event;
     // this.getsubjectDetails()
   }
-
-
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data: any) => {
       this.id = data.id;
-     this.craname =sessionStorage.getItem('fullName')
+      this.craname =sessionStorage.getItem('fullName')
+      this.inventoryForm.get('from_date')?.valueChanges.subscribe((value) => {
+      this.inventoryForm.get('to_date')?.setValidators([this.validateToDate(value)]);
+      this.inventoryForm.get('to_date')?.updateValueAndValidity();
+    });
     
     });
     if (this.route.url === '/home/site/labReports'+ '/'+this.id) {
@@ -98,30 +101,66 @@ export class NewkitsComponent implements OnInit {
       this.classifications = ['Select CRA','Eliot', 'Ruffel'];
    }
    else if (this.route.url === '/home/site/inventory') {
-    
     this.getInventory();
     this.subject = false
     this.reports = false
     this.inventory = true
     this.classifications = ['Select Type','screening ', 'Visit'];
-    
  }
-
   }
  
   openDialog(value: any){
     this.display = true;
     this.pdfValuesview = value;
   }
- 
+  validateToDate(selectedFromDate: string) {
+    return (control:any) => {
+      if (control.value < selectedFromDate) {
+        return { invalidToDate: true };
+      }
+      return null;
+    };
+  }
   getReports(){
-    const from = this.reportsForm.controls['from_date'].value;
-    const to = this.reportsForm.controls['to_date'].value;
-    const type = this.reportsForm.controls['kit_type'].value;
-    const patient = this.reportsForm.controls['patient_id'].value
-    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
+    this.reportsDetails = []
+    const obj: any ={
+      age:'',
+      gender:'',
+      kit_type: this.reportsForm.controls['kit_type'].value, 
+      patient_id: this.reportsForm.controls['patient_id'].value,
+      from_date: this.reportsForm.controls['from_date'].value,
+      to_date: this.reportsForm.controls['to_date'].value
+    }
+    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
+        this.reportsDetails = data.data
+        const patientIdsSetr = new Set(data.data.map((item: any) => item.patientId).filter((id:any) => id !== undefined));
+        // Convert the Set back to an array (if needed)
+        this.uniquePatientIdsr = Array.from(patientIdsSetr);
+        this.totalCountR = this.reportsDetails.length
+      },
+      (err: any) => {
+        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    )  
+  }
+  getReportss(){
+    this.reportsDetails = []
+    const obj: any ={
+      age:'',
+      gender:'',
+      kit_type: this.reportsForm.controls['kit_type'].value, 
+      patient_id: this.reportsForm.controls['patient_id'].value,
+      from_date: this.reportsForm.controls['from_date'].value,
+      to_date: this.reportsForm.controls['to_date'].value
+    }
+    if(this.reportsForm.controls['from_date'].value  && (this.reportsForm.controls['to_date'].value === '')){
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'To Date is Required'});    
+    }
+    else{
+    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+      (data: any) => {
         this.reportsDetails = data.data
         console.log(data)
         this.totalCountR = this.reportsDetails.length
@@ -129,51 +168,49 @@ export class NewkitsComponent implements OnInit {
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
-    ) 
-    // id:any, site:any, type:any, fromdate:any, todate:any, age:any, gender:any, patient:any
-
-    // this.protocol.kitsnsvf(this.id, sessionStorage.getItem('siteId'), type ,from, to, '0', '0', patient).subscribe(
-    //   (data: any) => {
-    
-    //     this.reportsDetails = data.data
-    //     console.log(data)
-    //     this.totalCountR = this.reportsDetails.length
-    //   },
-    //   (err: any) => {
-    //     this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-    //   }
-    // )
-    
-  }
-  getsubjectDetails() {
-    const age = this.subjectForm.controls['age'].value;
-    const gender = this.subjectForm.controls['gender'].value;
-    const type = this.subjectForm.controls['kit_type'].value;
-    const patient = this.subjectForm.controls['patient_id'].value
-     const obj: any ={
-      from_date :this.inventoryForm.controls['from_date'].value,
-      to_date:this.inventoryForm.controls['to_date'].value,
-      kit_type:'Variant1'
+    )
     }
-
-    //   this.protocol.kitsnsvf(this.id, sessionStorage.getItem('siteId'), type ,'0', '0', age, gender, patient).subscribe(
-    //   (data: any) => {
-    //     console.log(data)
-    
-    //     this.subjectDetails = data.data
-    //     console.log(data)
-    //     this.totalCountI = this.subjectDetails
-    //   },
-    //   (err: any) => {
-    //     this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-    //   }
-    // ) 
-    
-    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
+  }
+  getsubjectDetailss() {
+    this.subjectDetails = []
+    const obj: any ={
+     age: this.subjectForm.controls['age'].value,
+     gender:this.subjectForm.controls['gender'].value,
+     kit_type: this.subjectForm.controls['kit_type'].value, 
+     patient_id: this.subjectForm.controls['patient_id'].value,
+     from_date: '',
+     to_date: ''
+   }
+   this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+     (data: any) => {
+       this.subjectDetails = data.data 
+       this.totalCountR = this.subjectDetails.length
+     },
+     (err: any) => {
+       this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+     }
+   ) 
+ }
+  getsubjectDetails() {
+    this.subjectDetails =[]
+     const obj: any ={
+      age: this.subjectForm.controls['age'].value,
+      gender:this.subjectForm.controls['gender'].value,
+      kit_type: this.subjectForm.controls['kit_type'].value, 
+      patient_id: this.subjectForm.controls['patient_id'].value,
+      from_date: '',
+      to_date: ''
+    }
+    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
         this.subjectDetails = data.data
-        console.log(data)
+        const patientIdsSet = new Set(data.data.map((item: any) => item.patientId).filter((id:any) => id !== undefined));
+        // Convert the Set back to an array (if needed)
+        this.uniquePatientIds = Array.from(patientIdsSet);
+        const patientAgesSet = new Set(data.data.map((item: any) => item.patientAge).filter((id:any) => id !== undefined));
+        this.uniquePatientAge = Array.from(patientAgesSet);
+      
         this.totalCountR = this.subjectDetails.length
       },
       (err: any) => {
@@ -181,15 +218,70 @@ export class NewkitsComponent implements OnInit {
       }
     ) 
   }
-  getInventory(){
+  resetL(){
+    this.reportsForm=new FormGroup({
+      patient_id: new FormControl(""),
+      kit_type: new FormControl(""),
+      from_date: new FormControl(""),
+      to_date: new FormControl(""), 
+    });
+    this.getReports()
+  }
+  resets(){
+    this.subjectForm = new FormGroup({
+      patient_id: new FormControl(""),
+      kit_type: new FormControl(""),
+      age: new FormControl(""), 
+      gender: new FormControl(""),
+     });
+     this.getsubjectDetails() 
+  }
+  reseti(){
+    this.inventoryForm = new FormGroup({
+      kit_type: new FormControl(""),
+      from_date: new FormControl(""),
+      to_date: new FormControl(""), 
+    });
+    this.getInventory()
+  }
+  getInventorys(){
+    this.inventoryData = []
     const obj: any ={
       from_date :this.inventoryForm.controls['from_date'].value,
       to_date:this.inventoryForm.controls['to_date'].value,
       kit_type:this.inventoryForm.controls['kit_type'].value
     } 
+    if(this.inventoryForm.controls['from_date'].value  && (this.inventoryForm.controls['to_date'].value === '')){
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'To Date is Required'}); 
+      
+    }
+    else{
+      this.protocol.kitsnsfk(sessionStorage.getItem('siteId'), obj).subscribe(
+        (data: any) => {
+          this.inventoryData = data.data
+          console.log(data)
+          this.variants = data.variants
+          this.variants = Array.from(new Set(this.variants)); // Remove duplicates
+          this.totalCountR = this.inventoryData.length
+        },
+        (err: any) => {
+          this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+        } 
+      ) 
+      
+    }
+  }
+  getInventory(){
+    this.inventoryData = []
+
+    const obj: any ={
+      from_date :this.inventoryForm.controls['from_date'].value,
+      to_date:this.inventoryForm.controls['to_date'].value,
+      kit_type:this.inventoryForm.controls['kit_type'].value
+    } 
+    
     this.protocol.kitsnsfk(sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
-    
         this.inventoryData = data.data
         console.log(data)
         this.variants = data.variants
@@ -198,7 +290,7 @@ export class NewkitsComponent implements OnInit {
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-      }
+      } 
     ) 
   }
   base64String: any;
@@ -231,6 +323,7 @@ export class NewkitsComponent implements OnInit {
     URL.revokeObjectURL(url);
 
   }
+ 
   pdfContent: string = 'data:application/pdf;base64,...';
   viewPdf(file: any) {
    
