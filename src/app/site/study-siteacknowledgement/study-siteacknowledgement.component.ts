@@ -113,12 +113,10 @@ export class StudySiteacknowledgementComponent implements OnInit {
   });
 
   ngOnInit() {
-
     this.activatedRoute.params.subscribe((data: any) => {
       this.id = data.id;
       this.getprotocolDetails(this.id)
     });
-
     // this.sponsersData()
 
     this.croService.getSites().subscribe((sites) => {
@@ -394,6 +392,7 @@ export class StudySiteacknowledgementComponent implements OnInit {
         }
       })
     }
+    console.log(this.skDetails)
     this.skDetails.forEach((protocol: any, index: any) => {
       protocol.siteStatus = this.ScreenKitForm.value.screenKitList[index].siteStatus
       protocol.recievedDate = this.ScreenKitForm.value.screenKitList[index].recievedDate

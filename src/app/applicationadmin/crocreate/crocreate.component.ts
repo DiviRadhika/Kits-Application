@@ -73,22 +73,7 @@ export class CROcreateComponent implements OnInit {
     email: new FormControl(''),
     website: new FormControl(''),
     mobile_telephone: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-    // Validators.required,
-    // Validators.email,
-    // this.emailDomainValidator.bind(this)
-
-    // website: new FormControl('', [
-    //   Validators.required,
-    //   Validators.minLength(3),
-    //   Validators.pattern(
-    //     /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
-    //   ) // Regular expression pattern for URL validation
-    // ]),
-
-    // mobile_telephone: new FormControl('', [
-    //   Validators.required,
-    //   Validators.pattern('[0-9]{10}')
-    // ]),
+  
   });
   private capitalizeFirstLetter(value: string): string {
 

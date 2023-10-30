@@ -23,6 +23,8 @@ export class NewkitsComponent implements OnInit {
   display: boolean = false;
   pdfValuesview: any;
   heading: string = '';
+  craname: any = '';
+  variants: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -43,7 +45,23 @@ export class NewkitsComponent implements OnInit {
   isMenuOpen: boolean = false;
   reportsDetails: any;
  // 1 for ascending, -1 for descending
- 
+ public inventoryForm: FormGroup = new FormGroup({
+  kit_type: new FormControl(""),
+  from_date: new FormControl(""),
+  to_date: new FormControl(""), 
+ });
+ public subjectForm: FormGroup = new FormGroup({
+  patient_id: new FormControl(""),
+  kit_type: new FormControl(""),
+  age: new FormControl(""), 
+  gender: new FormControl(""),
+ });
+ public reportsForm: FormGroup = new FormGroup({
+  patient_id: new FormControl(""),
+  kit_type: new FormControl(""),
+  from_date: new FormControl(""),
+  to_date: new FormControl(""), 
+ });
   constructor(private route: Router,
     private admin: AdminService,
     private protocol:ProtocolService,
@@ -53,14 +71,15 @@ export class NewkitsComponent implements OnInit {
   
   pageChange(event: number) {
     this.page = event;
-    this.getsubjectDetails()
+    // this.getsubjectDetails()
   }
 
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data: any) => {
       this.id = data.id;
-     
+     this.craname =sessionStorage.getItem('fullName')
+    
     });
     if (this.route.url === '/home/site/labReports'+ '/'+this.id) {
       this.heading  = 'Lab Reports'
@@ -84,7 +103,7 @@ export class NewkitsComponent implements OnInit {
     this.subject = false
     this.reports = false
     this.inventory = true
-    this.classifications = ['Select Type','Screening ', 'Visit'];
+    this.classifications = ['Select Type','screening ', 'Visit'];
     
  }
 
@@ -96,6 +115,10 @@ export class NewkitsComponent implements OnInit {
   }
  
   getReports(){
+    const from = this.reportsForm.controls['from_date'].value;
+    const to = this.reportsForm.controls['to_date'].value;
+    const type = this.reportsForm.controls['kit_type'].value;
+    const patient = this.reportsForm.controls['patient_id'].value
     this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
       (data: any) => {
     
@@ -107,36 +130,76 @@ export class NewkitsComponent implements OnInit {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     ) 
+    // id:any, site:any, type:any, fromdate:any, todate:any, age:any, gender:any, patient:any
+
+    // this.protocol.kitsnsvf(this.id, sessionStorage.getItem('siteId'), type ,from, to, '0', '0', patient).subscribe(
+    //   (data: any) => {
+    
+    //     this.reportsDetails = data.data
+    //     console.log(data)
+    //     this.totalCountR = this.reportsDetails.length
+    //   },
+    //   (err: any) => {
+    //     this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+    //   }
+    // )
     
   }
   getsubjectDetails() {
+    const age = this.subjectForm.controls['age'].value;
+    const gender = this.subjectForm.controls['gender'].value;
+    const type = this.subjectForm.controls['kit_type'].value;
+    const patient = this.subjectForm.controls['patient_id'].value
+     const obj: any ={
+      from_date :this.inventoryForm.controls['from_date'].value,
+      to_date:this.inventoryForm.controls['to_date'].value,
+      kit_type:'Variant1'
+    }
 
+    //   this.protocol.kitsnsvf(this.id, sessionStorage.getItem('siteId'), type ,'0', '0', age, gender, patient).subscribe(
+    //   (data: any) => {
+    //     console.log(data)
+    
+    //     this.subjectDetails = data.data
+    //     console.log(data)
+    //     this.totalCountI = this.subjectDetails
+    //   },
+    //   (err: any) => {
+    //     this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+    //   }
+    // ) 
+    
     this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId')).subscribe(
       (data: any) => {
-        console.log(data)
     
         this.subjectDetails = data.data
         console.log(data)
-        this.totalCountI = this.subjectDetails
+        this.totalCountR = this.subjectDetails.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     ) 
-   
   }
   getInventory(){
-    this.protocol.kitsns(sessionStorage.getItem('siteId')).subscribe(
+    const obj: any ={
+      from_date :this.inventoryForm.controls['from_date'].value,
+      to_date:this.inventoryForm.controls['to_date'].value,
+      kit_type:this.inventoryForm.controls['kit_type'].value
+    } 
+    this.protocol.kitsnsfk(sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
         this.inventoryData = data.data
         console.log(data)
-        this.totalCountI = this.inventoryData
+        this.variants = data.variants
+        this.variants = Array.from(new Set(this.variants)); // Remove duplicates
+        this.totalCountR = this.inventoryData.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
-    )  
+    ) 
   }
   base64String: any;
   Download(id: any, name: string) {

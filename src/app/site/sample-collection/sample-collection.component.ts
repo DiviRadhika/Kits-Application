@@ -536,11 +536,6 @@ export class SampleCollectionComponent implements OnInit {
 
     })
 
-
-
-
-
-
     const data = {
       "protocol_id": this.uuid,
       "screening_kit_details": this.skDetails,

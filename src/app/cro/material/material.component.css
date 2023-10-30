@@ -62,3 +62,6 @@ h6 {
  ::ng-deep .p-card{
     background-color:rgb(204, 230, 245)
 }
+.custom-chart {
+  height: 10000%; /* Adjust the height as needed */
+}

@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/applicationadmin/admin.service';
 })
 export class MaterialComponent implements OnInit {
   stackedData2: any
+  subjectDetails: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -59,13 +60,14 @@ export class MaterialComponent implements OnInit {
   constructor(private fb: FormBuilder, private admin: AdminService) { }
 
   ngOnInit() {
+    this.getsubjectDetails()
     this.basicData = {
-      labels: ['P001', 'P002'],
+      labels: ['P001', 'P002', 'P003','P004', 'P005'],
       datasets: [
           {
-              label: 'Completed',
+              label: 'Received',
               backgroundColor: '#42A5F5',
-              data: [65, 12]
+              data: [20, 12, 13, 21, 4]
           },
          
       ]
@@ -116,17 +118,12 @@ export class MaterialComponent implements OnInit {
      
      
       
-      labels: ['No.of Protocols',
-        'Received Samples',
-       'Pending Samples'
-        ,'No.of Kits',
-        'No.of Patients',
-        'No.of Sites'],
+      labels: ['No.of Screened', 'Not Screened'
+       ],
       datasets: [
           {
             
-              data: [this.dashboardsData.no_of_protocols, this.dashboardsData.no_of_received_collections, this.dashboardsData.no_of_pending_collections,
-                this.dashboardsData.no_of_kits,this.dashboardsData.no_of_patients,this.dashboardsData.no_of_sites],
+              data: [10,22],
               backgroundColor: [
                 "#D98880 ",
                 '#F5B7B1',
@@ -402,18 +399,18 @@ export class MaterialComponent implements OnInit {
       this.crasiteenable = false;
 
     }
-    // else if(this.role === 'Site Coordinator'){
-    //   this.enableFields = false;
-    //   this.disablefields = false;
-    //   this.disappearfields = false;
-    //   this.appearfields = false;
-    //   this.crocenable = false;
-    //   this.cracenable= false;
-    //   this.crasiteenable = true;
-    //   this.sponsorcenable = false;
-    //   this.labcenable = false;
-    //   this.sponserfields = false;
-    // }
+    else if(this.role === 'Site Coordinator'){
+      this.enableFields = false;
+      this.disablefields = false;
+      this.disappearfields = false;
+      this.appearfields = false;
+      this.crocenable = false;
+      this.cracenable= false;
+      this.crasiteenable = true;
+      this.sponsorcenable = false;
+      this.labcenable = false;
+      this.sponserfields = false;
+    }
 
   }
   dateselect(val: any){
@@ -426,5 +423,20 @@ export class MaterialComponent implements OnInit {
   //   const
   // }
 
+  getsubjectDetails() {
 
+    this.admin.getInventory().subscribe(
+      (data: any) => {
+        console.log(data)
+    
+        this.subjectDetails = data
+        console.log(data)
+        
+      },
+      (err: any) => {
+        // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    ) 
+   
+  }
 }
