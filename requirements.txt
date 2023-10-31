@@ -22,6 +22,7 @@ marshmallow==3.9.1
 #marshmallow-sqlalchemy==0.24.1
 marshmallow-sqlalchemy
 openpyxl==3.0.10
+pyopenssl
 pandas
 pre-commit==2.20.0
 #psycopg2==2.9.3
