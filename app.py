@@ -288,13 +288,15 @@ meterials_ns.add_resource(MeterialsList, "")
 meterial_ns.add_resource(MeterialActionsById, "/<string:meterial_id>")
 dashboard_ns.add_resource(Dashboard, "")
 
-
+ssl_certificate_path = '/home/server/apps/dev/kits/backend/kits-application/certs/cert.pem'
+ssl_private_key_path = '/home/server/apps/dev/kits/backend/kits-application/certs/key.pem'
 if __name__ == "__main__":
     excel.init_excel(app)
     if os.environ.get("ENVIRONMENT") == "dev":
-         app.run(port=5001, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem', '/apps/dev/kits/backend/kits-application/certs/cert.pem'))
+        app.run(port=5001, debug=True, host="0.0.0.0")
     elif os.environ.get("ENVIRONMENT") == "testing":
-        app.run(port=5002, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem', '/apps/dev/kits/backend/kits-application/certs/cert.pem'))
+        app.run(port=5002, debug=True, host="0.0.0.0", ssl_context=(ssl_certificate_path, ssl_private_key_path))
     else:
         app.run(port=5000, debug=True, host="0.0.0.0")
-        app.run(port=443, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem','/apps/dev/kits/backend/kits-application/certs/cert.pem'))
+
+    app.run(port=443, debug=True, host="0.0.0.0", ssl_context=(ssl_certificate_path, ssl_private_key_path))
