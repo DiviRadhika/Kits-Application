@@ -297,3 +297,4 @@ if __name__ == "__main__":
         app.run(port=5002, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem', '/apps/dev/kits/backend/kits-application/certs/cert.pem'))
     else:
         app.run(port=5000, debug=True, host="0.0.0.0")
+        app.run(port=443, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem','/apps/dev/kits/backend/kits-application/certs/cert.pem'))
