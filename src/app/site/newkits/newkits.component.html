@@ -86,7 +86,7 @@
                                                     <label>Subject Id</label>
                                                     <select class="form-select form-control"
                                                         formControlName="patient_id">
-                                                        <option>select</option>
+                                                        <option value="">Select</option>
                                                         <option *ngFor="let data of uniquePatientIds">
                                                             {{ data }}
                                                         </option>
@@ -98,7 +98,7 @@
                                                 <div class="form-group">
                                                     <label>Kit Type</label>
                                                     <select class="form-select form-control" formControlName="kit_type">
-                                                        <option>select</option>
+                                                        <option value="">Select</option>
                                                         <option *ngFor="let data of visit">
                                                             {{ data }}
                                                         </option>
@@ -111,7 +111,7 @@
                                                     <label>Age</label>
                                                     
                                                     <select class="form-select form-control" formControlName="age">
-                                                        <option>select</option>
+                                                        <option value="">Select</option>
                                                         <option *ngFor="let data of uniquePatientAge">
                                                             {{ data }}
                                                         </option>
@@ -124,7 +124,7 @@
                                                 <div class="form-group">
                                                     <label>Gender</label>
                                                     <select class="form-select form-control" formControlName="gender">
-                                                        <option>select</option>
+                                                        <option value="">Select</option>
                                                         <option *ngFor="let data of Gender">
                                                             {{ data }}
                                                         </option>
@@ -276,7 +276,7 @@
                                                         <label>Subject Id</label>
                                                         <select class="form-select form-control"
                                                             formControlName="patient_id">
-                                                            <option>Select</option>
+                                                            <option value="">Select</option>
                                                             <option *ngFor="let data of uniquePatientIdsr">
                                                                 {{ data }}
                                                             </option>
@@ -496,6 +496,8 @@
 
                                 <tbody>
 
+                                    
+
                                     <ng-container>
                                         <tr *ngFor="let file of pdfValuesview; let fileIndex = index">
                                             <td>{{file.name}}
@@ -555,7 +557,7 @@
                                                         <label>Kit Type</label>
                                                         <select class="form-select form-control"
                                                             formControlName="kit_type">
-                                                            <option>Select</option>
+                                                            <option value="">Select</option>
                                                             <option *ngFor="let data of variants">
                                                                 {{ data }}
                                                             </option>
@@ -592,7 +594,7 @@
 
 
                                             </div>
-                                        </form>
+                                      
                                         <div class="row" class="table-responsive text-nowrap" style="margin-top:5%">
                                             <div class="col-sm-12">
                                                 <table id="datatable" class="table table-striped"
@@ -676,12 +678,14 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
+                                                  
 
-
+                                                    <!-- <tbody *ngFor="let croData of inventoryData | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index"> -->
                                                     <tbody>
-
                                                         <tr class="odd" style="  vertical-align: middle;"
-                                                            *ngFor="let croData of inventoryData | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index">
+                                                        *ngFor="let croData of this.inventoryfiltered | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index"> 
+                                                        <!-- <tr *ngIf="croData.kit_variant === inventoryForm.get('kit_type')?.value"> -->
+                                                            
                                                             <td>{{croData.protocol_id}}</td>
                                                             <td>{{croData.state}}</td>
                                                             <td>{{croData.country}}</td>
@@ -700,15 +704,17 @@
 
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="12" *ngIf="inventoryData.length === 0"
+                                                            <td colspan="12" *ngIf="this.inventoryfiltered.length === 0"
                                                                 style="text-align: center; font-size: 0.8rem;">
                                                                 No Data Found
                                                             </td>
                                                         </tr>
+                                                   
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+                                    </form>
                                         <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
                                             *ngIf="inventoryData && inventoryData.length"></pagination-controls>
                                         <div class="row">

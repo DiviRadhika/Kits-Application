@@ -28,6 +28,7 @@ export class NewkitsComponent implements OnInit {
   uniquePatientIds: any;
   uniquePatientAge: any
   uniquePatientIdsr: any;
+  inventoryfiltered: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -131,7 +132,7 @@ export class NewkitsComponent implements OnInit {
       from_date: this.reportsForm.controls['from_date'].value,
       to_date: this.reportsForm.controls['to_date'].value
     }
-    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
         this.reportsDetails = data.data
@@ -159,7 +160,7 @@ export class NewkitsComponent implements OnInit {
       this.messageService.add({severity:'error', summary:'Error Message', detail:'To Date is Required'});    
     }
     else{
-    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
         this.reportsDetails = data.data
         console.log(data)
@@ -181,7 +182,7 @@ export class NewkitsComponent implements OnInit {
      from_date: '',
      to_date: ''
    }
-   this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+   this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
      (data: any) => {
        this.subjectDetails = data.data 
        this.totalCountR = this.subjectDetails.length
@@ -201,7 +202,7 @@ export class NewkitsComponent implements OnInit {
       from_date: '',
       to_date: ''
     }
-    this.protocol.kitsnsvfk(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
+    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
         this.subjectDetails = data.data
@@ -256,12 +257,20 @@ export class NewkitsComponent implements OnInit {
       
     }
     else{
-      this.protocol.kitsnsfk(sessionStorage.getItem('siteId'), obj).subscribe(
+    
+      this.protocol.kitsinventory(sessionStorage.getItem('siteId'), obj).subscribe(
         (data: any) => {
           this.inventoryData = data.data
-          console.log(data)
+        if(this.inventoryForm.controls['kit_type'].value === ''){
+         this.inventoryfiltered = this.inventoryData
+        }
+        else{
+
           this.variants = data.variants
           this.variants = Array.from(new Set(this.variants)); // Remove duplicates
+          this.inventoryfiltered = this.inventoryData.filter((item:any) => item.kit_variant === this.inventoryForm.controls['kit_type'].value);
+          // console.log(val)
+        }
           this.totalCountR = this.inventoryData.length
         },
         (err: any) => {
@@ -280,9 +289,9 @@ export class NewkitsComponent implements OnInit {
       kit_type:this.inventoryForm.controls['kit_type'].value
     } 
     
-    this.protocol.kitsnsfk(sessionStorage.getItem('siteId'), obj).subscribe(
+    this.protocol.kitsinventory(sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
-        this.inventoryData = data.data
+        this.inventoryfiltered = data.data
         console.log(data)
         this.variants = data.variants
         this.variants = Array.from(new Set(this.variants)); // Remove duplicates
