@@ -23,6 +23,29 @@ kits_inventory_ns = Namespace(
     "kits_inventory_ns", description="kits_inventory_ns related operations"
 )
 
+kits_inventory_ns_filters = kits_inventory_ns.model(
+    "kit_inventory_filters",
+    {
+        "kit_type": fields.String(),
+        "from_date": fields.String(),
+        "to_date": fields.String(),
+    },
+)
+
+kits_ns_filters = kits_inventory_ns.model(
+    "kit_ns_filters",
+    {
+        "kit_type": fields.String(),
+        "from_date": fields.String(),
+        "to_date": fields.String(),
+        "visit": fields.String(),
+        "gender": fields.String(),
+        "age": fields.String(),
+        "patient_id": fields.String(),
+    },
+)
+
+
 clab_kit_preparations_ns = Namespace(
     "clab_kit_preparations", description="clab_kit_preparation related operations"
 )
@@ -271,10 +294,11 @@ class ClabKitPreparation(Resource):
 
 
 class KitsOperation(Resource):
+    @kits_ns.expect(kits_ns_filters)
     @kits_ns.doc("get protocols by site id")
     @jwt_required(fresh=True)
-    def get(self, protocol_id, site_uuid):
-        args = request.args
+    def post(self, protocol_id, site_uuid):
+        filters = request.get_json()
         patient_id_filter = False
         kit_type_filter = False
         age_filter = False
@@ -282,19 +306,19 @@ class KitsOperation(Resource):
         visit_filter = False
         from_date_filter = False
         to_date_filter = False
-        if "patient_id" in args and args["patient_id"] != "":
+        if "patient_id" in filters and filters.get("patient_id") != "":
             patient_id_filter = True
-        if "kit_type" in args and args.get("kit_type") != "":
+        if "kit_type" in filters and filters.get("kit_type") != "":
             kit_type_filter = True
-        if "age" in args and args.get("age") != "":
+        if "age" in filters and filters.get("age") != "":
             age_filter = True
-        if "gender" in args and args.get("gender") != "":
+        if "gender" in filters and filters.get("gender") != "":
             gender_filter = True
-        if "visit" in args and args.get("visit") != "":
+        if "visit" in filters and filters.get("visit") != "":
             visit_filter = True
-        if "from_date" in args and args.get("from_date") != "":
+        if "from_date" in filters and filters.get("from_date") != "":
             from_date_filter = True
-        if "to_date" in args and args.get("to_date") != "":
+        if "to_date" in filters and filters.get("to_date") != "":
             to_date_filter = True
 
         response = {
@@ -302,6 +326,7 @@ class KitsOperation(Resource):
             "age": [],
             "gender": [],
             "patient_ids": [],
+            "varients": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -325,27 +350,27 @@ class KitsOperation(Resource):
                                 if (
                                     "patientId" not in screening_kit_data
                                     or screening_kit_data["patientId"]
-                                    != args.get("patient_id")
+                                    != filters.get("patient_id")
                                 ):
                                     continue
                             if gender_filter == True:
                                 if (
-                                    "patientsex" not in screening_kit_data
-                                    or screening_kit_data["patientsex"]
-                                    != args.get("gender")
+                                    "patientSex" not in screening_kit_data
+                                    or screening_kit_data["patientSex"]
+                                    != filters.get("gender")
                                 ):
                                     continue
                             if age_filter == True:
                                 if (
                                     "patientAge" not in screening_kit_data
                                     or screening_kit_data["patientAge"]
-                                    != args.get("age")
+                                    != filters.get("age")
                                 ):
                                     continue
                             if from_date_filter == True:
                                 if "collectionDate" not in screening_kit_data:
                                     continue
-                                from_date = parse(args.get("from_date"))
+                                from_date = parse(filters.get("from_date"))
                                 collection_date = parse(
                                     screening_kit_data["collectinDate"]
                                 )
@@ -354,7 +379,7 @@ class KitsOperation(Resource):
                             if to_date_filter == True:
                                 if "collectionDate" not in screening_kit_data:
                                     continue
-                                to_date = parse(args.get("to_date"))
+                                to_date = parse(filters.get("to_date"))
                                 collection_date = parse(
                                     screening_kit_data["collectinDate"]
                                 )
@@ -363,9 +388,9 @@ class KitsOperation(Resource):
 
                             if "patientAge" in screening_kit_data:
                                 response["age"].append(screening_kit_data["patientAge"])
-                            if "patientsex" in screening_kit_data:
+                            if "patientSex" in screening_kit_data:
                                 response["gender"].append(
-                                    screening_kit_data["patientsex"]
+                                    screening_kit_data["patientSex"]
                                 )
                             if "patientId" in screening_kit_data:
                                 response["patient_ids"].append(
@@ -385,41 +410,41 @@ class KitsOperation(Resource):
                             if patient_id_filter == True:
                                 if "patientId" not in visit_kit_data or visit_kit_data[
                                     "patientId"
-                                ] != args.get("patient_id"):
+                                ] != filters.get("patient_id"):
                                     continue
                             if gender_filter == True:
-                                if "patientsex" not in visit_kit_data or visit_kit_data[
-                                    "patientsex"
-                                ] != args.get("gender"):
+                                if "patientSex" not in visit_kit_data or visit_kit_data[
+                                    "patientSex"
+                                ] != filters.get("gender"):
                                     continue
                             if age_filter == True:
                                 if "patientAge" not in visit_kit_data or visit_kit_data[
                                     "patientAge"
-                                ] != args.get("age"):
+                                ] != filters.get("age"):
                                     continue
                             if from_date_filter == True:
                                 if "collectionDate" not in visit_kit_data:
                                     continue
-                                from_date = parse(args.get("from_date"))
+                                from_date = parse(filters.get("from_date"))
                                 collection_date = parse(visit_kit_data["collectinDate"])
                                 if from_date > collection_date:
                                     continue
                             if to_date_filter == True:
                                 if "collectionDate" not in visit_kit_data:
                                     continue
-                                to_date = parse(args.get("to_date"))
+                                to_date = parse(filters.get("to_date"))
                                 collection_date = parse(visit_kit_data["collectinDate"])
                                 if to_date < collection_date:
                                     continue
                             if visit_filter == True:
-                                if args.get("visit") != visit_number:
+                                if filters.get("visit") != visit_number:
                                     continue
 
                             if "patientAge" in screening_kit_data:
                                 response["age"].append(screening_kit_data["patientAge"])
-                            if "patientsex" in screening_kit_data:
+                            if "patientSex" in screening_kit_data:
                                 response["gender"].append(
-                                    screening_kit_data["patientsex"]
+                                    screening_kit_data["patientSex"]
                                 )
                             if "patientId" in screening_kit_data:
                                 response["patient_ids"].append(
@@ -431,22 +456,24 @@ class KitsOperation(Resource):
 
 
 class KitsInventoryOperation(Resource):
+    @kits_inventory_ns.expect(kits_inventory_ns_filters)
     @kits_inventory_ns.doc("get protocols by site id")
     @jwt_required(fresh=True)
-    def get(self, site_uuid):
-        args = request.args
+    def post(self, site_uuid):
+        filters = request.get_json()
         kit_type_filter = False
         from_date_filter = False
         to_date_filter = False
-        if "kit_type" in args and args["kit_type"] != "":
+        if "kit_type" in filters and filters.get("kit_type") != "":
             kit_type_filter = True
-        if "from_date" in args and args["from_date"] != "":
+        if "from_date" in filters and filters.get("from_date") != "":
             from_date_filter = True
-        if "to_date" in args and args["to_date"] != "":
+        if "to_date" in filters and filters.get("to_date") != "":
             to_date_filter = True
         response = {
             "data": [],
             "variants": [],
+            "variant_spec": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -460,16 +487,30 @@ class KitsInventoryOperation(Resource):
             cp_visit_kit_details = VisitKitDetailsModel.find_by_protocol_id(cro_data.id)
             meterial_details = cp_visit_kit_details.meterial_details
             temp_variants = []
-            for meterial_detail in meterial_details:
-                if (
-                    "kit_variant" in meterial_detail
-                    and meterial_detail["kit_variant"] != ""
-                ):
-                    temp_variants.append(meterial_detail["kit_variant"])
+            debug_info = {
+                "protocol_id": str(cro_data.id),
+                "protocol_name": str(cro_data.protocol_id),
+            }
+            for midx in range(len(meterial_details)):
+                meterial_detail = meterial_details[midx]
+                mvariant = ""
+                if "kit_variant" in meterial_detail:
+                    mvariant = meterial_detail["kit_variant"]
+                temp_variants.append(mvariant)
+                if midx == 0:
+                    debug_info["screening_kit_variant"] = mvariant
+                else:
+                    debug_info["visit_" + str(midx - 1) + "kit_variant"] = mvariant
 
-            response["variants"].extend(temp_variants)
+            for variant in temp_variants:
+                if variant not in response["variants"]:
+                    response["variants"].extend(temp_variants)
+            # ldebug_info = {str(cro_data.protocol_id): debug_info}
+            # for record in response["variant_spec"]:
+            #    if cro_data.protocol_id not in record.values():
+            response["variant_spec"].append(debug_info)
 
-            if kit_type_filter and args.get("kit_type") not in temp_variants:
+            if kit_type_filter and filters.get("kit_type") not in temp_variants:
                 continue
 
             screening_kit_details = kit.screening_kit_details
@@ -490,38 +531,22 @@ class KitsInventoryOperation(Resource):
                 "last_shipped_data": "",
             }
             screening_kits_received_dates = []
-            for screening_kit_data in screening_kit_details:
+            for index in range(len(screening_kit_details)):
+                screening_kit_data = screening_kit_details[index]
+                obj["kit_variant"] = debug_info["screening_kit_variant"]
                 if "site_id" not in screening_kit_data:
                     continue
                 if site_id != screening_kit_data["site_id"]:
                     continue
                 if kit_type_filter == True:
-                    cp_visit_kit_details = VisitKitDetailsModel.find_by_protocol_id(
-                        cro_data.id
-                    )
-                    meterial_details = cp_visit_kit_details.meterial_details
-                    # we are storing screening_kit_data variant information
-                    # in the visits of zeroth index.
-                    for index in range(0, len(meterial_details)):
-                        if index > 0:
-                            break
-                        meterial_detail = meterial_details[index]
-
-                        if (
-                            "kit_variant" in meterial_detail
-                            and meterial_detail["kit_variant"] != ""
-                            and meterial_detail["kit_variant"] != args.get("kit_type")
-                        ):
-                            continue
-                        else:
-                            obj['kit_variant'] = meterial_detail["kit_variant"]
-
-                    response["variants"].extend(temp_variants)
+                    variant = debug_info["screening_kit_variant"]
+                    if variant == "" or filters.get("kit_type") != variant:
+                        continue
                 if from_date_filter == True and to_date_filter == True:
                     if "recievedDate" not in screening_kit_data:
                         continue
-                    from_date = parse(args.get("from_date"))
-                    to_date = parse(args.get("to_date"))
+                    from_date = parse(filters.get("from_date"))
+                    to_date = parse(filters.get("to_date"))
                     received_date = parse(screening_kit_data["recievedDate"])
                     if not (from_date <= received_date and received_date <= to_date):
                         continue
@@ -543,12 +568,18 @@ class KitsInventoryOperation(Resource):
                         obj["onhand_kits"] = obj["onhand_kits"] + 1
                 else:
                     obj["pending_kits"] = obj["pending_kits"] + 1
-                screening_kits_received_dates.sort(
-                    key=lambda date: datetime.strptime(date, "%Y-%m-%d"),
-                    reverse=True,
-                )
-                if len(screening_kits_received_dates) > 0:
-                    obj["last_shipped_date"] = screening_kits_received_dates[0]
+
+            screening_kits_received_dates.sort(
+                key=lambda date: datetime.strptime(date, "%Y-%m-%d"),
+                reverse=True,
+            )
+            if len(screening_kits_received_dates) > 0:
+                obj["last_shipped_date"] = screening_kits_received_dates[0]
+
+            if (
+                kit_type_filter == True
+                and obj["kit_variant"] == filters.get("kit_type")
+            ) or kit_type_filter == False:
                 response["data"].append(obj)
 
             for index in range(len(visit_kit_details)):
@@ -568,43 +599,24 @@ class KitsInventoryOperation(Resource):
                     "last_shipped_data": "",
                 }
                 visit_kit_received_dates = []
-                """
-                from_date = datetime.datetime(2023, 3, 10, 0, 0)
-                to_date = datetime.datetime(2023, 1, 10, 0, 0)
-                received_date = datetime.datetime(2023, 2, 20, 0, 0)
-                from_date <= received_date => true
-                """
                 visits = visit_kit_details[index]
+                obj["kit_variant"] = debug_info["visit_" + str(index) + "kit_variant"]
                 for visit_kit_data in visits:
                     if "site_id" not in visit_kit_data:
                         continue
                     if site_id != visit_kit_data["site_id"]:
                         continue
                     if kit_type_filter == True:
-                        cp_visit_kit_details = VisitKitDetailsModel.find_by_protocol_id(
-                            cro_data.id
-                        )
-                        meterial_details = cp_visit_kit_details.meterial_details
-                        for vidx in range(0, len(meterial_details)):
-                            # zeroth index belongs to screening_kit_data kit_type
-                            if index == 0 or index != vidx:
-                                continue
-                            meterial_detail = meterial_details[vidx]
-
-                            if (
-                                "kit_variant" in meterial_detail
-                                and meterial_detail["kit_variant"] != ""
-                                and meterial_detail["kit_variant"]
-                                != args.get("kit_type")
-                            ):
-                                continue
-                            else: 
-                                obj['kit_variant'] = meterial_detail["kit_variant"]
+                        if (
+                            obj["kit_variant"] == ""
+                            or filters.get("kit_type") != obj["kit_variant"]
+                        ):
+                            continue
                     if from_date_filter == True and to_date_filter == True:
                         if "recievedDate" not in visit_kit_data:
                             continue
-                        from_date = parse(args.get("from_date"))
-                        to_date = parse(args.get("to_date"))
+                        from_date = parse(filters.get("from_date"))
+                        to_date = parse(filters.get("to_date"))
                         received_date = parse(visit_kit_data["recievedDate"])
                         if not (
                             from_date <= received_date and received_date <= to_date
@@ -629,12 +641,16 @@ class KitsInventoryOperation(Resource):
                             obj["onhand_kits"] = obj["onhand_kits"] + 1
                     else:
                         obj["pending_kits"] = obj["pending_kits"] + 1
-                    visit_kit_received_dates.sort(
-                        key=lambda date: datetime.strptime(date, "%Y-%m-%d"),
-                        reverse=True,
-                    )
-                    if len(visit_kit_received_dates) > 0:
-                        obj["last_shipped_date"] = visit_kit_received_dates[0]
+                visit_kit_received_dates.sort(
+                    key=lambda date: datetime.strptime(date, "%Y-%m-%d"),
+                    reverse=True,
+                )
+                if len(visit_kit_received_dates) > 0:
+                    obj["last_shipped_date"] = visit_kit_received_dates[0]
+                if (
+                    kit_type_filter == True
+                    and obj["kit_variant"] == filters.get("kit_type")
+                ) or kit_type_filter == False:
                     response["data"].append(obj)
         return response, 200
 
