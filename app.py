@@ -292,8 +292,8 @@ dashboard_ns.add_resource(Dashboard, "")
 if __name__ == "__main__":
     excel.init_excel(app)
     if os.environ.get("ENVIRONMENT") == "dev":
-        app.run(port=5001, debug=True, host="0.0.0.0")
+         app.run(port=5001, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem', '/apps/dev/kits/backend/kits-application/certs/cert.pem'))
     elif os.environ.get("ENVIRONMENT") == "testing":
-        app.run(port=5002, debug=True, host="0.0.0.0")
+        app.run(port=5002, debug=True, host="0.0.0.0", ssl_context=('/apps/dev/kits/backend/kits-application/certs/key.pem', '/apps/dev/kits/backend/kits-application/certs/cert.pem'))
     else:
         app.run(port=5000, debug=True, host="0.0.0.0")
