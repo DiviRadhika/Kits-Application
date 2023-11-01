@@ -53,7 +53,7 @@
                     <div style="padding:1px"
                         class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">
-                            <i class="bx bxs-dashboard"></i>Kits Inventory Details
+                            <i class="bx bxs-dashboard"></i>Kit Inventory
                         </h4>
 
                         <div class="page-title-right">
@@ -61,7 +61,7 @@
                                 <li class="breadcrumb-item">
                                     <a routerLink="/home/cro/dashboards" class="waves-effect">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active">Kits
+                                <li class="breadcrumb-item active">Kit
                                     Inventory </li>
 
 
@@ -99,7 +99,7 @@
                                                     <label>Kit Type</label>
                                                     <select class="form-select form-control" formControlName="kit_type">
                                                         <option value="">Select</option>
-                                                        <option *ngFor="let data of visit">
+                                                        <option *ngFor="let data of variantssubjects">
                                                             {{ data }}
                                                         </option>
                                                     </select>
@@ -132,13 +132,13 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-1"></div>
+                                            <!-- <div class="col-md-1"></div> -->
                                             <div class="col-md-2" style="margin-top:0.6%">
                                                 <div class="form-group">
                                                     <br>
                                                      <button  class="btn btn-primary" (click)="resets()">Reset</button> 
 
-                                                     <button style="margin: 2px; font-size: 12px;" (click)="getsubjectDetailss()"
+                                                     <button style="margin-left: 11px; font-size: 12px;" (click)="getsubjectDetailss()"
                                                   class="btn btn-primary">Search</button> 
                                                 </div>
                                             </div>
@@ -157,6 +157,12 @@
                                                             CRA
 
                                                         </th>
+                                                        <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                        colspan="1" style="width: 335.2px;"
+                                                        aria-label="Name: activate to sort column ascending">Kit Type
+                                                        
+
+                                                    </th>
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                             colspan="1" style="width: 335.2px;"
                                                             aria-label="Name: activate to sort column ascending">Subject
@@ -202,9 +208,10 @@
                                                 <tbody>
 
                                                     <tr class="odd" style="  vertical-align: middle;"
-                                                        *ngFor="let croData of subjectDetails | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
+                                                        *ngFor="let croData of subjectsfiltered | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
 
                                                         <td>{{craname}}</td>
+                                                        <td>{{croData.kit_variant}}</td>
                                                         <td>{{croData.patientId}}</td>
                                                         <td>{{croData.site_id}}</td>
                                                         <td>{{croData.patientName}}</td>
@@ -214,7 +221,7 @@
                                                         <td>{{croData.collectionDate}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="12" *ngIf="subjectDetails.length === 0"
+                                                        <td colspan="12" *ngIf="subjectsfiltered.length === 0"
                                                             style="text-align: center; font-size: 0.8rem;">
                                                             No Data Found
                                                         </td>
@@ -224,13 +231,13 @@
                                         </div>
                                     </div>
                                     <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
-                                        *ngIf="subjectDetails && subjectDetails.length"></pagination-controls>
+                                        *ngIf="subjectsfiltered && subjectsfiltered.length"></pagination-controls>
                                     <div class="row">
                                         <div class="col-md-10">
 
                                         </div>
                                         <div class="col-md-2">
-                                            <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
+                                            <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCountR}}]</p>
                                         </div>
                                     </div>
                                 </div>
@@ -261,9 +268,10 @@
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <label>Select Type</label>
-                                                        <select class="form-select form-control">
-                                                            <option *ngFor="let data of classifications">
+                                                        <label>Kit Type</label>
+                                                        <select class="form-select form-control"  formControlName="kit_type">
+                                                            <option value="">Select</option>
+                                                            <option *ngFor="let data of variantsReports">
                                                                 {{ data }}
                                                             </option>
                                                         </select>
@@ -284,18 +292,20 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <!-- <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>Visit</label>
                                                         <select class="form-select form-control"
-                                                            formControlName="kit_type">
-                                                            <option *ngFor="let data of visit">
+                                                            formControlName="visit">
+                                                            <option value="">Select</option>
+                                                            <option *ngFor="let data of descriptionReports">
                                                                 {{ data }}
                                                             </option>
                                                         </select>
 
                                                     </div>
-                                                </div>
+                                                </div> -->
+                                               
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
@@ -308,8 +318,8 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <label>To Date</label>
-                                                        <input formControlName="to_date" type="text" type="date"
-                                                            value="" class="form-control" />
+                                                        <input type="date" formControlName="to_date" class="form-control" [min]="reportsForm.get('from_date')?.value" />
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -323,13 +333,14 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8"></div>
+                                                <!-- <div class="col-md-2"></div> -->
                                             <div class="col-md-2" style="margin-top:0.6%">
                                                 <div class="form-group">
                                                     <br>
-                                                     <button  class="btn btn-primary" (click)="resetL()">Reset</button> 
+                                                     <button style="font-size: 12px;" class="btn btn-primary" (click)="resetL()">Reset</button> 
 
-                                                     <button style="margin: 2px; font-size: 12px;" (click)="getReportss()"
+                                                     <button style="margin-left: 11px; font-size: 12px;" (click)="getReportss()"
+                                                     
                                                   class="btn btn-primary">Search</button> 
                                                 </div>
                                             </div>
@@ -347,7 +358,7 @@
                                                                 colspan="1" style="width: 243.2px;"
                                                                 aria-sort="ascending"
                                                                 aria-label="Code: activate to sort column descending">
-                                                                Type
+                                                                Kit Type
 
                                                             </th>
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
@@ -365,12 +376,12 @@
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                                 colspan="1" style="width: 289.2px;"
                                                                 aria-label="Legal Name: activate to sort column ascending">
-                                                                site
+                                                                Site
                                                             </th>
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                                 colspan="1" style="width: 289.2px;"
                                                                 aria-label="Legal Name: activate to sort column ascending">
-                                                                visit
+                                                                Visit
                                                             </th>
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                                 colspan="1" style="width: 289.2px;"
@@ -394,13 +405,13 @@
                                                     <tbody>
 
                                                         <tr class="odd" style="  vertical-align: middle;"
-                                                            *ngFor="let croData of reportsDetails | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index">
+                                                            *ngFor="let croData of reportsfiltered | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index">
 
-                                                            <td>{{croData.type}}</td>
+                                                            <td>{{croData.kit_variant}}</td>
                                                             <td>{{croData.patientId}}</td>
                                                             <td>{{croData.access}}</td>
                                                             <td>{{croData.site_id}}</td>
-                                                            <td>{{croData.visit}}</td>
+                                                            <td>{{croData.description}}</td>
                                                             <td>{{croData.collectionDate}}</td>
                                                             <td>{{croData.posted_date}}</td>
 
@@ -438,7 +449,7 @@
 
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="12" *ngIf="reportsDetails.length === 0"
+                                                            <td colspan="12" *ngIf="reportsfiltered.length === 0"
                                                                 style="text-align: center; font-size: 0.8rem;">
                                                                 No Data Found
                                                             </td>
@@ -448,14 +459,14 @@
                                             </div>
                                         </div>
                                         <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
-                                            *ngIf="reportsDetails && reportsDetails.length"></pagination-controls>
+                                            *ngIf="reportsfiltered && reportsfiltered.length"></pagination-controls>
                                         <div class="row">
                                             <div class="col-md-10">
 
                                             </div>
                                             <div class="col-md-2">
                                                 <p style="margin-top: -26%; color:#0a0a0a">Total
-                                                    Count:[{{totalCount}}]</p>
+                                                    Count:[{{totalCountR}}]</p>
                                             </div>
                                         </div>
                                     </div>
@@ -575,17 +586,18 @@
                                                   <div class="col-md-2">
                                                     <div class="form-group">
                                                       <label>To Date</label>
-                                                      <input type="date" formControlName="to_date" class="form-control" [min]="inventoryForm.get('from_date')?.value" />
+                                                      <input type="date" formControlName="to_date" class="form-control" [min]="reportsForm.get('from_date')?.value" />
+
                                                     </div>
                                                   </div>
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-2" style="margin-top:0.6%">
                                                     <div class="form-group">
                                                         <br>
-                                                        <button (click)="reseti()"
+                                                        <button style="font-size: 12px;" (click)="reseti()"
                                                             class="btn btn-primary">Reset</button>
 
-                                                        <button style="margin: 2px; font-size: 12px;"
+                                                        <button style="margin-left: 11px; font-size: 12px;"
                                                             (click)="getInventorys()"
                                                             class="btn btn-primary">Search</button>
                                                     </div>
@@ -721,9 +733,9 @@
                                             <div class="col-md-10">
 
                                             </div>
-                                            <!-- <div class="col-md-2">
-                                            <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCount}}]</p>
-                                        </div> -->
+                                            <div class="col-md-2">
+                                            <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCountR}}]</p>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

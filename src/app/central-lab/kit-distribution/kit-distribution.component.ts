@@ -308,7 +308,7 @@ export class KitDistributionComponent implements OnInit {
 
   }
   printLabel(i: any) {
-console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
+
 
 
     const siteId = this.ScreenKitForm.get('screenKitList').controls[i].get('siteId').value;
@@ -330,8 +330,10 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
                 /* Add any necessary styles for your specific requirements */
               </style>
             </head>
-            <h1>siteId</h1>
-            <p>${siteId}</p>
+            <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+            <p><strong>Protocol Id:</strong> ${this.protocolIdDetails.protocol_id}</p>
+            <p><strong>Site Id:</strong> ${siteId}</p>
+          
 
               <script>
                 setTimeout(() => {
@@ -351,7 +353,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
   printLabelm(tabIndex: number, rowIndex: number) {
     const selectedTab = this.vMatDetails[tabIndex];
     const matdetails = selectedTab.visits;
-    console.log(matdetails);
+
 
 
     const selectedRow = selectedTab.visitsList.controls[rowIndex];
@@ -379,10 +381,9 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
             <body>
        
           </body>
-             <h1>Site Id</h1>
-             <p>${siteId}</p>
-             
-        
+          <p><strong>Protocol Name:</strong> ${this.protocolIdDetails.protocol_name}</p>
+          <p><strong>Protocol Id:</strong> ${this.protocolIdDetails.protocol_id}</p>
+          <p><strong>site Id:</strong> ${siteId}</p>
               <script>
                 setTimeout(() => {
                   window.print();
@@ -396,9 +397,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
           `);
       }
     }
-
   }
-
   adjustScreenKitRows(count: number, skDetails:any) {
     const screenKitList = this.ScreenKitForm.get('screenKitList') as FormArray;
     const currentRowCount = screenKitList.length;
@@ -415,7 +414,7 @@ console.log( this.ScreenKitForm.get('screenKitList').controls[i]);
         if (i < skDetails.length) {
        
           this.ScreenKitForm.get('screenKitList').controls[i].get('siteId').patchValue(skDetails[i].site_id);
-        
+       
        
         }
         if (i < skDetails.length) {

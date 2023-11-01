@@ -26,33 +26,18 @@ export class ProtocolService {
   getProtocolId(id: any): Observable<any> {
     return this.http.get(endPointsUser.getProtocolId + id)
   }
-
-  // kitsns(id: any): Observable<any> {
-  //   return this.http.get(endPointsUser.kitsns + id)
-  // }
-
-  // kitsnsfk(id: any, payload: { kit_type: any, from_date: any, to_date: any }): Observable<any> {
-
-  //   const url = `${endPointsUser.kitsns}/${id}?kit_type=${payload.kit_type}&from_date=${payload.from_date}&to_date=${payload.to_date}`;
-  //   return this.http.get(url);
-  // }
+  dashboardtable(): Observable<any> {
+    return this.http.get(endPointsUser.dashboardtable)
+  }
+  
   kitsinventory(id: any, payload: any): Observable<any> {
     return this.http.post(endPointsUser.kitsinventory + id, payload)
   }
-  // kitsinventory(id: any, payload: any): Observable<any> {
-  //   return this.http.post(endPointsUser.postProtocol + id, payload)
-  // }
 
   kitsnsv(id: any, site: any, payload: any): Observable<any> {
     return this.http.post(endPointsUser.kitsnsv + id + '/' + site, payload)
   }
-  // kitsnsvf(id: any, site: any, type: any, fromdate: any, todate: any, age: any, gender: any, patient: any): Observable<any> {
-  //   return this.http.get(endPointsUser.kitsnsv + id + '/' + site + '/' + type + '/' + fromdate + '/' + todate + age + '/' + gender + '/' + patient)
-  // }
-  // kitsnsvfk(id: any, site: any, payload: { kit_type: any, from_date: any, to_date: any, age: any, gender: any, patient_id: any }): Observable<any> {
-  //   const url = `${endPointsUser.kitsnsv}/${id}/${site}?kit_type=${payload.kit_type}&from_date=${payload.from_date}&to_date=${payload.to_date}&age=${payload.age}&gender=${payload.gender}&patient_id=${payload.patient_id}`;
-  //   return this.http.get(url);
-  // }
+ 
   postPreparation(data: any): Observable<any> {
     return this.http.post(endPointsUser.postPreparation, data)
   }

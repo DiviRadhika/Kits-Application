@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
+import { ProtocolService } from '../protocol-registration/protocol-registration.service';
 
 @Component({
   selector: 'app-material',
@@ -20,7 +21,7 @@ export class MaterialComponent implements OnInit {
   disablefields: boolean = false;
   disappearfields: boolean = false;
   appearfields: boolean = false;
-  sponserfields:boolean = false;
+  sponserfields: boolean = false;
 
   dashboardform: any;
   myForm: any;
@@ -57,107 +58,69 @@ export class MaterialComponent implements OnInit {
   basicData: any;
   basicData2: any;
   basicOptions: any;
-  constructor(private fb: FormBuilder, private admin: AdminService) { }
+  constructor(private fb: FormBuilder, private admin: AdminService, private protocol:ProtocolService) { }
 
   ngOnInit() {
     this.getsubjectDetails()
     this.basicData = {
-      labels: ['P001', 'P002', 'P003','P004', 'P005'],
+      labels: ['P001', 'P002', 'P003', 'P004', 'P005'],
       datasets: [
-          {
-              label: 'Received',
-              backgroundColor: '#42A5F5',
-              data: [20, 12, 13, 21, 4]
-          },
-         
-      ]
-  };
-  this.basicData2 = {
-
-    labels: ['Sponsors', 'Sites', 'Lab Tests', 'Materials', 'Protocols'],
-
-    datasets: [
-
         {
-
-            label: 'CRO',
-
-            backgroundColor: '#42A5F5',
-
-            data: [6, 12, 2, 4, 5]
-
+          label: 'Received',
+          backgroundColor: '#42A5F5',
+          data: [20, 12, 13, 21, 4]
         },
 
-      //   {
-
-      //       label: 'In Progress',
-
-      //       backgroundColor: '#FFA726',
-
-      //       data: [28, 14]
-
-      //   },
-
-      //   {
-
-      //     label: 'Pending',
-
-      //     backgroundColor: '#FFA726',
-
-      //     data: [28, 23]
-
-      // }
-
-    ]
-
-};
-   this.admin.dashboard().subscribe((data:any)=>{
-    this.dashboardsData = data
-    console.log(this.dashboardsData);
-    this.dataCra = {
-     
-     
-      
-      labels: ['No.of Screened', 'Not Screened'
-       ],
-      datasets: [
-          {
-            
-              data: [10,22],
-              backgroundColor: [
-                "#D98880 ",
-                '#F5B7B1',
-                '#FDEBD0 ',
-                "#45B39D",
-                "#A2D9CE ",
-                '#D0ECE7'
-                               ],
-              hoverBackgroundColor: [
-                "#D98880 ",
-                '#F5B7B1',
-                '#FDEBD0 ',
-                "#45B39D",
-                "#A2D9CE ",
-                '#D0ECE7'
-                               ]
-          }
       ]
-      
-  };
-
+    };
   
-  this.dataCro = {
-    labels: ['Protocols',
-    'Sites',
-    'Sponsors',
-    'LabTests',
-    'Materials'
-  ],
-    datasets: [
-        {
+    this.admin.dashboard().subscribe((data: any) => {
+      this.dashboardsData = data
+      console.log(this.dashboardsData);
+      this.dataCra = {
+
+
+
+        labels: ['No.of Screened', 'Not Screened'
+        ],
+        datasets: [
+          {
+
+            data: [10, 22],
+            backgroundColor: [
+              "#D98880 ",
+              '#F5B7B1',
+              '#FDEBD0 ',
+              "#45B39D",
+              "#A2D9CE ",
+              '#D0ECE7'
+            ],
+            hoverBackgroundColor: [
+              "#D98880 ",
+              '#F5B7B1',
+              '#FDEBD0 ',
+              "#45B39D",
+              "#A2D9CE ",
+              '#D0ECE7'
+            ]
+          }
+        ]
+
+      };
+
+
+      this.dataCro = {
+        labels: ['Protocols',
+          'Sites',
+          'Sponsors',
+          'LabTests',
+          'Materials'
+        ],
+        datasets: [
+          {
             data: [this.dashboardsData.no_of_protocols, this.dashboardsData.no_of_sites, this.dashboardsData.no_of_sponsors, this.dashboardsData.no_of_lab_tests,
-              this.dashboardsData.no_of_materials],
-             
+            this.dashboardsData.no_of_materials],
+
             backgroundColor: [
               "#D98880 ",
               '#F5B7B1',
@@ -172,144 +135,144 @@ export class MaterialComponent implements OnInit {
               "#45B39D",
               "#A2D9CE ",
             ]
-        }
-    ]
-};
-    this.dataCentralLabs = {
-      labels: ['No.of Protocols',
-      'No.of Kits',
-        'No.of Patients',
-        'Prepared Kits',
-        'In Progress Kits',
-        'Verified Kits',
-        'Not Verified Kits',       
-        'Pending Samples',
-        'Recieved Samples'],
-      datasets: [
-        {
-          data: [this.dashboardsData.no_of_protocols,
+          }
+        ]
+      };
+      this.dataCentralLabs = {
+        labels: ['No.of Protocols',
+          'No.of Kits',
+          'No.of Patients',
+          'Prepared Kits',
+          'In Progress Kits',
+          'Verified Kits',
+          'Not Verified Kits',
+          'Pending Samples',
+          'Recieved Samples'],
+        datasets: [
+          {
+            data: [this.dashboardsData.no_of_protocols,
             this.dashboardsData.no_of_kits,
-             this.dashboardsData.no_of_patients,
-             this.dashboardsData.no_of_completed_kits
-            , this.dashboardsData.no_of_inprogress_kits,
-             this.dashboardsData.no_of_verified_kits,
-             this.dashboardsData.no_of_not_verified_kits,this.dashboardsData.no_of_pending_collections,
-              this.dashboardsData.no_of_received_collections],
-          backgroundColor: [
-            "#D98880 ",
-            '#F5B7B1',
-            '#FDEBD0 ',
-            "#45B39D",
-            "#A2D9CE ",
-            '#D0ECE7',
-            '#A569BD',
-            '#D7BDE2',
-            '#F4ECF7'
-          ],
-          hoverBackgroundColor: [
-            "#D98880",
-            '#F5B7B1',
-            '#FDEBD0 ',
-            "#45B39D",
-            "#A2D9CE",
-            '#D0ECE7',
-            '#A569BD',
-            '#D7BDE2',
-            '#F4ECF7'
-          ]
-        }
-      ]
-    };
-    this.stackedData = {
-      labels: ['P0001', 'P0002', 'P0003', 'P0004', 'P0005', 'P0006', 'P0007'],
-      datasets: [{
+            this.dashboardsData.no_of_patients,
+            this.dashboardsData.no_of_completed_kits
+              , this.dashboardsData.no_of_inprogress_kits,
+            this.dashboardsData.no_of_verified_kits,
+            this.dashboardsData.no_of_not_verified_kits, this.dashboardsData.no_of_pending_collections,
+            this.dashboardsData.no_of_received_collections],
+            backgroundColor: [
+              "#D98880 ",
+              '#F5B7B1',
+              '#FDEBD0 ',
+              "#45B39D",
+              "#A2D9CE ",
+              '#D0ECE7',
+              '#A569BD',
+              '#D7BDE2',
+              '#F4ECF7'
+            ],
+            hoverBackgroundColor: [
+              "#D98880",
+              '#F5B7B1',
+              '#FDEBD0 ',
+              "#45B39D",
+              "#A2D9CE",
+              '#D0ECE7',
+              '#A569BD',
+              '#D7BDE2',
+              '#F4ECF7'
+            ]
+          }
+        ]
+      };
+      this.stackedData = {
+        labels: ['P0001', 'P0002', 'P0003', 'P0004', 'P0005', 'P0006', 'P0007'],
+        datasets: [{
           type: 'bar',
           label: 'A',
           backgroundColor: '#42A5F5',
           data: [
-              50,
-              25,
-              12,
-              48,
-              90,
-              76,
-              42
+            50,
+            25,
+            12,
+            48,
+            90,
+            76,
+            42
           ]
-      }, {
+        }, {
           type: 'bar',
           label: 'B',
           backgroundColor: '#66BB6A',
           data: [
-              21,
-              84,
-              24,
-              75,
-              37,
-              65,
-              34
+            21,
+            84,
+            24,
+            75,
+            37,
+            65,
+            34
           ]
-      }, {
+        }, {
           type: 'bar',
           label: 'C',
           backgroundColor: '#FFA726',
           data: [
-              41,
-              52,
-              24,
-              74,
-              23,
-              21,
-              32
-          ]
-      }]
-  };
-  this.stackedData2 = {
-    labels: ['P0001'],
-    datasets: [{
-        type: 'bar',
-        label: 'A',
-        backgroundColor: '#42A5F5',
-        data: [
-            50,
-           
-        ]
-    }, {
-        type: 'bar',
-        label: 'B',
-        backgroundColor: '#66BB6A',
-        data: [
+            41,
+            52,
+            24,
+            74,
+            23,
             21,
-           
-        ]
-    }]
-};
-
-  this.stackedOptions= {
-    scales: {
-        x: { stacked: true },
-        y: { stacked: true }
-    }
-};
-
-    this.dataSponsor = {
-      labels: ['No.of Sponsors', 'No.of Protocols'],
-      datasets: [
-        {
-          data: [this.dashboardsData.no_of_sponsors, this.dashboardsData.no_of_protocols],
-          backgroundColor: [
-            "#D98880 ",
-            '#F5B7B1'
-          ],
-          hoverBackgroundColor: [
-            "#D98880 ",
-            '#F5B7B1'
+            32
           ]
+        }]
+      };
+      this.stackedData2 = {
+        labels: ['P0001'],
+        datasets: [{
+          type: 'bar',
+          label: 'A',
+          backgroundColor: '#42A5F5',
+          data: [
+            50,
+
+          ]
+        }, {
+          type: 'bar',
+          label: 'B',
+          backgroundColor: '#66BB6A',
+          data: [
+            21,
+
+          ]
+        }]
+      };
+
+      this.stackedOptions = {
+        scales: {
+          x: { stacked: true },
+          y: { stacked: true }
         }
-      ]
-    };
+      };
+
+      this.dataSponsor = {
+        labels: ['No.of Sponsors', 'No.of Protocols'],
+        datasets: [
+          {
+            data: [this.dashboardsData.no_of_sponsors, this.dashboardsData.no_of_protocols],
+            backgroundColor: [
+              "#D98880 ",
+              '#F5B7B1'
+            ],
+            hoverBackgroundColor: [
+              "#D98880 ",
+              '#F5B7B1'
+            ]
+          }
+        ]
+      };
 
 
-   })
+    })
     this.myForm = this.fb.group({
       tabControls: this.fb.array([]) // Create an empty FormArray
     });
@@ -327,12 +290,12 @@ export class MaterialComponent implements OnInit {
       cardControls: this.fb.array([])
     })
 
-  
+
 
 
 
     this.role = sessionStorage.getItem('role')
-    if(this.role === 'Admin' ||this.role === 'admin' ) {
+    if (this.role === 'Admin' || this.role === 'admin') {
       this.enableFields = true;
       this.disablefields = true;
       this.disappearfields = true;
@@ -349,11 +312,11 @@ export class MaterialComponent implements OnInit {
       this.disappearfields = false;
       this.appearfields = true;
       this.crocenable = false;
-      this.cracenable= false;
+      this.cracenable = false;
       this.sponsorcenable = true;
       this.labcenable = false;
       this.adminc = false;
-      this.sponserfields= true;
+      this.sponserfields = true;
       this.crasiteenable = false;
     }
     else if (this.role === 'CRO') {
@@ -362,7 +325,7 @@ export class MaterialComponent implements OnInit {
       this.disappearfields = false;
       this.appearfields = false;
       this.crocenable = true;
-      this.cracenable= false;
+      this.cracenable = false;
       this.sponsorcenable = false;
       this.labcenable = false;
       this.adminc = false;
@@ -377,7 +340,7 @@ export class MaterialComponent implements OnInit {
       this.disappearfields = false
       this.appearfields = false;
       this.crocenable = false;
-      this.cracenable= false;
+      this.cracenable = false;
       this.sponsorcenable = false;
       this.labcenable = true;
       this.adminc = false;
@@ -392,20 +355,20 @@ export class MaterialComponent implements OnInit {
       this.disappearfields = true;
       this.appearfields = false;
       this.crocenable = false;
-      this.cracenable= true;
+      this.cracenable = true;
       this.sponsorcenable = false;
       this.labcenable = false;
       this.sponserfields = false;
       this.crasiteenable = false;
 
     }
-    else if(this.role === 'Site Coordinator'){
+    else if (this.role === 'Site Coordinator') {
       this.enableFields = false;
       this.disablefields = false;
       this.disappearfields = false;
       this.appearfields = false;
       this.crocenable = false;
-      this.cracenable= false;
+      this.cracenable = false;
       this.crasiteenable = true;
       this.sponsorcenable = false;
       this.labcenable = false;
@@ -413,10 +376,10 @@ export class MaterialComponent implements OnInit {
     }
 
   }
-  dateselect(val: any){
+  dateselect(val: any) {
     console.log(val);
-    console.log(val +1);
-    
+    console.log(val + 1);
+
 
   }
   // function bringCardToTop(cardClass:string):void{
@@ -425,18 +388,30 @@ export class MaterialComponent implements OnInit {
 
   getsubjectDetails() {
 
-    this.admin.getInventory().subscribe(
+    // this.admin.getInventory().subscribe(
+    //   (data: any) => {
+    //     console.log(data)
+
+    //     this.subjectDetails = data
+    //     console.log(data)
+
+    //   },
+    //   (err: any) => {
+    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+    //   }
+    // )
+    this.protocol.dashboardtable().subscribe(
       (data: any) => {
         console.log(data)
-    
+
         this.subjectDetails = data
-        console.log(data)
-        
+        // console.log(data)
+
       },
       (err: any) => {
         // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
-    ) 
-   
+    )
+
   }
 }

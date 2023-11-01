@@ -29,6 +29,11 @@ export class NewkitsComponent implements OnInit {
   uniquePatientAge: any
   uniquePatientIdsr: any;
   inventoryfiltered: any;
+  variantsReports: any;
+  descriptionReports: any;
+  reportsfiltered: any;
+  subjectsfiltered: any;
+  variantssubjects: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -63,8 +68,10 @@ export class NewkitsComponent implements OnInit {
  public reportsForm: FormGroup = new FormGroup({
   patient_id: new FormControl(""),
   kit_type: new FormControl(""),
+
   from_date: new FormControl(""),
   to_date: new FormControl(""), 
+  visit: new FormControl(""), 
  });
   constructor(private route: Router,
     private admin: AdminService,
@@ -73,19 +80,16 @@ export class NewkitsComponent implements OnInit {
     private messageService: MessageService) { }
   pageChange(event: number) {
     this.page = 1;
-    
+    this.totalCount = 0;
     this.pageSize = 10;
     this.page = event;
-    this.getInventorys()
+    // this.getInventorys()
   }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data: any) => {
       this.id = data.id;
       this.craname =sessionStorage.getItem('fullName')
-      this.inventoryForm.get('from_date')?.valueChanges.subscribe((value) => {
-      this.inventoryForm.get('to_date')?.setValidators([this.validateToDate(value)]);
-      this.inventoryForm.get('to_date')?.updateValueAndValidity();
-    });
+  
     
     });
     if (this.route.url === '/home/site/labReports'+ '/'+this.id) {
@@ -94,6 +98,10 @@ export class NewkitsComponent implements OnInit {
       this.reports = true
       this.subject = false
       this.inventory = false
+      this.reportsForm.get('from_date')?.valueChanges.subscribe((value) => {
+        this.reportsForm.get('to_date')?.setValidators([this.validateToDate(value)]);
+        this.reportsForm.get('to_date')?.updateValueAndValidity();
+      });
       this.classifications = ['Select Type','Lab Result', 'Cancellation'];
     } 
     else if (this.route.url === '/home/site/newkits'+ '/'+this.id) {
@@ -110,6 +118,10 @@ export class NewkitsComponent implements OnInit {
     this.reports = false
     this.inventory = true
     this.classifications = ['Select Type','screening ', 'Visit'];
+    this.inventoryForm.get('from_date')?.valueChanges.subscribe((value) => {
+      this.inventoryForm.get('to_date')?.setValidators([this.validateToDate(value)]);
+      this.inventoryForm.get('to_date')?.updateValueAndValidity();
+    });
  }
   }
  
@@ -126,23 +138,31 @@ export class NewkitsComponent implements OnInit {
     };
   }
   getReports(){
-    this.reportsDetails = []
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
+    this.reportsfiltered = []
     const obj: any ={
       age:'',
       gender:'',
       kit_type: this.reportsForm.controls['kit_type'].value, 
       patient_id: this.reportsForm.controls['patient_id'].value,
       from_date: this.reportsForm.controls['from_date'].value,
-      to_date: this.reportsForm.controls['to_date'].value
+      to_date: this.reportsForm.controls['to_date'].value,
+      // visit: this.reportsForm.controls['visit'].value, 
     }
     this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
-    
-        this.reportsDetails = data.data
+        this.reportsfiltered = data.data
         const patientIdsSetr = new Set(data.data.map((item: any) => item.patientId).filter((id:any) => id !== undefined));
-        // Convert the Set back to an array (if needed)
         this.uniquePatientIdsr = Array.from(patientIdsSetr);
-        this.totalCountR = this.reportsDetails.length
+        const kitvariantr = new Set(data.data.map((item: any) => item.kit_variant).filter((id:any) => id !== undefined)); 
+        this.variantsReports = Array.from(kitvariantr)
+        const kitdescriptionr = new Set(data.data.map((item: any) => item.description).filter((id:any) => id !== undefined)); 
+        this.descriptionReports = Array.from(kitdescriptionr)
+        // console.log(this.variantsReports)
+        this.totalCountR = this.reportsfiltered.length
+       
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -150,6 +170,9 @@ export class NewkitsComponent implements OnInit {
     )  
   }
   getReportss(){
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
     this.reportsDetails = []
     const obj: any ={
       age:'',
@@ -157,17 +180,26 @@ export class NewkitsComponent implements OnInit {
       kit_type: this.reportsForm.controls['kit_type'].value, 
       patient_id: this.reportsForm.controls['patient_id'].value,
       from_date: this.reportsForm.controls['from_date'].value,
-      to_date: this.reportsForm.controls['to_date'].value
+      to_date: this.reportsForm.controls['to_date'].value,
+      // visit: this.reportsForm.controls['visit'].value, 
     }
     if(this.reportsForm.controls['from_date'].value  && (this.reportsForm.controls['to_date'].value === '')){
       this.messageService.add({severity:'error', summary:'Error Message', detail:'To Date is Required'});    
+    }
+    else if(this.reportsForm.controls['to_date'].value  && (this.reportsForm.controls['from_date'].value === '')){
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'From Date is Required'});
     }
     else{
     this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
         this.reportsDetails = data.data
-        console.log(data)
-        this.totalCountR = this.reportsDetails.length
+       if(this.reportsForm.controls['kit_type'].value === ''){
+         this.reportsfiltered = this.reportsDetails
+        }
+        else{
+          this.reportsfiltered = this.reportsDetails.filter((item:any) => item.kit_variant === this.reportsForm.controls['kit_type'].value);
+        }    
+        this.totalCountR = this.reportsfiltered.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -176,6 +208,9 @@ export class NewkitsComponent implements OnInit {
     }
   }
   getsubjectDetailss() {
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
     this.subjectDetails = []
     const obj: any ={
      age: this.subjectForm.controls['age'].value,
@@ -188,7 +223,15 @@ export class NewkitsComponent implements OnInit {
    this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
      (data: any) => {
        this.subjectDetails = data.data 
-       this.totalCountR = this.subjectDetails.length
+       if(this.subjectForm.controls['kit_type'].value === ''){
+        this.subjectsfiltered = this.subjectDetails
+       }
+       else{
+     
+         this.subjectsfiltered = this.subjectDetails.filter((item:any) => item.kit_variant === this.subjectForm.controls['kit_type'].value);
+       }  
+       this.totalCountR = this.subjectsfiltered.length
+       
      },
      (err: any) => {
        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -196,7 +239,10 @@ export class NewkitsComponent implements OnInit {
    ) 
  }
   getsubjectDetails() {
-    this.subjectDetails =[]
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
+    this.subjectsfiltered =[]
      const obj: any ={
       age: this.subjectForm.controls['age'].value,
       gender:this.subjectForm.controls['gender'].value,
@@ -208,14 +254,16 @@ export class NewkitsComponent implements OnInit {
     this.protocol.kitsnsv(this.id, sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
     
-        this.subjectDetails = data.data
+        this.subjectsfiltered = data.data
         const patientIdsSet = new Set(data.data.map((item: any) => item.patientId).filter((id:any) => id !== undefined));
         // Convert the Set back to an array (if needed)
         this.uniquePatientIds = Array.from(patientIdsSet);
         const patientAgesSet = new Set(data.data.map((item: any) => item.patientAge).filter((id:any) => id !== undefined));
         this.uniquePatientAge = Array.from(patientAgesSet);
-      
-        this.totalCountR = this.subjectDetails.length
+        const kitvariants= new Set(data.data.map((item: any) => item.kit_variant).filter((id:any) => id !== undefined)); 
+        this.variantssubjects = Array.from(kitvariants)
+        console.log(this.variantssubjects)
+        this.totalCountR = this.subjectsfiltered.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -228,6 +276,7 @@ export class NewkitsComponent implements OnInit {
       kit_type: new FormControl(""),
       from_date: new FormControl(""),
       to_date: new FormControl(""), 
+      visit: new FormControl(""), 
     });
     this.getReports()
   }
@@ -249,6 +298,9 @@ export class NewkitsComponent implements OnInit {
     this.getInventory()
   }
   getInventorys(){
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
     this.inventoryData = []
     const obj: any ={
       from_date :this.inventoryForm.controls['from_date'].value,
@@ -257,7 +309,9 @@ export class NewkitsComponent implements OnInit {
     } 
     if(this.inventoryForm.controls['from_date'].value  && (this.inventoryForm.controls['to_date'].value === '')){
       this.messageService.add({severity:'error', summary:'Error Message', detail:'To Date is Required'}); 
-      
+    }
+    else if(this.inventoryForm.controls['to_date'].value  && (this.inventoryForm.controls['from_date'].value === '')){
+      this.messageService.add({severity:'error', summary:'Error Message', detail:'From Date is Required'});
     }
     else{
     
@@ -284,6 +338,9 @@ export class NewkitsComponent implements OnInit {
     }
   }
   getInventory(){
+    this.page = 1;
+    this.totalCount = 0;
+    this.pageSize = 10;
     this.inventoryData = []
 
     const obj: any ={
@@ -295,7 +352,6 @@ export class NewkitsComponent implements OnInit {
     this.protocol.kitsinventory(sessionStorage.getItem('siteId'), obj).subscribe(
       (data: any) => {
         this.inventoryfiltered = data.data
-        console.log(data)
         this.variants = data.variants
         this.variants = Array.from(new Set(this.variants)); // Remove duplicates
         this.totalCountR = this.inventoryfiltered.length

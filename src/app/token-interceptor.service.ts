@@ -13,18 +13,18 @@ export class TokenInterceptorService {
   tokenizedReq: any;
   public role: any;
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router
-    ) {
+  ) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
     this.role = sessionStorage.getItem('role');
     if (this.role === null) {
-  
+
       const tokenizedReq = req.clone({
-       
-        setHeaders : {
-        Authorization : 'Bearer '
+
+        setHeaders: {
+          Authorization: 'Bearer '
         }
       });
       return next.handle(tokenizedReq)
@@ -40,7 +40,7 @@ export class TokenInterceptorService {
               } else if (err.status === 401) {
                 sessionStorage.clear()
                 this.router.navigate(['/login'])
-           
+
               } else if (err.status === 200) {
               } else if (err.status === 0) {
               }
@@ -54,16 +54,20 @@ export class TokenInterceptorService {
     }
     else {
 
-  
+
       this.tokenizedReq = req.clone({
-       
+
         setHeaders: {
-          
+
           Authorization: 'Bearer ' + sessionStorage.getItem('access_token'),
           // Access-Control-Allow-Origin: '*'
         }
       });
-
+      if (sessionStorage.getItem('access_token') === '') {
+        alert('k')
+        sessionStorage.clear()
+        this.router.navigate(['/login'])
+      }
       return next.handle(this.tokenizedReq)
         .pipe(
           tap((res) => {
@@ -71,34 +75,34 @@ export class TokenInterceptorService {
             }
           }),
           catchError((err: any) => {
-            
+
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504) {
 
               } else if (err.status === 404) {
                 // this.router.navigate(['/pagenotfound']);
               } else if (err.status === 401) {
-             
+
                 // sessionStorage.clear()
                 // this.router.navigate(['/login'])
 
-              
+
               }
               else if (err.status === 0) {
-              
+
                 // sessionStorage.clear()
                 // this.router.navigate(['/login'])
 
-              
+
               }
               else if (err.status === 200) {
-               
-             
+
+
               } else if (err.status === 0) {
-               
+
               }
             }
-         
+
             return of(err);
           }),
           finalize(() => {

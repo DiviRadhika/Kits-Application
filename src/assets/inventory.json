@@ -1,131 +1,54 @@
 [
     {
-      "id": 1,
-      "protocol": "Countries",
-      "Region": "America",
-      "Country":"Mexico",
-      "site": "S001",
-      "Kits": "23",
-      "Description": "Screening Visit2",
-      "Pending": "2",
-      "shipped": 4,
-      "Recieved": 3,
-      "Adjust": 9,
-      "onHand": 14,
-      "lastship": 4,
-      "lastshipdate":"20-09-2023"
-
+      
+      "name": "Countries",
+      "Actual": "2",
+      "Planned": 4
+     
     },
     {
-        "id": 1,
-        "protocol": "Sites",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S005",
-        "Kits": "45",
-        "Description": "Stage1 PK",
-        "Pending": 7,
-        "shipped": 8,
-        "Recieved": 3,
-        "Adjust": 7,
-        "onHand": 11,
-        "lastship": 8,
-        "lastshipdate":"12-09-2023"
+      
+        "name": "Sites",
+        "Actual": 7,
+        "Planned": 8
+      
     },
     {
-        "id": 1,
-        "protocol": "Subjects Screened",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S001",
-        "Kits": "29",
-        "Description": "liver Biopsy",
-        "Pending": 9,
-        "shipped": 14,
-        "Recieved":13,
-        "Adjust": 5,
-        "onHand": 1,
-        "lastship": 7,
-        "lastshipdate":"17-09-2023"
+      
+        "name": "Subjects Screened",
+        "Actual": 7,
+        "Planned": 8
     },
     {
-        "id": 1,
-        "protocol": "--",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S001",
-        "Kits": "21",
-        "Description": "Stage 1 infusion",
-        "Pending": 8,
-        "shipped": 4,
-        "Recieved": 3,
-        "Adjust": 9,
-        "onHand": 14,
-        "lastship": 4,
-        "lastshipdate":"16-09-2023"
+      
+        "name": "--",
+        "Actual": 7,
+        "Planned": 8
     },
     {
-        "id": 1,
-        "protocol": "Samples Received",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S001",
-        "Kits": "40",
-        "Description": "Screening Visit3",
-        "Pending": 8,
-        "shipped": 2,
-        "Recieved": 5,
-        "Adjust": 19,
-        "onHand": 1,
-        "lastship": 5,
-        "lastshipdate":"18-09-2023"
+       
+        "name": "Samples Received",
+      
+        "Actual": 7,
+        "Planned": 8
     },{
-        "id": 1,
-        "protocol": "--",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S007",
-        "Kits": "30",
-        "Description": "Screening Visit5",
-        "Pending": 12,
-        "shipped": 6,
-        "Recieved": 7,
-        "Adjust": 7,
-        "onHand": 12,
-        "lastship": 7,
-        "lastshipdate":"24-09-2023"
+      
+        "name": "--",
+        
+        "Actual": 7,
+        "Planned": 8
     }
     ,{
-        "id": 1,
-        "protocol": "--",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S007",
-        "Kits": "30",
-        "Description": "Screening Visit5",
-        "Pending": 12,
-        "shipped": 6,
-        "Recieved": 7,
-        "Adjust": 7,
-        "onHand": 12,
-        "lastship": 7,
-        "lastshipdate":"24-09-2023"
+       
+        "name": "--",
+        "Actual": 7,
+        "Planned": 8
     }
     ,{
-        "id": 1,
-        "protocol": "--",
-        "Region": "America",
-        "Country":"Mexico",
-        "site": "S007",
-        "Kits": "30",
-        "Description": "Screening Visit5",
-        "Pending": 12,
-        "shipped": 6,
-        "Recieved": 7,
-        "Adjust": 7,
-        "onHand": 12,
-        "lastship": 7,
-        "lastshipdate":"24-09-2023"
+      
+        "name": "--",
+        "Actual": 7,
+        "Planned": 8
     }
     
 
