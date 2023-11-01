@@ -18,6 +18,10 @@ clab_kit_preparation_ns = Namespace(
 
 kits_ns = Namespace("kits_ns", description="kits_ns related operations")
 
+dashboard_table_ns = Namespace(
+    "dashboard_table", description="dashboard_table related operations"
+)
+
 
 kits_inventory_ns = Namespace(
     "kits_inventory_ns", description="kits_inventory_ns related operations"
@@ -293,6 +297,68 @@ class ClabKitPreparation(Resource):
         return {"message": "kit details updated successfully"}, 201
 
 
+class Dashboard(Resource):
+    @dashboard_table_ns.doc("dashboard details")
+    @jwt_required(fresh=True)
+    def get(resource):
+        response = {
+            "actual_sites": 0,
+            "planned_sites": 0,
+            "actual_countries": 0,
+            "planned_countries": 0,
+            "acutal_subjects_screened": 0,
+            "planned_subects_screened": 0,
+            "actual_samples_received": 0,
+            "planned_samples_received": 0,
+        }
+        kits = ClabKitPreparationModel.find_all()
+        for kit in kits:
+            screening_kit_details = kit.screening_kit_details
+            visit_kit_details = kit.visit_kit_details
+            for index in range(len(screening_kit_details)):
+                screening_kit_data = screening_kit_details[index]
+                response["planned_sites"] = response["planned_sites"] + 1
+                response["planned_countries"] = response["planned_countries"] + 1
+                response["planed_sample_received"] = (
+                    response["planned_sample_received"] + 1
+                )
+                if (
+                    "site_id" in screening_kit_data
+                    and screening_kit_data["site_id"] != ""
+                ):
+                    response["actual_sites"] = response["actual_sites"] + 1
+                    response["actual_countries"] = response["actual_countries"] + 1
+                if "patientId" in screening_kit_data:
+                    if (
+                        "collection" in screening_kit_data
+                        and screening_kit_data["collection"] == "Collected"
+                    ):
+                        response["actual_sample_received"] = (
+                            response["actual_sample_received"] + 1
+                        )
+
+            for index in range(len(visit_kit_details)):
+                visits = visit_kit_details[index]
+                for visit_kit_data in visits:
+                    response["planned_sites"] = response["planned_sites"] + 1
+                    response["planned_countries"] = response["planned_countries"] + 1
+                    response["planed_sample_received"] = (
+                        response["planned_sample_received"] + 1
+                    )
+                    if "site_id" in visit_kit_data and visit_kit_data["site_id"] != "":
+                        response["actual_sites"] = response["actual_sites"] + 1
+                        response["actual_countries"] = response["actual_countries"] + 1
+                    if "patientId" in visit_kit_data:
+                        if (
+                            "collection" in visit_kit_data
+                            and visit_kit_data["collection"] == "Collected"
+                        ):
+                            response["actual_sample_received"] = (
+                                response["actual_sample_received"] + 1
+                            )
+        return response, 200
+
+
 class KitsOperation(Resource):
     @kits_ns.expect(kits_ns_filters)
     @kits_ns.doc("get protocols by site id")
@@ -357,7 +423,6 @@ class KitsOperation(Resource):
             for variant in temp_variants:
                 if variant not in response["variants"]:
                     response["variants"].extend(temp_variants)
-
 
             if kit_type_filter and filters.get("kit_type") not in temp_variants:
                 continue
@@ -686,4 +751,3 @@ class KitsInventoryOperation(Resource):
                 ) or kit_type_filter == False:
                     response["data"].append(obj)
         return response, 200
-

@@ -79,6 +79,8 @@ from resources.clab_kit_preparation import (
     GetProtocolsBySiteId,
     KitsOperation,
     KitsInventoryOperation,
+    dashboard_table_ns,
+    Dashboard,
 )
 from resources.sample_ack import (
     AckclabKitProtocolActionsById,
@@ -107,13 +109,11 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
     os.environ.get("DB_DATABASE"),
 )
 
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_size': 20,
-    'pool_recycle': 120,
-    'pool_pre_ping': True,
-     'connect_args': {
-        'connect_timeout': 1000
-    }
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_size": 20,
+    "pool_recycle": 120,
+    "pool_pre_ping": True,
+    "connect_args": {"connect_timeout": 1000},
 }
 
 
@@ -122,7 +122,7 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=45)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(hours=24)
 app.config["JWT_SECRET_KEY"] = "J@f@rU5m@9"
-#app.config["SECRET_KEY"] = uuid.uuid4().hex
+# app.config["SECRET_KEY"] = uuid.uuid4().hex
 
 jwt = JWTManager(app)
 # migrate_db = SQLAlchemy(app)
@@ -196,16 +196,18 @@ def revoked_token_callback(jwt_headers, jwt_payload):
         401,
     )
 
+
 @app.after_request
 def after_request(response):
     # header = response.headers
     # header["Access-Control-Allow-Origin"] = "*"
     response.headers.add("Access-Control-Allow-Origin", "*")
-    #response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    # response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
     response.headers.add("Access-Control-Allow-Headers", "*")
-    #response.headers.add("Access-Control-Allow-Methods", "POST,PUT,DELETE,GET")
+    # response.headers.add("Access-Control-Allow-Methods", "POST,PUT,DELETE,GET")
     response.headers.add("Access-Control-Allow-Methods", "*")
     return response
+
 
 api.add_namespace(sponsors_ns)
 api.add_namespace(sponsor_ns)
@@ -231,7 +233,7 @@ api.add_namespace(sample_ack_ns)
 api.add_namespace(dashboard_ns)
 api.add_namespace(kits_ns)
 api.add_namespace(kits_inventory_ns)
-
+api.add_namespace(dashboard_table_ns)
 
 
 @app.before_first_request
@@ -240,7 +242,6 @@ def create_tables():
     ma.init_app(app)
     db.create_all()
     CreateDefaultUser()
-
 
 
 sponsor_ns.add_resource(Sponser, "")
@@ -277,6 +278,7 @@ clab_kit_preparation_ns.add_resource(
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
 kits_ns.add_resource(KitsOperation, "/<string:protocol_id>/<string:site_uuid>")
 kits_inventory_ns.add_resource(KitsInventoryOperation, "/<string:site_uuid>")
+dashboard_table_ns.add_resource(Dashboard, "")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
