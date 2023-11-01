@@ -297,7 +297,7 @@ class ClabKitPreparation(Resource):
         return {"message": "kit details updated successfully"}, 201
 
 
-class Dashboard(Resource):
+class DashboardTable(Resource):
     @dashboard_table_ns.doc("dashboard details")
     @jwt_required(fresh=True)
     def get(resource):
@@ -308,8 +308,8 @@ class Dashboard(Resource):
             "planned_countries": 0,
             "acutal_subjects_screened": 0,
             "planned_subects_screened": 0,
-            "actual_samples_received": 0,
-            "planned_samples_received": 0,
+            "actual_sample_received": 0,
+            "planned_sample_received": 0,
         }
         kits = ClabKitPreparationModel.find_all()
         for kit in kits:

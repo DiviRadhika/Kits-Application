@@ -80,7 +80,7 @@ from resources.clab_kit_preparation import (
     KitsOperation,
     KitsInventoryOperation,
     dashboard_table_ns,
-    Dashboard,
+    DashboardTable,
 )
 from resources.sample_ack import (
     AckclabKitProtocolActionsById,
@@ -278,7 +278,7 @@ clab_kit_preparation_ns.add_resource(
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
 kits_ns.add_resource(KitsOperation, "/<string:protocol_id>/<string:site_uuid>")
 kits_inventory_ns.add_resource(KitsInventoryOperation, "/<string:site_uuid>")
-dashboard_table_ns.add_resource(Dashboard, "")
+dashboard_table_ns.add_resource(DashboardTable, "")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")
