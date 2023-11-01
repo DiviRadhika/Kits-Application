@@ -326,7 +326,7 @@ class KitsOperation(Resource):
             "age": [],
             "gender": [],
             "patient_ids": [],
-            "varients": [],
+            "variants": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -336,16 +336,47 @@ class KitsOperation(Resource):
         for kit in kits:
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
+            cro_data = CroProtocolModel.get_by_id(kit.protocol_id)
+            if not cro_data:
+                continue
+            cp_visit_kit_details = VisitKitDetailsModel.find_by_protocol_id(cro_data.id)
+            meterial_details = cp_visit_kit_details.meterial_details
+            temp_variants = []
+            debug_info = {}
+            for midx in range(len(meterial_details)):
+                meterial_detail = meterial_details[midx]
+                mvariant = ""
+                if "kit_variant" in meterial_detail:
+                    mvariant = meterial_detail["kit_variant"]
+                temp_variants.append(mvariant)
+                if midx == 0:
+                    debug_info["screening_kit_variant"] = mvariant
+                else:
+                    debug_info["visit_" + str(midx - 1) + "kit_variant"] = mvariant
+
+            for variant in temp_variants:
+                if variant not in response["variants"]:
+                    response["variants"].extend(temp_variants)
+
+
+            if kit_type_filter and filters.get("kit_type") not in temp_variants:
+                continue
 
             if visit_filter == False:
                 for index in range(len(screening_kit_details)):
                     screening_kit_data = screening_kit_details[index]
                     if "site_id" in screening_kit_data:
                         if site_id == screening_kit_data["site_id"]:
-                            # d = dict((x, y) for x, y in screening_kit_data)
+                            screening_kit_data["kit_variant"] = debug_info[
+                                "screening_kit_variant"
+                            ]
                             screening_kit_data["description"] = "screening-" + str(
                                 index
                             )
+                            if kit_type_filter == True:
+                                variant = debug_info["screening_kit_variant"]
+                                if variant == "" or filters.get("kit_type") != variant:
+                                    continue
                             if patient_id_filter == True:
                                 if (
                                     "patientId" not in screening_kit_data
@@ -405,8 +436,18 @@ class KitsOperation(Resource):
                 for visit_kit_data in visits:
                     if "site_id" in visit_kit_data:
                         if site_id == visit_kit_data["site_id"]:
+                            visit_kit_data["kit_variant"] = debug_info[
+                                "visit_" + str(index) + "kit_variant"
+                            ]
                             # d = dict((x, y) for x, y in visit_kit_data)
                             visit_kit_data["description"] = visit_number
+                            if kit_type_filter == True:
+                                if (
+                                    visit_kit_data["kit_variant"] == ""
+                                    or filters.get("kit_type")
+                                    != visit_kit_data["kit_variant"]
+                                ):
+                                    continue
                             if patient_id_filter == True:
                                 if "patientId" not in visit_kit_data or visit_kit_data[
                                     "patientId"
@@ -473,7 +514,6 @@ class KitsInventoryOperation(Resource):
         response = {
             "data": [],
             "variants": [],
-            "variant_spec": [],
         }
         site_data = SiteDataModel.find_by_id(site_uuid)
         if not site_data:
@@ -487,10 +527,7 @@ class KitsInventoryOperation(Resource):
             cp_visit_kit_details = VisitKitDetailsModel.find_by_protocol_id(cro_data.id)
             meterial_details = cp_visit_kit_details.meterial_details
             temp_variants = []
-            debug_info = {
-                "protocol_id": str(cro_data.id),
-                "protocol_name": str(cro_data.protocol_id),
-            }
+            debug_info = {}
             for midx in range(len(meterial_details)):
                 meterial_detail = meterial_details[midx]
                 mvariant = ""
@@ -505,10 +542,6 @@ class KitsInventoryOperation(Resource):
             for variant in temp_variants:
                 if variant not in response["variants"]:
                     response["variants"].extend(temp_variants)
-            # ldebug_info = {str(cro_data.protocol_id): debug_info}
-            # for record in response["variant_spec"]:
-            #    if cro_data.protocol_id not in record.values():
-            response["variant_spec"].append(debug_info)
 
             if kit_type_filter and filters.get("kit_type") not in temp_variants:
                 continue
