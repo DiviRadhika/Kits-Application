@@ -53,6 +53,7 @@ export class NewkitsComponent implements OnInit {
   searchText: any
   isMenuOpen: boolean = false;
   reportsDetails: any;
+ 
  // 1 for ascending, -1 for descending
  public inventoryForm: FormGroup = new FormGroup({
   kit_type: new FormControl(""),

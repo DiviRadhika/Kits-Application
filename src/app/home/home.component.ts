@@ -176,12 +176,12 @@ export class HomeComponent implements OnInit {
           // icon: 'bx bxs-analyse',
           // expanded: false,
           // subItems: [
-            { label: 'Study Summary', link: '/home/cro/protocolGrid' },
-            { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
-            { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
-            { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
+            // { label: 'Study Summary', link: '/home/cro/protocolGrid' },
+            // { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
+            // { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
+            // { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
             { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
-            { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
+            // { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
           // ]
         // },
         // Other menu items for admin role...

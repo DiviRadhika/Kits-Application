@@ -294,9 +294,8 @@ export class SampleAcknowledgementComponent implements OnInit {
               if (statusontrol) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
                 if (vkDetailForRowAndTab.kitStatus)
-                console.log('k')
+              
                   if (vkDetailForRowAndTab.kitStatus === undefined || vkDetailForRowAndTab.kitStatus === null || vkDetailForRowAndTab.kitStatus === '') {
-                    console.log('v', this.kitCondition[0].value)
                     statusontrol.patchValue(this.kitCondition[0].value);
                 
                     statusontrol.enable()
