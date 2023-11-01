@@ -72,8 +72,11 @@ export class NewkitsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService) { }
   pageChange(event: number) {
+    this.page = 1;
+    
+    this.pageSize = 10;
     this.page = event;
-    // this.getsubjectDetails()
+    this.getInventorys()
   }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((data: any) => {
@@ -271,7 +274,7 @@ export class NewkitsComponent implements OnInit {
           this.inventoryfiltered = this.inventoryData.filter((item:any) => item.kit_variant === this.inventoryForm.controls['kit_type'].value);
           // console.log(val)
         }
-          this.totalCountR = this.inventoryData.length
+          this.totalCountR = this.inventoryfiltered.length
         },
         (err: any) => {
           this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
@@ -295,7 +298,7 @@ export class NewkitsComponent implements OnInit {
         console.log(data)
         this.variants = data.variants
         this.variants = Array.from(new Set(this.variants)); // Remove duplicates
-        this.totalCountR = this.inventoryData.length
+        this.totalCountR = this.inventoryfiltered.length
       },
       (err: any) => {
         this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
