@@ -1,10 +1,12 @@
-import { Component, NgModule } from '@angular/core';
+
+import { ChangeDetectorRef, Component, NgModule } from '@angular/core';
 import { ProtocolService } from './protocol-registration.service';
 import { Form, FormBuilder, FormControl, FormsModule, FormArray, FormGroup, UntypedFormArray, UntypedFormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { CrosService } from '../cros.service';
 import { AdminService } from 'src/app/applicationadmin/admin.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-protocol-registration',
   templateUrl: './protocol-registration.component.html',
@@ -12,7 +14,6 @@ import { MessageService } from 'primeng/api';
 })
 export class ProtocolRegistrationComponent {
   sponsorName: any;
-  buttonClickedFlags: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -62,8 +63,11 @@ export class ProtocolRegistrationComponent {
     private route: Router, private fb: FormBuilder,
     private adminService: AdminService,
     private croService: CrosService,
+    private cdr: ChangeDetectorRef,
     private formBuilder: FormBuilder,
-    private messageService: MessageService) { };
+    private messageService: MessageService) {
+    this.visitCountNamesPerCard = [];
+  };
   sponsers: Array<any> = [];
 
   crosList: Array<any> = [];
@@ -150,7 +154,7 @@ export class ProtocolRegistrationComponent {
 
     })
     const materialControls = this.ScreenMaterialKitForm.get('materialList').controls;
-    // const materialControls = this.ScreenMaterialKitForm.get('materialList').controls;
+
     this.selectedVisitsData = new Array(materialControls.length).fill(null);
 
 
@@ -168,18 +172,13 @@ export class ProtocolRegistrationComponent {
       });
     });
     this.VisitKitMatForm = this.formBuilder.group({
-
+      assignVisits: new FormControl(''),
       materialList: this.formBuilder.array([this.addVisitKitMatData()])
 
     })
 
   }
-  // Inside your component class
-  // Inside your component class
-  // Inside your component class
-  // Inside your component class
-  // Inside your component class
-  // Inside your component class
+
   latestDuplicateRow: number | null = null;
   showAlert = false;
 
@@ -214,6 +213,137 @@ export class ProtocolRegistrationComponent {
 
     return false;
   }
+  // Initialize an array to store alternate names for each tab or visit
+visitAlternateNamesPerCard: string[][] = [];
+uniqueAlternateNames: string[] = [];
+
+
+// Method to update the alternate name for a selected visit
+updateAlternateName(cardIndex: number, visitIndex: number, newName: any) {
+  // Check if the cardIndex and visitIndex are valid
+  if (
+    cardIndex >= 0 &&
+    cardIndex < this.cards.length &&
+    visitIndex >= 0 &&
+    visitIndex < this.visitAlternateNamesPerCard[cardIndex].length
+  ) {
+    const currentAlternateNames = this.visitAlternateNamesPerCard[cardIndex];
+    const existingNames = [...currentAlternateNames];
+
+    // Update the alternate name value in the array
+    currentAlternateNames[visitIndex] = newName.target.value;
+
+    // // Check if the new name is a duplicate across all cards
+    // if (this.uniqueAlternateNames.includes(newName.target.value)) {
+    //   // If it's a duplicate, show an alert and revert the change
+    //   // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Alternate name must be unique across all the visits.' });
+    //   alert('Alternate name must be unique across all the visits.');
+     
+    //   this.cdr.detectChanges()
+    //   currentAlternateNames[visitIndex] = existingNames[visitIndex];
+    //   currentAlternateNames[visitIndex] = '';
+    // } else {
+    //   // Update the list of unique alternate names
+      
+    // }
+    this.uniqueAlternateNames = Array.from(new Set(this.visitAlternateNamesPerCard.flat()));
+    console.log(this.visitAlternateNamesPerCard);
+  }
+}
+
+
+
+// Method to get the alternate name for a selected visit
+getAlternateName(cardIndex: number, visitIndex: number): string {
+  // Check if the cardIndex and visitIndex are valid
+  if (
+    cardIndex >= 0 &&
+    cardIndex < this.cards.length &&
+    visitIndex >= 0 &&
+    visitIndex < this.visitAlternateNamesPerCard[cardIndex].length
+  ) {
+    // Retrieve the alternate name value from the array
+    return this.visitAlternateNamesPerCard[cardIndex][visitIndex];
+  }
+
+  // Return an empty string or handle the error as needed
+  return '';
+}
+
+ 
+  visitAlternateNames: string[][] = [];
+  selectedVisitCountsAcrossCards: string[] = [];
+  visitCountNamesPerCard: string[][] = [];
+ 
+
+  onVisitCountSelected(cardIndex: number, selectedValues: string[]): boolean {
+    // Check if any of the selected values already exist in this card
+    const existingValues = this.selectedVisitCountsPerCard[cardIndex] || [];
+  
+    // Identify newly selected values (not present in existingValues)
+    const newValues = selectedValues.filter(value => !existingValues.includes(value));
+  
+    // Identify values that were deselected
+    const deselectedValues = existingValues.filter(value => !selectedValues.includes(value));
+  
+    if (newValues.length === 0 && deselectedValues.length === 0) {
+      // No new values were selected or deselected, so nothing needs to be updated
+      return true;
+    }
+    const duplicateValues = selectedValues.filter((value) =>
+    this.selectedVisitCountsPerCard.some((cardCounts, index) => index !== cardIndex && cardCounts.includes(value))
+  );
+
+  if (duplicateValues.length > 0) {
+    // Some of the selected values are already selected in another card, handle the error as needed
+    alert('This Visit is selected in another Variant');
+    // this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'This Visit is selected in another Variant.' });
+    // Optionally, you can clear the selection for the current card if there are duplicates
+    const control = this.cards[cardIndex].form.get('kitVarient');
+    control?.setValue(control.value.filter((value: any) => !duplicateValues.includes(value)));
+    return false;
+  }
+    // Remove rows for deselected values
+    if (deselectedValues.length > 0) {
+      for (const deselectedValue of deselectedValues) {
+        const indexToRemove = this.selectedVisitCountsPerCard[cardIndex].indexOf(deselectedValue);
+        if (indexToRemove !== -1) {
+          this.selectedVisitCountsPerCard[cardIndex].splice(indexToRemove, 1);
+          this.visitAlternateNamesPerCard[cardIndex].splice(indexToRemove, 1);
+          const cardForm = this.cards[cardIndex].form as FormGroup;
+          const visitAlternateNamesArray = cardForm.get('visitAlternateNames') as FormArray;
+          visitAlternateNamesArray.removeAt(indexToRemove);
+        }
+      }
+    }
+  
+    // Add newly selected values to the selected values for this card
+    this.selectedVisitCountsPerCard[cardIndex] = existingValues.concat(newValues);
+  
+    // Create a new alternate name array for each selected visit count
+    const alternateNames: string[] = newValues.map(() => '');
+  
+    // If there are existing alternate names, preserve them while adding new ones
+    if (this.visitAlternateNamesPerCard[cardIndex]) {
+      this.visitAlternateNamesPerCard[cardIndex].push(...alternateNames);
+    } else {
+      this.visitAlternateNamesPerCard[cardIndex] = alternateNames;
+    }
+  
+    // Create new alternate name form controls for each selected visit count
+    const alternateNameControls: FormControl[] = alternateNames.map((name) => new FormControl(name));
+  
+    // Get the card's form group
+    const cardForm = this.cards[cardIndex].form as FormGroup;
+  
+    // Initialize the 'visitAlternateNames' FormArray with alternate name controls
+    cardForm.setControl('visitAlternateNames', new FormArray(alternateNameControls));
+  
+    return true;
+  }
+  
+
+
 
 
 
@@ -320,39 +450,13 @@ export class ProtocolRegistrationComponent {
   materialvalues() {
     this.displayva = false
     this.testDisplamaterials = true;
-    // this.multipleTestsv = [];
-    // if (this.protocolForm.controls['labTestValuev'].value === '' || this.protocolForm.controls['labTestValuev'].value === undefined ||
-    // this.protocolForm.controls['labTestValuev'].value === null) {
-    //   this.multipleTestsv = [];
-
-    // } else {
-    //   this.protocolForm.controls['labTestValuev'].value.forEach((element: any) => {
-
-    //   this.testDisplayv = true;
-    //   this.multipleTestsvId.push(element.lab_id);
-    //     this.multipleTestsv.push(element.name);
-    //     this.displayv = false
-    //   });
-    // }
+  
 
   }
   labValuesv() {
     this.displayv = false
     this.testDisplayv = true;
-    // this.multipleTestsv = [];
-    // if (this.protocolForm.controls['labTestValuev'].value === '' || this.protocolForm.controls['labTestValuev'].value === undefined ||
-    // this.protocolForm.controls['labTestValuev'].value === null) {
-    //   this.multipleTestsv = [];
-
-    // } else {
-    //   this.protocolForm.controls['labTestValuev'].value.forEach((element: any) => {
-
-    //   this.testDisplayv = true;
-    //   this.multipleTestsvId.push(element.lab_id);
-    //     this.multipleTestsv.push(element.name);
-    //     this.displayv = false
-    //   });
-    // }
+    
 
   }
   get customerAddressDTOList() {
@@ -363,6 +467,10 @@ export class ProtocolRegistrationComponent {
   }
   dialogv() {
     this.displayv = true
+  }
+  dialogvisitsv: boolean = false
+  dialogvisits() {
+    this.dialogvisitsv = true
   }
 
   removeMatScreenKit(j: number) {
@@ -377,14 +485,7 @@ export class ProtocolRegistrationComponent {
   }
 
   showv() {
-    // this.tabnum = tab
-    // this.listTabs = []; 
-    // for (let i = 0; i <= tab; i++)
-    //  { this.listTabs.push(`Item ${i}`); 
-    // //  this.addVisitKit()
-
-    // }
-    // this.addVisitKit()
+    
     this.screening = false;
     this.visit = true
   }
@@ -402,7 +503,6 @@ export class ProtocolRegistrationComponent {
     this.valueVariant = this.protocolForm.controls['kit_variant_count'].value;
     for (let i = 1; i <= this.valueVariant; i++) {
       this.addCard();
-     
     }
 
     this.varientValues = []
@@ -590,93 +690,83 @@ export class ProtocolRegistrationComponent {
     });
 
   }
-
   toTitleCase(str: string): string {
 
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   }
+ 
+
   SubmitData() {
-
-
-
     const errorMessages = [];
     const errorMessagesalter = [];
-    const formData: { selectedLabTests: any[], visits: any[] }[] = [];
-    const firstCardData: { selectedLabTests: any[], visits: any[] } = {
-      selectedLabTests: [],
-      visits: []
-    };
-    const remainingCardData: { selectedLabTests: any[], visits: any[] }[] = [];
+    const formData: { selectedLabTests: any[], materials: any[], alternateNames: any[], variant:any }[] = [];
+ 
     for (const [index, card] of this.cards.entries()) {
       const cardForm = card.form;
+      const kitVarient = cardForm.value.kitVarient;
+     
+
+    
+      if (!kitVarient) {
+        errorMessagesalter.push(`Please select Kit Variant in Card ${index + 1}`);
+      }
       const rowsArray = cardForm.get('visits') as FormArray;
-      const cardData = {
+      const cardData = { 
         selectedLabTests: this.selectedLabTests[this.cards.indexOf(card)] as any[],
-        visits: [] as any[]
+        visits: cardForm.value.kitVarient,
+        materials: [] as any[],
+        alternateNames: [],
+        variant : 'Variant'+ (index+1),
+        
       };
       if (cardData.selectedLabTests.length === 0) {
         errorMessages.push(`Please select lab tests in All visits`);
       }
       else {
       }
+      const alternateNamesForCard: string[] = [];
       for (const row of rowsArray.controls) {
         const rowForm = row as FormGroup;
-        cardData.visits.push(rowForm.value);
+       
+        cardData.materials.push(rowForm.value);
       }
-
       formData.push(cardData);
+      for (let index = 0; index < formData.length; index++) {
+        if (index < this.visitAlternateNamesPerCard.length) {
+          const alternateNamesForCard = this.visitAlternateNamesPerCard[index];
+          formData[index].alternateNames = alternateNamesForCard;
 
-      // for (let index = 0; index < this.rowCollectedData.length; index++) {
-      //   if (index < formData.length) {
-      //     this.outerObj = this.rowCollectedData[index];
-      //     const innerObj = formData[index];
+        }
 
-      //     // Merge selectedLabTests arrays
-      //     this.outerObj.selectedLabTests.push(...innerObj.selectedLabTests);
-
-      //     // Merge visits arrays
-      //     this.outerObj.visits.push(...innerObj.visits);
-
-      //   }
-
-      // }
-      // console.log(this.outerObj)
-
-
-      // if (index === 0) {
-      //   firstCardData.selectedLabTests = cardData.selectedLabTests;
-      //   firstCardData.visits = cardData.visits;
-      // } else {
-      //   remainingCardData.push(cardData);
-      // }
-
+      }
+  
     }
 
-    if (errorMessages.length > 0) {
+
+
+    console.log(formData)
+   
+    if (errorMessagesalter.length > 0) {
+     
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Kit Varients in All Variants' });
+    } 
+
+    else if (errorMessages.length > 0) {
       const combinedErrorMessage = errorMessages.join('\n');
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests in All Variants' });
     }
-    // else if (errorMessagesalter.length > 0) {
-    //   const combinedErrorMessage = errorMessagesalter.join('\n');
-    //   this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please give Alternate Week Name in All visits' });
-    // }
+
+   
     else if (this.protocolForm.controls['avant_sample_size'].value > this.protocolForm.controls['global_sample_size'].value) {
       this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Avant Sante Sample Size should be less than Global Sample Size' });
 
     }
-    // else if (this.kitCountval === '') {
-    //   this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Enter Visit Kit Count' });
-
-    // }
-
+    
 
     else {
 
       if (this.protocolForm.invalid) {
-        // if (this.protocolForm.controls['labTestValue'].value === undefined || this.protocolForm.controls['labTestValue'].value === '' ||
-        //   this.protocolForm.controls['labTestValue'].value === null) {
-        //   this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Lab Tests In Screening' });
-        // }
+        
 
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Fill All Mandatory Fields' });
         Object.keys(this.protocolForm.controls).forEach((key) => {
@@ -685,35 +775,33 @@ export class ProtocolRegistrationComponent {
 
       }
       else {
-        const sc = this.ScreenMaterialKitForm.value.materialList
+        // const sc = this.ScreenMaterialKitForm.value.materialList
 
 
-        for (let rowIndex = 0; rowIndex < this.rowCollectedData.length; rowIndex++) {
-          const rowArray = this.rowCollectedData[rowIndex];
+        // for (let rowIndex = 0; rowIndex < this.rowCollectedData.length; rowIndex++) {
+        //   const rowArray = this.rowCollectedData[rowIndex];
 
-          for (let innerIndex = 0; innerIndex < rowArray.length; innerIndex++) {
-            const innerObject = rowArray[innerIndex];
+        //   for (let innerIndex = 0; innerIndex < rowArray.length; innerIndex++) {
+        //     const innerObject = rowArray[innerIndex];
 
-            const matchingSC = sc.find((scObj: any) =>
-              scObj.variant === innerObject.variant
-            );
+        //     const matchingSC = sc.find((scObj: any) =>
+        //       scObj.variant === innerObject.variant
+        //     );
 
-            if (matchingSC) {
-              if (!matchingSC.rowCollectedData) {
-                matchingSC.rowCollectedData = [];
-              }
-              matchingSC.rowCollectedData.push(innerObject);
-            }
-          }
-        }
-        for (let index = 0; index < sc.length; index++) {
-          if (index < formData.length) {
-            sc[index].selectedLabTests = formData[index].selectedLabTests;
-            sc[index].materials = formData[index].visits;
-          }
-        }
-
-
+        //     if (matchingSC) {
+        //       if (!matchingSC.rowCollectedData) {
+        //         matchingSC.rowCollectedData = [];
+        //       }
+        //       matchingSC.rowCollectedData.push(innerObject);
+        //     }
+        //   }
+        // }
+        // for (let index = 0; index < sc.length; index++) {
+        //   if (index < formData.length) {
+        //     sc[index].selectedLabTests = formData[index].selectedLabTests;
+        //     sc[index].materials = formData[index].visits;
+        //   }
+        // }
         if (this.protocolForm.controls['selected_protocol_name'].value) {
           this.protocolForm.controls['selected_protocol_name'].setValue(this.toTitleCase(this.protocolForm.controls['selected_protocol_name'].value));
         }
@@ -745,19 +833,19 @@ export class ProtocolRegistrationComponent {
               "meterial_details": ''
             }
           ],
-          "variants": sc
+          "variants": formData
 
         }
 
 
-
+console.log(data)
 
 
         this.protocolService.postProtocol(data).subscribe(
           (data: any) => {
             this.route.navigate(['home/cro/protocolGrid'])
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Study Added Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Protocol Created Successfully' });
 
             }, 1000);
 
@@ -830,6 +918,11 @@ export class ProtocolRegistrationComponent {
 
     return [];
   }
+  selectedVisitCountsPerCard: string[][] = [];
+
+
+
+
 
   onVisitKitMatChange(evt: any, index: any) {
     this.selectedValuev = evt.target.value;
@@ -853,28 +946,18 @@ export class ProtocolRegistrationComponent {
   }
 
   cards: { form: FormGroup }[] = [];
-  // addMaterialClicked(cardIndex: number) {
-  //   // Check if the button has already been clicked for this card
-  //   if (!this.buttonClickedFlags[cardIndex]) {
-  //     // Perform the action for the first click (e.g., disable button)
-  //     this.buttonClickedFlags[cardIndex] = true;
-  //     // Add your additional logic here
-  //   }
-  // }
+
 
   addCard() {
-    // this.cards.forEach(() => {
-    //   this.buttonClickedFlags.push(false);
-    // });
-    const initialRowsCount = this.cards.length + 1; // Calculate the desired number of initial rows based on index
+    const initialRowsCount = this.cards.length + 1;
     const rowsArray = new FormArray([]);
     const cardForm = this.fb.group({
       kitVarient: new FormControl(""),
-      visits: rowsArray
+      visits: rowsArray,
+      visitAlternateNames: this.fb.control('') // Add this line to initialize the visitAlternateNames control
     });
     this.cards.push({ form: cardForm });
     this.selectedLabTests.push([]);
-    this.alternatenames.push([])
   }
 
   getVariant(val: any, tab: any) {
@@ -974,7 +1057,6 @@ export class ProtocolRegistrationComponent {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.push(this.createRow());
   }
-
   deleteRow(cardIndex: number, rowIndex: number) {
     const cardFormArray = this.getRowsFormArray(cardIndex);
     cardFormArray.removeAt(rowIndex);
@@ -1013,18 +1095,7 @@ export class ProtocolRegistrationComponent {
     input.value = numericValue;
 
   }
-  // ValidateScreening(input: any) {
-  //   let inputValue = input.value.trim();
-  //   //Remove non-numeric charecters
-  //   let numericValue = inputValue.replace(/\D/g, '');
-
-  //   if (numericValue.length > 5) {
-  //     numericValue = numericValue.slice(0, 5);
-  //   }
-
-  //   input.value = numericValue;
-
-  // }
+ 
   validateMobileNumber(input: any, phone: any) {
     let inputValue = input.value.trim();
 
@@ -1045,14 +1116,6 @@ export class ProtocolRegistrationComponent {
     input.value = numericValue;
 
   }
-
-
-
-
-
-
-
-
 
 
 

@@ -89,7 +89,8 @@ export class SampleAcknowledgementComponent implements OnInit {
   preprationData = [{ name: 'Pending', value: 'Pending' },
   { name: 'Received', value: 'Received' },
   ]
-  kitCondition = [{ name: 'Good', value: 'Good' },
+  kitCondition = [{ name: 'Select', value: 'Select' },
+  { name: 'Good', value: 'Good' },
   { name: 'Bad', value: 'Bad' }
   
   ]
@@ -290,22 +291,7 @@ export class SampleAcknowledgementComponent implements OnInit {
                 collection.patchValue(vkDetailForRowAndTab.collection);
 
               }
-              const statusontrol = visitKitListArray.at(j).get('kitStatus');
-              if (statusontrol) {
-                const vkDetailForRowAndTab = this.vkDetails[i][j];
-                if (vkDetailForRowAndTab.kitStatus)
-              
-                  if (vkDetailForRowAndTab.kitStatus === undefined || vkDetailForRowAndTab.kitStatus === null || vkDetailForRowAndTab.kitStatus === '') {
-                    statusontrol.patchValue(this.kitCondition[0].value);
-                
-                    statusontrol.enable()
-                  }
-                  else {
-                    statusontrol.patchValue(vkDetailForRowAndTab.kitStatus);
-                    statusontrol.enable()
-                  }
-                  statusontrol.enable()
-                }
+           
               const ackControl = visitKitListArray.at(j).get('acknowledgement');
               if (ackControl) {
                 const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -320,6 +306,22 @@ export class SampleAcknowledgementComponent implements OnInit {
                   }
                   ackControl.enable()
                 }
+                const statusontrol = visitKitListArray.at(j).get('kitStatus');
+
+                if (statusontrol) {
+                  const vkDetailForRowAndTab = this.vkDetails[i][j];
+                  if (vkDetailForRowAndTab.kitStatus)
+                 console.log()
+                    if (vkDetailForRowAndTab.kitStatus === undefined || vkDetailForRowAndTab.kitStatus === null || vkDetailForRowAndTab.kitStatus === '') {
+                      statusontrol.patchValue(this.kitCondition[0].value);
+                      statusontrol.enable()
+                    }
+                    else {
+                      statusontrol.patchValue(vkDetailForRowAndTab.kitStatus);
+                      statusontrol.enable()
+                    }
+                    statusontrol.enable()
+                  }
                 const remarksControl = visitKitListArray.at(j).get('remarks');
                 if (remarksControl) {
                   const vkDetailForRowAndTab = this.vkDetails[i][j];
@@ -408,7 +410,7 @@ export class SampleAcknowledgementComponent implements OnInit {
       ckitId: [''],
       expiryDate: [''],
       requistionNumber: [''],
-      kitStatus:[''],
+      kitStatus:['Select'],
       patientId: [''],
       site_id: [''],
       collection: [''],

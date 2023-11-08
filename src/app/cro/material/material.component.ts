@@ -12,6 +12,8 @@ import { ProtocolService } from '../protocol-registration/protocol-registration.
 export class MaterialComponent implements OnInit {
   stackedData2: any
   subjectDetails: any;
+  protocols: Array<any> = [];
+  enablestudy: boolean = false;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -58,7 +60,7 @@ export class MaterialComponent implements OnInit {
   basicData: any;
   basicData2: any;
   basicOptions: any;
-  constructor(private fb: FormBuilder, private admin: AdminService, private protocol:ProtocolService) { }
+  constructor(private fb: FormBuilder, private protocolService: ProtocolService, private admin: AdminService, private protocol:ProtocolService) { }
 
   ngOnInit() {
     this.getsubjectDetails()
@@ -373,33 +375,25 @@ export class MaterialComponent implements OnInit {
       this.sponsorcenable = false;
       this.labcenable = false;
       this.sponserfields = false;
+      this.protocolService.getProtocol().subscribe((protocols) => {
+        this.ProtoData(protocols);
+      });
+  
     }
 
   }
-  dateselect(val: any) {
-    console.log(val);
-    console.log(val + 1);
-
-
+  ProtoData(Protocols: any) {
+    Protocols.forEach((protocol: any) => {
+      this.protocols.push(protocol);
+    });
   }
-  // function bringCardToTop(cardClass:string):void{
-  //   const
-  // }
+  getdashboardDetails(e: any){
+    this.enablestudy = true
+    console.log(e.target.value)
+  }
 
   getsubjectDetails() {
 
-    // this.admin.getInventory().subscribe(
-    //   (data: any) => {
-    //     console.log(data)
-
-    //     this.subjectDetails = data
-    //     console.log(data)
-
-    //   },
-    //   (err: any) => {
-    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-    //   }
-    // )
     this.protocol.dashboardtable().subscribe(
       (data: any) => {
         console.log(data)

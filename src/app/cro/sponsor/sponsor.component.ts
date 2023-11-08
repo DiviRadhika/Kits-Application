@@ -336,10 +336,7 @@ export class SponsorComponent implements OnInit {
         "email": this.sponsorForm.controls['email'].value,
         "website": this.sponsorForm.controls['website'].value,
         "user_id": sessionStorage.getItem('userid'),
-
-
-
-
+        
 
       }
 

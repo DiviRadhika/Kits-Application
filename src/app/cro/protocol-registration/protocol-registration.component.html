@@ -36,8 +36,7 @@
                     <label for="formrow-firstname-input" class="form-label">Sponsor Study ID<label
                         style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
-                      formControlName="selected_protocol_id" class="form-control" id=""
-                      placeholder="Enter Sponsor Study ID"
+                      formControlName="selected_protocol_id" class="form-control" id="" placeholder="Enter Study ID"
                       [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
                   </div>
@@ -79,7 +78,7 @@
                     <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()"
                       class="form-select form-control"
                       [class.custom-invalid]="shouldShowRequired('selected_sponsor_id') && protocolForm.get('selected_sponsor_id')?.touched">
-                      <option selected value="">Select Sponsor ID / Name</option>
+                      <option selected value="">Select Sponsor ID</option>
                       <option *ngFor="let sponser of sponsers" [value]="sponser.sponsor_id">
                         {{ sponser.sponsor_code + ' - ' + sponser.sponsor_name }}
                       </option>
@@ -136,21 +135,21 @@
 
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">No.of Screenings<label
+                    <label for="formrow-firstname-input" class="form-label">No.of Screens<label
                         style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                       (input)="validateMobileNumber($event.target, 'office')" class="form-control" id=""
-                      placeholder="Enter No.of Screenings"
+                      placeholder="Enter No.of Screens"
                       [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screening Kit Count<label
+                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count<label
                         style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
-                      class="form-control" id="" placeholder="Enter Screening Kit Count"
+                      class="form-control" id="" placeholder="Enter Screen Kit Count"
                       [class.custom-invalid]="shouldShowRequired('selected_skit_count') && protocolForm.get('selected_skit_count')?.touched">
                   </div>
                 </div>
@@ -178,7 +177,7 @@
 
           </div>
         </form>
-        <div *ngIf="visible">
+        <div *ngIf="visible" style="margin-top:-5%">
           <p-tabView>
 
 
@@ -192,30 +191,37 @@
                     <button type="button" (click)="dialogv()" class="btn btn-primary  waves-light r-blue">Select Lab
                       Tests</button>
                   </div>
-                  <!-- <div class="col-md-2 mb-2" style="margin-left: -11%">
-                    <button type="button" (click)="dialogva()" class="btn btn-primary  waves-light r-blue">Select Materials
+                  <div class="col-md-3 mb-3" style="margin-left: -11%">
+                    <button type="button" (click)="dialogvisits()" class="btn btn-primary  waves-light r-blue">Select Visits
                       </button>
-                  </div> -->
-                  <div class="col-md-2 mb-3" align="right" style="margin-left: -11%;">
+                  </div>
+                  <div class="col-md-2 mb-3"  style="margin-left: -14%;">
                     <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
                     </button>
                   </div>
-                  <!-- Modify the "Add Material" button to call the addMaterialClicked function -->
-                  <!-- <div class="col-md-2 mb-3" align="right" style="margin-left: -11%;">
-                    <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addMaterialClicked(i)"
-                      [disabled]="buttonClickedFlags[i]">Add Material
-                    </button>
-                  </div> -->
+
+
+                  
+
 
                   <p-dialog [class.overlay]="displayv" (onShow)="disableScroll()" (onHide)="enableScroll()"
                     header="Select Lab Tests" [(visible)]="displayv">
                     <div class="row">
                       <div class="col-md-1 mb-3"></div>
                       <div class="col-md-8 mb-3">
-                        <p-multiSelect [options]="matList" [(ngModel)]="selectedLabTests[i]" class="font-size-12"
+                        <p-multiSelect [options]="matList" [(ngModel)]="selectedLabTests[i]"
                           defaultLabel="Select Lab Tests" optionLabel="name" optionValue="name"></p-multiSelect>
 
                       </div>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+
                       <div class="col-md-3 mb-3">
                         <button style="margin-left:-27%" type="button" align="right" (click)="labValuesv()"
                           class="btn btn-primary r-blue">Add Lab Tests</button>
@@ -228,7 +234,7 @@
                 </div>
 
                 <!-- <div class="col-md-3 mt-2 mb-3"></div> -->
-                <div class="col-md-3 mt-2 mb-3 card">
+                <div class="col-md-3 mt-2 mb-3">
                   <h5 *ngIf="testDisplayv"> &nbsp;&nbsp;Selected Lab Tests </h5>
                   <h6 style="color: black" *ngFor="let labTest of selectedLabTests[i]  let k = index">
                     &nbsp;&nbsp;{{k+1}}.&nbsp;&nbsp;{{ labTest }}</h6>
@@ -238,9 +244,75 @@
                 </div>
                 <form [formGroup]="card.form">
 
+                  <p-dialog [class.overlay]="dialogvisitsv" [style]="{width: '40vw'}" (onShow)="disableScroll()"
+                    (onHide)="enableScroll()" header="Select Visits" [(visible)]="dialogvisitsv">
+                    <div class="row">
+                      <div class="col-md-1 mb-3"></div>
+                      <div class="col-md-8 mb-3">
+                        <p-multiSelect [options]="visitcount" formControlName="kitVarient" defaultLabel="Select Visits"
+                          (onChange)="onVisitCountSelected(i, $event.value)" optionLabel="value"
+                          optionValue="value"></p-multiSelect>
+                        <!-- <div class="error-message" *ngIf="onVisitCountSelected(i, $event.target.value)">
+                      </div> -->
+                      </div>
+                      <!-- <div class="col-md-3 mb-3">
+                        <button style="margin-left:-27%" type="button" align="right" 
+                          class="btn btn-primary r-blue">Add Visits</button>
+                      </div> -->
+                      <div *ngIf="selectedVisitCountsPerCard[i] && selectedVisitCountsPerCard[i].length > 0">
 
+
+                        <div class="row">
+                          <div class="col-md-1 mb-3"></div>
+                          <div class="col-md-6 mb-3">
+                            <table id="datatable"
+                              class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                              role="grid" aria-describedby="datatable_info" style="width: 1182px;">
+                              <thead>
+                                <tr role="row">
+                                  <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                    style="width: 143.2px;" aria-sort="ascending"
+                                    aria-label="Code: activate to sort column descending">
+                                    Selected Visit</th>
+                                  <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                    style="width: 200.2px;" aria-label="Name: activate to sort column ascending">
+                                    Assign Alternate Name</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let value of selectedVisitCountsPerCard[i]; let j = index">
+                                  <td>{{ value }}</td>
+                                  <td>
+                                    <!-- Input field for updating alternate name -->
+                                    <input type="text" [value]="getAlternateName(i, j)"
+                                      (blur)="updateAlternateName(i, j, $event)" />
+                                  </td>
+                                </tr>
+
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+
+
+
+                      </div>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+
+
+                    </div>
+                  </p-dialog>
                   <div formArrayName="visits">
-                    <table class="table table-striped mb-0 font-size-12">
+                    <table class="table table-striped mb-0">
                       <thead Style="background:#EEE">
                         <tr>
                           <th>Material</th>
@@ -249,7 +321,6 @@
 
                           <th>Frozen at Site</th>
                           <th>Image</th>
-                          <!-- <th>Add Row</th> -->
                           <th>Delete</th>
                         </tr>
                       </thead>
@@ -266,7 +337,7 @@
                           </th>
                           <td>
                             <select formControlName="size" class="form-select form-control">
-                              <option selected value="">Select Size</option>
+                              <option selected value="">Select SiZe</option>
                               <option *ngFor="let size of getSizesv(i, j)" [value]="size">{{ size }}</option>
                             </select>
 
@@ -287,18 +358,9 @@
                             <img [src]="row.get('image')?.value" width="30" height="30" *ngIf="row.get('image')?.value"
                               alt="Material Image" />
                           </td>
-                          <!-- <td>
-                            <button type="button" (click)="addRow1(i)" class="btn btn-primary ml-3 mt-0">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-plus-circle-primary" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path
-                                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                              </svg></button>
 
-                          </td> -->
                           <td>
-                            <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-0">
+                            <button type="button" (click)="deleteRow(i, j)" class="btn btn-danger ml-3 mt-2">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path
@@ -308,8 +370,6 @@
                               </svg></button>
 
                           </td>
-
-
                       </tbody>
                     </table>
 
@@ -321,101 +381,7 @@
 
               <br>
             </p-tabPanel>
-            <div *ngIf='variantsTab' class="row">
 
-
-              <div class="col-md-8 mb-3"></div>
-
-              <div class="col-md-12 mb-3">
-                <p-dialog header="Assign Week Name for '{{ variant }}'" [(visible)]="display" [modal]="true">
-
-                  <table class="table table-striped mb-0 font-size-12">
-                    <thead>
-                      <tr>
-                        <th>Visit Name</th>
-                        <th>Alternate Week Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let data of selectedVisitsAsObjects; let i = index">
-                        <td class="hidden-column">{{ data.variant }}</td>
-                        <td class="hidden-column">{{ data.row }}</td>
-                        <td>{{ data.key }}</td>
-                        <td>
-                          <input type="text" [(ngModel)]="data.name" placeholder="Enter Name">
-                        </td>
-
-                      </tr>
-                    </tbody>
-                  </table>
-                  <button type="button" style="float: right;" class="btn btn-primary"
-                    (click)="collectDataAndClose()">Update Names</button>
-                </p-dialog>
-
-                <div class="table-responsive" [formGroup]="ScreenMaterialKitForm">
-
-
-                  <table class="table table-striped mb-0 font-size-12" formArrayName="materialList">
-                    <thead Style="background:#EEE">
-                      <tr>
-                        <th>Variants</th>
-                        <th>Assign Visits</th>
-                        <th>Assign Week Names</th>
-
-                      </tr>
-                    </thead>
-
-                    <tbody>
-
-                      <tr [formGroupName]="j" *ngFor="
-                          let item of ScreenMaterialKitForm.get('materialList')
-                            .controls;
-                          let j = index
-                        ">
-
-                        <td>
-                          <input autocomplete="off" type="text" placeholder="Enter Variant" formControlName="variant"
-                            class="form-control" value="" [disabled]="true" readonly />
-
-                        </td>
-                        <th scope="row">
-                          <div style="position: relative; overflow: visible;">
-                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits"
-                              defaultLabel="Select Visits" optionLabel="value" optionValue="value"
-                              (onPanelHide)="openUploadDialog(j)"
-                              [panelStyle]="{ maxHeight: '200px', overflow: 'auto', position: 'absolute', zIndex: '9999' }">
-                            </p-multiSelect>
-                          </div>
-                          <!-- <p-multiSelect [options]="visitcount" [style]="{ width: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)" [panelStyle]="{ maxHeight: '200px', overflow: 'auto' }">
-                          </p-multiSelect> -->
-                          <!-- <div style="width: 300px; overflow-x: auto;">
-                            <p-multiSelect [options]="visitcount" [style]="{ width: '100%', height: '100%' }" formControlName="visits" defaultLabel="Select Visits" optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
-                            </p-multiSelect>
-                          </div> -->
-
-                          <!-- <p-multiSelect [options]="visitcount" [style]="{width: '100%', height: '100%'}" formControlName="visits" defaultLabel="Select Visits"
-                            optionLabel="value" optionValue="value" (onPanelHide)="openUploadDialog(j)">
-                          </p-multiSelect> -->
-                          <div class="error-message" *ngIf="hasDuplicateSelection(j)">
-                            <!-- Error message will be displayed through the alert -->
-                          </div>
-                        </th>
-
-                        <td>
-                          <button class="text-center" type="button" class="md btn btn-warning r-blue"
-                            style="height: 40px" (click)="openUploadDialog(j)">Assign Names
-                          </button>
-                        </td>
-
-
-                      </tr>
-
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
 
             <div class="col-md-12 mb-3" align="right">
               <div class="mb-2 text-right" width="100%">
@@ -441,7 +407,7 @@
   <footer class="footer" style="position: fixed;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6">{{getCurrentYear()}} © ROBOXA</div>
+        <div class="col-sm-6">{{getCurrentYear()}} © Roboxa</div>
       </div>
     </div>
   </footer>
