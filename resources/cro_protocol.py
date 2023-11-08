@@ -229,7 +229,6 @@ class CroProtocol(Resource):
             visit_kit_details = request_json["visit_kit_details"]
             variants_json = request_json['variants']
             total_visits = []
-            #import pdb; pdb.set_trace()
             for variant_json in variants_json:
                 total_visits.extend(variant_json['visits'])
             total_visits = sorted(total_visits)
@@ -246,14 +245,21 @@ class CroProtocol(Resource):
                                 mdetails['kit_variant'] = variant_json['variant']
                             if 'materials' in variant_json:
                                 mdetails['visits'] = variant_json['materials']
+
+                            visit_idx = variant_json['visits'].index(total_visit)
+
+                            if len(variant_json['alternateNames']) > visit_idx:
+                                mdetails['alternate_names'] = variant_json['alternateNames'][visit_idx]
+                            else:
+                                mdetails['alternate_names'] = ""
                             
-                            rowCollectedData = []
+                            '''rowCollectedData = []
                             if 'rowCollectedData' in variant_json:
                                 rowCollectedData =  variant_json['rowCollectedData']
                             
                             for rowData in rowCollectedData:
                                 if total_visit == rowData['selectedVisit']:
-                                    mdetails['alternate_names'] = rowData['name']
+                                    mdetails['alternate_names'] = rowData['name']'''
                             meterial_details.append(mdetails)
                 visit_item_json = {
                     "protocol_id": cro_protocol_id,
