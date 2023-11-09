@@ -156,17 +156,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div *ngIf="sponsor" class="col-md-3">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor Name</label>
-                    <select formControlName="sId" class="form-select form-control">
-                      <option value="">Select Sponsor Name</option>
-                      <option *ngFor="let sponser of sponsorDetails" [value]="sponser.sponsor_id">
-                        {{ sponser.sponsor_name }}
-                      </option>
-                    </select>
-                  </div>
-                </div> -->
+                
                 <div *ngIf="sponsor" class="col-md-3">
                   <div class="mb-3">
                     <label for="formrow-firstname-input" class="form-label">Sponsor Name</label>
@@ -202,7 +192,7 @@
 
                   </div>
                 </div>
-
+              
 
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                   <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
@@ -211,6 +201,59 @@
                     class="btn btn-primary">Submit</button>
                 </div>
               </div>
+              <div class="row" *ngIf="view">
+                <div class="row">
+                  <hr>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Created By</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{createdName}}" disabled
+                        placeholder="Created By" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Created On</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{getUserData.created_on  | date: 'd-M-y'}}" disabled
+                        placeholder="Created On" >
+          
+                    </div>
+                  </div>
+          
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Changed By</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{changedName}}" disabled
+                      placeholder="Changed By" >
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Changed On</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value= "{{getUserData.changed_on | date: 'd-M-y'}}"  disabled
+                        placeholder="Changed On" >
+          
+                    </div>
+                  </div>
+                </div>
+
+
+             
+                
+              
+
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+                  <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
+
+                  <button style="margin: 2px;" *ngIf="!view" type="submit" (click)="submit()"
+                    class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              
 
             </form>
           </div>
@@ -220,7 +263,21 @@
     </div>
   </div>
 </div>
+<div class="container-fluid" *ngIf="view">
+  <div class="card-body">
+  
+    
+    
+     
+     
+ 
+  </div>
+  <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+    <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
 
+    <button style="margin: 2px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+  </div>
+</div>
 
 <footer class="footer" style="position: fixed;">
   <div class="container-fluid">

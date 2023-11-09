@@ -492,7 +492,9 @@ export class KitPreprationComponent implements OnInit {
 
   }
 
-
+  getCurrentDate(): Date {
+    return new Date();
+  }
 
 
   adjustScreenKitRows(count: number) {

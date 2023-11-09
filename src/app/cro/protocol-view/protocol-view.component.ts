@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@ang
 
 import { ProtocolService } from '../protocol-registration/protocol-registration.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 
 @Component({
   selector: 'app-protocol-view',
@@ -33,7 +34,8 @@ export class ProtocolViewComponent implements OnInit {
   constructor(private route: Router,
     private protocolService: ProtocolService,
     private _activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder) { };
+    private formBuilder: FormBuilder,
+    private admins: AdminService) { };
   protocols: Array<any> = [];
   crosList: Array<any> = [];
   protocolList: Array<any> = [];
@@ -109,15 +111,27 @@ export class ProtocolViewComponent implements OnInit {
     });
 
 
+  }changedName: any
+  createdName: any
+  getUser() {
+    this.admins.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.protocolIdDetails.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.protocolIdDetails.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
   }
-
   getprotocolDetails(id: any) {
 
     this.protocolService.getProtocolId(this.id).subscribe((protocols) => {
-      console.log(protocols);
+      
       this.displayValues = true;
       this.protocolIdDetails = protocols.protocol
-      console.log(this.protocolIdDetails.cro_id)
+     
 
       
       selected_sponsor_id: new FormControl("", [Validators.required]),

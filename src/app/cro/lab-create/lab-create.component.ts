@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { AdminService } from 'src/app/applicationadmin/admin.service';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { ConfirmationService } from 'primeng/api';
   styleUrls: ['./lab-create.component.css']
 })
 export class LabCreateComponent {
+  createdName: any;
+  changedName: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -36,7 +39,8 @@ export class LabCreateComponent {
     private _activatedRoute: ActivatedRoute,
     private _formbuilder: FormBuilder, private route: Router,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private admin: AdminService
 
   ) {
     this._activatedRoute.params.subscribe((data: any) => {
@@ -46,6 +50,8 @@ export class LabCreateComponent {
         this.id = data.id;
         _cro.getmeterialById(data.id).subscribe((data: any) => {
           this.labData = data
+          this.getUser()
+          
           this.labForm.controls['material'].setValue(this.labData.name)
           this.labForm.controls['size'].setValue(this.labData.size)
           // this.labForm.controls['lab_test'].disable()
@@ -126,6 +132,18 @@ export class LabCreateComponent {
   shouldShowRequired(controlName: string): boolean {
     const control = this.labForm.get(controlName);
     return control?.invalid && (control?.dirty || control?.touched) || false;
+  }
+  getUser() {
+    this.admin.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.labData.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.labData.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
   }
   reset(){
     if(this.isEdit === true){

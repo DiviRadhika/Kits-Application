@@ -131,12 +131,12 @@ export class SampleCollectionComponent implements OnInit {
     });
 
     this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
-      console.log(data);
+     
       this.ID = data.site_data_code
-      console.log(this.ID);
+    
 
       this.name = data.site_data_name
-      console.log(this.name)
+  
 
     });
 

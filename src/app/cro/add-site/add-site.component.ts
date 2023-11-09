@@ -17,6 +17,9 @@ export class AddSiteComponent {
   states: any;
   stateenable: boolean | undefined;
   districtEnable: boolean | undefined;
+  data: any;
+  createdName: any;
+  changedName: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -47,10 +50,12 @@ export class AddSiteComponent {
       if (data.id) {
 
 
-
+       
         this.isEdit = true;
         this.id = data.id;
         _cro.getSiteById(data.id).subscribe((data: any) => {
+          this.data = data
+          this.getUser()
           this.siteForm.patchValue(data);
           this.notifierEmails = data.notifier_emails
           if (this.notifierEmails.length > 0) {
@@ -140,6 +145,18 @@ export class AddSiteComponent {
 
     });
 
+  }
+  getUser() {
+    this.admin.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.data.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.data.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
   }
   get contactControls() {
     return (this.investigatorForm.get('investigator') as FormArray).controls;

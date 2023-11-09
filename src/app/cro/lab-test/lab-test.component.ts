@@ -63,8 +63,6 @@ export class LabTestComponent implements OnInit {
   isAscendingSort: boolean = true;
   isAscendingSort1: boolean = true;
   isAscendingSort2: boolean = true;
-
-
   disableAdd: boolean = true
   totalCountmaterial = 0;
   selectedIndex = 0;

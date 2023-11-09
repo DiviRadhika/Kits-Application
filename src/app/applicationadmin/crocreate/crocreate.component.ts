@@ -24,6 +24,8 @@ export class CROcreateComponent implements OnInit {
   states: any;
   districtEnable: boolean | undefined;
   stateenable: boolean | undefined;
+  createdName: any;
+  changedName: any;
   constructor(private admin: AdminService,
     private _activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
     private messageService: MessageService, private dataService: DataService
@@ -34,6 +36,7 @@ export class CROcreateComponent implements OnInit {
         this.id = data.id;
         admin.getCrobyId(data.id).subscribe((data: any) => {
           this.getcroData = data
+          this.getUser()
           this.CroForm.patchValue(data)
           this.CroForm.controls['cro_code'].disable()
           // this.CroForm.controls['cro_name'].disable()
@@ -108,7 +111,20 @@ export class CROcreateComponent implements OnInit {
       // this.getStatesForCountry(country);
       this.districtEnable = true
     });
-  } getStatesForCountry(country: any) {
+  }
+  getUser() {
+    this.admin.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.getcroData.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.getcroData.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
+  }
+   getStatesForCountry(country: any) {
     const payload = {
       country: country
     }

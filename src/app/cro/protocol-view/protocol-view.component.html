@@ -160,35 +160,16 @@
         </form>
                 <p-toast></p-toast>
 
-                <!-- end page title -->
-                <!-- <div class="row">
-                    <div class="col-md-9"></div>
-                    <div class="col-md-2" >
-                      <div class="pull-Right mb-2 text-right" width="100%">
-                        <button type="button" (click)="pCreate()"
-                          class="btn btn-warning waves-effect btn-label waves-light r-red pull-Right"
-                          data-bs-toggle="modal" data-bs-target=".transaction-detailModal"><i
-                            class="bx bx-plus label-icon"></i>
-                          Add Study</button>
-                      </div>
-                    </div>
-                  </div> -->
+              
                 <div class="card">
                     <div class="card-body">
-                        <hr class="mt-4 mb-4" />
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <h4 class="r-blue-text">Kit Details</h4>
                             </div>
-                            <div class="col-md-12 mb-3">
-
-
-
+                            <div class="col-md-12 mb-3" >
                                 <div *ngIf="displayValues" class="tab-content pt-3 text-muted">
                                     <div class="tab-pane active" role="tabpanel">
-
-                                        <br>
-
                                         <p-tabView>
                                             <p-tabPanel header="Screening">
 
@@ -284,17 +265,51 @@
 
 
                                         </p-tabView>
-
-
-
-
-
-                                        <br>
-                                        <br>
-                                        <div class="row">
-
-
-                                        </div>
+                                        <div class="container-fluid" >
+                                          <div class="card-body">
+                              
+                                              <div class="row">
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label>Created By</label>
+                                                          <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                                              value="{{createdName}}" disabled placeholder="Created By">
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label>Created On</label>
+                                                          <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                                              value="{{protocolIdDetails.created_on  | date: 'd-M-y'}}" disabled
+                                                              placeholder="Created On">
+                              
+                                                      </div>
+                                                  </div>
+                              
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label>Changed By</label>
+                                                          <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                                              value="{{changedName}}" disabled placeholder="Changed By">
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <br>
+                                              <div class="row">
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label>Changed On</label>
+                                                          <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                                              value="{{protocolIdDetails.changed_on | date: 'd-M-y'}}" disabled
+                                                              placeholder="Changed By">
+                              
+                                                      </div>
+                                                  </div>
+                              
+                                              </div>
+                              
+                                          </div>
+                                      </div>
 
 
                                     </div>
@@ -304,9 +319,10 @@
 
 
                     </div>
-
+                   
                     <!-- end col -->
                 </div>
+              
                 <!-- end row -->
             </div>
             <!-- HTML template -->

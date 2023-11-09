@@ -47,15 +47,12 @@ export class UserCreateComponent implements OnInit {
   countries: { key: number; name: string; }[] | undefined;
   states: { key: any; name: any; }[] | undefined;
   emailvalue: any;
+  createdName: any;
+  changedName: any;
   // passwordControl!: FormControl<any>;
   private capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
-
-
-
-
-
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -73,9 +70,8 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.dataService.getCountries();
     this.userForm.get('country')?.valueChanges.subscribe(country => {
-
       this.getStatesForCountry(country);
-    });
+    }); 
 
     this.status = [{
       'label': 'Active', 'id': 'active'
@@ -87,12 +83,10 @@ export class UserCreateComponent implements OnInit {
         this.isEdit = true;
         this.id = data.id;
 
-
         this.adminService.getUserbyId(data.id).subscribe((data: any) => {
-
-
           this.getUserData = data.body;
-          console.log(data)
+          this.getUser()
+         
           // this.getUserData.status = 'inactive'
           this.userForm.patchValue(this.getUserData);
 
@@ -191,8 +185,25 @@ export class UserCreateComponent implements OnInit {
       else {
 
       }
+      
     });
+
   }
+  getUser() {
+    console.log(this.getUserData.created_by)
+    this.adminService.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.getUserData.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.getUserData.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
+
+  }
+
   roleChange(event: any) {
 
     this.idValue = event.target.value

@@ -472,7 +472,10 @@ getAlternateName(cardIndex: number, visitIndex: number): string {
   dialogvisits() {
     this.dialogvisitsv = true
   }
+  valvisit(){
+    this.dialogvisitsv = false
 
+  }
   removeMatScreenKit(j: number) {
     this.ScreenMaterialKitForm.get('materialList').removeAt(j);
   }

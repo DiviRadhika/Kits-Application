@@ -299,22 +299,64 @@
                   </div>
                 </div>
                 <br>
-                <!--
-                <div calss="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Other Emails(Click on Enter to give Multiple Emails after giving each email)</label><br>
-                      <p-chips formControlName="oemails" placeholder="Emails"></p-chips>
-
-
-                    </div>
-
-                  </div>
-                </div> -->
+              
 
               </form>
+              
             </div>
 
+          </div>
+          <div class="container-fluid" *ngIf="view">
+            <div class="card-body">
+            
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Created By</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{data.created_by}}" disabled
+                        placeholder="Created By" >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Created On</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{data.created_on  | date: 'd-M-y'}}" disabled
+                        placeholder="Created On" >
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Changed By</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value="{{data.changed_by}}" disabled
+                      placeholder="Changed By" >
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Changed On</label>
+                      <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                      value= "{{data.changed_on | date: 'd-M-y'}}"  disabled
+                        placeholder="Changed By" >
+
+                    </div>
+                  </div>
+                  
+                </div>
+
+            </div>
+            <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
+              <button style="margin: 2px;" *ngIf="!view" (click)="reset()" class="btn btn-primary">Reset</button>
+
+              <button style="margin: 2px;" *ngIf="!view" (click)="submit()" class="btn btn-primary">Submit</button>
+            </div>
           </div>
           <div class="container-fluid">
             <div class="card-body">

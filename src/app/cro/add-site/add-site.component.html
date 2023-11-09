@@ -339,6 +339,51 @@ class="form-control" id="email" placeholder="Enter Email"
             </div>
 
           </div>
+          <div class="container-fluid" *ngIf="view">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Created By</label>
+                            <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                value="{{createdName}}" disabled placeholder="Created By">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Created On</label>
+                            <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                value="{{data.created_on  | date: 'd-M-y'}}" disabled
+                                placeholder="Created On">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Changed By</label>
+                            <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                value="{{changedName}}" disabled placeholder="Changed By">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Changed On</label>
+                            <input autocomplete="off" type="text" class="form-control" maxlength="20"
+                                value="{{data.changed_on | date: 'd-M-y'}}" disabled
+                                placeholder="Changed On">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
           <div class="container-fluid">
             <div class="card-body">
               <!-- <h6 style="color: rgb(250, 49, 49);">Communication</h6> -->

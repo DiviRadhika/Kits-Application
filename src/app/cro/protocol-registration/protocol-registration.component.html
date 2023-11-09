@@ -32,48 +32,40 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor Study ID<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Sponsor Study ID</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
                       formControlName="selected_protocol_id" class="form-control" id="" placeholder="Enter Study ID"
                       [class.custom-invalid]="shouldShowRequired('selected_protocol_id') && protocolForm.get('selected_protocol_id')?.touched">
 
-                  </div>
 
+                  </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Study Title<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Study Title</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
                       formControlName="selected_protocol_name" class="form-control" id=""
                       placeholder="Enter Study Title"
                       [class.custom-invalid]="shouldShowRequired('selected_protocol_name') && protocolForm.get('selected_protocol_name')?.touched">
+
                   </div>
                 </div>
-                <div class="col-md-4">
 
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
-                    <input style="margin-top: 2.9;" autocomplete="off" type="text" maxlength="100" autocomplete="off"
+                    <label>CRO Study ID</label>
+                    <input autocomplete="off" type="text" maxlength="100" autocomplete="off"
                       formControlName="cro_study_id" class="form-control" id="" placeholder="Enter CRO Study ID">
 
                   </div>
                 </div>
-                <!-- <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">CRO Study ID</label>
-                    <input autocomplete="off" type="text"  maxlength="100" autocomplete="off" formControlName="cro_study_id"
-                      class="form-control" id="" placeholder="Enter CRO Study ID">
-
-                  </div>
-                </div> -->
+              </div>
+              <br>
+              <div class="row">
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Sponsor ID / Name<label
-                        style="color: red;margin-left: 4px;">*</label></label>
-
+                  <div class="form-group">
+                    <label>Sponsor ID / Name</label><label style="color: red;margin-left: 4px;">*</label>
 
                     <select maxlength="100" formControlName="selected_sponsor_id" (change)="sponsorname()"
                       class="form-select form-control"
@@ -85,37 +77,39 @@
                     </select>
                   </div>
                 </div>
-
-
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Global Sample Size<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Global Sample Size</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="number" formControlName="global_sample_size" class="form-control"
                       maxlength="5" (input)="validateMobileNumber($event.target, 'office')" id=""
                       placeholder="Enter Global Sample Size"
                       [class.custom-invalid]="shouldShowRequired('global_sample_size') && protocolForm.get('global_sample_size')?.touched">
                   </div>
                 </div>
+
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Avant Sante Sample Size</label>
+                  <div class="form-group">
+                    <label> Avant Sante Sample Size</label>
                     (&nbsp;<input class="form-check-input" placeholder="Enter Avant Sante Sample Size " maxlength="5"
                       (change)="avantCheck($event)" formControlName="avantc"
                       (input)="validateMobileNumber($event.target, 'office')" type="checkbox" value="checked"
                       id="debugInfo" />
-                    &nbsp; <label for="formrow-firstname-input" class="form-label">Same as Global</label>)
+                    &nbsp; <label>Same as Global</label>)
 
                     <input autocomplete="off" type="number" maxlength="5" formControlName="avant_sample_size"
                       (blur)="getsize()" class="form-control" id="" placeholder="Enter Avant Sante Sample Size "
                       (input)="validateMobileNumber($event.target, 'office')"
                       [class.custom-invalid]="shouldShowRequired('avant_sample_size') && protocolForm.get('avant_sample_size')?.touched">
+
                   </div>
                 </div>
+              </div>
+              <br>
+              <div class="row">
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Kit Variant Count<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Kit Variant Count</label><label style="color: red;margin-left: 4px;">*</label>
+
                     <input autocomplete="off" maxlength="5" type="number" autocomplete="off"
                       formControlName="kit_variant_count" (input)="validateMobileNumber($event.target, 'office')"
                       (blur)="variantCount()" class="form-control" id="" placeholder="Enter Kit Variant Count"
@@ -123,9 +117,8 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Total No.of Visits<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Total No.of Visits</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       formControlName="total_visits" (input)="validateMobileNumber($event.target, 'office')"
                       placeholder="Enter Total No.of Visits" (blur)="visits($event)" class="form-control"
@@ -134,19 +127,20 @@
                 </div>
 
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">No.of Screens<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>No.of Screens</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
-                      (input)="validateMobileNumber($event.target, 'office')" class="form-control" id=""
-                      placeholder="Enter No.of Screens"
-                      [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
+                    (input)="validateMobileNumber($event.target, 'office')" class="form-control" id=""
+                    placeholder="Enter No.of Screens"
+                    [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
+              </div>
+              <br>
+              <div class="row">
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Screen Kit Count<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Screen Kit Count<label style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_skit_count"
                       class="form-control" id="" placeholder="Enter Screen Kit Count"
@@ -154,19 +148,21 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Visit Kit Count<label
-                        style="color: red;margin-left: 4px;">*</label></label>
+                  <div class="form-group">
+                    <label>Visit Kit Count<label style="color: red;margin-left: 4px;">*</label></label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5"
                       (input)="validateMobileNumber($event.target, 'office')" formControlName="selected_visit_count"
                       class="form-control" id="" placeholder="Enter Visit Kit Count"
                       [class.custom-invalid]="shouldShowRequired('selected_visit_count') && protocolForm.get('selected_visit_count')?.touched">
                   </div>
                 </div>
+                </div>
+                <br>
+                <div class="row">
 
                 <div class="col-md-12">
-                  <div class="mb-3">
-                    <label for="formrow-firstname-input" class="form-label">Special Instructions</label>
+                  <div class="form-group">
+                    <label>Special Instructions</label>
                     <textarea class="form-control" rows="3" cols="5" formControlName="specialInstructions"
                       id="comment"></textarea>
                   </div>
@@ -177,7 +173,8 @@
 
           </div>
         </form>
-        <div *ngIf="visible" style="margin-top:-5%">
+        <br>
+        <div *ngIf="visible" style="margin-top:-2%">
           <p-tabView>
 
 
@@ -192,16 +189,17 @@
                       Tests</button>
                   </div>
                   <div class="col-md-3 mb-3" style="margin-left: -11%">
-                    <button type="button" (click)="dialogvisits()" class="btn btn-primary  waves-light r-blue">Select Visits
-                      </button>
+                    <button type="button" (click)="dialogvisits()" class="btn btn-primary  waves-light r-blue">Select
+                      Visits
+                    </button>
                   </div>
-                  <div class="col-md-2 mb-3"  style="margin-left: -14%;">
+                  <div class="col-md-2 mb-3" style="margin-left: -14%;">
                     <button type="button" class="btn btn-primary  waves-light r-blue" (click)="addRow1(i)">Add Material
                     </button>
                   </div>
 
 
-                  
+
 
 
                   <p-dialog [class.overlay]="displayv" (onShow)="disableScroll()" (onHide)="enableScroll()"
@@ -252,13 +250,13 @@
                         <p-multiSelect [options]="visitcount" formControlName="kitVarient" defaultLabel="Select Visits"
                           (onChange)="onVisitCountSelected(i, $event.value)" optionLabel="value"
                           optionValue="value"></p-multiSelect>
-                        <!-- <div class="error-message" *ngIf="onVisitCountSelected(i, $event.target.value)">
-                      </div> -->
+
                       </div>
-                      <!-- <div class="col-md-3 mb-3">
-                        <button style="margin-left:-27%" type="button" align="right" 
+                      <div class="col-md-3 mb-3">
+                        <button style="margin-left:-27%" type="button" align="right" (click)="valvisit()"
                           class="btn btn-primary r-blue">Add Visits</button>
-                      </div> -->
+                      </div>
+
                       <div *ngIf="selectedVisitCountsPerCard[i] && selectedVisitCountsPerCard[i].length > 0">
 
 
@@ -276,7 +274,7 @@
                                     Selected Visit</th>
                                   <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                                     style="width: 200.2px;" aria-label="Name: activate to sort column ascending">
-                                    Assign Alternate Name</th>
+                                    Enter Alternate Name</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -329,7 +327,7 @@
                           <th scope="row">
                             <select formControlName="meterial_id" class="form-select form-control"
                               aria-placeholder="Select Test" (change)="onMeterialIdChange($event, i, j)">
-                              <option selected value="">Select Materials</option>
+                              <option selected disabled value="">Select Material</option>
                               <option *ngFor="let lab of labMatTestsList" [value]="lab.meterial_id">
                                 {{ lab.name }}
                               </option>
@@ -381,6 +379,7 @@
 
               <br>
             </p-tabPanel>
+
 
 
             <div class="col-md-12 mb-3" align="right">

@@ -18,6 +18,8 @@ export class LabTestCreateComponent implements OnInit {
   stateenable: boolean | undefined;
   districtEnable: boolean | undefined;
   states: any
+  createdName: any;
+  changedName: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -42,6 +44,7 @@ export class LabTestCreateComponent implements OnInit {
         this.id = data.id;
         cro.getLabById(data.id).subscribe((data: any) => {
           this.getcroData = data
+          this.getUser()
           this.labTestCreateForm.patchValue(data)
           this.labTestCreateForm.controls['cro_code'].disable()
           // this.labTestCreateForm.controls['cro_name'].disable()
@@ -62,7 +65,18 @@ export class LabTestCreateComponent implements OnInit {
     });
 
   }
-
+  getUser() {
+    this.admin.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.getcroData.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.getcroData.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
+  }
   public labTestCreateForm: FormGroup = new FormGroup({
     cro_code: new FormControl("", [Validators.required]),
     cro_name: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-z ]+$/)]),

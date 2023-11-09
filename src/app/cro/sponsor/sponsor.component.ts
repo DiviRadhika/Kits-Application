@@ -19,6 +19,9 @@ export class SponsorComponent implements OnInit {
   countries: any;
   districtEnable: boolean | undefined;
   edits: boolean = false;
+  data: any;
+  createdName: any;
+  changedName: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -75,8 +78,9 @@ export class SponsorComponent implements OnInit {
         this.isEdit = true;
         this.id = data.id;
         _cro.getSponsorById(data.id).subscribe((data: any) => {
+          this.data  = data
+          this.getUser()
           this.contactDetails = data.notifier_details
-          console.log(this.contactDetails.length);
           if (this.contactDetails.length > 0) {
             this.tableE = true
           }
@@ -105,9 +109,6 @@ export class SponsorComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-
-
-
     this.countries = this.dataService.getCountries();
     this.sponsorForm.get('country')?.valueChanges.subscribe((country: any) => {
 
@@ -133,6 +134,18 @@ export class SponsorComponent implements OnInit {
     } else {
       this.getSponsorDetails()
     }
+  }
+  getUser() {
+    this.admin.getUser().subscribe((data: any) => {
+      data.filter((val:any) => {
+        if (val.user_id === this.data.created_by) { 
+          this.createdName = val.first_name + ' ' + val.last_name 
+        }
+       if (val.user_id === this.data.changed_by) {        
+          this.changedName = val.first_name + ' ' + val.last_name
+        }
+      })
+    })
   }
   getStatesForCountry(country: any) {
     const payload = {
