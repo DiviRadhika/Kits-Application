@@ -25,3 +25,7 @@ table{
     border-collapse: collapse;
     
 }
+
+h4 {
+  text-transform: uppercase;
+}

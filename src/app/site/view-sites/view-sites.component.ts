@@ -10,6 +10,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
 })
 export class ViewSitesComponent implements OnInit {
   heading: string='';
+  name: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -52,6 +53,12 @@ export class ViewSitesComponent implements OnInit {
 
   ngOnInit(): void {
    this.study()
+   this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+    this.ID = data.site_data_code
+    this.name = data.site_data_name
+
+
+  });
    if (this.route.url === '/home/site/viewCRA') {
     this.heading = 'Sample Collection'
   }

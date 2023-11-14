@@ -13,6 +13,7 @@ import { ProtocolService } from 'src/app/cro/protocol-registration/protocol-regi
   styleUrls: ['./study-siteacknowledgement.component.css']
 })
 export class StudySiteacknowledgementComponent implements OnInit {
+  name: any;
   getCurrentYear(): number {
 
     return new Date().getFullYear();
@@ -134,6 +135,15 @@ export class StudySiteacknowledgementComponent implements OnInit {
 
     this.ScreenKitForm = this.formBuilder.group({
       screenKitList: this.formBuilder.array([])
+
+    });
+    this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+     
+      this.ID = data.site_data_code
+    
+
+      this.name = data.site_data_name
+  
 
     });
 

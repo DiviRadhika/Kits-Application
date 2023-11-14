@@ -128,10 +128,10 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label>No.of Screens</label><label style="color: red;margin-left: 4px;">*</label>
+                    <label>No.of Screenings</label><label style="color: red;margin-left: 4px;">*</label>
                     <input autocomplete="off" type="text" autocomplete="off" maxlength="5" formControlName="screens"
                     (input)="validateMobileNumber($event.target, 'office')" class="form-control" id=""
-                    placeholder="Enter No.of Screens"
+                    placeholder="Enter No.of Screenings"
                     [class.custom-invalid]="shouldShowRequired('screens') && protocolForm.get('screens')?.touched">
                   </div>
                 </div>
@@ -335,13 +335,13 @@
                           </th>
                           <td>
                             <select formControlName="size" class="form-select form-control">
-                              <option selected value="">Select SiZe</option>
+                              <option selected value="">Select Size</option>
                               <option *ngFor="let size of getSizesv(i, j)" [value]="size">{{ size }}</option>
                             </select>
 
                           </td>
                           <td>
-                            <input autocomplete="off" type="number" formControlName="quantity" class="form-control"
+                            <input autocomplete="off" type="number"placeholder="Enter Quantity" formControlName="quantity" class="form-control"
                               value="" />
                           </td>
                           <th *ngIf="materialhide" scope="row">

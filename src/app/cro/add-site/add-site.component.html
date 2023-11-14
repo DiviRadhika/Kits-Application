@@ -391,8 +391,8 @@ class="form-control" id="email" placeholder="Enter Email"
 
 
               <div *ngIf="!isEdit" class="row">
-                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button style="margin-right: -17px" (click)="addInvestigators()" class="btn btn-primary">Add
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end" style="margin-left:1.8%">
+                  <button style="font-size: 12px;" (click)="addInvestigators()" class="btn btn-primary">Add
                     CRA</button>
                 </div>
 
@@ -467,13 +467,14 @@ class="form-control" id="email" placeholder="Enter Email"
                   </form>
                 </div>
               </div>
-              <div *ngIf="isEdit" class="row">
+              <div *ngIf="isEdit" >
 
 
 
-                <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
-                  <button *ngIf="!view" style="margin-right: -17px" (click)="addInvestigatorse()"
-                    class="btn btn-primary">Add CRA</button>
+                <div class="col-12 mt-auto mb-2 d-flex justify-content-end" style="margin-left:1.8%">
+                  <button  *ngIf="!view" style="font-size: 12px;"  (click)="addInvestigatorse()" class="btn btn-primary">Add CRA</button>
+                  <!-- <button *ngIf="!view" style="margin-right: -17px" (click)="addInvestigatorse()"
+                    class="btn btn-primary">Add CRA</button> -->
                 </div>
 
                 <!-- <div class="col-3 mt-auto mb-2 ">
@@ -505,7 +506,7 @@ class="form-control" id="email" placeholder="Enter Email"
                               *ngFor="let invest of investigatorFormedit.get('investigatoredit').controls; let i = index;">
                               <th>
                                 <select formControlName="role" class="form-select" aria-label="Default select example">
-                                  <option selected value="">Select CRA</option>
+                                  <option selected disabled value="">Select Role</option>
                                   <option *ngFor="let option of investigate" [value]="option">{{ option }}</option>
                                 </select>
                               </th>

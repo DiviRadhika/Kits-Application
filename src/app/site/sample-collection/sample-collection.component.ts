@@ -466,6 +466,10 @@ export class SampleCollectionComponent implements OnInit {
           if (skDetails[i].acknowledgement) {
             if (skDetails[i].acknowledgement === 'Received') {
               this.ScreenKitForm.get('screenKitList').controls[i].get('patientId').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('patientName').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('patientAge').disable()
+              this.ScreenKitForm.get('screenKitList').controls[i].get('patientSex').disable()
+
               this.ScreenKitForm.get('screenKitList').controls[i].get('collection').disable()
               this.ScreenKitForm.get('screenKitList').controls[i].get('collectionDate').disable()
             }

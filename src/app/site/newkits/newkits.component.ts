@@ -34,6 +34,7 @@ export class NewkitsComponent implements OnInit {
   reportsfiltered: any;
   subjectsfiltered: any;
   variantssubjects: any;
+  name: any;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -78,7 +79,8 @@ export class NewkitsComponent implements OnInit {
     private admin: AdminService,
     private protocol:ProtocolService,
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private croService: CrosService) { }
   pageChange(event: number) {
     this.page = 1;
     this.totalCount = 0;
@@ -92,6 +94,12 @@ export class NewkitsComponent implements OnInit {
       this.craname =sessionStorage.getItem('fullName')
   
     
+    });
+    this.croService.getSiteById(sessionStorage.getItem('siteId')).subscribe((data: any) => {
+     
+      this.name = data.site_data_name
+  
+  
     });
     if (this.route.url === '/home/site/labReports'+ '/'+this.id) {
       this.heading  = 'Lab Reports'

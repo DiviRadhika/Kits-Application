@@ -64,6 +64,7 @@
                                 <li class="breadcrumb-item active">Kit
                                     Inventory </li>
 
+                                    <li class="breadcrumb-item active">Site : {{name}}</li>
 
                             </ol>
                         </div>
@@ -379,6 +380,12 @@
                                                                 Site
                                                             </th>
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                            colspan="1" style="width: 289.2px;"
+                                                            aria-label="Legal Name: activate to sort column ascending">
+                                                            Requistion No.
+                                                        </th>
+                                                          
+                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                                 colspan="1" style="width: 289.2px;"
                                                                 aria-label="Legal Name: activate to sort column ascending">
                                                                 Visit
@@ -411,9 +418,10 @@
                                                             <td>{{croData.patientId}}</td>
                                                             <td>{{croData.access}}</td>
                                                             <td>{{croData.site_id}}</td>
+                                                            <td>{{croData.requistionNumber}}</td>
                                                             <td>{{croData.description}}</td>
                                                             <td>{{croData.collectionDate}}</td>
-                                                            <td>{{croData.posted_date}}</td>
+                                                            <td>{{croData.acknowledgementDate}}</td>
 
 
                                                             <td width="20%">

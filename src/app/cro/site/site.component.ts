@@ -12,7 +12,12 @@ import { ProtocolService } from '../protocol-registration/protocol-registration.
 export class SiteComponent implements OnInit {
   isAscendingSorta: boolean = true;
   isAscendingSortb: boolean = true;
-;
+  subjectDetails: any;
+  dataCra: any;
+  basicOptions: any;
+  chartOptions: any
+  tabledisplay: boolean = true
+  crasiteenable : boolean = false
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -53,14 +58,80 @@ export class SiteComponent implements OnInit {
     }
   }
  
-  
+  basicData: any;
 
 
   constructor(private route: Router, private _cro:CrosService, private protocol: ProtocolService) { }
 
   ngOnInit(): void {
   this.getSitedetails();
+  this.getsubjectDetails()
+  this.basicData = {
+    labels: ['P001'],
+    datasets: [
+      {
+        label: 'Received',
+        backgroundColor: '#42A5F5',
+        data: [20]
+      },
+
+    ]
+  };
+  this.dataCra = {
+    labels: ['No.of Screened', 'Not Screened'
+    ],
+    datasets: [
+      {
+
+        data: [10, 22],
+        backgroundColor: [
+          "#D98880 ",
+          '#F5B7B1',
+          '#FDEBD0 ',
+          "#45B39D",
+          "#A2D9CE ",
+          '#D0ECE7'
+        ],
+        hoverBackgroundColor: [
+          "#D98880 ",
+          '#F5B7B1',
+          '#FDEBD0 ',
+          "#45B39D",
+          "#A2D9CE ",
+          '#D0ECE7'
+        ]
+      }
+    ]
+
+  };
+
   }
+  dashboard(){
+    this.crasiteenable = true
+    this.tabledisplay = false
+}
+change(){
+  this.crasiteenable = false
+  this.tabledisplay = true
+
+}
+  getsubjectDetails() {
+
+    this.protocol.dashboardtable().subscribe(
+      (data: any) => {
+        console.log(data)
+
+        this.subjectDetails = data
+        // console.log(data)
+
+      },
+      (err: any) => {
+        // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    )
+
+  }
+
   toggleSortingb(){
    
     this.isAscendingSortb = !this.isAscendingSortb;
@@ -152,6 +223,8 @@ study(id: any) {
 
     this.uniqueCombinedArray = this.getUniqueObjects(combinedArray, 'user_protocol_id');
   });
+  this.crasiteenable = false
+    this.tabledisplay = true
 }
 
 // getUniqueObjects function remains the same as mentioned in the previous response

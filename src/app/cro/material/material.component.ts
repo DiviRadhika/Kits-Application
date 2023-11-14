@@ -14,6 +14,9 @@ export class MaterialComponent implements OnInit {
   subjectDetails: any;
   protocols: Array<any> = [];
   enablestudy: boolean = false;
+  adminfields: boolean = false;
+  verificationFields: boolean = false;
+  distributionFields: boolean = false;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -78,11 +81,7 @@ export class MaterialComponent implements OnInit {
   
     this.admin.dashboard().subscribe((data: any) => {
       this.dashboardsData = data
-      console.log(this.dashboardsData);
       this.dataCra = {
-
-
-
         labels: ['No.of Screened', 'Not Screened'
         ],
         datasets: [
@@ -298,12 +297,13 @@ export class MaterialComponent implements OnInit {
 
     this.role = sessionStorage.getItem('role')
     if (this.role === 'Admin' || this.role === 'admin') {
-      this.enableFields = true;
-      this.disablefields = true;
-      this.disappearfields = true;
-      this.appearfields = true;
-      this.adminc = true;
-      this.sponserfields = true;
+      this.enableFields = false;
+      this.disablefields = false;
+      this.disappearfields = false;
+      this.appearfields = false;
+      this.adminc = false;
+      this.sponserfields = false;
+      this.adminfields = true
       this.crasiteenable = false;
 
 
@@ -336,7 +336,9 @@ export class MaterialComponent implements OnInit {
 
 
     }
-    else if (this.role === 'Central Lab') {
+
+    // 'Central Lab-Preparation', 'Central Lab-Verification', 'Central Lab-Distribution', 'Central Lab-Acknowledgement', 'Central Lab-Reports'
+    else if (this.role === 'Central Lab-Preparation') {
       this.enableFields = true;
       this.disablefields = false;
       this.disappearfields = false
@@ -351,6 +353,35 @@ export class MaterialComponent implements OnInit {
 
 
     }
+    else if (this.role === 'Central Lab-Verification') {
+      this.verificationFields = true;
+      this.disablefields = false;
+      this.disappearfields = false
+      this.appearfields = false;
+      this.crocenable = false;
+      this.cracenable = false;
+      this.sponsorcenable = false;
+      this.labcenable = true;
+      this.adminc = false;
+      this.sponserfields = false;
+      this.crasiteenable = false;
+
+    }
+    else if (this.role === 'Central Lab-Distribution') {
+      this.distributionFields = true;
+      this.disablefields = false;
+      this.disappearfields = false
+      this.appearfields = false;
+      this.crocenable = false;
+      this.cracenable = false;
+      this.sponsorcenable = false;
+      this.labcenable = true;
+      this.adminc = false;
+      this.sponserfields = false;
+      this.crasiteenable = false;
+
+    }
+    
     else if (this.role === 'CRA') {
       this.enableFields = false;
       this.disablefields = false;
@@ -388,8 +419,21 @@ export class MaterialComponent implements OnInit {
     });
   }
   getdashboardDetails(e: any){
-    this.enablestudy = true
     console.log(e.target.value)
+    this.enablestudy = true
+    this.getsubjectDetails()
+    // this.protocol.dashboardtable(e.target.value).subscribe(
+    //   (data: any) => {
+    //     console.log(data)
+
+    //     this.subjectDetails = data
+    //     // console.log(data)
+
+    //   },
+    //   (err: any) => {
+    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+    //   }
+    // )
   }
 
   getsubjectDetails() {
@@ -408,4 +452,5 @@ export class MaterialComponent implements OnInit {
     )
 
   }
+ 
 }

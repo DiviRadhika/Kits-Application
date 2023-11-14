@@ -16,12 +16,41 @@
         </div>
       </div>
       <!-- end page title -->
+     
 
+      <div *ngIf="adminfields">
+        <br>
+        <br>
+
+        <div class="row">
+
+          <div class="col-md-2" >
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 34%;" style="text-align: center;">Users</h5>
+                <h6 style="margin-left: 41%;" style="text-align: center;">12</h6>
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 34%;" style="text-align: center;">CRO</h5>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sites}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
 
       <div *ngIf="disablefields">
-
-        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">CRO</h4>
-        <hr>
+        <br>
+        <br>
 
         <div class="row">
 
@@ -66,31 +95,41 @@
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor">
-                <h5 style="margin-left: 34%;" style="text-align: center;">Materials</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_materials}}</h6>
+                <h5 style="margin-left: 34%;" style="text-align: center;">Lab Creation</h5>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests || 4}}</h6>
 
 
               </p-card>
             </div>
           </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-2" style="margin-left: 20px;">
+              <div class="form-group">
+                <p-card class="cardcolor">
+                  <h5 style="margin-left: 34%;" style="text-align: center;">Materials</h5>
+                  <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_materials}}</h6>
+                </p-card>
+              </div>
+            </div>
+        
         </div>
 
       </div>
 
-
-
-      <!-- ----============= Central Lab =================------------- -->
-
-      <br *ngIf="disablefields">
+     
       <div *ngIf="enableFields">
-        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Central Lab</h4>
-        <hr>
+        <br>
+        <br>
+        <!-- <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Central Lab</h4>
+        <hr> -->
         <div class="row">
 
           <div class="col-md-2" style="margin-left: 20px;">
             <div class="form-group">
               <p-card class="cardcolor" class="row">
-                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Study Summary</h5>
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
 
 
@@ -107,19 +146,19 @@
               </p-card>
             </div>
           </div>
-          <div class="col-md-2">
+          <!-- <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Patients</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
               </p-card>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Prepared Kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_completed_kits}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_completed_kits || 4}}</h6>
 
 
               </p-card>
@@ -129,7 +168,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">InProgress kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_inprogress_kits}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_inprogress_kits || 4}} </h6>
 
 
               </p-card>
@@ -137,31 +176,11 @@
           </div>
         </div>
 
-        <div class="row" style="padding-top: 10px;">
-          <div class="col-md-2" style="margin-left: 1%;">
-            <div class="form-group">
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 24%;" style="text-align: center;">No.of Verified Kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
 
 
-              </p-card>
-
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 24%;" style="text-align: center;">Not Verified kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits}}</h6>
 
 
-              </p-card>
-            </div>
-          </div>
-
-
-          <div class="col-md-2">
+        <!-- <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Pending Samples </h5>
@@ -180,40 +199,95 @@
 
               </p-card>
             </div>
-          </div>
-          <!-- <div class="col-md-2">
+          </div> -->
+
+      </div>
+      <div *ngIf="verificationFields">
+        <br>
+        <br>
+        <div class="row">
+
+          <div class="col-md-2" style="margin-left: 20px;">
             <div class="form-group">
-               <p-card class="cardcolor">
-                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
+              <p-card class="cardcolor" class="row">
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
 
 
               </p-card>
             </div>
-          </div> -->
+          </div>
+
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 24%;" style="text-align: center;">Verified Kits</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
+
+
+              </p-card>
+
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 24%;" style="text-align: center; font-size: 100%;">Not Verified kits</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits || 9}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="distributionFields">
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card class="cardcolor" class="row">
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+          <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
+              </p-card>
+            </div>
+          </div>
+
+
         </div>
       </div>
 
 
 
-      <!-- ---------------==============  CRA =============-------------------- -->
-      <!-- ---------------==============  CRA =============-------------------- -->
-
-      <br *ngIf="disablefields">
+     
 
 
       <div *ngIf="disappearfields">
-        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">CRA</h4>
+      <br>
+      <br>
         <div class="row">
           <div class="col-md-2" style="margin-left: 20px;">
             <div class="form-group">
               <p-card class="cardcolor">
-                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Studies </h5>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}
+                </h6>
               </p-card>
             </div>
           </div>
-          <!-- <div class="row"> -->
+
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor">
@@ -232,26 +306,19 @@
               </p-card>
             </div>
           </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Kits</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits}}</h6>
-              </p-card>
-            </div>
-          </div>
+
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor" class="row">
-                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Patients</h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Patients</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
               </p-card>
             </div>
           </div>
-          <div class="col-md-2" style="margin-left: 20px;">
-            <div class="form-group" style="padding-top: 10px;">
+          <div class="col-md-2">
+            <div class="form-group" >
               <p-card class="cardcolor">
-                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Sites</h5>
                 <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
 
 
@@ -270,16 +337,16 @@
 
 
       <div *ngIf="sponserfields">
-        <h4 class="mb-sm-0 font-size-18" style="margin-left: 25px;">Sponsor</h4>
-
-        <hr>
+      <br>
+      <br>
 
         <div class="row">
           <div class="col-md-2" style="margin-left: 20px;">
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}
+                </h6>
               </p-card>
             </div>
           </div>
@@ -297,7 +364,7 @@
         </div>
       </div>
 
-      <br *ngIf="disablefields">
+     
       <div *ngIf="crasiteenable">
         <div class="row">
           <div class="col-12">
@@ -315,9 +382,138 @@
                       </select>
                     </div>
                   </div>
-                  <div *ngIf ="enablestudy">
+                  <div *ngIf="enablestudy">
+                    <br>
+                    <h4 style="color:blue"> Overall Dashboard</h4>
                     <div class="row" style="margin-top:2%">
 
+                      <div class="col-md-3">
+                        <h5 style="color:blue"> Summary Panel</h5>
+                      </div>
+                      <div class="col-md-3">
+                        <h5 style="color:blue;text-align: center; ">Screening Number</h5>
+                      </div>
+                      <div class="col-md-3">
+                        <h5 style="color:blue;text-align: center; margin-left: 21%">Randomization Status</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <div class="card">
+
+                            <table id="datatable" class="table table-striped"
+                              class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                              role="grid" aria-describedby="datatable_info" style="width: 82px;">
+                              <thead>
+                                <tr role="row">
+                                  <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                    style="width: 335.2px;" aria-label="Name: activate to sort column ascending">
+                                  </th>
+                                  <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                    style="width: 243.2px;" aria-sort="ascending"
+                                    aria-label="Code: activate to sort column descending">
+                                    Actual
+                                  </th>
+                                  <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                                    style="width: 335.2px;" aria-label="Name: activate to sort column ascending">
+                                    Planned
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>Countries</th>
+                                  <td>{{subjectDetails.actual_countries}}</td>
+                                  <td>{{subjectDetails.planned_countries}}</td>
+                                </tr>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>Sites</th>
+                                  <td>{{subjectDetails.actual_sites}}</td>
+                                  <td>{{subjectDetails.planned_sites}}</td>
+                                </tr>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>Subjects Screened</th>
+                                  <td>{{subjectDetails.acutal_subjects_screened}}</td>
+                                  <td>{{subjectDetails.planned_subects_screened}}</td>
+                                </tr>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>--</th>
+                                  <td>NA</td>
+                                  <td>NA</td>
+                                </tr>
+
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>Samples Received</th>
+                                  <td>{{subjectDetails.actual_sample_received}}</td>
+                                  <td>{{subjectDetails.planed_sample_received}}</td>
+                                </tr>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>--</th>
+                                  <td>NA</td>
+                                  <td>NA</td>
+                                </tr>
+                                <tr class="odd" style="  vertical-align: middle;">
+                                  <th>--</th>
+                                  <td>NA</td>
+                                  <td>NA</td>
+                                </tr>
+                                <tr>
+                                  <td colspan="12" *ngIf="subjectDetails.length === 0"
+                                    style="text-align: center; font-size: 0.8rem;">
+                                    No Data Found
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-3" style="margin-left:2%;margin-top: 6%;">
+                        <div class="form-group">
+
+
+                          <p-chart type="doughnut" [data]="dataCra" [options]="chartOptions"
+                            [style]="{'width': '2%'}"></p-chart>
+
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-md-2"></div> -->
+                      <div class="col-md-5" style="margin-top: 6%;">
+                        <div class="form-group">
+
+                          <p-chart class="custom-chart" type="bar" [data]="basicData"
+                            [options]="basicOptions"></p-chart>
+                        </div>
+
+                      </div>
+
+                      <!-- <div class="col-md-4" style="margin-top: 15%;">
+                    <div class="form-group">
+                      <div class="card">
+
+                        <p-chart type="bar" [data]="stackedData" [options]="stackedOptions"></p-chart>
+                        
+                      </div>
+                    </div>
+                  </div> -->
+                      <!-- <div class="col-md-4" style="margin-top: 15%;">
+                    <div class="form-group">
+                      <div class="card">
+                        <p-chart type="bar" [data]="stackedData2" [options]="stackedOptions"></p-chart>
+                      </div>
+                    </div>
+                  </div> -->
+                    </div>
+                  </div>
+                  <div *ngIf="enablestudy">
+                    <div class="row" style="margin-top:2%">
+                      <h4 style="color:blue">Dashboard for Study : P001</h4>
+                      <br>
                       <div class="col-md-3">
                         <h5 style="color:blue"> Summary Panel</h5>
                       </div>

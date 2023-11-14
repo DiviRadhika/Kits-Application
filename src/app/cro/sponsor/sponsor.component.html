@@ -364,7 +364,7 @@
               <hr>
 
 
-              <div *ngIf="!isEdit" class="row">
+              <div *ngIf="!isEdit" >
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                   <button style="font-size: 11px; margin-right: -20px" (click)="addContact()"
                     class="btn btn-primary">Add Secondary Contact Details</button>
@@ -442,7 +442,7 @@
                   </form>
                 </div>
               </div>
-              <div *ngIf="isEdit" class="row">
+              <div *ngIf="isEdit" >
                 <div class="col-12 mt-auto mb-2 d-flex justify-content-end">
                   <button *ngIf="!view" style="font-size: 11px; margin-right: -20px" (click)="addContacte()"
                     class="btn btn-primary">Add Secondary Contact Details</button>
