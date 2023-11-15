@@ -180,6 +180,7 @@ export class HomeComponent implements OnInit {
             // { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
             // { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
             // { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
+            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
             { label: 'SAMPLE ACKNOWLEDGEMENT', link: '/home/centralLab/kitAcknowledgementGrid' },
             // { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
           // ]

@@ -17,6 +17,12 @@ export class MaterialComponent implements OnInit {
   adminfields: boolean = false;
   verificationFields: boolean = false;
   distributionFields: boolean = false;
+  subjectDetailsprotocol: any;
+  protoname: any;
+  basicDataProtocol: any;
+
+  dataCraProtocol: any
+  acknowledgementFields: boolean= false;
   getCurrentYear(): number {
     return new Date().getFullYear();
   }
@@ -67,48 +73,11 @@ export class MaterialComponent implements OnInit {
 
   ngOnInit() {
     this.getsubjectDetails()
-    this.basicData = {
-      labels: ['P001', 'P002', 'P003', 'P004', 'P005'],
-      datasets: [
-        {
-          label: 'Received',
-          backgroundColor: '#42A5F5',
-          data: [20, 12, 13, 21, 4]
-        },
-
-      ]
-    };
+   
   
     this.admin.dashboard().subscribe((data: any) => {
       this.dashboardsData = data
-      this.dataCra = {
-        labels: ['No.of Screened', 'Not Screened'
-        ],
-        datasets: [
-          {
-
-            data: [10, 22],
-            backgroundColor: [
-              "#D98880 ",
-              '#F5B7B1',
-              '#FDEBD0 ',
-              "#45B39D",
-              "#A2D9CE ",
-              '#D0ECE7'
-            ],
-            hoverBackgroundColor: [
-              "#D98880 ",
-              '#F5B7B1',
-              '#FDEBD0 ',
-              "#45B39D",
-              "#A2D9CE ",
-              '#D0ECE7'
-            ]
-          }
-        ]
-
-      };
-
+     
 
       this.dataCro = {
         labels: ['Protocols',
@@ -353,6 +322,23 @@ export class MaterialComponent implements OnInit {
 
 
     }
+    else if (this.role === 'Central Lab-Acknowledgement') {
+      // this.enableFields = false;
+      this.acknowledgementFields = true
+      // this.disablefields = false;
+      // this.disappearfields = false
+      // this.appearfields = false;
+      // this.crocenable = false;
+      // this.cracenable = false;
+      // this.sponsorcenable = false;
+      
+      // this.adminc = false;
+      // this.sponserfields = false;
+      // this.crasiteenable = false;
+
+
+    }
+    
     else if (this.role === 'Central Lab-Verification') {
       this.verificationFields = true;
       this.disablefields = false;
@@ -419,15 +405,84 @@ export class MaterialComponent implements OnInit {
     });
   }
   getdashboardDetails(e: any){
-    console.log(e.target.value)
+    this.basicDataProtocol = {
+      labels: '',
+      datasets: [
+        {
+          label: 'Sample Collected',
+          backgroundColor: '#42A5F5',
+          data: [0,0]
+        },
+
+      ]
+    };
+    this.dataCraProtocol = {
+      labels: ['No.of Screened', 'Not Screened'
+      ],
+      datasets: [
+        {
+
+          data: [0,0],
+          backgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+            
+          ],
+          hoverBackgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+           
+          ]
+        }
+      ]
+
+    };
+    this.protocols.forEach((val:any)=>{
+      if(val.id === e.target.value)    
+    this.protoname= val.protocol_id
+    });
+    this.subjectDetailsprotocol = []
+   
     this.enablestudy = true
     this.getsubjectDetails()
     this.protocol.dashboardtable(e.target.value).subscribe(
       (data: any) => {
-        console.log(data)
+        
 
-        this.subjectDetails = data
-        // console.log(data)
+        this.subjectDetailsprotocol = data
+        this.basicDataProtocol = {
+          labels: data.bar_data.protocol_ids,
+          datasets: [
+            {
+              label: 'Sample Collected',
+              backgroundColor: '#42A5F5',
+              data: this.subjectDetailsprotocol.bar_data.values
+            },
+    
+          ]
+        };
+        this.dataCraProtocol = {
+          labels: ['No.of Screened', 'Not Screened'
+          ],
+          datasets: [
+            {
+  
+              data: this.subjectDetailsprotocol.pie_chart.values,
+              backgroundColor: [
+                "#D98880 ",
+                '#F5B7B1'
+                
+              ],
+              hoverBackgroundColor: [
+                "#D98880 ",
+                '#F5B7B1'
+                
+              ]
+            }
+          ]
+  
+        };
+        
 
       },
       (err: any) => {
@@ -437,33 +492,88 @@ export class MaterialComponent implements OnInit {
   }
 
   getsubjectDetails() {
+    this.basicData = {
+      labels: '',
+      datasets: [
+        {
+          label: 'Sample Collected',
+          backgroundColor: '#42A5F5',
+          data: [0,0]
+        },
 
-    this.protocol.dashboardtable('All').subscribe(
-      (data: any) => {
-        console.log(data)
+      ]
+    };
+    this.dataCra = {
+      labels: ['No.of Screened', 'Not Screened'
+      ],
+      datasets: [
+        {
 
-        this.subjectDetails = data
-        // console.log(data)
+          data: [0,0],
+          backgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+            
+          ],
+          hoverBackgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+           
+          ]
+        }
+      ]
 
+    };
+    this.subjectDetails = []
+    this.protocol.dashboardtable('all').subscribe(
+      (data: any) => {     
+        this.subjectDetails = data  
+       
+        this.basicData = {
+          labels: data.bar_data.protocol_ids,
+          datasets: [
+            {
+              label: 'Sample Collected',
+              backgroundColor: '#42A5F5',
+              data: data.bar_data.values
+            },
+    
+          ]
+        };
+        this.dataCra = {
+          labels: ['No.of Screened', 'Not Screened'
+          ],
+          datasets: [
+            {
+  
+              data: data.pie_chart.values,
+              backgroundColor: [
+                "#D98880 ",
+                '#F5B7B1',
+                '#FDEBD0 ',
+                "#45B39D",
+                "#A2D9CE ",
+                '#D0ECE7'
+              ],
+              hoverBackgroundColor: [
+                "#D98880 ",
+                '#F5B7B1',
+                '#FDEBD0 ',
+                "#45B39D",
+                "#A2D9CE ",
+                '#D0ECE7'
+              ]
+            }
+          ]
+  
+        };
+  
       },
       (err: any) => {
         // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     )
 
-    this.protocol.dashboardtable('All').subscribe(
-      (data: any) => {
-        console.log(data)
-  
-        this.subjectDetails = data
-        // console.log(data)
-  
-      },
-      (err: any) => {
-        // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-      }
-    )
-  
   }
   }
   

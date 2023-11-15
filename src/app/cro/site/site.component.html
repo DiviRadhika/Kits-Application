@@ -79,7 +79,7 @@
 
                       <tr class="odd" style="vertical-align: 12px;"
                         *ngFor="let siteData of uniqueCombinedArray | sort:sortedColumn:sortDirection | paginate: { id: 'sitePagination', itemsPerPage: pageSize, currentPage: page }; let i=index">
-                        <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="dashboard()">{{siteData.user_protocol_id}}</td>
+                        <td class="sorting_1 dtr-control"  style="color:blue;cursor: pointer" (click)="dashboard(siteData)">{{siteData.user_protocol_id}}</td>
                         <td>{{siteData.protocol_name}}</td>
 
 

@@ -146,14 +146,7 @@
               </p-card>
             </div>
           </div>
-          <!-- <div class="col-md-2">
-            <div class="form-group">
-              <p-card class="cardcolor" class="row">
-                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Patients</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
-              </p-card>
-            </div>
-          </div> -->
+       
           <div class="col-md-2">
             <div class="form-group">
               <p-card class="cardcolor">
@@ -177,29 +170,6 @@
         </div>
 
 
-
-
-
-        <!-- <div class="col-md-2">
-            <div class="form-group">
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 34%;" style="text-align: center;">Pending Samples </h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_pending_collections}}</h6>
-
-
-              </p-card>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 34%;" style="text-align: center;">Received Samples</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_received_collections}}</h6>
-
-
-              </p-card>
-            </div>
-          </div> -->
 
       </div>
       <div *ngIf="verificationFields">
@@ -270,7 +240,46 @@
       </div>
 
 
+      <div *ngIf="acknowledgementFields">
+        <br>
+        <br>
+        <div class="row">
 
+          <div class="col-md-2" style="margin-left: 20px;">
+            <div class="form-group">
+              <p-card class="cardcolor" class="row">
+                <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 24%;" style="text-align: center;">Received </h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
+
+
+              </p-card>
+
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <p-card class="cardcolor">
+                <h5 style="margin-left: 24%;" style="text-align: center; font-size: 100%;">Pending </h5>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits || 9}}</h6>
+
+
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
      
 
 
@@ -315,24 +324,10 @@
               </p-card>
             </div>
           </div>
-          <div class="col-md-2">
-            <div class="form-group" >
-              <p-card class="cardcolor">
-                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Sites</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
-
-
-              </p-card>
-            </div>
-          </div>
+         
         </div>
       </div>
-      <!-- <br>
-      <br>
-      <br> -->
-
-      <!-------------------================ Sponser =============------------------>
-      <!-------------------================ Sponser =============------------------>
+    
 
 
 
@@ -344,7 +339,7 @@
           <div class="col-md-2" style="margin-left: 20px;">
             <div class="form-group">
               <p-card class="cardcolor">
-                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Protocols </h5>
+                <h5 style="margin-left: 54%;" style="text-align: center;">No.of Studies </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}
                 </h6>
               </p-card>
@@ -465,6 +460,7 @@
                                   </td>
                                 </tr>
                               </tbody>
+                           
                             </table>
 
                           </div>
@@ -511,9 +507,10 @@
                     </div>
                   </div>
                   <div *ngIf="enablestudy">
-                    <div class="row" style="margin-top:2%">
-                      <h4 style="color:blue">Dashboard for Study : P001</h4>
+                    <h4 style="color:blue">Dashboard for Study : {{protoname}}</h4>
                       <br>
+                    <div class="row" style="margin-top:2%">
+                      
                       <div class="col-md-3">
                         <h5 style="color:blue"> Summary Panel</h5>
                       </div>
@@ -551,18 +548,18 @@
                               <tbody>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Countries</th>
-                                  <td>{{subjectDetails.actual_countries}}</td>
-                                  <td>{{subjectDetails.planned_countries}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_countries}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_countries}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Sites</th>
-                                  <td>{{subjectDetails.actual_sites}}</td>
-                                  <td>{{subjectDetails.planned_sites}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_sites}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_sites}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Subjects Screened</th>
-                                  <td>{{subjectDetails.acutal_subjects_screened}}</td>
-                                  <td>{{subjectDetails.planned_subects_screened}}</td>
+                                  <td>{{subjectDetailsprotocol.acutal_subjects_screened}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_subects_screened}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
@@ -572,8 +569,8 @@
 
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Samples Received</th>
-                                  <td>{{subjectDetails.actual_sample_received}}</td>
-                                  <td>{{subjectDetails.planed_sample_received}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_sample_received}}</td>
+                                  <td>{{subjectDetailsprotocol.planed_sample_received}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
@@ -592,6 +589,7 @@
                                   </td>
                                 </tr>
                               </tbody>
+                           
                             </table>
 
                           </div>
@@ -603,7 +601,7 @@
                         <div class="form-group">
 
 
-                          <p-chart type="doughnut" [data]="dataCra" [options]="chartOptions"
+                          <p-chart type="doughnut" [data]="dataCraProtocol" [options]="chartOptions"
                             [style]="{'width': '2%'}"></p-chart>
 
                         </div>
@@ -613,7 +611,7 @@
                       <div class="col-md-5" style="margin-top: 6%;">
                         <div class="form-group">
 
-                          <p-chart class="custom-chart" type="bar" [data]="basicData"
+                          <p-chart class="custom-chart" type="bar" [data]="basicDataProtocol"
                             [options]="basicOptions"></p-chart>
                         </div>
 

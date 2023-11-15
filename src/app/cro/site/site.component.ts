@@ -65,82 +65,110 @@ export class SiteComponent implements OnInit {
 
   ngOnInit(): void {
   this.getSitedetails();
-  this.getsubjectDetails()
-  this.basicData = {
-    labels: ['P001'],
-    datasets: [
-      {
-        label: 'Received',
-        backgroundColor: '#42A5F5',
-        data: [20]
-      },
-
-    ]
-  };
-  this.dataCra = {
-    labels: ['No.of Screened', 'Not Screened'
-    ],
-    datasets: [
-      {
-
-        data: [10, 22],
-        backgroundColor: [
-          "#D98880 ",
-          '#F5B7B1',
-          '#FDEBD0 ',
-          "#45B39D",
-          "#A2D9CE ",
-          '#D0ECE7'
-        ],
-        hoverBackgroundColor: [
-          "#D98880 ",
-          '#F5B7B1',
-          '#FDEBD0 ',
-          "#45B39D",
-          "#A2D9CE ",
-          '#D0ECE7'
-        ]
-      }
-    ]
-
-  };
-
+ 
+  
+ 
   }
-  dashboard(){
+  dashboard(data: any){
     this.crasiteenable = true
     this.tabledisplay = false
+    this.getsubjectDetails(data.protocol_id)
 }
 change(){
   this.crasiteenable = false
   this.tabledisplay = true
 
 }
-  getsubjectDetails() {
+  getsubjectDetails(val:any) {
+    this.subjectDetails= []
+    this.basicData = {
+      labels: '',
+      datasets: [
+        {
+          label: 'Sample Collected',
+          backgroundColor: '#42A5F5',
+          data: [0,0]
+        },
 
-    this.protocol.dashboardtable('All').subscribe(
+      ]
+    };
+    this.dataCra = {
+      labels: ['No.of Screened', 'Not Screened'
+      ],
+      datasets: [
+        {
+
+          data: [0,0],
+          backgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+            '#FDEBD0 ',
+            "#45B39D",
+            "#A2D9CE ",
+            '#D0ECE7'
+          ],
+          hoverBackgroundColor: [
+            "#D98880 ",
+            '#F5B7B1',
+            '#FDEBD0 ',
+            "#45B39D",
+            "#A2D9CE ",
+            '#D0ECE7'
+          ]
+        }
+      ]
+
+    };
+
+    this.protocol.dashboardtable(val).subscribe(
       (data: any) => {
-        console.log(data)
-
+ 
         this.subjectDetails = data
-        // console.log(data)
+        this.basicData = {
+          labels: data.bar_data.protocol_ids,
+          datasets: [
+            {
+              label: 'Sample Collected',
+              backgroundColor: '#42A5F5',
+              data: data.bar_data.values
+            },
+    
+          ]
+        };
+        this.dataCra = {
+          labels: ['No.of Screened', 'Not Screened'
+          ],
+          datasets: [
+            {
+  
+              data: data.pie_chart.values,
+              backgroundColor: [
+                "#D98880 ",
+                '#F5B7B1',
+                '#FDEBD0 ',
+                "#45B39D",
+                "#A2D9CE ",
+                '#D0ECE7'
+              ],
+              hoverBackgroundColor: [
+                "#D98880 ",
+                '#F5B7B1',
+                '#FDEBD0 ',
+                "#45B39D",
+                "#A2D9CE ",
+                '#D0ECE7'
+              ]
+            }
+          ]
+  
+        };
 
       },
       (err: any) => {
         // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     )
-    // this.protocol.dashboardtable('All').subscribe(
-    //   (data: any) => {
-    //     console.log(data)
-
-    //     this.subjectDetails = data
-    //     // console.log(data)
-
-    //   },
-    //   (err: any) => {
-    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-    //   }
-    // )
+  
 
   }
 
