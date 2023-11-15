@@ -55,7 +55,7 @@ export const endPointsUser = {
     getProtocolId: `${apin}/cro_protocol/`,
     kitsinventory:`${apin}/kits_inventory_ns/`,
     kitsnsv:`${apin}/kits_ns/`,
-    dashboardtable:`${apin}/dashboard_table`,
+    dashboardtable:`${apin}/dashboard_table/`,
 
     // Endpoints for Preparatiion
     getPreparation: `${apin}/clab_kit_preparations`,

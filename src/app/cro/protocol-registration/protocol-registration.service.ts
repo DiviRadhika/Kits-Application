@@ -26,8 +26,8 @@ export class ProtocolService {
   getProtocolId(id: any): Observable<any> {
     return this.http.get(endPointsUser.getProtocolId + id)
   }
-  dashboardtable(): Observable<any> {
-    return this.http.get(endPointsUser.dashboardtable) 
+  dashboardtable(id: any,): Observable<any> {
+    return this.http.get(endPointsUser.dashboardtable+id) 
   }
   
   kitsinventory(id: any, payload: any): Observable<any> {

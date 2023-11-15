@@ -1,5 +1,3 @@
-
-
 <!-- Begin page -->
 
 <div id="layout-wrapper">
@@ -29,20 +27,18 @@
 
                             </h4>
 
- 
+
 
                             <div class="page-title-right">
 
                                 <ol class="breadcrumb m-0">
 
                                     <li class="breadcrumb-item"> <a routerLink="/home/cro/dashboards"
-
                                             class="waves-effect">Dashboard</a>
 
                                     </li>
 
                                     <li class="breadcrumb-item"><a routerLink="/home/site/viewCRAAcknowledgement"
-
                                             class="waves-effect">Study</a></li>
 
                                     <li class="breadcrumb-item active">Acknowledgement By Site : {{name}}</li>
@@ -61,7 +57,7 @@
 
                 <p-toast></p-toast>
 
- 
+
 
                 <div class="card">
 
@@ -73,39 +69,32 @@
 
 
 
- 
+
 
                                 <div *ngIf="displayValues" class="col-md-4 mb-3">
 
- 
+
 
                                     <label for="formrow-firstname-input" class="form-label">Study Name</label>
 
-                                  <input autocomplete="off" type="text"
-
- 
-
- 
-
-placeholder="Study Name" formControlName="protocol_name"
-
-                                        class="form-control" value="" />
+                                    <input autocomplete="off" type="text" placeholder="Study Name"
+                                        formControlName="protocol_name" class="form-control" value="" />
 
                                 </div>
 
- 
+
 
                             </div>
 
                         </form>
 
- 
 
- 
+
+
 
                         <hr class="mt-4 mb-4" />
 
- 
+
 
                         <div class="row">
 
@@ -121,12 +110,6 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                     <div class="tab-pane active" role="tabpanel">
 
- 
-
-                                        <br>
-
- 
-
                                         <p-tabView>
 
                                             <p-tabPanel header="Screening">
@@ -139,125 +122,121 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                                 </h5>
 
-                                             
+
 
                                                 <br>
 
                                                 <div class="row">
 
-                                               
-                                          
-
-                                                            <div class="table-responsive" [formGroup]="ScreenKitForm">
-
-                                                                <table class="table table-striped mb-0"
-
-                                                                    formArrayName="screenKitList">
-
-                                                                    <thead Style="background:#EEE">
-
-                                                                        <tr>
-                                                                            <th  style="width: 120px;">KitId</th>
-                                                                            <th  style="width: 120px;">Central Lab KitId</th>
-                                                                            <th  style="width: 120px;">Expiration Date</th>
-                                                                            <th  style="width: 120px;">Status</th>
-                                                                            
-                                                                            <th  style="width: 120px;">Received Date</th>
-                                                                            <th style="width: 120px;">Remarks</th>
-                                                                        </tr>
-
-                                                                    </thead>
-
- 
-
-                                                                    <tbody>
-
- 
-
-                                                                        <ng-container *ngFor="let item of ScreenKitForm.get('screenKitList').controls; let i = index">
-                                                                            <tr [formGroupName]="i" *ngIf="item.get('site_id').value === this.ID">
-
-                                                          <td>
-                                                            <input autocomplete="off" type="text"
-                                                            formControlName="kitId"
-                                                                placeholder="kitId" class="form-control"
-                                                                [disabled]="true" value="{{item.kitId}}" />
-                                                        </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text"
-                                                                placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
-                                                                value={{item.ckitId}}
-                                                                class="form-control" />
-                                                        </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="date"
-                                                                placeholder="Expiration Date"
-                                                                value={{item.expiryDate}}  formControlName="expiryDate"
-                                                                class="form-control" [disabled]="true" />
-                                                        </td>
 
 
-                                                                            <td>
-                                                                                <select formControlName="siteStatus"
-                                                                                    class="form-select form-control">
-                                                                                    <option
 
-                                                                                        *ngFor="let s of preprationData" [value]="s.name">{{s.name}}</option>
+                                                    <div class="table-responsive" [formGroup]="ScreenKitForm">
 
-                                                                                </select>
-                                                                            </td>
-                                                                       
-                                             
+                                                        <table class="table table-striped mb-0"
+                                                            formArrayName="screenKitList" style="width: 110%;">
 
-                                                                            <td >
+                                                            <thead Style="background:#EEE">
 
-                                                                                <input autocomplete="off" type="date"
+                                                                <tr>
+                                                                    <th style="width: 150px;">KitId</th>
+                                                                    <th style="width: 120px;">Central Lab KitId</th>
+                                                                    <th style="width: 20px;">Expiration Date</th>
+                                                                    <th style="width: 170px;">Status</th>
 
-                                                                                    placeholder="Date"
+                                                                    <th style="width: 120px;">Received Date</th>
+                                                                    <th style="width: 120px;">Remarks</th>
+                                                                </tr>
 
-                                                                                    class="form-control"
+                                                            </thead>
 
-                                                                                    formControlName="recievedDate"
 
-                                                                                    value="" />
 
-                                                                            </td>
+                                                            <tbody>
 
- 
 
-                                                                            <td >
 
-                                                                                <input autocomplete="off" type="text"
+                                                                <ng-container
+                                                                    *ngFor="let item of ScreenKitForm.get('screenKitList').controls; let i = index">
+                                                                    <tr [formGroupName]="i"
+                                                                        *ngIf="item.get('site_id').value === this.ID">
 
-                                                                                    placeholder="Remarks"
+                                                                        <td>
+                                                                            <input autocomplete="off" type="text"
+                                                                                formControlName="kitId"
+                                                                                placeholder="kitId" class="form-control"
+                                                                                [disabled]="true"
+                                                                                value="{{item.kitId}}" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input autocomplete="off" type="text"
+                                                                                placeholder="LabKitId"
+                                                                                formControlName="ckitId"
+                                                                                [disabled]="true" value={{item.ckitId}}
+                                                                                class="form-control" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input autocomplete="off" type="date"
+                                                                                placeholder="Expiration Date"
+                                                                                value={{item.expiryDate}}
+                                                                                formControlName="expiryDate"
+                                                                                class="form-control"
+                                                                                [disabled]="true" />
+                                                                        </td>
 
-                                                                                    formControlName="siteRemarks"
 
-                                                                                    class="form-control" value="" />
+                                                                        <td>
+                                                                            <select formControlName="siteStatus"
+                                                                                class="form-select form-control">
+                                                                                <option *ngFor="let s of preprationData"
+                                                                                    [value]="s.name">{{s.name}}</option>
 
-                                                                            </td>
+                                                                            </select>
+                                                                        </td>
 
-                                                                        </tr>
-                                                                        </ng-container>
 
-                                                                    </tbody>
 
-                                                                </table>
+                                                                        <td>
 
-                                                            </div>
+                                                                            <input autocomplete="off" type="date"
+                                                                                placeholder="Date" class="form-control"
+                                                                                formControlName="recievedDate"
+                                                                                value="" />
 
-                                                        </div>
+                                                                        </td>
+
+
+
+                                                                        <td>
+
+                                                                            <input autocomplete="off" type="text"
+                                                                                placeholder="Remarks"
+                                                                                formControlName="siteRemarks"
+                                                                                class="form-control" value="" />
+
+                                                                        </td>
+
+                                                                    </tr>
+                                                                </ng-container>
+
+                                                            </tbody>
+
+                                                        </table>
+
+                                                    </div>
+
+                                                </div>
 
 
                                             </p-tabPanel>
 
- 
+
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                            header="{{item.alternate_names | titlecase}}">
- 
+                                                header="{{item.alternate_names | titlecase}}">
 
- 
+
+
 
                                                 <h3> {{item.kit_variant}}</h3>
 
@@ -266,105 +245,109 @@ placeholder="Study Name" formControlName="protocol_name"
                                                     Visit Kit Count : {{vcount}}
 
                                                 </h5>
- 
+
                                                 <br>
                                                 <div class="row">
 
-                                                
 
 
-                                                            <div class="table-responsive"
 
-                                                                [formGroup]="item.visitKitFormGroup">
+                                                    <div class="table-responsive" [formGroup]="item.visitKitFormGroup">
 
-                                                                <table class="table table-striped mb-0"
+                                                        <table class="table table-striped mb-0"
+                                                            formArrayName="visitKitList">
 
-                                                                    formArrayName="visitKitList">
+                                                            <thead Style="background:#EEE">
+                                                                <tr>
+                                                                    <th style="width: 120px;">KitId</th>
+                                                                    <th style="width: 120px;">Central Lab KitId</th>
+                                                                    <th style="width: 120px;">Expiration Date</th>
+                                                                    <th style="width: 120px;">Status</th>
 
-                                                                    <thead Style="background:#EEE">
-                                                                        <tr>
-                                                                            <th  style="width: 120px;">KitId</th>
-                                                                            <th  style="width: 120px;">Central Lab KitId</th>
-                                                                            <th  style="width: 120px;">Expiration Date</th>
-                                                                            <th  style="width: 120px;">Status</th>
-                                                                            
-                                                                            <th  style="width: 120px;">Received Date</th>
-                                                                            <th style="width: 120px;">Remarks</th>
-                                                                        </tr>
-                                                                    </thead>
+                                                                    <th style="width: 120px;">Received Date</th>
+                                                                    <th style="width: 120px;">Remarks</th>
+                                                                </tr>
+                                                            </thead>
 
-                                                                    <tbody *ngIf="item.visitsList">
+                                                            <tbody *ngIf="item.visitsList">
 
-                                                                        <ng-container *ngFor="let control of item.visitsList.controls; let j = index">
-                                                                            <tr [formGroupName]="j" *ngIf="control.get('site_id').value === this.ID">
-                                                                            <td>
-                                                                                <input autocomplete="off" type="text"
+                                                                <ng-container
+                                                                    *ngFor="let control of item.visitsList.controls; let j = index">
+                                                                    <tr [formGroupName]="j"
+                                                                        *ngIf="control.get('site_id').value === this.ID">
+                                                                        <td>
+                                                                            <input autocomplete="off" type="text"
                                                                                 formControlName="kitId"
-                                                                                    placeholder="kitId" class="form-control"
-                                                                                    [disabled]="true" value="{{item.kitId}}" />
-                                                                            </td>
-                                                                            <td>
-                                                                                <input autocomplete="off" type="text"
-                                                                                    placeholder="LabKitId"  formControlName="ckitId" [disabled]="true"
-                                                                                    value={{item.ckitId}}
-                                                                                    class="form-control" />
-                                                                            </td>
-                                                                            <td>
-                                                                                <input autocomplete="off" type="date"
-                                                                                    placeholder="Expiration Date"
-                                                                                    value={{item.expiryDate}}  formControlName="expiryDate"
-                                                                                    class="form-control" [disabled]="true" />
-                                                                            </td>
-                                                                            <td>
+                                                                                placeholder="kitId" class="form-control"
+                                                                                [disabled]="true"
+                                                                                value="{{item.kitId}}" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input autocomplete="off" type="text"
+                                                                                placeholder="LabKitId"
+                                                                                formControlName="ckitId"
+                                                                                [disabled]="true" value={{item.ckitId}}
+                                                                                class="form-control" />
+                                                                        </td>
+                                                                        <td>
+                                                                            <input autocomplete="off" type="date"
+                                                                                placeholder="Expiration Date"
+                                                                                value={{item.expiryDate}}
+                                                                                formControlName="expiryDate"
+                                                                                class="form-control"
+                                                                                [disabled]="true" />
+                                                                        </td>
+                                                                        <td>
 
-                                                                                <select formControlName="siteStatus"
+                                                                            <select formControlName="siteStatus"
+                                                                                class="form-select form-control">
+                                                                                <option *ngFor="let s of preprationData"
+                                                                                    [value]="s.name"> {{s.name}}
+                                                                                </option>
+                                                                            </select>
+                                                                        </td>
 
-                                                                                    class="form-select form-control">
-                                                                                    <option  *ngFor="let s of preprationData" [value]="s.name">  {{s.name}}</option>
-                                                                                </select>
-                                                                            </td>
-                                                                      
-                                                                            <td >
-                                                                                <input autocomplete="off" type="date"
+                                                                        <td>
+                                                                            <input autocomplete="off" type="date"
+                                                                                placeholder="Date" class="form-control"
+                                                                                formControlName="recievedDate"
+                                                                                value={{date}} />
+                                                                        </td>
 
-                                                                                    placeholder="Date"  class="form-control" formControlName="recievedDate"   value={{date}} />
-                                                                            </td>
+                                                                        <td>
+                                                                            <input autocomplete="off" type="text"
+                                                                                placeholder="Remarks"
+                                                                                formControlName="siteRemarks"
+                                                                                class="form-control" value="" />
+                                                                        </td>
 
-                                                                            <td >
-                                                                                <input autocomplete="off" type="text"
 
-                                                                                    placeholder="Remarks"  formControlName="siteRemarks"   class="form-control" value="" />
-                                                                            </td>
 
- 
+                                                                    </tr>
+                                                                </ng-container>
 
-                                                                        </tr>
-                                                                        </ng-container>
+                                                            </tbody>
 
-                                                                    </tbody>
+                                                        </table>
 
-                                                                </table>
+                                                    </div>
 
-                                                            </div>
+                                                </div>
 
-                                                        </div>
 
-                                                
 
                                             </p-tabPanel>
 
                                             <br>
 
- 
+
 
                                             <div class="col-md-12 mb-3" align="right">
 
                                                 <div class="mb-2 text-right" width="100%">
 
                                                     <button type="button"
-
                                                         class="btn btn-warning waves-effect btn-label waves-light r-blue pull-Right"
-
                                                         style="width: 150px; height: 40px" (click)="SubmitData()">
 
                                                         <i class="bx bx-hdd label-icon"></i> Submit
@@ -375,21 +358,21 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                             </div>
 
- 
 
- 
+
+
 
                                         </p-tabView>
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
 
                                         <br>
 
@@ -397,17 +380,17 @@ placeholder="Study Name" formControlName="protocol_name"
 
                                         <div class="row">
 
- 
 
- 
 
- 
+
+
+
 
                                         </div>
 
- 
 
- 
+
+
 
                                     </div>
 
@@ -417,13 +400,13 @@ placeholder="Study Name" formControlName="protocol_name"
 
                         </div>
 
- 
 
- 
+
+
 
                     </div>
 
- 
+
 
                     <!-- end col -->
 
@@ -435,11 +418,11 @@ placeholder="Study Name" formControlName="protocol_name"
 
             <!-- HTML template -->
 
- 
 
- 
 
- 
+
+
+
 
             <!-- container-fluid -->
 
@@ -447,7 +430,7 @@ placeholder="Study Name" formControlName="protocol_name"
 
         <!-- End Page-content -->
 
- 
+
 
         <footer class="footer" style="position: fixed;">
 
@@ -469,11 +452,11 @@ placeholder="Study Name" formControlName="protocol_name"
 
 </div>
 
- 
+
 
 <!-- END layout-wrapper -->
 
- 
+
 
 <!-- Right bar overlay-->
 

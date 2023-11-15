@@ -117,7 +117,7 @@ change(){
 }
   getsubjectDetails() {
 
-    this.protocol.dashboardtable().subscribe(
+    this.protocol.dashboardtable('All').subscribe(
       (data: any) => {
         console.log(data)
 
@@ -129,6 +129,18 @@ change(){
         // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
       }
     )
+    // this.protocol.dashboardtable('All').subscribe(
+    //   (data: any) => {
+    //     console.log(data)
+
+    //     this.subjectDetails = data
+    //     // console.log(data)
+
+    //   },
+    //   (err: any) => {
+    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+    //   }
+    // )
 
   }
 

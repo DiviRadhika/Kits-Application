@@ -422,23 +422,23 @@ export class MaterialComponent implements OnInit {
     console.log(e.target.value)
     this.enablestudy = true
     this.getsubjectDetails()
-    // this.protocol.dashboardtable(e.target.value).subscribe(
-    //   (data: any) => {
-    //     console.log(data)
+    this.protocol.dashboardtable(e.target.value).subscribe(
+      (data: any) => {
+        console.log(data)
 
-    //     this.subjectDetails = data
-    //     // console.log(data)
+        this.subjectDetails = data
+        // console.log(data)
 
-    //   },
-    //   (err: any) => {
-    //     // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
-    //   }
-    // )
+      },
+      (err: any) => {
+        // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    )
   }
 
   getsubjectDetails() {
 
-    this.protocol.dashboardtable().subscribe(
+    this.protocol.dashboardtable('All').subscribe(
       (data: any) => {
         console.log(data)
 
@@ -451,6 +451,20 @@ export class MaterialComponent implements OnInit {
       }
     )
 
+    this.protocol.dashboardtable('All').subscribe(
+      (data: any) => {
+        console.log(data)
+  
+        this.subjectDetails = data
+        // console.log(data)
+  
+      },
+      (err: any) => {
+        // this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+      }
+    )
+  
   }
+  }
+  
  
-}
