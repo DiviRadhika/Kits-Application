@@ -14,6 +14,7 @@ import { StudySiteacknowledgementComponent } from './study-siteacknowledgement/s
 import { NewkitsComponent } from './newkits/newkits.component';
 import { KitsnewComponent } from './kitsnew/kitsnew.component';
 import { DialogModule } from 'primeng/dialog';
+import { InputRestrictionDirective } from '../input-restriction.directive';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DialogModule } from 'primeng/dialog';
     ViewsitesSortPipe,
     StudySiteacknowledgementComponent,
     NewkitsComponent,
-    KitsnewComponent
+    KitsnewComponent,
+    InputRestrictionDirective
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,6 @@ import { DialogModule } from 'primeng/dialog';
     NgxPaginationModule,
     DialogModule
 
-  ]
+  ], exports:[InputRestrictionDirective]
 })
 export class SiteModule { }

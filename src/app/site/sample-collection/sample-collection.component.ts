@@ -533,7 +533,9 @@ export class SampleCollectionComponent implements OnInit {
     console.log(this.sponsers)
 
   }
-
+  getCurrentDate(): Date {
+    return new Date();
+  }
   SubmitData() {
 
     this.ScreenKitForm.get('screenKitList').enable()

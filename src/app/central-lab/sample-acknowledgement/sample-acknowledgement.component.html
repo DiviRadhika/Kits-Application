@@ -175,7 +175,7 @@
                                                             <thead Style="background:#EEE"> -->
                                                                 <tr>
                                                                     <th style="width: 140px;">KitId</th>
-                                                                    <th style="width: 130px;">Central Lab KitId</th>
+                                                                    <th style="width: 130px;">Central Lab Kit Id</th>
                                                                     <th style="width: 100px;">Site Id</th>
                                                                     <th style="width: 100px;">Patient Id</th>
                                                                     <th style="width: 120px;">Expiration Date</th>
@@ -324,7 +324,7 @@
 
                                                                         <input type="text" type="date"
                                                                             formControlName="acknowledgementDate"
-                                                                            placeholder="Remarks" value=""
+                                                                            placeholder="Date" value=""   max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                             class="form-control" />
 
                                                                     </td>
@@ -515,7 +515,7 @@
 
                                                                     <tr>
                                                                         <th style="width: 140px;">KitId</th>
-                                                                        <th style="width: 130px;">Central Lab KitId</th>
+                                                                        <th style="width: 130px;">Central Lab Kit Id</th>
                                                                         <th style="width: 100px;">Site Id</th>
                                                                         <th style="width: 100px;">Patient Id</th>
                                                                         <th style="width: 120px;">Expiration Date</th>
@@ -640,7 +640,7 @@
                                                                     </td>
                                                                     <td>
 
-                                                                        <input type="date"
+                                                                        <input type="date" placeholder="Date"  max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                             formControlName="acknowledgementDate"
                                                                             value="" class="form-control" />
 

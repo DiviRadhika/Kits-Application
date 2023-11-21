@@ -239,6 +239,7 @@ export class LabTestComponent implements OnInit {
           this.labFormval = false
           this.disableAdd = true
           this.disableaddbtn = true
+          this.searchText =''
         },
         (err: any) => {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });

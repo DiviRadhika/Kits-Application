@@ -140,7 +140,7 @@
 
                                                                 <tr>
                                                                     <th style="width: 150px;">KitId</th>
-                                                                    <th style="width: 120px;">Central Lab KitId</th>
+                                                                    <th style="width: 120px;">Central Lab Kit Id</th>
                                                                     <th style="width: 20px;">Expiration Date</th>
                                                                     <th style="width: 170px;">Status</th>
 
@@ -200,7 +200,7 @@
 
                                                                             <input autocomplete="off" type="date"
                                                                                 placeholder="Date" class="form-control"
-                                                                                formControlName="recievedDate"
+                                                                                formControlName="recievedDate"   max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                                 value="" />
 
                                                                         </td>
@@ -260,7 +260,7 @@
                                                             <thead Style="background:#EEE">
                                                                 <tr>
                                                                     <th style="width: 120px;">KitId</th>
-                                                                    <th style="width: 120px;">Central Lab KitId</th>
+                                                                    <th style="width: 120px;">Central Lab Kit Id</th>
                                                                     <th style="width: 120px;">Expiration Date</th>
                                                                     <th style="width: 120px;">Status</th>
 
@@ -310,7 +310,7 @@
                                                                         <td>
                                                                             <input autocomplete="off" type="date"
                                                                                 placeholder="Date" class="form-control"
-                                                                                formControlName="recievedDate"
+                                                                                formControlName="recievedDate" max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                                 value={{date}} />
                                                                         </td>
 

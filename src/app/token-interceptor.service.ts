@@ -64,7 +64,7 @@ export class TokenInterceptorService {
         }
       });
       if (sessionStorage.getItem('access_token') === '') {
-        alert('k')
+       
         sessionStorage.clear()
         this.router.navigate(['/login'])
       }

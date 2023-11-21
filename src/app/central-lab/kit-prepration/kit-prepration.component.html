@@ -120,7 +120,7 @@
                                                         <thead Style="background:#EEE">
                                                             <tr>
                                                                 <th>KitId</th>
-                                                                <th>Central Lab KitId</th>
+                                                                <th>Central Lab Kit Id</th>
                                                                 <th>Expiry Date</th>
                                                                 <th>Preparation</th>
 
@@ -183,7 +183,8 @@
                                             </p-tabPanel>
 
                                             <p-tabPanel header="Visits" *ngFor="let item of vMatDetails  let i = index"
-                                                header="{{item.alternate_names | titlecase}}">
+                                                header="{{item.alternate_names 
+                                                 | titlecase}} ">
 
                                                 <h3> {{item.kit_variant}}</h3>
                                                 <h5 class="mb-sm-0 font-size-18">
@@ -226,7 +227,7 @@
                                                         <thead Style="background:#EEE">
                                                             <tr>
                                                                 <th>KitId</th>
-                                                                <th>Central Lab KitId</th>
+                                                                <th>Central Lab Kit Id</th>
                                                                 <th>Expiry Date</th>
                                                                 <th>Preparation</th>
 

@@ -35,8 +35,7 @@ import { CalendarModule } from 'primeng/calendar';
     UploadResultsComponent,
     HeaderComponent,
     FooterComponent,
-    InstructionsAppDirective,
-    InputRestrictionDirective
+    
   ],
   imports: [
     BrowserModule,
@@ -60,6 +59,7 @@ import { CalendarModule } from 'primeng/calendar';
   ],
   
   providers: [MessageService, ConfirmationService,SortPipe, {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService, multi:true}],
-  bootstrap: [AppComponent,]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule { }

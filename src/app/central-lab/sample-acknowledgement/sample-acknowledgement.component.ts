@@ -711,6 +711,9 @@ export class SampleAcknowledgementComponent implements OnInit {
 
 
   }
+  getCurrentDate(): Date {
+    return new Date();
+  }
   uploadFileFull(evt: any, rowIndex: any) {
     let uploadedFilesfull = [];
     this.files1 = evt.target.files;

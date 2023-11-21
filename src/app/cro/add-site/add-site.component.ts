@@ -359,7 +359,7 @@ export class AddSiteComponent {
         this._cro.updateSiteDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Updated Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Details Updated Successfully' });
             }, 1000);
 
             this.router.navigate(['/home/cro/siteGrid'])
@@ -391,7 +391,7 @@ export class AddSiteComponent {
         this._cro.CreateSiteDetails(obj).subscribe(
           (data: any) => {
             setTimeout(() => {
-              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Deatails Added Successfully' });
+              this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Site Details Added Successfully' });
             }, 1000);
 
             this.router.navigate(['/home/cro/siteGrid'])

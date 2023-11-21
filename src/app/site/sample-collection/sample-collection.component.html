@@ -99,7 +99,7 @@
                                                                 <tr>
                                                                     <th style="width: 130px;">KitId</th>
                                                                  
-                                                                    <th style="width: 150px;">Central Lab KitId</th>
+                                                                    <th style="width: 150px;">Central Lab Kit Id</th>
                                                                     <th style="width: 100px;">Expiration Date</th>
                                                                     <th style="width: 120px;">Patient Id</th>
                                                                     <th style="width: 120px;">Patient Name</th>
@@ -149,7 +149,7 @@
                                                                     <td >
                                                                         <input autocomplete="off" type="text"
                                                                             placeholder="Patient Name"
-                                                                            formControlName="patientName"
+                                                                            formControlName="patientName" appInputRestriction="name"
                                                                             class="form-control" value="" />
                                                                     </td>
                                                                     <td >
@@ -170,7 +170,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <input autocomplete="off" type="date"
-                                                                            placeholder="Date"
+                                                                            placeholder="Date" max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                             formControlName="collectionDate"
                                                                             class="form-control"
                                                                             value={{date}} />
@@ -220,7 +220,7 @@
                                                                     <thead Style="background:#EEE; ">
                                                                         <tr>
                                                                     <th style="width: 130px;">KitId</th>
-                                                                    <th style="width: 150px;">Central Lab KitId</th>
+                                                                    <th style="width: 150px;">Central Lab Kit Id</th>
                                                                     <th style="width: 100px;">Expiration Date</th>
                                                                     <th style="width: 120px;">Patient Id</th>
                                                                     <th style="width: 120px;">Patient Name</th>
@@ -266,7 +266,7 @@
                                                                             <td >
                                                                                 <input autocomplete="off" type="text"
                                                                                     placeholder="Patient Name"
-                                                                                    formControlName="patientName"
+                                                                                    formControlName="patientName" appInputRestriction="name"
                                                                                     class="form-control" value="" />
                                                                             </td>
                                                                             <td >
@@ -289,7 +289,7 @@
                                                                                 <input autocomplete="off" type="date"
                                                                                     placeholder="Date"
                                                                                     formControlName="collectionDate"
-                                                                                    class="form-control"
+                                                                                    class="form-control" max="{{ getCurrentDate() | date: 'yyyy-MM-dd' }}"
                                                                                     value={{date}} />
                                                                             </td>
                                                                             <td>

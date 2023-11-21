@@ -112,7 +112,9 @@ export class StudySiteacknowledgementComponent implements OnInit {
     protocol_name: new FormControl("", [Validators.required]),
 
   });
-
+  getCurrentDate(): Date {
+    return new Date();
+  }
   ngOnInit() {
     this.activatedRoute.params.subscribe((data: any) => {
       this.id = data.id;

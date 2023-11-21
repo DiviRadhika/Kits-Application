@@ -77,7 +77,7 @@
                                 <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort}"></i>
                             </span></th>
                             <th tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"(click)="toggleSorting1()"
-                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email
+                              style="width: 364.2px;" aria-label="Email: activate to sort column ascending" (click)="sort('email')">Email Id
                               <span style="float: right;" class="sort-icons">
                                 <i class="bx bx-chevron-up" [ngClass]="{'active': isAscendingSort1}"></i>
                                 <i class="bx bx-chevron-down" [ngClass]="{'active': !isAscendingSort1}"></i>
@@ -93,8 +93,6 @@
                              >Actions</th>
                           </tr>
                         </thead>
-
-
                         <tbody>
                           <tr class="odd" style="  vertical-align: middle;"  *ngFor="let user of (userDetails | sort:sortedColumn:sortDirection) | paginate: { id: 'userPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCount }; let i=index">
                             <td class="sorting_1 dtr-control" (click)="edit(user.user_id, 'view')" style="color:blue; cursor: pointer;">
