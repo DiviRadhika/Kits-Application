@@ -110,8 +110,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://{}:{}@{}:5432/{}".format(
 )
 
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_size": 20,
-    "pool_recycle": 120,
+    "pool_size": 100,
+    "pool_recycle": 220,
     "pool_pre_ping": True,
     "connect_args": {"connect_timeout": 1000},
 }
@@ -278,7 +278,7 @@ clab_kit_preparation_ns.add_resource(
 clab_kit_preparations_ns.add_resource(GetProtocolsBySiteId, "/<string:site_uuid>")
 kits_ns.add_resource(KitsOperation, "/<string:protocol_id>/<string:site_uuid>")
 kits_inventory_ns.add_resource(KitsInventoryOperation, "/<string:site_uuid>")
-dashboard_table_ns.add_resource(DashboardTable, "")
+dashboard_table_ns.add_resource(DashboardTable, "/<string:protocol_id>")
 login_ns.add_resource(SendOTP, "/sendotp")
 login_ns.add_resource(UserLogin, "")
 login_ns.add_resource(TokenRefresh, "/refreshtoken")

@@ -300,34 +300,40 @@ class ClabKitPreparation(Resource):
 class DashboardTable(Resource):
     @dashboard_table_ns.doc("dashboard details")
     @jwt_required(fresh=True)
-    def get(resource):
+    def get(resource, protocol_id):
         response = {
-            "actual_sites": 0,
-            "planned_sites": 0,
-            "actual_countries": 0,
-            "planned_countries": 0,
+            "actual_sites": 1,
+            "planned_sites": 1,
+            "actual_countries": 1,
+            "planned_countries": 1,
             "acutal_subjects_screened": 0,
             "planned_subects_screened": 0,
             "actual_sample_received": 0,
             "planned_sample_received": 0,
+            "bar_data": {
+                "protocol_ids": ["P001", "P002", "P003", "P004", "P005"],
+                "values": [20, 12, 13, 21, 4],
+            },
+            "pie_chart": {
+                "datasets": ["screened", "notscreened"],
+                "values": [10, 2]
+            },
         }
-        kits = ClabKitPreparationModel.find_all()
+        kits = []
+        protocol_ids = []
+        if protocol_id == "all":
+            kits = ClabKitPreparationModel.find_all()
+        else:
+            kit = ClabKitPreparationModel.get_by_id(protocol_id)
+            kits.append(kit)
         for kit in kits:
             screening_kit_details = kit.screening_kit_details
             visit_kit_details = kit.visit_kit_details
             for index in range(len(screening_kit_details)):
                 screening_kit_data = screening_kit_details[index]
-                response["planned_sites"] = response["planned_sites"] + 1
-                response["planned_countries"] = response["planned_countries"] + 1
                 response["planed_sample_received"] = (
                     response["planned_sample_received"] + 1
                 )
-                if (
-                    "site_id" in screening_kit_data
-                    and screening_kit_data["site_id"] != ""
-                ):
-                    response["actual_sites"] = response["actual_sites"] + 1
-                    response["actual_countries"] = response["actual_countries"] + 1
                 if "patientId" in screening_kit_data:
                     if (
                         "collection" in screening_kit_data
@@ -340,14 +346,9 @@ class DashboardTable(Resource):
             for index in range(len(visit_kit_details)):
                 visits = visit_kit_details[index]
                 for visit_kit_data in visits:
-                    response["planned_sites"] = response["planned_sites"] + 1
-                    response["planned_countries"] = response["planned_countries"] + 1
                     response["planed_sample_received"] = (
                         response["planned_sample_received"] + 1
                     )
-                    if "site_id" in visit_kit_data and visit_kit_data["site_id"] != "":
-                        response["actual_sites"] = response["actual_sites"] + 1
-                        response["actual_countries"] = response["actual_countries"] + 1
                     if "patientId" in visit_kit_data:
                         if (
                             "collection" in visit_kit_data
@@ -457,18 +458,16 @@ class KitsOperation(Resource):
                                 ):
                                     continue
                             if age_filter == True:
-                                if (
-                                    "patientAge" not in screening_kit_data
-                                    or screening_kit_data["patientAge"]
-                                    != filters.get("age")
-                                ):
+                                if "patientAge" not in screening_kit_data or str(
+                                    screening_kit_data["patientAge"]
+                                ) != str(filters.get("age")):
                                     continue
                             if from_date_filter == True:
                                 if "collectionDate" not in screening_kit_data:
                                     continue
                                 from_date = parse(filters.get("from_date"))
                                 collection_date = parse(
-                                    screening_kit_data["collectinDate"]
+                                    screening_kit_data["collectionDate"]
                                 )
                                 if from_date > collection_date:
                                     continue
@@ -477,7 +476,7 @@ class KitsOperation(Resource):
                                     continue
                                 to_date = parse(filters.get("to_date"))
                                 collection_date = parse(
-                                    screening_kit_data["collectinDate"]
+                                    screening_kit_data["collectionDate"]
                                 )
                                 if to_date < collection_date:
                                     continue
@@ -524,22 +523,26 @@ class KitsOperation(Resource):
                                 ] != filters.get("gender"):
                                     continue
                             if age_filter == True:
-                                if "patientAge" not in visit_kit_data or visit_kit_data[
-                                    "patientAge"
-                                ] != filters.get("age"):
+                                if "patientAge" not in visit_kit_data or str(
+                                    visit_kit_data["patientAge"]
+                                ) != str(filters.get("age")):
                                     continue
                             if from_date_filter == True:
                                 if "collectionDate" not in visit_kit_data:
                                     continue
                                 from_date = parse(filters.get("from_date"))
-                                collection_date = parse(visit_kit_data["collectinDate"])
+                                collection_date = parse(
+                                    visit_kit_data["collectionDate"]
+                                )
                                 if from_date > collection_date:
                                     continue
                             if to_date_filter == True:
                                 if "collectionDate" not in visit_kit_data:
                                     continue
                                 to_date = parse(filters.get("to_date"))
-                                collection_date = parse(visit_kit_data["collectinDate"])
+                                collection_date = parse(
+                                    visit_kit_data["collectionDate"]
+                                )
                                 if to_date < collection_date:
                                     continue
                             if visit_filter == True:
@@ -751,3 +754,4 @@ class KitsInventoryOperation(Resource):
                 ) or kit_type_filter == False:
                     response["data"].append(obj)
         return response, 200
+
