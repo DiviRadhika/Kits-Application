@@ -257,7 +257,7 @@ export class KitPreprationComponent implements OnInit {
     const preprationControl = this.ScreenKitForm.get('screenKitList.' + rowIndex + '.prepration');
     if (selectedValue.target.value === 'Completed') {
       if (!kitIdControl.value) {
-        alert('Please provide Central Lab KitId before selecting "Completed".');
+        alert('Please provide Central Lab Kit Id before selecting "Completed".');
         preprationControl.patchValue(this.preprationData[0].value);
       }
       else if(!expiryDateControl.value){

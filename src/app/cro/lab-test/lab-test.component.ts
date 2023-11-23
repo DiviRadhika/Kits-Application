@@ -87,6 +87,7 @@ export class LabTestComponent implements OnInit {
 
       this.selectedIndex = this.selectedIndex + 1;
       this.meterialsData()
+      this.breadcrumb = 'Material'
     }
 
     sessionStorage.setItem('tab', '');
@@ -135,8 +136,7 @@ export class LabTestComponent implements OnInit {
     })
   }
   onTabChange(event: any) {
-    // Handle tab change event here
-    console.log('Tab changed:', event.index); // You can access the selected tab index
+   
     if(event.index === 0){
       this.breadcrumb = 'Lab Test'
     }
