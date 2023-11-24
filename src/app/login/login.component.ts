@@ -135,7 +135,7 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
         }
       );
-      ;
+      
    
     
 

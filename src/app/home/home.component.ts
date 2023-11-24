@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmationService,ConfirmEventType, MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { AdminService } from '../applicationadmin/admin.service';
 
 @Component({
@@ -13,14 +13,14 @@ import { AdminService } from '../applicationadmin/admin.service';
 export class HomeComponent implements OnInit {
   addprofile: boolean = false
   updatepassword: boolean = false
-  passwordvisible:boolean = false;
+  passwordvisible: boolean = false;
   showPassword: boolean = false;
   showPassword1: boolean = false;
 
   @ViewChild('myModal') myModal: any;
 
 
-  menuItems :any[] = [];
+  menuItems: any[] = [];
   profileval: boolean = false;
   fullName: any
   log: boolean = false;
@@ -35,22 +35,22 @@ export class HomeComponent implements OnInit {
   }
 
 
-  constructor(private messageService:MessageService ,private admin: AdminService, private route: Router,
+  constructor(private messageService: MessageService, private admin: AdminService, private route: Router,
     private formBuilder: FormBuilder, private confirmationService: ConfirmationService, private router: Router) {
-     this.isSidebarShrunk = false;
+    this.isSidebarShrunk = false;
 
 
 
-   }
+  }
 
   public showSubheadings = false;
   public updatepasswordForm: FormGroup = new FormGroup({
     passwordDetails: new FormControl("", [Validators.required]),
-    email:new FormControl ("",[Validators.required]),
-    otp:new FormControl("",[Validators.required]),
+    email: new FormControl("", [Validators.required]),
+    otp: new FormControl("", [Validators.required]),
     // oldpassword: new FormControl("", [Validators.required]),
     passwordp: new FormControl("", [Validators.required, Validators.minLength(8)]),
-    passwordu: new FormControl("",[Validators.required, Validators.minLength(8)] )
+    passwordu: new FormControl("", [Validators.required, Validators.minLength(8)])
     // confirmPassword: new FormControl("", [Validators.required]),
 
 
@@ -61,194 +61,116 @@ export class HomeComponent implements OnInit {
   }
   confirm2() {
     this.confirmationService.confirm({
-        message: 'Are you sure Do you want to Logout?',
-        header: 'Logout Confirmation',
-        icon: 'pi pi-info-circle',
-        accept: () => {
-          this.clear()
-        },
-        reject: (type: any) => {
-            // switch(type) {
-            //     case ConfirmEventType.REJECT:
-            //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
-            //     break;
-            //     case ConfirmEventType.CANCEL:
-            //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
-            //     break;
-            // }
-        }
+      message: 'Are you sure Do you want to Logout?',
+      header: 'Logout Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.clear()
+      },
+      reject: (type: any) => {
+        // switch(type) {
+        //     case ConfirmEventType.REJECT:
+        //         this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+        //     break;
+        //     case ConfirmEventType.CANCEL:
+        //         this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+        //     break;
+        // }
+      }
     });
-}
+  }
   role: any
   adminRole: boolean = false;
   sponsorRole: boolean = false;
   isfullscreen = false;
-  croRole: boolean= false;
+  croRole: boolean = false;
   centralLab: boolean = false;
   siteRole: boolean = false;
   ngOnInit(): void {
 
     this.role = sessionStorage.getItem('role')
-    
-    this.fullName =  sessionStorage.getItem('fullName')
-    if(this.role === 'Admin' ||this.role === 'admin' ){
+
+    this.fullName = sessionStorage.getItem('fullName')
+    if (this.role === 'Admin' || this.role === 'admin') {
       this.menuItems = [
-        // {
-          // label: 'Application Admin',
-          // icon: 'bx bxs-user-check',
-          // expanded: false,
-          // subItems: [
-            { label: 'DASHBOARD', link: '/home/cro/dashboards'},
-            { label: 'CRO', link: '/home/admin/croGrid' },
-            { label: 'USERS', link: '/home/admin/userGrid' },
-            // { label: 'Dashboards', link: '/home/cro/material' }
-          // ]
 
-
-        // } ,
-        // {
-        //   label: 'CRO',
-        //   icon: 'bx bxs-user-check',
-        //   expanded: false,
-        //   subItems: [
-        //     { label: 'Sponsor', link: '/home/cro/sponsorGrid' },
-        //     { label: 'Site', link: '/home/cro/siteGrid' },
-        //     { label: 'LabTest', link: '/home/cro/labTestGrid' },
-        //     { label: 'Study Summary', link: '/home/cro/protocolGrid' }
-        //   ]
-        // },
-
-        // {
-        //   label: 'CRA',
-        //   icon: 'bx bxs-analyse',
-        //   expanded: false,
-        //   subItems: [
-        //     // { label: 'Sample Collection', link: '/home/site/viewCRA' }
-        //     { label: 'Sample Collection', link: '/home/site/sampleCollection' }
-        //   ]
-        // }
-
-
-
-        // Other menu items for admin role...
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'CRO', link: '/home/admin/croGrid' },
+        { label: 'USERS', link: '/home/admin/userGrid' },
+   
       ];
     }
-    else if(this.role === 'Sponsor'){
+    else if (this.role === 'Sponsor') {
       this.menuItems = [
-        // {
-          // label: 'CRO',
-          // icon: 'bx bxs-user-check',
-          // expanded: false,
-          // subItems: [
-            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-            { label: 'SPONSOR', link: '/home/Sponsor/sponsorStudies' },
-
-          // ]
-        // },
+  
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'SPONSOR', link: '/home/Sponsor/sponsorStudies' }
 
       ];
     }
-    else if(this.role === 'CRO'){
+    else if (this.role === 'CRO') {
       this.menuItems = [
-        // {
-          // label: 'CRO',
-          // icon: 'bx bxs-user-check',
-          // expanded: false,
-          // subItems: [
-
-            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-            { label: 'SPONSOR', link: '/home/cro/sponsorGrid' },
-            { label: 'SITE', link: '/home/cro/siteGrid' },
-            { label: 'LAB TEST', link: '/home/cro/labTestGrid' },
-            { label: 'LAB CREATION', link: '/home/cro/labGrid' },
-            { label: 'STUDY SUMMARY', link: '/home/cro/protocolGrid' },
 
 
-          // ]
-        // },
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'SPONSOR', link: '/home/cro/sponsorGrid' },
+        { label: 'SITE', link: '/home/cro/siteGrid' },
+        { label: 'LAB TEST', link: '/home/cro/labTestGrid' },
+        { label: 'LAB CREATION', link: '/home/cro/labGrid' },
+        { label: 'STUDY SUMMARY', link: '/home/cro/protocolGrid' },
 
       ];
     }
-    else if(this.role === 'Central Lab-Acknowledgement'){
+    else if (this.role === 'Central Lab-Acknowledgement') {
       this.menuItems = [
-        // {
-          // label: 'Central Lab',
-          // icon: 'bx bxs-analyse',
-          // expanded: false,
-          // subItems: [
-            // { label: 'Study Summary', link: '/home/cro/protocolGrid' },
-            // { label: 'Kit Preparation', link: '/home/centralLab/kitPreparationGrid' },
-            // { label: 'Kit Verification', link: '/home/centralLab/kitvarificationGrid' },
-            // { label: 'Kit Distribution', link: '/home/centralLab/kitDistributionGrid' },
-            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-            { label: 'SAMPLE ACKNOWLEDGEMENT', link: '/home/centralLab/kitAcknowledgementGrid' },
-            // { label: 'Sample Reports', link: '/home/centralLab/kitReportGrid' },
-          // ]
-        // },
-        // Other menu items for admin role...
+
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'SAMPLE ACKNOWLEDGEMENT', link: '/home/centralLab/kitAcknowledgementGrid' },
+
       ];
     }
-    else if(this.role === 'Central Lab-Preparation'){
+    else if (this.role === 'Central Lab-Preparation') {
       this.menuItems = [
         { label: 'DASHBOARD', link: '/home/cro/dashboards' },
         { label: 'KIT PREPARATION', link: '/home/centralLab/kitPreparationGrid' },
       ];
     }
-    else if(this.role === 'Central Lab-Verification'){
+    else if (this.role === 'Central Lab-Verification') {
       this.menuItems = [
         { label: 'Dashboard', link: '/home/cro/dashboards' },
         { label: 'KIT VERIFICATION', link: '/home/centralLab/kitvarificationGrid' },
       ];
     }
-    else if(this.role === 'Central Lab-Distribution'){
+    else if (this.role === 'Central Lab-Distribution') {
       this.menuItems = [
         { label: 'DASHBOARD', link: '/home/cro/dashboards' },
         { label: 'KIT DISTRIBUTION', link: '/home/centralLab/kitDistributionGrid' },
       ];
     }
-    // else if(this.role === 'Central Lab-Acknowledgement'){
-    //   this.menuItems = [
-    //     { label: 'Dashboard', link: '/home/cro/dashboards' },
-    //     { label: 'Sample Acknowledgement', link: '/home/centralLab/kitAcknowledgementGrid' },
-    //   ];
-    // }
-    else if(this.role === 'Central Lab-Reports'){
+   
+    else if (this.role === 'Central Lab-Reports') {
       this.menuItems = [
         { label: 'DASHBOARD', link: '/home/cro/dashboards' },
         { label: 'SAMPLE REPORTS', link: '/home/centralLab/kitReportGrid' },
       ];
     }
-    else if(this.role === 'CRA'){
+    else if (this.role === 'CRA') {
       this.menuItems = [
-        // {
-          // label: 'CRA',
-          // icon: 'bx bxs-analyse',
-          // expanded: false,
-          // subItems: [
-            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-            { label: 'SAMPLE COLLECTION', link: '/home/site/viewCRA' },
-//  { label: 'Acknowledgement By Site', link: '/home/site/viewCRAAcknowledgement' }
-            // { label: 'Sample Collection', link: '/home/site/sampleCollection' }
-          // ]
-        // }
-        // Other menu items for admin role...
+
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'SAMPLE COLLECTION', link: '/home/site/viewCRA' },
+
       ];
     }
-    else if(this.role === 'Site Coordinator'){
+    else if (this.role === 'Site Coordinator') {
       this.menuItems = [
-        // {
-          // label: 'CRA',
-          // icon: 'bx bxs-analyse',
-          // expanded: false,
-          // subItems: [
-            { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-            { label: 'ACKNOWLEDGEMENT BY SITE', link: '/home/site/viewCRAAcknowledgement' },
-            { label: 'LAB REPORTS', link: '/home/site/viewcraAcknowledgement' },
-            { label: 'STUDY SUBJECT', link: '/home/site/viewSubject' },
-            { label: 'KIT INVENTORY', link: '/home/site/inventory' }
-          // ]
-        // }
-        // Other menu items for admin role...
+
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
+        { label: 'ACKNOWLEDGEMENT BY SITE', link: '/home/site/viewCRAAcknowledgement' },
+        { label: 'LAB REPORTS', link: '/home/site/viewcraAcknowledgement' },
+        { label: 'STUDY SUBJECT', link: '/home/site/viewSubject' },
+        { label: 'KIT INVENTORY', link: '/home/site/inventory' }
+
       ];
     }
 
@@ -308,25 +230,25 @@ export class HomeComponent implements OnInit {
 
   }
 
-  showLogout:boolean=false;
-  toggleLogout(){
-    this.showLogout=!this.showLogout
+  showLogout: boolean = false;
+  toggleLogout() {
+    this.showLogout = !this.showLogout
   }
-  first_name:any;
-  last_name:any;
-  email:any;
-  profile(){
-    this.addprofile= true;
+  first_name: any;
+  last_name: any;
+  email: any;
+  profile() {
+    this.addprofile = true;
     this.first_name = sessionStorage.getItem('firstName'),
       this.last_name = sessionStorage.getItem('lastName'),
-      this. email = sessionStorage.getItem('email'),
-      this. role =sessionStorage.getItem('role')
-    }
+      this.email = sessionStorage.getItem('email'),
+      this.role = sessionStorage.getItem('role')
+  }
 
 
-  emailvaluef:any
+  emailvaluef: any
   set() {
-    this.passwordvisible=true
+    this.passwordvisible = true
     this.emailvaluef = this.updatepasswordForm.controls['email'].value.toLowerCase();
     const obj = {
       username: this.emailvaluef,
@@ -337,97 +259,90 @@ export class HomeComponent implements OnInit {
     }
     this.admin.otp(obj).subscribe(
       (data: any) => {
-        this.messageService.add({severity:'success', summary:'Success Message', detail:'OTP sent to your Email'});
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'OTP sent to your Email' });
 
         // this.route.navigate(['/home'])
       },
       (err: any) => {
-        this.passwordvisible=false
-        this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+        this.passwordvisible = false
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
 
       }
     ),
       this.admin['set'](obj).subscribe(
         (data: any) => {
-          this.passwordvisible=true
+          this.passwordvisible = true
 
           // this.route.navigate(['/home'])
         },
         (err: any) => {
-          this.passwordvisible=false
-          this.messageService.add({severity:'error', summary:'Error Message', detail:err.error.message});
+          this.passwordvisible = false
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
         }
       )
 
   }
 
-  reset(){
-    this.passwordvisible=true
- const obj ={
+  reset() {
+    this.passwordvisible = true
+    const obj = {
 
-  email: sessionStorage.getItem('email'),
-  password: this.updatepasswordForm.controls['passwordu'].value,
-  otp: Number(this.updatepasswordForm.controls['otp'].value),
-  prev_password:this.updatepasswordForm.controls['passwordp'].value
-  // is_forgot: false
+      email: sessionStorage.getItem('email'),
+      password: this.updatepasswordForm.controls['passwordu'].value,
+      otp: Number(this.updatepasswordForm.controls['otp'].value),
+      prev_password: this.updatepasswordForm.controls['passwordp'].value
+      // is_forgot: false
 
- }
+    }
 
+    if (this.updatepasswordForm.controls['passwordp'].value === '' || this.updatepasswordForm.controls['passwordp'].value === undefined) {
+      this.messageService.add({ severity: 'warn', summary: 'Warning Message', detail: 'Please Enter Password' });
+    }
 
-    // alert('Profile Added Successfully')
-    //           this.route.navigate(['/login'])
-              if (this.updatepasswordForm.controls['passwordp'].value === '' || this.updatepasswordForm.controls['passwordp'].value === undefined) {
-                // alert('Please Enter Password')
-                this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Please Enter Password'});
-              }
-              // else if (this.updatepasswordForm.controls['confirmPassword'].value === undefined || this.updatepasswordForm.controls['confirmPassword'].value === '') {
-              //   // alert('Please Enter Confirm Password')
-              //   this.messageService.add({severity:'warn', summary:'Warning Message', detail:'Error occurred while resetting password'});
-              // }
-              else {
+    else {
 
-                this.admin.reset(obj).subscribe(
-                  (data: any) => {
-                    this.messageService.add({severity:'success', summary:'Success Message', detail:'Password Updated Successfully'});
-                    this.updatepasswordForm.reset();
+      this.admin.reset(obj).subscribe(
+        (data: any) => {
+          this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Password Updated Successfully' });
+          this.updatepasswordForm.reset();
 
-                    console.log(data);
-                    this.updatepassword = false
-                    this.passwordvisible=false
-                    this.myModal.hide();
+          console.log(data);
+          this.updatepassword = false
+          this.passwordvisible = false
+          this.myModal.hide();
 
-                  },
-                  (err: any) => {
-                    console.log(err); // Log the specific error message to the console
-                    this.updatepassword = false
+        },
+        (err: any) => {
+          console.log(err); // Log the specific error message to the console
+          this.updatepassword = false
 
-                    this.messageService.add({severity:'error', summary:'Error Message', detail:'Error occurred while resetting password'});
-                  }
-                );
-                ;
+          this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Error occurred while resetting password' });
+        }
+      );
+      ;
 
-              }
+    }
 
-            }
-            updaten(){
-              // this.log=true
-              this.confirm2()
-              // this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
-            }
+  }
+  updaten() {
+    // this.log=true
+    this.confirm2()
+    // this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
+  }
 
-  update(){
-    this.passwordvisible=false
-   
+  update() {
+    this.passwordvisible = false
+
     this.updatepasswordForm = new FormGroup({
       passwordDetails: new FormControl("", [Validators.required]),
-      email:new FormControl ("",[Validators.required]),
-      otp:new FormControl("",[Validators.required]),
+      email: new FormControl("", [Validators.required]),
+      otp: new FormControl("", [Validators.required]),
       // oldpassword: new FormControl("", [Validators.required]),
       passwordp: new FormControl("", [Validators.required, Validators.minLength(8)]),
-      passwordu: new FormControl("",[Validators.required, Validators.minLength(8)] )
+      passwordu: new FormControl("", [Validators.required, Validators.minLength(8)])
       // confirmPassword: new FormControl("", [Validators.required]),
     });
-    this.updatepassword=true
+    this.updatepassword = true
     this.updatepasswordForm.controls['email'].setValue(sessionStorage.getItem('email'))
   }
   validateOTP(input: any, OTP: any) {
@@ -436,14 +351,14 @@ export class HomeComponent implements OnInit {
     // Remove non-numeric characters
     let numericValue = inputValue.replace(/\D/g, '');
 
-    if(OTP ==='otp'){
-    if (numericValue.length > 6) {
+    if (OTP === 'otp') {
+      if (numericValue.length > 6) {
         numericValue = numericValue.slice(0, 6);
+      }
     }
+    input.value = numericValue;
   }
-  input.value = numericValue;
-}
-  clear(){
+  clear() {
 
     sessionStorage.clear()
     this.router.navigate(['/login'])
