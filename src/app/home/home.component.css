@@ -11,6 +11,24 @@
     flex-direction: column; /* Align items vertically */
 
   }
+  /* Add this to your global CSS or component-specific CSS */
+.active {
+  background-color: darkcyan; /* Change this to the desired color */
+  color: #ffffff; /* Change this to the desired text color */
+  /* Add any other styles you want for the active state */
+}
+/* Add this style to shrink the content when the menu is shrunk */
+.content-shrunk {
+  margin-left: -180px; /* Adjust this value based on your design */
+  transition: margin-left 0.3s ease; /* Add transition for a smooth effect */
+}
+
+/* Other styles for your content area */
+#layout-wrapper {
+  /* ... your existing styles ... */
+}
+
+
   h4{
     top: 2;
     margin-top: 10px;

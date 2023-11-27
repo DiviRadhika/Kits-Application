@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
 
 @Directive({
     selector: '[appInputRestriction]'
@@ -12,7 +12,7 @@ export class InputRestrictionDirective {
     mobileNumRegex = /^[0-9]*$/;
     noSpclChar = /^[a-zA-Z0-9]*$/;;
 
-    constructor(el: ElementRef) {
+    constructor(el: ElementRef,private renderer: Renderer2) {
         this.inputElement = el;
     }
 
@@ -58,4 +58,8 @@ export class InputRestrictionDirective {
 
    
 
+      toggle() {
+        const layoutWrapper = this.inputElement.nativeElement.querySelector('#layout-wrapper');
+        this.renderer.addClass(layoutWrapper, 'toggled');
+      }
 }

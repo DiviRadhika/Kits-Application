@@ -36,6 +36,7 @@ import { CalendarModule } from 'primeng/calendar';
     HeaderComponent,
     FooterComponent,
     
+    
   ],
   imports: [
     BrowserModule,
@@ -46,6 +47,7 @@ import { CalendarModule } from 'primeng/calendar';
     // CentralLabModule,
     // SiteModule,
     ReactiveFormsModule,
+    
 
     FormsModule,
     NgxPaginationModule,

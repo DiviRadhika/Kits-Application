@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { endPointsUser } from '../api';
 @Injectable({
   providedIn: 'root'
@@ -78,6 +78,8 @@ getInventory(): Observable<any> {
   dashboard(){
     return this._httpClient.get(endPointsUser.dashboard)
   }
+
+
 
 
 }

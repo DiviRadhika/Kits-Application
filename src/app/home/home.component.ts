@@ -94,8 +94,9 @@ export class HomeComponent implements OnInit {
     if (this.role === 'Admin' || this.role === 'admin') {
       this.menuItems = [
 
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'CRO', link: '/home/admin/croGrid' },
+
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home'},
+        { label: 'CRO', link: '/home/admin/croGrid', icon: 'fas fa-user'  },
         { label: 'USERS', link: '/home/admin/userGrid' },
    
       ];
@@ -368,21 +369,22 @@ export class HomeComponent implements OnInit {
   isSidebarShrunk: boolean;
 
 
-  ngAfterViewInit() {
-    this.sidebarToggle = document.getElementById('sidebar-toggle')!;
-    this.sidebar = document.getElementById('sidebar')!;
+  // ngAfterViewInit() {
+  //   this.sidebarToggle = document.getElementById('sidebar-toggle')!;
+  //   this.sidebar = document.getElementById('sidebar')!;
 
-    if (this.sidebarToggle && this.sidebar) {
-      this.sidebarToggle.addEventListener('click', () => {
-        if (this.isSidebarShrunk) {
-          this.sidebar.style.width = '200px'; // Expand the sidebar
-        } else {
-          this.sidebar.style.width = '100px'; // Shrink the sidebar
-        }
+  //   if (this.sidebarToggle && this.sidebar) {
+  //     this.sidebarToggle.addEventListener('click', () => {
+  //       if (this.isSidebarShrunk) {
+  //         this.sidebar.style.width = '250px'; // Expand the sidebar
+  //       } else {
+  //         this.sidebar.style.width = '70px'; // Shrink the sidebar
+  //       }
 
-        this.isSidebarShrunk = !this.isSidebarShrunk;
-      });
-    }
+  //       this.isSidebarShrunk = !this.isSidebarShrunk;
+  //     });
+  //   }
+    
 
-  }
+  // }
 }
