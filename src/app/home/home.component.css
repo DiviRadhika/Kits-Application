@@ -23,11 +23,38 @@
   transition: margin-left 0.3s ease; /* Add transition for a smooth effect */
 }
 
-/* Other styles for your content area */
-#layout-wrapper {
-  /* ... your existing styles ... */
+#layout-wrapper.content-shrunks .footer {
+  bottom: 0;
+  padding: 20px calc(24px * 0.75);
+  position: fixed;
+  left: 70px;
+  color: var(--bs-footer-color);
+  right: 2px;
+  height: 60px;
+  background-color: var(--bs-footer-bg);
+}
+.vertical-menum {
+	background: #20456a !important;
+  width: 70px;
 }
 
+body[data-sidebar=dark] .navbar-brand-box {
+  background: #2a3042;
+}
+.navbar-brand-box {
+  background: #20456a !important;
+}
+.sh {
+  bottom: 0;
+  padding: 20px calc(24px * 0.75);
+  position: fixed;
+  left: -190px;
+  color: var(--bs-footer-color);
+  right: 207px;
+  height: 60px;
+  background-color: var(--bs-footer-bg);
+  position: fixed;
+}
 
   h4{
     top: 2;

@@ -6,15 +6,17 @@
 
 <p-toast style="margin-left:20%"></p-toast>
 
-<div id="layout-wrapper" >
+<div id="layout-wrapper">
 
 
     <header id="page-topbar">
         <div class="navbar-header">
             <div class="d-flex">
                 <!-- LOGO -->
-                <div class="navbar-brand-box" >
-                    <a class="logo logo-dark">
+
+
+                <div [ngClass]="{'navbar-brand-box': !isSidebarShrunk, 'vertical-menum': isSidebarShrunk}">
+                    <!-- <a class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="assets/images/logo-icon-dark.png" alt="" height="35">
                         </span>
@@ -22,21 +24,25 @@
                             <img src="assets/images/roboxa-logo-lite.png" alt="" height="35"
                                 style="float: left; margin-top: 35px;">
                         </span>
-                    </a>
+                    </a> -->
 
-                    <a class="logo logo-light">
-                        <span class="logo-sm">
-                            <img style="margin-left: -60%" src="assets/images/logo-icon-lite.png" alt="" height="35">
-                        </span>
-                        <span class="logo-lg">
+                    <a class="logo logo-light"  *ngIf="!isSidebarShrunk">
+                    
+                        <span class="logo-lg" >
                             <img style="margin-left: -60%" src="assets/images/roboxa-logo-lite.png" alt="" height="35">
+                        </span>
+                    </a>
+                    <a *ngIf="isSidebarShrunk">
+                       
+                        <span class="logo-lg" *ngIf="isSidebarShrunk">
+                            <img style="margin-top: 34%;"  src="assets/images/logo-icon-lite.png" alt="" height="35">
                         </span>
                     </a>
                 </div>
 
                 <button type="button" class="menu-toggle" id="sidebar-toggle"
                     class="btn btn-sm px-3 font-size-16 header-item waves-effect">
-            
+
                     <i class="mdi mdi-menu"></i>
                 </button>
 
@@ -75,29 +81,29 @@
                         </form>
                     </div>
                 </div>
-             
-                  
-                  <div *ngIf="!isfullscreen" class="dropdown d-none d-lg-inline-block ms-1 fullscreen-button">
+
+
+                <div *ngIf="!isfullscreen" class="dropdown d-none d-lg-inline-block ms-1 fullscreen-button">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen"
-                            (click)="openfullscreen()">
-                      <i class="bx bx-fullscreen"></i>
+                        (click)="openfullscreen()">
+                        <i class="bx bx-fullscreen"></i>
                     </button>
-                  </div>
-                  
-                  <div *ngIf="isfullscreen" class="dropdown d-none d-lg-inline-block ms-1 exit-fullscreen-button">
+                </div>
+
+                <div *ngIf="isfullscreen" class="dropdown d-none d-lg-inline-block ms-1 exit-fullscreen-button">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen"
-                            (click)="openfullscreen()">
-                      <i class="bx bx-exit-fullscreen"></i>
+                        (click)="openfullscreen()">
+                        <i class="bx bx-exit-fullscreen"></i>
                     </button>
-                  </div>
-                  
+                </div>
+
                 <!-- <div class="dropdown d-none d-lg-inline-block ms-1">
                     <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen" (click)="openfullscreen()">
                       <i class="bi" [class.bi-fullscreen]="!isfullscreen" [class.bi-compress]="isfullscreen"></i>
                     </button>
                   </div>
                    -->
-                  
+
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,8 +121,7 @@
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path
-               
-                         d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
                                 </svg>
                                 View Profile</span></a>
 
@@ -131,12 +136,15 @@
                                     d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                             </svg> &nbsp;<span key="t-logout" style="cursor: pointer; ">Update Password</span></a>
 
-                            <a style="width:85%" (click)="updaten()" class="dropdown-item text-danger"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-power" viewBox="0 0 16 16">
-                                <path d="M7.5 1v7h1V1z"/>
-                                <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812"/>
-                              </svg>     &nbsp;<span key="t-logout" style="cursor: pointer; ">Logout</span></a>
-                                       
-                                           
+                        <a style="width:85%" (click)="updaten()" class="dropdown-item text-danger"> <svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-power" viewBox="0 0 16 16">
+                                <path d="M7.5 1v7h1V1z" />
+                                <path
+                                    d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812" />
+                            </svg> &nbsp;<span key="t-logout" style="cursor: pointer; ">Logout</span></a>
+
+
 
                     </div>
 
@@ -306,13 +314,13 @@
                 </div>
             </div>
         </div> -->
-  
+
     <!-- <div class="vertical-menu" id="sidebar">
         <div data-simplebar class="h-100">
             <div id="sidebar-menu">
                 <ul style="line-height: 7px;" class="metismenu list-unstyled" id="side-menu">
                     <li style="font-size: 11px;margin-left: 5px;" class="menu-title" key="t-menu">{{role}}</li>
-    
+   
                     <li *ngFor="let subItem of menuItems" [routerLinkActive]="'active'">
                         <a [routerLink]="subItem.link" class="waves-effect">
                             <ng-container *ngIf="subItem.icon">
@@ -321,33 +329,39 @@
                             <ng-container *ngIf="!subItem.icon">{{ subItem.label }}</ng-container>
                         </a>
                     </li>
-          
+         
                 </ul>
             </div>
         </div>
     </div>
     -->
     <div class="vertical-menu" id="sidebar">
+
         <div data-simplebar class="h-100">
             <div id="sidebar-menu">
                 <ul style="line-height: 7px;" class="metismenu list-unstyled" id="side-menu">
-                    <li style="font-size: 11px;margin-left: 5px;" class="menu-title" key="t-menu">{{role}}</li>
-                  
+                    <li *ngIf="!isSidebarShrunk" style="font-size: 11px;margin-left: 5px;" class="menu-title"
+                        key="t-menu">{{role}}</li>
+
+                    <!-- Add *ngIf directive to conditionally render the icon -->
+                    <i *ngIf="isSidebarShrunk" class="fas fa-user-md fa-2x"
+                        style="color: white; margin-left:23px"></i>
+
                     <li *ngFor="let subItem of menuItems" [routerLinkActive]="'active'">
                         <a [routerLink]="subItem.link" class="waves-effect">
-                            <i *ngIf="isSidebarShrunk" class="{{ subItem.icon }}"></i>
+                            <i *ngIf="isSidebarShrunk" style="margin-left:-16px" class="{{ subItem.icon }}"></i>
                             <span *ngIf="!isSidebarShrunk">{{ subItem.label }}</span>
                         </a>
                     </li>
-                    
-                    
-                    
-                 
+
+
+
+
                 </ul>
             </div>
         </div>
     </div>
-    
+
 
 
 
@@ -356,11 +370,22 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-  <div  id="layout-wrapper" [ngClass]="{'content-shrunk': isSidebarShrunk}">
-    <router-outlet style="margin-left:40%;"></router-outlet></div>
-   
-    <!-- end main content-->
+    <div id="layout-wrapper" [ngClass]="{'content-shrunk': isSidebarShrunk}">
+        <router-outlet style="margin-left:40%;"></router-outlet>
+    </div>
 
+    <!-- end main content-->
+</div>
+<div id="layout-wrapper" [ngClass]="{'sh': isSidebarShrunk}">
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script>2023 © ROBOXA
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 <!-- END layout-wrapper -->
 

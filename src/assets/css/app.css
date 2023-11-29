@@ -401,7 +401,7 @@ body[data-layout=horizontal] .page-content {
 .footer {
   bottom: 0;
   padding: 20px calc(24px * 0.75);
-  position: absolute;
+  position: fixed;
   left: 0;
   color: var(--bs-footer-color);
   right: 250px;

@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -96,84 +95,82 @@ export class HomeComponent implements OnInit {
 
 
         { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home'},
-        { label: 'CRO', link: '/home/admin/croGrid', icon: 'fas fa-user'  },
-        { label: 'USERS', link: '/home/admin/userGrid' },
+        { label: 'CRO', link: '/home/admin/croGrid', icon: 'fas fa-user'   },
+        { label: 'USERS', link: '/home/admin/userGrid', icon: 'fas fa-users' },
    
-      ];
-    }
-    else if (this.role === 'Sponsor') {
-      this.menuItems = [
-  
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'SPONSOR', link: '/home/Sponsor/sponsorStudies' }
-
       ];
     }
     else if (this.role === 'CRO') {
       this.menuItems = [
 
 
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'SPONSOR', link: '/home/cro/sponsorGrid' },
-        { label: 'SITE', link: '/home/cro/siteGrid' },
-        { label: 'LAB TEST', link: '/home/cro/labTestGrid' },
-        { label: 'LAB CREATION', link: '/home/cro/labGrid' },
-        { label: 'STUDY SUMMARY', link: '/home/cro/protocolGrid' },
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'SPONSOR', link: '/home/cro/sponsorGrid', icon:'fas fa-handshake' },
+        { label: 'SITE', link: '/home/cro/siteGrid', icon:'fas fa-hospital' },
+        { label: 'LAB TEST', link: '/home/cro/labTestGrid', icon:'fas fa-vial' },
+        { label: 'LAB CREATION', link: '/home/cro/labGrid', icon:'fas fa-flask' },
+        { label: 'STUDY SUMMARY', link: '/home/cro/protocolGrid', icon:'fas fa-microscope' },
 
       ];
-    }
-    else if (this.role === 'Central Lab-Acknowledgement') {
+    }  else if (this.role === 'Central Lab-Preparation') {
       this.menuItems = [
-
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'SAMPLE ACKNOWLEDGEMENT', link: '/home/centralLab/kitAcknowledgementGrid' },
-
-      ];
-    }
-    else if (this.role === 'Central Lab-Preparation') {
-      this.menuItems = [
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'KIT PREPARATION', link: '/home/centralLab/kitPreparationGrid' },
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'KIT PREPARATION', link: '/home/centralLab/kitPreparationGrid',icon:'fas fa-toolbox' },
       ];
     }
     else if (this.role === 'Central Lab-Verification') {
       this.menuItems = [
-        { label: 'Dashboard', link: '/home/cro/dashboards' },
-        { label: 'KIT VERIFICATION', link: '/home/centralLab/kitvarificationGrid' },
+        { label: 'Dashboard', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'KIT VERIFICATION', link: '/home/centralLab/kitvarificationGrid', icon:'fas fa-check-circle' },
       ];
     }
     else if (this.role === 'Central Lab-Distribution') {
       this.menuItems = [
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'KIT DISTRIBUTION', link: '/home/centralLab/kitDistributionGrid' },
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'KIT DISTRIBUTION', link: '/home/centralLab/kitDistributionGrid', icon:'fas fa-box-open' },
       ];
-    }
-   
-    else if (this.role === 'Central Lab-Reports') {
-      this.menuItems = [
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'SAMPLE REPORTS', link: '/home/centralLab/kitReportGrid' },
-      ];
-    }
-    else if (this.role === 'CRA') {
+    }else if (this.role === 'CRA') {
       this.menuItems = [
 
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'SAMPLE COLLECTION', link: '/home/site/viewCRA' },
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'SAMPLE COLLECTION', link: '/home/site/viewCRA', icon:'fas fa-syringe' },
 
       ];
     }
     else if (this.role === 'Site Coordinator') {
       this.menuItems = [
 
-        { label: 'DASHBOARD', link: '/home/cro/dashboards' },
-        { label: 'ACKNOWLEDGEMENT BY SITE', link: '/home/site/viewCRAAcknowledgement' },
-        { label: 'LAB REPORTS', link: '/home/site/viewcraAcknowledgement' },
-        { label: 'STUDY SUBJECT', link: '/home/site/viewSubject' },
-        { label: 'KIT INVENTORY', link: '/home/site/inventory' }
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'ACKNOWLEDGEMENT BY SITE', link: '/home/site/viewCRAAcknowledgement',icon:'fas fa-check-square' },
+        { label: 'LAB REPORTS', link: '/home/site/viewcraAcknowledgement', icon:'fas fa-file-alt' },
+        { label: 'STUDY SUBJECT', link: '/home/site/viewSubject',icon:'fas fa-id-card'  },
+        { label: 'KIT INVENTORY', link: '/home/site/inventory',icon:'fas fa-info-circle' }
 
       ];
     }
+    else if (this.role === 'Central Lab-Acknowledgement') {
+      this.menuItems = [
+
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'SAMPLE ACKNOWLEDGEMENT', link: '/home/centralLab/kitAcknowledgementGrid',icon:'fas fa-file-pdf' },
+
+      ];
+    }
+    else if (this.role === 'Central Lab-Reports') {
+      this.menuItems = [
+        { label: 'DASHBOARD', link: '/home/cro/dashboards',  icon: 'fas fa-home' },
+        { label: 'SAMPLE REPORTS', link: '/home/centralLab/kitReportGrid', icon:'fas fa-files-alt'  },
+      ];
+    }
+    else if (this.role === 'Sponsor') {
+      this.menuItems = [
+ 
+        { label: 'DASHBOARD', link: '/home/cro/dashboards' ,  icon: 'fas fa-home' },
+        { label: 'SPONSOR', link: '/home/Sponsor/sponsorStudies', icon:'fas fa-handshake' }
+
+      ];
+    }
+     
 
     const navLinks = document.querySelectorAll('.nav-link');
     const collapses = document.querySelectorAll('.collapse');
@@ -369,22 +366,22 @@ export class HomeComponent implements OnInit {
   isSidebarShrunk: boolean;
 
 
-  // ngAfterViewInit() {
-  //   this.sidebarToggle = document.getElementById('sidebar-toggle')!;
-  //   this.sidebar = document.getElementById('sidebar')!;
+  ngAfterViewInit() {
+    this.sidebarToggle = document.getElementById('sidebar-toggle')!;
+    this.sidebar = document.getElementById('sidebar')!;
 
-  //   if (this.sidebarToggle && this.sidebar) {
-  //     this.sidebarToggle.addEventListener('click', () => {
-  //       if (this.isSidebarShrunk) {
-  //         this.sidebar.style.width = '250px'; // Expand the sidebar
-  //       } else {
-  //         this.sidebar.style.width = '70px'; // Shrink the sidebar
-  //       }
+    if (this.sidebarToggle && this.sidebar) {
+      this.sidebarToggle.addEventListener('click', () => {
+        if (this.isSidebarShrunk) {
+          this.sidebar.style.width = '250px'; // Expand the sidebar
+        } else {
+          this.sidebar.style.width = '70px'; // Shrink the sidebar
+        }
 
-  //       this.isSidebarShrunk = !this.isSidebarShrunk;
-  //     });
-  //   }
-    
+        this.isSidebarShrunk = !this.isSidebarShrunk;
+      });
+    }
+   
 
-  // }
+  }
 }
