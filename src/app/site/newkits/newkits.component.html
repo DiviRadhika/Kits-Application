@@ -64,7 +64,7 @@
                                 <li class="breadcrumb-item active">Kit
                                     Inventory </li>
 
-                                    <li class="breadcrumb-item active">Site : {{name}}</li>
+                                <li class="breadcrumb-item active">Site : {{name}}</li>
 
                             </ol>
                         </div>
@@ -82,7 +82,7 @@
                                 <div class="row">
                                     <form [formGroup]="subjectForm">
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Subject Id</label>
                                                     <select class="form-select form-control"
@@ -95,7 +95,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Kit Type</label>
                                                     <select class="form-select form-control" formControlName="kit_type">
@@ -107,10 +107,10 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Age</label>
-                                                    
+
                                                     <select class="form-select form-control" formControlName="age">
                                                         <option value="">Select Age</option>
                                                         <option *ngFor="let data of uniquePatientAge">
@@ -121,7 +121,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Gender</label>
                                                     <select class="form-select form-control" formControlName="gender">
@@ -133,19 +133,18 @@
 
                                                 </div>
                                             </div>
-                                            <!-- <div class="col-md-1"></div> -->
-                                            <div class="col-md-2" style="margin-top:0.6%">
-                                                <div class="form-group">
-                                                    <br>
-                                                     <button  class="btn btn-primary" (click)="resets()">Reset</button> 
-
-                                                     <button style="margin-left: 11px; font-size: 12px;" (click)="getsubjectDetailss()"
-                                                  class="btn btn-primary">Search</button> 
-                                                </div>
-                                            </div>
                                         </div>
+                                        <br>
+                                        <div class="col-12 mt-auto mb-2 d-flex justify-content-end"
+                                            style="margin-top:0.6%;margin-left:-3px">
+                                            <button class="btn btn-primary" (click)="resets()">Reset</button>
+
+                                            <button style="margin-left: 11px; font-size: 12px;"
+                                                (click)="getsubjectDetailss()" class="btn btn-primary">Search</button>
+                                        </div>
+
                                     </form>
-                                    <div class="row" class="table-responsive text-nowrap" style="margin-top:5%">
+                                    <div class="row" class="table-responsive text-nowrap" style="margin-top:2%">
                                         <div class="col-sm-12">
                                             <table id="datatable" class="table table-striped"
                                                 class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
@@ -159,11 +158,12 @@
 
                                                         </th>
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                        colspan="1" style="width: 335.2px;"
-                                                        aria-label="Name: activate to sort column ascending">Kit Type
-                                                        
+                                                            colspan="1" style="width: 335.2px;"
+                                                            aria-label="Name: activate to sort column ascending">Kit
+                                                            Type
 
-                                                    </th>
+
+                                                        </th>
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                             colspan="1" style="width: 335.2px;"
                                                             aria-label="Name: activate to sort column ascending">Subject
@@ -176,16 +176,16 @@
                                                             Site
                                                         </th>
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                        colspan="1" style="width: 289.2px;"
-                                                        aria-label="Legal Name: activate to sort column ascending">
-                                                        Name
-                                                    </th>
+                                                            colspan="1" style="width: 289.2px;"
+                                                            aria-label="Legal Name: activate to sort column ascending">
+                                                            Name
+                                                        </th>
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                             colspan="1" style="width: 289.2px;"
                                                             aria-label="Legal Name: activate to sort column ascending">
                                                             Gender
                                                         </th>
-                                                      
+
                                                         <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                             colspan="1" style="width: 289.2px;"
                                                             aria-label="Legal Name: activate to sort column ascending">
@@ -267,10 +267,11 @@
                                         <form [formGroup]="reportsForm">
                                             <div class="row">
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Kit Type</label>
-                                                        <select class="form-select form-control"  formControlName="kit_type">
+                                                        <select class="form-select form-control"
+                                                            formControlName="kit_type">
                                                             <option value="">Select Kit Type</option>
                                                             <option *ngFor="let data of variantsReports">
                                                                 {{ data }}
@@ -280,7 +281,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Subject Id</label>
                                                         <select class="form-select form-control"
@@ -293,22 +294,10 @@
 
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label>Visit</label>
-                                                        <select class="form-select form-control"
-                                                            formControlName="visit">
-                                                            <option value="">Select</option>
-                                                            <option *ngFor="let data of descriptionReports">
-                                                                {{ data }}
-                                                            </option>
-                                                        </select>
 
-                                                    </div>
-                                                </div> -->
-                                               
 
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>From Date</label>
                                                         <input formControlName="from_date" type="text" type="date"
@@ -316,14 +305,20 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>To Date</label>
-                                                        <input type="date" formControlName="to_date" class="form-control" [min]="reportsForm.get('from_date')?.value" />
-                                                       
+                                                        <input type="date" formControlName="to_date"
+                                                            class="form-control"
+                                                            [min]="reportsForm.get('from_date')?.value" />
+
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Accession</label>
                                                         <select class="form-select form-control">
@@ -334,18 +329,17 @@
 
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-md-2"></div> -->
-                                            <div class="col-md-2" style="margin-top:0.6%">
-                                                <div class="form-group">
-                                                    <br>
-                                                     <button style="font-size: 12px;" class="btn btn-primary" (click)="resetL()">Reset</button> 
 
-                                                     <button style="margin-left: 11px; font-size: 12px;" (click)="getReportss()"
-                                                     
-                                                  class="btn btn-primary">Search</button> 
-                                                </div>
+
                                             </div>
+                                            <div style="margin-top:-5%">
+                                                <div class="col-12 mt-auto mb-2 d-flex justify-content-end"
+                                                    style="margin-top:0.6%;margin-left:-3px" style="margin-top:0.6%">
+                                                    <button class="btn btn-primary" (click)="resetL()">Reset</button>
 
+                                                    <button style="margin-left: 11px; font-size: 12px;"
+                                                        (click)="getReportss()" class="btn btn-primary">Search</button>
+                                                </div>
                                             </div>
                                         </form>
                                         <div class="row" class="table-responsive text-nowrap" style="margin-top:5%">
@@ -380,11 +374,11 @@
                                                                 Site
                                                             </th>
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                            colspan="1" style="width: 289.2px;"
-                                                            aria-label="Legal Name: activate to sort column ascending">
-                                                            Requistion No.
-                                                        </th>
-                                                          
+                                                                colspan="1" style="width: 289.2px;"
+                                                                aria-label="Legal Name: activate to sort column ascending">
+                                                                Requistion No.
+                                                            </th>
+
                                                             <th tabindex="0" aria-controls="datatable" rowspan="1"
                                                                 colspan="1" style="width: 289.2px;"
                                                                 aria-label="Legal Name: activate to sort column ascending">
@@ -515,7 +509,7 @@
 
                                 <tbody>
 
-                                    
+
 
                                     <ng-container>
                                         <tr *ngFor="let file of pdfValuesview; let fileIndex = index">
@@ -554,10 +548,6 @@
             </div>
 
             <div *ngIf="inventory" class="row">
-
-
-
-
                 <p-toast></p-toast>
                 <div class="row">
                     <div class="col-12">
@@ -571,7 +561,7 @@
                                         <form [formGroup]="inventoryForm">
                                             <div class="row">
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Kit Type</label>
                                                         <select class="form-select form-control"
@@ -585,156 +575,159 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                      <label>From Date</label>
-                                                      <input type="date" formControlName="from_date" class="form-control" />
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-2">
-                                                    <div class="form-group">
-                                                      <label>To Date</label>
-                                                      <input type="date" formControlName="to_date" class="form-control" [min]="reportsForm.get('from_date')?.value" />
-
-                                                    </div>
-                                                  </div>
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-2" style="margin-top:0.6%">
-                                                    <div class="form-group">
-                                                        <br>
-                                                        <button style="font-size: 12px;" (click)="reseti()"
-                                                            class="btn btn-primary">Reset</button>
-
-                                                        <button style="margin-left: 11px; font-size: 12px;"
-                                                            (click)="getInventorys()"
-                                                            class="btn btn-primary">Search</button>
+                                                        <label>From Date</label>
+                                                        <input type="date" formControlName="from_date"
+                                                            class="form-control" />
                                                     </div>
                                                 </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>To Date</label>
+                                                        <input type="date" formControlName="to_date"
+                                                            class="form-control"
+                                                            [min]="reportsForm.get('from_date')?.value" />
+
+                                                    </div>
+                                                </div>
+          
 
 
 
                                             </div>
-                                      
-                                        <div class="row" class="table-responsive text-nowrap" style="margin-top:5%">
-                                            <div class="col-sm-12">
-                                                <table id="datatable" class="table table-striped"
-                                                    class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
-                                                    role="grid" aria-describedby="datatable_info" style="width: 82px;">
-                                                    <thead>
-                                                        <tr role="row">
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 243.2px;"
-                                                                aria-sort="ascending"
-                                                                aria-label="Code: activate to sort column descending">
-                                                                Protocol Number
+                                            <div style="margin-top:-4%">
+                                                <div class="col-12 mt-auto mb-2 d-flex justify-content-end"
+                                                    style="margin-top:0.6%;margin-left:-3px" style="margin-top:0.6%">
+                                                    <button class="btn btn-primary" (click)="reseti()">Reset</button>
 
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 335.2px;"
-                                                                aria-label="Name: activate to sort column ascending">
-                                                                Region
-
-
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Country
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                            colspan="1" style="width: 289.2px;"
-                                                            aria-label="Legal Name: activate to sort column ascending">
-                                                            Variant
-                                                        </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Site
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Kits
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Description
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Pending Kits
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Shipped Kits
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Received
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Adjust
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                On Hand
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Last Shipped
-                                                            </th>
-                                                            <th tabindex="0" aria-controls="datatable" rowspan="1"
-                                                                colspan="1" style="width: 289.2px;"
-                                                                aria-label="Legal Name: activate to sort column ascending">
-                                                                Last Shipped Date
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                  
-
-                                                    <!-- <tbody *ngFor="let croData of inventoryData | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index"> -->
-                                                    <tbody>
-                                                        <tr class="odd" style="  vertical-align: middle;"
-                                                        *ngFor="let croData of this.inventoryfiltered | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index"> 
-                                                        <!-- <tr *ngIf="croData.kit_variant === inventoryForm.get('kit_type')?.value"> -->
-                                                            
-                                                            <td>{{croData.protocol_id}}</td>
-                                                            <td>{{croData.state}}</td>
-                                                            <td>{{croData.country}}</td>
-                                                            <td>{{croData.kit_variant}}</td>
-                                                            <td>{{croData.site}}</td>
-                                                            <td>{{croData.total_kits}}</td>
-                                                            <td>{{croData.description}}</td>
-                                                            <td>{{croData.pending_kits}}</td>
-                                                            <td>{{croData.shipped_kits}}</td>
-                                                            <td>{{croData.received_kits}}</td>
-                                                            <td>{{croData.adjust_kits}}</td>
-                                                            <td>{{croData.onhand_kits}}</td>
-                                                            <td>{{croData.last_shipped}}</td>
-                                                            <td>{{croData.last_shipped_date}}</td>
-
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="12" *ngIf="this.inventoryfiltered.length === 0"
-                                                                style="text-align: center; font-size: 0.8rem;">
-                                                                No Data Found
-                                                            </td>
-                                                        </tr>
-                                                   
-                                                    </tbody>
-                                                </table>
+                                                    <button style="margin-left: 11px; font-size: 12px;"
+                                                        (click)="getInventorys()" class="btn btn-primary">Search</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+
+                                            <div class="row" class="table-responsive text-nowrap" style="margin-top:5%">
+                                                <div class="col-sm-12">
+                                                    <table id="datatable" class="table table-striped"
+                                                        class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                                        role="grid" aria-describedby="datatable_info"
+                                                        style="width: 82px;">
+                                                        <thead>
+                                                            <tr role="row">
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 243.2px;"
+                                                                    aria-sort="ascending"
+                                                                    aria-label="Code: activate to sort column descending">
+                                                                    Protocol Number
+
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 335.2px;"
+                                                                    aria-label="Name: activate to sort column ascending">
+                                                                    Region
+
+
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Country
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Variant
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Site
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Kits
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Description
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Pending Kits
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Shipped Kits
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Received
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Adjust
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    On Hand
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Last Shipped
+                                                                </th>
+                                                                <th tabindex="0" aria-controls="datatable" rowspan="1"
+                                                                    colspan="1" style="width: 289.2px;"
+                                                                    aria-label="Legal Name: activate to sort column ascending">
+                                                                    Last Shipped Date
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+
+
+                                                        <!-- <tbody *ngFor="let croData of inventoryData | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index"> -->
+                                                        <tbody>
+                                                            <tr class="odd" style="  vertical-align: middle;"
+                                                                *ngFor="let croData of this.inventoryfiltered | paginate: { id: 'croPagination', itemsPerPage: pageSize, currentPage: page, totalItems: totalCountR }; let i=index">
+                                                                <!-- <tr *ngIf="croData.kit_variant === inventoryForm.get('kit_type')?.value"> -->
+
+                                                                <td>{{croData.protocol_id}}</td>
+                                                                <td>{{croData.state}}</td>
+                                                                <td>{{croData.country}}</td>
+                                                                <td>{{croData.kit_variant}}</td>
+                                                                <td>{{croData.site}}</td>
+                                                                <td>{{croData.total_kits}}</td>
+                                                                <td>{{croData.description}}</td>
+                                                                <td>{{croData.pending_kits}}</td>
+                                                                <td>{{croData.shipped_kits}}</td>
+                                                                <td>{{croData.received_kits}}</td>
+                                                                <td>{{croData.adjust_kits}}</td>
+                                                                <td>{{croData.onhand_kits}}</td>
+                                                                <td>{{croData.last_shipped}}</td>
+                                                                <td>{{croData.last_shipped_date}}</td>
+
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="12"
+                                                                    *ngIf="this.inventoryfiltered.length === 0"
+                                                                    style="text-align: center; font-size: 0.8rem;">
+                                                                    No Data Found
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <pagination-controls id="croPagination" (pageChange)="pageChange($event)"
                                             *ngIf="inventoryfiltered && inventoryfiltered.length"></pagination-controls>
                                         <div class="row">
@@ -742,8 +735,9 @@
 
                                             </div>
                                             <div class="col-md-2">
-                                            <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCountR}}]</p>
-                                        </div>
+                                                <p style="margin-top: -26%; color:#0a0a0a">Total Count:[{{totalCountR}}]
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

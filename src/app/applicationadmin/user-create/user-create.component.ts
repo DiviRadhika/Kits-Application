@@ -451,21 +451,21 @@ export class UserCreateComponent implements OnInit {
 
         this.adminService.createUser(userObj).subscribe(
           (data: any) => {
-
+            console.log('User creation successful:', data);
+        
             setTimeout(() => {
               this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'User Added Successfully' });
             }, 1000);
+        
             this.router.navigate(['/home/admin/userGrid']);
-
-
           },
           (err: any) => {
-
+            console.error('User creation failed:', err);
+        
             this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
-
           }
         );
-
+        
       }
       // console.log(userObj)
     }

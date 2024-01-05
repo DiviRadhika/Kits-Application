@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { of } from 'rxjs/internal/observable/of';
 export class TokenInterceptorService {
   tokenizedReq: any;
   public role: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router
+  constructor(private route: ActivatedRoute, 
+    private messageService: MessageService, private http: HttpClient, private router: Router
   ) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -34,7 +36,8 @@ export class TokenInterceptorService {
             }
           }),
           catchError((err: any) => {
-            console.log(err)
+          
+         
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504 || err.status === 404) {
               } else if (err.status === 401) {
@@ -75,7 +78,7 @@ export class TokenInterceptorService {
             }
           }),
           catchError((err: any) => {
-
+            this.messageService.add({ severity: 'error', summary: 'Error Message', detail: err.error.message });
             if (err instanceof HttpErrorResponse) {
               if (err.status === 500 || err.status === 504) {
 

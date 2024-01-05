@@ -711,7 +711,7 @@ getAlternateName(cardIndex: number, visitIndex: number): string {
 
     
       if (!kitVarient) {
-        errorMessagesalter.push(`Please select Kit Variant in Card ${index + 1}`);
+        errorMessagesalter.push(`Please select Visits in Card ${index + 1}`);
       }
       const rowsArray = cardForm.get('visits') as FormArray;
       const cardData = { 
@@ -751,7 +751,7 @@ getAlternateName(cardIndex: number, visitIndex: number): string {
    
     if (errorMessagesalter.length > 0) {
      
-      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Kit Varients in All Variants' });
+      this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Please Select Visits in All Variants' });
     } 
 
     else if (errorMessages.length > 0) {
