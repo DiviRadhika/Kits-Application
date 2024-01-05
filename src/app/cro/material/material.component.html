@@ -28,7 +28,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Users</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">12</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_cro || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">CRO</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sites}}</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_cro || 0}}</h6>
 
 
               </p-card>
@@ -58,7 +58,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Sponsors</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sponsors}}</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sponsors || 0}}</h6>
 
 
               </p-card>
@@ -68,7 +68,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Sites</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sites}}</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_sites || 0}}</h6>
 
 
               </p-card>
@@ -79,7 +79,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Lab Tests</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests}}</h6>
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests || 0}}</h6>
 
 
               </p-card>
@@ -89,7 +89,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Lab Creation</h5>
-                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests || 4}}
+                <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_lab_tests ||0 }}
                 </h6>
 
 
@@ -100,7 +100,7 @@
               <div class="form-group">
                 <p-card class="cardcolor">
                   <h5 style="margin-left: 34%;" style="text-align: center;">Materials</h5>
-                  <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_materials}}</h6>
+                  <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_materials || 0}}</h6>
                 </p-card>
               </div>
             </div>
@@ -113,7 +113,7 @@
               <div class="form-group">
                 <p-card class="cardcolor">
                   <h5 style="margin-left: 34%;" style="text-align: center;">Study Summary</h5>
-                  <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}</h6>
+                  <h6 style="margin-left: 41%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols || 0}}</h6>
                 </p-card>
               </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols || 0}}</h6>
 
 
               </p-card>
@@ -147,7 +147,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Kits</h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits}}</h6>
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_kits || 0}}</h6>
 
 
               </p-card>
@@ -158,7 +158,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">Prepared Kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_completed_kits || 4}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_completed_kits || 0}}</h6>
 
 
               </p-card>
@@ -168,7 +168,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">In Progress kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_inprogress_kits || 4}} </h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_inprogress_kits || 0}} </h6>
 
 
               </p-card>
@@ -187,7 +187,7 @@
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols || 0}}</h6>
 
 
               </p-card>
@@ -199,7 +199,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 24%;" style="text-align: center;">Verified Kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits || 0}}</h6>
 
 
               </p-card>
@@ -210,7 +210,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 24%;" style="text-align: center; font-size: 90%;">Not Verified kits</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits || 9}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits ||0}}</h6>
 
 
               </p-card>
@@ -226,7 +226,7 @@
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols || 0}}</h6>
 
 
               </p-card>
@@ -236,7 +236,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Sites</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_sites || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -255,7 +255,7 @@
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 34%;" style="text-align: center;">No.of Studies</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_protocols || 0}}</h6>
 
 
               </p-card>
@@ -267,7 +267,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 24%;" style="text-align: center;">Received </h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_verified_kits || 0}}</h6>
 
 
               </p-card>
@@ -278,7 +278,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 24%;" style="text-align: center; font-size: 100%;">Pending </h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits || 9}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_not_verified_kits || 0}}</h6>
 
 
               </p-card>
@@ -296,7 +296,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Studies </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols || 0}}
                 </h6>
               </p-card>
             </div>
@@ -307,7 +307,7 @@
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">ReceivedSamples </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">
-                  {{this.dashboardsData.no_of_received_collections}}</h6>
+                  {{this.dashboardsData.no_of_received_collections || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -316,7 +316,7 @@
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">PendingSamples </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">
-                  {{this.dashboardsData.no_of_pending_collections}}</h6>
+                  {{this.dashboardsData.no_of_pending_collections || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -325,7 +325,7 @@
             <div class="form-group">
               <p-card class="cardcolor" class="row">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Patients</h5>
-                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients}}</h6>
+                <h6 style="margin-left: 41%;">{{this.dashboardsData.no_of_patients || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -343,7 +343,7 @@
             <div class="form-group">
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Studies </h5>
-                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols}}
+                <h6 style="margin-left: 71%;" style="text-align: center;">{{this.dashboardsData.no_of_protocols || 0}}
                 </h6>
               </p-card>
             </div>
@@ -354,7 +354,7 @@
               <p-card class="cardcolor">
                 <h5 style="margin-left: 54%;" style="text-align: center;">No.of Sponsors </h5>
                 <h6 style="margin-left: 71%;" style="text-align: center;">
-                  {{this.dashboardsData.no_of_sponsors}}</h6>
+                  {{this.dashboardsData.no_of_sponsors || 0}}</h6>
               </p-card>
             </div>
           </div>
@@ -422,18 +422,18 @@
                               <tbody>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Countries</th>
-                                  <td>{{subjectDetails.actual_countries}}</td>
-                                  <td>{{subjectDetails.planned_countries}}</td>
+                                  <td>{{subjectDetails.actual_countries || 0}}</td>
+                                  <td>{{subjectDetails.planned_countries || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Sites</th>
-                                  <td>{{subjectDetails.actual_sites}}</td>
-                                  <td>{{subjectDetails.planned_sites}}</td>
+                                  <td>{{subjectDetails.actual_sites || 0}}</td>
+                                  <td>{{subjectDetails.planned_sites|| 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Subjects Screened</th>
-                                  <td>{{subjectDetails.acutal_subjects_screened}}</td>
-                                  <td>{{subjectDetails.planned_subects_screened}}</td>
+                                  <td>{{subjectDetails.acutal_subjects_screened || 0}}</td>
+                                  <td>{{subjectDetails.planned_subects_screened || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
@@ -443,8 +443,8 @@
 
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Samples Received</th>
-                                  <td>{{subjectDetails.actual_sample_received}}</td>
-                                  <td>{{subjectDetails.planed_sample_received}}</td>
+                                  <td>{{subjectDetails.actual_sample_received || 0}}</td>
+                                  <td>{{subjectDetails.planed_sample_received || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
@@ -551,18 +551,18 @@
                               <tbody>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Countries</th>
-                                  <td>{{subjectDetailsprotocol.actual_countries}}</td>
-                                  <td>{{subjectDetailsprotocol.planned_countries}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_countries || 0}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_countries || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Sites</th>
-                                  <td>{{subjectDetailsprotocol.actual_sites}}</td>
-                                  <td>{{subjectDetailsprotocol.planned_sites}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_sites || 0}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_sites || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Subjects Screened</th>
-                                  <td>{{subjectDetailsprotocol.acutal_subjects_screened}}</td>
-                                  <td>{{subjectDetailsprotocol.planned_subects_screened}}</td>
+                                  <td>{{subjectDetailsprotocol.acutal_subjects_screened || 0}}</td>
+                                  <td>{{subjectDetailsprotocol.planned_subects_screened || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
@@ -572,8 +572,8 @@
 
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>Samples Received</th>
-                                  <td>{{subjectDetailsprotocol.actual_sample_received}}</td>
-                                  <td>{{subjectDetailsprotocol.planed_sample_received}}</td>
+                                  <td>{{subjectDetailsprotocol.actual_sample_received || 0}}</td>
+                                  <td>{{subjectDetailsprotocol.planed_sample_received || 0}}</td>
                                 </tr>
                                 <tr class="odd" style="  vertical-align: middle;">
                                   <th>--</th>
