@@ -270,6 +270,8 @@ export class LoginComponent implements OnInit {
       (data: any) => {
 
         this.enableFields = true
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'OTP sent to your Email' });
+
 
         // this.route.navigate(['/home'])
       },

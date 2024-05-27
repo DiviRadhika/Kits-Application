@@ -65,15 +65,15 @@ isAscendingSort1: boolean = true;
   this.protocol.getPreparationById(id).subscribe(
     (data: any) => {
       this.data = data
-      console.log(this.data)
+    
       // this.route.navigate(['/home/centralLab/kitPrepration', id, 'edit'])
     },
     (err: any) => {
-      console.log(err);
+    
       // this.route.navigate(['/home/centralLab/kitPrepration', id, 'add'])
     }
   );
-  console.log(this.data)
+
   setTimeout(() => {
     if(this.data){
       this.route.navigate(['/home/centralLab/kitPrepration', id, 'edit'])

@@ -26,16 +26,16 @@
                         </span>
                     </a> -->
 
-                    <a class="logo logo-light"  *ngIf="!isSidebarShrunk">
-                    
-                        <span class="logo-lg" >
+                    <a class="logo logo-light" *ngIf="!isSidebarShrunk">
+
+                        <span class="logo-lg">
                             <img style="margin-left: -60%" src="assets/images/roboxa-logo-lite.png" alt="" height="35">
                         </span>
                     </a>
                     <a *ngIf="isSidebarShrunk">
-                       
+
                         <span class="logo-lg" *ngIf="isSidebarShrunk">
-                            <img style="margin-top: 34%;"  src="assets/images/logo-icon-lite.png" alt="" height="35">
+                            <img style="margin-top: 34%;" src="assets/images/logo-icon-lite.png" alt="" height="35">
                         </span>
                     </a>
                 </div>
@@ -45,13 +45,6 @@
 
                     <i class="mdi mdi-menu"></i>
                 </button>
-
-
-
-
-
-
-
 
 
             </div>
@@ -315,37 +308,15 @@
             </div>
         </div> -->
 
-    <!-- <div class="vertical-menu" id="sidebar">
-        <div data-simplebar class="h-100">
-            <div id="sidebar-menu">
-                <ul style="line-height: 7px;" class="metismenu list-unstyled" id="side-menu">
-                    <li style="font-size: 11px;margin-left: 5px;" class="menu-title" key="t-menu">{{role}}</li>
-   
-                    <li *ngFor="let subItem of menuItems" [routerLinkActive]="'active'">
-                        <a [routerLink]="subItem.link" class="waves-effect">
-                            <ng-container *ngIf="subItem.icon">
-                                <i class="{{ subItem.icon }}"></i>
-                            </ng-container>
-                            <ng-container *ngIf="!subItem.icon">{{ subItem.label }}</ng-container>
-                        </a>
-                    </li>
-         
-                </ul>
-            </div>
-        </div>
-    </div>
-    -->
-    <div class="vertical-menu" id="sidebar">
 
+    <div class="vertical-menu" id="sidebar">
         <div data-simplebar class="h-100">
             <div id="sidebar-menu">
                 <ul style="line-height: 7px;" class="metismenu list-unstyled" id="side-menu">
                     <li *ngIf="!isSidebarShrunk" style="font-size: 11px;margin-left: 5px;" class="menu-title"
-                        key="t-menu">{{role}}</li>
-
+                       key="t-menu">{{role}}</li>                  
                     <!-- Add *ngIf directive to conditionally render the icon -->
-                    <i *ngIf="isSidebarShrunk" class="fas fa-user-md fa-2x"
-                        style="color: white; margin-left:23px"></i>
+                    <i *ngIf="isSidebarShrunk" class="fas fa-user-md fa-2x" style="color: white; margin-left:23px;margin-bottom:20%"></i>
 
                     <li *ngFor="let subItem of menuItems" [routerLinkActive]="'active'">
                         <a [routerLink]="subItem.link" class="waves-effect">
